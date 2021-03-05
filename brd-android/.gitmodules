@@ -1,6 +1,0 @@
-[submodule "google-services"]
-	path = google-services
-	url = ../../breadwallet/google-services.git
-[submodule "mobile-font"]
-	path = mobile-font
-	url = ../../breadwallet/mobile-font.git

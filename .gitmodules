@@ -10,7 +10,7 @@
 	path = external/google-services
 	url = git@gitlab.com:breadwallet/google-services.git
     update = none
-[submodule "external/in-app-il8n"]
-	path = external/in-app-il8n
+[submodule "external/in-app-i18n"]
+	path = external/in-app-i18n
 	url = git@gitlab.com:breadwallet/in-app-i18n.git
 	update = none

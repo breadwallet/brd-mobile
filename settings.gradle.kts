@@ -1,4 +1,4 @@
-rootProject.name = "cosmos"
+rootProject.name = "brd-mobile"
 
 include(
     "cosmos-core",

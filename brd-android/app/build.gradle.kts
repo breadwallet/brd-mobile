@@ -42,7 +42,7 @@ android {
         create("FakeSigningConfig") {
             keyAlias = "key0"
             keyPassword = "qwerty"
-            storeFile = rootProject.file("FakeSigningKey")
+            storeFile = file("../FakeSigningKey")
             storePassword = "qwerty"
         }
     }
@@ -136,10 +136,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":app-core"))
-    implementation(project(":ui:ui-common"))
-    implementation(project(":ui:ui-staking"))
-    implementation(project(":ui:ui-gift"))
+    implementation(project(":brd-android:app-core"))
+    implementation(project(":brd-android:ui:ui-common"))
+    implementation(project(":brd-android:ui:ui-staking"))
+    implementation(project(":brd-android:ui:ui-gift"))
     implementation(Libs.WalletKit.CoreAndroid)
 
     // AndroidX

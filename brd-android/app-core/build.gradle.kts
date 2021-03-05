@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":theme"))
+    implementation(project(":brd-android:theme"))
     implementation(Libs.Kotlin.StdLibJdk8)
     implementation(Libs.Coroutines.Core)
     api(Libs.WalletKit.CoreAndroid)

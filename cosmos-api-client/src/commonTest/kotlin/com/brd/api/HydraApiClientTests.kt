@@ -27,21 +27,30 @@ package com.brd.api
 import com.brd.api.models.BrdCurrenciesResult
 import com.brd.api.models.ExchangeCountriesResult
 import com.brd.api.models.ExchangePairsResult
-import kotlin.test.BeforeTest
-import kotlin.test.Ignore
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 @Ignore
 class HydraApiClientTests {
 
     private lateinit var apiClient: BRDApiClient
 
+    private val authProvider: BRDAuthProvider = object : BRDAuthProvider {
+        override var token: String?
+            get() = fail()
+            set(value) {}
+        override fun hasKey(): Boolean = fail()
+        override fun publicKey(): String = fail()
+        override fun deviceId(): String = fail()
+        override fun sign(
+            method: String,
+            body: String,
+            contentType: String,
+            url: String
+        ): BRDAuthProvider.Signature = fail()
+    }
     @BeforeTest
     fun before() {
-        //apiClient = BRDApiClient.create()
+        apiClient = BRDApiClient.create(authProvider)
     }
 
     @Test
