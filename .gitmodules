@@ -1,0 +1,16 @@
+[submodule "external/walletkit"]
+	path = external/walletkit
+	url = https://github.com/blockset-corp/walletkit.git
+	fetchRecurseSubmodules = true
+[submodule "external/mobile-font"]
+	path = external/mobile-font
+	url = git@gitlab.com:breadwallet/mobile-font.git
+	update = none
+[submodule "external/google-services"]
+	path = external/google-services
+	url = git@gitlab.com:breadwallet/google-services.git
+    update = none
+[submodule "external/in-app-il8n"]
+	path = external/in-app-il8n
+	url = git@gitlab.com:breadwallet/in-app-i18n.git
+	update = none

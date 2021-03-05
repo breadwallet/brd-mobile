@@ -1,0 +1,41 @@
+name: docs
+
+on:
+  create:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  gradle:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Cache Build files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle
+          key: ${{ runner.os }}-${{ hashFiles('gradle.properties') }}
+
+      - uses: eskatos/gradle-command-action@v1
+        name: Publish Docs
+        with:
+          arguments: clean dokkaHtmlMultiModule
+
+      - name: Publish Docs
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: docs
+          FOLDER: build/dokka/htmlMultiModule
+          SINGLE_COMMIT: true
