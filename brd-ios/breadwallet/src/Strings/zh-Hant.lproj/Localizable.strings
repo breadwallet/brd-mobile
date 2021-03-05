@@ -1,0 +1,1312 @@
+/* App name */
+"About.appName.android" = "BRD";
+/* About screen blog label */
+"About.blog" = "部落格";
+/* About screen footer */
+"About.footer" = "由全球 BRD 團隊製作。版本 %1$@構建%2$@";
+/* Privay Policy button label */
+"About.privacy" = "隱私政策";
+/* About screen reddit label */
+"About.reddit" = "Reddit";
+/* Terms of Use button label */
+"About.terms" = "使用規定";
+/* About screen title */
+"About.title" = "關於";
+/* About screen twitter label */
+"About.twitter" = "Twitter";
+/* About screen wallet ID label */
+"About.walletID" = "BRD 獎勵 ID";
+/* Close modal button accessibility label */
+"AccessibilityLabels.close" = "關閉";
+/* Support center accessibiliy label */
+"AccessibilityLabels.faq" = "支援中心";
+/* Account balance */
+"Account.balance" = "餘額";
+/* Delisted token alert banner message */
+"Account.delistedToken" = "該令牌已被除名。 \n\n您可能仍然可以將這些令牌發送到另一個平台。有關更多詳細信息，請訪問我們的支持頁面。";
+/* $10000 per BTC */
+"Account.exchangeRate" = "%1$@ 每 %2$@";
+/* Loading Wallet Message */
+"Account.loadingMessage" = "正在載入電子錢包";
+/* Confirm Account Creation mesage body */
+"AccountCreation.body" = "僅當您打算在錢包中存儲HBAR時，才創建一個Hedera帳戶。";
+/* Create Account button label */
+"AccountCreation.create" = "創建帳號";
+/* Creating Account progress Label */
+"AccountCreation.creating" = "建立帳戶";
+/* Creating Account progress Label */
+"AccountCreation.error" = "創建帳戶期間發生錯誤。請稍後再試。";
+/* Not Now button label. */
+"AccountCreation.notNow" = "現在不要";
+/* Creating Account progress Label */
+"AccountCreation.timeout" = "請求超時。請稍後再試。";
+/* Confirm Account Creation Title */
+"AccountCreation.title" = "確認帳戶創建";
+/* Default wallet name */
+"AccountHeader.defaultWalletName" = "我的 BRD";
+/* Third party keyboard warning */
+"Alert.customKeyboard.android" = "您似乎正在使用第三方鍵盤，該鍵盤可以記錄您鍵入的內容並竊取您的恢復短語。請切換到默認的Android鍵盤以提供額外的保護。";
+/* Error alert title */
+"Alert.error" = "錯誤";
+/* Keystore error */
+"Alert.keystore.generic.android" = "您的 Android OS 金鑰儲存區有問題，請聯絡 support@breadwallet.com";
+/* KeyStore error, keys are invalidated */
+"Alert.keystore.invalidated.android" = "您的 BRD 加密資料最近已被判定為無效，因爲您的 Android 螢幕鎖定已被停用。";
+/* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */
+"Alert.keystore.invalidated.uninstall.android" = "我們無法繼續，因為您的屏幕鎖定設置已更改（例如，密碼已禁用，指紋已更改）。為了安全起見，Android已永久鎖定您的密鑰存儲區。因此，必須通過卸載來擦除BRD應用程序數據。 \n\n不用擔心，您的資金仍然安全！重新安裝該應用程序並使用您的恢復短語恢復您的錢包。";
+/* Warn user key store data has been invalidate because the user changed their security settings. The user must wipe their app data. */
+"Alert.keystore.invalidated.wipe.android" = "我們無法繼續，因為您的屏幕鎖定設置已更改（例如，密碼已禁用，指紋已更改）。為了安全起見，Android已永久鎖定您的密鑰存儲區。因此，必須清除您的BRD應用數據。 \n\n不用擔心，您的資金仍然安全！使用您的恢復短語恢復您的錢包。";
+/* Keystore error title */
+"Alert.keystore.title.android" = "Android 金鑰儲存區錯誤";
+/* No internet alert message */
+"Alert.noInternet" = "找不到網路連線。請檢查您的連線，然後再試一次。";
+/* General error message */
+"Alert.somethingWentWrong" = "發生錯誤。請再試一次。";
+/* Request timed out error message */
+"Alert.timedOut" = "請求暫停。請檢查您的連接並再次嘗試。";
+/* Warning alert title */
+"Alert.warning" = "警告";
+/* 'the addresses were copied'' Alert title */
+"Alerts.copiedAddressesHeader" = "已複製位址";
+/* Addresses Copied Alert sub header */
+"Alerts.copiedAddressesSubheader" = "已成功複製所有的電子錢包位址。";
+/* Alert Header Label (the paper key was set) */
+"Alerts.paperKeySet" = "恢復短語集";
+/* Alert Subheader label (playfully positive) */
+"Alerts.paperKeySetSubheader" = "太棒了！";
+/* Alert Header label (the PIN was set) */
+"Alerts.pinSet" = "PIN 已設定";
+/* Send failure alert header label (the send failed to happen) */
+"Alerts.sendFailure" = "寄出失敗";
+/* Send success alert header label (confirmation that the send happened) */
+"Alerts.sendSuccess" = "寄出確認";
+/* Send success alert subheader label (e.g. the money was sent) */
+"Alerts.sendSuccessSubheader" = "錢已寄出！";
+/* Fingerprint was recognized by the scanner */
+"Alerts.touchIdSucceeded.android" = "已辨識指紋";
+/* Tell the user where they can enable permissions to access device storage. */
+"Android.allowFileSystemAccess" = "請在您的裝置啟用儲存權限：[設定] > [應用程式] > [BRD] > [權限]。";
+/* The "home" screen is the name of the top level menu for the app. */
+"Android.BCH.welcome.message" = "任何在您錢包裡的 BCH 都可透過主畫面存取。";
+/* Warning about using apps that can alter the screen */
+"Android.screenAlteringMessage" = "除非停用螢幕改變應用程式（例如 Twilight），否則 BRD 無法正常運作。";
+/* An app that alters the screen ("screen-altering app") has been detected. */
+"Android.screenAlteringTitle" = "偵測到螢幕改變應用程式";
+/* JSON Serialization error message */
+"ApiClient.jsonError" = "JSON 序列化錯誤";
+/* Wallet not ready error message */
+"ApiClient.notReady" = "電子錢包尚未就緒";
+/* API Token error message */
+"ApiClient.tokenError" = "無法擷取 API 權杖";
+/* Send BCH view body. */
+"BCH.body" = "在下方輸入目的地 BCH 地址。分叉（%1$@）之時錢包內所有的 BCH 都會送出。";
+/* Confirm sending <$5.00> to <address>? */
+"BCH.confirmationMessage" = "確定送出 %1$@ 至 %2$@";
+/* Confirmation alert title */
+"BCH.confirmationTitle" = "確認";
+/* Generic bch erorr message */
+"BCH.genericError" = "您的帳戶內沒有任何 BCH，或您是在分叉後取得 BCH。";
+/* Transaction ID copied message */
+"BCH.hashCopiedMessage" = "已複制交易 ID";
+/* No address error message */
+"BCH.noAddressError" = "請輸入地位";
+/* Attempted to scan unsupported qr code error message. */
+"BCH.paymentProtocolError" = "BCH 交易不支援付款組合要求";
+/* BCH successfully sent alert message */
+"BCH.successMessage" = "BCH 已成功寄送。";
+/* Widthdraw BCH view title */
+"BCH.title" = "提取 BCH";
+/* Tx Hash button header */
+"BCH.txHashHeader" = "BCH 交易 ID";
+/* Approve button label */
+"BitID.approve" = "許可";
+/* <sitename> is requesting authentication using your bitcoin wallet */
+"BitID.authenticationRequest" = "%1$@ 要求認證使用您的比特幣錢包";
+/* Deny button label */
+"BitID.deny" = "拒絕";
+/* BitID error alert title */
+"BitID.error" = "認證錯誤";
+/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
+"BitID.errorMessage" = "請檢查服務。您可能必須重試一次。";
+/* BitID success alert title */
+"BitID.success" = "認證成功。";
+/* BitID Authentication Request alert view title */
+"BitID.title" = "要求認證比特 ID";
+/* As in "(tap here to) buy (bitcoin)" */
+"Button.buy" = "購買";
+/* Cancel button label */
+"Button.cancel" = "取消";
+/* Confirm button title */
+"Button.confirm" = "確認";
+/* Button label to open a email compose window with our support email in the to field. */
+"Button.contactSupport.android" = "聯絡支援";
+/* prompt continue button */
+"Button.continueAction" = "繼續";
+/* prompt dismiss button */
+"Button.dismiss" = "終止";
+/* Done button title */
+"Button.done" = "完成";
+/* Button to return to the "home" screen (the home screen is the top menu). */
+"Button.Home" = "首頁";
+/* Ignore button label */
+"Button.ignore" = "略過";
+/* Maybe Later button label */
+"Button.maybeLater" = "稍後再說";
+/* menu button */
+"Button.menu" = "選單";
+/* More information button */
+"Button.moreInfo" = "更多資訊";
+/* No button */
+"Button.no" = "不要";
+/* OK button label */
+"Button.ok" = "確定";
+/* Open Settings button */
+"Button.openSettings" = "打開設置";
+/* receive button */
+"Button.receive" = "接收";
+/* Button label to open Security Settings. */
+"Button.securitySettings.android" = "資訊安全中心";
+/* Click this button to sell an asset */
+"Button.sell" = "賣出";
+/* send button */
+"Button.send" = "寄出";
+/* Settings button label */
+"Button.settings" = "設定";
+/* Setup button label */
+"Button.setup" = "設定";
+/* Skip button title */
+"Button.skip" = "略過";
+/* Settings button label */
+"Button.submit" = "提交";
+/* Button label to uninstall the app. */
+"Button.uninstall.android" = "解除安裝";
+/* Button label to wipe the user's application data. */
+"Button.wipe.android" = "消除";
+/* Yes button */
+"Button.yes" = "要";
+/* Camera plugin instruction */
+"CameraPlugin.centerInstruction" = "將您的 ID 在方塊置中";
+"CloudBackup.backupDeleted" = "備份已刪除";
+"CloudBackup.backupDeletedMessage" = "PIN嘗試失敗次數過多後，您的iCloud備份已被刪除。該應用程序現在將重新啟動。";
+"CloudBackup.backupMenuTitle" = "iCloud備份";
+"CloudBackup.createButton" = "建立新的電子錢包";
+"CloudBackup.createWarning" = "檢測到先前備份的錢包。建議使用此備份。您確定要繼續創建新的錢包嗎？";
+"CloudBackup.enableBody1" = "要啟用此功能，必須打開iCloud鑰匙串。";
+"CloudBackup.enableBody2" = "它應該如下所示：";
+"CloudBackup.enableButton" = "我已開啟iCloud鑰匙串";
+"CloudBackup.enableTitle" = "啟用鑰匙串";
+"CloudBackup.encryptBackupMessage" = "輸入密碼以加密備份";
+"CloudBackup.mainBody" = "請注意，iCloud備份僅與您的iCloud帳戶一樣安全。我們仍然建議在接下來的步驟中寫下恢復短語並保持其安全。如果您無法再訪問iCloud，則恢復短語是恢復錢包的唯一方法。";
+"CloudBackup.mainTitle" = "iCloud恢復備份";
+"CloudBackup.mainWarning" = "必須在iOS設置應用中打開iCloud鑰匙串才能使用此功能";
+"CloudBackup.mainWarningConfirmation" = "您確定要禁用iCloud備份嗎？這將從所有設備上刪除您的備份。";
+"CloudBackup.pinAttempts" = "清除備份之前還有剩余嘗試： %1$@";
+"CloudBackup.recoverButton" = "從恢復密鑰還原";
+"CloudBackup.recoverHeader" = "輸入PIN碼以解鎖iCloud備份";
+"CloudBackup.restoreButton" = "從iCloud備份還原";
+"CloudBackup.selectTitle" = "選擇備份";
+"CloudBackup.step1" = "啟動設置應用。";
+"CloudBackup.step2" = "點擊您的Apple ID名稱。";
+"CloudBackup.step3" = "點按iCloud。";
+"CloudBackup.step4" = "驗證iCloud鑰匙串是否已打開";
+"CloudBackup.understandText" = "我了解除非啟用iCloud鑰匙串，否則此功能將無法使用。";
+"CloudBackup.warningBody" = "在嘗試了%1$@次不正確的PIN後，您的iCloud備份將被清除。";
+/* Amount to Send: ($1.00) */
+"Confirmation.amountLabel" = "寄送金額：";
+"Confirmation.destinationTag" = "目的地標籤";
+"Confirmation.destinationTag_EmptyHint" = "（空）";
+/* Network Fee: ($1.00) */
+"Confirmation.feeLabel" = "網絡費：";
+/* Network Fee: (ETH) */
+"Confirmation.feeLabelETH" = "網路費用（ETH）:";
+/* Label for Hedera Memo field on transaction confirmation screen */
+"Confirmation.hederaMemo" = "Hedera Memo";
+/* eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. */
+"Confirmation.processingTime" = "處理時間：該筆交易預計在 %1$@ 後完成。";
+/* Label for "send" button on final confirmation screen */
+"Confirmation.send" = "寄送";
+/* Confirmation Screen title */
+"Confirmation.title" = "確認";
+/* To: (address) */
+"Confirmation.to" = "給";
+/* Total Cost: ($5.00) */
+"Confirmation.totalLabel" = "總計：";
+/* Confirm paper phrase error message */
+"ConfirmPaperPhrase.error" = "輸入的單詞與您的恢復短語不匹配。請再試一遍。";
+/* Confirm paper phrase view label. */
+"ConfirmPaperPhrase.label" = "為確保所有內容均正確記錄，請從您的恢復短語中輸入以下單詞。";
+/* Word label eg. Word #1, Word #2 */
+"ConfirmPaperPhrase.word" = "字組 #%1$@";
+/* Agree to legal terms button */
+"Crowdsale.agree" = "同意";
+/* As in "(tap here to) buy (some) tokens" */
+"Crowdsale.buyButton" = "購買代幣";
+/* Decline to legal terms button */
+"Crowdsale.decline" = "拒絕";
+/* Resume Idnetify verification button */
+"Crowdsale.resume" = "恢復驗證";
+/* Retry Identity verification button */
+"Crowdsale.retry" = "重試";
+/* Bitcoin denomination picker label */
+"DefaultCurrency.bitcoinLabel" = "比特幣顯示單位";
+/* Exchange rate label */
+"DefaultCurrency.rateLabel" = "匯率";
+/* The wallet is disabled. */
+"Disabled.title" = "停用錢包";
+/* Share address by e-mail subject */
+"Email.address_subject" = "%1$s地址";
+/* Service capabilities description */
+"EME.permissions.accountRequest" = "要求%1$@帳戶資訊";
+/* Service capabilities description */
+"EME.permissions.callRequest" = "要求%1$@智慧合約呼叫";
+/* Service capabilities description */
+"EME.permissions.paymentRequest" = "要求%1$@付款";
+/* Email unavailable alert title */
+"ErrorMessages.emailUnavailableMessage" = "本裝置並非設定來以 iOS 郵件應用程式傳送電子郵件。";
+/* Email unavailable alert title */
+"ErrorMessages.emailUnavailableTitle" = "無法使用電子郵件";
+/* Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) */
+"ErrorMessages.loopingLockScreen.android" = "由於您安卓系統版本中的錯誤，因此 BRD 無法取得認證。[請點擊此瞭解更多資訊。]";
+/* Messaging unavailable alert title */
+"ErrorMessages.messagingUnavailableMessage" = "本裝置並非設定來傳送訊息。";
+/* Messaging unavailable alert title */
+"ErrorMessages.messagingUnavailableTitle" = "無法使用傳訊";
+/* Fingerprint was not recognized by the scanner, please try scanning again */
+"ErrorMessages.touchIdFailed.android" = "指紋無法識別。請再試一次。";
+/* You can customize your Face ID Spending Limit from the [menu] */
+"FaceIDSettings.customizeText" = "您可由 %1$@ 自訂 Face ID 消費上限。";
+/* Text describing the purpose of the Face ID settings in the BRD app. */
+"FaceIDSettings.explanatoryText" = "使用Face ID解鎖您的BRD應用並匯款。";
+/* Face Id screen label */
+"FaceIDSettings.label" = "刷臉解鎖您的 BRD 並在設定的限制內撥款。";
+/* Title of the screen for setting the Face ID Spending Limit */
+"FaceIDSettings.linkText" = "Face ID 消費上限畫面";
+/* Setting to turn on Face ID for BRD */
+"FaceIDSettings.switchLabel" = "開放 BRD 使用 Face ID";
+/* Face ID settings view title */
+"FaceIDSettings.title" = "Face ID";
+/* Text label for a toggle that enables Face ID for sending money. */
+"FaceIDSettings.transactionsTitleText" = "啟用Face ID匯款";
+/* Instructions on how to turn on face id on the iPhone. Please ensure the name of the menu in this string matches the wording Apple uses in the iPhone menu. */
+"FaceIDSettings.unavailableAlertMessage" = "您尚未在此設備上設定 Face ID。現在就至設定->Face ID＆密碼來設置。";
+/* Face ID unavailable alert title */
+"FaceIDSettings.unavailableAlertTitle" = "尚未設置 Face ID";
+/* Text label for a toggle that enables Face ID for unlocking the BRD app. */
+"FaceIDSettings.unlockTitleText" = "啟用Face ID解鎖BRD";
+/* Face Id spending limit screen title */
+"FaceIDSpendingLimit.title" = "Face ID 消費上限";
+/* Economy fee */
+"FeeSelector.economy" = "經濟";
+/* E.g. [This transaction is predicted to complete in] 1-24 hours */
+"FeeSelector.economyTime" = "1-24 小時";
+/* Warning message for economy fee */
+"FeeSelector.economyWarning" = "此選項不建議用於時效性的交易。";
+/* E.g. Estimated delivery: 10-60 minutes */
+"FeeSelector.estimatedDeliver" = "預計發送時間：%1$@";
+/* [This transaction will complete in] 2-5 minutes */
+"FeeSelector.ethTime" = "2-5 分鐘";
+"FeeSelector.lessThanMinutes" = "<%1$d 分钟";
+/* Priority fee */
+"FeeSelector.priority" = "優先";
+/* E.g. [This transaction is predicted to complete in] 10-30 minutes */
+"FeeSelector.priorityTime" = "10-30 分鐘";
+/* Regular fee */
+"FeeSelector.regular" = "標準";
+/* E.g. [This transaction is predicted to complete in] 10-60 minutes */
+"FeeSelector.regularTime" = "10-60 分鐘";
+/* Fee Selector title */
+"FeeSelector.title" = "處理速度";
+/* Label for the Android file chooser when we need to prompt the user to select an image file. */
+"FileChooser.selectImageSource.android" = "選擇圖像源";
+/* Fingerprint authentication settings screen description */
+"FingerprintSettings.description" = "以您的指紋解鎖 Bread，並在設定好的限額內寄送款項。";
+/* Switch label to enable fingerprint authentication to send money */
+"FingerprintSettings.sendMoney" = "使用指紋匯款";
+/* Fingerprint authentication settings sceen title */
+"FingerprintSettings.title" = "指紋";
+/* Switch label to enable fingerprint authentication to unlock BRD app */
+"FingerprintSettings.unlockApp" = "使用指紋解鎖BRD";
+/* This is the section that allows administration of the user's wallet */
+"HomeScreen.admin" = "管理";
+/* Home screen menu button to buy some bitcoin */
+"HomeScreen.buy" = "購買";
+/* home screen toolbar 'Buy & Sell' button */
+"HomeScreen.buyAndSell" = "買賣";
+/* Menu button on the home screen toolbar */
+"HomeScreen.menu" = "選單";
+/* This section lists the users wallets */
+"HomeScreen.portfolio" = "錢包";
+/* Label for the total balance of all the user's assets (style is all lower case if your language permits) */
+"HomeScreen.totalAssets" = "總資產";
+/* (Tap here to) trade (your assets for other assets) */
+"HomeScreen.trade" = "換";
+/* Checking private key balance progress view text */
+"Import.checking" = "正在檢查私密金鑰餘額…";
+/* Sweep private key confirmation message */
+"Import.confirm" = "要從這個私密金鑰寄出 %1$@ 到您的電子錢包嗎？比特幣網路會收到 %2$@ 的費用。";
+/* Duplicate key error message */
+"Import.Error.duplicate" = "此私密金鑰已經在您的電子錢包了。";
+/* empty private key error message */
+"Import.Error.empty" = "此私密金鑰是空白的。";
+/* High fees error message */
+"Import.Error.highFees" = "交易手續費可能會超過此私密金鑰上的可用資金。";
+/* Not a valid private key error message */
+"Import.Error.notValid" = "不是有效的私密金鑰";
+/* Import signing error message */
+"Import.Error.signing" = "簽署交易出錯";
+/* [Redeem] the funds stored on this private key. */
+"Import.importButton" = "兌換";
+/* Importing wallet progress view label */
+"Import.importing" = "兌換私密金鑰中";
+/* Caption for graphics */
+"Import.leftCaption" = "私密金鑰";
+/* Import wallet intro screen message */
+"Import.message" = "私密金鑰通常以 QR 碼形式印在紙上，作為離線儲存資金使用。利用單一交易兌換私密金鑰下所控制的所有資金匯入您的 BRD。";
+/* Enter password alert view title */
+"Import.password" = "此私密金鑰受密碼保護。";
+/* password textfield placeholder */
+"Import.passwordPlaceholder" = "密碼";
+/* Caption for graphics */
+"Import.rightCaption" = "您的 BRD 錢包";
+/* Scan Private key button label */
+"Import.scan" = "掃描私密金鑰";
+/* Import wallet success alert title */
+"Import.success" = "成功";
+/* Successfully imported wallet message body */
+"Import.SuccessBody" = "成功兌換私密金鑰。";
+/* Import Wallet screen title */
+"Import.title" = "兌換私密金鑰";
+/* Unlocking Private key activity view message. */
+"Import.unlockingActivity" = "正在解除鎖定金鑰";
+/* Import wallet intro warning message */
+"Import.warning" = "兌換私密金鑰並不會匯入交易歷史或其他資料。";
+/* Wrong password alert message */
+"Import.wrongPassword" = "密碼錯誤，請重試一次。";
+/* Close app button */
+"JailbreakWarnings.close" = "關閉";
+/* Ignore jailbreak warning button */
+"JailbreakWarnings.ignore" = "略過";
+/* Jailbreak warning message */
+"JailbreakWarnings.messageWithBalance" = "裝置安全性遭破解\n 任何「越獄」應用程式都可以存取 BRD 的鑰匙圈資料、 竊取您的比特幣！立即抹除這個錢包，在安全的裝置上還原。";
+/* Jailbreak warning message */
+"JailbreakWarnings.messageWithoutBalance" = "裝置安全性遭破解\n 任何「越獄」應用程式都可以存取 BRD 的鑰匙圈資料、 竊取您的比特幣。請只在未越獄的裝置上使用 BRD。";
+/* Jailbreak warning title */
+"JailbreakWarnings.title" = "警告";
+/* Wipe wallet button */
+"JailbreakWarnings.wipe" = "抹除";
+/* Approve link wallet button label */
+"LinkWallet.approve" = "同意";
+/* Decline link wallet button label */
+"LinkWallet.decline" = "拒絕";
+/* Link Wallet view dislaimer footer */
+"LinkWallet.disclaimer" = "外部應用程式未經此裝置的允許無法匯款";
+/* Link Wallet view title above domain list */
+"LinkWallet.domainTitle" = "備註:在連線到下列網域時才會與此應用程式互動";
+/* Link wallet logo footer text */
+"LinkWallet.logoFooter" = "安全結帳";
+/* Link Wallet view title above permissions list */
+"LinkWallet.permissionsTitle" = "此應用程式將可以:";
+/* Link Wallet view title */
+"LinkWallet.title" = "連結電子錢包";
+/* Location services disabled error */
+"LocationPlugin.disabled" = "定位服務已停用。";
+/* No permissions for location services */
+"LocationPlugin.notAuthorized" = "BRD 沒有存取定位服務的權限。";
+/* Wallet creation date prefix */
+"ManageWallet.creationDatePrefix" = "您在 %1$@ 建立了電子錢包";
+/* Manage wallet description text */
+"ManageWallet.description" = "您的錢包名稱只會出現在您的帳戶交易記錄中，任何其他人都看不到。";
+/* Change Wallet name textfield label */
+"ManageWallet.textFeildLabel" = "電子錢包名稱";
+/* Manage wallet modal title */
+"ManageWallet.title" = "管理電子錢包";
+"MarketData.high24h" = "24 小时高";
+"MarketData.low24h" = "24小時低";
+"MarketData.marketCap" = "市值";
+"MarketData.volume" = "交易量";
+/* "Add [a] Wallet [to the home screen]" */
+"MenuButton.addWallet" = "增加錢包";
+/* Menu button title */
+"MenuButton.lock" = "鎖定電子錢包";
+/* (Click here to) manage (your list of) wallets */
+"MenuButton.manageWallets" = "管理錢包";
+/* (press here to) scan (a) QR code */
+"MenuButton.scan" = "掃描 QR";
+/* Menu button title */
+"MenuButton.security" = "資訊安全中心";
+/* Menu button title */
+"MenuButton.settings" = "設定";
+/* Menu button title */
+"MenuButton.support" = "支援";
+/* button label */
+"MenuViewController.createButton" = "建立新的電子錢包";
+/* Menu modal title */
+"MenuViewController.modalTitle" = "選單";
+/* button label */
+"MenuViewController.recoverButton" = "復原電子錢包";
+/* Paper Key Skip modal body (Android-version) */
+"Modal.PaperKeySkip.Body.Android" = "如果您更改手機上的安全設置，則必須輸入恢復短語才能打開錢包。 \n\n您確定要稍後設置恢復短語嗎？";
+/* Paper Key Skip modal Continue Set Up button */
+"Modal.PaperKeySkip.Button.ContinueSetUp" = "繼續設定";
+/* Paper Key Skip modal I'll do it later button */
+"Modal.PaperKeySkip.Button.IllDoItLater" = "稍後再做";
+/* Paper Key Skip modal title */
+"Modal.PaperKeySkip.Title" = "注意";
+/* Node selection mode is automatic */
+"NodeSelector.automatic" = "自動";
+/* Switch to automatic mode button label */
+"NodeSelector.automaticButton" = "切換至自動模式";
+/* Node is connected label */
+"NodeSelector.connected" = "已連線";
+/* Node is connecting label */
+"NodeSelector.connecting" = "連接中";
+/* Enter node ip address view body */
+"NodeSelector.enterBody" = "輸入節點的 IP 位址及連接埠（選擇性）";
+/* Enter Node ip address view title */
+"NodeSelector.enterTitle" = "輸入節點";
+/* Entered invalid node address at the node selection screen */
+"NodeSelector.invalid" = "無效的節點";
+/* Switch to manual mode button label */
+"NodeSelector.manualButton" = "切換至手動模式";
+/* Node address label */
+"NodeSelector.nodeLabel" = "目前主節點";
+/* Node is not connected label */
+"NodeSelector.notConnected" = "未連線";
+/* Node status label */
+"NodeSelector.statusLabel" = "節點連線狀態";
+/* Node Selector view title */
+"NodeSelector.title" = "比特幣節點";
+/* Onboarding screen 'I'll browse first' button */
+"Onboarding.browseFirst" = "我先瀏覽一下";
+/* Onboarding screen 'Buy some coin' button */
+"Onboarding.buyCoin" = "購買一些貨幣";
+/* Onboarding screen 'Get started' (create new wallet) button */
+"Onboarding.getStarted" = "開始使用服務";
+/* Onboarding screen 'Next' button */
+"Onboarding.next" = "下一個";
+/* Onboarding screen restore an existing wallet. */
+"Onboarding.restoreWallet" = "恢復錢包";
+/* Onboarding screen Skip button title that allows the user to exit the onboarding process. */
+"Onboarding.skip" = "略過";
+/* Onboarding screen Page 4 title */
+"OnboardingPageFour.title" = "只需 50 美元,便可在今日立即展開投資！";
+/* Onboarding screen Page 1 title */
+"OnboardingPageOne.title" = "歡迎使用您的新數字資產錢包！";
+/* Onboarding screen Page 3 subtitle */
+"OnboardingPageThree.subtitle" = "使用 BRD 進行多元分散投資,既輕鬆又安全。";
+/* Onboarding screen Page 3 title */
+"OnboardingPageThree.title" = "購買及交易比特幣,代幣及其他數位貨幣。";
+/* Onboarding screen Page 2 subtitle */
+"OnboardingPageTwo.subtitle" = "我們擁有價值超過 60 億美元受到保護的資產。";
+/* Onboarding screen Page 2 title */
+"OnboardingPageTwo.title" = "加入全球數百萬信賴 BRD 的人潮。";
+/* Eg. Send 1.0Eth to purchase CCC */
+"PaymentConfirmation.amountText" = "匯出%1$@來購買%2$@";
+/* Payment confirmation view title */
+"PaymentConfirmation.title" = "確認";
+/* Bad Payment request alert title */
+"PaymentProtocol.Errors.badPaymentRequest" = "不良的付款請求";
+/* Error opening payment protocol file message */
+"PaymentProtocol.Errors.corruptedDocument" = "不支持的或損毀的文件";
+/* Missing certificate payment protocol error message */
+"PaymentProtocol.Errors.missingCertificate" = "憑證遺失";
+/* Request expired payment protocol error message */
+"PaymentProtocol.Errors.requestExpired" = "請求已過期";
+/* Payment too small alert title */
+"PaymentProtocol.Errors.smallOutputError" = "無法進行付款";
+/* Amount too small error message */
+"PaymentProtocol.Errors.smallPayment" = "比特幣付款不能少於 %1$@。";
+/* Output too small error message. */
+"PaymentProtocol.Errors.smallTransaction" = "比特幣交易輸出不能少於 %1$@。";
+/* Unsupported signature type payment protocol error message */
+"PaymentProtocol.Errors.unsupportedSignatureType" = "不受支援的簽章類型";
+/* Untrusted certificate payment protocol error message */
+"PaymentProtocol.Errors.untrustedCertificate" = "不受信任的憑證";
+"Platform.transaction_cancelled" = "交易已取消";
+/* Body text for a prompt that asks the user to subscribe to email updates to find out product updates. */
+"Prompts.Email.body" = "搶先收到重要支援與產品新消息";
+/* Placeholder text for an email address text field. */
+"Prompts.Email.placeholder" = "輸入您的電子信箱";
+/* Body text that is shown when the user successfully subscribes to email updates. */
+"Prompts.Email.successBody" = "您已成功訂閱接收新消息";
+/* Text that is displayed as a footnote when the user successfully subscribes to email updates. */
+"Prompts.Email.successFootnote" = "感謝您一直以來的支持";
+/* Title that is shown when the user successfully subscribes to email updates. */
+"Prompts.Email.successTitle" = "謝謝您！";
+/* Title for a prompt that asks the user to subscribe to email updates to find out product updates. */
+"Prompts.Email.title" = "進入循環";
+/* Enable face ID prompt body */
+"Prompts.FaceId.body" = "點擊繼續來啟用 Face ID";
+/* Enable face ID prompt title */
+"Prompts.FaceId.title" = "啟用 Face ID";
+/* No passcode set warning body */
+"Prompts.NoPasscode.body" = "必須有裝置密碼來保護您的錢包。進入設定並開啟密碼。";
+/* No Passcode set warning title */
+"Prompts.NoPasscode.title" = "開啟裝置密碼。";
+/* Instructions on how to enable screen lock settings */
+"Prompts.NoScreenLock.body.android" = "需要裝置螢幕鎖定來保護您的錢包。前往「設定」 > 「安全性」 > 「螢幕鎖定」，啟用來繼續。";
+/* Device encryption prompt title */
+"Prompts.NoScreenLock.title.android" = "螢幕鎖定已停用";
+/* Warning about recovery phrase (formerly paper key). */
+"Prompts.PaperKey.body" = "如果丟失或更換手機，必須保存恢復短語。";
+/* Warning about paper key (Android-version) */
+"Prompts.PaperKey.Body.Android" = "設置恢復短語，以防萬一您丟失或更換手機。如果更改手機的安全設置，則還需要密鑰。";
+/* An action is required (You must do this action). */
+"Prompts.PaperKey.title" = "需要採取動作";
+"Prompts.RateApp.dontShow" = "不要再問了";
+"Prompts.RateApp.enjoyingBrd" = "享受BRD嗎？";
+"Prompts.RateApp.googlePlayReview" = "您的評論有助於擴大BRD社區。";
+"Prompts.RateApp.noThanks" = "不用了，謝謝";
+"Prompts.RateApp.rateUs" = "評論我們";
+/* Transaction rejected prompt body */
+"Prompts.RecommendRescan.body" = "您的電子錢包可能不同步。這通常可以經由重新掃描區塊鏈來修正。";
+/* Transaction rejected prompt title */
+"Prompts.RecommendRescan.title" = "交易被拒";
+/* Share data prompt body */
+"Prompts.ShareData.body" = "和我們分享您的匿名資料來協助改善 BRD";
+/* Share data prompt title */
+"Prompts.ShareData.title" = "分享匿名資料";
+/* Enable touch ID prompt body */
+"Prompts.TouchId.body" = "點選這裡來啟用 Touch ID";
+/* Enable Fingerprint prompt body */
+"Prompts.TouchId.body.android" = "點選這裡來啟用指紋驗證";
+/* Enable touch ID prompt title */
+"Prompts.TouchId.title" = "啟用 Touch ID";
+/* Enable Fingerprint prompt title */
+"Prompts.TouchId.title.android" = "啟用指紋驗證";
+/* Button on fingerprint prompt so the user can enter their PIN instead */
+"Prompts.TouchId.usePin.android" = "密碼";
+/* Upgrade PIN prompt body. */
+"Prompts.UpgradePin.body" = "BRD 已經升級至 6 位數 PIN 碼。請點這裡升級。";
+/* Upgrade PIN prompt title. */
+"Prompts.UpgradePin.title" = "升級 PIN 碼";
+/* Body text for the push notifications prompt. */
+"PushNotifications.body" = "開啟推送通知，搶先得知新功能和特別優惠。";
+/* Push notifications are disabled alert title" */
+"PushNotifications.disabled" = "已停用通知功能";
+/* Body text when push notifications are disabled. */
+"PushNotifications.disabledBody" = "開通推送消息通知功能，接收 BRD 特別優惠和最新資訊。";
+/* Body text when push notifications are enabled. */
+"PushNotifications.enabledBody" = "您將接收 BRD 特別優惠和最新資訊。";
+/* Instructions to enable push notifications for BRD in the phone's system settings. */
+"PushNotifications.enableInstructions" = "您好像關閉了推送通知功能。請前往“設置”，開通接收 BRD 推送功能。";
+/* Push notifications toggle switch label */
+"PushNotifications.label" = "接收推送";
+/* Push notifications are off label */
+"PushNotifications.off" = "關閉";
+/* Push notifications are on label */
+"PushNotifications.on" = "開啟";
+/* Push notifications settings view title label */
+"PushNotifications.title" = "持續獲知最新資訊";
+/* Push notifications settings failed to update settings on the back end */
+"PushNotifications.updateFailed" = "無法更新推送通知設置";
+/* Google play review prompt body */
+"RateAppPrompt.Body.Android" = "如果您喜歡我們的應用程式，請花點時間為其評分並提供評論。";
+/* Google play review prompt, revivew button */
+"RateAppPrompt.Button.Dismiss.Android" = "不用了，謝謝";
+/* Google play review prompt, dismiss button */
+"RateAppPrompt.Button.RateApp.Android" = "評價 BRD";
+/* Google play review prompt title */
+"RateAppPrompt.Title.Android" = "評價 BRD";
+/* Address copied message. */
+"Receive.copied" = "已複製至剪貼簿。";
+/* Share via email button label */
+"Receive.emailButton" = "電子郵件";
+/* Request button label */
+"Receive.request" = "要求帳戶";
+/* Share button label */
+"Receive.share" = "分享";
+/* Share via text message (SMS) */
+"Receive.textButton" = "簡訊";
+/* Receive modal title */
+"Receive.title" = "收取";
+/* Done button text */
+"RecoverWallet.done" = "完成";
+/* Recover wallet header */
+"RecoverWallet.header" = "復原電子錢包";
+/* Reset PIN with paper key: header */
+"RecoverWallet.header_reset_pin" = "重設 PIN 碼";
+/* Enter paper key instruction */
+"RecoverWallet.instruction" = "輸入恢復短語";
+/* Recover wallet intro */
+"RecoverWallet.intro" = "使用您的恢復短語恢復您的BRD。";
+/* Invalid paper key message */
+"RecoverWallet.invalid" = "您輸入的恢復短語無效。請仔細檢查每個單詞，然後重試。";
+/* Previous button accessibility label */
+"RecoverWallet.leftArrow" = "左箭頭";
+/* Next button label */
+"RecoverWallet.next" = "下一步";
+/* Reset PIN with paper key: more information button. */
+"RecoverWallet.reset_pin_more_info" = "點此了解更多資訊。";
+/* Next button accessibility label */
+"RecoverWallet.rightArrow" = "右箭頭";
+/* Recover wallet sub-header */
+"RecoverWallet.subheader" = "輸入您要恢復的錢包的恢復短語。";
+/* Reset PIN with paper key: sub-header */
+"RecoverWallet.subheader_reset_pin" = "要重置PIN碼，請在下面的框中輸入恢復短語中的單詞。";
+/* Instructs the user to enter words from the set of recovery key words. */
+"RecoveryKeyFlow.confirmRecoveryInputError" = "你輸入的字詞不正確,請再試一次。";
+/* Instructs the user to enter words from the set of recovery phrase words. */
+"RecoveryKeyFlow.confirmRecoveryKeySubtitle" = "快完成了！在您的恢復短語中輸入以下單詞。";
+/* Title for the confirmation step of the recovery phrase flow. */
+"RecoveryKeyFlow.confirmRecoveryKeyTitle" = "確認恢復短語";
+/* Title displayed when the user starts the process of entering a recovery phrase */
+"RecoveryKeyFlow.enterRecoveryKey" = "輸入恢復短語";
+/* Subtitle displayed when the user starts the process of entering a recovery phrase */
+"RecoveryKeyFlow.enterRecoveryKeySubtitle" = "請輸入您的恢復短語以斷開該錢包與設備的鏈接。";
+/* Body text for an alert dialog asking the user whether to set up the recovery phrase later */
+"RecoveryKeyFlow.exitRecoveryKeyPromptBody" = "您確定要稍後設置恢復短語嗎？";
+/* Title for an alert dialog asking the user whether to set up the recovery key later */
+"RecoveryKeyFlow.exitRecoveryKeyPromptTitle" = "稍後再設定";
+/* Button text for the 'Generate Recovery Phrase' button */
+"RecoveryKeyFlow.generateKeyButton" = "生成恢復短語";
+/* Subtext for the recovery key landing page. */
+"RecoveryKeyFlow.generateKeyExplanation" = "如果你升級或遺失手機,想要復原資金時,就需要這個金鑰。";
+/* Default title for the recovery phrase landing page */
+"RecoveryKeyFlow.generateKeyTitle" = "生成您的私人恢復短語";
+/* Title for a button that takes the user to the wallet after setting up the recovery key. */
+"RecoveryKeyFlow.goToWalletButtonTitle" = "前往錢包";
+/* Hint text for recovery key intro page, e.g., Step 2 */
+"RecoveryKeyFlow.howItWorksStep" = "運作方式 - 步驟 %1$@";
+/* Error text displayed when the user enters an incorrect recovery phrase */
+"RecoveryKeyFlow.invalidPhrase" = "您輸入的某些單詞與您的恢復短語不匹配。請再試一遍。";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.keepSecure" = "請保護金鑰的安全";
+/* Informs the user that the recovery is only required for recovering a wallet. */
+"RecoveryKeyFlow.keyUseHint" = "你只有復原的時候需要使用金鑰,日常存取錢包時並不需要。";
+/* Reminds the user not to take screenshots or email the recovery key words */
+"RecoveryKeyFlow.noScreenshotsOrEmailWarning" = "基於安全理由,請勿用螢幕擷圖或電子郵件保留這些字詞";
+/* Recommends that the user avoids capturing the paper key with a screenshot */
+"RecoveryKeyFlow.noScreenshotsRecommendation" = "請將金鑰寫在紙上並確認使用。基於安全理由,不建議使用螢幕擷圖。";
+/* Title displayed when the user starts the process of recovering a wallet */
+"RecoveryKeyFlow.recoveryYourWallet" = "復原錢包";
+/* Subtitle displayed when the user starts the process of recovering a wallet */
+"RecoveryKeyFlow.recoveryYourWalletSubtitle" = "請輸入您要恢復的錢包的恢復短語。";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.relaxBuyTrade" = "輕鬆購買,安心交易";
+/* Reminds the user to write down the recovery key words. */
+"RecoveryKeyFlow.rememberToWriteDownReminder" = "請記得寫下這些字詞；如果忘了,請滑動返回。";
+/* Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered */
+"RecoveryKeyFlow.resetPINInstruction" = "請輸入您的恢復短語以重置您的PIN碼。";
+/* Assures the user that BRD will keep the user's funds secure. */
+"RecoveryKeyFlow.securityAssurance" = "儘管放心購買與交易,你的資金經由商業界最高層級的安全性和隱私權所保護。";
+/* Recommends that the user stores the recovery key in a secure location */
+"RecoveryKeyFlow.storeSecurelyRecommendation" = "請將金鑰儲存在安全的位置,因為金鑰是你復原錢包的唯一途徑；BRD 並不會保留副本。";
+/* Title for the success page after the recovery phrase has been set up */
+"RecoveryKeyFlow.successHeading" = "恭喜你！您已完成恢復短語的設置。";
+/* Subtitle for the success page after the recovery key has been set up */
+"RecoveryKeyFlow.successSubheading" = "你已經設定完畢,可以透過 BRD 錢包存放,交易和購買加密貨幣了。";
+/* Title displayed to the user on the intro screen when unlinking a wallet */
+"RecoveryKeyFlow.unlinkWallet" = "取消這個裝置與錢包的連結。";
+/* Subtitle displayed to the user on the intro screen when unlinking a wallet. */
+"RecoveryKeyFlow.unlinkWalletSubtext" = "取消裝置與目前已安裝錢包的連結,才能啟用新錢包。";
+/* Warning displayed when the user starts the process of unlinking a wallet */
+"RecoveryKeyFlow.unlinkWalletWarning" = "你必須復原錢包,才能重新存取。";
+/* Title displayed to the user on the intro screen when wiping a wallet */
+"RecoveryKeyFlow.wipeWallet" = "取消這個裝置與錢包的連結。";
+/* Subtitle displayed to the user on the intro screen when wiping a wallet. */
+"RecoveryKeyFlow.wipeWalletSubtext" = "通過從設備中擦除當前錢包來啟動新錢包。";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.writeItDown" = "寫下你的金鑰";
+/* Title for the recovery phrase landing page if the key has already been generated. */
+"RecoveryKeyFlow.writeKeyAgain" = "再次寫下您的恢復短語";
+/* Subtitle for the write recovery key screen */
+"RecoveryKeyFlow.writeKeyScreenSubtitle" = "請依序寫下以下字詞。";
+/* Title for the write recovery phrase screen */
+"RecoveryKeyFlow.writeKeyScreenTitle" = "您的恢復短語";
+/* Title for the step number when the user pages through the recovery words */
+"RecoveryKeyFlow.writeKeyStepTitle" = "%2$@ 之 %1$@";
+/* No amount entered error message. */
+"RequestAnAmount.noAmount" = "請先輸入一個帳戶";
+/* Request a specific amount of bitcoin */
+"RequestAnAmount.title" = "要求帳戶";
+/* Alert action button label */
+"ReScan.alertAction" = "同步";
+/* Alert message body */
+"ReScan.alertMessage" = "同步期間無法發款。";
+/* Alert message title */
+"ReScan.alertTitle" = "要與區塊鏈同步嗎？";
+/* extimated time */
+"ReScan.body1" = "20-45 分鐘";
+/* Syncing explanation */
+"ReScan.body2" = "如果交易在比特幣網上已經顯示為完成，但沒有出現在您的 BRD 上。";
+/* Syncing explanation */
+"ReScan.body3" = "你不斷收到「交易被拒」的錯誤。";
+/* Start Sync button label */
+"ReScan.buttonTitle" = "開始同步";
+/* Sync blockchain view footer */
+"ReScan.footer" = "與區塊鏈同步期間無法發款。";
+/* Sync Blockchain view header */
+"ReScan.header" = "與區塊鏈同步";
+/* Subheader label */
+"ReScan.subheader1" = "預估時間";
+/* Subheader label */
+"ReScan.subheader2" = "什麼時候該進行同步？";
+/* Rewards view expanded body. */
+"RewardsView.expandedBody" = "了解如何節省交易費用，解鎖未來的財富。";
+/* Rewards view expanded title. */
+"RewardsView.expandedTitle" = "我們為您介紹BRD Rewards。";
+/* Rewards view title */
+"RewardsView.normalTitle" = "獎勵";
+/* Scan bitcoin address camera flash toggle */
+"Scanner.flashButtonLabel" = "相機閃光";
+/* (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") */
+"Scanner.paymentPromptMessage" = "您想向此地址发送 %1$@ 付款吗？";
+/* alert dialog title */
+"Scanner.paymentPromptTitle" = "發送付款";
+/* Complete filter label */
+"Search.complete" = "完成";
+/* Pending filter label */
+"Search.pending" = "待決";
+/* Received filter label */
+"Search.received" = "已收到";
+/* [Click here to] search */
+"Search.search" = "搜尋";
+/* Sent filter label */
+"Search.sent" = "已寄送";
+/* Face ID button title */
+"SecurityCenter.faceIdTitle" = "Face ID";
+/* Paper Key button description */
+"SecurityCenter.paperKeyDescription" = "您的手機遺失或升級時，存取您的比特幣唯一的方式。";
+/* Recovery Phrase button title. This used to be called 'paper key', so leaving the string key as `paperKeyTitle` in order
+ * to not break existing client code. */
+"SecurityCenter.paperKeyTitle" = "恢復短語";
+/* Paper Key button title */
+"SecurityCenter.paperKeyTitle.android" = "恢復短語";
+/* PIN button description */
+"SecurityCenter.pinDescription" = "保護您的 BRD，防範未經授權的使用者。";
+/* PIN button title */
+"SecurityCenter.pinTitle" = "6 位數 PIN 碼";
+/* Touch ID button description */
+"SecurityCenter.touchIdDescription" = "輕鬆解鎖您的 BRD，並在設定好的限額內寄送款項。";
+/* Touch ID button title */
+"SecurityCenter.touchIdTitle" = "Touch ID";
+/* Security center fingerprint authentication button */
+"SecurityCenter.touchIdTitle.android" = "指紋驗證";
+/* Segwit enabled confirmation title */
+"Segwit.ConfirmationConfirmationTitle" = "您已啟用 SegWit！";
+/* Segwit enabled confirmation description */
+"Segwit.ConfirmationInstructionsDescription" = "感謝您協助推動比特幣向前發展。";
+/* Segwit instructions */
+"Segwit.ConfirmationInstructionsInstructions" = "SegWit 支援仍為測試功能。\n一旦 SegWit 被啟用,將無法停用。您將能夠在設定中找到舊版位址。\n啟用 SegWit 的使用者可能無法使用某些第三方服務,包括加密貨幣交易。在緊急情況下,您可以在偏好選項 > 比特幣設定中產生一個舊版位址。\n在未來更新中,SegWit 將自動為所有使用者啟用。";
+/* Segwit extra confirmation title. */
+"Segwit.ConfirmChoiceLayout" = "啟用 SegWit 是不可逆轉的功能。確定要繼續嗎？";
+/* Segwit enableButton */
+"Segwit.Enable" = "啟用";
+/* Segwit button label that takes the user back to the home screen once SegWit is enabled. */
+"Segwit.HomeButton" = "到月球";
+"Send_fio_toLabel" = "FIO";
+/* Send money amount label */
+"Send.amountLabel" = "金額";
+/* Balance: $4.00 */
+"Send.balance" = "餘額：%1$@";
+/* Balance: $4.00 for iOS, the balance can't have a parameter */
+"Send.balanceString" = "餘額:";
+/* Instructions how to allow the camera access for the app */
+"Send.cameraUnavailabeMessage.android" = "到「設定」 > 「應用程式」 > 「BRD」 > 「權限」允許相機存取";
+/* Permission required to access camera */
+"Send.cameraUnavailabeTitle.android" = "BRD 尚未獲准存取相機";
+/* Camera not allowed message */
+"Send.cameraunavailableMessage" = "請至「設定」允許存取相機。";
+/* Camera not allowed alert title */
+"Send.cameraUnavailableTitle" = "BRD 未獲得存取相機的權限";
+/* Warning when sending to self. */
+"Send.containsAddress" = "目的地為您自己的地址。您不能寄送給自己。";
+/* Could not create transaction alert title */
+"Send.creatTransactionError" = "無法建立交易。";
+/* Description for sending money label */
+"Send.descriptionLabel" = "備註";
+/* Optional Destination Tag label */
+"Send.destinationTag_optional" = "目標標記（可選）";
+/* Required Destination Tag label */
+"Send.destinationTag_required" = "目標標記（必填）";
+"Send.destinationTag_required_error" = "目標地址需要有效的目標標記。";
+/* Emtpy pasteboard error message */
+"Send.emptyPasteboard" = "剪貼板是空的";
+/* "(you) can't send (to your)self" */
+"Send.ethSendSelf" = "無法寄給自己";
+/* Network Fee: $0.01 */
+"Send.fee" = "網路費：%1$@";
+"Send.fio_invalid" = "無效的FIO地址。";
+"Send.fio_noAddress" = "沒有與此FIO地址關聯的%1$s地址。";
+"Send.fio_retrievalError" = "檢索此FIO地址的地址時出錯。請稍後再試。";
+/* Payee identity not certified alert title. */
+"Send.identityNotCertified" = "受款人身分未經認證。";
+/* Insufficient funds error */
+"Send.insufficientFunds" = "資金不足";
+/* e,g, "You must have at least $2 in your wallet in order to transfer this type of token." In this case, "token" is an ethereum ERC20 token. */
+"Send.insufficientGasMessage" = "欲傳送此類代幣，您錢包中至少須有 %1$@。請問您現在要前往以太坊錢包嗎？";
+/* Your ethereum balance is insufficient to complete this action. */
+"Send.insufficientGasTitle" = "以太坊餘額不足";
+/* e.g. The destination is not a valid (bitcoin) address. */
+"Send.invalidAddressMessage" = "目的地址不是一個有效的%1$@地址。";
+/* Invalid address on pasteboard message */
+"Send.invalidAddressOnPasteboard" = "剪貼板未包含有效的%1$@地址。";
+/* Invalid address alert title */
+"Send.invalidAddressTitle" = "位址無效";
+/* Is rescanning error message */
+"Send.isRescanning" = "完全重新掃描期間無法寄送。";
+/* Warning when the user is trying to send bitcoin cash to a legacy bitcoin address (possible, but probably not what the user wants to do) */
+"Send.legacyAddressWarning" = "注意，這是一個 legacy 比特幣位址。您確定要傳送比特幣現金至此嗎？";
+/* We are loading the request (now) */
+"Send.loadingRequest" = "正在載入要求";
+/* Hedera Memo Tag Label */
+"Send.memoTag_optional" = "Hedera備忘（可選）";
+/* Transaction fee could not be be caluculated error. */
+"Send.nilFeeError" = "資金不足支付轉帳費用。";
+/* Empty address alert message */
+"Send.noAddress" = "請輸入收受者的地址。";
+/* Emtpy amount alert message */
+"Send.noAmount" = "請輸入欲寄送的金額。";
+/* No Fees error */
+"Send.noFeesError" = "正在下載網路資金現況。請再試一次。";
+/* Paste button label */
+"Send.pasteLabel" = "貼上";
+/* Error message for invalid PayID */
+"Send.payId_invalid" = "無效的PayID。";
+/* Error message for no address associated with a PayID for a given currency */
+"Send.payId_noAddress" = "沒有與此PayID相關的%1$s地址。";
+/* Error message for error in retrieving the address from the PayID endpoint */
+"Send.payId_retrievalError" = "檢索此PayID的地址時出錯。請稍後再試。";
+/* PayID label */
+"Send.payId_toLabel" = "PayID";
+/* Could not publish transaction alert title */
+"Send.publishTransactionError" = "無法公布交易。";
+/* Could not load remote request error message */
+"Send.remoteRequestError" = "無法載入付款要求";
+/* Scan button label */
+"Send.scanLabel" = "掃描";
+/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
+"Send.sendingMax" = "發送上限：";
+/* Send button label (the action, "press here to send") */
+"Send.sendLabel" = "寄送";
+/* Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) */
+"Send.sendMaximum" = "匯出最大金額?";
+/* Send screen title (as in "this is the screen for sending money") */
+"Send.title" = "寄送";
+/* Send money to label */
+"Send.toLabel" = "給";
+/* Adress already used alert message - first part */
+"Send.UsedAddress.firstLine" = "比特幣位址專供一次性使用。";
+/* Adress already used alert message - second part */
+"Send.UsedAddress.secondLIne" = "重複使用會降低您與收受者的隱私，如果收受者無法直接控制該位址，可能會造成損失。";
+/* Adress already used alert title */
+"Send.UsedAddress.title" = "位址已有人使用";
+/* About label */
+"Settings.about" = "關於";
+/* Advanced settings header */
+"Settings.advanced" = "進階";
+/* Advanced Settings title */
+"Settings.advancedTitle" = "進階設定";
+/* ATM map menu item title explaining that it's a feature only available in the USA */
+"Settings.atmMapMenuItemSubtitle" = "僅在美國提供";
+/* ATM map menu item title */
+"Settings.atmMapMenuItemTitle" = "加密ATM地圖";
+/* i.e. the currency which will be displayed */
+"Settings.currency" = "顯示貨幣";
+/* e.g. "USD Settings" (settings for how USD is handled) */
+"Settings.currencyPageTitle" = "%1$@ 設定";
+/* Section title for a collection of different settings screens, one for each currency */
+"Settings.currencySettings" = "貨幣設定";
+/* Join Early access label */
+"Settings.earlyAccess" = "參加「先行體驗」";
+/* Enable segwit. */
+"Settings.EnableSegwit" = "啟用 Segwit";
+/* Are you enjoying bread alert message body */
+"Settings.enjoying" = "您喜歡 BRD 嗎？";
+/* Face ID spending limit label */
+"Settings.faceIdLimit" = "Face ID 消費上限";
+/* Redeem the funds stored on this private key. */
+"Settings.importTitle" = "兌換私密金鑰";
+/* Manage settings section header */
+"Settings.manage" = "管理";
+/* Notifications label */
+"Settings.notifications" = "通知";
+/* Section header for "other settings". */
+"Settings.other" = "其他";
+/* Preferences settings section header */
+"Settings.preferences" = "偏好";
+/* Tap here to reset the list of currencies to the default settings. */
+"Settings.resetCurrencies" = "重設為預設貨幣";
+/* Leave review button label */
+"Settings.review" = "為我們撰寫評論";
+/* Rewards menu item */
+"Settings.rewards" = "獎勵";
+/* Share anonymous data label */
+"Settings.shareData" = "分享匿名資料";
+/* Sync blockchain label */
+"Settings.sync" = "與區塊鏈同步";
+/* Settings title */
+"Settings.title" = "設定";
+/* Touch ID spending limit label */
+"Settings.touchIdLimit" = "Touch ID 花費上限";
+/* The fingerprint spending limit */
+"Settings.touchIdLimit.android" = "指紋驗證花費限制";
+/* View legacy address (old format). */
+"Settings.ViewLegacyAddress" = "查看舊版接收位址";
+/* Receive Bitcoin instructions */
+"Settings.ViewLegacyAddressReceiveDescription" = "請只發送比特幣（BTC）至此位址。任何發送到此位址的資產將永久遺失。";
+/* Receive Bitcoin */
+"Settings.ViewLegacyAddressReceiveTitle" = "接收比特幣";
+/* Wallet Settings section header */
+"Settings.wallet" = "錢包";
+/* Unlink/delete your wallet from the current device. */
+"Settings.wipe" = "移除與此裝置連結";
+/* Wipe/delete your wallet from the current device. */
+"Settings.wipe.android" = "取消這個裝置與錢包的連結。";
+/* Share data view body */
+"ShareData.body" = "請跟我們分享您的匿名資料，以協助我們改善 BRD。其中不會包含財務資訊。我們尊重您的財務隱私。";
+/* Share data header */
+"ShareData.header" = "分享資料？";
+/* Share data switch label. */
+"ShareData.toggleLabel" = "分享匿名資料？";
+/* button label */
+"StartPaperPhrase.againButtonTitle" = "再次寫下恢復短語";
+/* Paper key explanation text. */
+"StartPaperPhrase.body" = "如果手機丟失，被盜，損壞或升級，則恢復短語是恢復BRD的唯一方法。 \n\n我們將為您顯示單詞列表，以便在紙上寫下並保持安全。";
+/* Paper key explanation text (Android-version) */
+"StartPaperPhrase.Body.Android" = "如果手機丟失，被盜，損壞或升級，則恢復短語是恢復BRD的唯一方法。 \n\n如果您更改設備上的安全設置，則還需要輸入恢復短語。 \n\n我們將為您顯示單詞列表，以便在紙上寫下並保持安全。";
+/* button label */
+"StartPaperPhrase.buttonTitle" = "記下恢復短語";
+/* Argument is date; date should be on a new line */
+"StartPaperPhrase.date" = "最後寫下\n %1$@";
+/* button label */
+"StartViewController.createButton" = "創建新錢包";
+/* Start view message */
+"StartViewController.message" = "使用比特幣最安全、最有保障的方式。";
+/* Recover your wallet from a backup */
+"StartViewController.recoverButton" = "恢復錢包";
+"SupportForm.feedbackAppreciated" = "我們希望收到您的反饋";
+"SupportForm.helpUsImprove" = "幫助我們改善";
+"SupportForm.notNow" = "現在不要";
+"SupportForm.pleaseDescribe" = "請描述您的經歷";
+/* Syncing view done syncing state header text */
+"SyncingView.activity" = "活動";
+/* Syncing view connectiong state header text */
+"SyncingView.connecting" = "正在連線";
+/* The sync has failed (to complete) */
+"SyncingView.failed" = "同步失敗";
+/* Syncing view header text */
+"SyncingView.header" = "正在同步";
+/* Retry button label */
+"SyncingView.retry" = "重試";
+/* "eg. Synced through <Jan 12, 2015> */
+"SyncingView.syncedThrough" = "從 %1$@ 同步";
+/* Syncing view syncing state header text */
+"SyncingView.syncing" = "正在同步";
+/* 6 d (6 days) */
+"TimeSince.days" = "%1$@ 天";
+/* 6 h (6 hours) */
+"TimeSince.hours" = "%1$@ 小時";
+/* 6 m (6 minutes) */
+"TimeSince.minutes" = "%1$@ 分鐘";
+/* 6 s (6 seconds) */
+"TimeSince.seconds" = "%1$@ 秒";
+/* Add [this item to the list] */
+"TokenList.add" = "增加";
+/* Add Wallets  [to your home screen] */
+"TokenList.addTitle" = "增加錢包";
+/* Hide [this token from view] */
+"TokenList.hide" = "隱藏";
+/* [click here to] Manage [your] Wallets */
+"TokenList.manageTitle" = "管理錢包";
+/* Remove [this item from the list] */
+"TokenList.remove" = "移除";
+/* Show [this item on your home screen] */
+"TokenList.show" = "顯示";
+/* You can customize your Touch ID Spending Limit from the [TouchIdSettings.linkText gets added here as a button] */
+"TouchIdSettings.customizeText" = "你可以在%1$@自訂你的 Touch ID 支出限額。";
+/* Fingerprint enabling description body */
+"TouchIdSettings.customizeText.android" = "您可以從「指紋授權花費限制」畫面自訂「指紋驗證花費限制」";
+/* Instruction for the fingerprint setup */
+"TouchIdSettings.disabledWarning.body.android" = "您尚未啟用此裝置上的指紋驗證。前往「設定」 -> 「安全性」來設定指紋驗證。";
+/* Fingerprint Is Not Setup */
+"TouchIdSettings.disabledWarning.title.android" = "指紋驗證並未啟用";
+/* Text that describes the purpose of the Touch ID settings in the BRD app. */
+"TouchIdSettings.explanatoryText" = "使用Touch ID解鎖您的BRD應用並匯款。";
+/* Touch Id screen label */
+"TouchIdSettings.label" = "以您的指紋解鎖 BRD，並在設定好的限額內寄送款項。";
+/* Link Text (see TouchIdSettings.customizeText) */
+"TouchIdSettings.linkText" = "Touch ID 支出限額畫面";
+/* Spending Limit: b100,000 ($100) */
+"TouchIdSettings.spendingLimit" = "花費上限：%1$@（%2$@）";
+/* Touch id switch label. */
+"TouchIdSettings.switchLabel" = "為 BRD 啟用 Touch ID";
+/* Enable fingerprint for this wallet called Bread */
+"TouchIdSettings.switchLabel.android" = "指紋驗證";
+/* Touch ID settings view title */
+"TouchIdSettings.title" = "Touch ID";
+/* Fingerprint authentication label */
+"TouchIdSettings.title.android" = "指紋驗證";
+/* Text label for a toggle that enables Touch ID for sending money. */
+"TouchIdSettings.transactionsTitleText" = "啟用Touch ID匯款";
+/* Touch ID unavailable alert message */
+"TouchIdSettings.unavailableAlertMessage" = "您尚未在此裝置設定 Touch ID。請立刻至「設定」->「 Touch ID 與密碼」進行設定。";
+/* Touch ID unavailable alert title */
+"TouchIdSettings.unavailableAlertTitle" = "未設定 Touch ID";
+/* Text label for the toggle that enables Touch ID for unlocking the BRD app. */
+"TouchIdSettings.unlockTitleText" = "啟用Touch ID解鎖BRD";
+/* Always require passcode option */
+"TouchIdSpendingLimit" = "總是要求密碼";
+/* Touch ID spending limit screen body */
+"TouchIdSpendingLimit.body" = "您必須輸入 6 位數 PIN 碼，才能送出超過您花費上限的交易；上次輸入 6 位數 PIN 碼經過 48 小時後，也必須重新輸入。";
+/* Touch Id spending limit screen title */
+"TouchIdSpendingLimit.title" = "Touch ID 花費上限";
+/* name of spending limit when using fingerprint authorization */
+"TouchIdSpendingLimit.title.android" = "指紋授權花費限制";
+/* Availability status text */
+"Transaction.available" = "可花用";
+/* Transaction complete label */
+"Transaction.complete" = "完成";
+/* Transaction is confirming status text */
+"Transaction.confirming" = "進行中";
+/* eg. Ending balance: $50.00 */
+"Transaction.ending" = "最終餘額：%1$@";
+/* Exchange rate on date header */
+"Transaction.exchangeOnDayReceived" = "收取時之匯率：";
+/* Exchange rate on date header */
+"Transaction.exchangeOnDaySent" = "送出時之匯率：";
+/* Transaction failed status text */
+"Transaction.failed" = "失敗";
+/* (b600 fee) */
+"Transaction.fee" = "（%1$@ 費）";
+/* Invalid transaction */
+"Transaction.invalid" = "無效";
+/* Timestamp label for event that just happened */
+"Transaction.justNow" = "剛剛";
+/* Transaction is pending status text */
+"Transaction.pending" = "作業中";
+/* Receive status text: 'In progress: 20%' */
+"Transaction.receivedStatus" = "處理中：%1$@";
+/* Send status text: 'In progress: 20%' */
+"Transaction.sendingStatus" = "處理中：%1$@";
+/* sending to <address> */
+"Transaction.sendingTo" = "正在寄送至 %1$@";
+/* sent to <address> */
+"Transaction.sentTo" = "寄送至 %1$@";
+/* eg. Starting balance: $50.00 */
+"Transaction.starting" = "開始餘額：%1$@";
+/* e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) */
+"Transaction.tokenTransfer" = "代幣傳送費用：%1$@";
+/* Waiting to be confirmed string */
+"Transaction.waiting" = "正在等待確認。部分商家要求確認完成交易。預估時間：1-2 小時。";
+/* e.g. I received money from an account. */
+"TransactionDetails.account" = "帳戶";
+/* Address received from header */
+"TransactionDetails.addressFromHeader" = "由";
+/* Address sent to header */
+"TransactionDetails.addressToHeader" = "至";
+/* e.g. "(this was received) via (address #1)" via = by way of */
+"TransactionDetails.addressViaHeader" = "經";
+/* Amount section header */
+"TransactionDetails.amountHeader" = "金額";
+/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+"TransactionDetails.amountWhenReceived" = "接收時為%1$@，現在則為%2$@";
+/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+"TransactionDetails.amountWhenSent" = "寄出時為 %1$@，現為 %2$@";
+/* Block height label */
+"TransactionDetails.blockHeightLabel" = "已在區塊確認";
+/* Memo section header */
+"TransactionDetails.commentsHeader" = "備註";
+/* Memo field placeholder */
+"TransactionDetails.commentsPlaceholder" = "新增備忘錄……";
+/* Timestamp section header for complete tx */
+"TransactionDetails.completeTimestampHeader" = "完成";
+/* Block height and confirmations label
+eg. 182930 (45061 confirmations) */
+"TransactionDetails.confirmationsLabel" = "確認";
+"TransactionDetails.destinationTag" = "目的地標籤";
+"TransactionDetails.destinationTag_EmptyHint" = "（空）";
+/* Empty transaction list message. */
+"TransactionDetails.emptyMessage" = "您的交易會顯示於此。";
+/* e.g. the users balance after the transaction was compeleted */
+"TransactionDetails.endingBalanceHeader" = "最終餘額";
+/* Exchange rate section header */
+"TransactionDetails.exchangeRateHeader" = "匯率";
+/* Tx detail field header */
+"TransactionDetails.feeHeader" = "總費用";
+/* "Received [$5] at [which of my addresses]" => This is the "at [which of my addresses]" part. */
+"TransactionDetails.from" = "於 %1$@";
+/* Tx detail field header */
+"TransactionDetails.gasLimitHeader" = "Gas 限價";
+/* Tx detail field header */
+"TransactionDetails.gasPriceHeader" = "Gas 價格";
+/* Label for Hedera Memo field on transaction details screen */
+"TransactionDetails.hederaMemo" = "Hedera Memo";
+/* Hide Details button */
+"TransactionDetails.hideDetails" = "隱藏細節";
+/* Label showing the transaction was started (initialized) */
+"TransactionDetails.initializedTimestampHeader" = "已開始";
+/* More button title */
+"TransactionDetails.more" = "更多……";
+/* Moved $5.00 (as in "I moved $5 to another location") */
+"TransactionDetails.moved" = "已轉移 %1$@";
+/* Moved $5.00 */
+"TransactionDetails.movedAmountDescription" = "已移動 <b>%1$@</b>";
+/* eg. Confirmed in Block: Not Confirmed */
+"TransactionDetails.notConfirmedBlockHeightLabel" = "未確認";
+/* "Received [$5] at [which of my addresses]" => This is the "Received [$5]" part. */
+"TransactionDetails.received" = "已收取 %1$@";
+/* Received $5.00 */
+"TransactionDetails.receivedAmountDescription" = "已收到 <b>%1$@</b>";
+/* received from <address> */
+"TransactionDetails.receivedFrom" = "已收取自 %1$@";
+/* received via <address> */
+"TransactionDetails.receivedVia" = "已經 %1$@ 收到";
+/* receiving from <address> */
+"TransactionDetails.receivingFrom" = "正收取自 %1$@";
+/* receiving via <address> */
+"TransactionDetails.receivingVia" = "正在經 %1$@ 收到";
+/* "Sent [$5] to [address]" => This is the "Sent [$5]" part. */
+"TransactionDetails.sent" = "已送出 %1$@";
+/* Sent $5.00 */
+"TransactionDetails.sentAmountDescription" = "已寄出 <b>%1$@</b>";
+/* Show Details button */
+"TransactionDetails.showDetails" = "顯示細節";
+/* The balance the user started with before the transaction completed */
+"TransactionDetails.startingBalanceHeader" = "原始餘額";
+/* Status section header */
+"TransactionDetails.statusHeader" = "狀態";
+/* Transaction Details Title */
+"TransactionDetails.title" = "交易詳情";
+/* Transaction Details Title - Failed */
+"TransactionDetails.titleFailed" = "隱藏細節";
+/* Transaction Details Title - Internal */
+"TransactionDetails.titleInternal" = "內部";
+/* Transaction Details Title - Received */
+"TransactionDetails.titleReceived" = "已收到";
+/* Transaction Details Title - Receiving */
+"TransactionDetails.titleReceiving" = "正在收到";
+/* Transaction Details Title - Sending */
+"TransactionDetails.titleSending" = "正在寄送";
+/* Transaction Details Title - Sent */
+"TransactionDetails.titleSent" = "已寄送";
+/* "Sent [$5] to [address]" => This is the "to [address]" part. */
+"TransactionDetails.to" = "至 %1$@";
+/* Tx detail field header */
+"TransactionDetails.totalHeader" = "總計";
+/* Transaction ID header */
+"TransactionDetails.txHashHeader" = "交易詳情";
+/* (this transaction was) Received at this address: */
+"TransactionDirection.address" = "已於此地址接收";
+/* (this transaction was) Sent to this address: */
+"TransactionDirection.to" = "已傳送至此地址";
+/* Disabled until date */
+"UnlockScreen.disabled" = "關閉至：%1$@";
+/* Unlock with FaceID accessibility label */
+"UnlockScreen.faceIdText" = "使用 FaceID 解鎖";
+/* My Address button title */
+"UnlockScreen.myAddress" = "我的地址";
+/* Reset PIN with Paper Key button label. */
+"UnlockScreen.resetPin" = "重設 PIN 碼";
+/* Scan button title */
+"UnlockScreen.scan" = "掃描";
+/* Instruction to touch the sensor for fingerprint authentication */
+"UnlockScreen.touchIdInstructions.android" = "觸控感測器";
+/* TouchID prompt text */
+"UnlockScreen.touchIdPrompt" = "解鎖您的 BRD。";
+/* Device authentication body */
+"UnlockScreen.touchIdPrompt.android" = "請解除鎖定您的 Android 裝置來繼續。";
+/* Unlock with TouchID accessibility label */
+"UnlockScreen.touchIdText" = "以 TouchID 解鎖";
+/* Device authentication title */
+"UnlockScreen.touchIdTitle.android" = "需要驗證";
+/* Update PIN caption text */
+"UpdatePin.caption" = "請記住此 PIN 碼。如果忘記，會無法存取您的比特幣。";
+/* PIN creation info. */
+"UpdatePin.createInstruction" = "您的 PIN 碼會用於解鎖 BRD 及送出款項。";
+/* Update PIN title */
+"UpdatePin.createTitle" = "設定 PIN 碼";
+/* Update PIN title */
+"UpdatePin.createTitleConfirm" = "重新輸入 PIN 碼";
+/* Enter current PIN instruction */
+"UpdatePin.enterCurrent" = "輸入目前的 PIN 碼";
+/* Enter new PIN instruction */
+"UpdatePin.enterNew" = "請輸入新 PIN 碼";
+/* Re-Enter new PIN instruction */
+"UpdatePin.reEnterNew" = "重新輸入新 PIN 碼";
+/* Update PIN failure error message. */
+"UpdatePin.setPinError" = "很抱歉，無法更新 PIN 碼。";
+/* Update PIN failure alert view title */
+"UpdatePin.setPinErrorTitle" = "PIN 碼更新錯誤";
+/* Update PIN title */
+"UpdatePin.updateTitle" = "更新 PIN 碼";
+/* Authorize to copy wallet addresses alert message */
+"URLHandling.addressaddressListAlertMessage" = "複製錢包地址至剪貼簿？";
+/* Authorize to copy wallet address PIN view prompt. */
+"URLHandling.addressList" = "授權複製錢包地址至剪貼簿";
+/* Authorize to copy wallet address alert title */
+"URLHandling.addressListAlertTitle" = "複製錢包地址";
+/* Copy wallet addresses alert button label */
+"URLHandling.copy" = "複製";
+/* Verify PIN for transaction view body */
+"VerifyPin.authorize" = "請輸入您的 PIN 碼授權此交易。";
+/* Verify PIN view body */
+"VerifyPin.continueBody" = "請輸入 PIN 碼以繼續";
+/* Verify PIN view title */
+"VerifyPin.title" = "PIN 碼為必填";
+/* Authorize transaction with touch id message */
+"VerifyPin.touchIdMessage" = "授權此交易";
+"Wallet.one_day" = "1d";
+"Wallet.one_month" = "1m";
+"Wallet.one_week" = "1w";
+"Wallet.one_year" = "1y";
+"Wallet.three_months" = "3m";
+"Wallet.three_years" = "3y";
+/* Turn off fast sync confirmation question */
+"WalletConnectionSettings.confirmation" = "您確定要關閉Fastsync嗎？";
+/* Explanation for wallet connection setting */
+"WalletConnectionSettings.explanatoryText" = "幾乎立即同步您的比特幣錢包。在此處了解有關其工作原理的更多信息。";
+/* Connection mode switch label. */
+"WalletConnectionSettings.footerTitle" = "供電";
+/* Wallet connection settings view title */
+"WalletConnectionSettings.header" = "Fastsync（試點）";
+/* Link text in explanatoryText This NB: This should exactly match the last word of WalletConnectionSettings.explanatoryText */
+"WalletConnectionSettings.link" = "這裡";
+/* WalletConnectionSettiongs
+Wallet connection settings menu item title. */
+"WalletConnectionSettings.menuTitle" = "連接方式";
+/* Turn off fast sync button label */
+"WalletConnectionSettings.turnOff" = "關掉";
+/* Wallet connection settings view title */
+"WalletConnectionSettings.viewTitle" = "Fastsync";
+/* 'No wallet' warning for watch app */
+"Watch.noWalletWarning" = "開啟 BRDiPhone 應用程式以設定您的錢包。";
+/* Dismiss button label */
+"Webview.dismiss" = "駁回";
+/* Webview loading error message */
+"Webview.errorMessage" = "載入內容時發生錯誤。請重試一次。";
+/* Updating webview message */
+"Webview.updating" = "正在更新……";
+/* Welcome screen text. (?) will be replaced with the help icon users should look for. */
+"Welcome.body" = "Breadwallet 已經改名爲 BRD，有嶄新的面貌和一些新功能。\n\n如果需要協助，就在大部分畫面的右上角尋找(?)。";
+/* Top title of welcome screen */
+"Welcome.title" = "歡迎使用 BRD！";
+/* Wipe wallet alert message */
+"WipeWallet.alertMessage" = "確定要刪除此錢包嗎？";
+/* Wipe wallet alert title */
+"WipeWallet.alertTitle" = "抹除錢包？";
+/* Failed wipe wallet alert message */
+"WipeWallet.failedMessage" = "抹除錢包失敗。";
+/* Failed wipe wallet alert title */
+"WipeWallet.failedTitle" = "失敗";
+/* Enter phrase to wipe wallet instruction. (Important to explain it is the CURRENT [this wallet's] paper key that needs to be entered). */
+"WipeWallet.instruction" = "請輸入您的恢復短語，以從設備中清除此錢包。";
+/* Instructions for unlinking the wallet */
+"WipeWallet.startMessage" = "自此裝置移除您錢包的連結。一旦移除此錢包的連結，您可在此裝置上啟用新錢包或恢復其他不同錢包。";
+/* Start wipe wallet view warning */
+"WipeWallet.startWarning" = "您當前的錢包將從此設備中刪除。如果您希望將來恢復它，則需要輸入恢復短語。";
+/* Unlink this wallet from this device. */
+"WipeWallet.title" = "移除錢包連結";
+/* Wipe wallet button title */
+"WipeWallet.wipe" = "抹除";
+/* Wiping activity message */
+"WipeWallet.wiping" = "正在抹除……";
+/* Paper key instructions. */
+"WritePaperPhrase.instruction" = "請依序寫下每個字，保存在安全的地方。";
+/* button label */
+"WritePaperPhrase.next" = "下一步";
+/* button label */
+"WritePaperPhrase.previous" = "上一頁";
+/* 1 of 3 */
+"WritePaperPhrase.step" = "%2$li 之 %1$li";

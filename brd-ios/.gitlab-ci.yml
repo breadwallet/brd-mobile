@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build_project:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script:
+    - xcodebuild clean -workspace breadwallet.xcworkspace -scheme breadwallet | xcpretty
+    - xcodebuild test -workspace breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.0' | xcpretty -s
+  tags:
+    - ios-12
+    - xcode-10
+    - macos-10_13

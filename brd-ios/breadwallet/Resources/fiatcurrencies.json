@@ -1,0 +1,222 @@
+[
+  {
+    "code": "USD",
+    "name": "US Dollar",
+    "rate": 10260.08
+  },
+  {
+    "code": "EUR",
+    "name": "Eurozone Euro",
+    "rate": 9299.4
+  },
+  {
+    "code": "GBP",
+    "name": "Pound Sterling",
+    "rate": 8324.84
+  },
+  {
+    "code": "JPY",
+    "name": "Japanese Yen",
+    "rate": 1101812.49
+  },
+  {
+    "code": "CAD",
+    "name": "Canadian Dollar",
+    "rate": 13521.71
+  },
+  {
+    "code": "AUD",
+    "name": "Australian Dollar",
+    "rate": 14967.76
+  },
+  {
+    "code": "CNY",
+    "name": "Chinese Yuan",
+    "rate": 72901.95
+  },
+  {
+    "code": "CHF",
+    "name": "Swiss Franc",
+    "rate": 10177.74
+  },
+  {
+    "code": "SEK",
+    "name": "Swedish Krona",
+    "rate": 99881.55
+  },
+  {
+    "code": "NZD",
+    "name": "New Zealand Dollar",
+    "rate": 15985.7
+  },
+  {
+    "code": "KRW",
+    "name": "South Korean Won",
+    "rate": 12228507.44
+  },
+  {
+    "code": "AED",
+    "name": "UAE Dirham",
+    "rate": 37688.15
+  },
+  {
+    "code": "ARS",
+    "name": "Argentine Peso",
+    "rate": 574700.26
+  },
+  {
+    "code": "BDT",
+    "name": "Bangladeshi Taka",
+    "rate": 869450.25
+  },
+  {
+    "code": "BHD",
+    "name": "Bahraini Dinar",
+    "rate": 3867.93
+  },
+  {
+    "code": "BMD",
+    "name": "Bermudan Dollar",
+    "rate": 10260.08
+  },
+  {
+    "code": "BRL",
+    "name": "Brazilian Real",
+    "rate": 42055.03
+  },
+  {
+    "code": "CLP",
+    "name": "Chilean Peso",
+    "rate": 7334826.73
+  },
+  {
+    "code": "CZK",
+    "name": "Czech Koruna",
+    "rate": 240518.78
+  },
+  {
+    "code": "DKK",
+    "name": "Danish Krone",
+    "rate": 69365.1
+  },
+  {
+    "code": "HKD",
+    "name": "Hong Kong Dollar",
+    "rate": 80451.42
+  },
+  {
+    "code": "HUF",
+    "name": "Hungarian Forint",
+    "rate": 3083373.43
+  },
+  {
+    "code": "IDR",
+    "name": "Indonesian Rupiah",
+    "rate": 144126511.85
+  },
+  {
+    "code": "ILS",
+    "name": "Israeli Shekel",
+    "rate": 36313.49
+  },
+  {
+    "code": "INR",
+    "name": "Indian Rupee",
+    "rate": 737685.74
+  },
+  {
+    "code": "KWD",
+    "name": "Kuwaiti Dinar",
+    "rate": 3118.04
+  },
+  {
+    "code": "LKR",
+    "name": "Sri Lankan Rupee",
+    "rate": 1851485.92
+  },
+  {
+    "code": "MMK",
+    "name": "Myanma Kyat",
+    "rate": 15661513.17
+  },
+  {
+    "code": "MXN",
+    "name": "Mexican Peso",
+    "rate": 200659.67
+  },
+  {
+    "code": "MYR",
+    "name": "Malaysian Ringgit",
+    "rate": 42789.56
+  },
+  {
+    "code": "NOK",
+    "name": "Norwegian Krone",
+    "rate": 92124.87
+  },
+  {
+    "code": "PHP",
+    "name": "Philippine Peso",
+    "rate": 534252.49
+  },
+  {
+    "code": "PKR",
+    "name": "Pakistani Rupee",
+    "rate": 1608754.51
+  },
+  {
+    "code": "PLN",
+    "name": "Polish Zloty",
+    "rate": 40288.58
+  },
+  {
+    "code": "RUB",
+    "name": "Russian Ruble",
+    "rate": 671586.7
+  },
+  {
+    "code": "SAR",
+    "name": "Saudi Riyal",
+    "rate": 38489.46
+  },
+  {
+    "code": "SGD",
+    "name": "Singapore Dollar",
+    "rate": 14156.14
+  },
+  {
+    "code": "THB",
+    "name": "Thai Baht",
+    "rate": 314163.57
+  },
+  {
+    "code": "TRY",
+    "name": "Turkish Lira",
+    "rate": 59193.78
+  },
+  {
+    "code": "TWD",
+    "name": "New Taiwan Dollar",
+    "rate": 320361.43
+  },
+  {
+    "code": "UAH",
+    "name": "Ukrainian Hryvnia",
+    "rate": 256440.37
+  },
+  {
+    "code": "VEF",
+    "name": "Venezuelan Bolívar Fuerte",
+    "rate": 2549502441.09
+  },
+  {
+    "code": "VND",
+    "name": "Vietnamese Dong",
+    "rate": 238116424.27
+  },
+  {
+    "code": "ZAR",
+    "name": "South African Rand",
+    "rate": 150697.91
+  },
+]

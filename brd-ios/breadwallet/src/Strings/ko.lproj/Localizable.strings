@@ -1,0 +1,1312 @@
+/* App name */
+"About.appName.android" = "BRD";
+/* About screen blog label */
+"About.blog" = "블로그";
+/* About screen footer */
+"About.footer" = "글로벌 BRD 팀 제작. 버전 %1$@ 빌드 %2$@";
+/* Privay Policy button label */
+"About.privacy" = "개인정보 보호정책";
+/* About screen reddit label */
+"About.reddit" = "레딧";
+/* Terms of Use button label */
+"About.terms" = "이용 약관";
+/* About screen title */
+"About.title" = "관련 사항";
+/* About screen twitter label */
+"About.twitter" = "트위터";
+/* About screen wallet ID label */
+"About.walletID" = "BRD Rewards ID";
+/* Close modal button accessibility label */
+"AccessibilityLabels.close" = "닫기";
+/* Support center accessibiliy label */
+"AccessibilityLabels.faq" = "고객지원 센터";
+/* Account balance */
+"Account.balance" = "잔액";
+/* Delisted token alert banner message */
+"Account.delistedToken" = "이 토큰은 목록에서 삭제되었습니다. \n\n여전히 이러한 토큰을 다른 플랫폼으로 보낼 수 있습니다. 자세한 내용은 지원 페이지를 참조하십시오.";
+/* $10000 per BTC */
+"Account.exchangeRate" = "%2$@ 당 %1$@";
+/* Loading Wallet Message */
+"Account.loadingMessage" = "지갑 로딩";
+/* Confirm Account Creation mesage body */
+"AccountCreation.body" = "지갑에 HBAR을 저장하려는 경우에만 Hedera 계정을 만드십시오.";
+/* Create Account button label */
+"AccountCreation.create" = "계정 만들기";
+/* Creating Account progress Label */
+"AccountCreation.creating" = "계정 만들기";
+/* Creating Account progress Label */
+"AccountCreation.error" = "계정 생성 중 오류가 발생했습니다. 나중에 다시 시도하세요.";
+/* Not Now button label. */
+"AccountCreation.notNow" = "지금은 아님";
+/* Creating Account progress Label */
+"AccountCreation.timeout" = "요청 시간이 초과되었습니다. 나중에 다시 시도하세요.";
+/* Confirm Account Creation Title */
+"AccountCreation.title" = "계정 생성 확인";
+/* Default wallet name */
+"AccountHeader.defaultWalletName" = "나의 BRD";
+/* Third party keyboard warning */
+"Alert.customKeyboard.android" = "입력 한 내용을 기록하고 복구 문구를 훔칠 수있는 타사 키보드를 사용중인 것 같습니다. 추가 보호를 위해 기본 Android 키보드로 전환하십시오.";
+/* Error alert title */
+"Alert.error" = "오류";
+/* Keystore error */
+"Alert.keystore.generic.android" = "귀하의 안드로이드 OS 키스토어에 문제가 있습니다, support@breadwallet.com로 연락해 주세요";
+/* KeyStore error, keys are invalidated */
+"Alert.keystore.invalidated.android" = "귀하의 안드로이드 잠금 화면이 꺼져서 귀하의 암호화 된 데이터가 최근 무효화 되었습니다.";
+/* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */
+"Alert.keystore.invalidated.uninstall.android" = "화면 잠금 설정이 변경 되었기 때문에 진행할 수 없습니다 (예 : 비밀번호 사용 안함, 지문 변경). 보안을 위해 Android는 키 저장소를 영구적으로 잠급니다. 따라서 제거하여 BRD 앱 데이터를 지워야합니다. \n\n걱정하지 마세요. 귀하의 자금은 여전히 안전합니다! 앱을 다시 설치하고 복구 문구를 사용하여 지갑을 복구하세요.";
+/* Warn user key store data has been invalidate because the user changed their security settings. The user must wipe their app data. */
+"Alert.keystore.invalidated.wipe.android" = "화면 잠금 설정이 변경 되었기 때문에 진행할 수 없습니다 (예 : 비밀번호 사용 안함, 지문 변경). 보안을 위해 Android는 키 저장소를 영구적으로 잠급니다. 따라서 BRD 앱 데이터를 삭제해야합니다. \n\n걱정하지 마세요. 귀하의 자금은 여전히 안전합니다! 복구 문구를 사용하여 지갑을 복구하십시오.";
+/* Keystore error title */
+"Alert.keystore.title.android" = "안드로이드 키스토어 오류";
+/* No internet alert message */
+"Alert.noInternet" = "인터넷이 연결되지 않았습니다. 연결을 확인하시고 다시 시도해 주세요.";
+/* General error message */
+"Alert.somethingWentWrong" = "뭔가 잘못됐습니다. 다시 시도해 주세요.";
+/* Request timed out error message */
+"Alert.timedOut" = "요청이 시간 초과 되었습니다. 인터넷 연결을 확인하고 다시 시도하세요.";
+/* Warning alert title */
+"Alert.warning" = "경고";
+/* 'the addresses were copied'' Alert title */
+"Alerts.copiedAddressesHeader" = "주소들 복사됨";
+/* Addresses Copied Alert sub header */
+"Alerts.copiedAddressesSubheader" = "모든 지갑 주소들이 성공적으로 복사됨.";
+/* Alert Header Label (the paper key was set) */
+"Alerts.paperKeySet" = "복구 문구 세트";
+/* Alert Subheader label (playfully positive) */
+"Alerts.paperKeySetSubheader" = "굉장해요!";
+/* Alert Header label (the PIN was set) */
+"Alerts.pinSet" = "PIN 준비";
+/* Send failure alert header label (the send failed to happen) */
+"Alerts.sendFailure" = "보내기 실패함";
+/* Send success alert header label (confirmation that the send happened) */
+"Alerts.sendSuccess" = "보내기 확인";
+/* Send success alert subheader label (e.g. the money was sent) */
+"Alerts.sendSuccessSubheader" = "돈을 보냈어요!";
+/* Fingerprint was recognized by the scanner */
+"Alerts.touchIdSucceeded.android" = "지문 인식됨";
+/* Tell the user where they can enable permissions to access device storage. */
+"Android.allowFileSystemAccess" = "단말의 \"설정\" > \"앱\" > \"BRD\" > \"권한\"에서 저장소 접근을 허용해 주세요.";
+/* The "home" screen is the name of the top level menu for the app. */
+"Android.BCH.welcome.message" = "홈 화면을 통해 월렛에 있는 모든 BCH에 액세스할 수 있습니다.";
+/* Warning about using apps that can alter the screen */
+"Android.screenAlteringMessage" = "BRD는 (Twilight과 같은) 화면 변경 앱을 비활성화하지 않으면 제대로 동작하지 않습니다.";
+/* An app that alters the screen ("screen-altering app") has been detected. */
+"Android.screenAlteringTitle" = "화면 변경 앱이 탐지됨";
+/* JSON Serialization error message */
+"ApiClient.jsonError" = "JSON 직렬화 오류";
+/* Wallet not ready error message */
+"ApiClient.notReady" = "지갑 준비 안됨";
+/* API Token error message */
+"ApiClient.tokenError" = "API 토큰을 가져올 수 없습니다";
+/* Send BCH view body. */
+"BCH.body" = "아래의 목적지 BCH 주소를 입력하세요. 분기 시점(%1$@)에 귀하의 월렛에 있는 모든 BCH를 보냅니다.";
+/* Confirm sending <$5.00> to <address>? */
+"BCH.confirmationMessage" = "%1$@를 %2$@(으)로 보내기를 확인";
+/* Confirmation alert title */
+"BCH.confirmationTitle" = "확정";
+/* Generic bch erorr message */
+"BCH.genericError" = "귀하의 계정에는 BCH가 없거나, 분기 이후에 BCH를 받으셨습니다.";
+/* Transaction ID copied message */
+"BCH.hashCopiedMessage" = "Transaction ID 복사됨";
+/* No address error message */
+"BCH.noAddressError" = "주소를 입력해 주세요";
+/* Attempted to scan unsupported qr code error message. */
+"BCH.paymentProtocolError" = "Payment Protocol Request는 BCH 트랜잭션에서 지원되지 않습니다";
+/* BCH successfully sent alert message */
+"BCH.successMessage" = "BCH를 성공적으로 보냈습니다.";
+/* Widthdraw BCH view title */
+"BCH.title" = "BCH 인출";
+/* Tx Hash button header */
+"BCH.txHashHeader" = "BCH Transaction ID";
+/* Approve button label */
+"BitID.approve" = "승인";
+/* <sitename> is requesting authentication using your bitcoin wallet */
+"BitID.authenticationRequest" = "%1$@(이)가 귀하의 비트코인 월렛 이용에 대한 인증을 요청하고 있습니다.";
+/* Deny button label */
+"BitID.deny" = "거부";
+/* BitID error alert title */
+"BitID.error" = "인증 오류";
+/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
+"BitID.errorMessage" = "서비스 측에 확인해 주세요. 다시 시도해야 할 수도 있습니다.";
+/* BitID success alert title */
+"BitID.success" = "성공적으로 인증됨";
+/* BitID Authentication Request alert view title */
+"BitID.title" = "BitID 인증 요청";
+/* As in "(tap here to) buy (bitcoin)" */
+"Button.buy" = "구매하기";
+/* Cancel button label */
+"Button.cancel" = "취소";
+/* Confirm button title */
+"Button.confirm" = "확인";
+/* Button label to open a email compose window with our support email in the to field. */
+"Button.contactSupport.android" = "지원 요청";
+/* prompt continue button */
+"Button.continueAction" = "계획하기";
+/* prompt dismiss button */
+"Button.dismiss" = "해제";
+/* Done button title */
+"Button.done" = "완료";
+/* Button to return to the "home" screen (the home screen is the top menu). */
+"Button.Home" = "홈";
+/* Ignore button label */
+"Button.ignore" = "무시";
+/* Maybe Later button label */
+"Button.maybeLater" = "다음 기회에";
+/* menu button */
+"Button.menu" = "메뉴";
+/* More information button */
+"Button.moreInfo" = "자세한 정보";
+/* No button */
+"Button.no" = "아니오";
+/* OK button label */
+"Button.ok" = "오케이";
+/* Open Settings button */
+"Button.openSettings" = "설정 열기";
+/* receive button */
+"Button.receive" = "받기";
+/* Button label to open Security Settings. */
+"Button.securitySettings.android" = "보안 센터";
+/* Click this button to sell an asset */
+"Button.sell" = "팔기";
+/* send button */
+"Button.send" = "보내기";
+/* Settings button label */
+"Button.settings" = "설정";
+/* Setup button label */
+"Button.setup" = "설";
+/* Skip button title */
+"Button.skip" = "넘어가기";
+/* Settings button label */
+"Button.submit" = "전송";
+/* Button label to uninstall the app. */
+"Button.uninstall.android" = "앱 제거";
+/* Button label to wipe the user's application data. */
+"Button.wipe.android" = "지우기";
+/* Yes button */
+"Button.yes" = "예";
+/* Camera plugin instruction */
+"CameraPlugin.centerInstruction" = "박스안에 귀하의 ID를 중앙에 두세요";
+"CloudBackup.backupDeleted" = "백업이 지워짐";
+"CloudBackup.backupDeletedMessage" = "PIN 시도가 너무 많이 실패하면 iCloud 백업이 지워졌습니다. 이제 앱이 다시 시작됩니다.";
+"CloudBackup.backupMenuTitle" = "iCloud 백업";
+"CloudBackup.createButton" = "새 지갑 만들기";
+"CloudBackup.createWarning" = "이전에 백업 한 지갑이 감지되었습니다. 이 백업을 사용하는 것이 좋습니다. 새 지갑 생성을 진행 하시겠습니까?";
+"CloudBackup.enableBody1" = "이 기능이 작동하려면 iCloud 키 체인이 켜져 있어야합니다.";
+"CloudBackup.enableBody2" = "다음과 같이 표시되어야합니다.";
+"CloudBackup.enableButton" = "iCloud 키 체인을 켰습니다";
+"CloudBackup.enableTitle" = "키 체인 활성화";
+"CloudBackup.encryptBackupMessage" = "백업을 암호화하려면 PIN을 입력하세요.";
+"CloudBackup.mainBody" = "iCloud 백업은 iCloud 계정만큼만 안전합니다. 다음 단계에서 복구 문구를 기록하고 안전하게 보관하는 것이 좋습니다. 복구 문구는 더 이상 iCloud에 액세스 할 수없는 경우 지갑을 복구하는 유일한 방법입니다.";
+"CloudBackup.mainTitle" = "iCloud 복구 백업";
+"CloudBackup.mainWarning" = "이 기능이 작동하려면 iOS 설정 앱에서 iCloud 키 체인이 켜져 있어야합니다.";
+"CloudBackup.mainWarningConfirmation" = "iCloud 백업을 비활성화 하시겠습니까? 모든 장치에서 백업이 삭제됩니다.";
+"CloudBackup.pinAttempts" = "백업을 지우기 전에 남은 시도 : %1$@";
+"CloudBackup.recoverButton" = "복구 키에서 복원";
+"CloudBackup.recoverHeader" = "iCloud 백업을 잠금 해제하려면 PIN을 입력하세요.";
+"CloudBackup.restoreButton" = "iCloud 백업에서 복원";
+"CloudBackup.selectTitle" = "백업 선택";
+"CloudBackup.step1" = "설정 앱을 시작합니다.";
+"CloudBackup.step2" = "Apple ID 이름을 탭합니다.";
+"CloudBackup.step3" = "iCloud를 탭합니다.";
+"CloudBackup.step4" = "iCloud 키 체인이 켜져 있는지 확인";
+"CloudBackup.understandText" = "iCloud 키 체인이 활성화되지 않으면이 기능이 작동하지 않음을 이해합니다.";
+"CloudBackup.warningBody" = "잘못된 PIN 시도를 %1$@ 더 시도하면 iCloud 백업이 삭제됩니다.";
+/* Amount to Send: ($1.00) */
+"Confirmation.amountLabel" = "보낼 금액:";
+"Confirmation.destinationTag" = "목적지 태그";
+"Confirmation.destinationTag_EmptyHint" = "(빈)";
+/* Network Fee: ($1.00) */
+"Confirmation.feeLabel" = "네트워크 수수료:";
+/* Network Fee: (ETH) */
+"Confirmation.feeLabelETH" = "네트워크 요금 (ETH):";
+/* Label for Hedera Memo field on transaction confirmation screen */
+"Confirmation.hederaMemo" = "Hedera Memo";
+/* eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. */
+"Confirmation.processingTime" = "처리 시간: 이 거래는 %1$@에 완료될 것으로 예상됩니다.";
+/* Label for "send" button on final confirmation screen */
+"Confirmation.send" = "보내기";
+/* Confirmation Screen title */
+"Confirmation.title" = "확정";
+/* To: (address) */
+"Confirmation.to" = "수취인";
+/* Total Cost: ($5.00) */
+"Confirmation.totalLabel" = "총 금액:";
+/* Confirm paper phrase error message */
+"ConfirmPaperPhrase.error" = "입력 한 단어가 복구 문구와 일치하지 않습니다. 다시 시도하십시오.";
+/* Confirm paper phrase view label. */
+"ConfirmPaperPhrase.label" = "모든 것이 올바르게 기록되었는지 확인하려면 복구 문구에서 다음 단어를 입력하십시오.";
+/* Word label eg. Word #1, Word #2 */
+"ConfirmPaperPhrase.word" = "단어 #%1$@";
+/* Agree to legal terms button */
+"Crowdsale.agree" = "동의하기";
+/* As in "(tap here to) buy (some) tokens" */
+"Crowdsale.buyButton" = "토큰 구매하기";
+/* Decline to legal terms button */
+"Crowdsale.decline" = "거부하기";
+/* Resume Idnetify verification button */
+"Crowdsale.resume" = "인증 다시 하기";
+/* Retry Identity verification button */
+"Crowdsale.retry" = "다시 시도하기";
+/* Bitcoin denomination picker label */
+"DefaultCurrency.bitcoinLabel" = "Bitcoin Display Unit";
+/* Exchange rate label */
+"DefaultCurrency.rateLabel" = "환율";
+/* The wallet is disabled. */
+"Disabled.title" = "월렛이 비활성화됨";
+/* Share address by e-mail subject */
+"Email.address_subject" = "%1$s 주소";
+/* Service capabilities description */
+"EME.permissions.accountRequest" = "%1$@ 계정 정보를 요청합니다";
+/* Service capabilities description */
+"EME.permissions.callRequest" = "%1$@ 스마트계약 콜을 요청합니다";
+/* Service capabilities description */
+"EME.permissions.paymentRequest" = "%1$@ 계정 정보를 요청합니다";
+/* Email unavailable alert title */
+"ErrorMessages.emailUnavailableMessage" = "이 장치는 iOS 메일 앱으로 이메일을 전송하도록 설정되지 않았습니다.";
+/* Email unavailable alert title */
+"ErrorMessages.emailUnavailableTitle" = "이메일 사용불가";
+/* Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) */
+"ErrorMessages.loopingLockScreen.android" = "현재 이용 중인 안드로이드 버전의 버그로 인해 BRD가 인증될 수 없습니다. [Please tap here for more information.]";
+/* Messaging unavailable alert title */
+"ErrorMessages.messagingUnavailableMessage" = "이 장치는 메시지를 보내도록 설정되지 않았습니다.";
+/* Messaging unavailable alert title */
+"ErrorMessages.messagingUnavailableTitle" = "메시지 사용불가";
+/* Fingerprint was not recognized by the scanner, please try scanning again */
+"ErrorMessages.touchIdFailed.android" = "지문 인식되지 않음. 다시 시도해 주세요.";
+/* You can customize your Face ID Spending Limit from the [menu] */
+"FaceIDSettings.customizeText" = "%1$@에서 페이스 ID 지출 한도를 사용자 설정할 수 있습니다.";
+/* Text describing the purpose of the Face ID settings in the BRD app. */
+"FaceIDSettings.explanatoryText" = "페이스 아이디로 BRD 앱을 잠금 해제하고 송금하세요.";
+/* Face Id screen label */
+"FaceIDSettings.label" = "얼굴을 사용하여 브레드의 잠금을 해제하고 설정 한도까지 돈을 보내세요.";
+/* Title of the screen for setting the Face ID Spending Limit */
+"FaceIDSettings.linkText" = "페이스 ID 지출 한도 화면";
+/* Setting to turn on Face ID for BRD */
+"FaceIDSettings.switchLabel" = "브레드에 페이스 ID 사용하기";
+/* Face ID settings view title */
+"FaceIDSettings.title" = "페이스 ID";
+/* Text label for a toggle that enables Face ID for sending money. */
+"FaceIDSettings.transactionsTitleText" = "페이스 아이디로 송금";
+/* Instructions on how to turn on face id on the iPhone. Please ensure the name of the menu in this string matches the wording Apple uses in the iPhone menu. */
+"FaceIDSettings.unavailableAlertMessage" = "이 장치에 페이스 ID를 설정하지 않았습니다. 설정 -> 페이스 ID 및 패스코드로 가서 지금 설정하세요.";
+/* Face ID unavailable alert title */
+"FaceIDSettings.unavailableAlertTitle" = "페이스 ID가 설정되지 않음";
+/* Text label for a toggle that enables Face ID for unlocking the BRD app. */
+"FaceIDSettings.unlockTitleText" = "페이스 아이디로 BRD 잠금 해제";
+/* Face Id spending limit screen title */
+"FaceIDSpendingLimit.title" = "페이스 ID 지출 한도";
+/* Economy fee */
+"FeeSelector.economy" = "경제";
+/* E.g. [This transaction is predicted to complete in] 1-24 hours */
+"FeeSelector.economyTime" = "1~24시간";
+/* Warning message for economy fee */
+"FeeSelector.economyWarning" = "이 옵션은 시간에 민감한 거래에는 추천하지 않습니다.";
+/* E.g. Estimated delivery: 10-60 minutes */
+"FeeSelector.estimatedDeliver" = "예상 배송 시간: %1$@";
+/* [This transaction will complete in] 2-5 minutes */
+"FeeSelector.ethTime" = "2-5분";
+"FeeSelector.lessThanMinutes" = "<%1$d 분";
+/* Priority fee */
+"FeeSelector.priority" = "우선 순위";
+/* E.g. [This transaction is predicted to complete in] 10-30 minutes */
+"FeeSelector.priorityTime" = "10~30분";
+/* Regular fee */
+"FeeSelector.regular" = "일반";
+/* E.g. [This transaction is predicted to complete in] 10-60 minutes */
+"FeeSelector.regularTime" = "10~60분";
+/* Fee Selector title */
+"FeeSelector.title" = "처리 속도";
+/* Label for the Android file chooser when we need to prompt the user to select an image file. */
+"FileChooser.selectImageSource.android" = "이미지 소스 선택";
+/* Fingerprint authentication settings screen description */
+"FingerprintSettings.description" = "지문을 사용하여 브레드의 보안을 해제하고 설정된 금액으로 송금할 수 있습니다.";
+/* Switch label to enable fingerprint authentication to send money */
+"FingerprintSettings.sendMoney" = "지문을 사용하여 송금";
+/* Fingerprint authentication settings sceen title */
+"FingerprintSettings.title" = "지문";
+/* Switch label to enable fingerprint authentication to unlock BRD app */
+"FingerprintSettings.unlockApp" = "지문을 사용하여 BRD 잠금 해제";
+/* This is the section that allows administration of the user's wallet */
+"HomeScreen.admin" = "관리";
+/* Home screen menu button to buy some bitcoin */
+"HomeScreen.buy" = "사다";
+/* home screen toolbar 'Buy & Sell' button */
+"HomeScreen.buyAndSell" = "구매 및 판매";
+/* Menu button on the home screen toolbar */
+"HomeScreen.menu" = "메뉴";
+/* This section lists the users wallets */
+"HomeScreen.portfolio" = "지갑";
+/* Label for the total balance of all the user's assets (style is all lower case if your language permits) */
+"HomeScreen.totalAssets" = "총 자산";
+/* (Tap here to) trade (your assets for other assets) */
+"HomeScreen.trade" = "교환";
+/* Checking private key balance progress view text */
+"Import.checking" = "개인 열쇠 잔고 확인 중...";
+/* Sweep private key confirmation message */
+"Import.confirm" = "이 개인 열쇠로부터 귀하의 지갑으로 %1$@ 를 보낼까요? 비트코인 네트워크가 %2$@의 수수료를 받게 됩니다.";
+/* Duplicate key error message */
+"Import.Error.duplicate" = "이 개인 열쇠가 이미 귀하의 지갑에 있습니다.";
+/* empty private key error message */
+"Import.Error.empty" = "이 개인 열쇠는 비어 있습니다.";
+/* High fees error message */
+"Import.Error.highFees" = "이 개인 열쇠에서 사용할 수 있는 자금보다 거래 수수료가 더 많이 듭니다.";
+/* Not a valid private key error message */
+"Import.Error.notValid" = "유효하지 않은 개인 열쇠입니다";
+/* Import signing error message */
+"Import.Error.signing" = "서명 거래 오류";
+/* [Redeem] the funds stored on this private key. */
+"Import.importButton" = "교환";
+/* Importing wallet progress view label */
+"Import.importing" = "개인 키 교환 중";
+/* Caption for graphics */
+"Import.leftCaption" = "개인 키";
+/* Import wallet intro screen message */
+"Import.message" = "개인 키는 QR코드로 종이에 출력되기도 하며, 오프라인에서자금을 적립하기 위해 사용됩니다. 개인 키 교환으로 한 번의 거래를 이용해 자신의 BRD로 모든 돈을 이전하세요.";
+/* Enter password alert view title */
+"Import.password" = "이 개인 열쇠는 비밀번호로 보호됩니다.";
+/* password textfield placeholder */
+"Import.passwordPlaceholder" = "비밀번호";
+/* Caption for graphics */
+"Import.rightCaption" = "귀하의 BRD 지갑";
+/* Scan Private key button label */
+"Import.scan" = "개인 열쇠 스캔";
+/* Import wallet success alert title */
+"Import.success" = "성공";
+/* Successfully imported wallet message body */
+"Import.SuccessBody" = "개인 키가 성공적으로 교환되었습니다.";
+/* Import Wallet screen title */
+"Import.title" = "개인 키 교환";
+/* Unlocking Private key activity view message. */
+"Import.unlockingActivity" = "열쇠 풀기";
+/* Import wallet intro warning message */
+"Import.warning" = "개인 키 교환은 거래 내역 또는 기타 세부 내용을 가져오지 않습니다.";
+/* Wrong password alert message */
+"Import.wrongPassword" = "잘못된 비밀번호. 다시 시도해 주세요.";
+/* Close app button */
+"JailbreakWarnings.close" = "닫기";
+/* Ignore jailbreak warning button */
+"JailbreakWarnings.ignore" = "무시";
+/* Jailbreak warning message */
+"JailbreakWarnings.messageWithBalance" = "장치 보안 취약\n모든 'jailbreak' 앱이 BRD의 키체인 데이터에 접속하여 귀하의 비트코인을 훔칠 수 있습니다! 이 지갑을 바로 지우시고 안전한 장치에서 복구하세요.";
+/* Jailbreak warning message */
+"JailbreakWarnings.messageWithoutBalance" = "장치 보안 취약\n모든 'jailbreak' 앱이 BRD의 키체인 데이터에 접속하여 귀하의 비트코인을 훔칠 수 있습니다! BRD를 비-jailbroken 장치에서만 사용해 주세요.";
+/* Jailbreak warning title */
+"JailbreakWarnings.title" = "경고";
+/* Wipe wallet button */
+"JailbreakWarnings.wipe" = "초기화";
+/* Approve link wallet button label */
+"LinkWallet.approve" = "승인";
+/* Decline link wallet button label */
+"LinkWallet.decline" = "거절";
+/* Link Wallet view dislaimer footer */
+"LinkWallet.disclaimer" = "외부 앱은 이 장치의 승인 없이 돈을 전송할 수 없습니다";
+/* Link Wallet view title above domain list */
+"LinkWallet.domainTitle" = "주의: 다음 도메인의 경우에만 이 앱이 연동됨";
+/* Link wallet logo footer text */
+"LinkWallet.logoFooter" = "안전한 체크아웃";
+/* Link Wallet view title above permissions list */
+"LinkWallet.permissionsTitle" = "이 앱의 기능:";
+/* Link Wallet view title */
+"LinkWallet.title" = "연결 지갑";
+/* Location services disabled error */
+"LocationPlugin.disabled" = "위치 서비스가 꺼졌습니다.";
+/* No permissions for location services */
+"LocationPlugin.notAuthorized" = "BRD가 위치 서비스 접속 권한이 없습니다.";
+/* Wallet creation date prefix */
+"ManageWallet.creationDatePrefix" = "귀하께서는 %1$@ 에 지갑을 만들었습니다";
+/* Manage wallet description text */
+"ManageWallet.description" = "귀하의 지갑 이름은 귀하 계정의 거래 기록에서만 나타나며 다른 사람은 볼 수 없습니다.";
+/* Change Wallet name textfield label */
+"ManageWallet.textFeildLabel" = "지갑 이름";
+/* Manage wallet modal title */
+"ManageWallet.title" = "지갑 관리";
+"MarketData.high24h" = "24 시간 최고";
+"MarketData.low24h" = "24 시간 최저";
+"MarketData.marketCap" = "시가 총액";
+"MarketData.volume" = "거래량";
+/* "Add [a] Wallet [to the home screen]" */
+"MenuButton.addWallet" = "지갑 추가";
+/* Menu button title */
+"MenuButton.lock" = "지갑 잠그기";
+/* (Click here to) manage (your list of) wallets */
+"MenuButton.manageWallets" = "지갑 관리";
+/* (press here to) scan (a) QR code */
+"MenuButton.scan" = "QR코드 스캔";
+/* Menu button title */
+"MenuButton.security" = "보안 센터";
+/* Menu button title */
+"MenuButton.settings" = "설정";
+/* Menu button title */
+"MenuButton.support" = "고객지원";
+/* button label */
+"MenuViewController.createButton" = "새 지갑 만들기";
+/* Menu modal title */
+"MenuViewController.modalTitle" = "메뉴";
+/* button label */
+"MenuViewController.recoverButton" = "지갑 복구하기";
+/* Paper Key Skip modal body (Android-version) */
+"Modal.PaperKeySkip.Body.Android" = "휴대폰의 보안 설정을 변경 한 경우 지갑을 열려면 복구 문구가 필요합니다. \n\n나중에 복구 문구를 설정 하시겠습니까?";
+/* Paper Key Skip modal Continue Set Up button */
+"Modal.PaperKeySkip.Button.ContinueSetUp" = "설정 계속하";
+/* Paper Key Skip modal I'll do it later button */
+"Modal.PaperKeySkip.Button.IllDoItLater" = "나중에 하겠습니다.";
+/* Paper Key Skip modal title */
+"Modal.PaperKeySkip.Title" = "주";
+/* Node selection mode is automatic */
+"NodeSelector.automatic" = "자동적 인";
+/* Switch to automatic mode button label */
+"NodeSelector.automaticButton" = "자동 모드로 전환";
+/* Node is connected label */
+"NodeSelector.connected" = "연결됨";
+/* Node is connecting label */
+"NodeSelector.connecting" = "연결 중";
+/* Enter node ip address view body */
+"NodeSelector.enterBody" = "노드 IP 주소와 포트를 입력하십시오(선택)";
+/* Enter Node ip address view title */
+"NodeSelector.enterTitle" = "노드를 입력하십시오";
+/* Entered invalid node address at the node selection screen */
+"NodeSelector.invalid" = "잘못된 노드";
+/* Switch to manual mode button label */
+"NodeSelector.manualButton" = "수동 모드로 전환";
+/* Node address label */
+"NodeSelector.nodeLabel" = "현재 주요 모드";
+/* Node is not connected label */
+"NodeSelector.notConnected" = "연결되지 않음";
+/* Node status label */
+"NodeSelector.statusLabel" = "노드 연결 상태";
+/* Node Selector view title */
+"NodeSelector.title" = "비트코인 노드";
+/* Onboarding screen 'I'll browse first' button */
+"Onboarding.browseFirst" = "먼저 둘러볼게요";
+/* Onboarding screen 'Buy some coin' button */
+"Onboarding.buyCoin" = "코인을 조금 구매";
+/* Onboarding screen 'Get started' (create new wallet) button */
+"Onboarding.getStarted" = "시작";
+/* Onboarding screen 'Next' button */
+"Onboarding.next" = "다음";
+/* Onboarding screen restore an existing wallet. */
+"Onboarding.restoreWallet" = "월렛 복구";
+/* Onboarding screen Skip button title that allows the user to exit the onboarding process. */
+"Onboarding.skip" = "넘어가기";
+/* Onboarding screen Page 4 title */
+"OnboardingPageFour.title" = "50달러 소액부터 오늘 투자를 시작해 보세요!";
+/* Onboarding screen Page 1 title */
+"OnboardingPageOne.title" = "새로운 디지털 자산 지갑에 오신 것을 환영합니다!";
+/* Onboarding screen Page 3 subtitle */
+"OnboardingPageThree.subtitle" = "BRD와 함께 쉽고 안전하게 투자하고 다양하게 분산시키세요.";
+/* Onboarding screen Page 3 title */
+"OnboardingPageThree.title" = "비트코인, 토큰, 그리고 그 외 다른 가상 화폐들을 구매하고 거래하세요.";
+/* Onboarding screen Page 2 subtitle */
+"OnboardingPageTwo.subtitle" = "저희는 60억 달러 넘는 가치의 자산을 안전하게 보유하고 있습니다.";
+/* Onboarding screen Page 2 title */
+"OnboardingPageTwo.title" = "BRD를 신뢰하는 전 세계 수백만 명과 함께 하십시오.";
+/* Eg. Send 1.0Eth to purchase CCC */
+"PaymentConfirmation.amountText" = "%2$@ 구매를 위해 %1$@ 전송";
+/* Payment confirmation view title */
+"PaymentConfirmation.title" = "확인";
+/* Bad Payment request alert title */
+"PaymentProtocol.Errors.badPaymentRequest" = "틀린 결제 요청";
+/* Error opening payment protocol file message */
+"PaymentProtocol.Errors.corruptedDocument" = "지원되지 않거나 망가진 문서";
+/* Missing certificate payment protocol error message */
+"PaymentProtocol.Errors.missingCertificate" = "빠진 증명서";
+/* Request expired payment protocol error message */
+"PaymentProtocol.Errors.requestExpired" = "요청 만료됨";
+/* Payment too small alert title */
+"PaymentProtocol.Errors.smallOutputError" = "결제를 할 수 없습니다";
+/* Amount too small error message */
+"PaymentProtocol.Errors.smallPayment" = "비트코인 결제는 %1$@ 보다 작을 수 없습니다.";
+/* Output too small error message. */
+"PaymentProtocol.Errors.smallTransaction" = "비트코인 거래 출력들은 %1$@보다 작을 수 없습니다.";
+/* Unsupported signature type payment protocol error message */
+"PaymentProtocol.Errors.unsupportedSignatureType" = "지원되지 않는 서명 형태";
+/* Untrusted certificate payment protocol error message */
+"PaymentProtocol.Errors.untrustedCertificate" = "신용할 수 없는 증명서";
+"Platform.transaction_cancelled" = "거래 취소";
+/* Body text for a prompt that asks the user to subscribe to email updates to find out product updates. */
+"Prompts.Email.body" = "주요 지원 및 제품 업데이트르 받을 첫 주인공이 되어 보세요.";
+/* Placeholder text for an email address text field. */
+"Prompts.Email.placeholder" = "이메일 입력";
+/* Body text that is shown when the user successfully subscribes to email updates. */
+"Prompts.Email.successBody" = "업데이트를 받기 위한 구독이 완료되었습니다.";
+/* Text that is displayed as a footnote when the user successfully subscribes to email updates. */
+"Prompts.Email.successFootnote" = "계속해서 지지해 주셔서 감사합니다.";
+/* Title that is shown when the user successfully subscribes to email updates. */
+"Prompts.Email.successTitle" = "감사합니다!";
+/* Title for a prompt that asks the user to subscribe to email updates to find out product updates. */
+"Prompts.Email.title" = "일원 되기";
+/* Enable face ID prompt body */
+"Prompts.FaceId.body" = "페이스 ID를 사용하시려면 계속하기를 탭하세요";
+/* Enable face ID prompt title */
+"Prompts.FaceId.title" = "페이스 ID 사용하기";
+/* No passcode set warning body */
+"Prompts.NoPasscode.body" = "지갑을 지키려면 장치 비밀번호가 필요합니다. 설정으로 가셔서 비밀번호를 켜십시오.";
+/* No Passcode set warning title */
+"Prompts.NoPasscode.title" = "기기 비밀번호 설정";
+/* Instructions on how to enable screen lock settings */
+"Prompts.NoScreenLock.body.android" = "귀하의 지갑을 보호하시려면 장치 화면 잠금이 필요합니다. 계속하시려면 \"설정\" > \"보안\" > \"화면 잠금\"가셔서 켜 주세요.";
+/* Device encryption prompt title */
+"Prompts.NoScreenLock.title.android" = "화면 잠금 꺼짐";
+/* Warning about recovery phrase (formerly paper key). */
+"Prompts.PaperKey.body" = "휴대 전화를 분실하거나 변경하는 경우 복구 문구를 저장해야합니다.";
+/* Warning about paper key (Android-version) */
+"Prompts.PaperKey.Body.Android" = "전화기를 분실하거나 교체 할 경우를 대비하여 복구 문구를 설정하십시오. 휴대 전화의 보안 설정을 변경하는 경우에도 키가 필요합니다.";
+/* An action is required (You must do this action). */
+"Prompts.PaperKey.title" = "조치 필요함";
+"Prompts.RateApp.dontShow" = "다시 묻지마";
+"Prompts.RateApp.enjoyingBrd" = "BRD를 즐기십니까?";
+"Prompts.RateApp.googlePlayReview" = "귀하의 검토는 BRD 커뮤니티의 성장을 돕습니다.";
+"Prompts.RateApp.noThanks" = "아니요, 괜찮아요";
+"Prompts.RateApp.rateUs" = "우리를 검토";
+/* Transaction rejected prompt body */
+"Prompts.RecommendRescan.body" = "귀하의 지갑이 동기화 되어 있지 않을 수 있습니다. 블록체인을 재스캔하면 대부분 고쳐집니다.";
+/* Transaction rejected prompt title */
+"Prompts.RecommendRescan.title" = "거래 거절됨";
+/* Share data prompt body */
+"Prompts.ShareData.body" = "BRD가 발전할 수 있도록 익명 데이터를 공유해주십시오";
+/* Share data prompt title */
+"Prompts.ShareData.title" = "익명 데이터 공유";
+/* Enable touch ID prompt body */
+"Prompts.TouchId.body" = "Touch ID를 켜시려면 여기를 탭하세요";
+/* Enable Fingerprint prompt body */
+"Prompts.TouchId.body.android" = "지문 본인확인을 켜시려면 여기를 탭 하세요";
+/* Enable touch ID prompt title */
+"Prompts.TouchId.title" = "Touch ID 켜";
+/* Enable Fingerprint prompt title */
+"Prompts.TouchId.title.android" = "지문 본인확인 켜기";
+/* Button on fingerprint prompt so the user can enter their PIN instead */
+"Prompts.TouchId.usePin.android" = "PIN";
+/* Upgrade PIN prompt body. */
+"Prompts.UpgradePin.body" = "6자리 PIN을 사용하도록 브레드가 업그레이드되었습니다. 업그레이드하려면 여기를 탭하세요.";
+/* Upgrade PIN prompt title. */
+"Prompts.UpgradePin.title" = "PIN 업그레이드";
+/* Body text for the push notifications prompt. */
+"PushNotifications.body" = "푸시 알림을 켜고 새로운 기능과 특가 제공 소식을 제일 먼저 접하세요.";
+/* Push notifications are disabled alert title" */
+"PushNotifications.disabled" = "알림 비활성";
+/* Body text when push notifications are disabled. */
+"PushNotifications.disabledBody" = "알림을 켜서 BRD로터 특가 판매와 업데이트를 받으십시오.";
+/* Body text when push notifications are enabled. */
+"PushNotifications.enabledBody" = "귀하는 BRD로부터 특가 판매 및 업데이트를 받고 있습니다.";
+/* Instructions to enable push notifications for BRD in the phone's system settings. */
+"PushNotifications.enableInstructions" = "알림이 꺼진 것 같습니다. 설정으로 가서 BRD 알림 받기를 활성화하십시오.";
+/* Push notifications toggle switch label */
+"PushNotifications.label" = "푸시 알림 받기";
+/* Push notifications are off label */
+"PushNotifications.off" = "Off";
+/* Push notifications are on label */
+"PushNotifications.on" = "On";
+/* Push notifications settings view title label */
+"PushNotifications.title" = "계속 정보를 받으세요.";
+/* Push notifications settings failed to update settings on the back end */
+"PushNotifications.updateFailed" = "푸시 알림 설정을 업데이트하지 못했습니다";
+/* Google play review prompt body */
+"RateAppPrompt.Body.Android" = "앱이 마음에 드신다면 잠시 시간을 내어 평가를 하고 리뷰를 보내주세요.";
+/* Google play review prompt, revivew button */
+"RateAppPrompt.Button.Dismiss.Android" = "아니요, 괜찮아요";
+/* Google play review prompt, dismiss button */
+"RateAppPrompt.Button.RateApp.Android" = "BRD 평가하기";
+/* Google play review prompt title */
+"RateAppPrompt.Title.Android" = "BRD 평가하기";
+/* Address copied message. */
+"Receive.copied" = "클립보드에 복사되었습니다.";
+/* Share via email button label */
+"Receive.emailButton" = "이메일";
+/* Request button label */
+"Receive.request" = "금액 요청";
+/* Share button label */
+"Receive.share" = "공유";
+/* Share via text message (SMS) */
+"Receive.textButton" = "문자 메시지";
+/* Receive modal title */
+"Receive.title" = "수신";
+/* Done button text */
+"RecoverWallet.done" = "완료";
+/* Recover wallet header */
+"RecoverWallet.header" = "지갑 복구하기";
+/* Reset PIN with paper key: header */
+"RecoverWallet.header_reset_pin" = "PIN 재설정";
+/* Enter paper key instruction */
+"RecoverWallet.instruction" = "복구 문구 입력";
+/* Recover wallet intro */
+"RecoverWallet.intro" = "복구 문구로 BRD를 복구하십시오.";
+/* Invalid paper key message */
+"RecoverWallet.invalid" = "입력 한 복구 문구가 잘못되었습니다. 각 단어를 다시 확인하고 다시 시도하십시오.";
+/* Previous button accessibility label */
+"RecoverWallet.leftArrow" = "왼쪽 화살표";
+/* Next button label */
+"RecoverWallet.next" = "다음";
+/* Reset PIN with paper key: more information button. */
+"RecoverWallet.reset_pin_more_info" = "자세한 내용을 보려면 여기를 탭하세요.";
+/* Next button accessibility label */
+"RecoverWallet.rightArrow" = "오른쪽 화살표";
+/* Recover wallet sub-header */
+"RecoverWallet.subheader" = "복구하려는 지갑의 복구 문구를 입력하십시오.";
+/* Reset PIN with paper key: sub-header */
+"RecoverWallet.subheader_reset_pin" = "PIN을 재설정하려면 아래 상자에 복구 문구의 단어를 입력하세요.";
+/* Instructs the user to enter words from the set of recovery key words. */
+"RecoveryKeyFlow.confirmRecoveryInputError" = "입력한 단어가 올바르지 않습니다. 다시 시도해 주세요.";
+/* Instructs the user to enter words from the set of recovery phrase words. */
+"RecoveryKeyFlow.confirmRecoveryKeySubtitle" = "거의 완료되었습니다! 복구 문구에서 다음 단어를 입력하십시오.";
+/* Title for the confirmation step of the recovery phrase flow. */
+"RecoveryKeyFlow.confirmRecoveryKeyTitle" = "복구 문구 확인";
+/* Title displayed when the user starts the process of entering a recovery phrase */
+"RecoveryKeyFlow.enterRecoveryKey" = "복구 문구 입력";
+/* Subtitle displayed when the user starts the process of entering a recovery phrase */
+"RecoveryKeyFlow.enterRecoveryKeySubtitle" = "기기에서이 지갑의 연결을 해제하려면 복구 문구를 입력하세요.";
+/* Body text for an alert dialog asking the user whether to set up the recovery phrase later */
+"RecoveryKeyFlow.exitRecoveryKeyPromptBody" = "나중에 복구 문구를 설정 하시겠습니까?";
+/* Title for an alert dialog asking the user whether to set up the recovery key later */
+"RecoveryKeyFlow.exitRecoveryKeyPromptTitle" = "나중에 설정";
+/* Button text for the 'Generate Recovery Phrase' button */
+"RecoveryKeyFlow.generateKeyButton" = "복구 문구 생성";
+/* Subtext for the recovery key landing page. */
+"RecoveryKeyFlow.generateKeyExplanation" = "이 키는 스마트폰을 업그레이드 또는 분실하는 경우 돈을 복구할 때 필수입니다.";
+/* Default title for the recovery phrase landing page */
+"RecoveryKeyFlow.generateKeyTitle" = "개인 복구 문구 생성";
+/* Title for a button that takes the user to the wallet after setting up the recovery key. */
+"RecoveryKeyFlow.goToWalletButtonTitle" = "지갑으로 이동";
+/* Hint text for recovery key intro page, e.g., Step 2 */
+"RecoveryKeyFlow.howItWorksStep" = "작동 원리 - %1$@ 단계";
+/* Error text displayed when the user enters an incorrect recovery phrase */
+"RecoveryKeyFlow.invalidPhrase" = "입력 한 단어 중 일부가 복구 문구와 일치하지 않습니다. 다시 시도하십시오.";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.keepSecure" = "안전하게 보관하세요.";
+/* Informs the user that the recovery is only required for recovering a wallet. */
+"RecoveryKeyFlow.keyUseHint" = "키는 복구에만 필요할 뿐 매일 지갑에 액세스할 때는 필요하지 않습니다.";
+/* Reminds the user not to take screenshots or email the recovery key words */
+"RecoveryKeyFlow.noScreenshotsOrEmailWarning" = "보안에 취약하므로 스크린샷이나 이메일로 이 단어를 남기지 마세요.";
+/* Recommends that the user avoids capturing the paper key with a screenshot */
+"RecoveryKeyFlow.noScreenshotsRecommendation" = "종이에 키를 적고 나서 확인하세요. 보안에 취약하므로 스크린샷을 찍는 것은 추천하지 않습니다.";
+/* Title displayed when the user starts the process of recovering a wallet */
+"RecoveryKeyFlow.recoveryYourWallet" = "내 지갑 복구";
+/* Subtitle displayed when the user starts the process of recovering a wallet */
+"RecoveryKeyFlow.recoveryYourWalletSubtitle" = "복구하려는 지갑의 복구 문구를 입력하세요.";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.relaxBuyTrade" = "편안하게 구매하고 거래하세요.";
+/* Reminds the user to write down the recovery key words. */
+"RecoveryKeyFlow.rememberToWriteDownReminder" = "이 단어들을 잊지 말고 적어 두세요. 잊으셨다면 가볍게 밀어 뒤로 가세요.";
+/* Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered */
+"RecoveryKeyFlow.resetPINInstruction" = "PIN을 재설정하려면 복구 문구를 입력하세요.";
+/* Assures the user that BRD will keep the user's funds secure. */
+"RecoveryKeyFlow.securityAssurance" = "비즈니스 최고의 보안과 개인정보 보호정책으로 자금이 보호받는다는 사실을 인지하며 구매하고 거래하세요.";
+/* Recommends that the user stores the recovery key in a secure location */
+"RecoveryKeyFlow.storeSecurelyRecommendation" = "안전한 장소에 키를 보관하세요. 지갑을 복구할 유일한 방법입니다. BRD는 복사본을 보관하지 않습니다.";
+/* Title for the success page after the recovery phrase has been set up */
+"RecoveryKeyFlow.successHeading" = "축하합니다! 복구 문구 설정을 완료했습니다.";
+/* Subtitle for the success page after the recovery key has been set up */
+"RecoveryKeyFlow.successSubheading" = "BRD 지갑에서 암호화화폐를 예금하고 거래하고 구매할 준비가 끝났습니다.";
+/* Title displayed to the user on the intro screen when unlinking a wallet */
+"RecoveryKeyFlow.unlinkWallet" = "이 기기에서 지갑 연결을 해제합니다.";
+/* Subtitle displayed to the user on the intro screen when unlinking a wallet. */
+"RecoveryKeyFlow.unlinkWalletSubtext" = "현재 설치된 지갑에서 기기 연결을 해제해 새 지갑을 시작하세요.";
+/* Warning displayed when the user starts the process of unlinking a wallet */
+"RecoveryKeyFlow.unlinkWalletWarning" = "액세스 권한을 다시 받으려면 지갑을 복구해야 합니다.";
+/* Title displayed to the user on the intro screen when wiping a wallet */
+"RecoveryKeyFlow.wipeWallet" = "이 기기에서 지갑 연결을 해제합니다.";
+/* Subtitle displayed to the user on the intro screen when wiping a wallet. */
+"RecoveryKeyFlow.wipeWalletSubtext" = "기기에서 현재 지갑을 닦아서 새 지갑을 시작합니다.";
+/* Title for recovery key intro page */
+"RecoveryKeyFlow.writeItDown" = "키를 적어 주세요.";
+/* Title for the recovery phrase landing page if the key has already been generated. */
+"RecoveryKeyFlow.writeKeyAgain" = "복구 문구를 다시 기록하십시오.";
+/* Subtitle for the write recovery key screen */
+"RecoveryKeyFlow.writeKeyScreenSubtitle" = "다음 단어를 순서대로 적으세요.";
+/* Title for the write recovery phrase screen */
+"RecoveryKeyFlow.writeKeyScreenTitle" = "복구 문구";
+/* Title for the step number when the user pages through the recovery words */
+"RecoveryKeyFlow.writeKeyStepTitle" = "%2$@ 중 %1$@";
+/* No amount entered error message. */
+"RequestAnAmount.noAmount" = "먼저 금액을 입력해 주세요.";
+/* Request a specific amount of bitcoin */
+"RequestAnAmount.title" = "금액 요청";
+/* Alert action button label */
+"ReScan.alertAction" = "동기화";
+/* Alert message body */
+"ReScan.alertMessage" = "동기화 중에는 송금할 수 없습니다.";
+/* Alert message title */
+"ReScan.alertTitle" = "블록체인과 동기화하겠습니까?";
+/* extimated time */
+"ReScan.body1" = "20-45분";
+/* Syncing explanation */
+"ReScan.body2" = "거래가 비트코인 네트워크에는 완료된 것으로 표시되지만, 브레드에는 표시되지 않는 경우.";
+/* Syncing explanation */
+"ReScan.body3" = "거래가 거절되었음을 알리는 오류 메시지가 반복적으로 나타납니다.";
+/* Start Sync button label */
+"ReScan.buttonTitle" = "동기화 시작";
+/* Sync blockchain view footer */
+"ReScan.footer" = "블록체인과 동기화하는 동안에는 송금할 수 없습니다.";
+/* Sync Blockchain view header */
+"ReScan.header" = "블록체인 동기화";
+/* Subheader label */
+"ReScan.subheader1" = "예상 시간";
+/* Subheader label */
+"ReScan.subheader2" = "동기화는 언제 해야 합니까?";
+/* Rewards view expanded body. */
+"RewardsView.expandedBody" = "거래 수수료를 절약하고 미래의 보상을 얻을 수 있는 방법을 배우십시오.";
+/* Rewards view expanded title. */
+"RewardsView.expandedTitle" = "BRD 리워즈를 소개합니다.";
+/* Rewards view title */
+"RewardsView.normalTitle" = "리워즈";
+/* Scan bitcoin address camera flash toggle */
+"Scanner.flashButtonLabel" = "카메라 플래시";
+/* (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") */
+"Scanner.paymentPromptMessage" = "이 주소로 %1$@ 지불금을 보내시겠습니까?";
+/* alert dialog title */
+"Scanner.paymentPromptTitle" = "지불 보내기";
+/* Complete filter label */
+"Search.complete" = "완료";
+/* Pending filter label */
+"Search.pending" = "대기 중";
+/* Received filter label */
+"Search.received" = "수신";
+/* [Click here to] search */
+"Search.search" = "검색";
+/* Sent filter label */
+"Search.sent" = "송금";
+/* Face ID button title */
+"SecurityCenter.faceIdTitle" = "페이스 ID";
+/* Paper Key button description */
+"SecurityCenter.paperKeyDescription" = "전화를 분실하거나 업그레이드하는 경우, 비트코인에 액세스할 수 있는 유일한 방법입니다.";
+/* Recovery Phrase button title. This used to be called 'paper key', so leaving the string key as `paperKeyTitle` in order
+ * to not break existing client code. */
+"SecurityCenter.paperKeyTitle" = "복구 문구";
+/* Paper Key button title */
+"SecurityCenter.paperKeyTitle.android" = "복구 문구";
+/* PIN button description */
+"SecurityCenter.pinDescription" = "허가받지 않은 사용자로부터 브레드를 보호하세요.";
+/* PIN button title */
+"SecurityCenter.pinTitle" = "6자리 PIN";
+/* Touch ID button description */
+"SecurityCenter.touchIdDescription" = "편리하게 브레드의 잠금을 해제하고 최대한도까지 송금해 보세요.";
+/* Touch ID button title */
+"SecurityCenter.touchIdTitle" = "터치 ID";
+/* Security center fingerprint authentication button */
+"SecurityCenter.touchIdTitle.android" = "지문 본인확인";
+/* Segwit enabled confirmation title */
+"Segwit.ConfirmationConfirmationTitle" = "SegWit을 활성화했습니다!";
+/* Segwit enabled confirmation description */
+"Segwit.ConfirmationInstructionsDescription" = "Bitcoin 발전에 일조해 주셔서 감사합니다.";
+/* Segwit instructions */
+"Segwit.ConfirmationInstructionsInstructions" = "SegWit 지원은 아직 베타 기능입니다.\nSegWit이 활성화되면 비활성화할 수\n없습니다. 유산 주소는 아래 설정에서 찾을 수 있습니다.\nSegWit를 활성화하면 암호화 거래 등 일부 제3자 서비스를 이용할 수 없을 수도 있습니다. 비상 시에는 선호도 > Bitcoin 설정에서 유산 주소를 생성할 수 있습니다.\nSegWit는 향후 업데이트 시 모든 사용자에게 \n자동으로 활성화됩니다.";
+/* Segwit extra confirmation title. */
+"Segwit.ConfirmChoiceLayout" = "SegWit을 활성화는 취소할 수 없는 기능입니다. 계속하시겠습니까?";
+/* Segwit enableButton */
+"Segwit.Enable" = "활성화";
+/* Segwit button label that takes the user back to the home screen once SegWit is enabled. */
+"Segwit.HomeButton" = "투 더 문";
+"Send_fio_toLabel" = "FIO";
+/* Send money amount label */
+"Send.amountLabel" = "금액";
+/* Balance: $4.00 */
+"Send.balance" = "잔액: %1$@";
+/* Balance: $4.00 for iOS, the balance can't have a parameter */
+"Send.balanceString" = "잔액:";
+/* Instructions how to allow the camera access for the app */
+"Send.cameraUnavailabeMessage.android" = "\"설정\" > \"앱\" > \"BRD\" > \"허용\"에서 카메라 접속을 허용해 주세요";
+/* Permission required to access camera */
+"Send.cameraUnavailabeTitle.android" = "BRD의 카메라 접속이 허용되지 않았습니다";
+/* Camera not allowed message */
+"Send.cameraunavailableMessage" = "설정에서 카메라 액세스를 허가해 주세요.";
+/* Camera not allowed alert title */
+"Send.cameraUnavailableTitle" = "브레드는 카메라 액세스를 허용하지 않습니다.";
+/* Warning when sending to self. */
+"Send.containsAddress" = "여러분의 주소를 입력해 주세요. 본인에게 전송할 수 없습니다.";
+/* Could not create transaction alert title */
+"Send.creatTransactionError" = "전송할 수 없습니다.";
+/* Description for sending money label */
+"Send.descriptionLabel" = "메모";
+/* Optional Destination Tag label */
+"Send.destinationTag_optional" = "대상 태그 (선택 사항)";
+/* Required Destination Tag label */
+"Send.destinationTag_required" = "대상 태그 (필수)";
+"Send.destinationTag_required_error" = "대상 주소에 유효한 대상 태그가 필요합니다.";
+/* Emtpy pasteboard error message */
+"Send.emptyPasteboard" = "클립보드가 비어 있습니다";
+/* "(you) can't send (to your)self" */
+"Send.ethSendSelf" = "자신에게는 보낼 수 없습니다.";
+/* Network Fee: $0.01 */
+"Send.fee" = "네트워크 비용: %1$@";
+"Send.fio_invalid" = "잘못된 FIO 주소입니다.";
+"Send.fio_noAddress" = "이 FIO 주소와 연결된 %1$s 주소가 없습니다.";
+"Send.fio_retrievalError" = "이 FIO 주소에 대한 주소를 검색하는 중에 오류가 발생했습니다. 나중에 다시 시도하십시오.";
+/* Payee identity not certified alert title. */
+"Send.identityNotCertified" = "인증되지 않은 수취인입니다.";
+/* Insufficient funds error */
+"Send.insufficientFunds" = "자금 부족";
+/* e,g, "You must have at least $2 in your wallet in order to transfer this type of token." In this case, "token" is an ethereum ERC20 token. */
+"Send.insufficientGasMessage" = "이 종류의 토큰을 전송하려면 지갑에 최소 %1$@가 있어야 합니다. 지금 이더리움 지갑으로 가시겠습니까?";
+/* Your ethereum balance is insufficient to complete this action. */
+"Send.insufficientGasTitle" = "이더리움 잔액이 부족합니다";
+/* e.g. The destination is not a valid (bitcoin) address. */
+"Send.invalidAddressMessage" = "해당 수취인 주소는 %1$@에서 유효하지 않은 주소입니다.";
+/* Invalid address on pasteboard message */
+"Send.invalidAddressOnPasteboard" = "클립보드가 유효한 %1$@ 주소를 가지고 있지 않습니다";
+/* Invalid address alert title */
+"Send.invalidAddressTitle" = "유효하지 않은 주소입니다";
+/* Is rescanning error message */
+"Send.isRescanning" = "전체 재검색 중에는 송금이 비활성화됩니다.";
+/* Warning when the user is trying to send bitcoin cash to a legacy bitcoin address (possible, but probably not what the user wants to do) */
+"Send.legacyAddressWarning" = "경고: 이것은 레거시 비트코인 주소입니다. 비트코인 캐시를 보내시겠습니까?";
+/* We are loading the request (now) */
+"Send.loadingRequest" = "요청 불러오는 중";
+/* Hedera Memo Tag Label */
+"Send.memoTag_optional" = "헤 데라 메모 (선택 사항)";
+/* Transaction fee could not be be caluculated error. */
+"Send.nilFeeError" = "거래 수수료를 지급하기에 자금이 부족합니다";
+/* Empty address alert message */
+"Send.noAddress" = "수신인의 주소를 입력하세요.";
+/* Emtpy amount alert message */
+"Send.noAmount" = "송금액을 입력하세요";
+/* No Fees error */
+"Send.noFeesError" = "네트워크 수수료 조건을 다운로드 중입니다. 다시 시도하십시오.";
+/* Paste button label */
+"Send.pasteLabel" = "붙여넣기";
+/* Error message for invalid PayID */
+"Send.payId_invalid" = "잘못된 PayID입니다.";
+/* Error message for no address associated with a PayID for a given currency */
+"Send.payId_noAddress" = "이 PayID와 연결된 %1$s 주소가 없습니다.";
+/* Error message for error in retrieving the address from the PayID endpoint */
+"Send.payId_retrievalError" = "이 PayID의 주소를 검색하는 중에 오류가 발생했습니다. 나중에 다시 시도하십시오.";
+/* PayID label */
+"Send.payId_toLabel" = "PayID";
+/* Could not publish transaction alert title */
+"Send.publishTransactionError" = "전송할 수 없습니다.";
+/* Could not load remote request error message */
+"Send.remoteRequestError" = "결제 요청을 불러올 수 없었습니다";
+/* Scan button label */
+"Send.scanLabel" = "스캔";
+/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
+"Send.sendingMax" = "최대 보내기 :";
+/* Send button label (the action, "press here to send") */
+"Send.sendLabel" = "보내기";
+/* Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) */
+"Send.sendMaximum" = "최고 한도 금액을 보내겠습니까?";
+/* Send screen title (as in "this is the screen for sending money") */
+"Send.title" = "보내기";
+/* Send money to label */
+"Send.toLabel" = "수취인";
+/* Adress already used alert message - first part */
+"Send.UsedAddress.firstLine" = "비트코인 주소는 일회용입니다.";
+/* Adress already used alert message - second part */
+"Send.UsedAddress.secondLIne" = "주소를 재사용할 경우 귀하와 받는 사람 모두의 개인 정보 보호가 약해지며, 받는 사람이 직접 주소를 관리하지 않을 경우 분실을 초래할 수 있습니다.";
+/* Adress already used alert title */
+"Send.UsedAddress.title" = "이미 사용중인 주소입니다";
+/* About label */
+"Settings.about" = "관련 사항";
+/* Advanced settings header */
+"Settings.advanced" = "고급";
+/* Advanced Settings title */
+"Settings.advancedTitle" = "고급 설정";
+/* ATM map menu item title explaining that it's a feature only available in the USA */
+"Settings.atmMapMenuItemSubtitle" = "미국에서만 사용 가능";
+/* ATM map menu item title */
+"Settings.atmMapMenuItemTitle" = "암호화 ATM지도";
+/* i.e. the currency which will be displayed */
+"Settings.currency" = "통화 보기";
+/* e.g. "USD Settings" (settings for how USD is handled) */
+"Settings.currencyPageTitle" = "%1$@ 설정";
+/* Section title for a collection of different settings screens, one for each currency */
+"Settings.currencySettings" = "통화 설정";
+/* Join Early access label */
+"Settings.earlyAccess" = "초기 버전을 사용해 보세요";
+/* Enable segwit. */
+"Settings.EnableSegwit" = "Segwit 활성화";
+/* Are you enjoying bread alert message body */
+"Settings.enjoying" = "브레드를 사용하고 있으신가요?";
+/* Face ID spending limit label */
+"Settings.faceIdLimit" = "페이스 ID 지출 한도";
+/* Redeem the funds stored on this private key. */
+"Settings.importTitle" = "개인 키 교환";
+/* Manage settings section header */
+"Settings.manage" = "관리";
+/* Notifications label */
+"Settings.notifications" = "알림";
+/* Section header for "other settings". */
+"Settings.other" = "기타";
+/* Preferences settings section header */
+"Settings.preferences" = "환경 설정";
+/* Tap here to reset the list of currencies to the default settings. */
+"Settings.resetCurrencies" = "기본 통화로 초기화";
+/* Leave review button label */
+"Settings.review" = "후기를 남겨주세요";
+/* Rewards menu item */
+"Settings.rewards" = "보상";
+/* Share anonymous data label */
+"Settings.shareData" = "익명 데이터 공유";
+/* Sync blockchain label */
+"Settings.sync" = "블록체인 동기화";
+/* Settings title */
+"Settings.title" = "설정";
+/* Touch ID spending limit label */
+"Settings.touchIdLimit" = "Touch ID 지출 한도";
+/* The fingerprint spending limit */
+"Settings.touchIdLimit.android" = "지문 본인확인 사용 한계";
+/* View legacy address (old format). */
+"Settings.ViewLegacyAddress" = "유산 수령 주소 보기";
+/* Receive Bitcoin instructions */
+"Settings.ViewLegacyAddressReceiveDescription" = "이 주소에는 Bitcoin(BTC)만 보낼 수 있습니다. 이 주소로 다른 자산을 보낼 경우 모두 영구 소실됩니다.";
+/* Receive Bitcoin */
+"Settings.ViewLegacyAddressReceiveTitle" = "Bitcoin 수령";
+/* Wallet Settings section header */
+"Settings.wallet" = "지갑";
+/* Unlink/delete your wallet from the current device. */
+"Settings.wipe" = "이 기기에서 연결 해제";
+/* Wipe/delete your wallet from the current device. */
+"Settings.wipe.android" = "이 기기에서 지갑 연결을 해제합니다.";
+/* Share data view body */
+"ShareData.body" = "브레드 기능 향상을 위해 여러분의 익명 데이터를 공유해 주세요. 금융 정보는 포함되지 않습니다. 여러분의 금융 관련 개인정보는 안전하게 보호됩니다.";
+/* Share data header */
+"ShareData.header" = "데이터를 공유하시겠습니까?";
+/* Share data switch label. */
+"ShareData.toggleLabel" = "익명 데이터를 공유하시겠습니까?";
+/* button label */
+"StartPaperPhrase.againButtonTitle" = "복구 문구를 다시 기록";
+/* Paper key explanation text. */
+"StartPaperPhrase.body" = "복구 문구는 휴대 전화가 분실, 도난, 파손 또는 업그레이드 된 경우 BRD를 복원하는 유일한 방법입니다. \n\n종이에 적어 안전하게 보관할 단어 목록을 보여드립니다.";
+/* Paper key explanation text (Android-version) */
+"StartPaperPhrase.Body.Android" = "복구 문구는 휴대 전화가 분실, 도난, 파손 또는 업그레이드 된 경우 BRD를 복원하는 유일한 방법입니다. \n\n장치의 보안 설정을 변경하는 경우에도 복구 문구가 필요합니다. \n\n종이에 적어 안전하게 보관할 단어 목록을 보여드립니다.";
+/* button label */
+"StartPaperPhrase.buttonTitle" = "복구 문구 기록";
+/* Argument is date; date should be on a new line */
+"StartPaperPhrase.date" = "마지막 기록 \n %1$@";
+/* button label */
+"StartViewController.createButton" = "새 지갑 생성하기";
+/* Start view message */
+"StartViewController.message" = "비트코인을 사용하는 가장 안정되고 안전한 방법.";
+/* Recover your wallet from a backup */
+"StartViewController.recoverButton" = "지갑 복구하기";
+"SupportForm.feedbackAppreciated" = "우리는 당신의 의견을 사랑합니다";
+"SupportForm.helpUsImprove" = "우리가 개선하도록 도와주세요";
+"SupportForm.notNow" = "지금은 아님";
+"SupportForm.pleaseDescribe" = "당신의 경험을 설명하십시오";
+/* Syncing view done syncing state header text */
+"SyncingView.activity" = "활동";
+/* Syncing view connectiong state header text */
+"SyncingView.connecting" = "연결 중";
+/* The sync has failed (to complete) */
+"SyncingView.failed" = "동기화 실패";
+/* Syncing view header text */
+"SyncingView.header" = "동기화 중";
+/* Retry button label */
+"SyncingView.retry" = "다시 시도";
+/* "eg. Synced through <Jan 12, 2015> */
+"SyncingView.syncedThrough" = "%1$@ 전 동기화 됨";
+/* Syncing view syncing state header text */
+"SyncingView.syncing" = "동기화 중";
+/* 6 d (6 days) */
+"TimeSince.days" = "%1$@ 일";
+/* 6 h (6 hours) */
+"TimeSince.hours" = "%1$@ 시";
+/* 6 m (6 minutes) */
+"TimeSince.minutes" = "%1$@ 분";
+/* 6 s (6 seconds) */
+"TimeSince.seconds" = "%1$@ 초";
+/* Add [this item to the list] */
+"TokenList.add" = "추가";
+/* Add Wallets  [to your home screen] */
+"TokenList.addTitle" = "지갑 추가";
+/* Hide [this token from view] */
+"TokenList.hide" = "숨기기";
+/* [click here to] Manage [your] Wallets */
+"TokenList.manageTitle" = "지갑 관리";
+/* Remove [this item from the list] */
+"TokenList.remove" = "삭제";
+/* Show [this item on your home screen] */
+"TokenList.show" = "보기";
+/* You can customize your Touch ID Spending Limit from the [TouchIdSettings.linkText gets added here as a button] */
+"TouchIdSettings.customizeText" = "%1$@에서 ???????????.";
+/* Fingerprint enabling description body */
+"TouchIdSettings.customizeText.android" = "지문 본인확인 시간 제한 화면에서 귀하의 지문 본인확인 사용 한계를 설정하실 수 있습니다";
+/* Instruction for the fingerprint setup */
+"TouchIdSettings.disabledWarning.body.android" = "귀하께서는 이 장치에 지문 본인확인 기능을 켜지 않으셨습니다. 설정 -> 보안으로 가셔서 지문 본인확인을 설정하세요.";
+/* Fingerprint Is Not Setup */
+"TouchIdSettings.disabledWarning.title.android" = "지문 본인확인이 켜지지 않음";
+/* Text that describes the purpose of the Touch ID settings in the BRD app. */
+"TouchIdSettings.explanatoryText" = "터치 아이디로 BRD 앱을 잠금 해제하고 송금하세요.";
+/* Touch Id screen label */
+"TouchIdSettings.label" = "지문을 사용하여 브레드의 보안을 해제하고 설정된 금액으로 송금할 수 있습니다.";
+/* Link Text (see TouchIdSettings.customizeText) */
+"TouchIdSettings.linkText" = "터치 ID 지불 한도 화면";
+/* Spending Limit: b100,000 ($100) */
+"TouchIdSettings.spendingLimit" = "지불 한도: %1$@ (%2$@)";
+/* Touch id switch label. */
+"TouchIdSettings.switchLabel" = "브레드에서";
+/* Enable fingerprint for this wallet called Bread */
+"TouchIdSettings.switchLabel.android" = "지문 본인확인 켜기";
+/* Touch ID settings view title */
+"TouchIdSettings.title" = "터치 ID";
+/* Fingerprint authentication label */
+"TouchIdSettings.title.android" = "지문 본인확인";
+/* Text label for a toggle that enables Touch ID for sending money. */
+"TouchIdSettings.transactionsTitleText" = "터치 아이디로 송금";
+/* Touch ID unavailable alert message */
+"TouchIdSettings.unavailableAlertMessage" = "이 기기에서 Touch ID가 설정되어 있지 않습니다. 지금 설정 -> Touch ID 및 암호로 이동하여 설정해 주세요.";
+/* Touch ID unavailable alert title */
+"TouchIdSettings.unavailableAlertTitle" = "Touch ID가 설정되지 않음";
+/* Text label for the toggle that enables Touch ID for unlocking the BRD app. */
+"TouchIdSettings.unlockTitleText" = "터치 아이디로 BRD 잠금 해제";
+/* Always require passcode option */
+"TouchIdSpendingLimit" = "항상 비밀번호 요구";
+/* Touch ID spending limit screen body */
+"TouchIdSpendingLimit.body" = "지출 한도를 넘는 트랜잭션을 보내실 경우, 그리고 마지막으로 6자리 PIN 코드를 입력하시고 48시간이 경과한 경우에는 6자리 PIN 코드를 입력하셔야 합니다.";
+/* Touch Id spending limit screen title */
+"TouchIdSpendingLimit.title" = "Touch ID 지출 한도";
+/* name of spending limit when using fingerprint authorization */
+"TouchIdSpendingLimit.title.android" = "지문 본인확인 사용 한계";
+/* Availability status text */
+"Transaction.available" = "지출 가능";
+/* Transaction complete label */
+"Transaction.complete" = "완료";
+/* Transaction is confirming status text */
+"Transaction.confirming" = "진행 중";
+/* eg. Ending balance: $50.00 */
+"Transaction.ending" = "기말 잔액: %1$@";
+/* Exchange rate on date header */
+"Transaction.exchangeOnDayReceived" = "받을 때의 환율:";
+/* Exchange rate on date header */
+"Transaction.exchangeOnDaySent" = "보낼 때의 환율:";
+/* Transaction failed status text */
+"Transaction.failed" = "실패했습니다";
+/* (b600 fee) */
+"Transaction.fee" = "(%1$@ 수수료)";
+/* Invalid transaction */
+"Transaction.invalid" = "무효";
+/* Timestamp label for event that just happened */
+"Transaction.justNow" = "지금 바로";
+/* Transaction is pending status text */
+"Transaction.pending" = "보류 중";
+/* Receive status text: 'In progress: 20%' */
+"Transaction.receivedStatus" = "진행 중: %1$@";
+/* Send status text: 'In progress: 20%' */
+"Transaction.sendingStatus" = "진행 중: %1$@";
+/* sending to <address> */
+"Transaction.sendingTo" = "%1$@으로 보내기";
+/* sent to <address> */
+"Transaction.sentTo" = "%1$@으로 전송되었습니다";
+/* eg. Starting balance: $50.00 */
+"Transaction.starting" = "기초 잔액: %1$@";
+/* e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) */
+"Transaction.tokenTransfer" = "토큰 송금 수수료: %1$@";
+/* Waiting to be confirmed string */
+"Transaction.waiting" = "확인 대기 중. 일부 판매자는 트랜잭션을 완료하기 위해 확인을 요구합니다. 예상 소요 시간: 1~2시간.";
+/* e.g. I received money from an account. */
+"TransactionDetails.account" = "계정";
+/* Address received from header */
+"TransactionDetails.addressFromHeader" = "시작";
+/* Address sent to header */
+"TransactionDetails.addressToHeader" = "끝";
+/* e.g. "(this was received) via (address #1)" via = by way of */
+"TransactionDetails.addressViaHeader" = "수단";
+/* Amount section header */
+"TransactionDetails.amountHeader" = "금액";
+/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+"TransactionDetails.amountWhenReceived" = "받았을 때 %1$@, 지금은 %2$@";
+/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+"TransactionDetails.amountWhenSent" = "전송 시 %1$@, 현재 %2$@";
+/* Block height label */
+"TransactionDetails.blockHeightLabel" = "차단 확인";
+/* Memo section header */
+"TransactionDetails.commentsHeader" = "메모";
+/* Memo field placeholder */
+"TransactionDetails.commentsPlaceholder" = "메모 추가...";
+/* Timestamp section header for complete tx */
+"TransactionDetails.completeTimestampHeader" = "완료";
+/* Block height and confirmations label
+eg. 182930 (45061 confirmations) */
+"TransactionDetails.confirmationsLabel" = "Confirmations";
+"TransactionDetails.destinationTag" = "목적지 태그";
+"TransactionDetails.destinationTag_EmptyHint" = "(빈)";
+/* Empty transaction list message. */
+"TransactionDetails.emptyMessage" = "귀하의 트랜잭션이 여기에 표시됩니다.";
+/* e.g. the users balance after the transaction was compeleted */
+"TransactionDetails.endingBalanceHeader" = "거래 후 잔액";
+/* Exchange rate section header */
+"TransactionDetails.exchangeRateHeader" = "환율";
+/* Tx detail field header */
+"TransactionDetails.feeHeader" = "비용 합계";
+/* "Received [$5] at [which of my addresses]" => This is the "at [which of my addresses]" part. */
+"TransactionDetails.from" = "%1$@에서";
+/* Tx detail field header */
+"TransactionDetails.gasLimitHeader" = "Gas Limit";
+/* Tx detail field header */
+"TransactionDetails.gasPriceHeader" = "Gas Price";
+/* Label for Hedera Memo field on transaction details screen */
+"TransactionDetails.hederaMemo" = "Hedera Memo";
+/* Hide Details button */
+"TransactionDetails.hideDetails" = "세부 정보 숨기기";
+/* Label showing the transaction was started (initialized) */
+"TransactionDetails.initializedTimestampHeader" = "초기화됨";
+/* More button title */
+"TransactionDetails.more" = "그 이상...";
+/* Moved $5.00 (as in "I moved $5 to another location") */
+"TransactionDetails.moved" = "%1$@ 이동함";
+/* Moved $5.00 */
+"TransactionDetails.movedAmountDescription" = "<b>%1$@</b> 이동됨";
+/* eg. Confirmed in Block: Not Confirmed */
+"TransactionDetails.notConfirmedBlockHeightLabel" = "확인되지 않음";
+/* "Received [$5] at [which of my addresses]" => This is the "Received [$5]" part. */
+"TransactionDetails.received" = "%1$@ 받음";
+/* Received $5.00 */
+"TransactionDetails.receivedAmountDescription" = "<b>%1$@</b> 수신됨";
+/* received from <address> */
+"TransactionDetails.receivedFrom" = "%1$@(으)로부터 받음";
+/* received via <address> */
+"TransactionDetails.receivedVia" = "%1$@으로 수취 됨";
+/* receiving from <address> */
+"TransactionDetails.receivingFrom" = "%1$@(으)로부터 받는 중";
+/* receiving via <address> */
+"TransactionDetails.receivingVia" = "%1$@으로 수취 중";
+/* "Sent [$5] to [address]" => This is the "Sent [$5]" part. */
+"TransactionDetails.sent" = "%1$@ 보냄";
+/* Sent $5.00 */
+"TransactionDetails.sentAmountDescription" = "<b>%1$@</b> 전송됨";
+/* Show Details button */
+"TransactionDetails.showDetails" = "세부 정보 보이기";
+/* The balance the user started with before the transaction completed */
+"TransactionDetails.startingBalanceHeader" = "시작 잔액";
+/* Status section header */
+"TransactionDetails.statusHeader" = "상태";
+/* Transaction Details Title */
+"TransactionDetails.title" = "트랜잭션 세부 정보";
+/* Transaction Details Title - Failed */
+"TransactionDetails.titleFailed" = "세부 정보 숨기기";
+/* Transaction Details Title - Internal */
+"TransactionDetails.titleInternal" = "내부";
+/* Transaction Details Title - Received */
+"TransactionDetails.titleReceived" = "수취 받음";
+/* Transaction Details Title - Receiving */
+"TransactionDetails.titleReceiving" = "수취 중";
+/* Transaction Details Title - Sending */
+"TransactionDetails.titleSending" = "전송 중";
+/* Transaction Details Title - Sent */
+"TransactionDetails.titleSent" = "전송됨";
+/* "Sent [$5] to [address]" => This is the "to [address]" part. */
+"TransactionDetails.to" = "%1$@에게";
+/* Tx detail field header */
+"TransactionDetails.totalHeader" = "합계";
+/* Transaction ID header */
+"TransactionDetails.txHashHeader" = "트랜잭션 세부 정보";
+/* (this transaction was) Received at this address: */
+"TransactionDirection.address" = "이 주소에서 받음";
+/* (this transaction was) Sent to this address: */
+"TransactionDirection.to" = "이 주소로 보냄";
+/* Disabled until date */
+"UnlockScreen.disabled" = "다음 기간까지 비활성화됨: %1$@";
+/* Unlock with FaceID accessibility label */
+"UnlockScreen.faceIdText" = "페이스 ID로 잠금 해제";
+/* My Address button title */
+"UnlockScreen.myAddress" = "내 주소";
+/* Reset PIN with Paper Key button label. */
+"UnlockScreen.resetPin" = "PIN 재설정";
+/* Scan button title */
+"UnlockScreen.scan" = "스캔";
+/* Instruction to touch the sensor for fingerprint authentication */
+"UnlockScreen.touchIdInstructions.android" = "터치 센서";
+/* TouchID prompt text */
+"UnlockScreen.touchIdPrompt" = "BRD의 잠금을 해제하세요.";
+/* Device authentication body */
+"UnlockScreen.touchIdPrompt.android" = "계속하시려면 귀하의 안드로이드 장치 잠금을 해제해 주세요.";
+/* Unlock with TouchID accessibility label */
+"UnlockScreen.touchIdText" = "Touch ID로 잠금 해제";
+/* Device authentication title */
+"UnlockScreen.touchIdTitle.android" = "본인확인 필요";
+/* Update PIN caption text */
+"UpdatePin.caption" = "이 PIN 코드를 기억하세요. PIN 코드를 잊어버리면 자신의 비트코인을 사용할 수 없게 됩니다.";
+/* PIN creation info. */
+"UpdatePin.createInstruction" = "귀하의 PIN 코드는 BRD의 잠금을 해제하고 돈을 송금하는 데 사용됩니다.";
+/* Update PIN title */
+"UpdatePin.createTitle" = "PIN 설정";
+/* Update PIN title */
+"UpdatePin.createTitleConfirm" = "PIN 코드를 다시 입력";
+/* Enter current PIN instruction */
+"UpdatePin.enterCurrent" = "현재의 PIN 코드를 입력하세요.";
+/* Enter new PIN instruction */
+"UpdatePin.enterNew" = "새 PIN 코드를 입력하세요.";
+/* Re-Enter new PIN instruction */
+"UpdatePin.reEnterNew" = "새 PIN 코드를 다시 입력하세요.";
+/* Update PIN failure error message. */
+"UpdatePin.setPinError" = "죄송합니다, PIN 코드를 업데이트하지 못했습니다.";
+/* Update PIN failure alert view title */
+"UpdatePin.setPinErrorTitle" = "PIN 코드 업데이트 오류";
+/* Update PIN title */
+"UpdatePin.updateTitle" = "PIN 코드 업데이트";
+/* Authorize to copy wallet addresses alert message */
+"URLHandling.addressaddressListAlertMessage" = "월렛 주소를 클립 보드에 복사할까요?";
+/* Authorize to copy wallet address PIN view prompt. */
+"URLHandling.addressList" = "월렛 주소를 클립 보드에 복사할 수 있는 권한을 부여";
+/* Authorize to copy wallet address alert title */
+"URLHandling.addressListAlertTitle" = "월렛 주소 복사하기";
+/* Copy wallet addresses alert button label */
+"URLHandling.copy" = "복사";
+/* Verify PIN for transaction view body */
+"VerifyPin.authorize" = "PIN을 입력하여 이 거래를 승인하십시오.";
+/* Verify PIN view body */
+"VerifyPin.continueBody" = "계속하려면 PIN 코드를 입력해 주세요.";
+/* Verify PIN view title */
+"VerifyPin.title" = "PIN 코드 입력 필수";
+/* Authorize transaction with touch id message */
+"VerifyPin.touchIdMessage" = "이 거래 승인";
+"Wallet.one_day" = "1d";
+"Wallet.one_month" = "1m";
+"Wallet.one_week" = "1w";
+"Wallet.one_year" = "1y";
+"Wallet.three_months" = "3m";
+"Wallet.three_years" = "3y";
+/* Turn off fast sync confirmation question */
+"WalletConnectionSettings.confirmation" = "Fastsync를 끄시겠습니까?";
+/* Explanation for wallet connection setting */
+"WalletConnectionSettings.explanatoryText" = "비트 코인 지갑을 실제로 즉시 동기화하십시오. 작동 방식에 대해 자세히 알아보십시오.";
+/* Connection mode switch label. */
+"WalletConnectionSettings.footerTitle" = "에 의해 구동";
+/* Wallet connection settings view title */
+"WalletConnectionSettings.header" = "패스트 싱크 (파일럿)";
+/* Link text in explanatoryText This NB: This should exactly match the last word of WalletConnectionSettings.explanatoryText */
+"WalletConnectionSettings.link" = "여기";
+/* WalletConnectionSettiongs
+Wallet connection settings menu item title. */
+"WalletConnectionSettings.menuTitle" = "연결 모드";
+/* Turn off fast sync button label */
+"WalletConnectionSettings.turnOff" = "끄다";
+/* Wallet connection settings view title */
+"WalletConnectionSettings.viewTitle" = "Fastsync";
+/* 'No wallet' warning for watch app */
+"Watch.noWalletWarning" = "귀하의 월렛을 설정하려면 BRD 앱을 열어 주세요.";
+/* Dismiss button label */
+"Webview.dismiss" = "무시";
+/* Webview loading error message */
+"Webview.errorMessage" = "콘텐츠를 로드하는 중에 오류가 발생했습니다. 다시 시도해 주세요.";
+/* Updating webview message */
+"Webview.updating" = "업데이트 중...";
+/* Welcome screen text. (?) will be replaced with the help icon users should look for. */
+"Welcome.body" = "Breadwallet이 이름을 BRD로 바꾸고 새롭게 단장하였으며 새로운 기능도 갖췄습니다.\n\n도움이 필요하시면 대부분 화면에서 우측 상단에 있는 (?)을(를) 클릭하십시오.";
+/* Top title of welcome screen */
+"Welcome.title" = "BRD에 환영합니다!";
+/* Wipe wallet alert message */
+"WipeWallet.alertMessage" = "정말 이 월렛을 삭제할까요?";
+/* Wipe wallet alert title */
+"WipeWallet.alertTitle" = "월렛을 초기화할까요?";
+/* Failed wipe wallet alert message */
+"WipeWallet.failedMessage" = "월렛 초기화가 실패함.";
+/* Failed wipe wallet alert title */
+"WipeWallet.failedTitle" = "실패함";
+/* Enter phrase to wipe wallet instruction. (Important to explain it is the CURRENT [this wallet's] paper key that needs to be entered). */
+"WipeWallet.instruction" = "기기에서이 지갑을 삭제하려면 복구 문구를 입력하세요.";
+/* Instructions for unlinking the wallet */
+"WipeWallet.startMessage" = "지갑의 연결을 해제하여 이 기기에서 제거하세요. 이 지갑의 연결이 해제되면, 새로운 지갑을 시작하거나 이 기기에 다른 지갑을 복구할 수 있습니다.";
+/* Start wipe wallet view warning */
+"WipeWallet.startWarning" = "현재 지갑이이 기기에서 제거됩니다. 나중에 복원하려면 복구 문구를 입력해야합니다.";
+/* Unlink this wallet from this device. */
+"WipeWallet.title" = "지갑 연결 해제";
+/* Wipe wallet button title */
+"WipeWallet.wipe" = "초기화";
+/* Wiping activity message */
+"WipeWallet.wiping" = "초기화 중...";
+/* Paper key instructions. */
+"WritePaperPhrase.instruction" = "각 단어를 순서대로 적어 놓고, 안전한 곳에 보관하세요.";
+/* button label */
+"WritePaperPhrase.next" = "다음";
+/* button label */
+"WritePaperPhrase.previous" = "이전";
+/* 1 of 3 */
+"WritePaperPhrase.step" = "%2$li의 %1$li";
