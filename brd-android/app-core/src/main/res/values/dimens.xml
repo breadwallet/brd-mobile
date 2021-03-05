@@ -1,0 +1,50 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!--<dimen name="activity_horizontal_margin">16dp</dimen>-->
+    <!--<dimen name="activity_vertical_margin">16dp</dimen>-->
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin_small">16dp</dimen>
+    <dimen name="transaction_item_margin">10dp</dimen>
+    <dimen name="button_height">60dp</dimen>
+    <dimen name="button_text_size">14sp</dimen>
+    <dimen name="pager_indicator_shadow_padding">2dp</dimen>
+    <dimen name="separator_height">1px</dimen>
+    <dimen name="text_size">18sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="pin_par_text_size">32sp</dimen>
+    <dimen name="bread_margin">16dp</dimen>
+    <dimen name="faq_dimen">24dp</dimen>
+    <dimen name="close_dimen">24dp</dimen>
+    <dimen name="radius">4dp</dimen>
+    <dimen name="paragraph">14sp</dimen>
+    <dimen name="large_header">28sp</dimen>
+    <dimen name="header">18sp</dimen>
+    <dimen name="sub_header">16sp</dimen>
+    <dimen name="animation_long">2000</dimen>
+    <dimen name="animation_medium">1000</dimen>
+    <dimen name="animation_short">500</dimen>
+    <dimen name="animation_very_short">300</dimen>
+    <dimen name="pin_dot_size">24dp</dimen>
+    <dimen name="manage_wallets_footer_padding_left">12dp</dimen>
+    <dimen name="large_button_height">72dp</dimen>
+    <dimen name="currency_code_text_size_large">28px</dimen>
+    <dimen name="amount_text_size">24px</dimen>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="balance_primary_padding">22dp</dimen>
+    <dimen name="balance_secondary_padding">12dp</dimen>
+    <dimen name="balance_text_margin">8dp</dimen>
+
+
+    <!-- Participate with BRD link wallet dialog -->
+    <dimen name="link_wallet_dialog_width">360dp</dimen>
+    <dimen name="permissions_scrollview_max_height">700dp</dimen>
+
+    <!-- Delisted token alpha values (for Home Screen) -->
+    <item name="token_background_with_alpha" format="float" type="dimen">.25</item>
+    <item name="token_background_no_alpha" format="float" type="dimen">1</item>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="wallet_balance_primary_text_size">22sp</dimen>
+    <dimen name="wallet_balance_secondary_text_size">14sp</dimen>
+</resources>

@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App name -->
+    <string name="About.appName.android">BRD</string>
+    <!-- About screen blog label -->
+    <string name="About.blog">ブログ</string>
+    <!-- About screen footer -->
+    <string name="About.footer">グローバルブレッドチームによって開発されました。バージョン %1$sビルド%2$s</string>
+    <!-- Privay Policy button label -->
+    <string name="About.privacy">プライバシーポリシー</string>
+    <!-- About screen reddit label -->
+    <string name="About.reddit">Reddit（レディット）</string>
+    <!-- Terms of Use button label -->
+    <string name="About.terms">利用規約</string>
+    <!-- About screen title -->
+    <string name="About.title">概要</string>
+    <!-- About screen twitter label -->
+    <string name="About.twitter">Twitter</string>
+    <!-- About screen wallet ID label -->
+    <string name="About.walletID">BRDリワードID</string>
+    <!-- Close modal button accessibility label -->
+    <string name="AccessibilityLabels.close">閉じる</string>
+    <!-- Support center accessibiliy label -->
+    <string name="AccessibilityLabels.faq">サポートセンター</string>
+    <!-- Account balance -->
+    <string name="Account.balance">残高</string>
+    <!-- Delisted token alert banner message -->
+    <string name="Account.delistedToken">このトークンは上場廃止となりました。 \n\nこれらのトークンを別のプラットフォームに送信できる場合があります。詳しくは、サポートページをご覧ください。</string>
+    <!-- $10000 per BTC -->
+    <string name="Account.exchangeRate">%2$sあたり%1$s</string>
+    <!-- Loading Wallet Message -->
+    <string name="Account.loadingMessage">ウォレット読み込み中</string>
+    <!-- Confirm Account Creation mesage body -->
+    <string name="AccountCreation.body">HBARをウォレットに保管する場合にのみ、Hederaアカウントを作成してください。</string>
+    <!-- Create Account button label -->
+    <string name="AccountCreation.create">アカウントを作成する</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.creating">アカウントを作成する</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.error">アカウントの作成中にエラーが発生しました。後でもう一度やり直してください。</string>
+    <!-- Not Now button label. -->
+    <string name="AccountCreation.notNow">今はやめろ</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.timeout">要求がタイムアウトしました。後でもう一度やり直してください。</string>
+    <!-- Confirm Account Creation Title -->
+    <string name="AccountCreation.title">アカウント作成の確認</string>
+    <!-- Default wallet name -->
+    <string name="AccountHeader.defaultWalletName">マイブレッド</string>
+    <!-- Third party keyboard warning -->
+    <string name="Alert.customKeyboard.android">サードパーティのキーボードを使用しているようです。キーボードを使用すると、入力内容を記録し、回復フレーズを盗むことができます。保護を強化するには、デフォルトのAndroidキーボードに切り替えてください。</string>
+    <!-- Error alert title -->
+    <string name="Alert.error">エラー</string>
+    <!-- Keystore error -->
+    <string name="Alert.keystore.generic.android">Android OSのKeystoreに問題があります。support@breadwallet.com にお問い合わせください。</string>
+    <!-- KeyStore error, keys are invalidated -->
+    <string name="Alert.keystore.invalidated.android">お使いのAndroidロック画面が無効にされたため、暗号化されたブレッドのデータはつい最近無効になりました。</string>
+    <!-- Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. -->
+    <string name="Alert.keystore.invalidated.uninstall.android">画面ロックの設定が変更されたため、続行できません（例：パスワードが無効になっている、指紋が変更されている）。セキュリティ上の理由から、Androidはキーストアを完全にロックしています。したがって、BRDアプリのデータはアンインストールによってワイプする必要があります。 \n\n心配しないでください、あなたの資金はまだ安全です！アプリを再インストールし、回復フレーズを使用してウォレットを回復します。</string>
+    <!-- Warn user key store data has been invalidate because the user changed their security settings. The user must wipe their app data. -->
+    <string name="Alert.keystore.invalidated.wipe.android">画面ロックの設定が変更されたため、続行できません（例：パスワードが無効になっている、指紋が変更されている）。セキュリティ上の理由から、Androidはキーストアを完全にロックしています。したがって、BRDアプリのデータをワイプする必要があります。 \n\n心配しないでください、あなたの資金はまだ安全です！回復フレーズを使用してウォレットを回復します。</string>
+    <!-- Keystore error title -->
+    <string name="Alert.keystore.title.android">Android KeyStoreエラー</string>
+    <!-- No internet alert message -->
+    <string name="Alert.noInternet">インターネット接続が見つかりません。接続を確認してから、もう一度お試しください。</string>
+    <!-- General error message -->
+    <string name="Alert.somethingWentWrong">何か問題が生じました。再度お試しください。</string>
+    <!-- Request timed out error message -->
+    <string name="Alert.timedOut">リクエストはタイムアウトしました。接続を確認して、もう一度お試しください。</string>
+    <!-- Warning alert title -->
+    <string name="Alert.warning">警告</string>
+    <!-- 'the addresses were copied'' Alert title -->
+    <string name="Alerts.copiedAddressesHeader">アドレスがコピーされました</string>
+    <!-- Addresses Copied Alert sub header -->
+    <string name="Alerts.copiedAddressesSubheader">すべてのウォレットアドレスが正常にコピーされました。</string>
+    <!-- Alert Header Label (the paper key was set) -->
+    <string name="Alerts.paperKeySet">リカバリフレーズセット</string>
+    <!-- Alert Subheader label (playfully positive) -->
+    <string name="Alerts.paperKeySetSubheader">いいね！</string>
+    <!-- Alert Header label (the PIN was set) -->
+    <string name="Alerts.pinSet">PINコードのセット</string>
+    <!-- Send failure alert header label (the send failed to happen) -->
+    <string name="Alerts.sendFailure">送金に失敗しました</string>
+    <!-- Send success alert header label (confirmation that the send happened) -->
+    <string name="Alerts.sendSuccess">送金のご確認</string>
+    <!-- Send success alert subheader label (e.g. the money was sent) -->
+    <string name="Alerts.sendSuccessSubheader">送金しました!</string>
+    <!-- Fingerprint was recognized by the scanner -->
+    <string name="Alerts.touchIdSucceeded.android">指紋が認識されました</string>
+    <!-- Tell the user where they can enable permissions to access device storage. -->
+    <string name="Android.allowFileSystemAccess">お使いのデバイスの設定でストレージの使用を許可して下さい: 「設定」&gt;「アプリ」&gt;「BRD」&gt;「許可」。</string>
+    <!-- The "home" screen is the name of the top level menu for the app. -->
+    <string name="Android.BCH.welcome.message">お使いのウォレットのBCHには、ホーム画面からアクセスすることができます。</string>
+    <!-- Warning about using apps that can alter the screen -->
+    <string name="Android.screenAlteringMessage">画面変更アプリ(例: Twilight) が無効になっていなければ、BRDは正常に動作しません。</string>
+    <!-- An app that alters the screen ("screen-altering app") has been detected. -->
+    <string name="Android.screenAlteringTitle">画面変更アプリが検出されました</string>
+    <!-- JSON Serialization error message -->
+    <string name="ApiClient.jsonError">JSONシリアル化エラー</string>
+    <!-- Wallet not ready error message -->
+    <string name="ApiClient.notReady">ウォレットの準備ができていません</string>
+    <!-- API Token error message -->
+    <string name="ApiClient.tokenError">APIトークンを取得できません</string>
+    <!-- Send BCH view body. -->
+    <string name="BCH.body">送金先のBCHアドレスを入力してください。フォーク時（%1$s）にウォレット内にあった全てのBCHが送られます。</string>
+    <!-- Confirm sending <$5.00> to <address>? -->
+    <string name="BCH.confirmationMessage">%1$sを%2$sに送金することを確認する</string>
+    <!-- Confirmation alert title -->
+    <string name="BCH.confirmationTitle">承認</string>
+    <!-- Generic bch erorr message -->
+    <string name="BCH.genericError">アカウントにBCHがない、またはフォークの後にBCHを受け取っています。</string>
+    <!-- Transaction ID copied message -->
+    <string name="BCH.hashCopiedMessage">トランザクションIDをコピー済み</string>
+    <!-- No address error message -->
+    <string name="BCH.noAddressError">アドレスを入力してください</string>
+    <!-- Attempted to scan unsupported qr code error message. -->
+    <string name="BCH.paymentProtocolError">BCHのトランザクションでペイメントプロトコルリクエストはサポートされていません。</string>
+    <!-- BCH successfully sent alert message -->
+    <string name="BCH.successMessage">BCHの送金に成功しました。</string>
+    <!-- Widthdraw BCH view title -->
+    <string name="BCH.title">BCHを引き出す</string>
+    <!-- Tx Hash button header -->
+    <string name="BCH.txHashHeader">BCHのトランザクションID</string>
+    <!-- Approve button label -->
+    <string name="BitID.approve">承認する</string>
+    <!-- <sitename> is requesting authentication using your bitcoin wallet -->
+    <string name="BitID.authenticationRequest">%1$sがビットコインウォレットを使っての認証を求めています</string>
+    <!-- Deny button label -->
+    <string name="BitID.deny">拒否する</string>
+    <!-- BitID error alert title -->
+    <string name="BitID.error">認証エラー</string>
+    <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
+    <string name="BitID.errorMessage">決済サービスの確認をしてください。再試行しなければいけない可能性もあります。</string>
+    <!-- BitID success alert title -->
+    <string name="BitID.success">認証成功</string>
+    <!-- BitID Authentication Request alert view title -->
+    <string name="BitID.title">BitID認証リクエスト</string>
+    <!-- As in "(tap here to) buy (bitcoin)" -->
+    <string name="Button.buy">購入する</string>
+    <!-- Cancel button label -->
+    <string name="Button.cancel">キャンセル</string>
+    <!-- Confirm button title -->
+    <string name="Button.confirm">確認</string>
+    <!-- Button label to open a email compose window with our support email in the to field. -->
+    <string name="Button.contactSupport.android">サポートに問い合わせ</string>
+    <!-- prompt continue button -->
+    <string name="Button.continueAction">続行する</string>
+    <!-- prompt dismiss button -->
+    <string name="Button.dismiss">却下する</string>
+    <!-- Done button title -->
+    <string name="Button.done">終了</string>
+    <!-- Button to return to the "home" screen (the home screen is the top menu). -->
+    <string name="Button.Home">ホーム</string>
+    <!-- Ignore button label -->
+    <string name="Button.ignore">無視する</string>
+    <!-- Maybe Later button label -->
+    <string name="Button.maybeLater">また後で</string>
+    <!-- menu button -->
+    <string name="Button.menu">メニュー</string>
+    <!-- More information button -->
+    <string name="Button.moreInfo">さらなる情報</string>
+    <!-- No button -->
+    <string name="Button.no">いいえ</string>
+    <!-- OK button label -->
+    <string name="Button.ok">OK</string>
+    <!-- Open Settings button -->
+    <string name="Button.openSettings">設定を開く</string>
+    <!-- receive button -->
+    <string name="Button.receive">受取</string>
+    <!-- Button label to open Security Settings. -->
+    <string name="Button.securitySettings.android">セキュリティ設定</string>
+    <!-- Click this button to sell an asset -->
+    <string name="Button.sell">売る</string>
+    <!-- send button -->
+    <string name="Button.send">送金する</string>
+    <!-- Settings button label -->
+    <string name="Button.settings">設定</string>
+    <!-- Setup button label -->
+    <string name="Button.setup">セットアップ</string>
+    <!-- Skip button title -->
+    <string name="Button.skip">スキップ</string>
+    <!-- Settings button label -->
+    <string name="Button.submit">確認</string>
+    <!-- Button label to uninstall the app. -->
+    <string name="Button.uninstall.android">アンインストール</string>
+    <!-- Button label to wipe the user's application data. -->
+    <string name="Button.wipe.android">消去</string>
+    <!-- Yes button -->
+    <string name="Button.yes">はい</string>
+    <!-- Camera plugin instruction -->
+    <string name="CameraPlugin.centerInstruction">ご自身のIDをこのボックス内の中央に配置してください</string>
+    <string name="CloudBackup.backupDeleted">バックアップが消去されました</string>
+    <string name="CloudBackup.backupDeletedMessage">PINの試行が何度も失敗した後、iCloudバックアップが消去されました。アプリが再起動します。</string>
+    <string name="CloudBackup.backupMenuTitle">iCloudバックアップ</string>
+    <string name="CloudBackup.createButton">新しいウォレットを作成する</string>
+    <string name="CloudBackup.createWarning">以前にバックアップされたウォレットが検出されました。このバックアップを使用することをお勧めします。新しいウォレットを作成してよろしいですか？</string>
+    <string name="CloudBackup.enableBody1">この機能を使用するには、iCloudキーチェーンをオンにする必要があります。</string>
+    <string name="CloudBackup.enableBody2">次のようになります。</string>
+    <string name="CloudBackup.enableButton">iCloudキーチェーンをオンにしました</string>
+    <string name="CloudBackup.enableTitle">キーチェーンを有効にする</string>
+    <string name="CloudBackup.encryptBackupMessage">バックアップを暗号化するにはPINを入力してください</string>
+    <string name="CloudBackup.mainBody">iCloudバックアップは、iCloudアカウントと同じくらい安全です。次の手順でリカバリフレーズを書き留めて、安全に保管することをお勧めします。回復フレーズは、iCloudにアクセスできなくなった場合にウォレットを回復する唯一の方法です。</string>
+    <string name="CloudBackup.mainTitle">iCloudリカバリバックアップ</string>
+    <string name="CloudBackup.mainWarning">この機能を使用するには、iOS設定アプリでiCloudキーチェーンをオンにする必要があります</string>
+    <string name="CloudBackup.mainWarningConfirmation">iCloudバックアップを無効にしてもよろしいですか？これにより、すべてのデバイスからバックアップが削除されます。</string>
+    <string name="CloudBackup.pinAttempts">バックアップを消去する前に残っている試行： %1$@</string>
+    <string name="CloudBackup.recoverButton">回復キーから復元</string>
+    <string name="CloudBackup.recoverHeader">PINを入力してiCloudバックアップのロックを解除します</string>
+    <string name="CloudBackup.restoreButton">iCloudバックアップから復元</string>
+    <string name="CloudBackup.selectTitle">バックアップを選択</string>
+    <string name="CloudBackup.step1">設定アプリを起動します。</string>
+    <string name="CloudBackup.step2">Apple ID名をタップします。</string>
+    <string name="CloudBackup.step3">iCloudをタップします。</string>
+    <string name="CloudBackup.step4">iCloudキーチェーンがオンになっていることを確認する</string>
+    <string name="CloudBackup.understandText">この機能はiCloudキーチェーンが有効になっていないと機能しないことを理解しています。</string>
+    <string name="CloudBackup.warningBody">あなたのiCloudバックアップは、あと%1$@回の間違ったPIN試行の後に消去されます。</string>
+    <!-- Amount to Send: ($1.00) -->
+    <string name="Confirmation.amountLabel">送る金額：</string>
+    <string name="Confirmation.destinationTag">宛先タグ</string>
+    <string name="Confirmation.destinationTag_EmptyHint">(空)</string>
+    <!-- Network Fee: ($1.00) -->
+    <string name="Confirmation.feeLabel">ネットワーク手数料：</string>
+    <!-- Network Fee: (ETH) -->
+    <string name="Confirmation.feeLabelETH">ネットワーク料金（ETH）:</string>
+    <!-- Label for Hedera Memo field on transaction confirmation screen -->
+    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
+    <string name="Confirmation.processingTime">処理時間: この取引は%1$sで完了する見込みです。</string>
+    <!-- Label for "send" button on final confirmation screen -->
+    <string name="Confirmation.send">送金する</string>
+    <!-- Confirmation Screen title -->
+    <string name="Confirmation.title">承認</string>
+    <!-- To: (address) -->
+    <string name="Confirmation.to">送金先</string>
+    <!-- Total Cost: ($5.00) -->
+    <string name="Confirmation.totalLabel">費用合計：</string>
+    <!-- Confirm paper phrase error message -->
+    <string name="ConfirmPaperPhrase.error">入力した単語は、回復フレーズと一致しません。もう一度お試しください。</string>
+    <!-- Confirm paper phrase view label. -->
+    <string name="ConfirmPaperPhrase.label">すべてが正しく記述されていることを確認するには、回復フレーズから次の単語を入力してください。</string>
+    <!-- Word label eg. Word #1, Word #2 -->
+    <string name="ConfirmPaperPhrase.word">フレーズ #%1$s</string>
+    <!-- Agree to legal terms button -->
+    <string name="Crowdsale.agree">同意する</string>
+    <!-- As in "(tap here to) buy (some) tokens" -->
+    <string name="Crowdsale.buyButton">トークンを購入する</string>
+    <!-- Decline to legal terms button -->
+    <string name="Crowdsale.decline">拒否する</string>
+    <!-- Resume Idnetify verification button -->
+    <string name="Crowdsale.resume">認証を再開する</string>
+    <!-- Retry Identity verification button -->
+    <string name="Crowdsale.retry">再試行する</string>
+    <!-- Bitcoin denomination picker label -->
+    <string name="DefaultCurrency.bitcoinLabel">ビットコインの表示単位</string>
+    <!-- Exchange rate label -->
+    <string name="DefaultCurrency.rateLabel">為替レート</string>
+    <!-- The wallet is disabled. -->
+    <string name="Disabled.title">ウォレットが無効になっています</string>
+    <!-- Share address by e-mail subject -->
+    <string name="Email.address_subject">%1$s住所</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.accountRequest">%1$s のアカウント情報をリクエスト</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.callRequest">%1$s のスマートコントラクトのコールをリクエスト</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.paymentRequest">%1$s のアカウント情報をリクエスト</string>
+    <!-- Email unavailable alert title -->
+    <string name="ErrorMessages.emailUnavailableMessage">この端末は、iOSのメールアプリを使用してメールを送信する設定がされていません。</string>
+    <!-- Email unavailable alert title -->
+    <string name="ErrorMessages.emailUnavailableTitle">メールが利用できません</string>
+    <!-- Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) -->
+    <string name="ErrorMessages.loopingLockScreen.android">BRDは、お使いのAndroidのバージョンに不具合があるため認証できません。 [詳しい情報はこちらをタップしてご覧ください。]</string>
+    <!-- Messaging unavailable alert title -->
+    <string name="ErrorMessages.messagingUnavailableMessage">この端末からメッセージを送信するための設定がされていません。</string>
+    <!-- Messaging unavailable alert title -->
+    <string name="ErrorMessages.messagingUnavailableTitle">メッセージの送受信ができません</string>
+    <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
+    <string name="ErrorMessages.touchIdFailed.android">指紋が認識されませんでした。もう一度やり直してください。</string>
+    <!-- You can customize your Face ID Spending Limit from the [menu] -->
+    <string name="FaceIDSettings.customizeText">%1$sからFace ID使用限度額をカスタマイズすることができます。</string>
+    <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
+    <string name="FaceIDSettings.explanatoryText">Face IDを使用してBRDアプリのロックを解除し、送金してください。</string>
+    <!-- Face Id screen label -->
+    <string name="FaceIDSettings.label">自分の顔を使って、ブレッドのロックを解除して、設定された使用限度額までお金を送金しましょう。</string>
+    <!-- Title of the screen for setting the Face ID Spending Limit -->
+    <string name="FaceIDSettings.linkText">Face ID使用限度額画面</string>
+    <!-- Setting to turn on Face ID for BRD -->
+    <string name="FaceIDSettings.switchLabel">ブレッド利用時にFace IDを有効にする</string>
+    <!-- Face ID settings view title -->
+    <string name="FaceIDSettings.title">Face ID</string>
+    <!-- Text label for a toggle that enables Face ID for sending money. -->
+    <string name="FaceIDSettings.transactionsTitleText">Face IDを有効にして送金する</string>
+    <!-- Instructions on how to turn on face id on the iPhone. Please ensure the name of the menu in this string matches the wording Apple uses in the iPhone menu. -->
+    <string name="FaceIDSettings.unavailableAlertMessage">このデバイスではFace IDのセットアップが完了していません。設定-&gt;Face IDとパスコードに移動して、今すぐセットアップしましょう。</string>
+    <!-- Face ID unavailable alert title -->
+    <string name="FaceIDSettings.unavailableAlertTitle">Face IDがセットアップされていません</string>
+    <!-- Text label for a toggle that enables Face ID for unlocking the BRD app. -->
+    <string name="FaceIDSettings.unlockTitleText">Face IDを有効にしてBRDのロックを解除する</string>
+    <!-- Face Id spending limit screen title -->
+    <string name="FaceIDSpendingLimit.title">Face ID使用限度額</string>
+    <!-- Economy fee -->
+    <string name="FeeSelector.economy">エコノミー</string>
+    <!-- E.g. [This transaction is predicted to complete in] 1-24 hours -->
+    <string name="FeeSelector.economyTime">1～24時間</string>
+    <!-- Warning message for economy fee -->
+    <string name="FeeSelector.economyWarning">このオプションは早く送金を済ませたい方にはお勧めしません。</string>
+    <!-- E.g. Estimated delivery: 10-60 minutes -->
+    <string name="FeeSelector.estimatedDeliver">推定送金時間: %1$s</string>
+    <!-- [This transaction will complete in] 2-5 minutes -->
+    <string name="FeeSelector.ethTime">2〜5分</string>
+    <string name="FeeSelector.lessThanMinutes">&lt;%1$d 分</string>
+    <!-- Priority fee -->
+    <string name="FeeSelector.priority">優先度</string>
+    <!-- E.g. [This transaction is predicted to complete in] 10-30 minutes -->
+    <string name="FeeSelector.priorityTime">10～30分</string>
+    <!-- Regular fee -->
+    <string name="FeeSelector.regular">レギュラー</string>
+    <!-- E.g. [This transaction is predicted to complete in] 10-60 minutes -->
+    <string name="FeeSelector.regularTime">10～60分</string>
+    <!-- Fee Selector title -->
+    <string name="FeeSelector.title">処理速度</string>
+    <!-- Label for the Android file chooser when we need to prompt the user to select an image file. -->
+    <string name="FileChooser.selectImageSource.android">画像ソースを選択</string>
+    <!-- Fingerprint authentication settings screen description -->
+    <string name="FingerprintSettings.description">設定された限度額以下の送金を行う場合には、指紋認証でご自身のブレッドのロックを解除できます。</string>
+    <!-- Switch label to enable fingerprint authentication to send money -->
+    <string name="FingerprintSettings.sendMoney">指紋を使用して送金する</string>
+    <!-- Fingerprint authentication settings sceen title -->
+    <string name="FingerprintSettings.title">指紋</string>
+    <!-- Switch label to enable fingerprint authentication to unlock BRD app -->
+    <string name="FingerprintSettings.unlockApp">指紋を使用してBRDのロックを解除する</string>
+    <!-- This is the section that allows administration of the user's wallet -->
+    <string name="HomeScreen.admin">管理</string>
+    <!-- Home screen menu button to buy some bitcoin -->
+    <string name="HomeScreen.buy">購入する</string>
+    <!-- home screen toolbar 'Buy & Sell' button -->
+    <string name="HomeScreen.buyAndSell">売買</string>
+    <!-- Menu button on the home screen toolbar -->
+    <string name="HomeScreen.menu">メニュー</string>
+    <!-- This section lists the users wallets -->
+    <string name="HomeScreen.portfolio">ウォレット</string>
+    <!-- Label for the total balance of all the user's assets (style is all lower case if your language permits) -->
+    <string name="HomeScreen.totalAssets">総資産</string>
+    <!-- (Tap here to) trade (your assets for other assets) -->
+    <string name="HomeScreen.trade">取引</string>
+    <!-- Checking private key balance progress view text -->
+    <string name="Import.checking">秘密鍵の残高確認中...</string>
+    <!-- Sweep private key confirmation message -->
+    <string name="Import.confirm">この秘密鍵からウォレットに%1$sを送信しますか? ビットコインネットワークは手数料%2$sを頂戴します。</string>
+    <!-- Duplicate key error message -->
+    <string name="Import.Error.duplicate">この秘密鍵はすでにあなたのウォレットに存在しています。</string>
+    <!-- empty private key error message -->
+    <string name="Import.Error.empty">この秘密鍵には何も入っていません。</string>
+    <!-- High fees error message -->
+    <string name="Import.Error.highFees">トランザクション手数料がこのプライベートキーのアカウントにある残高を上回っています。</string>
+    <!-- Not a valid private key error message -->
+    <string name="Import.Error.notValid">有効な秘密鍵ではありません</string>
+    <!-- Import signing error message -->
+    <string name="Import.Error.signing">トランザクションへのサイン中にエラーが発生しました</string>
+    <!-- [Redeem] the funds stored on this private key. -->
+    <string name="Import.importButton">取り出す</string>
+    <!-- Importing wallet progress view label -->
+    <string name="Import.importing">秘密鍵から取り出し中</string>
+    <!-- Caption for graphics -->
+    <string name="Import.leftCaption">秘密鍵</string>
+    <!-- Import wallet intro screen message -->
+    <string name="Import.message">秘密鍵は通常QRコードとして紙に印刷され、オフラインでの資金保管に使用されています。秘密鍵からの引き出しをすると秘密鍵が管理する資金全額を1回の取引でお使いのBRDに送金します。</string>
+    <!-- Enter password alert view title -->
+    <string name="Import.password">この秘密鍵はパスワードで保護されています。</string>
+    <!-- password textfield placeholder -->
+    <string name="Import.passwordPlaceholder">パスワード</string>
+    <!-- Caption for graphics -->
+    <string name="Import.rightCaption">あなたの\nブレッドの\nウォレット</string>
+    <!-- Scan Private key button label -->
+    <string name="Import.scan">秘密鍵をスキャン</string>
+    <!-- Import wallet success alert title -->
+    <string name="Import.success">成功</string>
+    <!-- Successfully imported wallet message body -->
+    <string name="Import.SuccessBody">正常に秘密鍵からの資金引き出しが行われました。</string>
+    <!-- Import Wallet screen title -->
+    <string name="Import.title">秘密鍵からの引き出し</string>
+    <!-- Unlocking Private key activity view message. -->
+    <string name="Import.unlockingActivity">鍵のロックを解除中です</string>
+    <!-- Import wallet intro warning message -->
+    <string name="Import.warning">秘密鍵から資金を引き出しても、取引履歴やその他の詳細はインポートされません。</string>
+    <!-- Wrong password alert message -->
+    <string name="Import.wrongPassword">パスワードが違います。もう一度お試しください。</string>
+    <!-- Close app button -->
+    <string name="JailbreakWarnings.close">閉じる</string>
+    <!-- Ignore jailbreak warning button -->
+    <string name="JailbreakWarnings.ignore">無視する</string>
+    <!-- Jailbreak warning message -->
+    <string name="JailbreakWarnings.messageWithBalance">端末がセキュリティの危険にさらされている可能性があります\n 「脱獄」アプリはブレッドのキーチェーンデータにアクセスし、あなたのビットコインを盗む恐れがあります!  直ちにこのウォレットを完全削除して、安全な端末で復元して下さい。</string>
+    <!-- Jailbreak warning message -->
+    <string name="JailbreakWarnings.messageWithoutBalance">端末がセキュリティの危険にさらされている可能性があります\n「脱獄」アプリはブレッドのキーチェーンデータにアクセスし、あなたのビットコインを盗む恐れがあります!  ブレッドは必ず脱獄端末以外で利用してください。</string>
+    <!-- Jailbreak warning title -->
+    <string name="JailbreakWarnings.title">警告</string>
+    <!-- Wipe wallet button -->
+    <string name="JailbreakWarnings.wipe">完全削除</string>
+    <!-- Approve link wallet button label -->
+    <string name="LinkWallet.approve">承認する</string>
+    <!-- Decline link wallet button label -->
+    <string name="LinkWallet.decline">拒否する</string>
+    <!-- Link Wallet view dislaimer footer -->
+    <string name="LinkWallet.disclaimer">外部のアプリは,このデバイスの承認がないと送金できません</string>
+    <!-- Link Wallet view title above domain list -->
+    <string name="LinkWallet.domainTitle">ご注意:以下のいずれかのドメインに属している場合は,このアプリとのみ情報をやり取りしてください</string>
+    <!-- Link wallet logo footer text -->
+    <string name="LinkWallet.logoFooter">安全なチェックアウト</string>
+    <!-- Link Wallet view title above permissions list -->
+    <string name="LinkWallet.permissionsTitle">このアプリでできること:</string>
+    <!-- Link Wallet view title -->
+    <string name="LinkWallet.title">リンクウォレット</string>
+    <!-- Location services disabled error -->
+    <string name="LocationPlugin.disabled">位置情報サービスが無効化されています。</string>
+    <!-- No permissions for location services -->
+    <string name="LocationPlugin.notAuthorized">ブレッドは位置情報サービスへのアクセスが許可されていません。</string>
+    <!-- Wallet creation date prefix -->
+    <string name="ManageWallet.creationDatePrefix">あなたは%1$sにご自身のウォレットを作成しました</string>
+    <!-- Manage wallet description text -->
+    <string name="ManageWallet.description">あなたのウォレットの名前はご自身のアカウントの取引履歴上でのみ表示され、あなた以外誰も閲覧することができません。</string>
+    <!-- Change Wallet name textfield label -->
+    <string name="ManageWallet.textFeildLabel">ウォレットの名前</string>
+    <!-- Manage wallet modal title -->
+    <string name="ManageWallet.title">ウォレットを管理</string>
+    <string name="MarketData.high24h">24時間高</string>
+    <string name="MarketData.low24h">24時間低</string>
+    <string name="MarketData.marketCap">時価総額</string>
+    <string name="MarketData.volume">取引量</string>
+    <!-- "Add [a] Wallet [to the home screen]" -->
+    <string name="MenuButton.addWallet">ウォレットの追加</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.lock">ウォレットにロックを設定する</string>
+    <!-- (Click here to) manage (your list of) wallets -->
+    <string name="MenuButton.manageWallets">ウォレットの管理</string>
+    <!-- (press here to) scan (a) QR code -->
+    <string name="MenuButton.scan">QRコードの読み込み</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.security">セキュリティ</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.settings">設定</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.support">サポート</string>
+    <!-- button label -->
+    <string name="MenuViewController.createButton">新規ウォレットを作成</string>
+    <!-- Menu modal title -->
+    <string name="MenuViewController.modalTitle">メニュー</string>
+    <!-- button label -->
+    <string name="MenuViewController.recoverButton">ウォレットを復元</string>
+    <!-- Paper Key Skip modal body (Android-version) -->
+    <string name="Modal.PaperKeySkip.Body.Android">スマートフォンのセキュリティ設定を変更した場合、ウォレットを開くにはリカバリフレーズが必要です。 \n\n後でリカバリフレーズを設定してもよろしいですか？</string>
+    <!-- Paper Key Skip modal Continue Set Up button -->
+    <string name="Modal.PaperKeySkip.Button.ContinueSetUp">セットアップを続けます</string>
+    <!-- Paper Key Skip modal I'll do it later button -->
+    <string name="Modal.PaperKeySkip.Button.IllDoItLater">後で行います</string>
+    <!-- Paper Key Skip modal title -->
+    <string name="Modal.PaperKeySkip.Title">注意</string>
+    <!-- Node selection mode is automatic -->
+    <string name="NodeSelector.automatic">自動</string>
+    <!-- Switch to automatic mode button label -->
+    <string name="NodeSelector.automaticButton">自動モードに切り替える</string>
+    <!-- Node is connected label -->
+    <string name="NodeSelector.connected">接続中</string>
+    <!-- Node is connecting label -->
+    <string name="NodeSelector.connecting">接続中</string>
+    <!-- Enter node ip address view body -->
+    <string name="NodeSelector.enterBody">ノードのIPアドレスとポートを入力する（任意）</string>
+    <!-- Enter Node ip address view title -->
+    <string name="NodeSelector.enterTitle">ノードを入力する</string>
+    <!-- Entered invalid node address at the node selection screen -->
+    <string name="NodeSelector.invalid">無効なノード</string>
+    <!-- Switch to manual mode button label -->
+    <string name="NodeSelector.manualButton">マニュアルモードに切り替える</string>
+    <!-- Node address label -->
+    <string name="NodeSelector.nodeLabel">現在のプライマリーノード</string>
+    <!-- Node is not connected label -->
+    <string name="NodeSelector.notConnected">未接続</string>
+    <!-- Node status label -->
+    <string name="NodeSelector.statusLabel">ノードの接続状況</string>
+    <!-- Node Selector view title -->
+    <string name="NodeSelector.title">ビットコインノード</string>
+    <!-- Onboarding screen 'I'll browse first' button -->
+    <string name="Onboarding.browseFirst">まずは閲覧</string>
+    <!-- Onboarding screen 'Buy some coin' button -->
+    <string name="Onboarding.buyCoin">コインを購入</string>
+    <!-- Onboarding screen 'Get started' (create new wallet) button -->
+    <string name="Onboarding.getStarted">開始</string>
+    <!-- Onboarding screen 'Next' button -->
+    <string name="Onboarding.next">次へ</string>
+    <!-- Onboarding screen restore an existing wallet. -->
+    <string name="Onboarding.restoreWallet">ウォレットを復元する</string>
+    <!-- Onboarding screen Skip button title that allows the user to exit the onboarding process. -->
+    <string name="Onboarding.skip">スキップ</string>
+    <!-- Onboarding screen Page 4 title -->
+    <string name="OnboardingPageFour.title">最低50ドルから,今すぐ投資を始めましょう！</string>
+    <!-- Onboarding screen Page 1 title -->
+    <string name="OnboardingPageOne.title">新しいデジタルアセットウォレットへようこそ！</string>
+    <!-- Onboarding screen Page 3 subtitle -->
+    <string name="OnboardingPageThree.subtitle">BRDで容易に安全に投資して多様化しましょう。</string>
+    <!-- Onboarding screen Page 3 title -->
+    <string name="OnboardingPageThree.title">ビットコイン,トークン,その他のデジタル通貨を購入・取引しましょう。</string>
+    <!-- Onboarding screen Page 2 subtitle -->
+    <string name="OnboardingPageTwo.subtitle">当社の保護下には,60億USドル超相当の資産があります。</string>
+    <!-- Onboarding screen Page 2 title -->
+    <string name="OnboardingPageTwo.title">世界中で何百万もの人々がBRDを利用しています。あなたもぜひ。</string>
+    <!-- Eg. Send 1.0Eth to purchase CCC -->
+    <string name="PaymentConfirmation.amountText">%2$sを購入するために%1$sを送金する</string>
+    <!-- Payment confirmation view title -->
+    <string name="PaymentConfirmation.title">確認</string>
+    <!-- Bad Payment request alert title -->
+    <string name="PaymentProtocol.Errors.badPaymentRequest">不正な支払い要求</string>
+    <!-- Error opening payment protocol file message -->
+    <string name="PaymentProtocol.Errors.corruptedDocument">ドキュメントがサポートされていないか、またはドキュメントが破損しています</string>
+    <!-- Missing certificate payment protocol error message -->
+    <string name="PaymentProtocol.Errors.missingCertificate">証明書が不足しています</string>
+    <!-- Request expired payment protocol error message -->
+    <string name="PaymentProtocol.Errors.requestExpired">期限切れのリクエスト</string>
+    <!-- Payment too small alert title -->
+    <string name="PaymentProtocol.Errors.smallOutputError">支払いが行えませんでした</string>
+    <!-- Amount too small error message -->
+    <string name="PaymentProtocol.Errors.smallPayment">%1$s未満のビットコインの支払いは行えません。</string>
+    <!-- Output too small error message. -->
+    <string name="PaymentProtocol.Errors.smallTransaction">ビットコインの送金額は%1$s以上である必要があります。</string>
+    <!-- Unsupported signature type payment protocol error message -->
+    <string name="PaymentProtocol.Errors.unsupportedSignatureType">サポートされていないタイプの署名です</string>
+    <!-- Untrusted certificate payment protocol error message -->
+    <string name="PaymentProtocol.Errors.untrustedCertificate">信頼できない証明書</string>
+    <string name="Platform.transaction_cancelled">キャンセルされた取引</string>
+    <!-- Body text for a prompt that asks the user to subscribe to email updates to find out product updates. -->
+    <string name="Prompts.Email.body">誰よりも早く重要なサポートを受け,製品をアップデートしましょう</string>
+    <!-- Placeholder text for an email address text field. -->
+    <string name="Prompts.Email.placeholder">メールアドレスを入力してください</string>
+    <!-- Body text that is shown when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successBody">アップデートを受け取るための申し込みが完了しました</string>
+    <!-- Text that is displayed as a footnote when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successFootnote">継続的なサポートに感謝いたします</string>
+    <!-- Title that is shown when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successTitle">ありがとうございます！</string>
+    <!-- Title for a prompt that asks the user to subscribe to email updates to find out product updates. -->
+    <string name="Prompts.Email.title">輪に加わりましょう</string>
+    <!-- Enable face ID prompt body -->
+    <string name="Prompts.FaceId.body">Face IDを有効にするには続行をタップして下さい</string>
+    <!-- Enable face ID prompt title -->
+    <string name="Prompts.FaceId.title">Face IDを有効にする</string>
+    <!-- No passcode set warning body -->
+    <string name="Prompts.NoPasscode.body">ウォレットを保護するためには端末のパスコードが必要です。設定画面にてパスコードをオンにしてください。</string>
+    <!-- No Passcode set warning title -->
+    <string name="Prompts.NoPasscode.title">端末のパスコードをオンにする</string>
+    <!-- Instructions on how to enable screen lock settings -->
+    <string name="Prompts.NoScreenLock.body.android">ウォレットを守るため機器の画面をロックする必要があります。「設定」 &gt; 「セキュリティ」 &gt; 「画面ロック」で有効にしてから続行してください。</string>
+    <!-- Device encryption prompt title -->
+    <string name="Prompts.NoScreenLock.title.android">画面ロックが無効になっています</string>
+    <!-- Warning about recovery phrase (formerly paper key). -->
+    <string name="Prompts.PaperKey.body">電話を紛失または変更した場合に備えて、回復フレーズを保存する必要があります。</string>
+    <!-- Warning about paper key (Android-version) -->
+    <string name="Prompts.PaperKey.Body.Android">スマートフォンを紛失または交換した場合に備えて、回復フレーズを設定します。スマートフォンのセキュリティ設定を変更する場合も、キーが必要です。</string>
+    <!-- An action is required (You must do this action). -->
+    <string name="Prompts.PaperKey.title">アクションが要求されました</string>
+    <string name="Prompts.RateApp.dontShow">もう聞かないで</string>
+    <string name="Prompts.RateApp.enjoyingBrd">BRDを楽しんでいますか？</string>
+    <string name="Prompts.RateApp.googlePlayReview">あなたのレビューは、BRDコミュニティの成長に役立ちます。</string>
+    <string name="Prompts.RateApp.noThanks">結構です</string>
+    <string name="Prompts.RateApp.rateUs">私たちをレビュー</string>
+    <!-- Transaction rejected prompt body -->
+    <string name="Prompts.RecommendRescan.body">あなたのウォレットは同期されていない可能性があります。ブロックチェーンを再スキャンすることで修復できる可能性があります。</string>
+    <!-- Transaction rejected prompt title -->
+    <string name="Prompts.RecommendRescan.title">トランザクションが拒否されました</string>
+    <!-- Share data prompt body -->
+    <string name="Prompts.ShareData.body">匿名のデータを共有してBRDの機能向上に役立てる</string>
+    <!-- Share data prompt title -->
+    <string name="Prompts.ShareData.title">匿名のデータを共有する</string>
+    <!-- Enable touch ID prompt body -->
+    <string name="Prompts.TouchId.body">Touch IDを有効にするにはこちらをタップしてください</string>
+    <!-- Enable Fingerprint prompt body -->
+    <string name="Prompts.TouchId.body.android">こちらをタップして指紋認証を有効にしてください</string>
+    <!-- Enable touch ID prompt title -->
+    <string name="Prompts.TouchId.title">Touch IDを有効化する</string>
+    <!-- Enable Fingerprint prompt title -->
+    <string name="Prompts.TouchId.title.android">指紋認証を有効にする</string>
+    <!-- Button on fingerprint prompt so the user can enter their PIN instead -->
+    <string name="Prompts.TouchId.usePin.android">PIN</string>
+    <!-- Upgrade PIN prompt body. -->
+    <string name="Prompts.UpgradePin.body">ブレッドのPINコードは6桁にアップグレードされました。こちらをタップして更新してください。</string>
+    <!-- Upgrade PIN prompt title. -->
+    <string name="Prompts.UpgradePin.title">PINコードを更新する</string>
+    <!-- Body text for the push notifications prompt. -->
+    <string name="PushNotifications.body">プッシュ通知をオンにして、新機能や特別オファーについての情報を誰よりも早くに入手しよう。</string>
+    <!-- Push notifications are disabled alert title" -->
+    <string name="PushNotifications.disabled">通知が無効になっています</string>
+    <!-- Body text when push notifications are disabled. -->
+    <string name="PushNotifications.disabledBody">BRDから特別オファーやアップデートを受信するには、通知を有効にします。</string>
+    <!-- Body text when push notifications are enabled. -->
+    <string name="PushNotifications.enabledBody">BRDから特別オファーや最新情報を受信します。</string>
+    <!-- Instructions to enable push notifications for BRD in the phone's system settings. -->
+    <string name="PushNotifications.enableInstructions">通知がオフになっている可能性があります。[設定] に移動して、BRDからの通知を有効にしてください。</string>
+    <!-- Push notifications toggle switch label -->
+    <string name="PushNotifications.label">プッシュ通知を受信</string>
+    <!-- Push notifications are off label -->
+    <string name="PushNotifications.off">オフ</string>
+    <!-- Push notifications are on label -->
+    <string name="PushNotifications.on">オン</string>
+    <!-- Push notifications settings view title label -->
+    <string name="PushNotifications.title">情報の輪からそのまま離れないで</string>
+    <!-- Push notifications settings failed to update settings on the back end -->
+    <string name="PushNotifications.updateFailed">プッシュ通知設定を更新できませんでした</string>
+    <!-- Google play review prompt body -->
+    <string name="RateAppPrompt.Body.Android">当社のアプリをとても気に入っているなら、少しお時間をいただき評価とレビューをお願いします。</string>
+    <!-- Google play review prompt, revivew button -->
+    <string name="RateAppPrompt.Button.Dismiss.Android">結構です</string>
+    <!-- Google play review prompt, dismiss button -->
+    <string name="RateAppPrompt.Button.RateApp.Android">BRDを評価する</string>
+    <!-- Google play review prompt title -->
+    <string name="RateAppPrompt.Title.Android">BRDを評価する</string>
+    <!-- Address copied message. -->
+    <string name="Receive.copied">クリップボードにコピーされました。</string>
+    <!-- Share via email button label -->
+    <string name="Receive.emailButton">メール</string>
+    <!-- Request button label -->
+    <string name="Receive.request">金額のリクエスト</string>
+    <!-- Share button label -->
+    <string name="Receive.share">シェアする</string>
+    <!-- Share via text message (SMS) -->
+    <string name="Receive.textButton">テキストメッセージ</string>
+    <!-- Receive modal title -->
+    <string name="Receive.title">受け取る</string>
+    <!-- Done button text -->
+    <string name="RecoverWallet.done">終了</string>
+    <!-- Recover wallet header -->
+    <string name="RecoverWallet.header">ウォレットを復元</string>
+    <!-- Reset PIN with paper key: header -->
+    <string name="RecoverWallet.header_reset_pin">PINコードをリセット</string>
+    <!-- Enter paper key instruction -->
+    <string name="RecoverWallet.instruction">回復フレーズを入力してください</string>
+    <!-- Recover wallet intro -->
+    <string name="RecoverWallet.intro">回復フレーズを使用してBRDを回復します。</string>
+    <!-- Invalid paper key message -->
+    <string name="RecoverWallet.invalid">入力したリカバリフレーズは無効です。各単語を再確認して、もう一度お試しください。</string>
+    <!-- Previous button accessibility label -->
+    <string name="RecoverWallet.leftArrow">左矢印</string>
+    <!-- Next button label -->
+    <string name="RecoverWallet.next">次へ</string>
+    <!-- Reset PIN with paper key: more information button. -->
+    <string name="RecoverWallet.reset_pin_more_info">詳しくはこちらをタップしてください。</string>
+    <!-- Next button accessibility label -->
+    <string name="RecoverWallet.rightArrow">右矢印</string>
+    <!-- Recover wallet sub-header -->
+    <string name="RecoverWallet.subheader">回復するウォレットの回復フレーズを入力します。</string>
+    <!-- Reset PIN with paper key: sub-header -->
+    <string name="RecoverWallet.subheader_reset_pin">PINをリセットするには、リカバリフレーズの単語を下のボックスに入力します。</string>
+    <!-- Instructs the user to enter words from the set of recovery key words. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryInputError">入力した単語は正しくありません。もう一度入力してください。</string>
+    <!-- Instructs the user to enter words from the set of recovery phrase words. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryKeySubtitle">ほぼ完了しました！回復フレーズから次の単語を入力します。</string>
+    <!-- Title for the confirmation step of the recovery phrase flow. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryKeyTitle">回復フレーズの確認</string>
+    <!-- Title displayed when the user starts the process of entering a recovery phrase -->
+    <string name="RecoveryKeyFlow.enterRecoveryKey">回復フレーズを入力してください</string>
+    <!-- Subtitle displayed when the user starts the process of entering a recovery phrase -->
+    <string name="RecoveryKeyFlow.enterRecoveryKeySubtitle">デバイスからこのウォレットのリンクを解除するには、リカバリフレーズを入力してください。</string>
+    <!-- Body text for an alert dialog asking the user whether to set up the recovery phrase later -->
+    <string name="RecoveryKeyFlow.exitRecoveryKeyPromptBody">後でリカバリフレーズを設定してもよろしいですか？</string>
+    <!-- Title for an alert dialog asking the user whether to set up the recovery key later -->
+    <string name="RecoveryKeyFlow.exitRecoveryKeyPromptTitle">後から行う</string>
+    <!-- Button text for the 'Generate Recovery Phrase' button -->
+    <string name="RecoveryKeyFlow.generateKeyButton">回復フレーズの生成</string>
+    <!-- Subtext for the recovery key landing page. -->
+    <string name="RecoveryKeyFlow.generateKeyExplanation">携帯のアップグレードや紛失の際に,保有資金を復元するためにこのキーが必要です。</string>
+    <!-- Default title for the recovery phrase landing page -->
+    <string name="RecoveryKeyFlow.generateKeyTitle">プライベートな回復フレーズを生成する</string>
+    <!-- Title for a button that takes the user to the wallet after setting up the recovery key. -->
+    <string name="RecoveryKeyFlow.goToWalletButtonTitle">ウォレットへ</string>
+    <!-- Hint text for recovery key intro page, e.g., Step 2 -->
+    <string name="RecoveryKeyFlow.howItWorksStep">使い方 - ステップ%1$@</string>
+    <!-- Error text displayed when the user enters an incorrect recovery phrase -->
+    <string name="RecoveryKeyFlow.invalidPhrase">入力した単語の一部が回復フレーズと一致しません。もう一度お試しください。</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.keepSecure">安全に保管</string>
+    <!-- Informs the user that the recovery is only required for recovering a wallet. -->
+    <string name="RecoveryKeyFlow.keyUseHint">キーは復元時にのみ必要です。通常のウォレットへのアクセスには必要ありません。</string>
+    <!-- Reminds the user not to take screenshots or email the recovery key words -->
+    <string name="RecoveryKeyFlow.noScreenshotsOrEmailWarning">安全上の観点から,これらの単語のスクリーンショットやメール送信はおやめください</string>
+    <!-- Recommends that the user avoids capturing the paper key with a screenshot -->
+    <string name="RecoveryKeyFlow.noScreenshotsRecommendation">キーは紙にメモして,確認してください。安全上の理由からスクリーンショットでの保管はお勧めできません。</string>
+    <!-- Title displayed when the user starts the process of recovering a wallet -->
+    <string name="RecoveryKeyFlow.recoveryYourWallet">ウォレットの復元</string>
+    <!-- Subtitle displayed when the user starts the process of recovering a wallet -->
+    <string name="RecoveryKeyFlow.recoveryYourWalletSubtitle">回復するウォレットの回復フレーズを入力してください。</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.relaxBuyTrade">安心の購入と取引</string>
+    <!-- Reminds the user to write down the recovery key words. -->
+    <string name="RecoveryKeyFlow.rememberToWriteDownReminder">単語はメモしましたか。忘れていたら,スワイプして戻ってください。</string>
+    <!-- Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered -->
+    <string name="RecoveryKeyFlow.resetPINInstruction">PINをリセットするには、回復フレーズを入力してください。</string>
+    <!-- Assures the user that BRD will keep the user's funds secure. -->
+    <string name="RecoveryKeyFlow.securityAssurance">お客様の資産は最も安全に個人情報を守りながら保護されていますので,安心して購入や取引ができます。</string>
+    <!-- Recommends that the user stores the recovery key in a secure location -->
+    <string name="RecoveryKeyFlow.storeSecurelyRecommendation">キーは安全な場所に保管してください。ウォレットを復元できるのはこのキーだけです。BRD はキーを保存していません。</string>
+    <!-- Title for the success page after the recovery phrase has been set up -->
+    <string name="RecoveryKeyFlow.successHeading">おめでとう！回復フレーズの設定が完了しました。</string>
+    <!-- Subtitle for the success page after the recovery key has been set up -->
+    <string name="RecoveryKeyFlow.successSubheading">BRD ウォレットで仮想通貨を保管・購入・取引をする準備ができました。</string>
+    <!-- Title displayed to the user on the intro screen when unlinking a wallet -->
+    <string name="RecoveryKeyFlow.unlinkWallet">端末からウォレットを解除する。</string>
+    <!-- Subtitle displayed to the user on the intro screen when unlinking a wallet. -->
+    <string name="RecoveryKeyFlow.unlinkWalletSubtext">端末から現在インストールされているウォレットを解除し,新しいウォレットを始めます。</string>
+    <!-- Warning displayed when the user starts the process of unlinking a wallet -->
+    <string name="RecoveryKeyFlow.unlinkWalletWarning">ウォレットは再アクセスのために復元を開始します。</string>
+    <!-- Title displayed to the user on the intro screen when wiping a wallet -->
+    <string name="RecoveryKeyFlow.wipeWallet">端末からウォレットを解除する。</string>
+    <!-- Subtitle displayed to the user on the intro screen when wiping a wallet. -->
+    <string name="RecoveryKeyFlow.wipeWalletSubtext">デバイスから現在のウォレットを消去して、新しいウォレットを開始します。</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.writeItDown">復元キーをメモする</string>
+    <!-- Title for the recovery phrase landing page if the key has already been generated. -->
+    <string name="RecoveryKeyFlow.writeKeyAgain">回復フレーズをもう一度書き留めます</string>
+    <!-- Subtitle for the write recovery key screen -->
+    <string name="RecoveryKeyFlow.writeKeyScreenSubtitle">以下の単語を順番通りにメモしてください。</string>
+    <!-- Title for the write recovery phrase screen -->
+    <string name="RecoveryKeyFlow.writeKeyScreenTitle">あなたの回復フレーズ</string>
+    <!-- Title for the step number when the user pages through the recovery words -->
+    <string name="RecoveryKeyFlow.writeKeyStepTitle">%1$@の%2$@</string>
+    <!-- No amount entered error message. -->
+    <string name="RequestAnAmount.noAmount">はじめに金額を入力してください。</string>
+    <!-- Request a specific amount of bitcoin -->
+    <string name="RequestAnAmount.title">金額のリクエスト</string>
+    <!-- Alert action button label -->
+    <string name="ReScan.alertAction">同期</string>
+    <!-- Alert message body -->
+    <string name="ReScan.alertMessage">同期中は送金することができません。</string>
+    <!-- Alert message title -->
+    <string name="ReScan.alertTitle">ブロックチェーンの同期をしますか?</string>
+    <!-- extimated time -->
+    <string name="ReScan.body1">20〜45分</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body2">ビットコインネットワークでトランザクションが完了したと表示されているが、BRD上では完了と表示されない場合。</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body3">送金しているが、拒否され続けている場合。</string>
+    <!-- Start Sync button label -->
+    <string name="ReScan.buttonTitle">同期を開始する</string>
+    <!-- Sync blockchain view footer -->
+    <string name="ReScan.footer">ブロックチェーンの同期中は送金できません。</string>
+    <!-- Sync Blockchain view header -->
+    <string name="ReScan.header">ブロックチェーン同期</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader1">推定時間</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader2">いつ同期しますか?</string>
+    <!-- Rewards view expanded body. -->
+    <string name="RewardsView.expandedBody">取引手数料を節約して今後のリワードをアンロックする方法を学びましょう。</string>
+    <!-- Rewards view expanded title. -->
+    <string name="RewardsView.expandedTitle">BRDリワードについて。</string>
+    <!-- Rewards view title -->
+    <string name="RewardsView.normalTitle">リワード</string>
+    <!-- Scan bitcoin address camera flash toggle -->
+    <string name="Scanner.flashButtonLabel">カメラのフラッシュ</string>
+    <!-- (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") -->
+    <string name="Scanner.paymentPromptMessage">この住所に %1$@ の支払いを送信しますか?</string>
+    <!-- alert dialog title -->
+    <string name="Scanner.paymentPromptTitle">支払いを送る</string>
+    <!-- Complete filter label -->
+    <string name="Search.complete">完了</string>
+    <!-- Pending filter label -->
+    <string name="Search.pending">保留中</string>
+    <!-- Received filter label -->
+    <string name="Search.received">受取済</string>
+    <!-- [Click here to] search -->
+    <string name="Search.search">検索</string>
+    <!-- Sent filter label -->
+    <string name="Search.sent">送信済</string>
+    <!-- Face ID button title -->
+    <string name="SecurityCenter.faceIdTitle">Face ID</string>
+    <!-- Paper Key button description -->
+    <string name="SecurityCenter.paperKeyDescription">あなたが携帯電話を紛失したり、アップグレードした場合にご自身のビットコインへアクセスできる唯一の方法です。</string>
+    <!-- Recovery Phrase button title. This used to be called 'paper key', so leaving the string key as `paperKeyTitle` in order
+ * to not break existing client code. -->
+    <string name="SecurityCenter.paperKeyTitle">回復フレーズ</string>
+    <!-- Paper Key button title -->
+    <string name="SecurityCenter.paperKeyTitle.android">回復フレーズ</string>
+    <!-- PIN button description -->
+    <string name="SecurityCenter.pinDescription">アクセス権限のないユーザーからあなたのブレッドを守ります。</string>
+    <!-- PIN button title -->
+    <string name="SecurityCenter.pinTitle">6桁のPINコード</string>
+    <!-- Touch ID button description -->
+    <string name="SecurityCenter.touchIdDescription">BRDロック解除の他、設定した限度額までの送金も指紋認証で出来ます。</string>
+    <!-- Touch ID button title -->
+    <string name="SecurityCenter.touchIdTitle">Touch ID</string>
+    <!-- Security center fingerprint authentication button -->
+    <string name="SecurityCenter.touchIdTitle.android">指紋認証</string>
+    <!-- Segwit enabled confirmation title -->
+    <string name="Segwit.ConfirmationConfirmationTitle">SegWitを有効化しました！</string>
+    <!-- Segwit enabled confirmation description -->
+    <string name="Segwit.ConfirmationInstructionsDescription">Bitcoinの前進にご協力いただきありがとうございます。</string>
+    <!-- Segwit instructions -->
+    <string name="Segwit.ConfirmationInstructionsInstructions">SegWit対応はまだベータ版の機能です。\n一度SegWitが有効化されると取り消しはできません。設定画面の下でレガシーアドレスをご確認いただけます。\nSegWitを有効化したユーザーは,第三者のサービス（仮想通貨取引を含む）を利用できない場合があります。緊急の場合は,プリファレンス &gt; Bitcoin設定から,レガシーアドレスを作成することができます。\n将来のアップデートでは,全ユーザーに対して自動的にSegWitが有効化されます。</string>
+    <!-- Segwit extra confirmation title. -->
+    <string name="Segwit.ConfirmChoiceLayout">「SegWitの有効化」は取り消しできない機能です。継続してよろしいですか？</string>
+    <!-- Segwit enableButton -->
+    <string name="Segwit.Enable">有効化する</string>
+    <!-- Segwit button label that takes the user back to the home screen once SegWit is enabled. -->
+    <string name="Segwit.HomeButton">月へ</string>
+    <string name="Send_fio_toLabel">FIO</string>
+    <!-- Send money amount label -->
+    <string name="Send.amountLabel">金額</string>
+    <!-- Balance: $4.00 -->
+    <string name="Send.balance">残高: %1$s</string>
+    <!-- Balance: $4.00 for iOS, the balance can't have a parameter -->
+    <string name="Send.balanceString">残高:</string>
+    <!-- Instructions how to allow the camera access for the app -->
+    <string name="Send.cameraUnavailabeMessage.android">「設定」 &gt; 「アプリ」 &gt; 「ブレッド」 &gt; 「許可」でカメラへのアクセスを許可してください</string>
+    <!-- Permission required to access camera -->
+    <string name="Send.cameraUnavailabeTitle.android">ブレッドはカメラへのアクセスを許可されていません</string>
+    <!-- Camera not allowed message -->
+    <string name="Send.cameraunavailableMessage">設定画面へ移動し、カメラへのアクセス許可をしてください。</string>
+    <!-- Camera not allowed alert title -->
+    <string name="Send.cameraUnavailableTitle">ブレッドはカメラへのアクセスが許可されていません</string>
+    <!-- Warning when sending to self. -->
+    <string name="Send.containsAddress">送金先がご自身のアドレスになっています。自分宛てには送金できません。</string>
+    <!-- Could not create transaction alert title -->
+    <string name="Send.creatTransactionError">トランザクションの作成ができませんでした。</string>
+    <!-- Description for sending money label -->
+    <string name="Send.descriptionLabel">メモ</string>
+    <!-- Optional Destination Tag label -->
+    <string name="Send.destinationTag_optional">宛先タグ（オプション）</string>
+    <!-- Required Destination Tag label -->
+    <string name="Send.destinationTag_required">宛先タグ（必須）</string>
+    <string name="Send.destinationTag_required_error">ターゲットアドレスには有効な宛先タグが必要です。</string>
+    <!-- Emtpy pasteboard error message -->
+    <string name="Send.emptyPasteboard">ペーストボードが空です</string>
+    <!-- "(you) can't send (to your)self" -->
+    <string name="Send.ethSendSelf">自分に送金することはできません。</string>
+    <!-- Network Fee: $0.01 -->
+    <string name="Send.fee">ネットワーク手数料: %1$s</string>
+    <string name="Send.fio_invalid">無効なFIOアドレス。</string>
+    <string name="Send.fio_noAddress">このFIOアドレスに関連付けられている%1$sアドレスはありません。</string>
+    <string name="Send.fio_retrievalError">このFIOアドレスのアドレスの取得中にエラーが発生しました。後でもう一度やり直してください。</string>
+    <!-- Payee identity not certified alert title. -->
+    <string name="Send.identityNotCertified">受取人の本人確認が行われていません。</string>
+    <!-- Insufficient funds error -->
+    <string name="Send.insufficientFunds">残高不足</string>
+    <!-- e,g, "You must have at least $2 in your wallet in order to transfer this type of token." In this case, "token" is an ethereum ERC20 token. -->
+    <string name="Send.insufficientGasMessage">このタイプのトークンを送金するには、ウォレットに%1$s以上保有していなければなりません。今すぐイーサリアムのウォレットに移動しますか?</string>
+    <!-- Your ethereum balance is insufficient to complete this action. -->
+    <string name="Send.insufficientGasTitle">イーサリアムの残高不足</string>
+    <!-- e.g. The destination is not a valid (bitcoin) address. -->
+    <string name="Send.invalidAddressMessage">送金先のアドレスが無効な%1$sアドレスです。</string>
+    <!-- Invalid address on pasteboard message -->
+    <string name="Send.invalidAddressOnPasteboard">ペーストボードに有効な%1$sアドレスが入っていません。</string>
+    <!-- Invalid address alert title -->
+    <string name="Send.invalidAddressTitle">無効なアドレスです</string>
+    <!-- Is rescanning error message -->
+    <string name="Send.isRescanning">再スキャンを行っている間は送金できません。</string>
+    <!-- Warning when the user is trying to send bitcoin cash to a legacy bitcoin address (possible, but probably not what the user wants to do) -->
+    <string name="Send.legacyAddressWarning">警告: これはレガシービットコインアドレスです。本当にビットコインキャッシュを送金しますか?</string>
+    <!-- We are loading the request (now) -->
+    <string name="Send.loadingRequest">リクエストをロード中</string>
+    <!-- Hedera Memo Tag Label -->
+    <string name="Send.memoTag_optional">Hedera Memo（オプション）</string>
+    <!-- Transaction fee could not be be caluculated error. -->
+    <string name="Send.nilFeeError">残高不足で取引手数料を支払うことができません。</string>
+    <!-- Empty address alert message -->
+    <string name="Send.noAddress">受取人のアドレスを入力してください。</string>
+    <!-- Emtpy amount alert message -->
+    <string name="Send.noAmount">送金金額を入力してください。</string>
+    <!-- No Fees error -->
+    <string name="Send.noFeesError">ネットワーク手数料の諸条件のダウンロード中です。もう一度お試し下さい。</string>
+    <!-- Paste button label -->
+    <string name="Send.pasteLabel">貼り付け</string>
+    <!-- Error message for invalid PayID -->
+    <string name="Send.payId_invalid">PayIDが無効です。</string>
+    <!-- Error message for no address associated with a PayID for a given currency -->
+    <string name="Send.payId_noAddress">このPayIDに関連付けられている%1$sアドレスはありません。</string>
+    <!-- Error message for error in retrieving the address from the PayID endpoint -->
+    <string name="Send.payId_retrievalError">このPayIDの住所の取得中にエラーが発生しました。後でもう一度やり直してください。</string>
+    <!-- PayID label -->
+    <string name="Send.payId_toLabel">PayID</string>
+    <!-- Could not publish transaction alert title -->
+    <string name="Send.publishTransactionError">取引を実行できませんでした。</string>
+    <!-- Could not load remote request error message -->
+    <string name="Send.remoteRequestError">支払い要求がロードできませんでした</string>
+    <!-- Scan button label -->
+    <string name="Send.scanLabel">スキャン</string>
+    <!-- Sending Max: $4.00 for iOS, the balance can't have a parameter -->
+    <string name="Send.sendingMax">最大送信：</string>
+    <!-- Send button label (the action, "press here to send") -->
+    <string name="Send.sendLabel">送金する</string>
+    <!-- Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) -->
+    <string name="Send.sendMaximum">限度額を送金しますか？</string>
+    <!-- Send screen title (as in "this is the screen for sending money") -->
+    <string name="Send.title">送金</string>
+    <!-- Send money to label -->
+    <string name="Send.toLabel">宛先</string>
+    <!-- Adress already used alert message - first part -->
+    <string name="Send.UsedAddress.firstLine">ビットコインアドレスは、個人利用のみを想定しています。</string>
+    <!-- Adress already used alert message - second part -->
+    <string name="Send.UsedAddress.secondLIne">再利用は、送金側と受取側の両方のプライバシーの侵害につながるおそれがあり、受取人がアドレスを直接管理しない場合、損害につながるおそれもあります。</string>
+    <!-- Adress already used alert title -->
+    <string name="Send.UsedAddress.title">アドレスはすでに使用されています</string>
+    <!-- About label -->
+    <string name="Settings.about">概要</string>
+    <!-- Advanced settings header -->
+    <string name="Settings.advanced">詳細</string>
+    <!-- Advanced Settings title -->
+    <string name="Settings.advancedTitle">詳細設定</string>
+    <!-- ATM map menu item title explaining that it's a feature only available in the USA -->
+    <string name="Settings.atmMapMenuItemSubtitle">アメリカでのみ利用可能</string>
+    <!-- ATM map menu item title -->
+    <string name="Settings.atmMapMenuItemTitle">暗号ATMマップ</string>
+    <!-- i.e. the currency which will be displayed -->
+    <string name="Settings.currency">表示される通貨</string>
+    <!-- e.g. "USD Settings" (settings for how USD is handled) -->
+    <string name="Settings.currencyPageTitle">%1$s設定</string>
+    <!-- Section title for a collection of different settings screens, one for each currency -->
+    <string name="Settings.currencySettings">通貨設定</string>
+    <!-- Join Early access label -->
+    <string name="Settings.earlyAccess">早期アクセスに参加</string>
+    <!-- Enable segwit. -->
+    <string name="Settings.EnableSegwit">Segwitを有効にする</string>
+    <!-- Are you enjoying bread alert message body -->
+    <string name="Settings.enjoying">ブレッドをお楽しみいただいていますか?</string>
+    <!-- Face ID spending limit label -->
+    <string name="Settings.faceIdLimit">Face ID使用限度額</string>
+    <!-- Redeem the funds stored on this private key. -->
+    <string name="Settings.importTitle">秘密鍵から引き出し</string>
+    <!-- Manage settings section header -->
+    <string name="Settings.manage">管理</string>
+    <!-- Notifications label -->
+    <string name="Settings.notifications">通知</string>
+    <!-- Section header for "other settings". -->
+    <string name="Settings.other">その他</string>
+    <!-- Preferences settings section header -->
+    <string name="Settings.preferences">設定</string>
+    <!-- Tap here to reset the list of currencies to the default settings. -->
+    <string name="Settings.resetCurrencies">デフォルトの通貨に戻す</string>
+    <!-- Leave review button label -->
+    <string name="Settings.review">レビューを書く</string>
+    <!-- Rewards menu item -->
+    <string name="Settings.rewards">リワード</string>
+    <!-- Share anonymous data label -->
+    <string name="Settings.shareData">匿名データをシェアする</string>
+    <!-- Sync blockchain label -->
+    <string name="Settings.sync">ブロックチェーン同期</string>
+    <!-- Settings title -->
+    <string name="Settings.title">設定</string>
+    <!-- Touch ID spending limit label -->
+    <string name="Settings.touchIdLimit">Touch IDの利用限度額</string>
+    <!-- The fingerprint spending limit -->
+    <string name="Settings.touchIdLimit.android">指紋認証利用上限</string>
+    <!-- View legacy address (old format). -->
+    <string name="Settings.ViewLegacyAddress">受取用レガシーアドレスを表示</string>
+    <!-- Receive Bitcoin instructions -->
+    <string name="Settings.ViewLegacyAddressReceiveDescription">このアドレスにはBitcoin（BTC）だけを送信してください。このアドレスに送信された他の資産は,いかなるものも永久に失われます。</string>
+    <!-- Receive Bitcoin -->
+    <string name="Settings.ViewLegacyAddressReceiveTitle">Bitcoinを受け取りましょう</string>
+    <!-- Wallet Settings section header -->
+    <string name="Settings.wallet">ウォレット</string>
+    <!-- Unlink/delete your wallet from the current device. -->
+    <string name="Settings.wipe">この端末から削除する</string>
+    <!-- Wipe/delete your wallet from the current device. -->
+    <string name="Settings.wipe.android">端末からウォレットを解除する。</string>
+    <!-- Share data view body -->
+    <string name="ShareData.body">匿名データをシェアして、ブレッドの改善にご協力ください。これにはいかなる財務情報も含まれません。私たちはあなたの財務プライバシーを尊重しています。</string>
+    <!-- Share data header -->
+    <string name="ShareData.header">データを共有しますか?</string>
+    <!-- Share data switch label. -->
+    <string name="ShareData.toggleLabel">匿名データをシェアしますか?</string>
+    <!-- button label -->
+    <string name="StartPaperPhrase.againButtonTitle">回復フレーズを書き留めます</string>
+    <!-- Paper key explanation text. -->
+    <string name="StartPaperPhrase.body">スマートフォンが紛失、盗難、破損、またはアップグレードされた場合にリカバリフレーズを使用することで、BRDを復元できます。 \n\n一枚の紙に書き留めて安全を保つための単語のリストをお見せします。</string>
+    <!-- Paper key explanation text (Android-version) -->
+    <string name="StartPaperPhrase.Body.Android">スマートフォンが紛失、盗難、破損、またはアップグレードされた場合にリカバリフレーズを使用することで、BRDを復元できます。 \n\nデバイスのセキュリティ設定を変更する場合も、リカバリフレーズが必要です。 \n\n一枚の紙に書き留めて安全を保つための単語のリストをお見せします。</string>
+    <!-- button label -->
+    <string name="StartPaperPhrase.buttonTitle">回復フレーズを書き留めます</string>
+    <!-- Argument is date; date should be on a new line -->
+    <string name="StartPaperPhrase.date">最後に書き留めた\n %1$@</string>
+    <!-- button label -->
+    <string name="StartViewController.createButton">新しいウォレットを作成する</string>
+    <!-- Start view message -->
+    <string name="StartViewController.message">最も安全にビットコインを使う手段。</string>
+    <!-- Recover your wallet from a backup -->
+    <string name="StartViewController.recoverButton">ウォレットを復元する</string>
+    <string name="SupportForm.feedbackAppreciated">フィードバックをお待ちしています</string>
+    <string name="SupportForm.helpUsImprove">改善にご協力ください</string>
+    <string name="SupportForm.notNow">今はやめろ</string>
+    <string name="SupportForm.pleaseDescribe">あなたの経験を教えてください</string>
+    <!-- Syncing view done syncing state header text -->
+    <string name="SyncingView.activity">アクティビティ</string>
+    <!-- Syncing view connectiong state header text -->
+    <string name="SyncingView.connecting">接続中</string>
+    <!-- The sync has failed (to complete) -->
+    <string name="SyncingView.failed">同期に失敗しました</string>
+    <!-- Syncing view header text -->
+    <string name="SyncingView.header">同期中</string>
+    <!-- Retry button label -->
+    <string name="SyncingView.retry">再試行</string>
+    <!-- "eg. Synced through <Jan 12, 2015> -->
+    <string name="SyncingView.syncedThrough">%1$sまで同期完了</string>
+    <!-- Syncing view syncing state header text -->
+    <string name="SyncingView.syncing">同期中</string>
+    <!-- 6 d (6 days) -->
+    <string name="TimeSince.days">%1$s日</string>
+    <!-- 6 h (6 hours) -->
+    <string name="TimeSince.hours">%1$s時間</string>
+    <!-- 6 m (6 minutes) -->
+    <string name="TimeSince.minutes">%1$s分</string>
+    <!-- 6 s (6 seconds) -->
+    <string name="TimeSince.seconds">%1$s秒</string>
+    <!-- Add [this item to the list] -->
+    <string name="TokenList.add">追加する</string>
+    <!-- Add Wallets  [to your home screen] -->
+    <string name="TokenList.addTitle">ウォレットを追加する</string>
+    <!-- Hide [this token from view] -->
+    <string name="TokenList.hide">非表示にする</string>
+    <!-- [click here to] Manage [your] Wallets -->
+    <string name="TokenList.manageTitle">ウォレットを管理する</string>
+    <!-- Remove [this item from the list] -->
+    <string name="TokenList.remove">削除する</string>
+    <!-- Show [this item on your home screen] -->
+    <string name="TokenList.show">表示する</string>
+    <!-- You can customize your Touch ID Spending Limit from the [TouchIdSettings.linkText gets added here as a button] -->
+    <string name="TouchIdSettings.customizeText">%1$sからTouch ID利用限度額を変更できます。</string>
+    <!-- Fingerprint enabling description body -->
+    <string name="TouchIdSettings.customizeText.android">指紋認証利用上限は指紋認証利用上限画面でカスタマイズできます</string>
+    <!-- Instruction for the fingerprint setup -->
+    <string name="TouchIdSettings.disabledWarning.body.android">この機器は指紋認証が有効化されていません。設定 -&gt; セキュリティに移動して指紋認証を設定してください。</string>
+    <!-- Fingerprint Is Not Setup -->
+    <string name="TouchIdSettings.disabledWarning.title.android">指紋認証が有効ではありません</string>
+    <!-- Text that describes the purpose of the Touch ID settings in the BRD app. -->
+    <string name="TouchIdSettings.explanatoryText">Touch IDを使用してBRDアプリのロックを解除し、送金してください。</string>
+    <!-- Touch Id screen label -->
+    <string name="TouchIdSettings.label">設定された限度額以下の送金を行う場合には、指紋認証でご自身のブレッドのロックを解除できます。</string>
+    <!-- Link Text (see TouchIdSettings.customizeText) -->
+    <string name="TouchIdSettings.linkText">Touch ID利用限度額画面</string>
+    <!-- Spending Limit: b100,000 ($100) -->
+    <string name="TouchIdSettings.spendingLimit">利用限度: %1$s (%2$s)</string>
+    <!-- Touch id switch label. -->
+    <string name="TouchIdSettings.switchLabel">ブレッドでTouch IDの有効化</string>
+    <!-- Enable fingerprint for this wallet called Bread -->
+    <string name="TouchIdSettings.switchLabel.android">指紋認証を有効にする</string>
+    <!-- Touch ID settings view title -->
+    <string name="TouchIdSettings.title">Touch ID</string>
+    <!-- Fingerprint authentication label -->
+    <string name="TouchIdSettings.title.android">指紋認証</string>
+    <!-- Text label for a toggle that enables Touch ID for sending money. -->
+    <string name="TouchIdSettings.transactionsTitleText">Touch IDを有効にして送金する</string>
+    <!-- Touch ID unavailable alert message -->
+    <string name="TouchIdSettings.unavailableAlertMessage">あなたはこの端末でTouch IDの利用設定をしていません。設定-&gt;Touch IDとパスコードに移動し、今すぐ設定してください。</string>
+    <!-- Touch ID unavailable alert title -->
+    <string name="TouchIdSettings.unavailableAlertTitle">Touch IDが設定されていません</string>
+    <!-- Text label for the toggle that enables Touch ID for unlocking the BRD app. -->
+    <string name="TouchIdSettings.unlockTitleText">Touch IDを有効にしてBRDのロックを解除する</string>
+    <!-- Always require passcode option -->
+    <string name="TouchIdSpendingLimit">常にパスコードを要求する</string>
+    <!-- Touch ID spending limit screen body -->
+    <string name="TouchIdSpendingLimit.body">限度額を超える金額の送金を行う場合や、最後に6桁のPINコードを入力してから48時間経過した場合は6桁のPINコードの入力が求められます。</string>
+    <!-- Touch Id spending limit screen title -->
+    <string name="TouchIdSpendingLimit.title">Touch IDの利用限度額</string>
+    <!-- name of spending limit when using fingerprint authorization -->
+    <string name="TouchIdSpendingLimit.title.android">指紋認証利用上限</string>
+    <!-- Availability status text -->
+    <string name="Transaction.available">利用可能</string>
+    <!-- Transaction complete label -->
+    <string name="Transaction.complete">完了</string>
+    <!-- Transaction is confirming status text -->
+    <string name="Transaction.confirming">進行中</string>
+    <!-- eg. Ending balance: $50.00 -->
+    <string name="Transaction.ending">期末残高: %1$s</string>
+    <!-- Exchange rate on date header -->
+    <string name="Transaction.exchangeOnDayReceived">受け取り時の為替レート：</string>
+    <!-- Exchange rate on date header -->
+    <string name="Transaction.exchangeOnDaySent">送金時の為替レート：</string>
+    <!-- Transaction failed status text -->
+    <string name="Transaction.failed">失敗</string>
+    <!-- (b600 fee) -->
+    <string name="Transaction.fee">(%1$s 手数料)</string>
+    <!-- Invalid transaction -->
+    <string name="Transaction.invalid">無効</string>
+    <!-- Timestamp label for event that just happened -->
+    <string name="Transaction.justNow">たった今</string>
+    <!-- Transaction is pending status text -->
+    <string name="Transaction.pending">保留中</string>
+    <!-- Receive status text: 'In progress: 20%' -->
+    <string name="Transaction.receivedStatus">進行中: %1$s</string>
+    <!-- Send status text: 'In progress: 20%' -->
+    <string name="Transaction.sendingStatus">進行中: %1$s</string>
+    <!-- sending to <address> -->
+    <string name="Transaction.sendingTo">%1$sに送金中</string>
+    <!-- sent to <address> -->
+    <string name="Transaction.sentTo">%1$sに送金済み</string>
+    <!-- eg. Starting balance: $50.00 -->
+    <string name="Transaction.starting">期首残高: %1$s</string>
+    <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
+    <string name="Transaction.tokenTransfer">トークン送金の手数料: %1$s</string>
+    <!-- Waiting to be confirmed string -->
+    <string name="Transaction.waiting">承認を待っています。トランザクションの完了には承認が必要となる場合があります。推定時間: 1-2時間。</string>
+    <!-- e.g. I received money from an account. -->
+    <string name="TransactionDetails.account">アカウント</string>
+    <!-- Address received from header -->
+    <string name="TransactionDetails.addressFromHeader">送金元</string>
+    <!-- Address sent to header -->
+    <string name="TransactionDetails.addressToHeader">送金先</string>
+    <!-- e.g. "(this was received) via (address #1)" via = by way of -->
+    <string name="TransactionDetails.addressViaHeader">経由</string>
+    <!-- Amount section header -->
+    <string name="TransactionDetails.amountHeader">金額</string>
+    <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
+    <string name="TransactionDetails.amountWhenReceived">%1$s を受領したので、%2$s になります</string>
+    <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
+    <string name="TransactionDetails.amountWhenSent">送金時%1$s、現在%2$s</string>
+    <!-- Block height label -->
+    <string name="TransactionDetails.blockHeightLabel">ブロックチェーンで承認済み</string>
+    <!-- Memo section header -->
+    <string name="TransactionDetails.commentsHeader">メモ</string>
+    <!-- Memo field placeholder -->
+    <string name="TransactionDetails.commentsPlaceholder">メモを追加する...</string>
+    <!-- Timestamp section header for complete tx -->
+    <string name="TransactionDetails.completeTimestampHeader">完了</string>
+    <!-- Block height and confirmations label -->
+    <!--eg. 182930 (45061 confirmations)-->
+    <string name="TransactionDetails.confirmationsLabel">確認</string>
+    <string name="TransactionDetails.destinationTag">宛先タグ</string>
+    <string name="TransactionDetails.destinationTag_EmptyHint">(空)</string>
+    <!-- Empty transaction list message. -->
+    <string name="TransactionDetails.emptyMessage">あなたの取引はこちらに表示されます。</string>
+    <!-- e.g. the users balance after the transaction was compeleted -->
+    <string name="TransactionDetails.endingBalanceHeader">終了後残高</string>
+    <!-- Exchange rate section header -->
+    <string name="TransactionDetails.exchangeRateHeader">為替レート</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.feeHeader">総手数料</string>
+    <!-- "Received [$5] at [which of my addresses]" => This is the "at [which of my addresses]" part. -->
+    <string name="TransactionDetails.from">%1$sで</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.gasLimitHeader">ガソリン上限</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.gasPriceHeader">ガソリン価格</string>
+    <!-- Label for Hedera Memo field on transaction details screen -->
+    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <!-- Hide Details button -->
+    <string name="TransactionDetails.hideDetails">詳細を隠す</string>
+    <!-- Label showing the transaction was started (initialized) -->
+    <string name="TransactionDetails.initializedTimestampHeader">初期化済み</string>
+    <!-- More button title -->
+    <string name="TransactionDetails.more">もっと見る...</string>
+    <!-- Moved $5.00 (as in "I moved $5 to another location") -->
+    <string name="TransactionDetails.moved">%1$sを移動させました</string>
+    <!-- Moved $5.00 -->
+    <string name="TransactionDetails.movedAmountDescription"><![CDATA[<b>%1$s</b>を移動させました]]></string>
+    <!-- eg. Confirmed in Block: Not Confirmed -->
+    <string name="TransactionDetails.notConfirmedBlockHeightLabel">未承認</string>
+    <!-- "Received [$5] at [which of my addresses]" => This is the "Received [$5]" part. -->
+    <string name="TransactionDetails.received">%1$sを受け取りました</string>
+    <!-- Received $5.00 -->
+    <string name="TransactionDetails.receivedAmountDescription"><![CDATA[<b>%1$s</b>を受け取りました]]></string>
+    <!-- received from <address> -->
+    <string name="TransactionDetails.receivedFrom">%1$sから受け取りました</string>
+    <!-- received via <address> -->
+    <string name="TransactionDetails.receivedVia">%1$s経由で受け取り済み</string>
+    <!-- receiving from <address> -->
+    <string name="TransactionDetails.receivingFrom">%1$sから受け取っています</string>
+    <!-- receiving via <address> -->
+    <string name="TransactionDetails.receivingVia">%1$s経由で受け取り中</string>
+    <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
+    <string name="TransactionDetails.sent">%1$sを送金しました</string>
+    <!-- Sent $5.00 -->
+    <string name="TransactionDetails.sentAmountDescription"><![CDATA[<b>%1$s</b>を送金しました]]></string>
+    <!-- Show Details button -->
+    <string name="TransactionDetails.showDetails">詳細を表示する</string>
+    <!-- The balance the user started with before the transaction completed -->
+    <string name="TransactionDetails.startingBalanceHeader">開始時残高</string>
+    <!-- Status section header -->
+    <string name="TransactionDetails.statusHeader">ステータス</string>
+    <!-- Transaction Details Title -->
+    <string name="TransactionDetails.title">取引詳細</string>
+    <!-- Transaction Details Title - Failed -->
+    <string name="TransactionDetails.titleFailed">詳細を隠す</string>
+    <!-- Transaction Details Title - Internal -->
+    <string name="TransactionDetails.titleInternal">内部</string>
+    <!-- Transaction Details Title - Received -->
+    <string name="TransactionDetails.titleReceived">受け取り済み</string>
+    <!-- Transaction Details Title - Receiving -->
+    <string name="TransactionDetails.titleReceiving">受け取り中</string>
+    <!-- Transaction Details Title - Sending -->
+    <string name="TransactionDetails.titleSending">送金中</string>
+    <!-- Transaction Details Title - Sent -->
+    <string name="TransactionDetails.titleSent">送金済み</string>
+    <!-- "Sent [$5] to [address]" => This is the "to [address]" part. -->
+    <string name="TransactionDetails.to">%1$sに</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.totalHeader">トータル</string>
+    <!-- Transaction ID header -->
+    <string name="TransactionDetails.txHashHeader">取引詳細</string>
+    <!-- (this transaction was) Received at this address: -->
+    <string name="TransactionDirection.address">このアドレスで受け取りました</string>
+    <!-- (this transaction was) Sent to this address: -->
+    <string name="TransactionDirection.to">このアドレスに送金しました</string>
+    <!-- Disabled until date -->
+    <string name="UnlockScreen.disabled">以下まで無効: %1$s</string>
+    <!-- Unlock with FaceID accessibility label -->
+    <string name="UnlockScreen.faceIdText">FaceIDでロックを解除する</string>
+    <!-- My Address button title -->
+    <string name="UnlockScreen.myAddress">マイアドレス</string>
+    <!-- Reset PIN with Paper Key button label. -->
+    <string name="UnlockScreen.resetPin">PINコードをリセット</string>
+    <!-- Scan button title -->
+    <string name="UnlockScreen.scan">スキャン</string>
+    <!-- Instruction to touch the sensor for fingerprint authentication -->
+    <string name="UnlockScreen.touchIdInstructions.android">タッチセンサー</string>
+    <!-- TouchID prompt text -->
+    <string name="UnlockScreen.touchIdPrompt">ブレッドのロックを解除してください。</string>
+    <!-- Device authentication body -->
+    <string name="UnlockScreen.touchIdPrompt.android">続行するためAndroid機器のロックを解除 してください</string>
+    <!-- Unlock with TouchID accessibility label -->
+    <string name="UnlockScreen.touchIdText">Touch IDでロックを解除する</string>
+    <!-- Device authentication title -->
+    <string name="UnlockScreen.touchIdTitle.android">認証が必要です</string>
+    <!-- Update PIN caption text -->
+    <string name="UpdatePin.caption">このPINコードは覚えておいてください。忘れた場合、ご自身のビットコインへアクセスできなくなります。</string>
+    <!-- PIN creation info. -->
+    <string name="UpdatePin.createInstruction">あなたのPINコードはご自身のブレッドのロックを解除したり、送金する時に利用します。</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.createTitle">PINコードの設定</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.createTitleConfirm">PINコードを再入力してください</string>
+    <!-- Enter current PIN instruction -->
+    <string name="UpdatePin.enterCurrent">現在のPINコードを入力してください。</string>
+    <!-- Enter new PIN instruction -->
+    <string name="UpdatePin.enterNew">新しいPINコードを入力してください。</string>
+    <!-- Re-Enter new PIN instruction -->
+    <string name="UpdatePin.reEnterNew">新しいPINコードを再入力してください。</string>
+    <!-- Update PIN failure error message. -->
+    <string name="UpdatePin.setPinError">申し訳ありませんが、PINコードが更新できませんでした。</string>
+    <!-- Update PIN failure alert view title -->
+    <string name="UpdatePin.setPinErrorTitle">PINコード更新エラー</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.updateTitle">PINコードを更新する</string>
+    <!-- Authorize to copy wallet addresses alert message -->
+    <string name="URLHandling.addressaddressListAlertMessage">ウォレットアドレスをクリップボードにコピーしますか?</string>
+    <!-- Authorize to copy wallet address PIN view prompt. -->
+    <string name="URLHandling.addressList">ウォレットアドレスのクリップボードへのコピーを認証</string>
+    <!-- Authorize to copy wallet address alert title -->
+    <string name="URLHandling.addressListAlertTitle">ウォレットアドレスをコピーします</string>
+    <!-- Copy wallet addresses alert button label -->
+    <string name="URLHandling.copy">コピー</string>
+    <!-- Verify PIN for transaction view body -->
+    <string name="VerifyPin.authorize">このトランザクションを認証するためにはPINを入力してください。</string>
+    <!-- Verify PIN view body -->
+    <string name="VerifyPin.continueBody">続けるにはPINコードを入力してください。</string>
+    <!-- Verify PIN view title -->
+    <string name="VerifyPin.title">PINコードが必要です</string>
+    <!-- Authorize transaction with touch id message -->
+    <string name="VerifyPin.touchIdMessage">このトランザクションを認証する</string>
+    <string name="Wallet.one_day">1d</string>
+    <string name="Wallet.one_month">1m</string>
+    <string name="Wallet.one_week">1w</string>
+    <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.three_months">3m</string>
+    <string name="Wallet.three_years">3y</string>
+    <!-- Turn off fast sync confirmation question -->
+    <string name="WalletConnectionSettings.confirmation">Fastsyncをオフにしてもよろしいですか？</string>
+    <!-- Explanation for wallet connection setting -->
+    <string name="WalletConnectionSettings.explanatoryText">ビットコインウォレットの同期を実質的に瞬時にします。仕組みの詳細については、こちらをご覧ください。</string>
+    <!-- Connection mode switch label. -->
+    <string name="WalletConnectionSettings.footerTitle">搭載</string>
+    <!-- Wallet connection settings view title -->
+    <string name="WalletConnectionSettings.header">Fastsync（パイロット）</string>
+    <!-- Link text in explanatoryText This NB: This should exactly match the last word of WalletConnectionSettings.explanatoryText -->
+    <string name="WalletConnectionSettings.link">ここに</string>
+    <!-- WalletConnectionSettiongs -->
+    <!--Wallet connection settings menu item title.-->
+    <string name="WalletConnectionSettings.menuTitle">接続モード</string>
+    <!-- Turn off fast sync button label -->
+    <string name="WalletConnectionSettings.turnOff">消す</string>
+    <!-- Wallet connection settings view title -->
+    <string name="WalletConnectionSettings.viewTitle">Fastsync</string>
+    <!-- 'No wallet' warning for watch app -->
+    <string name="Watch.noWalletWarning">BRDのiPhoneアプリを開き、ウォレットをセットアップする</string>
+    <!-- Dismiss button label -->
+    <string name="Webview.dismiss">解除</string>
+    <!-- Webview loading error message -->
+    <string name="Webview.errorMessage">このコンテンツの読み込み中にエラーが発生しました。もう一度お試しください。</string>
+    <!-- Updating webview message -->
+    <string name="Webview.updating">更新中...</string>
+    <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+    <string name="Welcome.body">Breadwalletは新しい機能や見た目を備えて、BRDという名前に生まれ変わりました。\n\nヘルプをご覧になるには、画面右上にある(?)からお探しください。</string>
+    <!-- Top title of welcome screen -->
+    <string name="Welcome.title">BRDへようこそ！</string>
+    <!-- Wipe wallet alert message -->
+    <string name="WipeWallet.alertMessage">本当にこのウォレットを削除しますか？</string>
+    <!-- Wipe wallet alert title -->
+    <string name="WipeWallet.alertTitle">ウォレットを消去しますか？</string>
+    <!-- Failed wipe wallet alert message -->
+    <string name="WipeWallet.failedMessage">ウォレットを消去できませんでした。</string>
+    <!-- Failed wipe wallet alert title -->
+    <string name="WipeWallet.failedTitle">失敗しました</string>
+    <!-- Enter phrase to wipe wallet instruction. (Important to explain it is the CURRENT [this wallet's] paper key that needs to be entered). -->
+    <string name="WipeWallet.instruction">デバイスからこのウォレットをワイプするには、リカバリフレーズを入力してください。</string>
+    <!-- Instructions for unlinking the wallet -->
+    <string name="WipeWallet.startMessage">ご利用ウォレットのリンクを解除してこの機器から解除してください。このウォレットのリンクが解除されると、この機器で新しいウォレットを起動したり、別のウォレット再び利用できるようになります。</string>
+    <!-- Start wipe wallet view warning -->
+    <string name="WipeWallet.startWarning">現在のウォレットはこのデバイスから削除されます。後で復元する場合は、リカバリフレーズを入力する必要があります。</string>
+    <!-- Unlink this wallet from this device. -->
+    <string name="WipeWallet.title">ウォレットのリンクを解除</string>
+    <!-- Wipe wallet button title -->
+    <string name="WipeWallet.wipe">消去</string>
+    <!-- Wiping activity message -->
+    <string name="WipeWallet.wiping">消去中...</string>
+    <!-- Paper key instructions. -->
+    <string name="WritePaperPhrase.instruction">単語は順番通りに書き留めて、安全な場所に保管しておいてください。</string>
+    <!-- button label -->
+    <string name="WritePaperPhrase.next">次へ</string>
+    <!-- button label -->
+    <string name="WritePaperPhrase.previous">前へ</string>
+    <!-- 1 of 3 -->
+    <string name="WritePaperPhrase.step">%2$dの%1$d</string>
+</resources>

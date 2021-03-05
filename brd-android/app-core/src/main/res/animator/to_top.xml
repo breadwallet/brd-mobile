@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false">
+    <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="@integer/slide_speed"
+        android:interpolator="@anim/overshoot_interpolator"
+        android:propertyName="y"
+        android:valueFrom="0"
+        android:valueTo="@integer/standard_screen_height_neg"
+        android:valueType="floatType" />
+
+</set>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseTextView">
+        <attr name="brdFont" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="BRLinearLayoutWithCaret">
+        <attr name="strokeColor" format="color"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="withStroke" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="BRButton">
+        <attr name="isBreadButton" format="boolean"/>
+        <attr name="buttonType" format="integer"/>
+        <attr name="buttonColor" format="reference"/>
+        <attr name="hasShadow" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="PinLayout">
+        <attr name="pinDigitsResId" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="BRKeyboard">
+        <attr name="showAlphabet" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="BRNotificationBar">
+        <attr name="breadText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="SparkView">
+        <attr name="spark_lineColor" format="color|reference" />
+        <attr name="spark_lineWidth" format="dimension|reference" />
+        <attr name="spark_cornerRadius" format="dimension|reference" />
+        <attr name="spark_fillColor" format="color|reference" />
+        <attr name="spark_scrubLineColor" format="color|reference" />
+        <attr name="spark_scrubLineWidth" format="dimension|reference" />
+        <attr name="spark_scrubEnabled" format="boolean"/>
+        <attr name="spark_fillType" format="enum">
+            <!-- must match values in SparkView.FillType -->
+            <enum name="none" value="0" />
+            <enum name="up" value="1" />
+            <enum name="down" value="2" />
+            <enum name="towardZero" value="3" />
+        </attr>
+    </declare-styleable>
+</resources>

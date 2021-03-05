@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App name -->
+    <string name="About.appName.android">BRD</string>
+    <!-- About screen blog label -->
+    <string name="About.blog">Blogg</string>
+    <!-- About screen footer -->
+    <string name="About.footer">Skapad av det lokala teamet för BRD. Version %1$s Build %2$s</string>
+    <!-- Privay Policy button label -->
+    <string name="About.privacy">Sekretesspolicy</string>
+    <!-- About screen reddit label -->
+    <string name="About.reddit">Reddit</string>
+    <!-- Terms of Use button label -->
+    <string name="About.terms">Användarvillkor</string>
+    <!-- About screen title -->
+    <string name="About.title">Om</string>
+    <!-- About screen twitter label -->
+    <string name="About.twitter">Twitter</string>
+    <!-- About screen wallet ID label -->
+    <string name="About.walletID">Belönings-ID för BRD</string>
+    <!-- Close modal button accessibility label -->
+    <string name="AccessibilityLabels.close">Stäng</string>
+    <!-- Support center accessibiliy label -->
+    <string name="AccessibilityLabels.faq">Support Center</string>
+    <!-- Account balance -->
+    <string name="Account.balance">Saldo</string>
+    <!-- Delisted token alert banner message -->
+    <string name="Account.delistedToken">Detta token har avlistats. \n\nDu kanske fortfarande kan skicka dessa tokens till en annan plattform. För mer information, besök vår supportsida.</string>
+    <!-- $10000 per BTC -->
+    <string name="Account.exchangeRate">%1$s per %2$s</string>
+    <!-- Loading Wallet Message -->
+    <string name="Account.loadingMessage">Laddar plånbok</string>
+    <!-- Confirm Account Creation mesage body -->
+    <string name="AccountCreation.body">Skapa bara ett Hedera-konto om du tänker lagra HBAR i din plånbok.</string>
+    <!-- Create Account button label -->
+    <string name="AccountCreation.create">Skapa konto</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.creating">Skapar konto</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.error">Ett fel inträffade under skapandet av kontot. Vänligen försök igen senare.</string>
+    <!-- Not Now button label. -->
+    <string name="AccountCreation.notNow">Inte nu</string>
+    <!-- Creating Account progress Label -->
+    <string name="AccountCreation.timeout">Begäran avbröts. Vänligen försök igen senare.</string>
+    <!-- Confirm Account Creation Title -->
+    <string name="AccountCreation.title">Bekräfta konto skapande</string>
+    <!-- Default wallet name -->
+    <string name="AccountHeader.defaultWalletName">Mitt BRD</string>
+    <!-- Third party keyboard warning -->
+    <string name="Alert.customKeyboard.android">Det verkar som om du använder ett tangentbord från tredje part som kan spela in vad du skriver och stjäla din återställningsfras. Byt till standard Android-tangentbordet för extra skydd.</string>
+    <!-- Error alert title -->
+    <string name="Alert.error">Fel</string>
+    <!-- Keystore error -->
+    <string name="Alert.keystore.generic.android">Det har uppstått ett problem med KeyStore till Android OS. Kontakta support@breadwallet.com</string>
+    <!-- KeyStore error, keys are invalidated -->
+    <string name="Alert.keystore.invalidated.android">Dina krypterade BRD-uppgifter har nyligen ogiltigförklarats på grund av att Androids skärmlås inaktiverades.</string>
+    <!-- Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. -->
+    <string name="Alert.keystore.invalidated.uninstall.android">Vi kan inte fortsätta eftersom dina inställningar för skärmlås har ändrats (t.ex. lösenord har inaktiverats, fingeravtryck har ändrats). Av säkerhetsskäl har Android permanent låst din nyckelbutik. Därför måste dina BRD-appdata rensas genom att avinstallera. \n\nOroa dig inte, dina pengar är fortfarande säkra! Installera om appen och återställ din plånbok med din återställningsfras.</string>
+    <!-- Warn user key store data has been invalidate because the user changed their security settings. The user must wipe their app data. -->
+    <string name="Alert.keystore.invalidated.wipe.android">Vi kan inte fortsätta eftersom dina inställningar för skärmlås har ändrats (t.ex. lösenord har inaktiverats, fingeravtryck har ändrats). Av säkerhetsskäl har Android permanent låst din nyckelbutik. Därför måste dina BRD-appdata rensas. \n\nOroa dig inte, dina pengar är fortfarande säkra! Återställ din plånbok med din återställningsfras.</string>
+    <!-- Keystore error title -->
+    <string name="Alert.keystore.title.android">KeyStore-fel för Android</string>
+    <!-- No internet alert message -->
+    <string name="Alert.noInternet">Ingen anslutning till internet hittades. Kontrollera din anslutning och försök igen.</string>
+    <!-- General error message -->
+    <string name="Alert.somethingWentWrong">Något gick fel. Försök igen, tack. </string>
+    <!-- Request timed out error message -->
+    <string name="Alert.timedOut">Begärde time-out. Kontrollera din anslutning och försök igen.</string>
+    <!-- Warning alert title -->
+    <string name="Alert.warning">Varning</string>
+    <!-- 'the addresses were copied'' Alert title -->
+    <string name="Alerts.copiedAddressesHeader">Adresser kopierade</string>
+    <!-- Addresses Copied Alert sub header -->
+    <string name="Alerts.copiedAddressesSubheader">Alla plånboksadresser har kopierats.</string>
+    <!-- Alert Header Label (the paper key was set) -->
+    <string name="Alerts.paperKeySet">Återställningsfrasuppsättning</string>
+    <!-- Alert Subheader label (playfully positive) -->
+    <string name="Alerts.paperKeySetSubheader">Härligt!</string>
+    <!-- Alert Header label (the PIN was set) -->
+    <string name="Alerts.pinSet">PIN-kod är inställd</string>
+    <!-- Send failure alert header label (the send failed to happen) -->
+    <string name="Alerts.sendFailure">Sändningen misslyckades</string>
+    <!-- Send success alert header label (confirmation that the send happened) -->
+    <string name="Alerts.sendSuccess">Sänd bekräftelse</string>
+    <!-- Send success alert subheader label (e.g. the money was sent) -->
+    <string name="Alerts.sendSuccessSubheader">Pengarna sändade!</string>
+    <!-- Fingerprint was recognized by the scanner -->
+    <string name="Alerts.touchIdSucceeded.android">Fingeravtryck bekräftat</string>
+    <!-- Tell the user where they can enable permissions to access device storage. -->
+    <string name="Android.allowFileSystemAccess">Vi ber dig att medge lagringstillåtelse i dina enhetsinställningar: \"Inställningar\" &gt; \"Appar\" &gt; \"BRD\" &gt; \"Tillåtelser\".</string>
+    <!-- The "home" screen is the name of the top level menu for the app. -->
+    <string name="Android.BCH.welcome.message">Valfri BCH i din plånbok kan nås via hemskärmen.</string>
+    <!-- Warning about using apps that can alter the screen -->
+    <string name="Android.screenAlteringMessage">BRD fungerar inte korrekt om inte skärmskiftande appar (såsom Twilight) är inaktiverade.</string>
+    <!-- An app that alters the screen ("screen-altering app") has been detected. -->
+    <string name="Android.screenAlteringTitle">Skärmskiftande app upptäckt</string>
+    <!-- JSON Serialization error message -->
+    <string name="ApiClient.jsonError">Fel vid JSON-serialisering</string>
+    <!-- Wallet not ready error message -->
+    <string name="ApiClient.notReady">Plånboken ej redo</string>
+    <!-- API Token error message -->
+    <string name="ApiClient.tokenError">Kan inte ta emot API-symbol</string>
+    <!-- Send BCH view body. -->
+    <string name="BCH.body">Ange mottagarens BCH-adress nedan. Alla BCH i din plånbok vid nästa fork (%1$s) kommer sändas.</string>
+    <!-- Confirm sending <$5.00> to <address>? -->
+    <string name="BCH.confirmationMessage">Bekräfta sändar %1$s till %2$s</string>
+    <!-- Confirmation alert title -->
+    <string name="BCH.confirmationTitle">Bekräftelse</string>
+    <!-- Generic bch erorr message -->
+    <string name="BCH.genericError">Ditt konto har inte några BCH, eller så tar du emot BCH först efter nästa fork.</string>
+    <!-- Transaction ID copied message -->
+    <string name="BCH.hashCopiedMessage">Transaktions-ID kopierat</string>
+    <!-- No address error message -->
+    <string name="BCH.noAddressError">Var god ange en adress</string>
+    <!-- Attempted to scan unsupported qr code error message. -->
+    <string name="BCH.paymentProtocolError">Betalningsprotokollsbegäran stöds inte för BCH-transaktioner</string>
+    <!-- BCH successfully sent alert message -->
+    <string name="BCH.successMessage">BCH sändades.</string>
+    <!-- Widthdraw BCH view title -->
+    <string name="BCH.title">Ta ut BCH</string>
+    <!-- Tx Hash button header -->
+    <string name="BCH.txHashHeader">BCH transaktions-ID</string>
+    <!-- Approve button label -->
+    <string name="BitID.approve">Godkänn</string>
+    <!-- <sitename> is requesting authentication using your bitcoin wallet -->
+    <string name="BitID.authenticationRequest">%1$s begär autentisering med hjälp av din bitcoin-plånbok</string>
+    <!-- Deny button label -->
+    <string name="BitID.deny">Avslå</string>
+    <!-- BitID error alert title -->
+    <string name="BitID.error">Autentiseringsfel</string>
+    <!-- BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) -->
+    <string name="BitID.errorMessage">Var god kontrollera med tjänsten. Du kan behöva försöka igen.</string>
+    <!-- BitID success alert title -->
+    <string name="BitID.success">Autentiseringen lyckades</string>
+    <!-- BitID Authentication Request alert view title -->
+    <string name="BitID.title">BitId autentiseringsförfrågan</string>
+    <!-- As in "(tap here to) buy (bitcoin)" -->
+    <string name="Button.buy">Köp</string>
+    <!-- Cancel button label -->
+    <string name="Button.cancel">Avbryt</string>
+    <!-- Confirm button title -->
+    <string name="Button.confirm">Bekräfta</string>
+    <!-- Button label to open a email compose window with our support email in the to field. -->
+    <string name="Button.contactSupport.android">Kontakta Support</string>
+    <!-- prompt continue button -->
+    <string name="Button.continueAction">Fortsätt</string>
+    <!-- prompt dismiss button -->
+    <string name="Button.dismiss">Avvisa</string>
+    <!-- Done button title -->
+    <string name="Button.done">Klar</string>
+    <!-- Button to return to the "home" screen (the home screen is the top menu). -->
+    <string name="Button.Home">Hem</string>
+    <!-- Ignore button label -->
+    <string name="Button.ignore">Ignorera</string>
+    <!-- Maybe Later button label -->
+    <string name="Button.maybeLater">Kanske senare</string>
+    <!-- menu button -->
+    <string name="Button.menu">Meny</string>
+    <!-- More information button -->
+    <string name="Button.moreInfo">Mer info</string>
+    <!-- No button -->
+    <string name="Button.no">Nej</string>
+    <!-- OK button label -->
+    <string name="Button.ok">OK</string>
+    <!-- Open Settings button -->
+    <string name="Button.openSettings">Öppna Inställningar</string>
+    <!-- receive button -->
+    <string name="Button.receive">Ta emot</string>
+    <!-- Button label to open Security Settings. -->
+    <string name="Button.securitySettings.android">Säkerhetscenter</string>
+    <!-- Click this button to sell an asset -->
+    <string name="Button.sell">Sälj</string>
+    <!-- send button -->
+    <string name="Button.send">Sänd</string>
+    <!-- Settings button label -->
+    <string name="Button.settings">Inställningar</string>
+    <!-- Setup button label -->
+    <string name="Button.setup">Skapa</string>
+    <!-- Skip button title -->
+    <string name="Button.skip">Hoppa över</string>
+    <!-- Settings button label -->
+    <string name="Button.submit">Överlämna</string>
+    <!-- Button label to uninstall the app. -->
+    <string name="Button.uninstall.android">Avinstallera</string>
+    <!-- Button label to wipe the user's application data. -->
+    <string name="Button.wipe.android">Ta bort</string>
+    <!-- Yes button -->
+    <string name="Button.yes">Ja</string>
+    <!-- Camera plugin instruction -->
+    <string name="CameraPlugin.centerInstruction">Centrera ditt ID i boxen</string>
+    <string name="CloudBackup.backupDeleted">Backup raderad</string>
+    <string name="CloudBackup.backupDeletedMessage">Din iCloud-säkerhetskopia har raderats efter för många misslyckade PIN-försök. Appen kommer nu att starta om.</string>
+    <string name="CloudBackup.backupMenuTitle">iCloud Backup</string>
+    <string name="CloudBackup.createButton">Skapa ny plånbok</string>
+    <string name="CloudBackup.createWarning">En tidigare säkerhetskopierad plånbok har upptäckts. Att använda denna säkerhetskopia rekommenderas. Är du säker på att du vill fortsätta att skapa en ny plånbok?</string>
+    <string name="CloudBackup.enableBody1">iCloud-nyckelring måste vara aktiverad för att den här funktionen ska fungera.</string>
+    <string name="CloudBackup.enableBody2">Det ska se ut så här:</string>
+    <string name="CloudBackup.enableButton">Jag har aktiverat iCloud Keychain</string>
+    <string name="CloudBackup.enableTitle">Aktivera nyckelring</string>
+    <string name="CloudBackup.encryptBackupMessage">Ange stift för att kryptera säkerhetskopiering</string>
+    <string name="CloudBackup.mainBody">Observera att iCloud-säkerhetskopiering är bara lika säker som ditt iCloud-konto. Vi rekommenderar fortfarande att du skriver ned din återställningsfras i följande steg och håller den säker. Återställningsfrasen är det enda sättet att återställa din plånbok om du inte längre kan komma åt iCloud.</string>
+    <string name="CloudBackup.mainTitle">Säkerhetskopiering av återställning iCloud</string>
+    <string name="CloudBackup.mainWarning">iCloud-nyckelring måste vara aktiverad i appen iOS-inställningar för att den här funktionen ska fungera</string>
+    <string name="CloudBackup.mainWarningConfirmation">Är du säker på att du vill inaktivera iCloud Backup? Detta tar bort din säkerhetskopia från alla enheter.</string>
+    <string name="CloudBackup.pinAttempts">Återstående försök innan radering av säkerhetskopiering: %1$@</string>
+    <string name="CloudBackup.recoverButton">Återställ från återställningsnyckel</string>
+    <string name="CloudBackup.recoverHeader">Ange PIN-kod för att låsa upp iCloud-säkerhetskopiering</string>
+    <string name="CloudBackup.restoreButton">Återställ från iCloud Backup</string>
+    <string name="CloudBackup.selectTitle">Välj Säkerhetskopia</string>
+    <string name="CloudBackup.step1">Starta appen Inställningar.</string>
+    <string name="CloudBackup.step2">Tryck på ditt Apple-ID-namn.</string>
+    <string name="CloudBackup.step3">Tryck på iCloud.</string>
+    <string name="CloudBackup.step4">Kontrollera att iCloud-nyckelring är PÅ</string>
+    <string name="CloudBackup.understandText">Jag förstår att den här funktionen inte fungerar om inte iCloud Keychain är aktiverat.</string>
+    <string name="CloudBackup.warningBody">Din iCloud-säkerhetskopia raderas efter %1$@ fler felaktiga PIN-försök.</string>
+    <!-- Amount to Send: ($1.00) -->
+    <string name="Confirmation.amountLabel">Belopp att sänd:</string>
+    <string name="Confirmation.destinationTag">Mål tag</string>
+    <string name="Confirmation.destinationTag_EmptyHint">(tom)</string>
+    <!-- Network Fee: ($1.00) -->
+    <string name="Confirmation.feeLabel">Nätverks-avgift</string>
+    <!-- Network Fee: (ETH) -->
+    <string name="Confirmation.feeLabelETH">Nätverksavgift (ETH):</string>
+    <!-- Label for Hedera Memo field on transaction confirmation screen -->
+    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
+    <string name="Confirmation.processingTime">Behandlingstid: Den här transaktionen beräknas slutföras om %1$s.</string>
+    <!-- Label for "send" button on final confirmation screen -->
+    <string name="Confirmation.send">Sänd</string>
+    <!-- Confirmation Screen title -->
+    <string name="Confirmation.title">Bekräftelse</string>
+    <!-- To: (address) -->
+    <string name="Confirmation.to">Till</string>
+    <!-- Total Cost: ($5.00) -->
+    <string name="Confirmation.totalLabel">Total kostnad:</string>
+    <!-- Confirm paper phrase error message -->
+    <string name="ConfirmPaperPhrase.error">De angivna orden matchar inte din återställningsfras. Var god försök igen.</string>
+    <!-- Confirm paper phrase view label. -->
+    <string name="ConfirmPaperPhrase.label">För att säkerställa att allt har skrivits ner korrekt, skriv följande ord från din återställningsfras.</string>
+    <!-- Word label eg. Word #1, Word #2 -->
+    <string name="ConfirmPaperPhrase.word">Ord #%1$s</string>
+    <!-- Agree to legal terms button -->
+    <string name="Crowdsale.agree">Godkänn</string>
+    <!-- As in "(tap here to) buy (some) tokens" -->
+    <string name="Crowdsale.buyButton">Köp tokens</string>
+    <!-- Decline to legal terms button -->
+    <string name="Crowdsale.decline">Avböj</string>
+    <!-- Resume Idnetify verification button -->
+    <string name="Crowdsale.resume">Återuppta verifikation</string>
+    <!-- Retry Identity verification button -->
+    <string name="Crowdsale.retry">Försök igen</string>
+    <!-- Bitcoin denomination picker label -->
+    <string name="DefaultCurrency.bitcoinLabel">Bitcoin visningsenhet</string>
+    <!-- Exchange rate label -->
+    <string name="DefaultCurrency.rateLabel">Växelkurs</string>
+    <!-- The wallet is disabled. -->
+    <string name="Disabled.title">Plånbok inaktiverad</string>
+    <!-- Share address by e-mail subject -->
+    <string name="Email.address_subject">%1$s Adress</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.accountRequest">Begär %1$s betalning</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.callRequest">Begär %1$s smart kontraktsamtal</string>
+    <!-- Service capabilities description -->
+    <string name="EME.permissions.paymentRequest">Begär %1$s kontoinformation</string>
+    <!-- Email unavailable alert title -->
+    <string name="ErrorMessages.emailUnavailableMessage">Enheten är inte konfigurerad för att sänd e-post med post-appen i iOS.</string>
+    <!-- Email unavailable alert title -->
+    <string name="ErrorMessages.emailUnavailableTitle">E-posten är inte tillgänglig</string>
+    <!-- Message that gets shown when we've detected the user has encountered the looping lock-screen bug. (preserve [ ] characters) -->
+    <string name="ErrorMessages.loopingLockScreen.android">BRD kan inte verifieras på grund av en bugg i din version av Android. [Klicka här för mer information.]</string>
+    <!-- Messaging unavailable alert title -->
+    <string name="ErrorMessages.messagingUnavailableMessage">Denna enhet är inte konfigurerad för att sänd meddelanden.</string>
+    <!-- Messaging unavailable alert title -->
+    <string name="ErrorMessages.messagingUnavailableTitle">Meddelandehantering inte tillgänglig</string>
+    <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
+    <string name="ErrorMessages.touchIdFailed.android">Fingeravtryck ej bekräftat. Försök igen.</string>
+    <!-- You can customize your Face ID Spending Limit from the [menu] -->
+    <string name="FaceIDSettings.customizeText">Du kan anpassa din utgiftsgräns för Face ID från %1$s.</string>
+    <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
+    <string name="FaceIDSettings.explanatoryText">Använd Face ID för att låsa upp din BRD-app och sänd pengar.</string>
+    <!-- Face Id screen label -->
+    <string name="FaceIDSettings.label">Använd ditt ansikte för att låsa upp din BRD och sänd pengar upp till en satt gräns.</string>
+    <!-- Title of the screen for setting the Face ID Spending Limit -->
+    <string name="FaceIDSettings.linkText">Sida för utgiftsgräns för Face ID</string>
+    <!-- Setting to turn on Face ID for BRD -->
+    <string name="FaceIDSettings.switchLabel">Aktivera Face ID för BRD</string>
+    <!-- Face ID settings view title -->
+    <string name="FaceIDSettings.title">Face ID</string>
+    <!-- Text label for a toggle that enables Face ID for sending money. -->
+    <string name="FaceIDSettings.transactionsTitleText">Aktivera Face ID för att sänd pengar</string>
+    <!-- Instructions on how to turn on face id on the iPhone. Please ensure the name of the menu in this string matches the wording Apple uses in the iPhone menu. -->
+    <string name="FaceIDSettings.unavailableAlertMessage">Du har inte satt upp Face ID på den här enheten. Gå till Inställningar-&gt;Face ID &amp; Lösenord för att sätta upp det nu.</string>
+    <!-- Face ID unavailable alert title -->
+    <string name="FaceIDSettings.unavailableAlertTitle">Face ID har inte satts upp</string>
+    <!-- Text label for a toggle that enables Face ID for unlocking the BRD app. -->
+    <string name="FaceIDSettings.unlockTitleText">Aktivera Face ID för att låsa upp BRD</string>
+    <!-- Face Id spending limit screen title -->
+    <string name="FaceIDSpendingLimit.title">Utgiftsgräns för Face ID</string>
+    <!-- Economy fee -->
+    <string name="FeeSelector.economy">Ekonomi</string>
+    <!-- E.g. [This transaction is predicted to complete in] 1-24 hours -->
+    <string name="FeeSelector.economyTime">1–24 timmar</string>
+    <!-- Warning message for economy fee -->
+    <string name="FeeSelector.economyWarning">Detta alternativ rekommenderas inte för tidskänsliga transaktioner.</string>
+    <!-- E.g. Estimated delivery: 10-60 minutes -->
+    <string name="FeeSelector.estimatedDeliver">Beräknad leverans: %1$s</string>
+    <!-- [This transaction will complete in] 2-5 minutes -->
+    <string name="FeeSelector.ethTime">2-5 minuter</string>
+    <string name="FeeSelector.lessThanMinutes">&lt;%1$d minuter</string>
+    <!-- Priority fee -->
+    <string name="FeeSelector.priority">Prioritet</string>
+    <!-- E.g. [This transaction is predicted to complete in] 10-30 minutes -->
+    <string name="FeeSelector.priorityTime">10–30 minuter</string>
+    <!-- Regular fee -->
+    <string name="FeeSelector.regular">Vanlig</string>
+    <!-- E.g. [This transaction is predicted to complete in] 10-60 minutes -->
+    <string name="FeeSelector.regularTime">10–60 minuter</string>
+    <!-- Fee Selector title -->
+    <string name="FeeSelector.title">Bearbetningshastighet</string>
+    <!-- Label for the Android file chooser when we need to prompt the user to select an image file. -->
+    <string name="FileChooser.selectImageSource.android">Välj bildkälla</string>
+    <!-- Fingerprint authentication settings screen description -->
+    <string name="FingerprintSettings.description">Använd ditt fingeravtryck för att låsa upp din BRD-app och sänd transaktioner.</string>
+    <!-- Switch label to enable fingerprint authentication to send money -->
+    <string name="FingerprintSettings.sendMoney">Använd fingeravtryck för att sänd pengar</string>
+    <!-- Fingerprint authentication settings sceen title -->
+    <string name="FingerprintSettings.title">Fingeravtryck</string>
+    <!-- Switch label to enable fingerprint authentication to unlock BRD app -->
+    <string name="FingerprintSettings.unlockApp">Använd fingeravtryck för att låsa upp BRD</string>
+    <!-- This is the section that allows administration of the user's wallet -->
+    <string name="HomeScreen.admin">Admin</string>
+    <!-- Home screen menu button to buy some bitcoin -->
+    <string name="HomeScreen.buy">Köpa</string>
+    <!-- home screen toolbar 'Buy & Sell' button -->
+    <string name="HomeScreen.buyAndSell">Köp &amp; Sälj</string>
+    <!-- Menu button on the home screen toolbar -->
+    <string name="HomeScreen.menu">Meny</string>
+    <!-- This section lists the users wallets -->
+    <string name="HomeScreen.portfolio">Plånböcker</string>
+    <!-- Label for the total balance of all the user's assets (style is all lower case if your language permits) -->
+    <string name="HomeScreen.totalAssets">totala tillgångar</string>
+    <!-- (Tap here to) trade (your assets for other assets) -->
+    <string name="HomeScreen.trade">Handla</string>
+    <!-- Checking private key balance progress view text -->
+    <string name="Import.checking">Kontrollerar privat nyckelsaldo...</string>
+    <!-- Sweep private key confirmation message -->
+    <string name="Import.confirm">Sänd %1$s från denna privata nyckel till din plånbok? Bitcoins nätverk tar en avgift på %2$s.</string>
+    <!-- Duplicate key error message -->
+    <string name="Import.Error.duplicate">Denna privata nyckel finns redan i din plånbok.</string>
+    <!-- empty private key error message -->
+    <string name="Import.Error.empty">Denna privata nyckel är tom.</string>
+    <!-- High fees error message -->
+    <string name="Import.Error.highFees">Transaktionsavgifter skulle kosta mer än de medel som finns tillgängliga på denna privata nyckel.</string>
+    <!-- Not a valid private key error message -->
+    <string name="Import.Error.notValid">Inte någon privat nyckel</string>
+    <!-- Import signing error message -->
+    <string name="Import.Error.signing">Fel vid signering av transaktion</string>
+    <!-- [Redeem] the funds stored on this private key. -->
+    <string name="Import.importButton">Lös In</string>
+    <!-- Importing wallet progress view label -->
+    <string name="Import.importing">Att Lösa In En Privat Nyckel</string>
+    <!-- Caption for graphics -->
+    <string name="Import.leftCaption">Privat Nyckel</string>
+    <!-- Import wallet intro screen message -->
+    <string name="Import.message">Privata nycklar trycks ofta på papper som en QR-kod och används för att lagra tillgångar offline. Du löser in en privat nyckel för att överföra alla pengar den kontrollerar in i din BRD med en enda transaktion.</string>
+    <!-- Enter password alert view title -->
+    <string name="Import.password">Denna privata nyckel är lösenordsskyddad.</string>
+    <!-- password textfield placeholder -->
+    <string name="Import.passwordPlaceholder">lösenord</string>
+    <!-- Caption for graphics -->
+    <string name="Import.rightCaption">Din BRD-plånbok</string>
+    <!-- Scan Private key button label -->
+    <string name="Import.scan">Läs av privat nyckel</string>
+    <!-- Import wallet success alert title -->
+    <string name="Import.success">Lyckades</string>
+    <!-- Successfully imported wallet message body -->
+    <string name="Import.SuccessBody">Inlösning av privat nyckel lyckades.</string>
+    <!-- Import Wallet screen title -->
+    <string name="Import.title">Lös In Privat Nyckel</string>
+    <!-- Unlocking Private key activity view message. -->
+    <string name="Import.unlockingActivity">Nyckel för upplåsning</string>
+    <!-- Import wallet intro warning message -->
+    <string name="Import.warning">Att lösa in en privat nyckel importerar inte transaktionshistoriken eller annan information.</string>
+    <!-- Wrong password alert message -->
+    <string name="Import.wrongPassword">Fel lösenord, var god försök igen.</string>
+    <!-- Close app button -->
+    <string name="JailbreakWarnings.close">Stäng</string>
+    <!-- Ignore jailbreak warning button -->
+    <string name="JailbreakWarnings.ignore">Ignorera</string>
+    <!-- Jailbreak warning message -->
+    <string name="JailbreakWarnings.messageWithBalance">ENHETENS SÄKERHET ÄR ÄVENTYRAD\nEn \"intrångs\"-app kan få tillgång till BRDs nyckeldata och stjäla dina bitcoin! Töm denna plånbok direkt och återställ den på en säker enhet.</string>
+    <!-- Jailbreak warning message -->
+    <string name="JailbreakWarnings.messageWithoutBalance">ENHETENS SÄKERHET ÄR ÄVENTYRAD\nEn \"intrångs\"-app kan få tillgång till BRDs nyckeldata och stjäla dina bitcoin! Använd BRD endast på en säker enhet.</string>
+    <!-- Jailbreak warning title -->
+    <string name="JailbreakWarnings.title">VARNING</string>
+    <!-- Wipe wallet button -->
+    <string name="JailbreakWarnings.wipe">Töm</string>
+    <!-- Approve link wallet button label -->
+    <string name="LinkWallet.approve">Godkänn</string>
+    <!-- Decline link wallet button label -->
+    <string name="LinkWallet.decline">Avböj</string>
+    <!-- Link Wallet view dislaimer footer -->
+    <string name="LinkWallet.disclaimer">Externa appar kan inte sänd pengar utan godkännande från denna enhet</string>
+    <!-- Link Wallet view title above domain list -->
+    <string name="LinkWallet.domainTitle">OBS: Interagera BARA med denna app från en av följande domäner</string>
+    <!-- Link wallet logo footer text -->
+    <string name="LinkWallet.logoFooter">Säker kassa</string>
+    <!-- Link Wallet view title above permissions list -->
+    <string name="LinkWallet.permissionsTitle">Denna app kommer att kunna:</string>
+    <!-- Link Wallet view title -->
+    <string name="LinkWallet.title">Länka plånbok</string>
+    <!-- Location services disabled error -->
+    <string name="LocationPlugin.disabled">Platstjänster är inaktiverade.</string>
+    <!-- No permissions for location services -->
+    <string name="LocationPlugin.notAuthorized">BRD har inte rätt att utnyttja platstjänster</string>
+    <!-- Wallet creation date prefix -->
+    <string name="ManageWallet.creationDatePrefix">Du skapade din plånbok på %1$s</string>
+    <!-- Manage wallet description text -->
+    <string name="ManageWallet.description">Din plånboks namn visas bara i din kontohistorik och kan inte ses av någon annan.</string>
+    <!-- Change Wallet name textfield label -->
+    <string name="ManageWallet.textFeildLabel">Plånbokens namn</string>
+    <!-- Manage wallet modal title -->
+    <string name="ManageWallet.title">Hantera plånbok</string>
+    <string name="MarketData.high24h">24h hög</string>
+    <string name="MarketData.low24h">24 timmar låg</string>
+    <string name="MarketData.marketCap">Börsvärde</string>
+    <string name="MarketData.volume">Handelsvolym</string>
+    <!-- "Add [a] Wallet [to the home screen]" -->
+    <string name="MenuButton.addWallet">Lägg till plånbok</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.lock">Lås plånbok</string>
+    <!-- (Click here to) manage (your list of) wallets -->
+    <string name="MenuButton.manageWallets">Hantera plånböcker</string>
+    <!-- (press here to) scan (a) QR code -->
+    <string name="MenuButton.scan">Skanna QR-kod</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.security">Säkerhetscenter</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.settings">Inställningar</string>
+    <!-- Menu button title -->
+    <string name="MenuButton.support">Support</string>
+    <!-- button label -->
+    <string name="MenuViewController.createButton">Skapa ny plånbok</string>
+    <!-- Menu modal title -->
+    <string name="MenuViewController.modalTitle">Meny</string>
+    <!-- button label -->
+    <string name="MenuViewController.recoverButton">Återställ plånbok</string>
+    <!-- Paper Key Skip modal body (Android-version) -->
+    <string name="Modal.PaperKeySkip.Body.Android">Din återställningsfras krävs för att öppna din plånbok om du ändrar säkerhetsinställningarna på din telefon. \n\nÄr du säker på att du vill ställa in din återställningsfras senare?</string>
+    <!-- Paper Key Skip modal Continue Set Up button -->
+    <string name="Modal.PaperKeySkip.Button.ContinueSetUp">Fortsätt processen</string>
+    <!-- Paper Key Skip modal I'll do it later button -->
+    <string name="Modal.PaperKeySkip.Button.IllDoItLater">Jag gör det senare</string>
+    <!-- Paper Key Skip modal title -->
+    <string name="Modal.PaperKeySkip.Title">Observera</string>
+    <!-- Node selection mode is automatic -->
+    <string name="NodeSelector.automatic">Automatisk</string>
+    <!-- Switch to automatic mode button label -->
+    <string name="NodeSelector.automaticButton">Byt till automatiskt läge</string>
+    <!-- Node is connected label -->
+    <string name="NodeSelector.connected">Ansluten</string>
+    <!-- Node is connecting label -->
+    <string name="NodeSelector.connecting">Ansluter</string>
+    <!-- Enter node ip address view body -->
+    <string name="NodeSelector.enterBody">Ange nodens IP-adress och port (valfritt)</string>
+    <!-- Enter Node ip address view title -->
+    <string name="NodeSelector.enterTitle">Ange nod</string>
+    <!-- Entered invalid node address at the node selection screen -->
+    <string name="NodeSelector.invalid">Ogiltig nod</string>
+    <!-- Switch to manual mode button label -->
+    <string name="NodeSelector.manualButton">Byt till manuellt läge</string>
+    <!-- Node address label -->
+    <string name="NodeSelector.nodeLabel">Nuvarande primär nod</string>
+    <!-- Node is not connected label -->
+    <string name="NodeSelector.notConnected">Inte ansluten</string>
+    <!-- Node status label -->
+    <string name="NodeSelector.statusLabel">Nodens anslutningsstatus</string>
+    <!-- Node Selector view title -->
+    <string name="NodeSelector.title">Bitcoin-noder</string>
+    <!-- Onboarding screen 'I'll browse first' button -->
+    <string name="Onboarding.browseFirst">Jag ska titta runt först</string>
+    <!-- Onboarding screen 'Buy some coin' button -->
+    <string name="Onboarding.buyCoin">Köp mynt</string>
+    <!-- Onboarding screen 'Get started' (create new wallet) button -->
+    <string name="Onboarding.getStarted">Kom igång</string>
+    <!-- Onboarding screen 'Next' button -->
+    <string name="Onboarding.next">Nästa</string>
+    <!-- Onboarding screen restore an existing wallet. -->
+    <string name="Onboarding.restoreWallet">Återskapa plånbok</string>
+    <!-- Onboarding screen Skip button title that allows the user to exit the onboarding process. -->
+    <string name="Onboarding.skip">Hoppa över</string>
+    <!-- Onboarding screen Page 4 title -->
+    <string name="OnboardingPageFour.title">Börja investera idag med så lite som $50!</string>
+    <!-- Onboarding screen Page 1 title -->
+    <string name="OnboardingPageOne.title">Välkommen till din nya digitala plånbok!</string>
+    <!-- Onboarding screen Page 3 subtitle -->
+    <string name="OnboardingPageThree.subtitle">Investera och bredda dig med BRD, lätt och tryggt.</string>
+    <!-- Onboarding screen Page 3 title -->
+    <string name="OnboardingPageThree.title">Köp och handla med bitcoin, jetonger och andra digitala valutor.</string>
+    <!-- Onboarding screen Page 2 subtitle -->
+    <string name="OnboardingPageTwo.subtitle">Vi har skyddade tillgångar värda över 6 miljarder  USD.</string>
+    <!-- Onboarding screen Page 2 title -->
+    <string name="OnboardingPageTwo.title">Bli en av miljontals människor runt om i världen som litar på BRD.</string>
+    <!-- Eg. Send 1.0Eth to purchase CCC -->
+    <string name="PaymentConfirmation.amountText">Sänd %1$s för att köpa %2$s</string>
+    <!-- Payment confirmation view title -->
+    <string name="PaymentConfirmation.title">Bekräftelse</string>
+    <!-- Bad Payment request alert title -->
+    <string name="PaymentProtocol.Errors.badPaymentRequest">Felaktig utbetalningsbegäran</string>
+    <!-- Error opening payment protocol file message -->
+    <string name="PaymentProtocol.Errors.corruptedDocument">Dokumentet är felaktigt eller utan stöd</string>
+    <!-- Missing certificate payment protocol error message -->
+    <string name="PaymentProtocol.Errors.missingCertificate">certifikat saknas</string>
+    <!-- Request expired payment protocol error message -->
+    <string name="PaymentProtocol.Errors.requestExpired">begäran har utgått</string>
+    <!-- Payment too small alert title -->
+    <string name="PaymentProtocol.Errors.smallOutputError">Kunde inte göra utbetalning</string>
+    <!-- Amount too small error message -->
+    <string name="PaymentProtocol.Errors.smallPayment">Utbetalning av Bitcoin får inte vara lägre än %1$s.</string>
+    <!-- Output too small error message. -->
+    <string name="PaymentProtocol.Errors.smallTransaction">Utbetalningstransaktioner av Bitcoin får inte vara lägre än %1$s.</string>
+    <!-- Unsupported signature type payment protocol error message -->
+    <string name="PaymentProtocol.Errors.unsupportedSignatureType">signaturtypen saknar stöd</string>
+    <!-- Untrusted certificate payment protocol error message -->
+    <string name="PaymentProtocol.Errors.untrustedCertificate">opålitligt certifikat</string>
+    <string name="Platform.transaction_cancelled">Transaktionen annullerad</string>
+    <!-- Body text for a prompt that asks the user to subscribe to email updates to find out product updates. -->
+    <string name="Prompts.Email.body">Var först med att få viktiga support- och produktuppdateringar </string>
+    <!-- Placeholder text for an email address text field. -->
+    <string name="Prompts.Email.placeholder">ange din e-post</string>
+    <!-- Body text that is shown when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successBody">Du prenumererar nu på uppdateringar</string>
+    <!-- Text that is displayed as a footnote when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successFootnote">Vi uppskattar ditt fortsatta stöd</string>
+    <!-- Title that is shown when the user successfully subscribes to email updates. -->
+    <string name="Prompts.Email.successTitle">Tack!</string>
+    <!-- Title for a prompt that asks the user to subscribe to email updates to find out product updates. -->
+    <string name="Prompts.Email.title">Häng med i utvecklingen</string>
+    <!-- Enable face ID prompt body -->
+    <string name="Prompts.FaceId.body">Klicka Fortsätt för att aktivera Face ID</string>
+    <!-- Enable face ID prompt title -->
+    <string name="Prompts.FaceId.title">Aktivera Face ID</string>
+    <!-- No passcode set warning body -->
+    <string name="Prompts.NoPasscode.body">Ett enhets-lösenord behövs för att skydda din plånbok. Gå till inställningar och aktivera lösenord.</string>
+    <!-- No Passcode set warning title -->
+    <string name="Prompts.NoPasscode.title">Aktivera enhets-lösenord</string>
+    <!-- Instructions on how to enable screen lock settings -->
+    <string name="Prompts.NoScreenLock.body.android">Ett skärmlås krävs på enheten för att skydda din plånbok. Gå till Inställningar &gt; Säkerhet &gt; Skärmlås och aktivera för att fortsätta.</string>
+    <!-- Device encryption prompt title -->
+    <string name="Prompts.NoScreenLock.title.android">Skärmlås inaktiverat</string>
+    <!-- Warning about recovery phrase (formerly paper key). -->
+    <string name="Prompts.PaperKey.body">Din återställningsfras måste sparas om du tappar eller byter telefon.</string>
+    <!-- Warning about paper key (Android-version) -->
+    <string name="Prompts.PaperKey.Body.Android">Ställ in din återställningsfras om du någonsin tappar eller byter ut telefonen. Din nyckel krävs också om du ändrar telefonens säkerhetsinställningar.</string>
+    <!-- An action is required (You must do this action). -->
+    <string name="Prompts.PaperKey.title">Åtgärd krävs</string>
+    <string name="Prompts.RateApp.dontShow">Fråga inte igen</string>
+    <string name="Prompts.RateApp.enjoyingBrd">Njuter BRD?</string>
+    <string name="Prompts.RateApp.googlePlayReview">Din recension hjälper till att växa BRD-gemenskapen.</string>
+    <string name="Prompts.RateApp.noThanks">Nej tack</string>
+    <string name="Prompts.RateApp.rateUs">Granska oss</string>
+    <!-- Transaction rejected prompt body -->
+    <string name="Prompts.RecommendRescan.body">Din plånbok kan vara osynkroniserad. Detta kan ofta lösas genom att läsa om blockkedjan.</string>
+    <!-- Transaction rejected prompt title -->
+    <string name="Prompts.RecommendRescan.title">Transaktionen avslogs</string>
+    <!-- Share data prompt body -->
+    <string name="Prompts.ShareData.body">Hjälp till att förbättra BRD genom att dela dina anonyma data med oss</string>
+    <!-- Share data prompt title -->
+    <string name="Prompts.ShareData.title">Dela anonyma data</string>
+    <!-- Enable touch ID prompt body -->
+    <string name="Prompts.TouchId.body">Klicka här för att aktivera Touch ID</string>
+    <!-- Enable Fingerprint prompt body -->
+    <string name="Prompts.TouchId.body.android">Tryck här för att aktivera fingeravtrycksautentisering</string>
+    <!-- Enable touch ID prompt title -->
+    <string name="Prompts.TouchId.title">Aktivera Touch ID</string>
+    <!-- Enable Fingerprint prompt title -->
+    <string name="Prompts.TouchId.title.android">Aktivera fingeravtrycksautentisering</string>
+    <!-- Button on fingerprint prompt so the user can enter their PIN instead -->
+    <string name="Prompts.TouchId.usePin.android">PIN-kod</string>
+    <!-- Upgrade PIN prompt body. -->
+    <string name="Prompts.UpgradePin.body">BRD har uppgraderat till att använda 6-siffrig PIN-kod. Klicka här för att uppgradera.</string>
+    <!-- Upgrade PIN prompt title. -->
+    <string name="Prompts.UpgradePin.title">Uppgradera PIN-kod</string>
+    <!-- Body text for the push notifications prompt. -->
+    <string name="PushNotifications.body">Slå på push-meddelanden och var den första att höra om nya funktioner och specialerbjudanden.</string>
+    <!-- Push notifications are disabled alert title" -->
+    <string name="PushNotifications.disabled">Meddelanden avaktiverade</string>
+    <!-- Body text when push notifications are disabled. -->
+    <string name="PushNotifications.disabledBody">Slå på meddelanden för att få specialerbjudanden och uppdateringar från BRD.</string>
+    <!-- Body text when push notifications are enabled. -->
+    <string name="PushNotifications.enabledBody">Du får specialerbjudanden och uppdateringar från BRD.</string>
+    <!-- Instructions to enable push notifications for BRD in the phone's system settings. -->
+    <string name="PushNotifications.enableInstructions">Det verkar som att meddelanden är avstängda. Gå till Inställningar för att aktivera meddelanden från BRD.</string>
+    <!-- Push notifications toggle switch label -->
+    <string name="PushNotifications.label">Ta emot push-meddelanden</string>
+    <!-- Push notifications are off label -->
+    <string name="PushNotifications.off">Av</string>
+    <!-- Push notifications are on label -->
+    <string name="PushNotifications.on">På</string>
+    <!-- Push notifications settings view title label -->
+    <string name="PushNotifications.title">Håll dig uppdaterad</string>
+    <!-- Push notifications settings failed to update settings on the back end -->
+    <string name="PushNotifications.updateFailed">Det gick inte att uppdatera inställningarna för push-aviseringar</string>
+    <!-- Google play review prompt body -->
+    <string name="RateAppPrompt.Body.Android">Om du älskar vår app, var god ta en stund att betygsätta den och ge oss en recension.</string>
+    <!-- Google play review prompt, revivew button -->
+    <string name="RateAppPrompt.Button.Dismiss.Android">Nej tack</string>
+    <!-- Google play review prompt, dismiss button -->
+    <string name="RateAppPrompt.Button.RateApp.Android">Betygsätt BRD</string>
+    <!-- Google play review prompt title -->
+    <string name="RateAppPrompt.Title.Android">Betygsätt BRD</string>
+    <!-- Address copied message. -->
+    <string name="Receive.copied">Kopierad till urklipp.</string>
+    <!-- Share via email button label -->
+    <string name="Receive.emailButton">E-post</string>
+    <!-- Request button label -->
+    <string name="Receive.request">Begär ett belopp</string>
+    <!-- Share button label -->
+    <string name="Receive.share">Dela</string>
+    <!-- Share via text message (SMS) -->
+    <string name="Receive.textButton">Textmeddelande</string>
+    <!-- Receive modal title -->
+    <string name="Receive.title">Ta emot</string>
+    <!-- Done button text -->
+    <string name="RecoverWallet.done">Klar</string>
+    <!-- Recover wallet header -->
+    <string name="RecoverWallet.header">Återställ plånbok</string>
+    <!-- Reset PIN with paper key: header -->
+    <string name="RecoverWallet.header_reset_pin">Återställ PIN-kod</string>
+    <!-- Enter paper key instruction -->
+    <string name="RecoverWallet.instruction">Ange återställningsfras</string>
+    <!-- Recover wallet intro -->
+    <string name="RecoverWallet.intro">Återställ din BRD med din återställningsfras.</string>
+    <!-- Invalid paper key message -->
+    <string name="RecoverWallet.invalid">Återställningsfrasen du angav är ogiltig. Dubbelkolla varje ord och försök igen.</string>
+    <!-- Previous button accessibility label -->
+    <string name="RecoverWallet.leftArrow">Vänster pil</string>
+    <!-- Next button label -->
+    <string name="RecoverWallet.next">Nästa</string>
+    <!-- Reset PIN with paper key: more information button. -->
+    <string name="RecoverWallet.reset_pin_more_info">Klicka här för fler uppgifter.</string>
+    <!-- Next button accessibility label -->
+    <string name="RecoverWallet.rightArrow">Höger pil</string>
+    <!-- Recover wallet sub-header -->
+    <string name="RecoverWallet.subheader">Ange återställningsfrasen för plånboken du vill återställa.</string>
+    <!-- Reset PIN with paper key: sub-header -->
+    <string name="RecoverWallet.subheader_reset_pin">För att återställa din PIN-kod, ange orden från din återställningsfras i rutorna nedan.</string>
+    <!-- Instructs the user to enter words from the set of recovery key words. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryInputError">Ordet du skrev in är felaktigt. Var god försök igen.</string>
+    <!-- Instructs the user to enter words from the set of recovery phrase words. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryKeySubtitle">Nästan klar! Ange följande ord från din återställningsfras.</string>
+    <!-- Title for the confirmation step of the recovery phrase flow. -->
+    <string name="RecoveryKeyFlow.confirmRecoveryKeyTitle">Bekräfta återställningsfrasen</string>
+    <!-- Title displayed when the user starts the process of entering a recovery phrase -->
+    <string name="RecoveryKeyFlow.enterRecoveryKey">Ange återvinningsfras</string>
+    <!-- Subtitle displayed when the user starts the process of entering a recovery phrase -->
+    <string name="RecoveryKeyFlow.enterRecoveryKeySubtitle">Ange din återställningsfras för att ta bort länken till din plånbok från din enhet.</string>
+    <!-- Body text for an alert dialog asking the user whether to set up the recovery phrase later -->
+    <string name="RecoveryKeyFlow.exitRecoveryKeyPromptBody">Är du säker på att du vill konfigurera din återställningsfras senare?</string>
+    <!-- Title for an alert dialog asking the user whether to set up the recovery key later -->
+    <string name="RecoveryKeyFlow.exitRecoveryKeyPromptTitle">Ställ in senare</string>
+    <!-- Button text for the 'Generate Recovery Phrase' button -->
+    <string name="RecoveryKeyFlow.generateKeyButton">Generera återhämtningsfras</string>
+    <!-- Subtext for the recovery key landing page. -->
+    <string name="RecoveryKeyFlow.generateKeyExplanation">Den här nyckeln krävs för att återställa dina pengar om du uppgraderar eller förlorar din telefon.</string>
+    <!-- Default title for the recovery phrase landing page -->
+    <string name="RecoveryKeyFlow.generateKeyTitle">Generera din privata återhämtningsfras</string>
+    <!-- Title for a button that takes the user to the wallet after setting up the recovery key. -->
+    <string name="RecoveryKeyFlow.goToWalletButtonTitle">Gå till plånbok</string>
+    <!-- Hint text for recovery key intro page, e.g., Step 2 -->
+    <string name="RecoveryKeyFlow.howItWorksStep">Hur det fungerar - Steg %1$@</string>
+    <!-- Error text displayed when the user enters an incorrect recovery phrase -->
+    <string name="RecoveryKeyFlow.invalidPhrase">Vissa av de ord du angav matchar inte din återställningsfras. Var god försök igen.</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.keepSecure">Förvara den säkert</string>
+    <!-- Informs the user that the recovery is only required for recovering a wallet. -->
+    <string name="RecoveryKeyFlow.keyUseHint">Din nyckel behövs endast för återställning, inte för daglig tillgång till plånboken</string>
+    <!-- Reminds the user not to take screenshots or email the recovery key words -->
+    <string name="RecoveryKeyFlow.noScreenshotsOrEmailWarning">Av säkerhetsskäl bör du undvika att ta en skärmdump eller mejla dessa ord</string>
+    <!-- Recommends that the user avoids capturing the paper key with a screenshot -->
+    <string name="RecoveryKeyFlow.noScreenshotsRecommendation">Skriv ner din nyckel på ett papper och bekräfta den. Skärmdumpar rekommenderas inte av säkerhetsskäl.</string>
+    <!-- Title displayed when the user starts the process of recovering a wallet -->
+    <string name="RecoveryKeyFlow.recoveryYourWallet">Återställ din plånbok</string>
+    <!-- Subtitle displayed when the user starts the process of recovering a wallet -->
+    <string name="RecoveryKeyFlow.recoveryYourWalletSubtitle">Ange återställningsfrasen för plånboken du vill återställa.</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.relaxBuyTrade">Slappna av, köp, och handla</string>
+    <!-- Reminds the user to write down the recovery key words. -->
+    <string name="RecoveryKeyFlow.rememberToWriteDownReminder">Kom ihåg att skriva ner dessa ord. Svep tillbaka om du glömt att göra det.</string>
+    <!-- Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered -->
+    <string name="RecoveryKeyFlow.resetPINInstruction">Ange din återställningsfras för att återställa din PIN-kod.</string>
+    <!-- Assures the user that BRD will keep the user's funds secure. -->
+    <string name="RecoveryKeyFlow.securityAssurance">Köp och handla med vetskapen att dina tillgångar skyddas av den bästa säkerheten och integriteten i branschen</string>
+    <!-- Recommends that the user stores the recovery key in a secure location -->
+    <string name="RecoveryKeyFlow.storeSecurelyRecommendation">Förvara din nyckel på en säker plats. Detta är det enda sättet att återställa din plånbok. BRD tillhandahåller inte någon kopia.</string>
+    <!-- Title for the success page after the recovery phrase has been set up -->
+    <string name="RecoveryKeyFlow.successHeading">Grattis! Du slutförde din återställningsfrasinstallation.</string>
+    <!-- Subtitle for the success page after the recovery key has been set up -->
+    <string name="RecoveryKeyFlow.successSubheading">Du är nu redo att börja sätta in, handla med och köpa krypto från din BRD-plånbok</string>
+    <!-- Title displayed to the user on the intro screen when unlinking a wallet -->
+    <string name="RecoveryKeyFlow.unlinkWallet">Ta bort länken till din plånbok från denna enhet.</string>
+    <!-- Subtitle displayed to the user on the intro screen when unlinking a wallet. -->
+    <string name="RecoveryKeyFlow.unlinkWalletSubtext">Starta en ny plånbok genom att ta bort länken till den för närvarande installerade plånboken från denna enhet.</string>
+    <!-- Warning displayed when the user starts the process of unlinking a wallet -->
+    <string name="RecoveryKeyFlow.unlinkWalletWarning">Plånboken måste återställas för att du ska återfå tillgång till den.</string>
+    <!-- Title displayed to the user on the intro screen when wiping a wallet -->
+    <string name="RecoveryKeyFlow.wipeWallet">Ta bort länken till din plånbok från denna enhet.</string>
+    <!-- Subtitle displayed to the user on the intro screen when wiping a wallet. -->
+    <string name="RecoveryKeyFlow.wipeWalletSubtext">Starta en ny plånbok genom att torka av den nuvarande plånboken från din enhet.</string>
+    <!-- Title for recovery key intro page -->
+    <string name="RecoveryKeyFlow.writeItDown">Skriv ner din nyckel</string>
+    <!-- Title for the recovery phrase landing page if the key has already been generated. -->
+    <string name="RecoveryKeyFlow.writeKeyAgain">Skriv ner din återhämtningsfras igen</string>
+    <!-- Subtitle for the write recovery key screen -->
+    <string name="RecoveryKeyFlow.writeKeyScreenSubtitle">Skriv ner följande ord i ordning.</string>
+    <!-- Title for the write recovery phrase screen -->
+    <string name="RecoveryKeyFlow.writeKeyScreenTitle">Din återhämtningsfras</string>
+    <!-- Title for the step number when the user pages through the recovery words -->
+    <string name="RecoveryKeyFlow.writeKeyStepTitle">%1$@ av %2$@</string>
+    <!-- No amount entered error message. -->
+    <string name="RequestAnAmount.noAmount">Var god ange ett belopp först.</string>
+    <!-- Request a specific amount of bitcoin -->
+    <string name="RequestAnAmount.title">Begär ett belopp</string>
+    <!-- Alert action button label -->
+    <string name="ReScan.alertAction">Synka</string>
+    <!-- Alert message body -->
+    <string name="ReScan.alertMessage">Du kan inte sänd pengar under synkning.</string>
+    <!-- Alert message title -->
+    <string name="ReScan.alertTitle">Synka med blockkedja?</string>
+    <!-- extimated time -->
+    <string name="ReScan.body1">20-45 minuter</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body2">Om en transaktion visar sig som klar i bitcoins nätverk men inte i BRD.</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body3">Du får gång på gång ett meddelande som säger att din transaktion avvisades.</string>
+    <!-- Start Sync button label -->
+    <string name="ReScan.buttonTitle">Starta synkning</string>
+    <!-- Sync blockchain view footer -->
+    <string name="ReScan.footer">Du kan inte sänd pengar under synkningen med blockkedjan.</string>
+    <!-- Sync Blockchain view header -->
+    <string name="ReScan.header">Synka blockkedja</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader1">Uppskattad tid</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader2">När ska man synka?</string>
+    <!-- Rewards view expanded body. -->
+    <string name="RewardsView.expandedBody">Se hur du kan spara in på handelsavgifter och frigöra framtida belöningar.</string>
+    <!-- Rewards view expanded title. -->
+    <string name="RewardsView.expandedTitle">Introduktion av BRD Rewards.</string>
+    <!-- Rewards view title -->
+    <string name="RewardsView.normalTitle">Belöningar</string>
+    <!-- Scan bitcoin address camera flash toggle -->
+    <string name="Scanner.flashButtonLabel">Kamerablixt</string>
+    <!-- (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") -->
+    <string name="Scanner.paymentPromptMessage">Vill du sänd en %1$@ betalning till den här adressen?</string>
+    <!-- alert dialog title -->
+    <string name="Scanner.paymentPromptTitle">Sänd betalning</string>
+    <!-- Complete filter label -->
+    <string name="Search.complete">avsluta</string>
+    <!-- Pending filter label -->
+    <string name="Search.pending">väntar</string>
+    <!-- Received filter label -->
+    <string name="Search.received">mottaget</string>
+    <!-- [Click here to] search -->
+    <string name="Search.search">Sök</string>
+    <!-- Sent filter label -->
+    <string name="Search.sent">sänd</string>
+    <!-- Face ID button title -->
+    <string name="SecurityCenter.faceIdTitle">Face ID</string>
+    <!-- Paper Key button description -->
+    <string name="SecurityCenter.paperKeyDescription">Det enda sättet att komma åt dina bitcoin om du förlorar eller uppgraderar din telefon.</string>
+    <!-- Recovery Phrase button title. This used to be called 'paper key', so leaving the string key as `paperKeyTitle` in order
+ * to not break existing client code. -->
+    <string name="SecurityCenter.paperKeyTitle">Återställningsfras</string>
+    <!-- Paper Key button title -->
+    <string name="SecurityCenter.paperKeyTitle.android">Återställningsfras</string>
+    <!-- PIN button description -->
+    <string name="SecurityCenter.pinDescription">Skyddar ditt BRD från obehöriga användare.</string>
+    <!-- PIN button title -->
+    <string name="SecurityCenter.pinTitle">6-siffrig PIN-kod</string>
+    <!-- Touch ID button description -->
+    <string name="SecurityCenter.touchIdDescription">Lås enkelt upp ditt BRD och sänd pengar upp till en inställd gräns.</string>
+    <!-- Touch ID button title -->
+    <string name="SecurityCenter.touchIdTitle">Touch ID</string>
+    <!-- Security center fingerprint authentication button -->
+    <string name="SecurityCenter.touchIdTitle.android">Fingeravtrycksautentisering</string>
+    <!-- Segwit enabled confirmation title -->
+    <string name="Segwit.ConfirmationConfirmationTitle">Du aktiverade Segwit!</string>
+    <!-- Segwit enabled confirmation description -->
+    <string name="Segwit.ConfirmationInstructionsDescription">Tack för att du hjälper bitcoin framåt. </string>
+    <!-- Segwit instructions -->
+    <string name="Segwit.ConfirmationInstructionsInstructions">Segwit-support är fortfarande på betastadiet. \nNär Segwit väl har aktiverats är det inte möjligt att avaktivera det. Du kan hitta den gamla adressen under Inställningar. \nVissa tredjepartstjänster, inklusive kryptohandel, kanske inte är tillgängliga för användare som har aktiverat Segwit. I nödfall har du möjlighet att skapa en gammal adress i Preferenser &gt; Bitcoininställningar. \nSegwit kommer automatiskt att vara aktiverat för alla användare i en framtida uppdatering.</string>
+    <!-- Segwit extra confirmation title. -->
+    <string name="Segwit.ConfirmChoiceLayout">En aktivering av Segwit är oåterkallelig. Är du säker på att du vill fortsätta?</string>
+    <!-- Segwit enableButton -->
+    <string name="Segwit.Enable">Aktivera</string>
+    <!-- Segwit button label that takes the user back to the home screen once SegWit is enabled. -->
+    <string name="Segwit.HomeButton">Till månen</string>
+    <string name="Send_fio_toLabel">FIO</string>
+    <!-- Send money amount label -->
+    <string name="Send.amountLabel">Belopp</string>
+    <!-- Balance: $4.00 -->
+    <string name="Send.balance">Saldo: %1$s</string>
+    <!-- Balance: $4.00 for iOS, the balance can't have a parameter -->
+    <string name="Send.balanceString">Saldo:</string>
+    <!-- Instructions how to allow the camera access for the app -->
+    <string name="Send.cameraUnavailabeMessage.android">Tillåt kameraåtkomst under Inställningar &gt; Appar &gt; BRD &gt; Behörigheter</string>
+    <!-- Permission required to access camera -->
+    <string name="Send.cameraUnavailabeTitle.android">BRD har inte åtkomst till kameran</string>
+    <!-- Camera not allowed message -->
+    <string name="Send.cameraunavailableMessage">Gå till Inställningar för att ge tillgång till kameran.</string>
+    <!-- Camera not allowed alert title -->
+    <string name="Send.cameraUnavailableTitle">BRD har inte tillgång till kameran</string>
+    <!-- Warning when sending to self. -->
+    <string name="Send.containsAddress">Destinationen är din egen adress. Du kan inte sänd till dig själv.</string>
+    <!-- Could not create transaction alert title -->
+    <string name="Send.creatTransactionError">Kunde inte skapa transaktion.</string>
+    <!-- Description for sending money label -->
+    <string name="Send.descriptionLabel">Memo</string>
+    <!-- Optional Destination Tag label -->
+    <string name="Send.destinationTag_optional">Destinationstagg (valfritt)</string>
+    <!-- Required Destination Tag label -->
+    <string name="Send.destinationTag_required">Destinationstagg (obligatoriskt)</string>
+    <string name="Send.destinationTag_required_error">En giltig målmärke krävs för måladressen.</string>
+    <!-- Emtpy pasteboard error message -->
+    <string name="Send.emptyPasteboard">Urklipp är tomt</string>
+    <!-- "(you) can't send (to your)self" -->
+    <string name="Send.ethSendSelf">Kan inte skicka till sig själv.</string>
+    <!-- Network Fee: $0.01 -->
+    <string name="Send.fee">Nätverksavgift: %1$s</string>
+    <string name="Send.fio_invalid">Ogiltig FIO-adress.</string>
+    <string name="Send.fio_noAddress">Det finns ingen %1$s adress kopplad till denna FIO-adress.</string>
+    <string name="Send.fio_retrievalError">Det gick inte att hämta adressen för den här FIO-adressen. Vänligen försök igen senare.</string>
+    <!-- Payee identity not certified alert title. -->
+    <string name="Send.identityNotCertified">Betalningsmottagaren är inte certifierad.</string>
+    <!-- Insufficient funds error -->
+    <string name="Send.insufficientFunds">Inte tillräckligt med pengar</string>
+    <!-- e,g, "You must have at least $2 in your wallet in order to transfer this type of token." In this case, "token" is an ethereum ERC20 token. -->
+    <string name="Send.insufficientGasMessage">Du måste ha minst %1$s i din plånbok för att överföra denna typ av token. Vill du gå till din Ethereum-plånbok nu?</string>
+    <!-- Your ethereum balance is insufficient to complete this action. -->
+    <string name="Send.insufficientGasTitle">För lågt Ethereum-saldo</string>
+    <!-- e.g. The destination is not a valid (bitcoin) address. -->
+    <string name="Send.invalidAddressMessage">Mottagaradressen är inte en giltig %1$s-adress.</string>
+    <!-- Invalid address on pasteboard message -->
+    <string name="Send.invalidAddressOnPasteboard">Urklipp innehåller inte en giltig %1$s-adress.</string>
+    <!-- Invalid address alert title -->
+    <string name="Send.invalidAddressTitle">Ogiltig adress</string>
+    <!-- Is rescanning error message -->
+    <string name="Send.isRescanning">Skicka är avaktiverat under en full omskanning.</string>
+    <!-- Warning when the user is trying to send bitcoin cash to a legacy bitcoin address (possible, but probably not what the user wants to do) -->
+    <string name="Send.legacyAddressWarning">Varning: detta är en legacy bitcoin-adress. Är du säker på att du vill sänd Bitcoin Cash till den?</string>
+    <!-- We are loading the request (now) -->
+    <string name="Send.loadingRequest">Laddar förfrågan</string>
+    <!-- Hedera Memo Tag Label -->
+    <string name="Send.memoTag_optional">Hedera Memo (valfritt)</string>
+    <!-- Transaction fee could not be be caluculated error. -->
+    <string name="Send.nilFeeError">Inte tillräckligt med pengar för att täcka transaktionsavgiften.</string>
+    <!-- Empty address alert message -->
+    <string name="Send.noAddress">Ange mottagarens adress.</string>
+    <!-- Emtpy amount alert message -->
+    <string name="Send.noAmount">Ange ett belopp att sänd.</string>
+    <!-- No Fees error -->
+    <string name="Send.noFeesError">Villkor för nätverksavgifter laddas ned. Försök igen.</string>
+    <!-- Paste button label -->
+    <string name="Send.pasteLabel">Klistra in</string>
+    <!-- Error message for invalid PayID -->
+    <string name="Send.payId_invalid">Ogiltigt PayID.</string>
+    <!-- Error message for no address associated with a PayID for a given currency -->
+    <string name="Send.payId_noAddress">Det finns ingen %1$s adress kopplad till detta PayID.</string>
+    <!-- Error message for error in retrieving the address from the PayID endpoint -->
+    <string name="Send.payId_retrievalError">Det gick inte att hämta adressen för detta PayID. Vänligen försök igen senare.</string>
+    <!-- PayID label -->
+    <string name="Send.payId_toLabel">PayID</string>
+    <!-- Could not publish transaction alert title -->
+    <string name="Send.publishTransactionError">Kunde inte lägga ut transaktion.</string>
+    <!-- Could not load remote request error message -->
+    <string name="Send.remoteRequestError">Kunde inte ladda betalningsförfrågan</string>
+    <!-- Scan button label -->
+    <string name="Send.scanLabel">Läs av</string>
+    <!-- Sending Max: $4.00 for iOS, the balance can't have a parameter -->
+    <string name="Send.sendingMax">Sänd Max: </string>
+    <!-- Send button label (the action, "press here to send") -->
+    <string name="Send.sendLabel">Sänd</string>
+    <!-- Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) -->
+    <string name="Send.sendMaximum">Sänd maxbeloppet?</string>
+    <!-- Send screen title (as in "this is the screen for sending money") -->
+    <string name="Send.title">Sänd</string>
+    <!-- Send money to label -->
+    <string name="Send.toLabel">Till</string>
+    <!-- Adress already used alert message - first part -->
+    <string name="Send.UsedAddress.firstLine">Bitcoin-adresser är avsedda för engångsanvändning.</string>
+    <!-- Adress already used alert message - second part -->
+    <string name="Send.UsedAddress.secondLIne">Återanvändning minskar sekretessen både för dig och mottagaren och kan sluta i förlust om mottagaren inte direkt kontrollerar adressen.</string>
+    <!-- Adress already used alert title -->
+    <string name="Send.UsedAddress.title">Adressen är redan använd</string>
+    <!-- About label -->
+    <string name="Settings.about">Om</string>
+    <!-- Advanced settings header -->
+    <string name="Settings.advanced">Avancerat</string>
+    <!-- Advanced Settings title -->
+    <string name="Settings.advancedTitle">Avancerade inställningar</string>
+    <!-- ATM map menu item title explaining that it's a feature only available in the USA -->
+    <string name="Settings.atmMapMenuItemSubtitle">Endast tillgängligt i USA</string>
+    <!-- ATM map menu item title -->
+    <string name="Settings.atmMapMenuItemTitle">Crypto ATM-karta</string>
+    <!-- i.e. the currency which will be displayed -->
+    <string name="Settings.currency">Visa valuta</string>
+    <!-- e.g. "USD Settings" (settings for how USD is handled) -->
+    <string name="Settings.currencyPageTitle">%1$s Inställningar</string>
+    <!-- Section title for a collection of different settings screens, one for each currency -->
+    <string name="Settings.currencySettings">Valutainställningar</string>
+    <!-- Join Early access label -->
+    <string name="Settings.earlyAccess">Använd Snabb tillgång</string>
+    <!-- Enable segwit. -->
+    <string name="Settings.EnableSegwit">Aktivera Segwit</string>
+    <!-- Are you enjoying bread alert message body -->
+    <string name="Settings.enjoying">Gillar du BRD?</string>
+    <!-- Face ID spending limit label -->
+    <string name="Settings.faceIdLimit">Utgiftsgräns för Face ID</string>
+    <!-- Redeem the funds stored on this private key. -->
+    <string name="Settings.importTitle">Lös In Privat Nyckel</string>
+    <!-- Manage settings section header -->
+    <string name="Settings.manage">Hantera</string>
+    <!-- Notifications label -->
+    <string name="Settings.notifications">Meddelanden</string>
+    <!-- Section header for "other settings". -->
+    <string name="Settings.other">Andra</string>
+    <!-- Preferences settings section header -->
+    <string name="Settings.preferences">Preferenser</string>
+    <!-- Tap here to reset the list of currencies to the default settings. -->
+    <string name="Settings.resetCurrencies">Återställ till förvalda valutor</string>
+    <!-- Leave review button label -->
+    <string name="Settings.review">Betygssätt oss</string>
+    <!-- Rewards menu item -->
+    <string name="Settings.rewards">Belöningar</string>
+    <!-- Share anonymous data label -->
+    <string name="Settings.shareData">Dela anonyma uppgifter</string>
+    <!-- Sync blockchain label -->
+    <string name="Settings.sync">Synka blockkedja</string>
+    <!-- Settings title -->
+    <string name="Settings.title">Inställningar</string>
+    <!-- Touch ID spending limit label -->
+    <string name="Settings.touchIdLimit">Touch ID utnyttjandegräns</string>
+    <!-- The fingerprint spending limit -->
+    <string name="Settings.touchIdLimit.android">Maxbelopp med fingeravtrycksautentisering</string>
+    <!-- View legacy address (old format). -->
+    <string name="Settings.ViewLegacyAddress">Visa mottagaradress i gamla formatet</string>
+    <!-- Receive Bitcoin instructions -->
+    <string name="Settings.ViewLegacyAddressReceiveDescription">Sänd endast bitcoin (BTC) till denna adress. Alla andra tillgångar som sänd till denna adress går förlorade permanent.</string>
+    <!-- Receive Bitcoin -->
+    <string name="Settings.ViewLegacyAddressReceiveTitle">Erhåll bitcoin</string>
+    <!-- Wallet Settings section header -->
+    <string name="Settings.wallet">Plånbok</string>
+    <!-- Unlink/delete your wallet from the current device. -->
+    <string name="Settings.wipe">Ta Bort Länken Från Denna Enhet</string>
+    <!-- Wipe/delete your wallet from the current device. -->
+    <string name="Settings.wipe.android">Ta bort länken till din plånbok från denna enhet.</string>
+    <!-- Share data view body -->
+    <string name="ShareData.body">Hjälp till att förbättra BRD genom att dela dina anonyma uppgifter med oss. Detta inbegriper inga ekonomiska uppgifter. Vi respekterar din ekonomiska sekretess.</string>
+    <!-- Share data header -->
+    <string name="ShareData.header">Dela uppgifter?</string>
+    <!-- Share data switch label. -->
+    <string name="ShareData.toggleLabel">Dela anonyma uppgifter?</string>
+    <!-- button label -->
+    <string name="StartPaperPhrase.againButtonTitle">Skriv ner återhämtningsfrasen igen</string>
+    <!-- Paper key explanation text. -->
+    <string name="StartPaperPhrase.body">Din återställningsfras är det enda sättet att återställa din BRD om din telefon går förlorad, stulen, trasig eller uppgraderas. \n\nVi visar dig en lista med ord att skriva ner på ett papper och hålla dig säker.</string>
+    <!-- Paper key explanation text (Android-version) -->
+    <string name="StartPaperPhrase.Body.Android">Din återställningsfras är det enda sättet att återställa din BRD om din telefon går förlorad, stulen, trasig eller uppgraderas. \n\nDin återställningsfras krävs också om du ändrar säkerhetsinställningarna på din enhet. \n\nVi visar dig en lista med ord att skriva ner på ett papper och hålla dig säker.</string>
+    <!-- button label -->
+    <string name="StartPaperPhrase.buttonTitle">Skriv ner återhämtningsfras</string>
+    <!-- Argument is date; date should be on a new line -->
+    <string name="StartPaperPhrase.date">Senast nedskrivet \n %1$@</string>
+    <!-- button label -->
+    <string name="StartViewController.createButton">Skapa ny plånbok</string>
+    <!-- Start view message -->
+    <string name="StartViewController.message">Det säkraste och tryggaste sättet att använda bitcoin.</string>
+    <!-- Recover your wallet from a backup -->
+    <string name="StartViewController.recoverButton">Återställ plånbok</string>
+    <string name="SupportForm.feedbackAppreciated">Vi skulle älska din feedback</string>
+    <string name="SupportForm.helpUsImprove">Hjälp oss att förbättra</string>
+    <string name="SupportForm.notNow">Inte nu</string>
+    <string name="SupportForm.pleaseDescribe">Beskriv din upplevelse</string>
+    <!-- Syncing view done syncing state header text -->
+    <string name="SyncingView.activity">Aktivitet</string>
+    <!-- Syncing view connectiong state header text -->
+    <string name="SyncingView.connecting">Ansluter</string>
+    <!-- The sync has failed (to complete) -->
+    <string name="SyncingView.failed">Synkronisering misslyckades</string>
+    <!-- Syncing view header text -->
+    <string name="SyncingView.header">Synkar</string>
+    <!-- Retry button label -->
+    <string name="SyncingView.retry">Försök igen</string>
+    <!-- "eg. Synced through <Jan 12, 2015> -->
+    <string name="SyncingView.syncedThrough">Synkroniserad genom %1$s</string>
+    <!-- Syncing view syncing state header text -->
+    <string name="SyncingView.syncing">Synkroniserar</string>
+    <!-- 6 d (6 days) -->
+    <string name="TimeSince.days">%1$s d</string>
+    <!-- 6 h (6 hours) -->
+    <string name="TimeSince.hours">%1$s t</string>
+    <!-- 6 m (6 minutes) -->
+    <string name="TimeSince.minutes">%1$s m</string>
+    <!-- 6 s (6 seconds) -->
+    <string name="TimeSince.seconds">%1$s s</string>
+    <!-- Add [this item to the list] -->
+    <string name="TokenList.add">Lägg till</string>
+    <!-- Add Wallets  [to your home screen] -->
+    <string name="TokenList.addTitle">Lägg till plånböcker</string>
+    <!-- Hide [this token from view] -->
+    <string name="TokenList.hide">Dölj</string>
+    <!-- [click here to] Manage [your] Wallets -->
+    <string name="TokenList.manageTitle">Hantera plånböcker</string>
+    <!-- Remove [this item from the list] -->
+    <string name="TokenList.remove">Ta bort</string>
+    <!-- Show [this item on your home screen] -->
+    <string name="TokenList.show">Visa</string>
+    <!-- You can customize your Touch ID Spending Limit from the [TouchIdSettings.linkText gets added here as a button] -->
+    <string name="TouchIdSettings.customizeText">Du kan anpassa din utgiftsgräns i Touch ID från %1$s.</string>
+    <!-- Fingerprint enabling description body -->
+    <string name="TouchIdSettings.customizeText.android">Du kan anpassa ditt maxbelopp med fingeravtrycksautentisering från skärmen Maxbelopp med fingeravtrycksauktorisering</string>
+    <!-- Instruction for the fingerprint setup -->
+    <string name="TouchIdSettings.disabledWarning.body.android">Du har inte aktiverat fingeravtrycksautentisering på den här enheten. Gå till Inställningar &gt; Säkerhet för att konfigurera fingeravtrycksautentisering.</string>
+    <!-- Fingerprint Is Not Setup -->
+    <string name="TouchIdSettings.disabledWarning.title.android">Fingeravtrycksautentisering har inte aktiverats</string>
+    <!-- Text that describes the purpose of the Touch ID settings in the BRD app. -->
+    <string name="TouchIdSettings.explanatoryText">Använd Touch ID för att låsa upp din BRD-app och sänd pengar.</string>
+    <!-- Touch Id screen label -->
+    <string name="TouchIdSettings.label">Använd ditt fingeravtryck för att låsa upp BRD och sänd pengar upp till en inställd gräns.</string>
+    <!-- Link Text (see TouchIdSettings.customizeText) -->
+    <string name="TouchIdSettings.linkText">Sida för utgiftsgräns i Touch ID</string>
+    <!-- Spending Limit: b100,000 ($100) -->
+    <string name="TouchIdSettings.spendingLimit">Utnyttjandegräns: %1$s (%2$s)</string>
+    <!-- Touch id switch label. -->
+    <string name="TouchIdSettings.switchLabel">Aktivera Touch ID för BRD</string>
+    <!-- Enable fingerprint for this wallet called Bread -->
+    <string name="TouchIdSettings.switchLabel.android">Aktivera fingeravtrycksautentisering</string>
+    <!-- Touch ID settings view title -->
+    <string name="TouchIdSettings.title">Touch ID</string>
+    <!-- Fingerprint authentication label -->
+    <string name="TouchIdSettings.title.android">Fingeravtrycksautentisering</string>
+    <!-- Text label for a toggle that enables Touch ID for sending money. -->
+    <string name="TouchIdSettings.transactionsTitleText">Aktivera Touch ID för att sänd pengar</string>
+    <!-- Touch ID unavailable alert message -->
+    <string name="TouchIdSettings.unavailableAlertMessage">Du har inte ställt in Touch ID på denna enhet. Gå till Inställningar-&gt;Touch ID &amp; Lösenkod för att ställa in det nu.</string>
+    <!-- Touch ID unavailable alert title -->
+    <string name="TouchIdSettings.unavailableAlertTitle">Touch ID är inte inställt</string>
+    <!-- Text label for the toggle that enables Touch ID for unlocking the BRD app. -->
+    <string name="TouchIdSettings.unlockTitleText">Aktivera Touch ID för att låsa upp BRD</string>
+    <!-- Always require passcode option -->
+    <string name="TouchIdSpendingLimit">Kräver alltid lösenord</string>
+    <!-- Touch ID spending limit screen body -->
+    <string name="TouchIdSpendingLimit.body">Du kommer att behöva ange din 6-siffriga PIN-kod för att sänd transaktioner som överskrider din utnyttjandegräns och varje gång efter 48 timmar sedan du senast angav din 6-siffriga PIN-kod.</string>
+    <!-- Touch Id spending limit screen title -->
+    <string name="TouchIdSpendingLimit.title">Touch ID utnyttjandegräns</string>
+    <!-- name of spending limit when using fingerprint authorization -->
+    <string name="TouchIdSpendingLimit.title.android">Maxbelopp med fingeravtrycksauktorisering</string>
+    <!-- Availability status text -->
+    <string name="Transaction.available">Tillgängligt att utnyttja</string>
+    <!-- Transaction complete label -->
+    <string name="Transaction.complete">Avsluta</string>
+    <!-- Transaction is confirming status text -->
+    <string name="Transaction.confirming">Pågår</string>
+    <!-- eg. Ending balance: $50.00 -->
+    <string name="Transaction.ending">Utgående saldo: %1$s</string>
+    <!-- Exchange rate on date header -->
+    <string name="Transaction.exchangeOnDayReceived">Växlingskurs vid mottagande:</string>
+    <!-- Exchange rate on date header -->
+    <string name="Transaction.exchangeOnDaySent">Växlingskurs vid sändade:</string>
+    <!-- Transaction failed status text -->
+    <string name="Transaction.failed">Misslyckad</string>
+    <!-- (b600 fee) -->
+    <string name="Transaction.fee">(%1$s avgift)</string>
+    <!-- Invalid transaction -->
+    <string name="Transaction.invalid">OGILTIG</string>
+    <!-- Timestamp label for event that just happened -->
+    <string name="Transaction.justNow">just nu</string>
+    <!-- Transaction is pending status text -->
+    <string name="Transaction.pending">Avvaktar</string>
+    <!-- Receive status text: 'In progress: 20%' -->
+    <string name="Transaction.receivedStatus">Pågår: %1$s</string>
+    <!-- Send status text: 'In progress: 20%' -->
+    <string name="Transaction.sendingStatus">Pågår: %1$s</string>
+    <!-- sending to <address> -->
+    <string name="Transaction.sendingTo">Sändar till %1$s</string>
+    <!-- sent to <address> -->
+    <string name="Transaction.sentTo">Sänd till %1$s</string>
+    <!-- eg. Starting balance: $50.00 -->
+    <string name="Transaction.starting">Ingående saldo: %1$s</string>
+    <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
+    <string name="Transaction.tokenTransfer">Avgift för token-överföring: %1$s</string>
+    <!-- Waiting to be confirmed string -->
+    <string name="Transaction.waiting">Väntar på bekräftelse. Vissa handlare kräver bekräftelse för att slutföra en transaktion. Uppskattad tid: 1-2 timmar.</string>
+    <!-- e.g. I received money from an account. -->
+    <string name="TransactionDetails.account">konto</string>
+    <!-- Address received from header -->
+    <string name="TransactionDetails.addressFromHeader">Från</string>
+    <!-- Address sent to header -->
+    <string name="TransactionDetails.addressToHeader">Till</string>
+    <!-- e.g. "(this was received) via (address #1)" via = by way of -->
+    <string name="TransactionDetails.addressViaHeader">Via</string>
+    <!-- Amount section header -->
+    <string name="TransactionDetails.amountHeader">Belopp</string>
+    <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
+    <string name="TransactionDetails.amountWhenReceived">%1$s vid mottagande, %2$s nu</string>
+    <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
+    <string name="TransactionDetails.amountWhenSent">%1$s när det sänddes, %2$s nu</string>
+    <!-- Block height label -->
+    <string name="TransactionDetails.blockHeightLabel">Bekräftad i block</string>
+    <!-- Memo section header -->
+    <string name="TransactionDetails.commentsHeader">Memo</string>
+    <!-- Memo field placeholder -->
+    <string name="TransactionDetails.commentsPlaceholder">Lägg till promemoria ...</string>
+    <!-- Timestamp section header for complete tx -->
+    <string name="TransactionDetails.completeTimestampHeader">Slutför</string>
+    <!-- Block height and confirmations label -->
+    <!--eg. 182930 (45061 confirmations)-->
+    <string name="TransactionDetails.confirmationsLabel">Bekräftelser</string>
+    <string name="TransactionDetails.destinationTag">Mål tag</string>
+    <string name="TransactionDetails.destinationTag_EmptyHint">(tom)</string>
+    <!-- Empty transaction list message. -->
+    <string name="TransactionDetails.emptyMessage">Dina transaktioner visas här.</string>
+    <!-- e.g. the users balance after the transaction was compeleted -->
+    <string name="TransactionDetails.endingBalanceHeader">Utgående saldo</string>
+    <!-- Exchange rate section header -->
+    <string name="TransactionDetails.exchangeRateHeader">Växlingskurs</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.feeHeader">Total avgift</string>
+    <!-- "Received [$5] at [which of my addresses]" => This is the "at [which of my addresses]" part. -->
+    <string name="TransactionDetails.from">på %1$s</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.gasLimitHeader">Gasbegränsning</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.gasPriceHeader">Gaspris</string>
+    <!-- Label for Hedera Memo field on transaction details screen -->
+    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <!-- Hide Details button -->
+    <string name="TransactionDetails.hideDetails">Dölj detaljer</string>
+    <!-- Label showing the transaction was started (initialized) -->
+    <string name="TransactionDetails.initializedTimestampHeader">Initierad</string>
+    <!-- More button title -->
+    <string name="TransactionDetails.more">Mer...</string>
+    <!-- Moved $5.00 (as in "I moved $5 to another location") -->
+    <string name="TransactionDetails.moved">Flyttade %1$s</string>
+    <!-- Moved $5.00 -->
+    <string name="TransactionDetails.movedAmountDescription"><![CDATA[Flyttade <b>%1$s</b>]]></string>
+    <!-- eg. Confirmed in Block: Not Confirmed -->
+    <string name="TransactionDetails.notConfirmedBlockHeightLabel">Inte bekräftad</string>
+    <!-- "Received [$5] at [which of my addresses]" => This is the "Received [$5]" part. -->
+    <string name="TransactionDetails.received">Mottog %1$s</string>
+    <!-- Received $5.00 -->
+    <string name="TransactionDetails.receivedAmountDescription"><![CDATA[Tog emot <b>%1$s</b>]]></string>
+    <!-- received from <address> -->
+    <string name="TransactionDetails.receivedFrom">mottaget från %1$s</string>
+    <!-- received via <address> -->
+    <string name="TransactionDetails.receivedVia">mottaget via %1$s</string>
+    <!-- receiving from <address> -->
+    <string name="TransactionDetails.receivingFrom">tar emot från %1$s</string>
+    <!-- receiving via <address> -->
+    <string name="TransactionDetails.receivingVia">tar emot via %1$s</string>
+    <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
+    <string name="TransactionDetails.sent">Sändade %1$s</string>
+    <!-- Sent $5.00 -->
+    <string name="TransactionDetails.sentAmountDescription"><![CDATA[Sändade <b>%1$s</b>]]></string>
+    <!-- Show Details button -->
+    <string name="TransactionDetails.showDetails">Visa detaljer</string>
+    <!-- The balance the user started with before the transaction completed -->
+    <string name="TransactionDetails.startingBalanceHeader">Ingående saldo</string>
+    <!-- Status section header -->
+    <string name="TransactionDetails.statusHeader">Status</string>
+    <!-- Transaction Details Title -->
+    <string name="TransactionDetails.title">Transaktionsuppgifter</string>
+    <!-- Transaction Details Title - Failed -->
+    <string name="TransactionDetails.titleFailed">Dölj detaljer</string>
+    <!-- Transaction Details Title - Internal -->
+    <string name="TransactionDetails.titleInternal">Intern</string>
+    <!-- Transaction Details Title - Received -->
+    <string name="TransactionDetails.titleReceived">Mottaget</string>
+    <!-- Transaction Details Title - Receiving -->
+    <string name="TransactionDetails.titleReceiving">Tar emot</string>
+    <!-- Transaction Details Title - Sending -->
+    <string name="TransactionDetails.titleSending">Sändar</string>
+    <!-- Transaction Details Title - Sent -->
+    <string name="TransactionDetails.titleSent">Sänd</string>
+    <!-- "Sent [$5] to [address]" => This is the "to [address]" part. -->
+    <string name="TransactionDetails.to">till %1$s</string>
+    <!-- Tx detail field header -->
+    <string name="TransactionDetails.totalHeader">Totalt</string>
+    <!-- Transaction ID header -->
+    <string name="TransactionDetails.txHashHeader">Transaktions ID</string>
+    <!-- (this transaction was) Received at this address: -->
+    <string name="TransactionDirection.address">Togs emot på den här adressen</string>
+    <!-- (this transaction was) Sent to this address: -->
+    <string name="TransactionDirection.to">Sänd till den här adressen</string>
+    <!-- Disabled until date -->
+    <string name="UnlockScreen.disabled">Inaktiverad till: %1$s</string>
+    <!-- Unlock with FaceID accessibility label -->
+    <string name="UnlockScreen.faceIdText">Lås upp med Face ID</string>
+    <!-- My Address button title -->
+    <string name="UnlockScreen.myAddress">Min adress</string>
+    <!-- Reset PIN with Paper Key button label. -->
+    <string name="UnlockScreen.resetPin">Återställ PIN-kod</string>
+    <!-- Scan button title -->
+    <string name="UnlockScreen.scan">Läs av</string>
+    <!-- Instruction to touch the sensor for fingerprint authentication -->
+    <string name="UnlockScreen.touchIdInstructions.android">Touchsensor</string>
+    <!-- TouchID prompt text -->
+    <string name="UnlockScreen.touchIdPrompt">Lås upp BRD.</string>
+    <!-- Device authentication body -->
+    <string name="UnlockScreen.touchIdPrompt.android">Lås upp din Android-enhet för att fortsätta.</string>
+    <!-- Unlock with TouchID accessibility label -->
+    <string name="UnlockScreen.touchIdText">Lås upp med TouchID</string>
+    <!-- Device authentication title -->
+    <string name="UnlockScreen.touchIdTitle.android">Autentisering krävs</string>
+    <!-- Update PIN caption text -->
+    <string name="UpdatePin.caption">Kom ihåg PIN-koden. Om du glömmer den, kommer du inte åt dina bitcoin.</string>
+    <!-- PIN creation info. -->
+    <string name="UpdatePin.createInstruction">Din PIN-kod används för att låsa upp ditt BRD och sänd pengar</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.createTitle">Ställ in PIN-kod</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.createTitleConfirm">Ange PIN-koden igen</string>
+    <!-- Enter current PIN instruction -->
+    <string name="UpdatePin.enterCurrent">Ange aktuell PIN-kod.</string>
+    <!-- Enter new PIN instruction -->
+    <string name="UpdatePin.enterNew">Ange din nya PIN-kod.</string>
+    <!-- Re-Enter new PIN instruction -->
+    <string name="UpdatePin.reEnterNew">Ange din nya PIN-kod igen.</string>
+    <!-- Update PIN failure error message. -->
+    <string name="UpdatePin.setPinError">Förlåt, vi kunde inte uppdatera din PIN-kod.</string>
+    <!-- Update PIN failure alert view title -->
+    <string name="UpdatePin.setPinErrorTitle">Fel vid uppdatering av PIN-kod</string>
+    <!-- Update PIN title -->
+    <string name="UpdatePin.updateTitle">Uppdatera PIN-kod</string>
+    <!-- Authorize to copy wallet addresses alert message -->
+    <string name="URLHandling.addressaddressListAlertMessage">Kopiera plånboksadresser till urklipp?</string>
+    <!-- Authorize to copy wallet address PIN view prompt. -->
+    <string name="URLHandling.addressList">Godkänn att kopiera plånbokens adress till urklipp</string>
+    <!-- Authorize to copy wallet address alert title -->
+    <string name="URLHandling.addressListAlertTitle">Kopiera plånboksadresser</string>
+    <!-- Copy wallet addresses alert button label -->
+    <string name="URLHandling.copy">Kopiera</string>
+    <!-- Verify PIN for transaction view body -->
+    <string name="VerifyPin.authorize">Var god ange din pinkod för att godkänna denna transaktion.</string>
+    <!-- Verify PIN view body -->
+    <string name="VerifyPin.continueBody">Ange din PIN-kod för att fortsätta.</string>
+    <!-- Verify PIN view title -->
+    <string name="VerifyPin.title">PIN-kod krävs</string>
+    <!-- Authorize transaction with touch id message -->
+    <string name="VerifyPin.touchIdMessage">Godkänn denna transaktion</string>
+    <string name="Wallet.one_day">1d</string>
+    <string name="Wallet.one_month">1m</string>
+    <string name="Wallet.one_week">1w</string>
+    <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.three_months">3m</string>
+    <string name="Wallet.three_years">3y</string>
+    <!-- Turn off fast sync confirmation question -->
+    <string name="WalletConnectionSettings.confirmation">Är du säker på att du vill stänga av Fastsync?</string>
+    <!-- Explanation for wallet connection setting -->
+    <string name="WalletConnectionSettings.explanatoryText">Gör synkronisering av din bitcoin-plånbok praktiskt taget omedelbart. Läs mer om hur det fungerar här.</string>
+    <!-- Connection mode switch label. -->
+    <string name="WalletConnectionSettings.footerTitle">Drivs av</string>
+    <!-- Wallet connection settings view title -->
+    <string name="WalletConnectionSettings.header">Fastsync (pilot)</string>
+    <!-- Link text in explanatoryText This NB: This should exactly match the last word of WalletConnectionSettings.explanatoryText -->
+    <string name="WalletConnectionSettings.link">här</string>
+    <!-- WalletConnectionSettiongs -->
+    <!--Wallet connection settings menu item title.-->
+    <string name="WalletConnectionSettings.menuTitle">Anslutningsläge</string>
+    <!-- Turn off fast sync button label -->
+    <string name="WalletConnectionSettings.turnOff">Stäng av</string>
+    <!-- Wallet connection settings view title -->
+    <string name="WalletConnectionSettings.viewTitle">Fastsync</string>
+    <!-- 'No wallet' warning for watch app -->
+    <string name="Watch.noWalletWarning">Öppna iPhone-appen BRD för att ställa in din plånbok.</string>
+    <!-- Dismiss button label -->
+    <string name="Webview.dismiss">Avfärda</string>
+    <!-- Webview loading error message -->
+    <string name="Webview.errorMessage">Det blev fel vid uppladdning av innehållet. Försök igen</string>
+    <!-- Updating webview message -->
+    <string name="Webview.updating">Uppdaterar...</string>
+    <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+    <string name="Welcome.body">BRDplånboken har bytt namn till BRD, med ett splitter nytt utseende och några nya funktioner.\n\nOm du behöver hjälp, leta efter (?)-tecknet i det övre högra hörnet på de flesta skärmar.</string>
+    <!-- Top title of welcome screen -->
+    <string name="Welcome.title">Välkommen till BRD!</string>
+    <!-- Wipe wallet alert message -->
+    <string name="WipeWallet.alertMessage">Är du säker på att du vill ta bort den här plånboken.</string>
+    <!-- Wipe wallet alert title -->
+    <string name="WipeWallet.alertTitle">Rensa plånbok?</string>
+    <!-- Failed wipe wallet alert message -->
+    <string name="WipeWallet.failedMessage">Rensning av plånboken misslyckades.</string>
+    <!-- Failed wipe wallet alert title -->
+    <string name="WipeWallet.failedTitle">Misslyckades</string>
+    <!-- Enter phrase to wipe wallet instruction. (Important to explain it is the CURRENT [this wallet's] paper key that needs to be entered). -->
+    <string name="WipeWallet.instruction">Ange din återställningsfras för att torka den här plånboken från din enhet.</string>
+    <!-- Instructions for unlinking the wallet -->
+    <string name="WipeWallet.startMessage">Ta bort länken till din plånbok för att ta bort den från denna enhet. När länken till denna plånbok är borttagen kan du skapa en ny plånbok eller återställa en annan plånbok på denna enhet.</string>
+    <!-- Start wipe wallet view warning -->
+    <string name="WipeWallet.startWarning">Din nuvarande plånbok kommer att tas bort från den här enheten. Om du vill återställa den i framtiden måste du ange din återställningsfras.</string>
+    <!-- Unlink this wallet from this device. -->
+    <string name="WipeWallet.title">Ta Bort Länken Till Plånboken</string>
+    <!-- Wipe wallet button title -->
+    <string name="WipeWallet.wipe">Rensa</string>
+    <!-- Wiping activity message -->
+    <string name="WipeWallet.wiping">Rensar...</string>
+    <!-- Paper key instructions. -->
+    <string name="WritePaperPhrase.instruction">Skriv ner varje ord i ordning och lagra dem på ett säkert ställe.</string>
+    <!-- button label -->
+    <string name="WritePaperPhrase.next">Nästa</string>
+    <!-- button label -->
+    <string name="WritePaperPhrase.previous">Föregående</string>
+    <!-- 1 of 3 -->
+    <string name="WritePaperPhrase.step">%1$d av %2$d</string>
+</resources>

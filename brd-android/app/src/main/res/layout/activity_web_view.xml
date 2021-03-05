@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/webview_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.breadwallet.ui.browser.WebViewActivity">
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:filterTouchesWhenObscured="true">
+
+    </WebView>
+
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/web_view_toolbar"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/webview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Simplex Checkout"
+                android:textColor="@color/black"
+                android:fontFamily="@font/mobile_font_bold" />
+
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingEnd="8dp"
+                android:text="@string/AccessibilityLabels.close"
+                android:textColor="@color/button_primary_normal"
+                android:fontFamily="@font/mobile_font_bold" />
+
+
+        </RelativeLayout>
+
+    </Toolbar>
+
+    <Toolbar
+        android:id="@+id/toolbar_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/web_view_toolbar"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:id="@+id/webview_back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_webview_left_inactive" />
+
+
+            <ImageButton
+                android:id="@+id/webview_forward_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@id/webview_back_arrow"
+                android:background="@drawable/ic_webview_right_inactive" />
+
+
+            <ImageButton
+                android:id="@+id/reload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_reload_blue" />
+
+        </RelativeLayout>
+
+    </Toolbar>
+
+</RelativeLayout>
