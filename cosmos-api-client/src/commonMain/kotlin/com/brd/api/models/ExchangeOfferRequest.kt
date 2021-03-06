@@ -46,7 +46,13 @@ data class ExchangeOfferRequest(
     val quoteCurrencyCode: String,
     val offers: List<ExchangeOffer>,
 ) {
-    val id = url.substringAfterLast("/")
+
+    // Workaround for https://github.com/Kotlin/kotlinx.serialization/issues/848
+    val id: String
+
+    init {
+        id = url.substringAfterLast("/")
+    }
 
     @Serializable
     enum class Status {
