@@ -78,7 +78,7 @@ internal class HydraApiClient(
             }
         }
         Json {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer(apiJson)
             accept(ContentType.Application.Json.withCharset(UTF_8))
         }
         Logging {

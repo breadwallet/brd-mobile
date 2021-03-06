@@ -29,7 +29,6 @@ import com.brd.api.models.ExchangeCountriesResult
 import com.brd.api.models.ExchangePairsResult
 import kotlin.test.*
 
-@Ignore
 class HydraApiClientTests {
 
     private lateinit var apiClient: BRDApiClient
