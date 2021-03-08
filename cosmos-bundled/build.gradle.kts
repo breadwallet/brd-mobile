@@ -15,6 +15,7 @@ kotlin {
             binaries.framework {
                 baseName = "Cosmos"
                 export(project(":cosmos-api-client"))
+                export(project(":cosmos-bakers-api-client"))
             }
         }
     }
@@ -30,6 +31,7 @@ kotlin {
                 implementation(brd.Libs.Kotlinx.Atomicfu)
 
                 api(project(":cosmos-api-client"))
+                api(project(":cosmos-bakers-api-client"))
             }
         }
     }
