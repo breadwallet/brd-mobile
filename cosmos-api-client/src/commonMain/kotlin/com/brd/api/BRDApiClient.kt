@@ -28,7 +28,7 @@ import com.brd.api.models.*
 import io.ktor.client.HttpClient
 import kotlin.coroutines.cancellation.CancellationException
 
-private const val STAGING_API_HOST = "brd-web-staging.herokuapp.com"//"stage2.breadwallet.com"
+private const val STAGING_API_HOST = "test.brd.com"//"stage2.breadwallet.com"
 private const val PRODUCTION_API_HOST = "api.breadwallet.com"
 
 interface BRDAuthProvider {
