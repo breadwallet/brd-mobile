@@ -16,5 +16,3 @@ include(
     "brd-android:ui:ui-gift",
     "brd-android:theme"
 )
-
-enableFeaturePreview("GRADLE_METADATA")
