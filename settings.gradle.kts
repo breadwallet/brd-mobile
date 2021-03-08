@@ -3,7 +3,7 @@ rootProject.name = "brd-mobile"
 include(
     "cosmos-core",
     "cosmos-api-client",
-    "cosmos-websocket",
+    //"cosmos-websocket",
     "cosmos-bundled"
 )
 
