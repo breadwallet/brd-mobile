@@ -26,6 +26,7 @@ package brd
 
 const val KOTLIN_VERSION = "1.4.31"
 private const val KTOR_VERSION = "1.5.2"
+private const val KOTLINX_ATOMICFU_VERSION = "0.15.0"
 private const val KOTLINX_DATETIME_VERSION = "0.1.1"
 private const val KOTLINX_SERIALIZATION_VERSION = "1.1.0"
 private const val COROUTINES_VERSION = "1.4.3-native-mt"
@@ -195,6 +196,7 @@ object Libs {
     object Kotlinx {
         const val DateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$KOTLINX_DATETIME_VERSION"
         const val SerializationRuntime = "org.jetbrains.kotlinx:kotlinx-serialization-json:$KOTLINX_SERIALIZATION_VERSION"
+        const val Atomicfu = "org.jetbrains.kotlinx:atomicfu:$KOTLINX_ATOMICFU_VERSION"
     }
 
     object Ktor {

@@ -3,7 +3,7 @@ rootProject.name = "brd-mobile"
 include(
     "cosmos-core",
     "cosmos-api-client",
-    "cosmos-websocket",
+    //"cosmos-websocket",
     "cosmos-bundled",
     "cosmos-bakers-api-client"
 )
@@ -17,5 +17,3 @@ include(
     "brd-android:ui:ui-gift",
     "brd-android:theme"
 )
-
-enableFeaturePreview("GRADLE_METADATA")

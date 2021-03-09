@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -24,6 +23,13 @@ kotlin {
     sourceSets {
         named("commonMain") {
             dependencies {
+                // Work around a transitive dependency on Atomicfu that
+                // causes the Kotlin compiler to fail when proccing an
+                // outdated klib package.  This is reported twice as
+                // https://youtrack.jetbrains.com/issue/KT-43911 and
+                // https://youtrack.jetbrains.com/issue/KT-41821
+                implementation(brd.Libs.Kotlinx.Atomicfu)
+
                 api(project(":cosmos-api-client"))
                 api(project(":cosmos-bakers-api-client"))
             }
