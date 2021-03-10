@@ -3,7 +3,7 @@ stages:
   - deploy
 
 default:
-  image: alvrme/alpine-android:android-29
+  image: alvrme/alpine-android:android-29-jdk11
 
 variables:
   SIGNING_KEY: /builds/breadwallet/brd-mobile/brd-android/FakeSigningKey
