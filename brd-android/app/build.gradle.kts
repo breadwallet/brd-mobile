@@ -137,7 +137,7 @@ android {
         )
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = brd.COMPOSE_VERSION
     }
 }
 
