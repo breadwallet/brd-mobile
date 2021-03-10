@@ -79,6 +79,7 @@ private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
 private const val AGP_VERSION = "4.1.2"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
 private const val AUTODESK_VERSION = "0.6.2"
+const val COMPOSE_VERSION = "1.0.0-beta01"
 
 object Libs {
     object WalletKit {
@@ -263,5 +264,12 @@ object Libs {
 
     object AutoDesk {
         const val CoroutineWorker = "com.autodesk:coroutineworker:$AUTODESK_VERSION"
+    }
+
+    object Compose {
+        const val Ui = "androidx.compose.ui:ui:$COMPOSE_VERSION"
+        const val Tooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
+        const val Foundation = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
+        const val Material = "androidx.compose.material:material:$COMPOSE_VERSION"
     }
 }
