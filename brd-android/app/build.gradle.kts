@@ -118,6 +118,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -130,8 +131,13 @@ android {
             "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xopt-in=kotlinx.coroutines.FlowPreview",
             "-Xopt-in=kotlin.time.ExperimentalTime",
-            "-Xopt-in=kotlin.RequiresOptIn"
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
         )
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = COMPOSE_VERSION
     }
 }
 
@@ -221,6 +227,12 @@ dependencies {
     // Kodein DI
     implementation(Libs.Kodein.CoreErasedJvm)
     implementation(Libs.Kodein.FrameworkAndroidX)
+
+    // Compose
+    implementation(Libs.Compose.Ui)
+    implementation(Libs.Compose.Tooling)
+    implementation(Libs.Compose.Foundation)
+    implementation(Libs.Compose.Material)
 
     // Debugging/Monitoring
     debugImplementation(Libs.LeakCanary.Core)
