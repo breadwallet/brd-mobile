@@ -523,19 +523,25 @@ class CryptoUserManager(
     private suspend fun <T> executeWithAuth(action: (context: Activity) -> T): T {
         val activity = getActivity()
         return try {
-            Main {
-                runCatching { action(activity) }
-            }.getOrThrow()
+            runOnMain{ action(activity) }
         } catch (e: UserNotAuthenticatedException) {
             logInfo("Attempting authentication")
 
             when (resultChannel.receive()) {
-                Activity.RESULT_OK -> Main {
-                    runCatching { action(activity) }
-                }.getOrThrow()
+                Activity.RESULT_OK -> runOnMain { action(activity) }
                 else -> throw e
             }
         }
+    }
+
+    private suspend fun <T> runOnMain(block : () -> T): T {
+        return Main {
+            try {
+               block()
+            } catch (e: Throwable) {
+                e
+            }
+        }.let { if (it is Throwable) throw it else (it as T) }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int) {
@@ -601,7 +607,7 @@ class CryptoUserManager(
             return true
         }
 
-        return runCatching {
+        return try {
             // Attempt to retrieve the key that protects the paper key and initialize an encryption cipher.
             val key = KeyStore.getInstance(ANDROID_KEY_STORE)
                 .apply { load(null) }
@@ -616,7 +622,7 @@ class CryptoUserManager(
                 store?.getBytes(KEY_ACCOUNT, null) != null -> false // key is null when it should not be
                 else -> true // key has not been initialized, the key store is still considered valid
             }
-        }.recoverCatching { e ->
+        } catch (e: Exception) {
             // If KeyPermanentlyInvalidatedException
             //  -> with no cause happens, then the password was disabled. See DROID-1019.
             // If UnrecoverableKeyException
@@ -628,7 +634,7 @@ class CryptoUserManager(
             (e !is KeyPermanentlyInvalidatedException && e !is UnrecoverableKeyException).also { isValid ->
                 if (!isValid) BRReportsManager.error("Phrase key permanently invalidated", e)
             }
-        }.getOrDefault(false)
+        }
     }
 
     private fun requiresUninstall(): Boolean {
