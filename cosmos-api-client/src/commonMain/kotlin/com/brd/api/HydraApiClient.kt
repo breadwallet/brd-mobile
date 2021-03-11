@@ -45,6 +45,7 @@ import io.ktor.utils.io.charsets.Charsets.UTF_8
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
@@ -194,9 +195,11 @@ internal class HydraApiClient(
                 )
             } catch (e: ResponseException) {
                 val bodyString = e.response.readText()
-                val jsonData = runCatching {
+                val jsonData = try {
                     apiJson.parseToJsonElement(bodyString)
-                }.getOrNull()?.jsonObject
+                } catch (e: SerializationException) {
+                    null
+                }?.jsonObject
                 ExchangeOrderResult.Error(
                     status = e.response.status.value,
                     body = bodyString,

@@ -13,8 +13,8 @@ plugins {
 }
 
 plugins.apply(AppetizePlugin::class)
-apply(from = file("../gradle/google-services.gradle"))
-apply(from = file("../gradle/copy-font-files.gradle"))
+apply(from = rootProject.file("gradle/google-services.gradle"))
+apply(from = rootProject.file("gradle/copy-font-files.gradle"))
 
 val BDB_CLIENT_TOKEN: String by project
 val useGoogleServices: Boolean by ext
@@ -42,7 +42,7 @@ android {
         create("FakeSigningConfig") {
             keyAlias = "key0"
             keyPassword = "qwerty"
-            storeFile = file("../FakeSigningKey")
+            storeFile = file("FakeSigningKey")
             storePassword = "qwerty"
         }
     }

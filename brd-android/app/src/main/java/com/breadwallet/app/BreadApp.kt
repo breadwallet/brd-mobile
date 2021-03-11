@@ -518,15 +518,16 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private fun createGiftBackupEncryptedPrefs(): SharedPreferences? = createEncryptedPrefs(ENCRYPTED_GIFT_BACKUP_FILE)
 
     private fun createEncryptedPrefs(fileName: String): SharedPreferences? {
-        val masterKeys = runCatching {
+        val masterKeys = try {
             MasterKey.Builder(this)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             BRReportsManager.error("Failed to create Master Keys", e)
-        }.getOrNull() ?: return null
+            return null
+        }
 
-        return runCatching {
+        return try {
             EncryptedSharedPreferences.create(
                 this@BreadApp,
                 fileName,
@@ -534,9 +535,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             BRReportsManager.error("Failed to create Encrypted Shared Preferences", e)
-        }.getOrNull()
+            null
+        }
     }
 
     override fun getCameraXConfig(): CameraXConfig {
@@ -545,7 +547,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
     @VisibleForTesting
     fun clearApplicationData() {
-        runCatching {
+        try {
             startedScope.coroutineContext.cancelChildren()
             applicationScope.coroutineContext.cancelChildren()
             val breadBox = direct.instance<BreadBox>()
@@ -561,7 +563,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 .delete(PlatformSqliteHelper.KV_STORE_TABLE_NAME, null, null)
 
             getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE).edit { clear() }
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             logError("Failed to clear application data", e)
         }
     }
