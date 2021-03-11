@@ -37,7 +37,7 @@ build-android:
   script:
     - git submodule sync
     - git submodule update --init --force --remote
-    - ./gradlew :brd-android:build -xlint -xdetekt
+    - ./gradlew :brd-android:app:build -xlint -xdetekt
   only:
     - develop
     - main
