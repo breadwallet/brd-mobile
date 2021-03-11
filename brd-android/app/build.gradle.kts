@@ -42,7 +42,7 @@ android {
         create("FakeSigningConfig") {
             keyAlias = "key0"
             keyPassword = "qwerty"
-            storeFile = file("../FakeSigningKey")
+            storeFile = file("FakeSigningKey")
             storePassword = "qwerty"
         }
     }
