@@ -1,4 +1,4 @@
-def hasAppServicesJson = file("google-services.json").exists()
+def hasAppServicesJson = rootProject.file("brd-android/app/google-services.json").exists()
 def submoduleServicesJson = rootProject.file("external/google-services/google-services.json")
 
 ext {
