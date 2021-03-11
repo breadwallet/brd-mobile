@@ -39,6 +39,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.brd.api.AndroidBRDAuthProvider
+import com.brd.api.BRDApiClient
+import com.brd.api.BRDAuthProvider
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.BdbAuthInterceptor
 import com.breadwallet.breadbox.BreadBox
@@ -383,6 +386,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 instance(),
                 instance()
             )
+        }
+
+        bind<BRDApiClient>() with singleton {
+            BRDApiClient.create(AndroidBRDAuthProvider(instance()))
         }
     }
 

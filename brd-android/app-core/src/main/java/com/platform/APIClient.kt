@@ -205,27 +205,6 @@ class APIClient(
         return response.bodyText
     }
 
-    private fun signRequest(request: String): String? {
-        val requestHash = CryptoHelper.doubleSha256(request.toByteArray())
-        if (requestHash == null) {
-            logError("requestHash is null, cannot sign request")
-            return null
-        }
-
-        val key: Key? = authKey
-        if (key == null) {
-            logError("key is null, failed to get api key")
-            return null
-        }
-
-        val signedBytes = CryptoHelper.signCompact(requestHash, key)
-        if (signedBytes.isEmpty()) {
-            logError("Failed to sign request.")
-            return null
-        }
-        return CryptoHelper.base58Encode(signedBytes)
-    }
-
     @VisibleForTesting
     fun sendHttpRequest(locRequest: Request, withAuth: Boolean, token: String?): Response? {
         check(!UiUtils.isMainThread()) { "urlGET: network on main thread" }
@@ -320,7 +299,7 @@ class APIClient(
                     return createBrResponse(response)
                 } else if (!BuildConfig.DEBUG &&
                     (!newUri.host!!.equals(host, true) ||
-                        !newUri.scheme!!.equals(PROTO, true))
+                            !newUri.scheme!!.equals(PROTO, true))
                 ) {
                     logError("WARNING: redirect is NOT safe: $newLocation")
                     return createBrResponse(
@@ -436,7 +415,7 @@ class APIClient(
             $url
         """.trimIndent()
 
-        val signedRequest = signRequest(requestString) ?: return null
+        val signedRequest = signRequest(requestString, authKey ?: return null) ?: return null
         val authValue = "$BREAD $token:$signedRequest"
         return modifiedRequest
             .header(BRConstants.AUTHORIZATION, authValue)
@@ -596,7 +575,7 @@ class APIClient(
         const val UA_APP_NAME = "breadwallet/"
         const val UA_PLATFORM = "android/"
 
-        private val DATE_FORMAT = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+        val DATE_FORMAT = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
         private const val CONNECTION_TIMEOUT_SECONDS = 30
 
         @JvmStatic
@@ -647,6 +626,21 @@ class APIClient(
             } catch (e: IOException) {
                 null
             }
+        }
+
+        fun signRequest(request: String, key: Key): String? {
+            val requestHash = CryptoHelper.doubleSha256(request.toByteArray())
+            if (requestHash == null) {
+                logError("requestHash is null, cannot sign request")
+                return null
+            }
+
+            val signedBytes = CryptoHelper.signCompact(requestHash, key)
+            if (signedBytes.isEmpty()) {
+                logError("Failed to sign request.")
+                return null
+            }
+            return CryptoHelper.base58Encode(signedBytes)
         }
     }
 }
