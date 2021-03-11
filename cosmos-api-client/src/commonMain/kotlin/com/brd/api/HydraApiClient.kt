@@ -53,7 +53,6 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
-import kotlin.coroutines.cancellation.CancellationException
 import kotlin.native.concurrent.SharedImmutable
 
 @SharedImmutable
@@ -91,7 +90,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getCurrencies(mainnet: Boolean): BrdCurrenciesResult {
         return withContext(dispatcher) {
             try {
@@ -109,7 +107,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getExchangeCountries(): ExchangeCountriesResult {
         return withContext(dispatcher) {
             try {
@@ -123,7 +120,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getExchangePairs(
         countryCode: String,
         regionCode: String?,
@@ -147,7 +143,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun createOfferRequest(configuration: ExchangeOfferBody): ExchangeOfferRequestResult {
         return withContext(dispatcher) {
             try {
@@ -166,7 +161,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getOfferRequest(id: String): ExchangeOfferRequest? {
         return withContext(dispatcher) {
             try {
@@ -180,7 +174,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun createOrder(offerId: String): ExchangeOrderResult {
         return withContext(dispatcher) {
             try {
@@ -211,7 +204,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getOrder(orderId: String): ExchangeOrder? {
         return withContext(dispatcher) {
             try {
@@ -225,7 +217,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun submitCryptoAddress(action: ExchangeOrder.Action, address: String): Boolean {
         check(action is CryptoReceiveAddress || action is CryptoRefundAddress)
         return withContext(dispatcher) {
@@ -245,7 +236,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun submitCryptoSendTransactionId(
         action: ExchangeOrder.Action.CryptoSend,
         transactionId: String
@@ -267,7 +257,6 @@ internal class HydraApiClient(
         }
     }
 
-    @Throws(CancellationException::class)
     override suspend fun getMe(): Boolean {
         return withContext(dispatcher) {
             try {

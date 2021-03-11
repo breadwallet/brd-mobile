@@ -26,7 +26,6 @@ package com.brd.api
 
 import com.brd.api.models.*
 import io.ktor.client.HttpClient
-import kotlin.coroutines.cancellation.CancellationException
 
 private const val STAGING_API_HOST = "brd-web-staging.com"//"stage2.breadwallet.com"
 private const val PRODUCTION_API_HOST = "api.breadwallet.com"
@@ -68,7 +67,6 @@ interface BRDApiClient {
      * Fetch a list of supported mainnet [BrdCurrency]s or testnet
      * currencies when [mainnet] is false.
      */
-    @Throws(CancellationException::class)
     suspend fun getCurrencies(mainnet: Boolean = true): BrdCurrenciesResult
 
     /**
@@ -77,14 +75,12 @@ interface BRDApiClient {
      *
      * @see getExchangePairs
      */
-    @Throws(CancellationException::class)
     suspend fun getExchangeCountries(): ExchangeCountriesResult
 
     /**
      * Fetch a list of supported [com.brd.api.models.ExchangePair]s for the
      * given [countryCode] and [regionCode].
      */
-    @Throws(CancellationException::class)
     suspend fun getExchangePairs(
         countryCode: String,
         regionCode: String? = null,
@@ -92,24 +88,17 @@ interface BRDApiClient {
         quoteCurrencyCode: String? = null,
     ): ExchangePairsResult
 
-    @Throws(CancellationException::class)
     suspend fun createOfferRequest(configuration: ExchangeOfferBody): ExchangeOfferRequestResult
 
-    @Throws(CancellationException::class)
     suspend fun getOfferRequest(id: String): ExchangeOfferRequest?
 
-    @Throws(CancellationException::class)
     suspend fun createOrder(offerId: String): ExchangeOrderResult
 
-    @Throws(CancellationException::class)
     suspend fun getOrder(orderId: String): ExchangeOrder?
 
-    @Throws(CancellationException::class)
     suspend fun submitCryptoAddress(action: ExchangeOrder.Action, address: String): Boolean
 
-    @Throws(CancellationException::class)
     suspend fun submitCryptoSendTransactionId(action: ExchangeOrder.Action.CryptoSend, transactionId: String): Boolean
 
-    @Throws(CancellationException::class)
     suspend fun getMe(): Boolean
 }
