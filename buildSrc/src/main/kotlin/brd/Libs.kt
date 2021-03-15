@@ -80,6 +80,7 @@ private const val AGP_VERSION = "4.1.2"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
 private const val AUTODESK_VERSION = "0.6.2"
 const val COMPOSE_VERSION = "1.0.0-beta01"
+private const val ACCOMPANIST_VERSION = "0.6.2"
 
 object Libs {
     object WalletKit {
@@ -271,5 +272,7 @@ object Libs {
         const val Tooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
         const val Foundation = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
         const val Material = "androidx.compose.material:material:$COMPOSE_VERSION"
+        const val MaterialIcons = "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
+        const val AccompanistPicasso = "dev.chrisbanes.accompanist:accompanist-picasso:$ACCOMPANIST_VERSION"
     }
 }

@@ -234,6 +234,8 @@ dependencies {
     implementation(Libs.Compose.Tooling)
     implementation(Libs.Compose.Foundation)
     implementation(Libs.Compose.Material)
+    implementation(Libs.Compose.MaterialIcons)
+    implementation(Libs.Compose.AccompanistPicasso)
 
     // Debugging/Monitoring
     debugImplementation(Libs.LeakCanary.Core)
