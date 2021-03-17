@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform") /*version "1.4.31"*/ apply false
-    kotlin("plugin.serialization") version "1.4.31" apply false
+    kotlin("multiplatform") version brd.KOTLIN_VERSION apply false
+    kotlin("plugin.serialization") version brd.KOTLIN_VERSION apply false
     id("org.jetbrains.dokka") version "1.4.20"
 }
 

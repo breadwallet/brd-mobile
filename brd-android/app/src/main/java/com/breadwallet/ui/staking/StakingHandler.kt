@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.breadwallet.ui.uistaking
+package com.breadwallet.ui.staking
 
 import android.content.Context
 import com.breadwallet.breadbox.BreadBox
@@ -47,12 +47,12 @@ import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
 import com.breadwallet.tools.util.EventUtils
-import com.breadwallet.ui.uistaking.Staking.E
-import com.breadwallet.ui.uistaking.Staking.F
-import com.breadwallet.ui.uistaking.Staking.M
-import com.breadwallet.ui.uistaking.Staking.M.ViewValidator.State.PENDING_STAKE
-import com.breadwallet.ui.uistaking.Staking.M.ViewValidator.State.PENDING_UNSTAKE
-import com.breadwallet.ui.uistaking.Staking.M.ViewValidator.State.STAKED
+import com.breadwallet.ui.staking.Staking.E
+import com.breadwallet.ui.staking.Staking.F
+import com.breadwallet.ui.staking.Staking.M
+import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.PENDING_STAKE
+import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.PENDING_UNSTAKE
+import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.STAKED
 import drewcarlson.mobius.flow.flowTransformer
 import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.flow.debounce

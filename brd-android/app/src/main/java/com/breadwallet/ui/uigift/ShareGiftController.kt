@@ -32,6 +32,9 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
+import com.breadwallet.BuildConfig
+import com.breadwallet.R
+import com.breadwallet.databinding.ControllerShareGiftBinding
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.logger.logError
@@ -45,7 +48,6 @@ import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.uigift.ShareGift.E
 import com.breadwallet.ui.uigift.ShareGift.F
 import com.breadwallet.ui.uigift.ShareGift.M
-import com.breadwallet.ui.uigift.databinding.ControllerShareGiftBinding
 import drewcarlson.mobius.flow.FlowTransformer
 import drewcarlson.mobius.flow.flowTransformer
 import kotlinx.coroutines.Dispatchers.IO
