@@ -7,7 +7,7 @@ commit_changes() {
 	else
 		version="${version}.0.${mainBundleVersion}";
 	fi
-	tag="build-${version}"
+	tag="ios-${version}"
 
 	git add .
 	git status
