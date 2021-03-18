@@ -2,6 +2,9 @@ stages:
   - build
   - deploy
 
+include:
+  - template: Managed-Cluster-Applications.gitlab-ci.yml
+
 default:
   image: alvrme/alpine-android:android-29-jdk11
   tags:
