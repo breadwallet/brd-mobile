@@ -28,30 +28,21 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class ExchangeCurrency {
-
-    abstract val currencyId: String
-    abstract val code: String
-    abstract val name: String
-    abstract val decimals: Int
-
-    @Serializable
-    @SerialName("crypto")
-    data class Crypto(
-        @SerialName("currency_id")
-        override val currencyId: String,
-        override val code: String,
-        override val name: String,
-        override val decimals: Int,
-    ) : ExchangeCurrency()
+data class ExchangeCurrency(
+    @SerialName("currency_id")
+    val currencyId: String,
+    val code: String,
+    val name: String,
+    val decimals: Int,
+    val type: Type
+) {
+    fun isCrypto(): Boolean = type == Type.CRYPTO
 
     @Serializable
-    @SerialName("fiat")
-    data class Fiat(
-        @SerialName("currency_id")
-        override val currencyId: String,
-        override val code: String,
-        override val name: String,
-        override val decimals: Int,
-    ) : ExchangeCurrency()
+    enum class Type {
+        @SerialName("crypto")
+        CRYPTO,
+        @SerialName("fiat")
+        FIAT,
+    }
 }

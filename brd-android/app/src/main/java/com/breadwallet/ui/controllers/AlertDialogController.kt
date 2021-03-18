@@ -29,9 +29,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.breadwallet.databinding.ControllerAlertDialogBinding
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
-import com.breadwallet.ui.uicommon.databinding.ControllerAlertDialogBinding
 
 /** */
 class AlertDialogController(

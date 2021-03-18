@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.breadwallet.ui.uistaking
+package com.breadwallet.ui.staking
 
 import com.breadwallet.crypto.TransferFeeBasis
 import com.breadwallet.ui.ViewEffect

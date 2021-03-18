@@ -34,6 +34,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.drawable.toBitmap
+import com.breadwallet.R
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.invoke
 import kotlin.math.absoluteValue

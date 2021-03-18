@@ -27,6 +27,7 @@ package com.breadwallet.ui.uigift
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.crypto.TransferFeeBasis
 import com.breadwallet.tools.util.BRConstants
+import com.breadwallet.R
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget

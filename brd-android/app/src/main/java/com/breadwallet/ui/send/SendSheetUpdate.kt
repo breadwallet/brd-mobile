@@ -27,7 +27,6 @@ package com.breadwallet.ui.send
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.ext.isZero
 import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.Link
 import com.breadwallet.ui.send.SendSheet.E
 import com.breadwallet.ui.send.SendSheet.E.OnAddressValidated.InvalidAddress
 import com.breadwallet.ui.send.SendSheet.E.OnAddressValidated.NoAddress

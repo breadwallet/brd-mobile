@@ -43,7 +43,7 @@ private const val WORK_MANAGER_VERSION = "2.4.0"
 private const val SECURITY_VERSION = "1.1.0-alpha03"
 private const val LEGACY_V13 = "1.0.0"
 private const val CORE_VERSION = "1.3.2"
-private const val APPCOMPAT_VERSION = "1.2.0"
+private const val APPCOMPAT_VERSION = "1.3.0-beta01"
 private const val CARDVIEW_VERSION = "1.0.0"
 private const val CAMERAX_VERSION = "1.0.0-rc02"
 private const val CAMERAX_VIEW_VERSION = "1.0.0-alpha21"
@@ -80,6 +80,7 @@ private const val AGP_VERSION = "4.1.2"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
 private const val AUTODESK_VERSION = "0.6.2"
 const val COMPOSE_VERSION = "1.0.0-beta01"
+private const val ACCOMPANIST_VERSION = "0.6.2"
 
 object Libs {
     object WalletKit {
@@ -271,5 +272,7 @@ object Libs {
         const val Tooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
         const val Foundation = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
         const val Material = "androidx.compose.material:material:$COMPOSE_VERSION"
+        const val MaterialIcons = "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
+        const val AccompanistPicasso = "dev.chrisbanes.accompanist:accompanist-picasso:$ACCOMPANIST_VERSION"
     }
 }

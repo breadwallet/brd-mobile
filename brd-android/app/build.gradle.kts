@@ -144,9 +144,6 @@ android {
 dependencies {
     implementation(project(":cosmos-bundled"))
     implementation(project(":brd-android:app-core"))
-    implementation(project(":brd-android:ui:ui-common"))
-    implementation(project(":brd-android:ui:ui-staking"))
-    implementation(project(":brd-android:ui:ui-gift"))
     implementation(Libs.WalletKit.CoreAndroid)
 
     // AndroidX
@@ -234,6 +231,8 @@ dependencies {
     implementation(Libs.Compose.Tooling)
     implementation(Libs.Compose.Foundation)
     implementation(Libs.Compose.Material)
+    implementation(Libs.Compose.MaterialIcons)
+    implementation(Libs.Compose.AccompanistPicasso)
 
     // Debugging/Monitoring
     debugImplementation(Libs.LeakCanary.Core)
