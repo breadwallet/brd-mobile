@@ -3,7 +3,7 @@
 echo "Copying fonts...";
 
 copy_font() {
-	if cp "Modules/mobile-font/$1" "breadwallet/Fonts/$2"
+	if cp "../external/mobile-font/$1" "breadwallet/Fonts/$2"
 	then
   		echo "Success $1"
 	else
