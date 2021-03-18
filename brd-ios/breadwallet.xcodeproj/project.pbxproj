@@ -603,6 +603,11 @@
 		CEF3E8361DE60222007C0A9E /* ModalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */; };
 		CEF61B121ECF52C700C7EA6A /* AmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61B111ECF52C700C7EA6A /* AmountViewController.swift */; };
 		CEF7D94622CE6AC000939D19 /* HistoryPeriodButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7D94522CE6AC000939D19 /* HistoryPeriodButton.swift */; };
+		D1423EEB2602A23D00709CCA /* WalletKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0C6087242A5CC900F0FBC2 /* WalletKit */; };
+		D1423EEC2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 3A858B29250A781700812B36 /* CoinGecko */; };
+		D1423EED2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3C2FA625DA7F1C00C7C398 /* CoinGecko */; };
+		D1423EEE2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3C2FAA25DA7F2F00C7C398 /* CoinGecko */; };
+		D1423EF62602AB9C00709CCA /* WalletKitSwift in Resources */ = {isa = PBXBuildFile; fileRef = D1423EF52602AB9C00709CCA /* WalletKitSwift */; };
 		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
 		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
 		E821D4CD21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
@@ -785,7 +790,6 @@
 		3A88E1D0251533070097C3C2 /* LinkStatusCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkStatusCircle.swift; sourceTree = "<group>"; };
 		3A93890722A3037F0081FCF9 /* BezierView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BezierView.swift; path = src/Views/Charts/BezierView.swift; sourceTree = "<group>"; };
 		3A93890822A3037F0081FCF9 /* CubicCurveAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CubicCurveAlgorithm.swift; path = src/Views/Charts/CubicCurveAlgorithm.swift; sourceTree = "<group>"; };
-		3AA8B0D6242E7DFB006BD84F /* WalletKitSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WalletKitSwift; path = Modules/walletkit/WalletKitSwift; sourceTree = "<group>"; };
 		3AB3EE0E227A23B400414616 /* ASADataFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ASADataFormatter.swift; path = src/Utilities/ASADataFormatter.swift; sourceTree = "<group>"; };
 		3AB3EE10227A27DD00414616 /* ASADataFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASADataFormatterTests.swift; sourceTree = "<group>"; };
 		3ABD8D0D24E1CF1500EC4C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -1312,6 +1316,7 @@
 		CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModalNavigationController.swift; path = src/ViewControllers/ModalNavigationController.swift; sourceTree = "<group>"; };
 		CEF61B111ECF52C700C7EA6A /* AmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AmountViewController.swift; path = src/ViewControllers/AmountViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CEF7D94522CE6AC000939D19 /* HistoryPeriodButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryPeriodButton.swift; path = src/Views/Charts/HistoryPeriodButton.swift; sourceTree = "<group>"; };
+		D1423EF52602AB9C00709CCA /* WalletKitSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WalletKitSwift; path = ../external/walletkit/WalletKitSwift; sourceTree = "<group>"; };
 		E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
 		E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRAnalyticsEvent.swift; path = src/Platform/BRAnalyticsEvent.swift; sourceTree = "<group>"; };
 		E837FCFC219D1C0600F59D99 /* onboarding-video-globe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onboarding-video-globe.mp4"; path = "Resources/onboarding-videos/onboarding-video-globe.mp4"; sourceTree = "<group>"; };
@@ -1336,7 +1341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABD8D1B24E1CF1500EC4C91 /* SwiftUI.framework in Frameworks */,
+				D1423EEC2602A23D00709CCA /* CoinGecko in Frameworks */,
 				7CBC6B2E21751ECA00899AFB /* iAd.framework in Frameworks */,
+				D1423EEB2602A23D00709CCA /* WalletKit in Frameworks */,
 				22A9A9661DF61FEE000F0016 /* WebKit.framework in Frameworks */,
 				22A9A9641DF61FE7000F0016 /* Security.framework in Frameworks */,
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
@@ -1366,6 +1373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F29A99C25D5C605000FEB40 /* Intents.framework in Frameworks */,
+				D1423EEE2602A23D00709CCA /* CoinGecko in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1374,6 +1382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FB0CA1225D5AD180057DD11 /* SwiftUI.framework in Frameworks */,
+				D1423EED2602A23D00709CCA /* CoinGecko in Frameworks */,
 				9FB0CA1125D5AD180057DD11 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1794,7 +1803,7 @@
 		75B6F52F1DA71DCC0031A93F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3AA8B0D6242E7DFB006BD84F /* WalletKitSwift */,
+				D1423EF52602AB9C00709CCA /* WalletKitSwift */,
 				22A9A9971DF63426000F0016 /* libbz2 */,
 				75FEFD1F1DAEE7A400203D3A /* sqlite3 */,
 			);
@@ -2608,8 +2617,8 @@
 			);
 			name = breadwallet;
 			packageProductDependencies = (
-				3A0C6087242A5CC900F0FBC2,
-				3A858B29250A781700812B36,
+				3A0C6087242A5CC900F0FBC2 /* WalletKit */,
+				3A858B29250A781700812B36 /* CoinGecko */,
 			);
 			productName = breadwallet;
 			productReference = 75A2A7901DA5934300A983D8 /* breadwallet.app */;
@@ -2665,7 +2674,7 @@
 			);
 			name = breadwalletIntentHandler;
 			packageProductDependencies = (
-				9F3C2FAA25DA7F2F00C7C398,
+				9F3C2FAA25DA7F2F00C7C398 /* CoinGecko */,
 			);
 			productName = breadwalletIntentHandler;
 			productReference = 9F29A99A25D5C605000FEB40 /* breadwalletIntentHandler.appex */;
@@ -2685,7 +2694,7 @@
 			);
 			name = breadwalletWidgetExtension;
 			packageProductDependencies = (
-				9F3C2FA625DA7F1C00C7C398,
+				9F3C2FA625DA7F1C00C7C398 /* CoinGecko */,
 			);
 			productName = breadwalletWidgetExtension;
 			productReference = 9FB0CA0F25D5AD180057DD11 /* breadwalletWidgetExtension.appex */;
@@ -2802,7 +2811,7 @@
 			);
 			mainGroup = 75A2A7871DA5934300A983D8;
 			packageReferences = (
-				3A858B28250A781700812B36,
+				3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */,
 			);
 			productRefGroup = 75A2A7911DA5934300A983D8 /* Products */;
 			projectDirPath = "";
@@ -2854,6 +2863,7 @@
 				9AE800D721FFF81F00D5058C /* rewardsIcon-44.gif in Resources */,
 				9AE800FB21FFF81F00D5058C /* rewardsIcon-32.gif in Resources */,
 				9A926F6A22034B3800CC2263 /* CellHighlight-77.png in Resources */,
+				D1423EF62602AB9C00709CCA /* WalletKitSwift in Resources */,
 				9A926F8022034B3800CC2263 /* CellHighlight-19.png in Resources */,
 				7C54FF9E2165866A007BF3EF /* currencies.json in Resources */,
 				9A926F9522034B3800CC2263 /* CellHighlight-3.png in Resources */,
@@ -6001,7 +6011,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A858B28250A781700812B36 = {
+		3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/breadwallet/coingecko";
 			requirement = {
@@ -6012,23 +6022,23 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A0C6087242A5CC900F0FBC2 = {
+		3A0C6087242A5CC900F0FBC2 /* WalletKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WalletKit;
 		};
-		3A858B29250A781700812B36 = {
+		3A858B29250A781700812B36 /* CoinGecko */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A858B28250A781700812B36;
+			package = 3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */;
 			productName = CoinGecko;
 		};
-		9F3C2FA625DA7F1C00C7C398 = {
+		9F3C2FA625DA7F1C00C7C398 /* CoinGecko */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A858B28250A781700812B36;
+			package = 3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */;
 			productName = CoinGecko;
 		};
-		9F3C2FAA25DA7F2F00C7C398 = {
+		9F3C2FAA25DA7F2F00C7C398 /* CoinGecko */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A858B28250A781700812B36;
+			package = 3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */;
 			productName = CoinGecko;
 		};
 /* End XCSwiftPackageProductDependency section */
