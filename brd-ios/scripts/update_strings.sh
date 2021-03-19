@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copies localized strings from in-app-i18n repo (assumes it's located one folder up)
 here=`pwd`
-i18n_repo="$here/../in-app-i18n"
+i18n_repo="$here/../external/in-app-i18n"
 project_strings="$here/breadwallet/src/Strings"
 
 echo "Pulling latest in-app-i18n repo..."
