@@ -381,7 +381,6 @@
 		9F29A9A325D5C605000FEB40 /* breadwalletIntentHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F29A99A25D5C605000FEB40 /* breadwalletIntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F29A9BB25D5C75B000FEB40 /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F29A9BA25D5C75B000FEB40 /* AssetView.swift */; };
 		9F29A9CF25D5C8AD000FEB40 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FB0CA1625D5AD180057DD11 /* BreadwalletWidget.intentdefinition */; };
-		9F38F0012603FFF2008A0A70 /* Cosmos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F38F0002603FFF2008A0A70 /* Cosmos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F3C301725DA841100C7C398 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		9F3C301E25DA841100C7C398 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		9F3C302525DA8B2F00C7C398 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9FAF7625D5D0140014F729 /* WidgetService.swift */; };
@@ -414,6 +413,8 @@
 		9FB0CA1B25D5AD190057DD11 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FB0CA1625D5AD180057DD11 /* BreadwalletWidget.intentdefinition */; };
 		9FB0CA1E25D5AD190057DD11 /* breadwalletWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9FB0CA0F25D5AD180057DD11 /* breadwalletWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FBF66BD25D5F1AB007F172D /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */; };
+		9FC52A9B2605175900855473 /* Cosmos.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC52A9A2605175900855473 /* Cosmos.xcframework */; };
+		9FC52A9C2605175900855473 /* Cosmos.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC52A9A2605175900855473 /* Cosmos.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FD519D525E310D300F9D856 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C371EA5B4680086F724 /* Strings.swift */; };
 		9FD519DC25E310D800F9D856 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C371EA5B4680086F724 /* Strings.swift */; };
 		9FD519E325E3185F00F9D856 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29901C1EFD6DE50093A0F2 /* Localizable.strings */; };
@@ -673,8 +674,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9F38F0012603FFF2008A0A70 /* Cosmos.framework in Embed Frameworks */,
 				754AE0B71DFCA870007FD001 /* libbz2.framework in Embed Frameworks */,
+				9FC52A9C2605175900855473 /* Cosmos.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1097,8 +1098,6 @@
 		9F29A99E25D5C605000FEB40 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		9F29A9A025D5C605000FEB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F29A9BA25D5C75B000FEB40 /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
-		9F38EFDB2603FC83008A0A70 /* Cosmos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cosmos.framework; path = "../cosmos-bundled/build/xcode-frameworks/Cosmos.framework"; sourceTree = "<group>"; };
-		9F38F0002603FFF2008A0A70 /* Cosmos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cosmos.framework; path = "../cosmos-bundled/build/xcode-frameworks/Cosmos.framework"; sourceTree = "<group>"; };
 		9F3C305525DA902E00C7C398 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		9F3C313B25DACEDA00C7C398 /* ColorOption+ExtensionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ColorOption+ExtensionUI.swift"; sourceTree = "<group>"; };
 		9F3C314625DACF1300C7C398 /* AssetListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListViewModel.swift; sourceTree = "<group>"; };
@@ -1114,6 +1113,7 @@
 		9FB0CA1725D5AD190057DD11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FB0CA1925D5AD190057DD11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
+		9FC52A9A2605175900855473 /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build/xcode-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
 		9FDDE55025D5B79D00E42BE3 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9FDDE55125D5B79D00E42BE3 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		9FDDE55225D5B79D00E42BE3 /* CGTypes+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGTypes+Extensions.swift"; sourceTree = "<group>"; };
@@ -1355,6 +1355,7 @@
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
+				9FC52A9B2605175900855473 /* Cosmos.xcframework in Frameworks */,
 				22717B062315D3E300F77F4E /* CloudKit.framework in Frameworks */,
 				223DB21B1DF69F0F0076A151 /* libbz2.framework in Frameworks */,
 			);
@@ -1674,7 +1675,6 @@
 		75A2A7871DA5934300A983D8 = {
 			isa = PBXGroup;
 			children = (
-				9F38F0002603FFF2008A0A70 /* Cosmos.framework */,
 				75A2A7921DA5934300A983D8 /* breadwallet */,
 				75A2A7A71DA5934300A983D8 /* breadwalletTests */,
 				75A2A7B21DA5934300A983D8 /* breadwalletUITests */,
@@ -1797,7 +1797,7 @@
 		75A2A7F11DA5935F00A983D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9F38EFDB2603FC83008A0A70 /* Cosmos.framework */,
+				9FC52A9A2605175900855473 /* Cosmos.xcframework */,
 				3ABD8D0D24E1CF1500EC4C91 /* SwiftUI.framework */,
 				22717B052315D3E300F77F4E /* CloudKit.framework */,
 				7C4D64CA222C511900DE2C2B /* libresolv.tbd */,
@@ -3106,7 +3106,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd .. &&  ./gradlew :cosmos-bundled:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
+			shellScript = "cd .. && ./gradlew cosmos-bundled:createXCFramework\n";
 		};
 		3ADA3F8924C8D2FE00E1CBCF /* Copy Fonts */ = {
 			isa = PBXShellScriptBuildPhase;
