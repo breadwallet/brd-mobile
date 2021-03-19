@@ -870,6 +870,10 @@ class ModalPresenter: Subscriber, Trackable {
 
                             menuNav.present(alert, animated: true, completion: nil)
                 }))
+            
+            developerItems.append(MenuItem(title: "Debug crash") {
+                fatalError("Debug crash")
+            })
 
             rootItems.append(MenuItem(title: "Developer Options", icon: nil, subMenu: developerItems, rootNav: menuNav, faqButton: nil))
         }
