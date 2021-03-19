@@ -29,6 +29,8 @@ import android.content.SharedPreferences
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.core.content.edit
 import androidx.test.runner.AndroidJUnit4
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,7 +49,7 @@ class BRSharedPrefsTests {
         //  in the future this should be a Unit test that
         //  mocks SharedPreferences.
         sharedPrefs = context.getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE)
-        BRSharedPrefs.initialize(context)
+        BRSharedPrefs.initialize(context, CoroutineScope(Dispatchers.Main))
     }
 
     @Test
