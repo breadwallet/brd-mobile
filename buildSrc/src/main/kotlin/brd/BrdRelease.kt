@@ -49,7 +49,7 @@ object BrdRelease {
     const val internalVersionName = "$marketing.$product.$engineering.$build"
 
     const val ANDROID_TARGET_SDK = 29
-    const val ANDROID_COMPILE_SDK = 29
+    const val ANDROID_COMPILE_SDK = 30
     const val ANDROID_MINIMUM_SDK = 23
-    const val ANDROID_BUILD_TOOLS = "29.0.3"
+    const val ANDROID_BUILD_TOOLS = "30.0.2"
 }
