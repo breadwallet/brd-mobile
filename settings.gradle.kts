@@ -5,6 +5,7 @@ include(
     "cosmos-api-client",
     //"cosmos-websocket",
     "cosmos-bundled",
+    "cosmos-preferences",
     "cosmos-bakers-api-client"
 )
 

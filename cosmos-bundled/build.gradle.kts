@@ -2,11 +2,25 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeOutputKind
 
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
 }
 
+android {
+    compileSdkVersion(brd.BrdRelease.ANDROID_COMPILE_SDK)
+    buildToolsVersion(brd.BrdRelease.ANDROID_BUILD_TOOLS)
+    defaultConfig {
+        minSdkVersion(brd.BrdRelease.ANDROID_MINIMUM_SDK)
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
 kotlin {
-    jvm {
+    android {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -19,6 +33,7 @@ kotlin {
                 baseName = "Cosmos"
                 export(project(":cosmos-api-client"))
                 export(project(":cosmos-bakers-api-client"))
+                export(project(":cosmos-preferences"))
             }
         }
     }
@@ -35,6 +50,7 @@ kotlin {
 
                 api(project(":cosmos-api-client"))
                 api(project(":cosmos-bakers-api-client"))
+                api(project(":cosmos-preferences"))
             }
         }
     }
