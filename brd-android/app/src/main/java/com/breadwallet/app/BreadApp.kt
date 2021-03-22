@@ -41,7 +41,8 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.brd.api.AndroidBRDAuthProvider
 import com.brd.api.BRDApiClient
-import com.brd.api.BRDAuthProvider
+import com.brd.prefs.AndroidPreferences
+import com.brd.prefs.Preferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.BdbAuthInterceptor
 import com.breadwallet.breadbox.BreadBox
@@ -390,6 +391,11 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         bind<BRDApiClient>() with singleton {
             BRDApiClient.create(AndroidBRDAuthProvider(instance()))
+        }
+
+        bind<Preferences>() with singleton {
+            val prefs = getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE)
+            AndroidPreferences(prefs)
         }
     }
 
