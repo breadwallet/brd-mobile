@@ -67,7 +67,7 @@ class InAppNotificationActivity : BRActivity(), KodeinAware {
     private val uriParser by instance<CryptoUriParser>()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val viewModel by viewModel {
-        InAppNotificationViewModel(intent.getParcelableExtra(EXT_NOTIFICATION))
+        InAppNotificationViewModel(checkNotNull(intent.getParcelableExtra(EXT_NOTIFICATION)))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

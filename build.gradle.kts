@@ -7,6 +7,7 @@ plugins {
 allprojects {
     repositories {
         mavenCentral()
+        google()
         maven(url = "https://kotlin.bintray.com/kotlinx/") // TODO: required for kotlinx.datetime
         maven(url = "https://dl.bintray.com/kotlin/dokka") // TODO: required for dokka
     }
