@@ -56,6 +56,15 @@ kotlin {
     }
 }
 
+tasks.register<Delete>("cleanXCFramework") {
+    delete(fileTree("build-frameworks") {
+        exclude("*.xcframework/Info.plist")
+        exclude("**/*.framework/Info.plist")
+    })
+}
+
+tasks.findByName("clean")?.dependsOn("cleanXCFramework")
+
 tasks.register<Exec>("createXCFramework") {
     group = "build"
     description = "Creates an XCFramework for iOS x64 and arm64 targets"
@@ -69,14 +78,14 @@ tasks.register<Exec>("createXCFramework") {
         .flatMap {
             it.binaries.filter { binary ->
                 binary.outputKind == NativeOutputKind.FRAMEWORK &&
-                        binary.buildType.getName().equals(configurationName, ignoreCase = true)
+                    binary.buildType.getName().equals(configurationName, ignoreCase = true)
             }
         }
 
     dependsOn(frameworks.map { it.linkTask.name })
 
     val outputName = frameworks.first().outputFile.nameWithoutExtension
-    val xcFrameworkDestination = File(buildDir, "xcode-frameworks/${outputName}.xcframework")
+    val xcFrameworkDestination = file("build-frameworks/${outputName}.xcframework")
     executable = "xcodebuild"
     args(
         "-create-xcframework",

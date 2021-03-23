@@ -1113,7 +1113,7 @@
 		9FB0CA1725D5AD190057DD11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FB0CA1925D5AD190057DD11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
-		9FC52A9A2605175900855473 /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build/xcode-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
+		9FC52A9A2605175900855473 /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
 		9FDDE55025D5B79D00E42BE3 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9FDDE55125D5B79D00E42BE3 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		9FDDE55225D5B79D00E42BE3 /* CGTypes+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGTypes+Extensions.swift"; sourceTree = "<group>"; };
@@ -3943,7 +3943,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -3993,7 +3993,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -4202,7 +4202,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -4422,7 +4422,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -4642,7 +4642,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -5448,7 +5448,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -5669,7 +5669,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -5889,7 +5889,7 @@
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(SRCROOT)/../cosmos-bundled/build/bin/xcode-frameworks",
+					"$(SRCROOT)/../cosmos-bundled/build-frameworks",
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
