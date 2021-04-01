@@ -43,6 +43,7 @@ struct AssetListView: View {
                             singleColumnLimit: 3,
                             doubleColumnLimit: 3
                         )
+                        .widgetURL(viewModel.anyAsset.urlScheme)
                     default:
                         Text("Not supported")
                     }
