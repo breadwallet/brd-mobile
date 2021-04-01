@@ -1,0 +1,228 @@
+"1BT6DH" = "daily";
+
+"1CykkH" = "false";
+
+"1J9VT8" = "Falling price chart color";
+
+"2aZ6E9" = "Text Color";
+
+"3sM9Sg" = "Logo Style";
+
+"4bA1J9" = "true";
+
+"4u4KJa" = "Color Option";
+
+"6exxyA-1BT6DH" = "Just to confirm, you wanted ‘daily’?";
+
+"6exxyA-Nubh8Q" = "Just to confirm, you wanted ‘minute’?";
+
+"6lj7GI" = "true";
+
+"6rfFPo" = "Logo Style";
+
+"7Ghefw-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
+
+"7Ghefw-FIlJ2n" = "Just to confirm, you wanted ‘Text Ticker’?";
+
+"7Ghefw-TCnDye" = "Just to confirm, you wanted ‘Icon with Background’?";
+
+"7Ghefw-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
+
+"7wvcZG" = "Falling price chart color";
+
+"8MLW1q" = "Text Ticker and Name";
+
+"8WI3pc" = "Background Color";
+
+"AiUDFj-8MLW1q" = "There are ${count} options matching ‘Text Ticker and Name’.";
+
+"AiUDFj-FIlJ2n" = "There are ${count} options matching ‘Text Ticker’.";
+
+"AiUDFj-TCnDye" = "There are ${count} options matching ‘Icon with Background’.";
+
+"AiUDFj-i8t9EV" = "There are ${count} options matching ‘Icon no Background’.";
+
+"B5QJf1" = "Asset List";
+
+"D8DTCl" = "Style";
+
+"Dk8KDo-1BT6DH" = "Just to confirm, you wanted ‘daily’?";
+
+"Dk8KDo-Nubh8Q" = "Just to confirm, you wanted ‘minute’?";
+
+"FIlJ2n" = "Text Ticker";
+
+"H1mfaZ-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
+
+"H1mfaZ-FIlJ2n" = "Just to confirm, you wanted ‘Text Ticker’?";
+
+"H1mfaZ-TCnDye" = "Just to confirm, you wanted ‘Icon with Background’?";
+
+"H1mfaZ-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
+
+"IVQPjt" = "Minimalist";
+
+"Ka6r47" = "Max Info";
+
+"Ld1fdS" = "Show Separator Lines";
+
+"LuAplo" = "Text Color";
+
+"McjLuz-IVQPjt" = "Just to confirm, you wanted ‘Minimalist’?";
+
+"McjLuz-Ka6r47" = "Just to confirm, you wanted ‘Max Info’?";
+
+"NKQg9b-1BT6DH" = "Just to confirm, you wanted ‘daily’?";
+
+"NKQg9b-Nubh8Q" = "Just to confirm, you wanted ‘minute’?";
+
+"Nubh8Q" = "minute";
+
+"OGe0So" = "Logo Style";
+
+"P7pFMw" = "Stay up to date with your favorite crypto assets";
+
+"PO6EsG-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
+
+"PO6EsG-FIlJ2n" = "Just to confirm, you wanted ‘Text Ticker’?";
+
+"PO6EsG-TCnDye" = "Just to confirm, you wanted ‘Icon with Background’?";
+
+"PO6EsG-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
+
+"QWBdbb" = "Chart Location";
+
+"S9SJa4" = "false";
+
+"SG2b9e" = "Interval Option";
+
+"SZCGq2" = "Rising price chart color";
+
+"T8CzDn-IVQPjt" = "There are ${count} options matching ‘Minimalist’.";
+
+"T8CzDn-Ka6r47" = "There are ${count} options matching ‘Max Info’.";
+
+"TCnDye" = "Icon with Background";
+
+"TX4dE9" = "Background Color";
+
+"WrkrYV-1BT6DH" = "There are ${count} options matching ‘daily’.";
+
+"WrkrYV-Nubh8Q" = "There are ${count} options matching ‘minute’.";
+
+"X6F3S3" = "Style Option";
+
+"X8nbdU" = "Assets";
+
+"YFwvZl-8MLW1q" = "There are ${count} options matching ‘Text Ticker and Name’.";
+
+"YFwvZl-FIlJ2n" = "There are ${count} options matching ‘Text Ticker’.";
+
+"YFwvZl-TCnDye" = "There are ${count} options matching ‘Icon with Background’.";
+
+"YFwvZl-i8t9EV" = "There are ${count} options matching ‘Icon no Background’.";
+
+"af9EDB" = "trailing";
+
+"akpAzt" = "Interval";
+
+"bS8Cze" = "true";
+
+"bi3FKn-1BT6DH" = "There are ${count} options matching ‘daily’.";
+
+"bi3FKn-Nubh8Q" = "There are ${count} options matching ‘minute’.";
+
+"c2DmD8" = "true";
+
+"c7Jrle" = "Show Updated Time";
+
+"cik6w8" = "Interval";
+
+"dWx5Pi" = "Rising price chart color";
+
+"dylYcc" = "Asset";
+
+"e3XSIN" = "middle";
+
+"eQ7KOH" = "Assets";
+
+"eylMMN-af9EDB" = "There are ${count} options matching ‘trailing’.";
+
+"eylMMN-e3XSIN" = "There are ${count} options matching ‘middle’.";
+
+"eylMMN-siy8Gj" = "There are ${count} options matching ‘none’.";
+
+"gBsLoa-af9EDB" = "There are ${count} options matching ‘trailing’.";
+
+"gBsLoa-e3XSIN" = "There are ${count} options matching ‘middle’.";
+
+"gBsLoa-siy8Gj" = "There are ${count} options matching ‘none’.";
+
+"gOUUWB-1BT6DH" = "There are ${count} options matching ‘daily’.";
+
+"gOUUWB-Nubh8Q" = "There are ${count} options matching ‘minute’.";
+
+"gpCwrM" = "Asset";
+
+"gynpqo" = "false";
+
+"hFEYdE" = "Falling price chart color";
+
+"hew4na" = "Interval";
+
+"hth234" = "Text Color";
+
+"i8t9EV" = "Icon no Background";
+
+"iUdqod" = "Rising price chart color";
+
+"lWct3E" = "true";
+
+"mpveDb" = "false";
+
+"nY3Viw" = "Logo Style";
+
+"nlqkWz" = "Show Separators";
+
+"phdmY1-af9EDB" = "Just to confirm, you wanted ‘trailing’?";
+
+"phdmY1-e3XSIN" = "Just to confirm, you wanted ‘middle’?";
+
+"phdmY1-siy8Gj" = "Just to confirm, you wanted ‘none’?";
+
+"qhi5M1" = "Chart Location";
+
+"rDgGMR-af9EDB" = "Just to confirm, you wanted ‘trailing’?";
+
+"rDgGMR-e3XSIN" = "Just to confirm, you wanted ‘middle’?";
+
+"rDgGMR-siy8Gj" = "Just to confirm, you wanted ‘none’?";
+
+"rfa0Mf" = "Background Color";
+
+"rlUXg6" = "Chart Location";
+
+"siy8Gj" = "none";
+
+"tPX7Gc-8MLW1q" = "There are ${count} options matching ‘Text Ticker and Name’.";
+
+"tPX7Gc-FIlJ2n" = "There are ${count} options matching ‘Text Ticker’.";
+
+"tPX7Gc-TCnDye" = "There are ${count} options matching ‘Icon with Background’.";
+
+"tPX7Gc-i8t9EV" = "There are ${count} options matching ‘Icon no Background’.";
+
+"tVvJ9c" = "Stay up to date with your favorite crypto asset";
+
+"uTB17L" = "Portfolio";
+
+"v1uaJ9" = "Show Updated Time";
+
+"xXePIL" = "Asset Option";
+
+"yhPFjM" = "false";
+
+"zDdiVu" = "Show last updated time";
+
+"zGKgaA" = "Stay up to date with your portfolio";
+
