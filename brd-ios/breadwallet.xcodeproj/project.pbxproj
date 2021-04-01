@@ -373,6 +373,8 @@
 		9F0EA16C25E2904400D4225E /* WidgetDataShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0EA16325E2902700D4225E /* WidgetDataShareService.swift */; };
 		9F13F5C925DDD73A0031AEC7 /* fiatcurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 71014F7B2327E49400DA1373 /* fiatcurrencies.json */; };
 		9F13F5D025DDD73B0031AEC7 /* fiatcurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 71014F7B2327E49400DA1373 /* fiatcurrencies.json */; };
+		9F18E567261630EB00698ADB /* Cosmos.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18E566261630EB00698ADB /* Cosmos.xcframework */; };
+		9F18E568261630EB00698ADB /* Cosmos.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18E566261630EB00698ADB /* Cosmos.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F2118AC25DD74EA00ABD2C8 /* CoinGecko+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2118AB25DD74EA00ABD2C8 /* CoinGecko+Extesions.swift */; };
 		9F2118C025DD7D7D00ABD2C8 /* CoinGecko+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2118AB25DD74EA00ABD2C8 /* CoinGecko+Extesions.swift */; };
 		9F2118F525DDBC6200ABD2C8 /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2118F425DDBC6200ABD2C8 /* Formatter+Extensions.swift */; };
@@ -380,8 +382,6 @@
 		9F29A99F25D5C605000FEB40 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F29A99E25D5C605000FEB40 /* IntentHandler.swift */; };
 		9F29A9A325D5C605000FEB40 /* breadwalletIntentHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F29A99A25D5C605000FEB40 /* breadwalletIntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F29A9BB25D5C75B000FEB40 /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F29A9BA25D5C75B000FEB40 /* AssetView.swift */; };
-		9F29A9CF25D5C8AD000FEB40 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FB0CA1625D5AD180057DD11 /* BreadwalletWidget.intentdefinition */; };
-		9F38F0012603FFF2008A0A70 /* Cosmos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F38F0002603FFF2008A0A70 /* Cosmos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F3C301725DA841100C7C398 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		9F3C301E25DA841100C7C398 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		9F3C302525DA8B2F00C7C398 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9FAF7625D5D0140014F729 /* WidgetService.swift */; };
@@ -412,8 +412,6 @@
 		9FB0CA1825D5AD190057DD11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB0CA1725D5AD190057DD11 /* Assets.xcassets */; };
 		9FB0CA1E25D5AD190057DD11 /* breadwalletWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9FB0CA0F25D5AD180057DD11 /* breadwalletWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FBF66BD25D5F1AB007F172D /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */; };
-		9FC52A9B2605175900855473 /* Cosmos.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC52A9A2605175900855473 /* Cosmos.xcframework */; };
-		9FC52A9C2605175900855473 /* Cosmos.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC52A9A2605175900855473 /* Cosmos.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FC529D02604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FC529D42604FAA300855473 /* BreadwalletWidget.intentdefinition */; };
 		9FC529D12604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FC529D42604FAA300855473 /* BreadwalletWidget.intentdefinition */; };
 		9FC529D22604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9FC529D42604FAA300855473 /* BreadwalletWidget.intentdefinition */; };
@@ -612,7 +610,6 @@
 		D1423EEC2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 3A858B29250A781700812B36 /* CoinGecko */; };
 		D1423EED2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3C2FA625DA7F1C00C7C398 /* CoinGecko */; };
 		D1423EEE2602A23D00709CCA /* CoinGecko in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3C2FAA25DA7F2F00C7C398 /* CoinGecko */; };
-		D1423EF62602AB9C00709CCA /* WalletKitSwift in Resources */ = {isa = PBXBuildFile; fileRef = D1423EF52602AB9C00709CCA /* WalletKitSwift */; };
 		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
 		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
 		E821D4CD21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
@@ -677,7 +674,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				754AE0B71DFCA870007FD001 /* libbz2.framework in Embed Frameworks */,
-				9FC52A9C2605175900855473 /* Cosmos.xcframework in Embed Frameworks */,
+				9F18E568261630EB00698ADB /* Cosmos.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1093,6 +1090,7 @@
 		9F00EAF325DDFC9600A99218 /* Currency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currency+Extensions.swift"; sourceTree = "<group>"; };
 		9F0EA16325E2902700D4225E /* WidgetDataShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataShareService.swift; sourceTree = "<group>"; };
 		9F0EA17325E29DC500D4225E /* breadwalletWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = breadwalletWidgetExtension.entitlements; sourceTree = "<group>"; };
+		9F18E566261630EB00698ADB /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
 		9F2118AB25DD74EA00ABD2C8 /* CoinGecko+Extesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoinGecko+Extesions.swift"; sourceTree = "<group>"; };
 		9F2118F425DDBC6200ABD2C8 /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
 		9F29A99A25D5C605000FEB40 /* breadwalletIntentHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = breadwalletIntentHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1114,8 +1112,6 @@
 		9FB0CA1725D5AD190057DD11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FB0CA1925D5AD190057DD11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
-		9FC52A9A2605175900855473 /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
-		9FC52A9A2605175900855473 /* Cosmos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cosmos.xcframework; path = "../cosmos-bundled/build/xcode-frameworks/Cosmos.xcframework"; sourceTree = "<group>"; };
 		9FC529D32604FAA300855473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/BreadwalletWidget.intentdefinition; sourceTree = "<group>"; };
 		9FC529DC2604FAAA00855473 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
 		9FC529E42604FAAF00855473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
@@ -1371,7 +1367,7 @@
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
-				9FC52A9B2605175900855473 /* Cosmos.xcframework in Frameworks */,
+				9F18E567261630EB00698ADB /* Cosmos.xcframework in Frameworks */,
 				22717B062315D3E300F77F4E /* CloudKit.framework in Frameworks */,
 				223DB21B1DF69F0F0076A151 /* libbz2.framework in Frameworks */,
 			);
@@ -1813,7 +1809,7 @@
 		75A2A7F11DA5935F00A983D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9FC52A9A2605175900855473 /* Cosmos.xcframework */,
+				9F18E566261630EB00698ADB /* Cosmos.xcframework */,
 				3ABD8D0D24E1CF1500EC4C91 /* SwiftUI.framework */,
 				22717B052315D3E300F77F4E /* CloudKit.framework */,
 				7C4D64CA222C511900DE2C2B /* libresolv.tbd */,
@@ -2897,7 +2893,6 @@
 				9AE800D721FFF81F00D5058C /* rewardsIcon-44.gif in Resources */,
 				9AE800FB21FFF81F00D5058C /* rewardsIcon-32.gif in Resources */,
 				9A926F6A22034B3800CC2263 /* CellHighlight-77.png in Resources */,
-				D1423EF62602AB9C00709CCA /* WalletKitSwift in Resources */,
 				9A926F8022034B3800CC2263 /* CellHighlight-19.png in Resources */,
 				7C54FF9E2165866A007BF3EF /* currencies.json in Resources */,
 				9A926F9522034B3800CC2263 /* CellHighlight-3.png in Resources */,
