@@ -2,13 +2,15 @@ stages:
   - build
   - deploy
 
-include:
-  - template: Managed-Cluster-Applications.gitlab-ci.yml
+#include:
+#  - template: Managed-Cluster-Applications.gitlab-ci.yml
 
 default:
-  image: alvrme/alpine-android:android-29-jdk11
+#  image: alvrme/alpine-android:android-29-jdk11
   tags:
-    - cluster
+    - ios-12
+    - xcode-10
+    - macos-10_13
 
 variables:
   SIGNING_KEY: /builds/breadwallet/brd-mobile/brd-android/FakeSigningKey
@@ -26,16 +28,19 @@ cache:
     - ~/.gradle/
     - /root/.gradle/
 
-#detekt:
-#  stage: test
-#  script:
-#    - ./gradlew detekt
-#  only:
-#    - merge_requests
-#  artifacts:
-#    expose_as: "Detekt Report"
-#    paths:
-#      - app/build/reports/detekt/detekt.html
+build-cosmos:
+  stage: build
+  script:
+    - ./gradlew allTest --no-daemon
+  only:
+    refs:
+      - main
+      - develop
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
 
 build-android:
   stage: build
@@ -44,10 +49,15 @@ build-android:
     - git submodule update --init --force --remote
     - ./gradlew :brd-android:app:build -xlint -xdetekt --no-daemon
   only:
-    - develop
-    - main
-    - /^release.*$/
-    - merge_requests
+    refs:
+      - main
+      - develop
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - brd-android/**/*
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
   artifacts:
     paths:
       - brd-android/app/build/outputs/apk/brd/debug/
@@ -59,7 +69,18 @@ build-android:
 
 build-ios:
   stage: build
+  only:
+    refs:
+      - main
+      - develop
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - brd-ios/**/*
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
   script:
+    - ./gradlew :cosmos-bundled:createXCFramework
     - xcodebuild clean -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet | xcpretty
     - xcodebuild test -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.4' | xcpretty -s
   tags:
@@ -75,7 +96,13 @@ deploy-appetize:
     - git submodule update --init --force --remote
     - ./gradlew appetizeUpload
   only:
-    - merge_requests
+    refs:
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - brd-android/**/*
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
   environment:
     name: Review $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
     url: $NATIVE_REVIEW_URL?versionName=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
@@ -90,7 +117,13 @@ stop-review:
     - cd $CI_PROJECT_DIR; ./gradlew appetizeRemove -Pmerge=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
   when: manual
   only:
-    - merge_requests
+    refs:
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - brd-android/**/*
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
   environment:
     name: Review $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
     action: stop
