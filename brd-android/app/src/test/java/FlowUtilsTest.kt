@@ -29,6 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -36,6 +37,7 @@ class FlowUtilsTest {
 
     // TODO: Use runBlockingTest: https://github.com/Kotlin/kotlinx.coroutines/issues/1204
     @Test
+    @Ignore("Relies on a real clock, causing flakiness on slower environements.")
     fun throttleLatestTest() = runBlocking {
         assertEquals(
             listOf(1, 3),

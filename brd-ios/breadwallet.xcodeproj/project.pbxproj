@@ -3103,6 +3103,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		3A4972C22602E0620002C3EC /* Build Cosmos */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
