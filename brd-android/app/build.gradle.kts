@@ -3,6 +3,7 @@ import brd.Libs
 import brd.appetize.AppetizePlugin
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.google.firebase.appdistribution.gradle.AppDistributionExtension
+import io.gitlab.arturbosch.detekt.detekt
 
 plugins {
     id("com.android.application")
@@ -21,6 +22,10 @@ val useGoogleServices: Boolean by ext
 
 redacted {
     replacementString.set("***")
+}
+
+detekt {
+    ignoreFailures = true
 }
 
 android {
@@ -75,7 +80,7 @@ android {
         lintConfig = file("lint.xml")
         isQuiet = true
         isExplainIssues = true
-        isAbortOnError = true
+        isAbortOnError = false
         isIgnoreWarnings = false
         isCheckReleaseBuilds = false
         disable("MissingTranslation")

@@ -21,6 +21,9 @@ android {
         minSdkVersion(BrdRelease.ANDROID_MINIMUM_SDK)
         buildConfigField("int", "VERSION_CODE", "${BrdRelease.versionCode}")
     }
+    lintOptions {
+        isAbortOnError = false
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
