@@ -19,6 +19,8 @@ typealias CurrencyInfoResult = Result<([Currency], [CurrencyId: MarketInfo]), Er
 
 protocol WidgetService {
 
+    var lastRefreshed: Date { get }
+
     func fetchCurrenciesAndMarketInfo(for assetOptions: [AssetOption],
                                       quote: String,
                                       interval: IntervalOption,
@@ -50,20 +52,33 @@ enum WidgetServiceError: Error {
 class DefaultWidgetService: WidgetService {
 
     let widgetDataShareService: WidgetDataShareService?
+    let cacheService: CacheService?
+    let imageStoreService: ImageStoreService?
     let coinGeckoClient = CoinGeckoClient()
 
     private(set) var currenciesCache: [Currency] = []
-    
-    init(widgetDataShareService: WidgetDataShareService?,
-         imageStoreService: ImageStoreService?) {
+    private(set) var lastRefreshed: Date {
+        didSet {
+            cacheService?.cache(value: lastRefreshed, key: Constant.refreshedKey)
+        }
+    }
+
+    init(
+        widgetDataShareService: WidgetDataShareService?,
+        imageStoreService: ImageStoreService?,
+        cacheService: CacheService?
+    ) {
         self.widgetDataShareService = widgetDataShareService
-        imageStoreService?.loadImagesIfNeeded()
+        self.imageStoreService = imageStoreService
+        self.cacheService = cacheService
+        self.lastRefreshed = cacheService?.cached(key: Constant.refreshedKey) ?? Date()
     }
 
     func fetchCurrenciesAndMarketInfo(for assetOptions: [AssetOption],
                                       quote: String,
                                       interval: IntervalOption,
                                       handler: @escaping CurrencyInfoHandler) {
+        imageStoreService?.loadImagesIfNeeded()
         let uids = assetOptions.map { $0.identifier }
         fetchCurrencies { [weak self] result in
             switch result {
@@ -200,6 +215,7 @@ private extension DefaultWidgetService {
                                 interval: IntervalOption,
                                 handler: @escaping (CurrencyInfoResult) -> Void) {
         let group = DispatchGroup()
+        let rInterval = interval.resources
         var priceList: PriceList = []
         var charts: [CurrencyId: MarketChart] = [:]
         var error: Error?
@@ -209,9 +225,16 @@ private extension DefaultWidgetService {
         self.priceList(codes: codes, base: quote) { result in
             switch result {
             case let .success(list):
+                self.cache(list, codes: codes, quote: quote)
+                self.lastRefreshed = Date()
                 priceList = list
             case let .failure(err):
-                error = err
+                let cache = self.cachedPriceList(codes: codes, quote: quote)
+                if !cache.isEmpty {
+                    priceList = cache
+                } else {
+                    error = err
+                }
             }
             group.leave()
         }
@@ -221,7 +244,7 @@ private extension DefaultWidgetService {
                 continue
             }
             group.enter()
-            chart(code: code, quote: quote, interval: interval.resources) { result in
+            chart(code: code, quote: quote, interval: rInterval) { result in
                 switch result {
                 case let .success(chartData):
                     charts[currency.uid] = chartData
@@ -236,6 +259,11 @@ private extension DefaultWidgetService {
             if let error = error {
                 handler(.failure(error))
                 return
+            }
+            if charts.isEmpty {
+                charts = self.cachedCharts(codes: codes, quote: quote, interval: rInterval)
+            } else {
+                self.cache(charts: charts, codes: codes, quote: quote, interval: rInterval)
             }
             let info = self.marketInfo(currencies, priceList: priceList, charts: charts)
             handler(.success((currencies, info)))
@@ -284,13 +312,64 @@ private extension DefaultWidgetService {
     }
 }
 
+// MARK: - Cache handling
+
+private extension DefaultWidgetService {
+
+    func cache(_ priceList: PriceList, codes: [String], quote: String) {
+        let key = cacheKey(codes: codes, quote: quote)
+        cacheService?.cache(value: priceList, key: key)
+    }
+
+    func cachedPriceList(codes: [String], quote: String) -> PriceList {
+        let key = cacheKey(codes: codes, quote: quote)
+        let priceList: PriceList = cacheService?.cached(key: key) ?? []
+        return priceList
+    }
+
+    func cache(
+        charts: [CurrencyId: MarketChart],
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval
+    ) {
+        let key = cacheKey(codes: codes, quote: quote, interval: interval)
+        cacheService?.cache(value: charts, key: key)
+    }
+
+    func cachedCharts(
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval) -> [CurrencyId: MarketChart] {
+        let key = cacheKey(codes: codes, quote: quote, interval: interval)
+        let charts: [CurrencyId: MarketChart] = cacheService?.cached(key: key) ?? [:]
+        return charts
+    }
+
+    func cacheKey(codes: [String], quote: String) -> String {
+        "\(Constant.cachePriceListKey)-\(codes.reduce("", +))-\(quote)"
+    }
+
+    func cacheKey(
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval
+    ) -> String {
+        "\(Constant.cacheChartKey)-\(codes.reduce("", +))-\(quote)-\(interval)"
+    }
+}
+
 // MARK: - Utilities
 
 private extension DefaultWidgetService {
 
     enum Constant {
+        static let cachePriceListKey = "cachePriceList"
+        static let cacheChartKey = "cacheChart"
+        static let refreshedKey = "refreshed"
         static let defaultCurrencyCodes = ["BTC", "ETH", "BRD"]
         static let currenciesURL = Bundle.main.url(forResource: "currencies",
                                                    withExtension: "json")
+
     }
 }

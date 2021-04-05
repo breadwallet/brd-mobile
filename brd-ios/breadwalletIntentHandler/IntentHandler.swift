@@ -15,8 +15,11 @@ class IntentHandler: INExtension {
     private let service: WidgetService
 
     override init() {
-        service = DefaultWidgetService(widgetDataShareService: nil,
-                                       imageStoreService: nil)
+        service = DefaultWidgetService(
+            widgetDataShareService: nil,
+            imageStoreService: nil,
+            cacheService: nil
+        )
         super.init()
     }
 

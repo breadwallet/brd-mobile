@@ -15,4 +15,12 @@ extension Date {
     func adding(minutes: Double) -> Date {
         return addingTimeInterval(60 * minutes)
     }
+
+    func adding(hours: Double) -> Date {
+        return adding(minutes: 60 * hours)
+    }
+
+    func adding(days: Double) -> Date {
+        return adding(hours: 24 * days)
+    }
 }

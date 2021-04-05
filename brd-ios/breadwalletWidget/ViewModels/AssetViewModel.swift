@@ -89,7 +89,7 @@ extension AssetViewModel {
             price: AssetViewModel.formattedPrice(info?.price, config: config),
             pctChange: AssetViewModel.formattedPctChange(info?.change24hr),
             marketCap: info?.marketCap?.int.abbreviated ?? "-",
-            updated: WidgetFormatter.time.string(from: Date()),
+            updated: WidgetFormatter.time.string(from: config.updated),
             showUpdateTime: config.showUpdatedTime,
             showSeparators: config.showSeparators,
             bgColor: bgColor,
