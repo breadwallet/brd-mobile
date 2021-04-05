@@ -137,7 +137,7 @@ deploy-firebase:
     - git submodule update --init --force --remote
     - ./gradlew assemble appDistributionUploadBrdRelease appDistributionUploadBrdTestnetRelease appDistributionUploadBrdDebug appDistributionUploadBrdTestnetDebug
   rules:
-    - if: '$CI_COMMIT_TAG != null'
+    - if: '$CI_COMMIT_TAG != null && $CI_COMMIT_TAG =~ /^android/'
   artifacts:
     paths:
       - brd-android/app/build/outputs/apk/brd/debug/
