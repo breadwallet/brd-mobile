@@ -171,7 +171,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             else -> listOf(
                 "bitcoin-mainnet:__native__",
                 "ethereum-mainnet:__native__",
-                "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
+                "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6",
+                "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
             )
         }
 
