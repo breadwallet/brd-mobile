@@ -34,6 +34,7 @@ kotlin {
                 export(project(":cosmos-api-client"))
                 export(project(":cosmos-bakers-api-client"))
                 export(project(":cosmos-preferences"))
+                export(brd.Libs.Blockset)
             }
         }
     }
@@ -51,6 +52,7 @@ kotlin {
                 api(project(":cosmos-api-client"))
                 api(project(":cosmos-bakers-api-client"))
                 api(project(":cosmos-preferences"))
+                api(brd.Libs.Blockset)
             }
         }
     }

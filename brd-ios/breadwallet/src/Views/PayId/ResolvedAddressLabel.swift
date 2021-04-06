@@ -10,21 +10,51 @@
 
 import UIKit
 
-class ResolvedAddressLabel: UILabel {
+class ResolvedAddressLabel: UIView {
+    
+    private let imageHeight: CGFloat = 22.0
+    private let image = UIImageView()
+    private var widthConstraint: NSLayoutConstraint?
     
     var type: ResolvableType? {
         didSet {
-            self.text = type?.label
+            guard let iconName = type?.iconName else { image.image = nil; return }
+            image.image = UIImage(named: iconName)
+            if widthConstraint != nil {
+                NSLayoutConstraint.deactivate([widthConstraint!])
+            }
+            
+            if let size = image.image?.size {
+                let aspectRatio = size.width/size.height
+                let width = aspectRatio * imageHeight
+                widthConstraint = image.widthAnchor.constraint(equalToConstant: width)
+                NSLayoutConstraint.activate([widthConstraint!])
+            }
+            self.image.transform = .identity
+            
+            let duration = 0.2
+            let scale: CGFloat = 1.2
+            
+            UIView.spring(duration, animations: {
+                self.image.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }, completion: { _ in
+                UIView.spring(duration, animations: {
+                    self.image.transform = .identity
+                }, completion: { _ in })
+            })
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .secondaryButton
-        self.layer.cornerRadius = 2.0
-        self.layer.masksToBounds = true
-        self.font = Theme.body1
-        self.textColor = .grayTextTint
+        addSubview(image)
+        backgroundColor = .blue
+        image.constrain([
+            image.leadingAnchor.constraint(equalTo: leadingAnchor),
+            image.topAnchor.constraint(equalTo: topAnchor),
+            image.heightAnchor.constraint(equalToConstant: imageHeight)
+        ])
+        image.contentMode = .scaleAspectFit
     }
     
     required init?(coder: NSCoder) {

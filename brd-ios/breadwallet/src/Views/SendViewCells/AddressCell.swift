@@ -43,6 +43,13 @@ class AddressCell: UIView {
         scan.isHidden = true
         scan.isEnabled = false
     }
+    
+    func showActionButtons() {
+        paste.isHidden = false
+        paste.isEnabled = true
+        scan.isHidden = false
+        scan.isEnabled = true
+    }
 
     let textField = UITextField()
     let paste = BRDButton(title: S.Send.pasteLabel, type: .tertiary)
@@ -61,7 +68,7 @@ class AddressCell: UIView {
         resolvedAddressLabel.isHidden = false
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
-        isEditable = false
+        isEditable = true
         resolvedAddressLabel.type = type
     }
     
@@ -73,7 +80,7 @@ class AddressCell: UIView {
         isEditable = true
     }
     
-    func showPayIdSpinner() {
+    func showResolvingSpinner() {
         label.isHidden = true
         addSubview(activityIndicator)
         activityIndicator.constrain([
@@ -167,6 +174,8 @@ class AddressCell: UIView {
         textField.becomeFirstResponder()
         contentLabel.isHidden = true
         textField.isHidden = false
+        showActionButtons()
+        resolvedAddressLabel.type = nil
     }
     
     @objc private func textFieldDidChange() {
@@ -194,7 +203,7 @@ extension AddressCell: UITextFieldDelegate {
         contentLabel.text = textField.text
         
         if let text = textField.text, let resolver = ResolvableFactory.resolver(text) {
-            showPayIdSpinner()
+            showResolvingSpinner()
             resolver.fetchAddress(forCurrency: currency) { result in
                 DispatchQueue.main.async {
                     self.didReceiveResolvedAddress?(result, resolver.type)
