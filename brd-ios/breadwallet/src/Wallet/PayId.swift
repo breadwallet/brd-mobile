@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import Cosmos
 
 enum ResolvableError: Error {
     case invalidPayID
@@ -26,6 +27,8 @@ protocol Resolvable {
 enum ResolvableType {
     case payId
     case fio
+    case uDomains
+    case ens
     
     var label: String {
         switch self {
@@ -33,6 +36,23 @@ enum ResolvableType {
             return "PayString"
         case .fio:
             return "FIO"
+        case .uDomains:
+            return "Unstoppable"
+        case .ens:
+            return "ENS"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .payId:
+            return "payidIcon"
+        case .fio:
+            return "fioIcon"
+        case .uDomains:
+            return "udomainIcon"
+        case .ens:
+            return "ensIcon"
         }
     }
 }
@@ -41,6 +61,7 @@ struct ResolvedAddress {
     let humanReadableAddress: String
     let cryptoAddress: String
     let label: String
+    let type: ResolvableType
 }
 
 enum ResolvableFactory {
@@ -51,6 +72,10 @@ enum ResolvableFactory {
         
         if let payId = PayId(address: address) {
             return payId
+        }
+        
+        if let cns = UDomains(address: address) {
+            return cns
         }
         
         return nil
@@ -174,7 +199,6 @@ private class PayId: Resolvable {
         let range = address.range(of: pattern, options: .regularExpression)
         return range != nil
     }
-    
 }
 
 struct PayIdResponse: Codable {
@@ -192,4 +216,33 @@ struct PayIdAddress: Codable {
 struct PayIdAddressDetails: Codable {
     let address: String
     let tag: String?
+}
+
+private class UDomains: Resolvable {
+    private let address: String
+    let type: ResolvableType = .uDomains
+    required init?(address: String) {
+        self.address = address
+        guard address.hasSuffix(".eth") || address.hasSuffix(".crypto") else { return nil }
+    }
+    
+    func fetchAddress(forCurrency currency: Currency, callback: @escaping (Result<(String, String?), ResolvableError>) -> Void) {
+        Backend.bdbClient.addressLookup(domainName: address, currencyCodeList: [currency.code]) { (result, _) in
+            guard result != nil else {
+                callback(.failure(.badResponse))
+                return
+            }
+            guard let value = result?.embedded.addresses.first,
+                  let status = value.status,
+                  status == BdbAddress.Status.success else {
+                callback(.failure(.badResponse))
+                return
+            }
+            guard status == BdbAddress.Status.success else {
+                callback(.failure(.currencyNotSupported))
+                return
+            }
+            callback(.success((value.address!, nil)))
+        }
+    }
 }

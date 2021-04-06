@@ -9,7 +9,7 @@
 import UIKit
 import LocalAuthentication
 
-class ConfirmationViewController: UIViewController, ContentBoxPresenter {
+class ConfirmationViewController: UIViewController, ContentBoxPresenter, Trackable {
 
     init(amount: Amount,
          fee: Amount,
@@ -225,6 +225,9 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
             myself.dismiss(animated: true, completion: myself.cancelCallback)
         }
         sendButton.tap = strongify(self) { myself in
+            if let resolvedType = myself.resolvedAddress?.type.label {
+                myself.saveEvent("resolvedaddress.\(resolvedType)")
+            }
             myself.dismiss(animated: true, completion: myself.successCallback)
         }
 
@@ -236,13 +239,13 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
         }
         
         if resolvedAddress == nil {
-            resolvedAddressTitle.text = nil
+            resolvedAddressTitle.type = nil
             resolvedAddressLabel.text = nil
             resolvedAddressTitle.isHidden = true
             resolvedAddressLabel.isHidden = true
         } else {
             resolvedAddressLabel.text = resolvedAddress?.humanReadableAddress
-            resolvedAddressTitle.text = resolvedAddress?.label
+            resolvedAddressTitle.type = resolvedAddress?.type
         }
         
         if isStake {

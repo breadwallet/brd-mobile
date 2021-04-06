@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import Cosmos
 
 class Backend {
     
@@ -16,11 +17,13 @@ class Backend {
     private static let shared = Backend()
     private init() {
         apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
+        bdbClient = BdbServiceCompanion().create()
     }
     
     // MARK: - Private
     
     private var apiClient: BRAPIClient
+    private var bdbClient: BdbService
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
     private var eventManager: EventManager?
@@ -34,6 +37,10 @@ class Backend {
     
     static var apiClient: BRAPIClient {
         return shared.apiClient
+    }
+    
+    static var bdbClient: BdbService {
+        return shared.bdbClient
     }
     
     static var kvStore: BRReplicatedKVStore? {
@@ -64,6 +71,7 @@ class Backend {
         shared.kvStore = try? BRReplicatedKVStore(encryptionKey: key, remoteAdaptor: KVStoreAdaptor(client: shared.apiClient))
         shared.exchangeUpdater = ExchangeUpdater()
         shared.eventManager = EventManager(adaptor: shared.apiClient)
+        shared.bdbClient = BdbServiceCompanion().createForTest(bdbAuthToken: authenticator.bdbAuthToken?.token ?? "")
     }
     
     /// Disconnect backend services and reset API auth
@@ -73,6 +81,7 @@ class Backend {
         shared.exchangeUpdater = nil
         shared.kvStore = nil
         shared.apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
+        shared.bdbClient = BdbServiceCompanion().create()
     }
 }
 

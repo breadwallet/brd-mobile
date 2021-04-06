@@ -343,7 +343,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         
         if let resolver = ResolvableFactory.resolver(pasteboard) {
             self.addressCell.setContent(pasteboard)
-            self.addressCell.showPayIdSpinner()
+            self.addressCell.showResolvingSpinner()
             resolver.fetchAddress(forCurrency: currency) { response in
                 DispatchQueue.main.async {
                     self.handleResolvableResponse(response, type: resolver.type, id: pasteboard, shouldShowError: true)
@@ -380,7 +380,8 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             //to when a payment request is recieved
             self.resolvedAddress = ResolvedAddress(humanReadableAddress: id,
                                                    cryptoAddress: address,
-                                                   label: type.label)
+                                                   label: type.label,
+                                                   type: type)
             if tag != nil {
                 self.hideDestinationTag()
             }
@@ -389,11 +390,20 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             if let destinationTag = tag {
                 attributeCell?.setContent(destinationTag)
             }
-        case .failure(_):
+        case .failure:
             if shouldShowError {
-                showErrorMessage(type == .fio ? S.FIO.invalid : S.PayId.invalidPayID)
+                switch type {
+                case .fio:
+                    showErrorMessage(S.FIO.invalid)
+                case .payId:
+                    showErrorMessage(S.PayId.invalidPayID)
+                case .uDomains:
+                    showErrorMessage(S.UDomains.invalid)
+                default:
+                    showErrorMessage(S.UDomains.invalid)
+                }
             }
-            self.resetPayId()
+            addressCell.hideResolveableState()
         }
     }
     
