@@ -18,8 +18,11 @@ struct AssetListProvider: IntentTimelineProvider {
     typealias Intent = AssetListIntent
 
     let service: WidgetService = {
-        DefaultWidgetService(widgetDataShareService: DefaultWidgetDataShareService(),
-                             imageStoreService: DefaultImageStoreService())
+        DefaultWidgetService(
+            widgetDataShareService: DefaultWidgetDataShareService(),
+            imageStoreService: DefaultImageStoreService(),
+            cacheService: DefaultCacheService()
+        )
     }()
 
     func placeholder(in context: Context) -> AssetListEntry {
@@ -41,7 +44,7 @@ struct AssetListProvider: IntentTimelineProvider {
 
             switch result {
             case let .success((currencies, info)):
-                entry = AssetListEntry(date: Date(),
+                entry = AssetListEntry(date: service.lastRefreshed,
                                        intent: configuration,
                                        currencies: currencies,
                                        quoteCurrencyCode: quote,
@@ -86,7 +89,8 @@ struct AssetListEntry: TimelineEntry {
         }
 
         let configuration = Configuration(intent: intent,
-                                          quoteCurrencyCode: quoteCurrencyCode)
+                                          quoteCurrencyCode: quoteCurrencyCode,
+                                          updated: date)
 
         viewModel = AssetListViewModel(config: configuration,
                                        currencies: currencies,
