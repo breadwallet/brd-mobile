@@ -226,14 +226,6 @@ class SettingsScreenHandler(
                     }
                 }
             }
-            F.ToggleTezos -> launch {
-                val enabled = metaDataManager.enabledWallets().first()
-                if (enabled.contains(TEZOS_ID)) {
-                    metaDataManager.disableWallet(TEZOS_ID)
-                } else {
-                    metaDataManager.enableWallet(TEZOS_ID)
-                }
-            }
             F.GenerateTransactionsExportFile -> launch { exportTransactionsToFile() }
         }
     }
@@ -459,10 +451,6 @@ class SettingsScreenHandler(
                 SettingsOption.TOGGLE_RATE_APP_PROMPT,
                 addOn = "show=$toggleRateAppPromptAddOn"
             ),
-            SettingsItem(
-                "Toggle Tezos",
-                SettingsOption.TOGGLE_TEZOS
-            )
         ) + getHiddenOptions()
     }
 
