@@ -51,6 +51,7 @@ struct PortfolioView: View {
                             singleColumnLimit: 2,
                             doubleColumnLimit: 2
                         )
+                        .widgetURL(viewModel.assetList.anyAsset.urlScheme)
                     default:
                         Text("Not supported")
                     }

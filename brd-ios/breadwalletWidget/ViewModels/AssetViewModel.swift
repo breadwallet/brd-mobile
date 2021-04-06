@@ -194,8 +194,11 @@ extension AssetViewModel {
     }
     
     static func urlScheme(for currency: Currency?) -> URL {
-        let urlString = (currency?.urlSchemes?.first ?? "") + "://"
-        return URL(string: urlString) ?? URL(string: "bread://")!
+        var urlString = "bread://widget.open"
+        if let code = currency?.code {
+            urlString += "?currency=" + code
+        }
+        return URL(string: urlString)!
     }
 }
 
