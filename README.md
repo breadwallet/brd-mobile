@@ -67,7 +67,7 @@ Each module contains only code related to a single feature, helping keep the pro
 The following modules are available, click on the name to learn more.
 
 - [`cosmos-core`](/cosmos-core) Internal shared utilities for all other modules to leverage.
-- [`cosmos-api-client`](/cosmos-api-client) A Hydra compatible API wrapper for Kotlin and Swift.
+- [`cosmos-brd-api-client`](/cosmos-brd-api-client) A Hydra compatible API wrapper for Kotlin and Swift.
 - [`cosmos-bundled`](/cosmos-bundled) Depends on all other modules to produce final dependency artifacts.
 
 **Mobile Applications**
@@ -125,7 +125,7 @@ Tests
 # Run all tests, in all modules
 ./gradlew allTest
 # Run all tests, in a single module
-./gradlew :cosmos-api-client:allTest
+./gradlew :cosmos-brd-api-client:allTest
 # Run Jvm tests
 ./gradlew jvmTest
 # Run iOS Simulator tests

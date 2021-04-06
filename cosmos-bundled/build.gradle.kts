@@ -31,7 +31,7 @@ kotlin {
         compilations.named("main") {
             binaries.framework {
                 baseName = "Cosmos"
-                export(project(":cosmos-api-client"))
+                export(project(":cosmos-brd-api-client"))
                 export(project(":cosmos-bakers-api-client"))
                 export(project(":cosmos-preferences"))
                 export(brd.Libs.Blockset)
@@ -49,7 +49,7 @@ kotlin {
                 // https://youtrack.jetbrains.com/issue/KT-41821
                 implementation(brd.Libs.Kotlinx.Atomicfu)
 
-                api(project(":cosmos-api-client"))
+                api(project(":cosmos-brd-api-client"))
                 api(project(":cosmos-bakers-api-client"))
                 api(project(":cosmos-preferences"))
                 api(brd.Libs.Blockset)

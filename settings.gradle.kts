@@ -2,7 +2,7 @@ rootProject.name = "brd-mobile"
 
 include(
     "cosmos-core",
-    "cosmos-api-client",
+    "cosmos-brd-api-client",
     //"cosmos-websocket",
     "cosmos-bundled",
     "cosmos-preferences",
