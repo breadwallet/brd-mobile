@@ -135,7 +135,11 @@ deploy-firebase:
   script:
     - git submodule sync
     - git submodule update --init --force --remote
-    - ./gradlew assemble appDistributionUploadBrdRelease appDistributionUploadBrdTestnetRelease appDistributionUploadBrdDebug appDistributionUploadBrdTestnetDebug
+    - ./gradlew :brd-android:app:assemble
+    - ./gradlew :brd-android:app:appDistributionUploadBrdRelease
+    - ./gradlew :brd-android:app:appDistributionUploadBrdTestnetRelease
+    - ./gradlew :brd-android:app:appDistributionUploadBrdDebug
+    - ./gradlew :brd-android:app:appDistributionUploadBrdTestnetDebug
   rules:
     - if: '$CI_COMMIT_TAG != null && $CI_COMMIT_TAG =~ /^android/'
   artifacts:
