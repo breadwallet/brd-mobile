@@ -610,10 +610,7 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
         } else {
             newFiatAmount = model.fiatAmount
             newAmount = if (pricePerUnit > BigDecimal.ZERO) {
-                newFiatAmount.setScale(
-                    pricePerUnit.scale().coerceAtMost(MAX_DIGITS),
-                    BRConstants.ROUNDING_MODE
-                ) / pricePerUnit
+                newFiatAmount.setScale(MAX_DIGITS, BRConstants.ROUNDING_MODE) / pricePerUnit
             } else {
                 model.amount
             }
