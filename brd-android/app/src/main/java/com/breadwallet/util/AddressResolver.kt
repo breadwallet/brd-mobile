@@ -40,13 +40,15 @@ interface AddressResolverService {
 
 class AddressResolverServiceLocator (
     private val payIdService: PayIdService,
-    private val fioService: FioService
+    private val fioService: FioService,
+    private val unstoppableDomainService: UnstoppableDomainService
 ) {
 
     /** Returns the appropriate [AddressResolverService] for a given [addressType], null if none found **/
     fun getService(addressType: AddressType): AddressResolverService? = when (addressType) {
         is AddressType.Resolvable.PayId -> payIdService
         is AddressType.Resolvable.Fio -> fioService
+        is AddressType.Resolvable.UnstoppableDomain -> unstoppableDomainService
         else -> null
     }
 }

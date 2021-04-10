@@ -874,6 +874,7 @@
     <string name="Send.payId_retrievalError">There was an error retrieving the address for this PayID. Please try again later.</string>
     <!-- PayID label -->
     <string name="Send.payId_toLabel">PayID</string>
+    <string name="Send.unstoppableDomain_toLabel">Unstoppable Domain</string>
     <!-- Could not publish transaction alert title -->
     <string name="Send.publishTransactionError">Could not publish transaction.</string>
     <!-- Could not load remote request error message -->

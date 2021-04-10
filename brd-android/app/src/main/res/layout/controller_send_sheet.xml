@@ -110,6 +110,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelTitle"/>
 
+        <ImageView
+            android:id="@+id/resolvableIcon"
+            android:layout_width="84dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/inputLayoutAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separator0"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_ens_mod" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutAddress"
             android:layout_width="0dp"

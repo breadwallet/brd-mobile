@@ -182,6 +182,13 @@ public final class EventUtils {
     private static final String ERROR_MESSAGE_ATTRIBUTE_KEY = "errorMessage";
     private static final String KEY = "key";
     private static final String VALUE = "value";
+    // Resolvable Address
+    public static final String EVENT_NAME_RESOLVED = "nameresolved";
+    public static final String EVENT_ATTRIBUTE_SERVICE = "service";
+    public static final String EVENT_SERVICE_CNS = "cns";
+    public static final String EVENT_SERVICE_ENS = "ens";
+    public static final String EVENT_SERVICE_FIO = "fio";
+    public static final String EVENT_SERVICE_PAY = "paystring";
 
     private static final String EVENTS_FOLDER_NAME = "events";
 
