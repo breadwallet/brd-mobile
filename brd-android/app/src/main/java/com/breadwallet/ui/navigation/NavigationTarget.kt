@@ -24,6 +24,7 @@
  */
 package com.breadwallet.ui.navigation
 
+import com.brd.bakerapi.models.Baker
 import com.breadwallet.model.InAppMessage
 import com.breadwallet.tools.util.Link
 import com.breadwallet.ui.auth.AuthMode
@@ -166,5 +167,9 @@ sealed class NavigationTarget : INavigationTarget {
         val giftAmountFiat: BigDecimal,
         val pricePerUnit: BigDecimal,
         val replaceTop: Boolean = false
+    ) : NavigationTarget()
+
+    data class SelectBakerScreen(
+        val bakers: List<Baker>
     ) : NavigationTarget()
 }

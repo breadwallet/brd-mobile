@@ -25,6 +25,9 @@
 package com.breadwallet.ui.staking
 
 import android.content.Context
+import com.brd.bakerapi.BakersApiClient
+import com.brd.bakerapi.models.BakerResult
+import com.brd.bakerapi.models.BakersResult
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.addressFor
 import com.breadwallet.breadbox.estimateFee
@@ -42,7 +45,6 @@ import com.breadwallet.crypto.WalletManagerState
 import com.breadwallet.crypto.errors.FeeEstimationError
 import com.breadwallet.crypto.errors.TransferSubmitError
 import com.breadwallet.logger.logError
-import com.breadwallet.tools.manager.BRClipboardManager
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
@@ -76,7 +78,8 @@ fun createStakingHandler(
     context: Context,
     currencyId: String,
     breadBox: BreadBox,
-    userManager: BrdUserManager
+    userManager: BrdUserManager,
+    bakersClient: BakersApiClient
 ) = subtypeEffectHandler<F, E> {
     addTransformer(handleLoadAccount(currencyId, breadBox))
     addFunction<F.ValidateAddress> { (address) ->
@@ -100,15 +103,6 @@ fun createStakingHandler(
             feeEstimate = feeBasis,
             phrase = checkNotNull(userManager.getPhrase())
         )
-    }
-    addLatestValueCollector<F.PasteFromClipboard> { effect ->
-        val wallet = breadBox.wallet(currencyId).first()
-        val text = BRClipboardManager.getClipboard()
-        if (wallet.addressFor(text) == null) {
-            emit(E.OnAddressValidated(isValid = false))
-        } else if (text != effect.currentDelegateAddress) {
-            emit(E.OnAddressChanged(text))
-        }
     }
     addFunction<F.EstimateFee> { (address) ->
         val wallet = breadBox.wallet(currencyId).first()
@@ -136,6 +130,18 @@ fun createStakingHandler(
         val isEnabled = isFingerPrintAvailableAndSetup(context) && BRSharedPrefs.sendMoneyWithFingerprint
         E.OnAuthenticationSettingsUpdated(isEnabled)
     }
+    addFunction<F.LoadBakers> {
+        when (val bakersResult = bakersClient.getBakers()) {
+            is BakersResult.Success -> E.OnBakersLoaded(bakersResult.bakers)
+            else -> E.OnBakersFailed
+        }
+    }
+    addFunction<F.LoadBaker> { (address) ->
+        when (val bakerResult = bakersClient.getBaker(address)) {
+            is BakerResult.Success -> E.OnBakerLoaded(bakerResult.baker)
+            else -> E.OnBakerFailed
+        }
+    }
 }
 
 private val stakedTransferStates = listOf(SUBMITTED, INCLUDED, PENDING, CREATED, SIGNED)
@@ -156,9 +162,9 @@ private fun handleLoadAccount(
                 .firstOrNull { transfer ->
                     transfer.attributes.any {
                         it.key.equals(DELEGATION_OP, true) ||
-                        it.key.equals(DELEGATE, true) ||
-                            (it.key.equals(UNSTAKE_KEY, true) &&
-                                it.value.or("").equals(UNSTAKE_VALUE, true))
+                                it.key.equals(DELEGATE, true) ||
+                                (it.key.equals(UNSTAKE_KEY, true) &&
+                                        it.value.or("").equals(UNSTAKE_VALUE, true))
                     } && (transfer.confirmation.orNull()?.success ?: true)
                 }
             val balance = wallet.balance.toBigDecimal()
@@ -170,6 +176,7 @@ private fun handleLoadAccount(
                     val isConfirmed = transfer.confirmation.orNull()?.success ?: false
                     val delegateAddress = transfer.attributes.find { it.key.equals(DELEGATE, true) }?.value?.or(address)
                     val isStaked = delegateAddress != null
+
                     if (isConfirmed) {
                         if (isStaked) {
                             E.AccountUpdated.Staked(currencyCode, delegateAddress!!, STAKED, balance)
@@ -200,11 +207,14 @@ private suspend fun BreadBox.changeValidator(
     return try {
         // Estimate and submit transfer
         val event: String
+        val state: M.ViewValidator.State
         val address = if (targetAddress == null) {
             event = EventUtils.EVENT_WALLET_UNSTAKE
+            state = PENDING_UNSTAKE
             wallet.target // unstake
         } else {
             event = EventUtils.EVENT_WALLET_STAKE
+            state = PENDING_STAKE
             checkNotNull(wallet.addressFor(targetAddress))
         }
         val transfer = wallet.createTransfer(address, amount, feeEstimate, attrs).orNull()
@@ -221,7 +231,11 @@ private suspend fun BreadBox.changeValidator(
                         val target = checkNotNull(tx.target.orNull()).toString()
                         val balance = wallet.balance.toBigDecimal()
                         EventUtils.pushEvent(event)
-                        E.AccountUpdated.Staked(wallet.currency.code, target, PENDING_STAKE, balance)
+                        if (state == PENDING_STAKE) {
+                            E.AccountUpdated.Staked(wallet.currency.code, target, state, balance)
+                        } else {
+                            E.AccountUpdated.Unstaked(wallet.currency.code, balance)
+                        }
                     }
                     DELETED, FAILED -> {
                         logError("Failed to submit transfer ${tx.state.failedError.orNull()}")

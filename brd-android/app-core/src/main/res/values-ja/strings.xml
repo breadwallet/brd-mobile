@@ -222,7 +222,7 @@
     <!-- Network Fee: (ETH) -->
     <string name="Confirmation.feeLabelETH">ネットワーク料金（ETH）:</string>
     <!-- Label for Hedera Memo field on transaction confirmation screen -->
-    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <string name="Confirmation.hederaMemo">ヘデラメモ</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">処理時間: この取引は%1$sで完了する見込みです。</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -233,12 +233,27 @@
     <string name="Confirmation.to">送金先</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">費用合計：</string>
+    <string name="ConfirmGift.paperWalletAmount">紙の財布の金額</string>
+    <string name="ConfirmGift.processingTime">ネットワーク上でこの紙のウォレットを検証するには、最大60分かかる場合があります</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">入力した単語は、回復フレーズと一致しません。もう一度お試しください。</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">すべてが正しく記述されていることを確認するには、回復フレーズから次の単語を入力してください。</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">フレーズ #%1$s</string>
+    <string name="CreateGift.amountLabel">金額を選択（$ USD）</string>
+    <string name="CreateGift.create">作成する</string>
+    <string name="CreateGift.customAmountHint">カスタム金額（最大$ 500）</string>
+    <string name="CreateGift.description">と呼ばれるものを作成します</string>
+    <string name="CreateGift.inputAmountError">ギフトの金額を選択する必要があります。</string>
+    <string name="CreateGift.inputRecipientNameError">受信者の名前を入力する必要があります。</string>
+    <string name="CreateGift.insufficientBalanceError">贈り物を送るのに十分な資金がありません。</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">この金額のギフトを送るのに十分な資金がありません。</string>
+    <string name="CreateGift.recipientName">受取人の氏名</string>
+    <string name="CreateGift.serverError">サーバーエラーが発生しました。後でもう一度やり直してください。</string>
+    <string name="CreateGift.subtitle">財布を持っていなくてもビットコインを誰かに送ってください。</string>
+    <string name="CreateGift.title">ビットコインのギフトを贈る</string>
+    <string name="CreateGift.unexpectedError">予期しないエラーが発生しました。サポートにお問い合わせください。</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">同意する</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">メッセージの送受信ができません</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">指紋が認識されませんでした。もう一度やり直してください。</string>
+    <string name="ExportConfirmation.cancel">キャンセル</string>
+    <string name="ExportConfirmation.continue">継続する</string>
+    <string name="ExportConfirmation.message">これにより、有効なすべてのウォレットから完了したすべてのトランザクションを含むCSVファイルが生成されます。</string>
+    <string name="ExportConfirmation.title">輸出取引？</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">これにより、有効なすべてのウォレットから完了したすべてのトランザクションを含むCSVファイルが生成されます。</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">エクスポート転送</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">CSVファイルのエクスポートに失敗しました。再試行してください。</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">エクスポートに失敗しました</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">輸出取引？</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">%1$sからFace ID使用限度額をカスタマイズすることができます。</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Segwitを有効にする</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">ブレッドをお楽しみいただいていますか?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">トランザクション履歴をCSVにエクスポート</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">Face ID使用限度額</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">リワード</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">匿名データをシェアする</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">ポートフォリオデータをウィジェットと共有する</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">ブロックチェーン同期</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">データを共有しますか?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">匿名データをシェアしますか?</string>
+    <string name="ShareGift.approximateTotal">おおよその合計</string>
+    <string name="ShareGift.footerMessage1">ネットワーク料金は、請求時に合計から差し引かれます。\n実際の値はビットコインの現在の価格によって異なります。</string>
+    <string name="ShareGift.footerMessage2">iPhoneまたはAndroid用のBRDアプリをダウンロードします。\n詳細については、brd.com / giftをご覧ください。</string>
+    <string name="ShareGift.tagLine">誰かがあなたにビットコインをプレゼントしました！</string>
+    <string name="ShareGift.walletName">ビットコイン</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ベイカーを選択</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">フリースペース</string>
+    <string name="Staking.changeValidator">変化する</string>
+    <string name="Staking.descriptionTezos">Tezosアカウントをバリデーターに委任して、コインの完全なセキュリティと制御を維持しながら報酬を獲得します。</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">費用：</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">トランザクション保留中...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">削除する</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">EST（東部基準時。 ROI</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">XTZデリゲートを選択します</string>
+    <string name="Staking.stake">ステーク</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">アクティブ</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">非活性</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">保留中</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">ステーキング</string>
+    <string name="Staking.stakingTo">%1$sへのステーキング</string>
+    <string name="Staking.statusPending">保留中</string>
+    <string name="Staking.statusStaked">賭けた！</string>
+    <string name="Staking.subTitle">持ちながらお金を稼ぐ</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">テゾス＆デューン</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">マルチアセットプール</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">テゾスのみ</string>
+    <string name="Staking.title">ステーク%1$s</string>
+    <string name="Staking.unstake">アンステーク</string>
+    <string name="Staking.validatorHint">バリデーターアドレスを入力してください</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">回復フレーズを書き留めます</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">%1$sに送金中</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">%1$sに送金済み</string>
+    <string name="Transaction.stakingTo">%1$sへのステーキング</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">期首残高: %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">トークン送金の手数料: %1$s</string>
+    <string name="Transaction.toRecipient">〜 %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">承認を待っています。トランザクションの完了には承認が必要となる場合があります。推定時間: 1-2時間。</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,8 +1211,10 @@
     <string name="TransactionDetails.gasLimitHeader">ガソリン上限</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">ガソリン価格</string>
+    <string name="TransactionDetails.gift">贈り物</string>
+    <string name="TransactionDetails.giftedTo">%1$s贈られました</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
-    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <string name="TransactionDetails.hederaMemo">ヘデラメモ</string>
     <!-- Hide Details button -->
     <string name="TransactionDetails.hideDetails">詳細を隠す</string>
     <!-- Label showing the transaction was started (initialized) -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">%1$sから受け取っています</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">%1$s経由で受け取り中</string>
+    <string name="TransactionDetails.reclaim">再利用</string>
+    <string name="TransactionDetails.resend">再送信</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">%1$sを送金しました</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">ステーキング</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwalletは新しい機能や見た目を備えて、BRDという名前に生まれ変わりました。\n\nヘルプをご覧になるには、画面右上にある(?)からお探しください。</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">BRDへようこそ！</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">お気に入りの暗号資産を最新の状態に保つ</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">お気に入りの暗号資産を最新の状態に保つ</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">資産リスト</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">資産</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">システムオートライト/ダーク</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">ブラック</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">青い</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">グレー</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">緑</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">オレンジ</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">ピンク</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">プライマリ</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">プライマリ</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">紫の</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">赤</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">二次</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">二次</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">三次</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">三次</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">白い</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">黄</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">テーマの背景色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">基本色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">通貨の色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">システムカラー</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">テーマのテキストの色</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">アプリで有効にする\n環境設定</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">ポートフォリオを最新の状態に保つ</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">ポートフォリオ\n概要</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">ポートフォリオ</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">本当にこのウォレットを削除しますか？</string>
     <!-- Wipe wallet alert title -->

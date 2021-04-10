@@ -233,12 +233,27 @@
     <string name="Confirmation.to">На</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">Общая стоимость:</string>
+    <string name="ConfirmGift.paperWalletAmount">Сумма бумажного кошелька</string>
+    <string name="ConfirmGift.processingTime">Проверка этого бумажного кошелька в сети может занять до 60 минут.</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">Введенные слова не соответствуют вашей фразе для восстановления. Пожалуйста, попробуйте еще раз.</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">Чтобы убедиться, что все записано правильно, введите следующие слова из фразы для восстановления.</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">Слово #%1$s</string>
+    <string name="CreateGift.amountLabel">Выберите сумму ($ USD)</string>
+    <string name="CreateGift.create">Создавать</string>
+    <string name="CreateGift.customAmountHint">Специальная сумма (макс. 500 долларов США)</string>
+    <string name="CreateGift.description">Мы создадим то, что называется</string>
+    <string name="CreateGift.inputAmountError">Вы должны выбрать сумму подарка.</string>
+    <string name="CreateGift.inputRecipientNameError">Вы должны ввести имя получателя.</string>
+    <string name="CreateGift.insufficientBalanceError">У вас недостаточно средств для отправки подарка.</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">У вас недостаточно средств для отправки подарка на эту сумму.</string>
+    <string name="CreateGift.recipientName">Имя получателя</string>
+    <string name="CreateGift.serverError">Произошла ошибка сервера. Пожалуйста, повторите попытку позже.</string>
+    <string name="CreateGift.subtitle">Отправляйте биткойны кому-нибудь, даже если у них нет кошелька.</string>
+    <string name="CreateGift.title">Подарить Биткойн в подарок</string>
+    <string name="CreateGift.unexpectedError">Произошла непредвиденная ошибка. Обратитесь в службу поддержки.</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">Согласен</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Опция обмена сообщениями недоступна</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">Отпечаток пальца не идентифицирован. Повторите попытку.</string>
+    <string name="ExportConfirmation.cancel">Отмена</string>
+    <string name="ExportConfirmation.continue">Продолжать</string>
+    <string name="ExportConfirmation.message">Будет создан файл CSV, включающий все завершенные транзакции со всех включенных кошельков.</string>
+    <string name="ExportConfirmation.title">Экспортные операции?</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">Будет создан файл CSV, включающий все завершенные транзакции со всех включенных кошельков.</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">Экспортные переводы</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">Не удалось экспортировать файл CSV, попробуйте еще раз.</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">Ошибка экспорта</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">Экспортные операции?</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">Вы можете индивидуально настроить ваш лимит расходов Face ID от %1$s.</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Активировать Segwit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">Нравится ли вам использовать BRD?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">Экспорт истории транзакций в CSV</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">Лимит расходов Face ID</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">Вознаграждения</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">Поделиться анонимными данными</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">Делитесь данными портфолио с виджетами</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Синхронизация с Blockchain</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">Поделиться данными?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">Поделиться анонимными данными?</string>
+    <string name="ShareGift.approximateTotal">Приблизительная сумма</string>
+    <string name="ShareGift.footerMessage1">Плата за сеть будет вычтена из общей суммы при подаче заявки.\n Фактическое значение зависит от текущей цены биткойна.</string>
+    <string name="ShareGift.footerMessage2">Загрузите приложение BRD для iPhone или Android.\n Для получения дополнительной информации посетите brd.com/gift.</string>
+    <string name="ShareGift.tagLine">Кто-то подарил вам биткойны!</string>
+    <string name="ShareGift.walletName">Биткойн</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ Выбрать Бейкера</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">Свободное место</string>
+    <string name="Staking.changeValidator">Изменять</string>
+    <string name="Staking.descriptionTezos">Передайте свою учетную запись Tezos валидатору, чтобы получить вознаграждение, сохраняя при этом полную безопасность и контроль над своими монетами.</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">Платеж:</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">Ожидается транзакция ...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">Удалить</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">Стандартное восточное время. Рентабельность инвестиций</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">Выберите делегата XTZ</string>
+    <string name="Staking.stake">Ставка</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">АКТИВНЫЙ</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">НЕАКТИВНЫЙ</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">В ОЖИДАНИИ</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">Ставка</string>
+    <string name="Staking.stakingTo">ставка на %1$s</string>
+    <string name="Staking.statusPending">В ожидании</string>
+    <string name="Staking.statusStaked">Ставка!</string>
+    <string name="Staking.subTitle">Зарабатывай, пока держишь</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">Тезос и Дюна</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">Пул с несколькими активами</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">Только Tezos</string>
+    <string name="Staking.title">Ставка %1$s</string>
+    <string name="Staking.unstake">Unstake</string>
+    <string name="Staking.validatorHint">Введите адрес валидатора</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">Запишите фразу восстановления еще раз</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">отправка по адресу %1$s</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">отправлено по адресу %1$s</string>
+    <string name="Transaction.stakingTo">ставка на %1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">Начальный баланс: %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">Сбор за передачу токена: %1$s</string>
+    <string name="Transaction.toRecipient">в %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">Ожидает подтверждения. Некоторые продавцы требуют подтверждения для выполнения транзакции. Предполагаемое время: 1-2 часа.</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,6 +1211,8 @@
     <string name="TransactionDetails.gasLimitHeader">Лимит газа</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">Стоимость газа</string>
+    <string name="TransactionDetails.gift">Подарок</string>
+    <string name="TransactionDetails.giftedTo">Подарено %1$s</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
     <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
     <!-- Hide Details button -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">получение от %1$s</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">идет получение через %1$s</string>
+    <string name="TransactionDetails.reclaim">Вернуть</string>
+    <string name="TransactionDetails.resend">Отправить снова</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">Отправить %1$s</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">Ставка</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet сменил свое название на BRD и обзавелся новым дизайном и функциями.\n\nЕсли вам нужна помощь, то ищите иконку (?) в правом верхнем углу большинства экранов.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Добро пожаловать в BRD!</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">Будьте в курсе ваших любимых криптоактивов</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">Будьте в курсе ваших любимых криптоактивов</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">Список активов</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">Актив</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">Система Авто Свет / Темнота</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">Чернить</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">Синий</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">серый</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">Зеленый</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">апельсин</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">Розовый</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">Начальный</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">Начальный</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">Фиолетовый</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">красный</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">Вторичный</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">Вторичный</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">Третичный</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">Третичный</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">белый</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">Желтый</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">Цвета фона темы</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">Основные цвета</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">Цвета валюты</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">Системные цвета</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">Цвета текста темы</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">Включить в приложении\n предпочтения</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">Будьте в курсе своего портфолио</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">портфолио\n Резюме</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">портфолио</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">Вы действительно хотите удалить этот кошелек?</string>
     <!-- Wipe wallet alert title -->

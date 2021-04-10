@@ -314,7 +314,7 @@ class SettingsScreenHandler(
             }
             add(
                 SettingsItem(
-                    context.getString(R.string.Settings_exportTransaction),
+                    context.getString(R.string.Settings_exportTransfers),
                     SettingsOption.EXPORT_TRANSACTIONS,
                     R.drawable.ic_export
                 )

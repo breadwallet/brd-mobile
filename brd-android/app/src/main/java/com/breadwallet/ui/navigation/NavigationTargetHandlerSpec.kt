@@ -72,6 +72,7 @@ interface NavigationTargetHandlerSpec {
         is NavigationTarget.Staking -> staking(effect)
         is NavigationTarget.CreateGift -> createGift(effect)
         is NavigationTarget.ShareGift -> shareGift(effect)
+        is NavigationTarget.SelectBakerScreen -> selectBaker(effect)
     }
 
     fun metadataViewer()
@@ -165,4 +166,6 @@ interface NavigationTargetHandlerSpec {
     fun createGift(effect: NavigationTarget.CreateGift): Unit
 
     fun shareGift(effect: NavigationTarget.ShareGift): Unit
+
+    fun selectBaker(effect: NavigationTarget.SelectBakerScreen): Unit
 }
