@@ -40,14 +40,15 @@ import com.spotify.mobius.Update
 object StakingUpdate : Update<M, E, F> {
     override fun update(model: M, event: E): Next<M, F> = when (event) {
         is E.AccountUpdated -> accountUpdated(model, event)
-        is E.OnAddressChanged -> onAddressChanged(model, event)
+        is E.OnBakerChanged -> onBakerChanged(model, event)
         is E.OnAddressValidated -> onAddressValidated(model, event)
         is E.OnTransferFailed -> onTransferFailed(model, event)
         is E.OnFeeUpdated -> onFeeUpdated(model, event)
         is E.OnAuthenticationSettingsUpdated -> onAuthenticationSettingsUpdated(model, event)
+        is E.OnBakersLoaded -> onBakersLoaded(model, event)
+        is E.OnBakerLoaded -> onBakerLoaded(model, event)
         E.OnStakeClicked -> onStakeClicked(model)
         E.OnUnstakeClicked -> onUnstakeClicked(model)
-        E.OnChangeClicked -> onChangeClicked(model)
         E.OnCancelClicked -> onCancelClicked(model)
         E.OnConfirmClicked -> onConfirmClicked(model)
         E.OnPasteClicked -> onPasteClicked(model)
@@ -57,51 +58,90 @@ object StakingUpdate : Update<M, E, F> {
         E.OnTransactionCancelClicked -> onTransactionCancelClicked(model)
         E.OnAuthSuccess -> onAuthSuccess(model)
         E.OnAuthCancelled -> onAuthCancelled(model)
+        E.OnSelectBakerClicked -> onSelectBakerClicked(model)
+        E.OnBakersFailed -> onBakersFailed(model)
+        E.OnBakerFailed -> onBakerFailed(model)
     }
 
     private fun accountUpdated(
         model: M,
         event: E.AccountUpdated
-    ): Next<M, F> = next(
+    ): Next<M, F> =
         when (event) {
             is E.AccountUpdated.Unstaked ->
-                M.SetValidator.createDefault(
+                next(M.SetValidator.createDefault(
                     event.balance,
                     model.currencyId,
                     event.currencyCode,
-                    isFingerprintEnabled = model.isFingerprintEnabled
+                    isFingerprintEnabled = model.isFingerprintEnabled,
+                    bakers = model.bakers,
+                    selectedBaker = (model as? M.SetValidator)?.selectedBaker,
+                ))
+            is E.AccountUpdated.Staked -> {
+                val baker = model.bakers.find { it.address == event.address }
+                next(
+                    M.ViewValidator(
+                        state = event.state,
+                        balance = event.balance,
+                        address = event.address,
+                        currencyCode = event.currencyCode,
+                        currencyId = model.currencyId,
+                        isFingerprintEnabled = model.isFingerprintEnabled,
+                        bakers = model.bakers,
+                        baker = baker
+                    ),
+                    if (baker == null && event.state != PENDING_UNSTAKE) setOf(F.LoadBaker(event.address)) else emptySet()
                 )
-            is E.AccountUpdated.Staked -> M.ViewValidator(
-                state = event.state,
-                balance = event.balance,
-                address = event.address,
-                currencyCode = event.currencyCode,
-                currencyId = model.currencyId,
-                isFingerprintEnabled = model.isFingerprintEnabled
-            )
+            }
         }
-    )
 
-    private fun onAddressChanged(
+    private fun onBakerChanged(
         model: M,
-        event: E.OnAddressChanged
+        event: E.OnBakerChanged
     ): Next<M, F> {
-        return if (model.address == event.address) {
+        val address = event.baker.address
+        return if (model.address == address) {
             noChange()
         } else {
             when (model) {
                 is M.SetValidator -> {
                     next(
                         model.copy(
-                            address = event.address,
-                            isAddressValid = (event.address.isBlank() || model.isAddressValid) && event.address != model.originalAddress,
-                            isAddressChanged = event.address != model.originalAddress,
+                            selectedBaker = event.baker,
+                            address = address,
+                            isAddressValid = (address.isBlank() || model.isAddressValid) && address != model.originalAddress,
+                            isAddressChanged = address != model.originalAddress,
                             canSubmitTransfer = false,
                             feeEstimate = null
                         ),
                         setOfNotNull(
-                            if (event.address.isNotBlank()) {
-                                F.ValidateAddress(event.address)
+                            if (address.isNotBlank() && !model.isWalletEmpty) {
+                                F.ValidateAddress(address)
+                            } else null
+                        )
+                    )
+                }
+                is M.ViewValidator -> {
+                    next(
+                        M.SetValidator(
+                            balance = model.balance,
+                            currencyId = model.currencyId,
+                            currencyCode = model.currencyCode,
+                            address = event.baker.address,
+                            isAddressValid = true,
+                            isAddressChanged = false,
+                            canSubmitTransfer = false,
+                            transactionError = null,
+                            isCancellable = model.address.isNotBlank(),
+                            originalAddress = model.address,
+                            feeEstimate = null,
+                            isFingerprintEnabled = model.isFingerprintEnabled,
+                            bakers = model.bakers,
+                            selectedBaker = event.baker,
+                        ),
+                        setOfNotNull(
+                            if (address.isNotBlank()) {
+                                F.ValidateAddress(address)
                             } else null
                         )
                     )
@@ -199,21 +239,6 @@ object StakingUpdate : Update<M, E, F> {
         else -> noChange()
     }
 
-    private fun onChangeClicked(model: M): Next<M, F> = when (model) {
-        is M.ViewValidator -> if (model.state == STAKED) {
-            next(
-                M.SetValidator.createDefault(
-                    model.balance,
-                    model.currencyId,
-                    model.currencyCode,
-                    model.address,
-                    model.isFingerprintEnabled,
-                )
-            )
-        } else noChange()
-        else -> noChange()
-    }
-
     private fun onCancelClicked(model: M): Next<M, F> = when (model) {
         is M.SetValidator -> if (model.isCancellable) {
             next(
@@ -222,7 +247,9 @@ object StakingUpdate : Update<M, E, F> {
                     balance = model.balance,
                     state = STAKED,
                     currencyId = model.currencyId,
-                    currencyCode = model.currencyCode
+                    currencyCode = model.currencyCode,
+                    bakers = model.bakers,
+                    baker = model.bakers.find { it.address == model.originalAddress }
                 )
             )
         } else noChange()
@@ -241,7 +268,8 @@ object StakingUpdate : Update<M, E, F> {
                     currencyCode = model.currencyCode,
                     address = model.address,
                     balance = model.balance,
-                    state = PENDING_STAKE
+                    state = PENDING_STAKE,
+                    bakers = model.bakers
                 ),
                 setOf(F.Stake(model.address, model.feeEstimate))
             )
@@ -315,4 +343,46 @@ object StakingUpdate : Update<M, E, F> {
             is M.SetValidator -> next(model.copy(isFingerprintEnabled = event.isFingerprintEnabled))
             is M.Loading -> next(model.copy(isFingerprintEnabled = event.isFingerprintEnabled))
         }
+
+    private fun onSelectBakerClicked(model: M): Next<M, F> =
+        when (model) {
+            is M.SetValidator -> {
+                if (model.bakers.isEmpty()) next(model.copy(isLoadingBakers = true), setOf(F.LoadBakers))
+                else dispatch(setOf(F.GoToSelectBaker(model.bakers)))
+            }
+            is M.ViewValidator -> {
+                if (model.bakers.isEmpty()) next(model.copy(isLoadingBakers = true), setOf(F.LoadBakers))
+                else dispatch(setOf(F.GoToSelectBaker(model.bakers)))
+            }
+            else -> noChange()
+        }
+
+    private fun onBakersLoaded(model: M, event: E.OnBakersLoaded): Next<M,F> =
+        next(
+            when (model) {
+                is M.ViewValidator  -> model.copy(bakers = event.bakers, isLoadingBakers = false)
+                is M.SetValidator -> model.copy(bakers = event.bakers, isLoadingBakers = false)
+                else -> model
+            },
+            setOf(F.GoToSelectBaker(event.bakers))
+        )
+
+    private fun onBakerLoaded(model: M, event: E.OnBakerLoaded): Next<M,F> =
+        next(
+            when (model) {
+                is M.ViewValidator  -> model.copy(baker = event.baker)
+                is M.SetValidator -> model.copy(selectedBaker = event.baker)
+                else -> model
+            }
+        )
+
+    private fun onBakersFailed(model: M): Next<M,F> = next(
+        when (model) {
+            is M.ViewValidator -> model.copy(isLoadingBakers = false)
+            is M.SetValidator -> model.copy(isLoadingBakers = false)
+            else -> model
+        },
+        setOf(F.ShowBakerError)
+    )
+    private fun onBakerFailed(model: M): Next<M,F> = dispatch(setOf(F.ShowBakerError))
 }

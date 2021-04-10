@@ -71,6 +71,7 @@ import com.breadwallet.ui.settings.segwit.EnableSegWitController
 import com.breadwallet.ui.settings.segwit.LegacyAddressController
 import com.breadwallet.ui.settings.wipewallet.WipeWalletController
 import com.breadwallet.ui.showkey.ShowPaperKeyController
+import com.breadwallet.ui.staking.SelectBakersController
 import com.breadwallet.ui.sync.SyncBlockchainController
 import com.breadwallet.ui.txdetails.TxDetailsController
 import com.breadwallet.ui.wallet.BrdWalletController
@@ -649,6 +650,10 @@ class RouterNavigator(
         } else {
             router.pushController(transaction)
         }
+    }
+
+    override fun selectBaker(effect: NavigationTarget.SelectBakerScreen) {
+        router.pushController(RouterTransaction.with(SelectBakersController(effect.bakers)))
     }
 
     private inline fun <reified T : Controller> pushSingleInstance(

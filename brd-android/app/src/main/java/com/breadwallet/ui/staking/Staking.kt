@@ -24,8 +24,13 @@
  */
 package com.breadwallet.ui.staking
 
+import com.brd.bakerapi.models.Baker
+import com.breadwallet.R
 import com.breadwallet.crypto.TransferFeeBasis
+import com.breadwallet.ext.isZero
 import com.breadwallet.ui.ViewEffect
+import com.breadwallet.ui.navigation.NavigationEffect
+import com.breadwallet.ui.navigation.NavigationTarget
 import java.math.BigDecimal
 
 object Staking {
@@ -44,6 +49,8 @@ object Staking {
         abstract val balance: BigDecimal
         abstract val isAuthenticating: Boolean
         abstract val isFingerprintEnabled: Boolean
+        abstract val bakers: List<Baker>
+        abstract val isLoadingBakers: Boolean
 
         data class Loading(
             override val currencyCode: String = "",
@@ -52,6 +59,8 @@ object Staking {
             override val balance: BigDecimal = BigDecimal.ZERO,
             override val isAuthenticating: Boolean = false,
             override val isFingerprintEnabled: Boolean = false,
+            override val bakers: List<Baker> = emptyList(),
+            override val isLoadingBakers: Boolean = false
         ) : M()
 
         data class SetValidator(
@@ -61,6 +70,8 @@ object Staking {
             override val balance: BigDecimal = BigDecimal.ZERO,
             override val isAuthenticating: Boolean = false,
             override val isFingerprintEnabled: Boolean,
+            override val bakers: List<Baker>,
+            override val isLoadingBakers: Boolean = false,
             val originalAddress: String,
             val isAddressValid: Boolean,
             val isAddressChanged: Boolean,
@@ -68,8 +79,11 @@ object Staking {
             val transactionError: TransactionError?,
             val feeEstimate: TransferFeeBasis?,
             val isCancellable: Boolean,
-            val confirmWhenReady: Boolean = false
+            val confirmWhenReady: Boolean = false,
+            val selectedBaker: Baker? = null,
         ) : M() {
+            val isWalletEmpty: Boolean
+                get() = selectedBaker != null && balance.isZero()
 
             companion object {
                 fun createDefault(
@@ -77,9 +91,11 @@ object Staking {
                     currencyId: String,
                     currencyCode: String,
                     originalAddress: String? = null,
-                    isFingerprintEnabled: Boolean
+                    isFingerprintEnabled: Boolean,
+                    bakers: List<Baker> = emptyList(),
+                    selectedBaker: Baker? = null,
                 ) = SetValidator(
-                    balance =  balance,
+                    balance = balance,
                     currencyId = currencyId,
                     currencyCode = currencyCode,
                     address = "",
@@ -90,7 +106,9 @@ object Staking {
                     isCancellable = originalAddress != null,
                     originalAddress = originalAddress ?: "",
                     feeEstimate = null,
-                    isFingerprintEnabled = isFingerprintEnabled
+                    isFingerprintEnabled = isFingerprintEnabled,
+                    bakers = bakers,
+                    selectedBaker = selectedBaker,
                 )
             }
         }
@@ -102,8 +120,11 @@ object Staking {
             override val balance: BigDecimal,
             override val isAuthenticating: Boolean = false,
             override val isFingerprintEnabled: Boolean = false,
+            override val bakers: List<Baker> = emptyList(),
+            override val isLoadingBakers: Boolean = false,
             val state: State,
-            val feeEstimate: TransferFeeBasis? = null
+            val feeEstimate: TransferFeeBasis? = null,
+            val baker: Baker? = null,
         ) : M() {
             enum class State {
                 PENDING_STAKE, PENDING_UNSTAKE, STAKED
@@ -130,7 +151,7 @@ object Staking {
             ) : AccountUpdated()
         }
 
-        data class OnAddressChanged(val address: String) : E()
+        data class OnBakerChanged(val baker: Baker) : E()
         data class OnAddressValidated(
             val isValid: Boolean,
             val fromClipboard: Boolean = false,
@@ -145,9 +166,13 @@ object Staking {
 
         data class OnAuthenticationSettingsUpdated(val isFingerprintEnabled: Boolean) : E()
 
+        data class OnBakersLoaded(val bakers: List<Baker>) : E()
+        object OnBakersFailed : E()
+        data class OnBakerLoaded(val baker: Baker) : E()
+        object OnBakerFailed : E()
+
         object OnStakeClicked : E()
         object OnUnstakeClicked : E()
-        object OnChangeClicked : E()
         object OnCancelClicked : E()
         object OnPasteClicked : E()
         object OnCloseClicked : E()
@@ -157,6 +182,7 @@ object Staking {
         object OnTransactionCancelClicked : E()
         object OnAuthSuccess : E()
         object OnAuthCancelled : E()
+        object OnSelectBakerClicked : E()
     }
 
     sealed class F {
@@ -166,6 +192,7 @@ object Staking {
         data class PasteFromClipboard(
             val currentDelegateAddress: String
         ) : F()
+
         object Help : F(), ViewEffect
         object Close : F(), ViewEffect
 
@@ -179,5 +206,18 @@ object Staking {
             val balance: BigDecimal,
             val fee: BigDecimal
         ) : F(), ViewEffect
+
+        object LoadBakers : F()
+        data class LoadBaker(val address: String) : F()
+        data class GoToSelectBaker(val bakers: List<Baker>) : F(), NavigationEffect {
+            override val navigationTarget = NavigationTarget.SelectBakerScreen(bakers)
+        }
+
+        object ShowBakerError : F(), NavigationEffect {
+            override val navigationTarget = NavigationTarget.AlertDialog(
+                messageResId = R.string.Staking_loadingBakerError,
+                positiveButtonResId = R.string.Button_ok
+            )
+        }
     }
 }

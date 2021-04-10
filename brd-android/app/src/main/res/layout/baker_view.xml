@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/extra_light_blue_background"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/baker_content"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/baker_token_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/almost_black"
+                android:fontFamily="@font/mobile_font_book"
+                android:textSize="16sp"/>
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/fee_pct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/settings_chevron_right"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:layout_width="fill_parent"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/roi_pct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/almost_black"
+                android:fontFamily="@font/mobile_font_book"
+                android:textSize="16sp"/>
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/est_roi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/settings_chevron_right"
+                android:textSize="12sp"
+                android:text="@string/Staking.roiHeader"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</FrameLayout>

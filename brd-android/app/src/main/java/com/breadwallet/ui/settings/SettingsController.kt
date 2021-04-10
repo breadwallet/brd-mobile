@@ -241,7 +241,7 @@ class SettingsController(
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/csv"
             putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.Settings_exportTransaction))
+            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.Settings_exportTransfers))
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         val title = context.getString(R.string.Settings_share)

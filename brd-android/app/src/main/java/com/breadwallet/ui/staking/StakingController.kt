@@ -24,19 +24,20 @@
  */
 package com.breadwallet.ui.uistaking
 
-import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
+import com.brd.bakerapi.models.Baker
 import com.breadwallet.R
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerConfirmTxDetailsBinding
 import com.breadwallet.databinding.ControllerStakingBinding
 import com.breadwallet.tools.animation.SlideDetector
+import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.BaseMobiusController
 import com.breadwallet.ui.ViewEffect
@@ -44,11 +45,9 @@ import com.breadwallet.ui.auth.AuthMode
 import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
+import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.flowbind.clicks
-import com.breadwallet.ui.flowbind.textChanges
-import com.breadwallet.ui.staking.StakingInit
-import com.breadwallet.ui.staking.StakingUpdate
-import com.breadwallet.ui.staking.createStakingHandler
+import com.breadwallet.ui.staking.*
 import com.breadwallet.ui.staking.Staking.E
 import com.breadwallet.ui.staking.Staking.F
 import com.breadwallet.ui.staking.Staking.M
@@ -57,12 +56,15 @@ import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.PENDING_UNSTAKE
 import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.STAKED
 import com.breadwallet.ui.web.WebController
 import com.platform.HTTPServer
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
 import org.kodein.di.erased.instance
+import java.io.File
 import java.math.BigDecimal
+import java.text.NumberFormat
 import java.util.Locale
 
 interface ConfirmationListener {
@@ -76,7 +78,9 @@ class StakingController(
     bundle: Bundle? = null
 ) : BaseMobiusController<M, E, F>(bundle),
     ConfirmationListener,
-    AuthenticationController.Listener {
+    AuthenticationController.Listener,
+    SelectBakerListener,
+    AlertDialogController.Listener {
 
     constructor(
         currencyId: String
@@ -95,7 +99,8 @@ class StakingController(
             context = direct.instance(),
             currencyId = arg(CURRENCY_ID),
             breadBox = direct.instance(),
-            userManager = direct.instance()
+            userManager = direct.instance(),
+            bakersClient = direct.instance()
         )
 
     private val binding by viewBinding(ControllerStakingBinding::inflate)
@@ -109,13 +114,13 @@ class StakingController(
         return with(binding) {
             merge(
                 buttonStake.clicks().map { E.OnStakeClicked },
-                buttonPaste.clicks().map { E.OnPasteClicked },
                 buttonClose.clicks().map { E.OnCloseClicked },
                 buttonCancel.clicks().map { E.OnCancelClicked },
                 buttonUnstake.clicks().map { E.OnUnstakeClicked },
                 buttonConfirm.clicks().map { E.OnStakeClicked },
-                buttonChangeValidator.clicks().map { E.OnChangeClicked },
-                inputAddress.textChanges().map { E.OnAddressChanged(it) },
+                buttonChangeValidator.clicks().map { E.OnSelectBakerClicked },
+                selectBakerLayout.clicks().map { E.OnSelectBakerClicked },
+                bakerLayout.clicks().map { E.OnSelectBakerClicked },
                 buttonFaq.clicks().map { E.OnHelpClicked }
             )
         }
@@ -153,13 +158,15 @@ class StakingController(
 
             when (this@render) {
                 is M.Loading -> {
+                    loadingBakersView.root.isVisible = false
                     loadingView.isVisible = true
                     buttonStake.isVisible = false
                     labelStatus.isVisible = false
                     layoutChange.isVisible = false
-                    buttonPaste.isVisible = false
                     layoutConfirmChange.isVisible = false
-                    inputLayoutAddress.isVisible = false
+                    selectBakerLayout.isVisible = false
+                    bakerLayout.isVisible = false
+                    stakedBaker.root.isVisible = false
                 }
                 is M.SetValidator -> renderSetBaker(res)
                 is M.ViewValidator -> renderViewBaker(res)
@@ -170,57 +177,64 @@ class StakingController(
     private fun M.SetValidator.renderSetBaker(res: Resources) {
         val theme = checkNotNull(activity).theme
         with(binding) {
+            stakedBaker.root.isVisible = false
+            labelStatus.isVisible = false
+            layoutChange.isVisible = false
             loadingView.isVisible = false
-            labelAddress.isVisible = false
-            inputAddress.isEnabled = true
-            inputLayoutAddress.isVisible = true
 
-            ifChanged(M.SetValidator::isCancellable) {
-                layoutChange.isVisible = false
-                buttonStake.isVisible = !isCancellable
-                layoutConfirmChange.isVisible = isCancellable
+            ifChanged(M.SetValidator::isLoadingBakers) {
+                loadingBakersView.root.isVisible = isLoadingBakers
             }
 
-            ifChanged(M.SetValidator::address) {
-                buttonPaste.isVisible = address.isBlank()
-                if (address.isNullOrBlank() || (address.isNotBlank() && inputAddress.text.isNullOrBlank())) {
-                    inputAddress.setText(address)
+            ifChanged(M.SetValidator::selectedBaker, M.SetValidator::isCancellable) { ->
+                bakerLayout.isVisible = selectedBaker != null
+                selectBakerLayout.isVisible = selectedBaker == null
+                buttonStake.isVisible = !isCancellable
+                layoutConfirmChange.isVisible = isCancellable
+
+                if (selectedBaker != null) {
+                    val formatter = NumberFormat.getPercentInstance()
+                    selectedFeePct.text = res.getString(
+                        R.string.Staking_feePct,
+                        "${formatter.format(selectedBaker.fee)}"
+                    )
+                    selectedName.text = selectedBaker.name
+                    formatter.maximumFractionDigits = 3
+                    formatter.minimumFractionDigits = 3
+                    selectedRoiPct.text = "${formatter.format(selectedBaker.estimatedRoi)}"
+                    Picasso.get().load(selectedBaker.logo).into(selectedBakerTokenIcon)
+                }
+            }
+
+            ifChanged(M.SetValidator::currencyCode) {
+                val tokenIconPath = TokenUtil.getTokenIconPath(currencyCode, true)
+                if (!tokenIconPath.isNullOrBlank()) {
+                    val iconFile = File(tokenIconPath)
+                    Picasso.get().load(iconFile).into(stakingTokenIcon)
                 }
             }
 
             ifChanged(M.SetValidator::isAddressValid, M.SetValidator::canSubmitTransfer) {
                 buttonConfirm.isEnabled = canSubmitTransfer
-                inputLayoutAddress.apply {
-                    if (isAddressValid) {
-                        error = null
-                        helperText = if (canSubmitTransfer) {
-                            "Valid baker address!"
-                        } else null
-                        setHelperTextColor(
-                            ColorStateList.valueOf(
-                                res.getColor(com.breadwallet.R.color.green_text, theme)
-                            )
-                        )
-                    } else {
-                        error = "Invalid baker address"
-                        helperText = null
-                        setHelperTextColor(null)
-                    }
-                }
+                buttonStake.isEnabled = canSubmitTransfer
             }
 
-            ifChanged(M.SetValidator::transactionError) {
-                labelStatus.isInvisible = transactionError == null
-                when (transactionError) {
-                    is M.TransactionError.Unknown,
-                    M.TransactionError.TransferFailed -> {
-                        labelStatus.setText(com.breadwallet.R.string.Transaction_failed)
+            ifChanged(M.SetValidator::transactionError, M.SetValidator::isWalletEmpty) {
+                labelStatus.isInvisible = transactionError == null || !isWalletEmpty
+
+                if (isWalletEmpty) {
+                    labelStatus.setText(R.string.Send_insufficientFunds)
+                } else {
+                    val text =  when (transactionError) {
+                        is M.TransactionError.Unknown,
+                        M.TransactionError.TransferFailed -> R.string.Transaction_failed
+                        M.TransactionError.FeeEstimateFailed -> R.string.Send_noFeesError
+                        null -> null
                     }
-                    M.TransactionError.FeeEstimateFailed -> {
-                        labelStatus.setText(com.breadwallet.R.string.Send_noFeesError)
-                    }
-                    null -> {
+                    if (text == null) {
                         labelStatus.text = null
+                    } else {
+                        labelStatus.setText(text)
                     }
                 }
             }
@@ -235,19 +249,36 @@ class StakingController(
         val theme = checkNotNull(activity).theme
         with(binding) {
 
-            ifChanged(M::address) {
-                labelAddress.isVisible = true
-                labelAddress.text = address
+
+            ifChanged(M.ViewValidator::isLoadingBakers) {
+                loadingBakersView.root.isVisible = isLoadingBakers
+            }
+            ifChanged(M::address, M.ViewValidator::baker) {
+                loadingView.isVisible = baker == null
+                stakedBaker.root.isVisible = baker != null
+
+                if (baker != null) {
+                    val formatter = NumberFormat.getPercentInstance()
+                    stakedBaker.name.text = baker.name
+                    stakedBaker.feePct.text = res.getString(
+                        R.string.Staking_feePct,
+                        "${formatter.format(baker.fee)}"
+                    )
+                    formatter.maximumFractionDigits = 3
+                    formatter.minimumFractionDigits = 3
+                    stakedBaker.roiPct.text = "${formatter.format(baker.estimatedRoi)}"
+                    Picasso.get().load(baker.logo).into(stakedBaker.bakerTokenIcon)
+
+                }
             }
 
             ifChanged(M.ViewValidator::state) {
                 labelStatus.isVisible = true
                 layoutChange.isVisible = true
-                loadingView.isVisible = false
-                buttonPaste.isVisible = false
                 buttonStake.isVisible = false
                 layoutConfirmChange.isVisible = false
-                inputLayoutAddress.isVisible = false
+                selectBakerLayout.isVisible = false
+                bakerLayout.isVisible = false
 
                 when (state) {
                     PENDING_STAKE, PENDING_UNSTAKE -> {
@@ -310,6 +341,20 @@ class StakingController(
         eventConsumer.accept(E.OnAuthCancelled)
     }
 
+    override fun onSelected(baker: Baker) {
+        eventConsumer.accept(E.OnBakerChanged(baker))
+    }
+
+    override fun onSelectCancelled() = Unit
+
+    override fun onPositiveClicked(
+        dialogId: String,
+        controller: AlertDialogController,
+        result: AlertDialogController.DialogInputResult
+    ) {
+        router.popController(this)
+    }
+
     class ConfirmationController(args: Bundle) : BaseController(args) {
 
         constructor(
@@ -317,12 +362,14 @@ class StakingController(
             address: String?,
             balance: BigDecimal,
             feeEstimate: BigDecimal
-        ) : this(bundleOf(
-            "currencyCode" to currencyCode,
-            "address" to address,
-            "balance" to balance,
-            "feeEstimate" to feeEstimate
-        ))
+        ) : this(
+            bundleOf(
+                "currencyCode" to currencyCode,
+                "address" to address,
+                "balance" to balance,
+                "feeEstimate" to feeEstimate
+            )
+        )
 
         private val currencyCode: String = arg("currencyCode")
         private val address: String? = argOptional("address")
@@ -355,10 +402,12 @@ class StakingController(
                         com.breadwallet.R.string.FeeSelector_ethTime
                     )
                 )
-                sendLabel.setText(when (address) {
-                    null -> com.breadwallet.R.string.Staking_unstake
-                    else -> com.breadwallet.R.string.Staking_stake
-                })
+                sendLabel.setText(
+                    when (address) {
+                        null -> com.breadwallet.R.string.Staking_unstake
+                        else -> com.breadwallet.R.string.Staking_stake
+                    }
+                )
                 sendValue.text = balance.formatCryptoForUi(currencyCode)
                 networkFeeValue.text = feeEstimate.formatCryptoForUi(currencyCode)
 

@@ -1,0 +1,104 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutSheetBody"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:animateLayoutChanges="true"
+    android:padding="0dp">
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/receive_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewStartAnchor"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <View
+        android:id="@+id/viewStartAnchor"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/labelTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintHeight_percent="0.3" />
+
+    <ImageButton
+        android:id="@+id/buttonClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/bread_margin"
+        android:background="@drawable/ic_close_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/labelTitle"/>
+
+    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        android:id="@+id/labelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/bread_margin"
+        android:fontFamily="@font/mobile_font_bold"
+        android:text="@string/Staking.selectBakerTitle"
+        android:textColor="@color/almost_black"
+        android:textSize="@dimen/header"
+        app:layout_constraintBottom_toTopOf="@+id/separator0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewStartAnchor"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <ImageButton
+        android:id="@+id/buttonFaq"
+        android:layout_width="@dimen/faq_dimen"
+        android:layout_height="@dimen/faq_dimen"
+        android:layout_alignTop="@+id/labelTitle"
+        android:layout_alignBottom="@+id/labelTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/bread_margin"
+        android:layout_marginTop="@dimen/bread_margin"
+        android:layout_marginEnd="@dimen/bread_margin"
+        android:layout_marginBottom="@dimen/bread_margin"
+        android:background="@drawable/faq_question_black"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/labelTitle"
+        app:layout_constraintTop_toTopOf="@+id/labelTitle"/>
+
+    <View
+        android:id="@+id/separator0"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/extra_light_gray"
+        app:layout_constraintBottom_toTopOf="@+id/bakers_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelTitle"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bakers_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator0"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

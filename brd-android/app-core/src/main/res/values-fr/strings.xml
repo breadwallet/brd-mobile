@@ -222,7 +222,7 @@
     <!-- Network Fee: (ETH) -->
     <string name="Confirmation.feeLabelETH">Frais de réseau (ETH):</string>
     <!-- Label for Hedera Memo field on transaction confirmation screen -->
-    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <string name="Confirmation.hederaMemo">Mémo Hedera</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">Temps de traitement : cette opération devrait se conclure dans %1$s.</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -233,12 +233,27 @@
     <string name="Confirmation.to">À</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">Coût total :</string>
+    <string name="ConfirmGift.paperWalletAmount">Montant du portefeuille papier</string>
+    <string name="ConfirmGift.processingTime">La validation de ce portefeuille papier sur le réseau peut prendre jusqu\'à 60 minutes</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">Les mots saisis ne correspondent pas à votre phrase de récupération. Veuillez réessayer.</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">Pour vous assurer que tout a été écrit correctement, veuillez saisir les mots suivants de votre phrase de récupération.</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">Mot no.%1$s</string>
+    <string name="CreateGift.amountLabel">Choisissez le montant ($ USD)</string>
+    <string name="CreateGift.create">Créer</string>
+    <string name="CreateGift.customAmountHint">Montant personnalisé (500 $ maximum)</string>
+    <string name="CreateGift.description">Nous allons créer ce qu\'on appelle un</string>
+    <string name="CreateGift.inputAmountError">Vous devez sélectionner un montant de cadeau.</string>
+    <string name="CreateGift.inputRecipientNameError">Vous devez entrer le nom du destinataire.</string>
+    <string name="CreateGift.insufficientBalanceError">Vous n\'avez pas suffisamment de fonds pour envoyer un cadeau.</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">Vous n\'avez pas suffisamment de fonds pour envoyer un cadeau de ce montant.</string>
+    <string name="CreateGift.recipientName">Nom du destinataire</string>
+    <string name="CreateGift.serverError">Une erreur de serveur s\'est produite. Veuillez réessayer plus tard.</string>
+    <string name="CreateGift.subtitle">Envoyez des bitcoins à quelqu\'un même s\'il n\'a pas de portefeuille.</string>
+    <string name="CreateGift.title">Offrez le Bitcoin</string>
+    <string name="CreateGift.unexpectedError">Une erreur inattendue est apparue. Veuillez contacter le support.</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">Accepter</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Messagerie non disponible</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">L\'empreinte digitale n\'a pas été reconnue. Veuillez réessayer.</string>
+    <string name="ExportConfirmation.cancel">Annuler</string>
+    <string name="ExportConfirmation.continue">Continuez</string>
+    <string name="ExportConfirmation.message">Cela générera un fichier CSV comprenant toutes les transactions terminées à partir de tous les portefeuilles activés.</string>
+    <string name="ExportConfirmation.title">Les transactions d\'exportation?</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">Cela générera un fichier CSV comprenant toutes les transactions terminées à partir de tous les portefeuilles activés.</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">Transferts d\'exportation</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">Échec de l\'exportation du fichier CSV, veuillez réessayer.</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">Échec de l\'exportation</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">Les transactions d\'exportation?</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">Vous pouvez personnaliser votre limite de dépense Face ID à partir de %1$s.</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Activer Segwit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">Vous aimez BRD ?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">Exporter l\'historique des transactions au format CSV</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">Limite de dépenses Face ID</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">Récompenses</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">Partager des données anonymes</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">Partagez les données de votre portefeuille avec des widgets</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Synchroniser avec la blockchain</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">Partager les données ?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">Partager des données anonymes ?</string>
+    <string name="ShareGift.approximateTotal">Total approximatif</string>
+    <string name="ShareGift.footerMessage1">Des frais de réseau seront déduits du total lors de la réclamation.\n La valeur réelle dépend du prix actuel du bitcoin.</string>
+    <string name="ShareGift.footerMessage2">Téléchargez l\'application BRD pour iPhone ou Android.\n Pour plus d\'informations, visitez brd.com/gift</string>
+    <string name="ShareGift.tagLine">Quelqu\'un vous a offert du bitcoin!</string>
+    <string name="ShareGift.walletName">Bitcoin</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ Sélectionnez Baker</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">Espace libre</string>
+    <string name="Staking.changeValidator">Changement</string>
+    <string name="Staking.descriptionTezos">Déléguez votre compte Tezos à un validateur pour gagner une récompense tout en gardant une sécurité et un contrôle complets de vos pièces.</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">Frais:</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">Transaction en attente ...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">Retirer</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">Est. ROI</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">Sélectionnez Délégué XTZ</string>
+    <string name="Staking.stake">Pieu</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">ACTIF</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">INACTIF</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">EN ATTENDANT</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">Jalonnement</string>
+    <string name="Staking.stakingTo">jalonnement sur %1$s</string>
+    <string name="Staking.statusPending">En attente</string>
+    <string name="Staking.statusStaked">Jalonné!</string>
+    <string name="Staking.subTitle">Gagnez de l\'argent en tenant</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">Tezos et Dune</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">Piscine multi-actifs</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">Tezos uniquement</string>
+    <string name="Staking.title">Mise %1$s</string>
+    <string name="Staking.unstake">Annuler le pari</string>
+    <string name="Staking.validatorHint">Entrez l\'adresse du validateur</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">Notez à nouveau la phrase de récupération</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">envoi à %1$s</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">envoyé à %1$s</string>
+    <string name="Transaction.stakingTo">jalonnement sur %1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">Solde initial : %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">Frais de transfert du jeton : %1$s</string>
+    <string name="Transaction.toRecipient">à %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">En attente d\'être confirmé. Certains marchands exigent une confirmation pour mener à bien une transaction. Temps estimé : 1-2 heures.</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,8 +1211,10 @@
     <string name="TransactionDetails.gasLimitHeader">Limite de gaz</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">Prix du gaz</string>
+    <string name="TransactionDetails.gift">Cadeau</string>
+    <string name="TransactionDetails.giftedTo">Offert à %1$s</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
-    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <string name="TransactionDetails.hederaMemo">Mémo Hedera</string>
     <!-- Hide Details button -->
     <string name="TransactionDetails.hideDetails">Masquer les détails</string>
     <!-- Label showing the transaction was started (initialized) -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">reçu de %1$s</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">réception via %1$s</string>
+    <string name="TransactionDetails.reclaim">Récupérer</string>
+    <string name="TransactionDetails.resend">Renvoyer</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">A envoyé %1$s</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">Jalonnement</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet revient sous le nom de BRD, avec un nouveau design et de nouvelles fonctionnalités. \n\nSi vous avez besoin d\'aide, cliquez sur le (?) en haut à droite de la plupart des écrans.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Bienvenue chez BRD!</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">Restez à jour avec votre actif cryptographique préféré</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">Restez à jour avec vos actifs cryptographiques préférés</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">Liste des actifs</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">Actif</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">Système Auto Light / Dark</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">Noir</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">Bleu</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">grise</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">Vert</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">Orange</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">Rose</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">Primaire</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">Primaire</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">Violet</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">rouge</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">Secondaire</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">Secondaire</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">Tertiaire</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">Tertiaire</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">blanc</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">Jaune</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">Couleurs d\'arrière-plan du thème</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">Couleurs de base</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">Couleurs des devises</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">Couleurs du système</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">Couleurs du texte du thème</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">Activer dans l\'application\n préférences</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">Restez à jour avec votre portfolio</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">Portefeuille\n Résumé</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">Portefeuille</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">Souhaitez-vous vraiment supprimer ce portefeuille ?</string>
     <!-- Wipe wallet alert title -->
