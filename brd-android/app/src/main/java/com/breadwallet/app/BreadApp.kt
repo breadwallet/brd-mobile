@@ -39,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.bdb.api.AndroidBdbAuthProvider
 import com.brd.api.AndroidBRDAuthProvider
 import com.brd.api.BRDApiClient
 import com.brd.prefs.AndroidPreferences
@@ -79,22 +80,18 @@ import com.breadwallet.tools.util.SupportManager
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.uigift.GiftBackup
 import com.breadwallet.ui.uigift.SharedPrefsGiftBackup
-import com.breadwallet.util.AddressResolverServiceLocator
-import com.breadwallet.util.CryptoUriParser
-import com.breadwallet.util.FioService
-import com.breadwallet.util.PayIdService
-import com.breadwallet.util.errorHandler
-import com.breadwallet.util.isEthereum
 import com.breadwallet.util.usermetrics.UserMetricsUtil
 import com.platform.APIClient
 import com.platform.HTTPServer
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import com.breadwallet.util.*
 import com.platform.interfaces.KVStoreProvider
 import com.platform.interfaces.MetaDataManager
 import com.platform.interfaces.WalletProvider
 import com.platform.sqlite.PlatformSqliteHelper
 import com.platform.tools.KVStoreManager
 import com.platform.tools.TokenHolder
+import drewcarlson.blockset.BdbService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -334,8 +331,15 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             FioService(instance())
         }
 
+        bind<UnstoppableDomainService>() with singleton {
+            UnstoppableDomainService(
+                BdbService.create(authProvider = AndroidBdbAuthProvider(instance()))
+            )
+        }
+
         bind<AddressResolverServiceLocator>() with singleton {
             AddressResolverServiceLocator(
+                instance(),
                 instance(),
                 instance()
             )

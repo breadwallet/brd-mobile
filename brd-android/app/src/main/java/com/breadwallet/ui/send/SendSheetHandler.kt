@@ -52,22 +52,12 @@ import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
 import com.breadwallet.tools.util.BRConstants
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.Link
 import com.breadwallet.tools.util.asLink
 import com.breadwallet.ui.send.SendSheet.E
 import com.breadwallet.ui.send.SendSheet.F
-import com.breadwallet.util.AddressResolverServiceLocator
-import com.breadwallet.util.AddressResult
-import com.breadwallet.util.CryptoUriParser
-import com.breadwallet.util.CurrencyCode
-import com.breadwallet.util.HEADER_BITPAY_PARTNER
-import com.breadwallet.util.HEADER_BITPAY_PARTNER_KEY
-import com.breadwallet.util.buildPaymentProtocolRequest
-import com.breadwallet.util.getAcceptHeader
-import com.breadwallet.util.getContentTypeHeader
-import com.breadwallet.util.getPaymentRequestHeader
-import com.breadwallet.util.isFio
-import com.breadwallet.util.isPayId
+import com.breadwallet.util.*
 import com.platform.APIClient
 import com.spotify.mobius.Connectable
 import drewcarlson.mobius.flow.flowTransformer
@@ -116,6 +106,9 @@ object SendSheetHandler {
         addFunction(parseClipboard(context, breadBox, uriParser))
         addFunction(handleGetTransferFields(breadBox))
         addFunction(handleValidateTransferFields(breadBox))
+        addConsumer<F.TrackEvent> { (event, attrs) ->
+            EventUtils.pushEvent(event, attrs)
+        }
 
         addFunctionSync<F.LoadAuthenticationSettings> {
             val isEnabled =
@@ -341,6 +334,8 @@ object SendSheetHandler {
         val reqAddress = cryptoRequest?.address ?: target
 
         return when {
+            target.isCNS() -> E.OnAddressValidated.ResolvableAddress(AddressType.Resolvable.UnstoppableDomain.CNS, target)
+            target.isENS() -> E.OnAddressValidated.ResolvableAddress(AddressType.Resolvable.UnstoppableDomain.ENS, target)
             target.isPayId() -> E.OnAddressValidated.ResolvableAddress(AddressType.Resolvable.PayId, target)
             target.isFio() -> E.OnAddressValidated.ResolvableAddress(AddressType.Resolvable.Fio, target)
             target.isBlank() -> E.OnAddressValidated.NoAddress(AddressType.NativePublic, fromClipboard)
