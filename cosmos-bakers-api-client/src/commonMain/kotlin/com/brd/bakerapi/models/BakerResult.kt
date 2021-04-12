@@ -34,8 +34,16 @@ sealed class BakerResult {
     ) : BakerResult()
 
     @Serializable
-    data class Error(
-        val status: Int,
-        val body: String
-    ): BakerResult()
+    sealed class Error : BakerResult() {
+        @Serializable
+        data class HttpError(
+            val status: Int,
+            val body: String
+        ): Error()
+
+        @Serializable
+        data class ResponseError(
+            val message: String
+        ) : Error()
+    }
 }

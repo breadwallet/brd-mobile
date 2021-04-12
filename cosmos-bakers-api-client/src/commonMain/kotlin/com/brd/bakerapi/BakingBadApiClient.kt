@@ -41,6 +41,7 @@ import io.ktor.http.URLProtocol
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlin.native.concurrent.SharedImmutable
 
@@ -82,9 +83,13 @@ internal class BakingBadApiClient(
                     }
                 )
             } catch (e: ResponseException) {
-                BakersResult.Error(
+                BakersResult.Error.HttpError(
                     e.response.status.value,
                     e.response.readText()
+                )
+            } catch (e: SerializationException) {
+                BakersResult.Error.ResponseError(
+                    e.message ?: e.stackTraceToString()
                 )
             }
         }
@@ -97,9 +102,13 @@ internal class BakingBadApiClient(
                     baker = http.get("/v2/bakers/$address")
                 )
             } catch (e: ResponseException) {
-                BakerResult.Error(
+                BakerResult.Error.HttpError(
                     e.response.status.value,
                     e.response.readText()
+                )
+            } catch (e: SerializationException) {
+                BakerResult.Error.ResponseError(
+                    e.message ?: e.stackTraceToString()
                 )
             }
         }
