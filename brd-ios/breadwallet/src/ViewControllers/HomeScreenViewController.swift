@@ -322,6 +322,9 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
             return amount.fiatValue
         }.reduce(0.0, +)
         
+        let localeComponents = [NSLocale.Key.currencyCode.rawValue: UserDefaults.defaultCurrencyCode]
+        let localeIdentifier = Locale.identifier(fromComponents: localeComponents)
+        totalAssetsNumberFormatter.locale = Locale(identifier: localeIdentifier)
         totalAssetsNumberFormatter.currencySymbol = Store.state.orderedWallets.first?.currentRate?.currencySymbol ?? ""
         
         self.total.text = totalAssetsNumberFormatter.string(from: fiatTotal as NSDecimalNumber)
