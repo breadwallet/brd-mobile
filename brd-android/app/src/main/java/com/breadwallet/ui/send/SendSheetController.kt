@@ -279,6 +279,7 @@ class SendSheetController(args: Bundle? = null) :
                         val last = targetAddress.takeLast(RESOLVED_ADDRESS_CHARS)
                         "$first...$last"
                     }
+                    inputLayoutAddress.hint = ""
                 } else {
                     resolvableIcon.isVisible = false
                     inputLayoutAddress.helperText = null

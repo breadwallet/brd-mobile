@@ -407,7 +407,8 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                 model.copy(
                     targetString = event.toAddress,
                     targetAddress = "",
-                    targetInputError = null
+                    targetInputError = null,
+                    addressType = AddressType.NativePublic
                 )
             )
         }
