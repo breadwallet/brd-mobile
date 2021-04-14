@@ -24,15 +24,24 @@
  */
 package brd
 
+private val ciTag = System.getenv("CI_COMMIT_TAG")
+    ?.split("-") // <target>-x.x.x.x
+    ?.lastOrNull()
+    ?.split(".")
+    ?.map(String::toInt)
+
 object BrdRelease {
     /** Major version. Usually affected by marketing. Maximum value: 99 */
-    private const val marketing = 4
+    private val marketing = ciTag?.firstOrNull() ?: 4
+
     /** Minor version. Usually affected by product. Maximum value: 99 */
-    private const val product = 8
+    private val product = ciTag?.get(1) ?: 9
+
     /** Hot fix version. Usually affected by engineering. Maximum value: 9 */
-    private const val engineering = 0
+    private val engineering = ciTag?.get(2) ?: 1
+
     /** Build version. Increase for each new build. Maximum value: 999 */
-    private const val build = 7
+    private val build = ciTag?.lastOrNull() ?: 1
 
     init {
         check(marketing in 0..99)
@@ -43,10 +52,10 @@ object BrdRelease {
 
     // The version code must be monotonically increasing. It is used by Android to maintain upgrade/downgrade
     // relationship between builds with a max value of 2 100 000 000.
-    const val versionCode = (marketing * 1000000) + (product * 10000) + (engineering * 1000) + build
-    const val versionName = "$marketing.$product.$engineering"
-    const val buildVersion = build
-    const val internalVersionName = "$marketing.$product.$engineering.$build"
+    val versionCode = (marketing * 1000000) + (product * 10000) + (engineering * 1000) + build
+    val versionName = "$marketing.$product.$engineering"
+    val buildVersion = build
+    val internalVersionName = "$marketing.$product.$engineering.$build"
 
     const val ANDROID_TARGET_SDK = 29
     const val ANDROID_COMPILE_SDK = 30

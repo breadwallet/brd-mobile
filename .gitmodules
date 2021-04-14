@@ -4,13 +4,13 @@
 	fetchRecurseSubmodules = true
 [submodule "external/mobile-font"]
 	path = external/mobile-font
-	url = git@gitlab.com:breadwallet/mobile-font.git
+	url = ../../breadwallet/mobile-font.git
 	update = none
 [submodule "external/google-services"]
 	path = external/google-services
-	url = git@gitlab.com:breadwallet/google-services.git
+	url = ../../breadwallet/google-services.git
     update = none
 [submodule "external/in-app-i18n"]
 	path = external/in-app-i18n
-	url = git@gitlab.com:breadwallet/in-app-i18n.git
+	url = ../../breadwallet/in-app-i18n.git
 	update = none

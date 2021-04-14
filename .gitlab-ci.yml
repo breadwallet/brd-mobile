@@ -11,6 +11,8 @@ default:
     - ios-12
     - xcode-10
     - macos-10_13
+  before_script:
+    - git submodule update --init --checkout
 
 variables:
   SIGNING_KEY: /builds/breadwallet/brd-mobile/brd-android/FakeSigningKey
@@ -21,6 +23,7 @@ variables:
   ORG_GRADLE_DEPENDENCY_VERIFICATION: "off"
   ORG_GRADLE_CONSOLE: plain
   GIT_SUBMODULE_STRATEGY: recursive
+  GIT_STRATEGY: clone
 
 cache:
   key: ${CI_PROJECT_ID}-3
@@ -45,8 +48,6 @@ build-cosmos:
 build-android:
   stage: build
   script:
-    - git submodule sync
-    - git submodule update --init --force --remote
     - ./gradlew :brd-android:app:build -xlint -xdetekt --no-daemon
   only:
     refs:
@@ -92,8 +93,6 @@ deploy-appetize:
   stage: deploy
   needs: [ "build-android" ]
   script:
-    - git submodule sync
-    - git submodule update --init --force --remote
     - ./gradlew appetizeUpload
   only:
     refs:
@@ -133,8 +132,6 @@ deploy-firebase:
   variables:
     ORG_GRADLE_DEPENDENCY_VERIFICATION: "off"
   script:
-    - git submodule sync
-    - git submodule update --init --force --remote
     - ./gradlew :brd-android:app:assemble
     - ./gradlew :brd-android:app:appDistributionUploadBrdRelease
     - ./gradlew :brd-android:app:appDistributionUploadBrdTestnetRelease
