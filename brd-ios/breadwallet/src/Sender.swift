@@ -62,7 +62,7 @@ class Sender: Subscriber {
             submitTimeoutTimer?.invalidate()
         }
     }
-    private let submitTimeout: TimeInterval = 30.0
+    private let submitTimeout: TimeInterval = 60.0
 
     private var isOriginatingTransferNeeded: Bool {
         return wallet.currency.tokenType == .erc20
@@ -275,7 +275,7 @@ class Sender: Subscriber {
         let handleTimeout = {
             DispatchQueue.main.async {
                 self.stopWaitingForSubmission()
-                completion(.publishFailure(code: 0, message: S.Alert.timedOut))
+                completion(.publishFailure(code: 0, message: S.Send.timeOutBody))
             }
         }
 
