@@ -88,7 +88,7 @@ object Libs {
     const val Blockset = "org.drewcarlson:blockset:$BLOCKSET_VERSION"
 
     object WalletKit {
-        const val CoreAndroid = "com.breadwallet.core:corecrypto-android:$WALLETKIT_VERSION"
+        const val CoreAndroid = "com.breadwallet.core:corecrypto-android"
     }
 
     object Android {
