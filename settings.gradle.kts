@@ -14,3 +14,10 @@ include(
     "brd-android:app-core",
     "brd-android:theme"
 )
+
+includeBuild("external/walletkit/WalletKitJava") {
+    dependencySubstitution {
+        substitute(module("com.breadwallet.core:corecrypto-android"))
+            .with(project(":corecrypto-android"))
+    }
+}
