@@ -15,7 +15,7 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     private let assetList = AssetListTableView()
     private let subHeaderView = UIView()
     private let logo = UIImageView(image: UIImage(named: "LogoGradientSmall"))
-    private let total = UILabel(font: Theme.h1Title, color: Theme.primaryText)
+    private let total = UILabel(font: Theme.boldTitle.withSize(Theme.FontSize.h1Title.rawValue), color: Theme.primaryText)
     private let totalAssetsLabel = UILabel(font: Theme.caption, color: Theme.tertiaryText)
     private let debugLabel = UILabel(font: .customBody(size: 12.0), color: .transparentWhiteText) // debug info
     private let prompt = UIView()
