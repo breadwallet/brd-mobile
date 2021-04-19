@@ -56,7 +56,7 @@ private const val API_HOST = "api.baking-bad.org"
 
 internal class BakingBadApiClient(
     apiHost: String = API_HOST,
-    httpClient: HttpClient = HttpClient(),
+    httpClient: HttpClient,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ) : BakersApiClient {
 

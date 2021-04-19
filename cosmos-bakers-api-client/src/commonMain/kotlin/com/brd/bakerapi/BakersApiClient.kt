@@ -28,11 +28,14 @@ package com.brd.bakerapi
 import com.brd.bakerapi.models.Baker
 import com.brd.bakerapi.models.BakerResult
 import com.brd.bakerapi.models.BakersResult
+import io.ktor.client.*
 
 interface BakersApiClient {
 
     companion object {
-        fun create(): BakersApiClient = BakingBadApiClient()
+        fun create(
+            httpClient: HttpClient = HttpClient()
+        ): BakersApiClient = BakingBadApiClient(httpClient = httpClient)
     }
 
     /**

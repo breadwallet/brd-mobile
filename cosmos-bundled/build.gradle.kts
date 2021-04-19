@@ -55,6 +55,11 @@ kotlin {
                 api(brd.Libs.Blockset)
             }
         }
+        named("androidMain") {
+            dependencies {
+                api(brd.Libs.Ktor.Client.OkHttpClientEngine)
+            }
+        }
     }
 }
 
