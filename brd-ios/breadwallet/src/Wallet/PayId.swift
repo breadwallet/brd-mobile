@@ -78,6 +78,10 @@ enum ResolvableFactory {
             return cns
         }
         
+        if let ens = ENS(address: address) {
+            return ens
+        }
+        
         return nil
     }
 }
@@ -223,7 +227,36 @@ private class UDomains: Resolvable {
     let type: ResolvableType = .uDomains
     required init?(address: String) {
         self.address = address
-        guard address.hasSuffix(".eth") || address.hasSuffix(".crypto") else { return nil }
+        guard address.hasSuffix(".crypto") else { return nil }
+    }
+    
+    func fetchAddress(forCurrency currency: Currency, callback: @escaping (Result<(String, String?), ResolvableError>) -> Void) {
+        Backend.bdbClient.addressLookup(domainName: address, currencyCodeList: [currency.code]) { (result, _) in
+            guard result != nil else {
+                callback(.failure(.badResponse))
+                return
+            }
+            guard let value = result?.embedded.addresses.first,
+                  let status = value.status,
+                  status == BdbAddress.Status.success else {
+                callback(.failure(.badResponse))
+                return
+            }
+            guard status == BdbAddress.Status.success else {
+                callback(.failure(.currencyNotSupported))
+                return
+            }
+            callback(.success((value.address!, nil)))
+        }
+    }
+}
+
+private class ENS: Resolvable {
+    private let address: String
+    let type: ResolvableType = .ens
+    required init?(address: String) {
+        self.address = address
+        guard address.hasSuffix(".eth") else { return nil }
     }
     
     func fetchAddress(forCurrency currency: Currency, callback: @escaping (Result<(String, String?), ResolvableError>) -> Void) {
