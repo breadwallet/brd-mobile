@@ -385,7 +385,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             if tag != nil {
                 self.hideDestinationTag()
             }
-            addressCell.showResolveableState(type: type)
+            addressCell.showResolveableState(type: type, address: address)
             addressCell.hideActionButtons()
             if let destinationTag = tag {
                 attributeCell?.setContent(destinationTag)

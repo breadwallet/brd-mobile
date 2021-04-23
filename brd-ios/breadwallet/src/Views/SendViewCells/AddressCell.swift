@@ -62,7 +62,7 @@ class AddressCell: UIView {
     private let resolvedAddressLabel = ResolvedAddressLabel()
     private let activityIndicator = UIActivityIndicatorView(style: .gray)
     
-    func showResolveableState(type: ResolvableType) {
+    func showResolveableState(type: ResolvableType, address: String) {
         textField.resignFirstResponder()
         label.isHidden = true
         resolvedAddressLabel.isHidden = false
@@ -70,6 +70,7 @@ class AddressCell: UIView {
         activityIndicator.isHidden = true
         isEditable = true
         resolvedAddressLabel.type = type
+        resolvedAddressLabel.address = address
     }
     
     func hideResolveableState() {
@@ -98,6 +99,7 @@ class AddressCell: UIView {
     }
 
     private func addSubviews() {
+        addSubview(resolvedAddressLabel)
         addSubview(label)
         addSubview(contentLabel)
         addSubview(textField)
@@ -105,7 +107,6 @@ class AddressCell: UIView {
         addSubview(border)
         addSubview(paste)
         addSubview(scan)
-        addSubview(resolvedAddressLabel)
     }
 
     private func addConstraints() {
@@ -156,7 +157,7 @@ class AddressCell: UIView {
         textField.clearButtonMode = .whileEditing
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
-        textField.keyboardType = .asciiCapable
+        textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         label.textColor = .grayTextTint
         contentLabel.lineBreakMode = .byTruncatingMiddle
@@ -176,6 +177,7 @@ class AddressCell: UIView {
         textField.isHidden = false
         showActionButtons()
         resolvedAddressLabel.type = nil
+        resolvedAddressLabel.address = nil
     }
     
     @objc private func textFieldDidChange() {
@@ -207,7 +209,6 @@ extension AddressCell: UITextFieldDelegate {
             resolver.fetchAddress(forCurrency: currency) { result in
                 DispatchQueue.main.async {
                     self.didReceiveResolvedAddress?(result, resolver.type)
-                    self.resolvedAddressLabel.type = resolver.type
                 }
             }
         }
