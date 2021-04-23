@@ -14,6 +14,7 @@ class ResolvedAddressLabel: UIView {
     
     private let imageHeight: CGFloat = 22.0
     private let image = UIImageView()
+    private let addressLabel = UILabel(font: .customBody(size: 12.0), color: .lightText)
     private var widthConstraint: NSLayoutConstraint?
     
     var type: ResolvableType? {
@@ -45,9 +46,17 @@ class ResolvedAddressLabel: UIView {
         }
     }
     
+    var address: String? {
+        didSet {
+            addressLabel.text = address
+            addressLabel.lineBreakMode = .byTruncatingMiddle
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(image)
+        addSubview(addressLabel)
         backgroundColor = .blue
         image.constrain([
             image.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -55,6 +64,11 @@ class ResolvedAddressLabel: UIView {
             image.heightAnchor.constraint(equalToConstant: imageHeight)
         ])
         image.contentMode = .scaleAspectFit
+        addressLabel.constrain([
+            addressLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            addressLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: C.padding[2]),
+            addressLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[10])
+        ])
     }
     
     required init?(coder: NSCoder) {
