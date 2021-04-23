@@ -27,7 +27,7 @@ package com.breadwallet.ui.send
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.ext.isZero
 import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.Link
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.send.SendSheet.E
 import com.breadwallet.ui.send.SendSheet.E.OnAddressValidated.InvalidAddress
 import com.breadwallet.ui.send.SendSheet.E.OnAddressValidated.NoAddress
@@ -407,7 +407,8 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                 model.copy(
                     targetString = event.toAddress,
                     targetAddress = "",
-                    targetInputError = null
+                    targetInputError = null,
+                    addressType = AddressType.NativePublic
                 )
             )
         }
@@ -487,15 +488,29 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                     event.targetString,
                     transferFields
                 )
-                is ResolvableAddress -> next(
-                    model.copy(
-                        targetString = event.targetString,
-                        addressType = event.type,
-                        isResolvingAddress = true,
-                        transferFields = transferFields
-                    ),
-                    setOf<F>(F.ResolveAddress(model.currencyCode, event.targetString, event.type))
-                )
+                is ResolvableAddress -> {
+                    val service = when (event.type) {
+                        AddressType.Resolvable.UnstoppableDomain.CNS -> EventUtils.EVENT_SERVICE_CNS
+                        AddressType.Resolvable.UnstoppableDomain.ENS -> EventUtils.EVENT_SERVICE_ENS
+                        AddressType.Resolvable.Fio -> EventUtils.EVENT_SERVICE_FIO
+                        AddressType.Resolvable.PayId -> EventUtils.EVENT_SERVICE_PAY
+                    }
+                    next(
+                        model.copy(
+                            targetString = event.targetString,
+                            addressType = event.type,
+                            isResolvingAddress = true,
+                            transferFields = transferFields
+                        ),
+                        setOf(
+                            F.ResolveAddress(model.currencyCode,event.targetString, event.type),
+                            F.TrackEvent(
+                                EventUtils.EVENT_NAME_RESOLVED,
+                                mapOf(EventUtils.EVENT_ATTRIBUTE_SERVICE to service)
+                            )
+                        )
+                    )
+                }
                 is InvalidAddress -> next(
                     model.copy(
                         addressType = event.type,
@@ -611,10 +626,7 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
         } else {
             newFiatAmount = model.fiatAmount
             newAmount = if (pricePerUnit > BigDecimal.ZERO) {
-                newFiatAmount.setScale(
-                    pricePerUnit.scale().coerceAtMost(MAX_DIGITS),
-                    BRConstants.ROUNDING_MODE
-                ) / pricePerUnit
+                newFiatAmount.setScale(MAX_DIGITS, BRConstants.ROUNDING_MODE) / pricePerUnit
             } else {
                 model.amount
             }

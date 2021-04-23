@@ -32,7 +32,7 @@ struct PortfolioView: View {
                             singleColumnLimit: 4,
                             doubleColumnLimit: 12
                         )
-                        BetterDivider(color: textColor)
+                        BetterDivider(viewModel: viewModel.assetList.anyAsset)
                         PortfolioItemView(viewModel: viewModel)
                     case .systemMedium:
                         AssetListGridView(
@@ -40,17 +40,18 @@ struct PortfolioView: View {
                             singleColumnLimit: 2,
                             doubleColumnLimit: 4
                         )
-                        BetterDivider(color: textColor)
+                        BetterDivider(viewModel: viewModel.assetList.anyAsset)
                         PortfolioItemView(viewModel: viewModel)
 
                     case .systemSmall:
                         PortfolioItemView(viewModel: viewModel)
-                        BetterDivider(color: textColor)
+                        BetterDivider(viewModel: viewModel.assetList.anyAsset)
                         AssetListGridView(
                             viewModel: viewModel.assetList,
                             singleColumnLimit: 2,
                             doubleColumnLimit: 2
                         )
+                        .widgetURL(viewModel.assetList.anyAsset.urlScheme)
                     default:
                         Text("Not supported")
                     }

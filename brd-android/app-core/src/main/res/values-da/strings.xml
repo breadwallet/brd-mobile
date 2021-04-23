@@ -233,12 +233,27 @@
     <string name="Confirmation.to">Til</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">Samlede omkostninger:</string>
+    <string name="ConfirmGift.paperWalletAmount">Papir tegnebog beløb</string>
+    <string name="ConfirmGift.processingTime">Validering af denne papirpung på netværket kan tage op til 60 minutter</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">De indtastede ord matcher ikke din gendannelsessætning. Prøv igen.</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">For at sikre, at alt blev skrevet korrekt, skal du indtaste følgende ord fra din gendannelsessætning.</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">Ord #%1$s</string>
+    <string name="CreateGift.amountLabel">Vælg beløb ($ USD)</string>
+    <string name="CreateGift.create">skab</string>
+    <string name="CreateGift.customAmountHint">Tilpasset beløb (maks. $ 500)</string>
+    <string name="CreateGift.description">Vi opretter det, der kaldes en</string>
+    <string name="CreateGift.inputAmountError">Du skal vælge et gavebeløb.</string>
+    <string name="CreateGift.inputRecipientNameError">Du skal indtaste modtagerens navn.</string>
+    <string name="CreateGift.insufficientBalanceError">Du har ikke tilstrækkelige midler til at sende en gave.</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">Du har ikke tilstrækkelige midler til at sende en gave på dette beløb.</string>
+    <string name="CreateGift.recipientName">modtagers navn</string>
+    <string name="CreateGift.serverError">Der opstod en serverfejl. Prøv igen senere.</string>
+    <string name="CreateGift.subtitle">Send bitcoin til nogen, selvom de ikke har en tegnebog.</string>
+    <string name="CreateGift.title">Giv Bitcoin gave</string>
+    <string name="CreateGift.unexpectedError">Der opstod en uventet fejl. Kontakt support.</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">Enig</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Beskeder utilgængelig</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">Fingeraftryk ikke genkendt. Prøv igen.</string>
+    <string name="ExportConfirmation.cancel">Afbestille</string>
+    <string name="ExportConfirmation.continue">Blive ved</string>
+    <string name="ExportConfirmation.message">Dette genererer en CSV-fil, der inkluderer alle gennemførte transaktioner fra alle aktiverede tegnebøger.</string>
+    <string name="ExportConfirmation.title">Eksporttransaktioner?</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">Dette genererer en CSV-fil, der inkluderer alle gennemførte transaktioner fra alle aktiverede tegnebøger.</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">Eksport overførsler</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">Kunne ikke eksportere CSV-filen, prøv igen.</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">Eksport mislykkedes</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">Eksporttransaktioner?</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">Du kan tilpasse din Face ID betalingsgrænse fra %1$s.</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Aktivér Segwit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">Nyder du BRD?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">Eksporter transaktionshistorik til CSV</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">Face ID betalingsgrænse</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">Belønninger</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">Del anonyme data</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">Del porteføljedata med widgets</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Synkroniser blokkæde</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">Del data?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">Del anonyme data?</string>
+    <string name="ShareGift.approximateTotal">Omtrentlig total</string>
+    <string name="ShareGift.footerMessage1">Et netafgift trækkes fra det samlede beløb, når det kræves.\n Den faktiske værdi afhænger af den aktuelle pris på bitcoin.</string>
+    <string name="ShareGift.footerMessage2">Download BRD-appen til iPhone eller Android.\n For mere information besøg brd.com/gift</string>
+    <string name="ShareGift.tagLine">Nogen gav dig bitcoin!</string>
+    <string name="ShareGift.walletName">Bitcoin</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ Vælg Baker</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">Fri plads</string>
+    <string name="Staking.changeValidator">Lave om</string>
+    <string name="Staking.descriptionTezos">Delegér din Tezos-konto til en validator for at optjene en belønning, mens du holder fuld sikkerhed og kontrol med dine mønter.</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">Betaling:</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">Transaktion afventer ...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">Fjern</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">Est. ROI</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">Vælg XTZ-delegeret</string>
+    <string name="Staking.stake">Indsats</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">AKTIV</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">INAKTIV</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">VERSERENDE</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">Indsats</string>
+    <string name="Staking.stakingTo">indsats til %1$s</string>
+    <string name="Staking.statusPending">Afventede</string>
+    <string name="Staking.statusStaked">Indsat!</string>
+    <string name="Staking.subTitle">Tjen penge, mens du holder</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">Tezos &amp; Dune</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">Multiasset-pool</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">Kun tezos</string>
+    <string name="Staking.title">Indsats %1$s</string>
+    <string name="Staking.unstake">Fjern indsatsen</string>
+    <string name="Staking.validatorHint">Indtast Validator-adresse</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">Skriv genoprettelsesfrasen igen</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">sender til %1$s</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">sendt til %1$s</string>
+    <string name="Transaction.stakingTo">indsats til %1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">Startbalance: %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">Gebyr for token-overførsel: %1$s</string>
+    <string name="Transaction.toRecipient">til %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">Venter på bekræftelse. Nogen forhandlere kræver bekræftelse for at gennemføre en transaktion. Anslået tid: 1-2 timer.</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,6 +1211,8 @@
     <string name="TransactionDetails.gasLimitHeader">Gasgrænse</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">Gaspris</string>
+    <string name="TransactionDetails.gift">Gave</string>
+    <string name="TransactionDetails.giftedTo">Begavet til %1$s</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
     <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
     <!-- Hide Details button -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">modtager fra %1$s</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">modtager via %1$s</string>
+    <string name="TransactionDetails.reclaim">Gendan</string>
+    <string name="TransactionDetails.resend">Send igen</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">Sendt %1$s</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">Indsats</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet har skiftet navn til BRD med et helt nyt look og nogle nye funktioner.\n\nHvis du har brug for hjælp, led efter (?) øverst til højre på de fleste skærme.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Velkommen til BRD!</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">Bliv opdateret med dit yndlings krypto-aktiv</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">Bliv opdateret med dine foretrukne kryptoaktiver</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">Liste over aktiver</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">Aktiv</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">System Auto Lys / Mørk</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">Sort</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">Blå</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">Grå</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">Grøn</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">orange</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">Lyserød</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">Primær</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">Primær</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">Lilla</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">Rød</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">Sekundær</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">Sekundær</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">Tertiære</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">Tertiære</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">hvid</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">Gul</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">Tema baggrundsfarver</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">Grundlæggende farver</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">Valutafarver</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">Systemfarver</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">Tema tekstfarver</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">Aktivér i app\n præferencer</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">Bliv opdateret med din portefølje</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">Portefølje\n Resumé</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">Portefølje</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">Er du sikker på at du vil slette denne wallet?</string>
     <!-- Wipe wallet alert title -->

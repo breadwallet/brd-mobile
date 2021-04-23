@@ -30,6 +30,8 @@ import com.breadwallet.model.PriceAlert.Companion.percentageChanged
 import com.breadwallet.model.PriceAlert.Companion.percentageDecreasedInDay
 import com.breadwallet.model.PriceAlert.Companion.priceTargetIncrease
 import com.breadwallet.tools.manager.BRSharedPrefs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -43,7 +45,10 @@ class PriceAlertRepositoryTest {
 
     @Before
     fun setup() {
-        BRSharedPrefs.initialize(InstrumentationRegistry.getInstrumentation().context)
+        BRSharedPrefs.initialize(
+            InstrumentationRegistry.getInstrumentation().context,
+            CoroutineScope(Dispatchers.Main)
+        )
     }
 
     @After

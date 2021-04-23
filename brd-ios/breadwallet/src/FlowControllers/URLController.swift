@@ -75,6 +75,8 @@ class URLController: Trackable, Subscriber {
                 return handlePaymentRequestUri(uri, currency: btc)
             } else if url.host == "debug" {
                 handleDebugLink(url)
+            } else if url.host == "widget.open" {
+                saveEvent("widget.open", attributes: url.queryParameters ?? [:])
             }
             return true
             

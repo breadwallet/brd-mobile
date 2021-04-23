@@ -1,4 +1,9 @@
-[![Bread](images/top-logo.png)](https://play.google.com/store/apps/details?id=com.breadwallet)
+[![Bread](images/top-logo.png)](https://brd.com/)
+
+<div align="center">
+  <a href="https://apps.apple.com/us/app/brd-bitcoin-wallet-btc-bch-eth/id885251393"><img align="center" width="140px" height="47px" src="images/app_store.png"/></a>
+  <a href="https://play.google.com/store/apps/details?id=com.breadwallet"><img align="center" width="170px" height="47px" src="images/play_store.png"/></a>
+</div>
 
 BRD is the best way to get started with bitcoin.
 Our simple, streamlined design is easy for beginners, yet powerful enough for experienced users.
@@ -67,7 +72,7 @@ Each module contains only code related to a single feature, helping keep the pro
 The following modules are available, click on the name to learn more.
 
 - [`cosmos-core`](/cosmos-core) Internal shared utilities for all other modules to leverage.
-- [`cosmos-api-client`](/cosmos-api-client) A Hydra compatible API wrapper for Kotlin and Swift.
+- [`cosmos-brd-api-client`](/cosmos-brd-api-client) A Hydra compatible API wrapper for Kotlin and Swift.
 - [`cosmos-bundled`](/cosmos-bundled) Depends on all other modules to produce final dependency artifacts.
 
 **Mobile Applications**
@@ -125,7 +130,7 @@ Tests
 # Run all tests, in all modules
 ./gradlew allTest
 # Run all tests, in a single module
-./gradlew :cosmos-api-client:allTest
+./gradlew :cosmos-brd-api-client:allTest
 # Run Jvm tests
 ./gradlew jvmTest
 # Run iOS Simulator tests
@@ -144,12 +149,10 @@ Packaging
 
 ## Git History
 
-This repository merges the commit history of [BRD iOS](https://github.com/breadwallet/breadwallet-ios) and [BRD Android](https://github.com/breadwallet/breadwallet-android) with some large legacy files purged.
-To build BRD application versions before 5.0, please refer to the respective legacy git repository tags.
+This repository merges the commit history of [BRD iOS](https://github.com/breadwallet/breadwallet-ios) and [BRD Android](https://github.com/breadwallet/breadwallet-android).
+To build BRD application versions before 4.10, please refer to the respective legacy git repository tags.
 
 A light clone of this repository can be created with `git clone git@github.com:breadwallet/brd-mobile.git --depth 50`
-
-Purged file types include: `.tar`, `.otf`, `.ttf`, `.hprof`, `.jar`
 
 ### WARNING:
 

@@ -233,12 +233,27 @@
     <string name="Confirmation.to">Naar</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">Totale Prijs:</string>
+    <string name="ConfirmGift.paperWalletAmount">Hoeveelheid papieren portemonnee</string>
+    <string name="ConfirmGift.processingTime">Het valideren van deze papieren portemonnee op het netwerk kan tot 60 minuten duren</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">De ingevoerde woorden komen niet overeen met uw herstelzin. Probeer het a.u.b. opnieuw.</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">Voer de volgende woorden uit uw herstelzin in om er zeker van te zijn dat alles correct is opgeschreven.</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">Woord #%1$s</string>
+    <string name="CreateGift.amountLabel">Kies bedrag ($ USD)</string>
+    <string name="CreateGift.create">Creëer</string>
+    <string name="CreateGift.customAmountHint">Aangepast bedrag (maximaal $ 500)</string>
+    <string name="CreateGift.description">We maken een zogeheten</string>
+    <string name="CreateGift.inputAmountError">U moet een geschenkbedrag selecteren.</string>
+    <string name="CreateGift.inputRecipientNameError">U moet de naam van de ontvanger invoeren.</string>
+    <string name="CreateGift.insufficientBalanceError">Je hebt onvoldoende saldo om een cadeau te sturen.</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">U heeft onvoldoende saldo om dit bedrag te schenken.</string>
+    <string name="CreateGift.recipientName">Naam ontvanger</string>
+    <string name="CreateGift.serverError">Er is een serverfout opgetreden. Probeer het later nog eens.</string>
+    <string name="CreateGift.subtitle">Stuur bitcoin naar iemand, zelfs als ze geen portemonnee hebben.</string>
+    <string name="CreateGift.title">Geef Bitcoin cadeau</string>
+    <string name="CreateGift.unexpectedError">Er is een onverwachte fout opgetreden. Neem dan contact op met ondersteuning.</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">Akkoord</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Bericht versturen niet beschikbaar</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">Vingerafdruk niet herkend. Probeer het alstublieft opnieuw.</string>
+    <string name="ExportConfirmation.cancel">annuleren</string>
+    <string name="ExportConfirmation.continue">Doorgaan met</string>
+    <string name="ExportConfirmation.message">Dit genereert een CSV-bestand met alle voltooide transacties van alle ingeschakelde wallets.</string>
+    <string name="ExportConfirmation.title">Transacties exporteren?</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">Dit genereert een CSV-bestand met alle voltooide transacties van alle ingeschakelde wallets.</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">Overboekingen exporteren</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">Het exporteren van CSV-bestand is mislukt. Probeer het opnieuw.</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">Export mislukt</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">Transacties exporteren?</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">Je kunt de bestedingslimiet van je Face-ID aanpassen vanuit het %1$s.</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Activeer SegWit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">Vind je BRD leuk?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">Exporteer transactiegeschiedenis naar CSV</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">Bestedingslimiet Face-ID</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">Beloningen</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">Deel Anonieme Data</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">Deel portfoliogegevens met widgets</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Synchroniseer Blockchain</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">Data Delen?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">Anonieme Data Delen?</string>
+    <string name="ShareGift.approximateTotal">Totaal bij benadering</string>
+    <string name="ShareGift.footerMessage1">Bij het claimen wordt een netwerkvergoeding van het totaalbedrag afgetrokken.\n De werkelijke waarde is afhankelijk van de huidige prijs van bitcoin.</string>
+    <string name="ShareGift.footerMessage2">Download de BRD-app voor iPhone of Android.\n Ga voor meer informatie naar brd.com/gift</string>
+    <string name="ShareGift.tagLine">Iemand heeft je bitcoin cadeau gedaan!</string>
+    <string name="ShareGift.walletName">Bitcoin</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ Selecteer Baker</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">Vrije ruimte</string>
+    <string name="Staking.changeValidator">Verandering</string>
+    <string name="Staking.descriptionTezos">Delegeer uw Tezos-account aan een validator om een beloning te verdienen terwijl u de volledige veiligheid en controle over uw munten behoudt.</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">Vergoeding:</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">Transactie in behandeling ...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">Verwijderen</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">Est. ROI</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">Selecteer XTZ Delegate</string>
+    <string name="Staking.stake">Inzet</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">ACTIEF</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">INACTIEF</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">IN AFWACHTING</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">Uitzetten</string>
+    <string name="Staking.stakingTo">uitzetten naar %1$s</string>
+    <string name="Staking.statusPending">In Afwachting</string>
+    <string name="Staking.statusStaked">Uitgezet!</string>
+    <string name="Staking.subTitle">Verdien geld terwijl je vasthoudt</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">Tezos &amp; Dune</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">Multiasset-zwembad</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">Alleen Tezos</string>
+    <string name="Staking.title">%1$s inzetten</string>
+    <string name="Staking.unstake">Ongedaan maken</string>
+    <string name="Staking.validatorHint">Voer Validator-adres in</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">Schrijf de herstelzin opnieuw op</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">versturen naar %1$s</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">verstuurd naar %1$s</string>
+    <string name="Transaction.stakingTo">uitzetten naar %1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">Startbalans: %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">Fee voor token verzending: %1$s</string>
+    <string name="Transaction.toRecipient">naar %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">Wachtend op bevestiging. Sommige handelaren willen bevestiging om een transactie af te roden. Geschatte tijd: 1-2 uur.</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,6 +1211,8 @@
     <string name="TransactionDetails.gasLimitHeader">Gaslimiet</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">Gasprijs</string>
+    <string name="TransactionDetails.gift">Geschenk</string>
+    <string name="TransactionDetails.giftedTo">Geschonken aan %1$s</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
     <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
     <!-- Hide Details button -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">ontvangen van %1$s</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">ontvangen via %1$s</string>
+    <string name="TransactionDetails.reclaim">Reclaim</string>
+    <string name="TransactionDetails.resend">Opnieuw verzenden</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">Verstuurd %1$s</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">Uitzetten</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet is omgedoopt tot BRD, met een gloednieuw uiterlijk en enkele nieuwe functies.\n\nAls u hulp nodig hebt, zoek naar de (?) rechtsboven in de meeste schermen.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Welkom bij BRD!</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">Blijf op de hoogte van uw favoriete cryptovaluta</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">Blijf op de hoogte van uw favoriete cryptovaluta</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">Asset lijst</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">Bedrijfsmiddel</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">Systeem Auto Licht / Donker</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">Zwart</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">Blauw</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">Grijs</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">Groen</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">Oranje</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">Roze</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">Primair</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">Primair</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">Purper</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">Rood</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">Ondergeschikt</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">Ondergeschikt</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">Tertiair</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">Tertiair</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">Wit</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">Geel</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">Thema achtergrondkleuren</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">Basiskleuren</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">Valutakleuren</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">Systeemkleuren</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">Thema Tekstkleuren</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">Schakel in app\n voorkeuren</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">Blijf op de hoogte van uw portfolio</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">Portefeuille\n Overzicht</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">Portefeuille</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">Weet je zeker dat je deze portomonnee wilt verwijderen?</string>
     <!-- Wipe wallet alert title -->

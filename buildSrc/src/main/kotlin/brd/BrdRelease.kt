@@ -28,11 +28,11 @@ object BrdRelease {
     /** Major version. Usually affected by marketing. Maximum value: 99 */
     private const val marketing = 4
     /** Minor version. Usually affected by product. Maximum value: 99 */
-    private const val product = 8
+    private const val product = 10
     /** Hot fix version. Usually affected by engineering. Maximum value: 9 */
     private const val engineering = 0
     /** Build version. Increase for each new build. Maximum value: 999 */
-    private const val build = 7
+    private const val build = 5
 
     init {
         check(marketing in 0..99)
@@ -49,7 +49,7 @@ object BrdRelease {
     const val internalVersionName = "$marketing.$product.$engineering.$build"
 
     const val ANDROID_TARGET_SDK = 29
-    const val ANDROID_COMPILE_SDK = 29
+    const val ANDROID_COMPILE_SDK = 30
     const val ANDROID_MINIMUM_SDK = 23
-    const val ANDROID_BUILD_TOOLS = "29.0.3"
+    const val ANDROID_BUILD_TOOLS = "30.0.2"
 }

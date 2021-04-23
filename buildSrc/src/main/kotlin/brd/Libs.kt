@@ -26,10 +26,11 @@ package brd
 
 const val KOTLIN_VERSION = "1.4.31"
 private const val KTOR_VERSION = "1.5.2"
+private const val KOTLINX_ATOMICFU_VERSION = "0.15.0"
 private const val KOTLINX_DATETIME_VERSION = "0.1.1"
 private const val KOTLINX_SERIALIZATION_VERSION = "1.1.0"
 private const val COROUTINES_VERSION = "1.4.3-native-mt"
-private const val WALLETKIT_VERSION = "6.3.4"
+private const val WALLETKIT_VERSION = "6.3.5"
 private const val FIREBASE_APPDIST_VERSION = "2.0.1"
 private const val FIREBASE_MESSAGING_VERSION = "21.0.1"
 private const val FIREBASE_ANALYTICS_VERSION = "18.0.2"
@@ -42,7 +43,7 @@ private const val WORK_MANAGER_VERSION = "2.4.0"
 private const val SECURITY_VERSION = "1.1.0-alpha03"
 private const val LEGACY_V13 = "1.0.0"
 private const val CORE_VERSION = "1.3.2"
-private const val APPCOMPAT_VERSION = "1.2.0"
+private const val APPCOMPAT_VERSION = "1.3.0-beta01"
 private const val CARDVIEW_VERSION = "1.0.0"
 private const val CAMERAX_VERSION = "1.0.0-rc02"
 private const val CAMERAX_VIEW_VERSION = "1.0.0-alpha21"
@@ -75,10 +76,17 @@ const val REDACTED_VERSION = "0.8.0"
 private const val DETEKT_VERSION = "1.0.1"
 private const val COMMONS_COMPRESS_VERSION = "1.20"
 private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
-private const val AGP_VERSION = "4.1.2"
+private const val AGP_VERSION = "4.1.3"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
+private const val AUTODESK_VERSION = "0.6.2"
+const val COMPOSE_VERSION = "1.0.0-beta02"
+private const val ACCOMPANIST_VERSION = "0.6.2"
+private const val BLOCKSET_VERSION = "0.1.2"
 
 object Libs {
+
+    const val Blockset = "org.drewcarlson:blockset:$BLOCKSET_VERSION"
+
     object WalletKit {
         const val CoreAndroid = "com.breadwallet.core:corecrypto-android:$WALLETKIT_VERSION"
     }
@@ -187,11 +195,14 @@ object Libs {
         const val StdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
         const val Test = "org.jetbrains.kotlin:kotlin-test:$KOTLIN_VERSION"
         const val TestJunit = "org.jetbrains.kotlin:kotlin-test-junit:$KOTLIN_VERSION"
+        const val TestCommon = "org.jetbrains.kotlin:kotlin-test-common:$KOTLIN_VERSION"
+        const val TestAnnotationsCommon = "org.jetbrains.kotlin:kotlin-test-annotations-common:$KOTLIN_VERSION"
     }
 
     object Kotlinx {
         const val DateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$KOTLINX_DATETIME_VERSION"
         const val SerializationRuntime = "org.jetbrains.kotlinx:kotlinx-serialization-json:$KOTLINX_SERIALIZATION_VERSION"
+        const val Atomicfu = "org.jetbrains.kotlinx:atomicfu:$KOTLINX_ATOMICFU_VERSION"
     }
 
     object Ktor {
@@ -254,5 +265,18 @@ object Libs {
 
     object Detekt {
         const val Formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$DETEKT_VERSION"
+    }
+
+    object AutoDesk {
+        const val CoroutineWorker = "com.autodesk:coroutineworker:$AUTODESK_VERSION"
+    }
+
+    object Compose {
+        const val Ui = "androidx.compose.ui:ui:$COMPOSE_VERSION"
+        const val Tooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
+        const val Foundation = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
+        const val Material = "androidx.compose.material:material:$COMPOSE_VERSION"
+        const val MaterialIcons = "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
+        const val AccompanistPicasso = "dev.chrisbanes.accompanist:accompanist-picasso:$ACCOMPANIST_VERSION"
     }
 }

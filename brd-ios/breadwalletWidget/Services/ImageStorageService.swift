@@ -62,7 +62,16 @@ private extension DefaultImageStoreService {
     func needsToRefreshImages() -> Bool {
         let defautls = UserDefaults.standard
         let lastVersion = defautls.string(forKey: Constant.refreshedVersionKey) ?? ""
-        return lastVersion != currentVersionString() && isRunningInWidgetExtension()
+        return (lastVersion != currentVersionString() ||
+            (!decompressedAssetExists())) &&
+            isRunningInWidgetExtension()
+    }
+
+    func decompressedAssetExists() -> Bool {
+        let path = bgFolder().appendingPathComponent("btc.png").path
+        let pathNoBg = bgFolder().appendingPathComponent("btc.png").path
+        return FileManager.default.fileExists(atPath: path) &&
+            FileManager.default.fileExists(atPath: pathNoBg)
     }
     
     func markFilesExtracted() {

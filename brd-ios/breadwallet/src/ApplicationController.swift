@@ -9,6 +9,11 @@
 import UIKit
 import WalletKit
 import UserNotifications
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
+
+
 
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
@@ -84,6 +89,10 @@ class ApplicationController: Subscriber, Trackable {
         Reachability.addDidChangeCallback({ isReachable in
             self.isReachable = isReachable
         })
+
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
     
     private func bumpLaunchCount() {
@@ -111,6 +120,9 @@ class ApplicationController: Subscriber, Trackable {
         })
         
         Store.subscribe(self, name: .didWipeWallet) { [unowned self] _ in
+            if let modalPresenter = self.modalPresenter {
+                Store.unsubscribe(modalPresenter)
+            }
             self.modalPresenter = nil
             self.rootNavigationController?.viewControllers = []
             
@@ -226,6 +238,10 @@ class ApplicationController: Subscriber, Trackable {
         Backend.kvStore?.syncAllKeys { error in
             print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
             Store.trigger(name: .didSyncKVStore)
+        }
+
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

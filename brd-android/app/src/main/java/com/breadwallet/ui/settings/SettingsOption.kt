@@ -64,7 +64,6 @@ enum class SettingsOption {
     TOGGLE_RATE_APP_PROMPT,
     VIEW_LOGS,
     COPY_PAPER_KEY,
-    TOGGLE_TEZOS,
     METADATA_VIEWER,
 
     // BTC

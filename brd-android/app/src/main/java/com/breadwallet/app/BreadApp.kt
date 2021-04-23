@@ -39,6 +39,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.bdb.api.AndroidBdbAuthProvider
+import com.brd.api.AndroidBRDAuthProvider
+import com.brd.api.BRDApiClient
+import com.brd.bakerapi.BakersApiClient
+import com.brd.prefs.AndroidPreferences
+import com.brd.prefs.Preferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.BdbAuthInterceptor
 import com.breadwallet.breadbox.BreadBox
@@ -75,22 +81,20 @@ import com.breadwallet.tools.util.SupportManager
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.uigift.GiftBackup
 import com.breadwallet.ui.uigift.SharedPrefsGiftBackup
-import com.breadwallet.util.AddressResolverServiceLocator
-import com.breadwallet.util.CryptoUriParser
-import com.breadwallet.util.FioService
-import com.breadwallet.util.PayIdService
-import com.breadwallet.util.errorHandler
-import com.breadwallet.util.isEthereum
 import com.breadwallet.util.usermetrics.UserMetricsUtil
 import com.platform.APIClient
 import com.platform.HTTPServer
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import com.breadwallet.util.*
 import com.platform.interfaces.KVStoreProvider
 import com.platform.interfaces.MetaDataManager
 import com.platform.interfaces.WalletProvider
 import com.platform.sqlite.PlatformSqliteHelper
 import com.platform.tools.KVStoreManager
 import com.platform.tools.TokenHolder
+import drewcarlson.blockset.BdbService
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -167,7 +171,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             else -> listOf(
                 "bitcoin-mainnet:__native__",
                 "ethereum-mainnet:__native__",
-                "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
+                "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6",
+                "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
             )
         }
 
@@ -329,8 +334,28 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             FioService(instance())
         }
 
+        bind<HttpClient>() with singleton {
+            HttpClient(OkHttp) {
+                engine {
+                    config {
+                        retryOnConnectionFailure(true)
+                    }
+                }
+            }
+        }
+
+        bind<UnstoppableDomainService>() with singleton {
+            UnstoppableDomainService(
+                BdbService.create(
+                    instance(),
+                    authProvider = AndroidBdbAuthProvider(instance())
+                )
+            )
+        }
+
         bind<AddressResolverServiceLocator>() with singleton {
             AddressResolverServiceLocator(
+                instance(),
                 instance(),
                 instance()
             )
@@ -383,6 +408,19 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 instance(),
                 instance()
             )
+        }
+
+        bind<BRDApiClient>() with singleton {
+            BRDApiClient.create(AndroidBRDAuthProvider(instance()))
+        }
+
+        bind<Preferences>() with singleton {
+            val prefs = getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE)
+            AndroidPreferences(prefs)
+        }
+
+        bind<BakersApiClient>() with singleton {
+            BakersApiClient.create(instance())
         }
     }
 
@@ -518,15 +556,16 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private fun createGiftBackupEncryptedPrefs(): SharedPreferences? = createEncryptedPrefs(ENCRYPTED_GIFT_BACKUP_FILE)
 
     private fun createEncryptedPrefs(fileName: String): SharedPreferences? {
-        val masterKeys = runCatching {
+        val masterKeys = try {
             MasterKey.Builder(this)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             BRReportsManager.error("Failed to create Master Keys", e)
-        }.getOrNull() ?: return null
+            return null
+        }
 
-        return runCatching {
+        return try {
             EncryptedSharedPreferences.create(
                 this@BreadApp,
                 fileName,
@@ -534,9 +573,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             BRReportsManager.error("Failed to create Encrypted Shared Preferences", e)
-        }.getOrNull()
+            null
+        }
     }
 
     override fun getCameraXConfig(): CameraXConfig {
@@ -545,7 +585,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
     @VisibleForTesting
     fun clearApplicationData() {
-        runCatching {
+        try {
             startedScope.coroutineContext.cancelChildren()
             applicationScope.coroutineContext.cancelChildren()
             val breadBox = direct.instance<BreadBox>()
@@ -561,7 +601,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 .delete(PlatformSqliteHelper.KV_STORE_TABLE_NAME, null, null)
 
             getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE).edit { clear() }
-        }.onFailure { e ->
+        } catch (e: Throwable) {
             logError("Failed to clear application data", e)
         }
     }

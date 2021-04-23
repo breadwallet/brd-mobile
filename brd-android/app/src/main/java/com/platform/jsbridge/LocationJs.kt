@@ -24,6 +24,7 @@
  */
 package com.platform.jsbridge
 
+import android.annotation.SuppressLint
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -59,23 +60,24 @@ class LocationJs(
     private val locationUpdateChannel = BroadcastChannel<Location>(BUFFERED)
 
     private val networkListener = object : DefaultListener() {
-        override fun onLocationChanged(location: Location?) {
-            location?.run(locationUpdateChannel::offer)
+        override fun onLocationChanged(location: Location) {
+            location.run(locationUpdateChannel::offer)
         }
     }
 
     private val gpsListener = object : DefaultListener() {
-        override fun onLocationChanged(location: Location?) {
-            location?.run(locationUpdateChannel::offer)
+        override fun onLocationChanged(location: Location) {
+            location.run(locationUpdateChannel::offer)
         }
     }
 
     private val passiveListener = object : DefaultListener() {
-        override fun onLocationChanged(location: Location?) {
-            location?.run(locationUpdateChannel::offer)
+        override fun onLocationChanged(location: Location) {
+            location.run(locationUpdateChannel::offer)
         }
     }
 
+    @SuppressLint("MissingPermission")
     @JavascriptInterface
     fun getLocation() = promise.create {
         checkNotNull(locationManager)
@@ -123,7 +125,7 @@ class LocationJs(
     }
 
     private open class DefaultListener : LocationListener {
-        override fun onLocationChanged(location: Location?) = Unit
+        override fun onLocationChanged(location: Location) = Unit
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) = Unit
         override fun onProviderEnabled(provider: String) = Unit
         override fun onProviderDisabled(provider: String) = Unit

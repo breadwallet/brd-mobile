@@ -308,7 +308,7 @@ class WebController(
                     binding.webView.loadUrl(url)
                 }
             }
-            "POST" -> binding.webView.postUrl(url, body?.toByteArray())
+            "POST" -> binding.webView.postUrl(url, body?.toByteArray() ?: byteArrayOf())
             else -> error("Unexpected method: $method")
         }
     }

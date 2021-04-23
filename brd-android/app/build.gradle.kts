@@ -3,6 +3,7 @@ import brd.Libs
 import brd.appetize.AppetizePlugin
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.google.firebase.appdistribution.gradle.AppDistributionExtension
+import io.gitlab.arturbosch.detekt.detekt
 
 plugins {
     id("com.android.application")
@@ -13,14 +14,18 @@ plugins {
 }
 
 plugins.apply(AppetizePlugin::class)
-apply(from = file("../gradle/google-services.gradle"))
-apply(from = file("../gradle/copy-font-files.gradle"))
+apply(from = rootProject.file("gradle/google-services.gradle"))
+apply(from = rootProject.file("gradle/copy-font-files.gradle"))
 
 val BDB_CLIENT_TOKEN: String by project
 val useGoogleServices: Boolean by ext
 
 redacted {
     replacementString.set("***")
+}
+
+detekt {
+    ignoreFailures = true
 }
 
 android {
@@ -42,7 +47,7 @@ android {
         create("FakeSigningConfig") {
             keyAlias = "key0"
             keyPassword = "qwerty"
-            storeFile = file("../FakeSigningKey")
+            storeFile = file("FakeSigningKey")
             storePassword = "qwerty"
         }
     }
@@ -75,7 +80,7 @@ android {
         lintConfig = file("lint.xml")
         isQuiet = true
         isExplainIssues = true
-        isAbortOnError = true
+        isAbortOnError = false
         isIgnoreWarnings = false
         isCheckReleaseBuilds = false
         disable("MissingTranslation")
@@ -136,10 +141,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":cosmos-bundled"))
     implementation(project(":brd-android:app-core"))
-    implementation(project(":brd-android:ui:ui-common"))
-    implementation(project(":brd-android:ui:ui-staking"))
-    implementation(project(":brd-android:ui:ui-gift"))
     implementation(Libs.WalletKit.CoreAndroid)
 
     // AndroidX

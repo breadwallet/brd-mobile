@@ -202,22 +202,24 @@ class RatesFetcher(
             .url(url)
             .build()
         val res = withContext(Dispatchers.IO) {
-            runCatching {
+            try {
                 okhttp.newCall(request).execute()
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to fetch data", e)
+                null
             }
-        }.getOrNull()
+        }
 
         return if (res == null || !res.isSuccessful) {
             emptyMap()
         } else {
-            val json = runCatching {
+            val json = try {
                 val bodyString = checkNotNull(res.body).string()
                 JSONObject(bodyString)
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to parse response body", e)
-            }.getOrNull()
+                null
+            }
 
             if (json == null) {
                 emptyMap()
@@ -250,22 +252,24 @@ class RatesFetcher(
             .url(url)
             .build()
         val res = withContext(Dispatchers.IO) {
-            runCatching {
+            try {
                 okhttp.newCall(request).execute()
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to fetch data", e)
+                null
             }
-        }.getOrNull()
+        }
 
         return if (res == null || !res.isSuccessful) {
             emptyList()
         } else {
-            val json = runCatching {
+            val json = try {
                 val bodyString = checkNotNull(res.body).string()
                 JSONObject(bodyString)
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to parse response body", e)
-            }.getOrNull()
+                null
+            }
 
             if (json == null) {
                 emptyList()
@@ -308,22 +312,24 @@ class RatesFetcher(
             .url(url)
             .build()
         val res = withContext(Dispatchers.IO) {
-            runCatching {
+            try {
                 okhttp.newCall(request).execute()
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to fetch data", e)
+                null
             }
-        }.getOrNull()
+        }
 
         return if (res == null || !res.isSuccessful) {
             MarketDataResult.Failure.Fetch
         } else {
-            val json = runCatching {
+            val json = try {
                 val bodyString = checkNotNull(res.body).string()
                 JSONObject(bodyString)
-            }.onFailure { e ->
+            } catch (e: Throwable) {
                 logError("Failed to parse response body", e)
-            }.getOrNull()
+                null
+            }
 
             if (json == null) {
                 MarketDataResult.Failure.BadData

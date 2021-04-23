@@ -222,7 +222,7 @@
     <!-- Network Fee: (ETH) -->
     <string name="Confirmation.feeLabelETH">网络费 (ETH):</string>
     <!-- Label for Hedera Memo field on transaction confirmation screen -->
-    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <string name="Confirmation.hederaMemo">赫德拉回忆录</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">处理时间：预计此交易将在 %1$s 后完成。</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -233,12 +233,27 @@
     <string name="Confirmation.to">至</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">费用总计：</string>
+    <string name="ConfirmGift.paperWalletAmount">纸钱包金额</string>
+    <string name="ConfirmGift.processingTime">在网络上验证此纸钱包可能最多需要60分钟</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">输入的单词与您的恢复短语不匹配。请再试一遍。</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">为确保所有内容均正确记录，请从您的恢复短语中输入以下单词。</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">单词#%1$s</string>
+    <string name="CreateGift.amountLabel">选择金额（美元）</string>
+    <string name="CreateGift.create">创建</string>
+    <string name="CreateGift.customAmountHint">自定义金额（最高$ 500）</string>
+    <string name="CreateGift.description">我们将创建一个所谓的</string>
+    <string name="CreateGift.inputAmountError">您必须选择礼物金额。</string>
+    <string name="CreateGift.inputRecipientNameError">您必须输入收件人的姓名。</string>
+    <string name="CreateGift.insufficientBalanceError">您没有足够的资金来发送礼物。</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">您的资金不足，无法发送此数量的礼物。</string>
+    <string name="CreateGift.recipientName">收件人的名字</string>
+    <string name="CreateGift.serverError">发生服务器错误。请稍后再试。</string>
+    <string name="CreateGift.subtitle">即使没有钱包，也可以将比特币发送给某人。</string>
+    <string name="CreateGift.title">送出比特币的礼物</string>
+    <string name="CreateGift.unexpectedError">一个意料之外的问题发生了。请联系支持。</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">同意</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">消息发送不可用</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">未识别出指纹。请再试一次。</string>
+    <string name="ExportConfirmation.cancel">取消</string>
+    <string name="ExportConfirmation.continue">继续</string>
+    <string name="ExportConfirmation.message">这将生成一个CSV文件，其中包括来自所有启用的钱包的所有已完成的交易。</string>
+    <string name="ExportConfirmation.title">出口交易？</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">这将生成一个CSV文件，其中包括来自所有启用的钱包的所有已完成的交易。</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">出口转移</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">无法导出CSV文件，请重试。</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">导出失败</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">出口交易？</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">您可以在 %1$s 自定义面部识别支出限额。</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">启用 SegWit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">您喜欢 BRD 吗？</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">将交易记录导出为CSV</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">面部识别支出限额</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">奖励</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">分享匿名数据</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">与小部件共享投资组合数据</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">同步区块链</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">共享数据？</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">共享匿名数据？</string>
+    <string name="ShareGift.approximateTotal">大约合计</string>
+    <string name="ShareGift.footerMessage1">索赔时将从总费用中扣除网络费用。\n实际价值取决于比特币的当前价格。</string>
+    <string name="ShareGift.footerMessage2">下载适用于iPhone或Android的BRD应用程序。\n有关更多信息，请访问brd.com/gift</string>
+    <string name="ShareGift.tagLine">有人给了你比特币！</string>
+    <string name="ShareGift.walletName">比特币</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+选择贝克</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">可用空间</string>
+    <string name="Staking.changeValidator">改变</string>
+    <string name="Staking.descriptionTezos">将您的Tezos帐户委托给验证程序以赚取奖励，同时保持对硬币的完全安全性和控制力。</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">费用：</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">交易待处理中...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">移除</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">美东时间。投资报酬率</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">选择XTZ代表</string>
+    <string name="Staking.stake">赌注</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">积极的</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">不活跃</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">待办的</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">放样</string>
+    <string name="Staking.stakingTo">下注到%1$s</string>
+    <string name="Staking.statusPending">待定</string>
+    <string name="Staking.statusStaked">臭！</string>
+    <string name="Staking.subTitle">持有时赚钱</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">特佐斯（Tezos）和沙丘（Dune）</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">多资产池</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">仅限Tezos</string>
+    <string name="Staking.title">赌注%1$s</string>
+    <string name="Staking.unstake">放心</string>
+    <string name="Staking.validatorHint">输入验证人地址</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">再次写下恢复短语</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">正在发送至 %1$s</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">已发送至 %1$s</string>
+    <string name="Transaction.stakingTo">下注到%1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">期初余额：%1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">代币转让费用： %1$s</string>
+    <string name="Transaction.toRecipient">至%1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">等待确认中。部分商家需要进行确认以完成交易。预估时间：1-2 小时。</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,8 +1211,10 @@
     <string name="TransactionDetails.gasLimitHeader">燃料上限</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">燃料价格</string>
+    <string name="TransactionDetails.gift">礼物</string>
+    <string name="TransactionDetails.giftedTo">送给%1$s</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
-    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <string name="TransactionDetails.hederaMemo">赫德拉回忆录</string>
     <!-- Hide Details button -->
     <string name="TransactionDetails.hideDetails">隐藏详细信息</string>
     <!-- Label showing the transaction was started (initialized) -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">正在接收，来自 %1$s</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">正在通过 %1$s 接收</string>
+    <string name="TransactionDetails.reclaim">回收</string>
+    <string name="TransactionDetails.resend">重新发送</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">已发送 %1$s</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">放样</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet 更名为 BRD， 并增加了全新的界面和功能。如果您需要帮助，请使用在大多数设备屏幕右上角的(?)</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">欢迎使用BRD！</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">随时了解您最喜欢的加密资产</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">随时了解您喜欢的加密资产</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">资产清单</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">资产</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">系统自动亮/暗</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">黑色的</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">蓝色</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">灰色的</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">绿色的</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">橘子</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">粉色的</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">基本的</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">基本的</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">紫色的</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">红色的</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">次要的</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">次要的</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">第三</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">第三</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">白色的</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">黄色的</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">主题背景颜色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">基本颜色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">货币颜色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">系统颜色</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">主题文字颜色</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">在应用程式中启用\n优先</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">随时了解您的投资组合</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">文件夹\n概括</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">文件夹</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">您确认要删除此钱包吗？</string>
     <!-- Wipe wallet alert title -->

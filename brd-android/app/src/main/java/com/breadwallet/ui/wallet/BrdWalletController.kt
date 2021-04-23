@@ -123,7 +123,7 @@ class BrdWalletController : WalletController("BRD") {
                 mAppBarLayoutRoot!!.setExpanded(false, true)
             }
             mCollapseRewardsDelayHandler.postDelayed(
-                mCollapseRewardsRunnable,
+                mCollapseRewardsRunnable!!,
                 COLLAPSE_REWARDS_DELAY_MILLISECONDS.toLong()
             )
         }
@@ -138,7 +138,7 @@ class BrdWalletController : WalletController("BRD") {
     override fun onDetach(view: View) {
         super.onDetach(view)
         if (mCollapseRewardsRunnable != null) {
-            mCollapseRewardsDelayHandler.removeCallbacks(mCollapseRewardsRunnable)
+            mCollapseRewardsDelayHandler.removeCallbacks(mCollapseRewardsRunnable!!)
         }
         mAppBarLayoutRoot!!.setExpanded(false, false)
     }

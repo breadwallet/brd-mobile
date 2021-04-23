@@ -1,12 +1,13 @@
 plugins {
-    kotlin("multiplatform") /*version "1.4.31"*/ apply false
-    kotlin("plugin.serialization") version "1.4.31" apply false
+    kotlin("multiplatform") version brd.KOTLIN_VERSION apply false
+    kotlin("plugin.serialization") version brd.KOTLIN_VERSION apply false
     id("org.jetbrains.dokka") version "1.4.20"
 }
 
 allprojects {
     repositories {
         mavenCentral()
+        google()
         maven(url = "https://kotlin.bintray.com/kotlinx/") // TODO: required for kotlinx.datetime
         maven(url = "https://dl.bintray.com/kotlin/dokka") // TODO: required for dokka
     }

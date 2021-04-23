@@ -71,6 +71,11 @@ sealed class AddressType {
     sealed class Resolvable : AddressType() {
         object PayId : Resolvable()
         object Fio : Resolvable()
+
+        sealed class UnstoppableDomain : Resolvable() {
+            object ENS : UnstoppableDomain()
+            object CNS : UnstoppableDomain()
+        }
     }
 }
 
@@ -577,6 +582,11 @@ object SendSheet {
                 val transfer: Transfer
             ) : PaymentProtocol()
         }
+
+        data class TrackEvent(
+            val eventString: String,
+            val attrs: Map<String, String>
+        ) : F()
     }
 }
 

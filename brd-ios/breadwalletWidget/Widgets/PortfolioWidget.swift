@@ -18,8 +18,11 @@ struct PortfolioProvider: IntentTimelineProvider {
     typealias Intent = PortfolioIntent
     
     let service: WidgetService = {
-        DefaultWidgetService(widgetDataShareService: DefaultWidgetDataShareService(),
-                             imageStoreService: DefaultImageStoreService())
+        DefaultWidgetService(
+            widgetDataShareService: DefaultWidgetDataShareService(),
+            imageStoreService: DefaultImageStoreService(),
+            cacheService: DefaultCacheService()
+        )
     }()
     
     func placeholder(in context: Context) -> PortfolioEntry {
@@ -41,7 +44,7 @@ struct PortfolioProvider: IntentTimelineProvider {
 
             switch result {
             case let .success((currencies, info)):
-                entry = PortfolioEntry(date: Date(),
+                entry = PortfolioEntry(date: service.lastRefreshed,
                                        intent: configuration,
                                        currencies: currencies,
                                        quoteCurrencyCode: quote,
@@ -86,7 +89,8 @@ struct PortfolioEntry: TimelineEntry {
         }
         
         let configuration = Configuration(intent: intent,
-                                          quoteCurrencyCode: quoteCurrencyCode)
+                                          quoteCurrencyCode: quoteCurrencyCode,
+                                          updated: date)
 
         viewModel = PortfolioViewModel(config: configuration,
                                        currencies: currencies,

@@ -66,6 +66,7 @@ protocol WalletAuthenticator {
 
     var apiAuthKey: Key? { get }
     var apiUserAccount: [AnyHashable: Any]? { get set }
+    var bdbAuthToken: JWT? { get set }
 
     func authenticateWithBlockchainDB(client: AuthenticationClient, completion: @escaping (APIAuthenticationResult) -> Void)
 
@@ -408,7 +409,7 @@ extension KeyStore: WalletAuthenticator {
         }
     }
 
-    private var bdbAuthToken: JWT? {
+    var bdbAuthToken: JWT? {
         get {
             do {
                 guard let tokenData: Data = try keychainItem(key: KeychainKey.bdbAuthToken) else { return nil }
@@ -946,6 +947,7 @@ extension KeyStore {
 
 struct NoAuthWalletAuthenticator: WalletAuthenticator {
     
+    var bdbAuthToken: JWT? = nil
     var apiUserAccount: [AnyHashable: Any]?
     
     var noWallet: Bool { return true }

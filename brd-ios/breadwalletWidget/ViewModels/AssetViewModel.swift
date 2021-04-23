@@ -89,7 +89,7 @@ extension AssetViewModel {
             price: AssetViewModel.formattedPrice(info?.price, config: config),
             pctChange: AssetViewModel.formattedPctChange(info?.change24hr),
             marketCap: info?.marketCap?.int.abbreviated ?? "-",
-            updated: WidgetFormatter.time.string(from: Date()),
+            updated: WidgetFormatter.time.string(from: config.updated),
             showUpdateTime: config.showUpdatedTime,
             showSeparators: config.showSeparators,
             bgColor: bgColor,
@@ -194,8 +194,11 @@ extension AssetViewModel {
     }
     
     static func urlScheme(for currency: Currency?) -> URL {
-        let urlString = (currency?.urlSchemes?.first ?? "") + "://"
-        return URL(string: urlString) ?? URL(string: "bread://")!
+        var urlString = "bread://widget.open"
+        if let code = currency?.code {
+            urlString += "?currency=" + code
+        }
+        return URL(string: urlString)!
     }
 }
 

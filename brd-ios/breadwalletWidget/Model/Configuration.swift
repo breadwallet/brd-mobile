@@ -23,6 +23,7 @@ struct Configuration {
     let chartLocation: ChartLocation
     let chartUpColor: ColorOption?
     let chartDownColor: ColorOption?
+    let updated: Date
 
     var anyAsset: AssetOption {
         return assets[0] // TODO: Return mock for empty asset
@@ -33,10 +34,11 @@ struct Configuration {
 
 extension Configuration {
 
-    init(intent: AssetIntent, quoteCurrencyCode: String) {
+    init(intent: AssetIntent, quoteCurrencyCode: String, updated: Date) {
         assets = [intent.asset].compactMap { $0 }
         interval = intent.interval
         self.quoteCurrencyCode = quoteCurrencyCode
+        self.updated = updated
         style = intent.style
         textColor = intent.textColor
         logoStyle = intent.logoStyle
@@ -53,10 +55,11 @@ extension Configuration {
 
 extension Configuration {
 
-    init(intent: AssetListIntent, quoteCurrencyCode: String) {
+    init(intent: AssetListIntent, quoteCurrencyCode: String, updated: Date) {
         assets = intent.assets ?? []
         interval = intent.interval
         self.quoteCurrencyCode = quoteCurrencyCode
+        self.updated = updated
         style = .maxInfo
         textColor = intent.textColor
         logoStyle = intent.logoStyle
@@ -73,10 +76,11 @@ extension Configuration {
 
 extension Configuration {
 
-    init(intent: PortfolioIntent, quoteCurrencyCode: String) {
+    init(intent: PortfolioIntent, quoteCurrencyCode: String, updated: Date) {
         assets = intent.assets ?? []
         interval = intent.interval
         self.quoteCurrencyCode = quoteCurrencyCode
+        self.updated = updated
         style = .maxInfo
         textColor = intent.textColor
         logoStyle = intent.logoStyle

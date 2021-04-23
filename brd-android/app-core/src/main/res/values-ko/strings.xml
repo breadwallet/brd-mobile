@@ -222,7 +222,7 @@
     <!-- Network Fee: (ETH) -->
     <string name="Confirmation.feeLabelETH">네트워크 요금 (ETH):</string>
     <!-- Label for Hedera Memo field on transaction confirmation screen -->
-    <string name="Confirmation.hederaMemo">Hedera Memo</string>
+    <string name="Confirmation.hederaMemo">헤 데라 메모</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">처리 시간: 이 거래는 %1$s에 완료될 것으로 예상됩니다.</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -233,12 +233,27 @@
     <string name="Confirmation.to">수취인</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">총 금액:</string>
+    <string name="ConfirmGift.paperWalletAmount">종이 지갑 금액</string>
+    <string name="ConfirmGift.processingTime">네트워크에서이 종이 지갑을 확인하는 데 최대 60 분이 걸릴 수 있습니다.</string>
     <!-- Confirm paper phrase error message -->
     <string name="ConfirmPaperPhrase.error">입력 한 단어가 복구 문구와 일치하지 않습니다. 다시 시도하십시오.</string>
     <!-- Confirm paper phrase view label. -->
     <string name="ConfirmPaperPhrase.label">모든 것이 올바르게 기록되었는지 확인하려면 복구 문구에서 다음 단어를 입력하십시오.</string>
     <!-- Word label eg. Word #1, Word #2 -->
     <string name="ConfirmPaperPhrase.word">단어 #%1$s</string>
+    <string name="CreateGift.amountLabel">금액 선택 ($ USD)</string>
+    <string name="CreateGift.create">창조하다</string>
+    <string name="CreateGift.customAmountHint">맞춤 금액 (최대 $ 500)</string>
+    <string name="CreateGift.description">우리는</string>
+    <string name="CreateGift.inputAmountError">선물 금액을 선택해야합니다.</string>
+    <string name="CreateGift.inputRecipientNameError">받는 사람의 이름을 입력해야합니다.</string>
+    <string name="CreateGift.insufficientBalanceError">선물을 보낼 자금이 부족합니다.</string>
+    <string name="CreateGift.insufficientBalanceForAmountError">이 금액의 선물을 보낼 수있는 자금이 부족합니다.</string>
+    <string name="CreateGift.recipientName">수령인의 이름</string>
+    <string name="CreateGift.serverError">서버 오류가 발생했습니다. 나중에 다시 시도하세요.</string>
+    <string name="CreateGift.subtitle">지갑이 없어도 누군가에게 비트 코인을 보냅니다.</string>
+    <string name="CreateGift.title">비트 코인 선물하기</string>
+    <string name="CreateGift.unexpectedError">예기치 않은 오류가 발생했습니다. 지원팀에 문의하세요.</string>
     <!-- Agree to legal terms button -->
     <string name="Crowdsale.agree">동의하기</string>
     <!-- As in "(tap here to) buy (some) tokens" -->
@@ -275,6 +290,20 @@
     <string name="ErrorMessages.messagingUnavailableTitle">메시지 사용불가</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">지문 인식되지 않음. 다시 시도해 주세요.</string>
+    <string name="ExportConfirmation.cancel">취소</string>
+    <string name="ExportConfirmation.continue">계속하다</string>
+    <string name="ExportConfirmation.message">이렇게하면 활성화 된 모든 지갑에서 완료된 모든 트랜잭션이 포함 된 CSV 파일이 생성됩니다.</string>
+    <string name="ExportConfirmation.title">수출 거래?</string>
+    <!-- "Export transfers body" -->
+    <string name="ExportTransfers.body">이렇게하면 활성화 된 모든 지갑에서 완료된 모든 트랜잭션이 포함 된 CSV 파일이 생성됩니다.</string>
+    <!-- "Export transfers button" -->
+    <string name="ExportTransfers.confirmExport">수출 송금</string>
+    <!-- "Export dialog error message" -->
+    <string name="ExportTransfers.exportFailedBody">CSV 파일을 내 보내지 못했습니다. 다시 시도하십시오.</string>
+    <!-- "Export dialog error title" -->
+    <string name="ExportTransfers.exportFailedTitle">내보내기 실패</string>
+    <!-- "Export transfers header" -->
+    <string name="ExportTransfers.header">수출 거래?</string>
     <!-- You can customize your Face ID Spending Limit from the [menu] -->
     <string name="FaceIDSettings.customizeText">%1$s에서 페이스 ID 지출 한도를 사용자 설정할 수 있습니다.</string>
     <!-- Text describing the purpose of the Face ID settings in the BRD app. -->
@@ -916,6 +945,8 @@
     <string name="Settings.EnableSegwit">Segwit 활성화</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">브레드를 사용하고 있으신가요?</string>
+    <!-- Export transaction history menu item -->
+    <string name="Settings.exportTransfers">거래 내역을 CSV로 내보내기</string>
     <!-- Face ID spending limit label -->
     <string name="Settings.faceIdLimit">페이스 ID 지출 한도</string>
     <!-- Redeem the funds stored on this private key. -->
@@ -936,6 +967,8 @@
     <string name="Settings.rewards">보상</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">익명 데이터 공유</string>
+    <!-- "Enables sharing balance to widget" -->
+    <string name="Settings.shareWithWidget">위젯으로 포트폴리오 데이터 공유</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">블록체인 동기화</string>
     <!-- Settings title -->
@@ -962,6 +995,49 @@
     <string name="ShareData.header">데이터를 공유하시겠습니까?</string>
     <!-- Share data switch label. -->
     <string name="ShareData.toggleLabel">익명 데이터를 공유하시겠습니까?</string>
+    <string name="ShareGift.approximateTotal">대략적인 합계</string>
+    <string name="ShareGift.footerMessage1">청구시 총액에서 네트워크 요금이 공제됩니다.\n 실제 가치는 현재 비트 코인 가격에 따라 다릅니다.</string>
+    <string name="ShareGift.footerMessage2">iPhone 또는 Android 용 BRD 앱을 다운로드하십시오.\n 자세한 내용은 brd.com/gift를 방문하십시오.</string>
+    <string name="ShareGift.tagLine">누군가 당신에게 비트 코인을 선물했습니다!</string>
+    <string name="ShareGift.walletName">비트 코인</string>
+    <!-- Button label: select a baker -->
+    <string name="Staking.add">+ 베이커 선택</string>
+    <!-- Baker cell: Free Space field header -->
+    <string name="Staking.cellFreeSpaceHeader">자유 공간</string>
+    <string name="Staking.changeValidator">변화</string>
+    <string name="Staking.descriptionTezos">Tezos 계정을 검증 자에게 위임하여 코인에 대한 완전한 보안과 제어를 유지하면서 보상을 받으세요.</string>
+    <!-- Baker cell: Fee field header -->
+    <string name="Staking.feeHeader">회비:</string>
+    <!-- Status label: current staking transaction is pending -->
+    <string name="Staking.pendingTransaction">거래 보류 중 ...</string>
+    <!-- Button label: remove selected baker -->
+    <string name="Staking.remove">삭제</string>
+    <!-- Baker cell: ROI field header -->
+    <string name="Staking.roiHeader">동부 표준시. ROI</string>
+    <!-- Modal title: Select Baker modal -->
+    <string name="Staking.selectBakerTitle">XTZ 대리인 선택</string>
+    <string name="Staking.stake">말뚝</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingActiveFlag">유효한</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingInactiveFlag">비활성</string>
+    <!-- UI flag showing state of Tezos staking -->
+    <string name="Staking.stakingPendingFlag">보류 중</string>
+    <!-- Staking banner title -->
+    <string name="Staking.stakingTitle">스테이 킹</string>
+    <string name="Staking.stakingTo">%1$s 스테이 킹</string>
+    <string name="Staking.statusPending">보류 중</string>
+    <string name="Staking.statusStaked">스테이크!</string>
+    <string name="Staking.subTitle">잡고있는 동안 돈을 버십시오</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosDune">테 조스 &amp; 듄</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosMultiasset">다중 자산 풀</string>
+    <!-- Tezos XTZ baker asset type -->
+    <string name="Staking.tezosOnly">Tezos 전용</string>
+    <string name="Staking.title">%1$s 지분</string>
+    <string name="Staking.unstake">언 스테이크</string>
+    <string name="Staking.validatorHint">검증 인 주소 입력</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">복구 문구를 다시 기록</string>
     <!-- Paper key explanation text. -->
@@ -1086,10 +1162,12 @@
     <string name="Transaction.sendingTo">%1$s으로 보내기</string>
     <!-- sent to <address> -->
     <string name="Transaction.sentTo">%1$s으로 전송되었습니다</string>
+    <string name="Transaction.stakingTo">%1$s 스테이 킹</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">기초 잔액: %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">토큰 송금 수수료: %1$s</string>
+    <string name="Transaction.toRecipient">%1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">확인 대기 중. 일부 판매자는 트랜잭션을 완료하기 위해 확인을 요구합니다. 예상 소요 시간: 1~2시간.</string>
     <!-- e.g. I received money from an account. -->
@@ -1133,8 +1211,10 @@
     <string name="TransactionDetails.gasLimitHeader">Gas Limit</string>
     <!-- Tx detail field header -->
     <string name="TransactionDetails.gasPriceHeader">Gas Price</string>
+    <string name="TransactionDetails.gift">선물</string>
+    <string name="TransactionDetails.giftedTo">%1$s 에게 선물 함</string>
     <!-- Label for Hedera Memo field on transaction details screen -->
-    <string name="TransactionDetails.hederaMemo">Hedera Memo</string>
+    <string name="TransactionDetails.hederaMemo">헤 데라 메모</string>
     <!-- Hide Details button -->
     <string name="TransactionDetails.hideDetails">세부 정보 숨기기</string>
     <!-- Label showing the transaction was started (initialized) -->
@@ -1159,6 +1239,8 @@
     <string name="TransactionDetails.receivingFrom">%1$s(으)로부터 받는 중</string>
     <!-- receiving via <address> -->
     <string name="TransactionDetails.receivingVia">%1$s으로 수취 중</string>
+    <string name="TransactionDetails.reclaim">개심</string>
+    <string name="TransactionDetails.resend">재전송</string>
     <!-- "Sent [$5] to [address]" => This is the "Sent [$5]" part. -->
     <string name="TransactionDetails.sent">%1$s 보냄</string>
     <!-- Sent $5.00 -->
@@ -1253,6 +1335,7 @@
     <string name="Wallet.one_month">1m</string>
     <string name="Wallet.one_week">1w</string>
     <string name="Wallet.one_year">1y</string>
+    <string name="Wallet.stakingTitle">스테이 킹</string>
     <string name="Wallet.three_months">3m</string>
     <string name="Wallet.three_years">3y</string>
     <!-- Turn off fast sync confirmation question -->
@@ -1284,6 +1367,66 @@
     <string name="Welcome.body">Breadwallet이 이름을 BRD로 바꾸고 새롭게 단장하였으며 새로운 기능도 갖췄습니다.\n\n도움이 필요하시면 대부분 화면에서 우측 상단에 있는 (?)을(를) 클릭하십시오.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">BRD에 환영합니다!</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">좋아하는 암호화 자산으로 최신 상태 유지</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">좋아하는 암호화 자산으로 최신 상태 유지</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">자산 목록</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">유산</string>
+    <!-- Name of color based on os theme light/dark -->
+    <string name="Widget.Color.autoLightDark">시스템 자동 밝음 / 어두움</string>
+    <!-- Name of color - Black -->
+    <string name="Widget.Color.black">검정</string>
+    <!-- Name of color - Blue -->
+    <string name="Widget.Color.blue">푸른</string>
+    <!-- Name of color - Gray -->
+    <string name="Widget.Color.gray">회색</string>
+    <!-- Name of color - Green -->
+    <string name="Widget.Color.green">초록</string>
+    <!-- Name of color - Orange -->
+    <string name="Widget.Color.orange">주황색</string>
+    <!-- Name of color - Pink -->
+    <string name="Widget.Color.pink">분홍</string>
+    <!-- Name of color - Primary Background -->
+    <string name="Widget.Color.primaryBackground">일 순위</string>
+    <!-- Name of color - Primary Text -->
+    <string name="Widget.Color.primaryText">일 순위</string>
+    <!-- Name of color - Purple -->
+    <string name="Widget.Color.purple">보라색</string>
+    <!-- Name of color - Red -->
+    <string name="Widget.Color.red">빨간</string>
+    <!-- Name of color - Secondary Background -->
+    <string name="Widget.Color.secondaryBackground">중고등 학년</string>
+    <!-- Name of color - Secondary Text -->
+    <string name="Widget.Color.secondaryText">중고등 학년</string>
+    <!-- Name of color - Tertiary Background -->
+    <string name="Widget.Color.tertiaryBackground">제삼기</string>
+    <!-- Name of color - Tertiary Text -->
+    <string name="Widget.Color.tertiaryText">제삼기</string>
+    <!-- Name of color - White -->
+    <string name="Widget.Color.white">하얀</string>
+    <!-- Name of color - Yellow -->
+    <string name="Widget.Color.yellow">노랑</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBackground">테마 배경색</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionBasic">기본 색상</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionCurrency">통화 색상</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionSystem">시스템 색상</string>
+    <!-- Title of color grouping in widget color picker -->
+    <string name="Widget.colorSectionText">테마 텍스트 색상</string>
+    <!-- Portfolio widget description if data sharing is disabled -->
+    <string name="Widget.enablePortfolio">앱에서 사용\n 선호도</string>
+    <!-- Portfolio description -->
+    <string name="Widget.portfolioDescription">포트폴리오로 최신 상태 유지</string>
+    <!-- Portfolio widget description if data sharing is enabled -->
+    <string name="Widget.portfolioSummary">포트폴리오\n 요약</string>
+    <!-- Portfolio widget title -->
+    <string name="Widget.portfolioTitle">포트폴리오</string>
     <!-- Wipe wallet alert message -->
     <string name="WipeWallet.alertMessage">정말 이 월렛을 삭제할까요?</string>
     <!-- Wipe wallet alert title -->

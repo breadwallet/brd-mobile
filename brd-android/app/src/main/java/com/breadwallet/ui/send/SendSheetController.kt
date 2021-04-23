@@ -265,15 +265,23 @@ class SendSheetController(args: Bundle? = null) :
             ifChanged(M::addressType, M::isResolvingAddress) {
                 addressProgressBar.isVisible = isResolvingAddress
                 if (addressType is AddressType.Resolvable) {
-                    inputLayoutAddress.hint = res.getString(
-                        if (addressType is AddressType.Resolvable.PayId) R.string.Send_payId_toLabel else R.string.Send_fio_toLabel
+                    resolvableIcon.setImageResource(
+                        when (addressType) {
+                            AddressType.Resolvable.UnstoppableDomain.CNS -> R.drawable.udomainicon
+                            AddressType.Resolvable.UnstoppableDomain.ENS -> R.drawable.ic_ens_mod
+                            AddressType.Resolvable.PayId -> R.drawable.ic_paystring_logo_light_bkgd
+                            else -> R.drawable.ic_fio
+                        }
                     )
+                    resolvableIcon.isVisible = true
                     inputLayoutAddress.helperText = if (isResolvingAddress) null else {
                         val first = targetAddress.take(RESOLVED_ADDRESS_CHARS)
                         val last = targetAddress.takeLast(RESOLVED_ADDRESS_CHARS)
                         "$first...$last"
                     }
+                    inputLayoutAddress.hint = ""
                 } else {
+                    resolvableIcon.isVisible = false
                     inputLayoutAddress.helperText = null
                     inputLayoutAddress.hint = res.getString(R.string.Send_toLabel)
                 }
