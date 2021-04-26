@@ -47,7 +47,7 @@ data class Baker(
     val serviceHealth: ServiceHealth,
     val payoutTiming: PayoutTiming,
     val payoutAccuracy: PayoutAccuracy,
-    val audit: String
+    val audit: String? = null
 )
 
 @Serializable

@@ -93,6 +93,8 @@ import com.platform.sqlite.PlatformSqliteHelper
 import com.platform.tools.KVStoreManager
 import com.platform.tools.TokenHolder
 import drewcarlson.blockset.BdbService
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -332,9 +334,22 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             FioService(instance())
         }
 
+        bind<HttpClient>() with singleton {
+            HttpClient(OkHttp) {
+                engine {
+                    config {
+                        retryOnConnectionFailure(true)
+                    }
+                }
+            }
+        }
+
         bind<UnstoppableDomainService>() with singleton {
             UnstoppableDomainService(
-                BdbService.create(authProvider = AndroidBdbAuthProvider(instance()))
+                BdbService.create(
+                    instance(),
+                    authProvider = AndroidBdbAuthProvider(instance())
+                )
             )
         }
 
@@ -405,7 +420,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<BakersApiClient>() with singleton {
-            BakersApiClient.create()
+            BakersApiClient.create(instance())
         }
     }
 

@@ -1,3 +1,4 @@
+import brd.hasAndroidSdK
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeOutputKind
 
@@ -5,6 +6,9 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
 }
+
+// Generates "local.properties" file with path to SDK (needed for buidling outside Android Studio)
+hasAndroidSdK()
 
 android {
     compileSdkVersion(brd.BrdRelease.ANDROID_COMPILE_SDK)
@@ -53,6 +57,11 @@ kotlin {
                 api(project(":cosmos-bakers-api-client"))
                 api(project(":cosmos-preferences"))
                 api(brd.Libs.Blockset)
+            }
+        }
+        named("androidMain") {
+            dependencies {
+                api(brd.Libs.Ktor.Client.OkHttpClientEngine)
             }
         }
     }
