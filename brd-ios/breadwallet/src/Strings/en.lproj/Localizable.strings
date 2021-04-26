@@ -871,6 +871,10 @@
 "Send.invalidAddressMessage" = "The destination address is not a valid %1$@ address.";
 /* Invalid address on pasteboard message */
 "Send.invalidAddressOnPasteboard" = "Pasteboard does not contain a valid %1$@ address.";
+/* Title for error when send request times out and we are not sure weather it succesfull or not. */
+"Send.sendError" = "Send Error";
+/* Error message when send request times out and we are not sure weather it succesfull or not. */
+"Send.timeOutBody" = "Timed out waiting for network response. Please wait 30 minutes for confirmation before retrying.";
 /* Invalid address alert title */
 "Send.invalidAddressTitle" = "Invalid Address";
 /* Is rescanning error message */
