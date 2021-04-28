@@ -24,6 +24,7 @@
  */
 package com.breadwallet.ui.pin
 
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.pin.InputPin.E
 import com.breadwallet.ui.pin.InputPin.F
 import com.breadwallet.ui.pin.InputPin.M
@@ -69,12 +70,15 @@ object InputPinUpdate : Update<M, E, F>, InputPinUpdateSpec {
         next(model, setOf(F.GoToDisabledScreen))
 
     override fun onPinSaved(model: M): Next<M, F> {
-        val effect = if (model.pinUpdateMode || model.skipWriteDownKey) {
-            F.GoToHome
+        val effects = if (model.pinUpdateMode || model.skipWriteDownKey) {
+            setOf(F.GoToHome)
         } else {
-            F.GoToWriteDownKey(model.onComplete)
-        } as F
-        return next(model, setOf(effect))
+            setOf(
+                F.GoToWriteDownKey(model.onComplete),
+                F.TrackEvent(EventUtils.EVENT_ONBOARDING_PIN_CREATED)
+            )
+        }
+        return next(model, effects)
     }
 
     override fun onPinSaveFailed(model: M): Next<M, F> {

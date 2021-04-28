@@ -1,8 +1,8 @@
 /**
  * BreadWallet
  *
- * Created by Pablo Budelli <pablo.budelli@breadwallet.com> on 9/23/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Created by Ahsan Butt <ahsan.butt@breadwallet.com> on 4/27/21.
+ * Copyright (c) 2021 breadwallet LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,32 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.breadwallet.ui.pin
+package com.breadwallet.ui.writedownkey
 
-import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.util.EventUtils
-import com.breadwallet.ui.pin.InputPin.E
-import com.breadwallet.ui.pin.InputPin.F
-import drewcarlson.mobius.flow.subtypeEffectHandler
+import com.spotify.mobius.First
+import com.spotify.mobius.Init
+import com.breadwallet.ui.writedownkey.WriteDownKey.M
+import com.breadwallet.ui.writedownkey.WriteDownKey.F
 
-fun createInputPinHandler(
-    userManager: BrdUserManager
-) = subtypeEffectHandler<F, E> {
-    addFunction<F.SetupPin> { effect ->
-        try {
-            userManager.configurePinCode(effect.pin)
-            E.OnPinSaved
-        } catch (e: Exception) {
-            E.OnPinSaveFailed
-        }
-    }
-
-    addFunction<F.CheckIfPinExists> {
-        E.OnPinCheck(userManager.hasPinCode())
-    }
-
-    addConsumer<F.TrackEvent> { (event) ->
-        EventUtils.pushEvent(event)
-    }
+object WriteDownKeyInit : Init<M, F> {
+    override fun init(model: M): First<M, F> =
+        First.first(model, setOf(F.TrackEvent(EventUtils.EVENT_PAPER_KEY_INTRO_APPEARED)))
 }
-

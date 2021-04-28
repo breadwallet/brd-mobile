@@ -115,6 +115,11 @@ public final class EventUtils {
     public static final String EVENT_FINAL_PAGE_BROWSE_FIRST = "onboarding.finalPage.browseFirst";
     public static final String EVENT_SKIP_BUTTON = "onboarding.skipButton";
     public static final String EVENT_BACK_BUTTON = "onboarding.backButton";
+    public static final String EVENT_ONBOARDING_PIN_CREATED = "onboarding.setPin.pinCreated";
+    public static final String EVENT_PAPER_KEY_INTRO_APPEARED = "onboarding.paperKeyIntro.appeared";
+    public static final String EVENT_PAPER_KEY_INTRO_DISMISSED = "onboarding.paperKeyIntro.dismissed";
+    public static final String EVENT_PAPER_KEY_INTRO_GENEREATE_KEY = "onboarding.paperKeyIntro.generatePaperKeyButton";
+    public static final String EVENT_ONBOARDING_COMPLETE = "onboarding.complete";
     public static final String EVENT_REWARDS_OPEN_WALLET = "rewards.openwallet";
     public static final String EVENT_REWARDS_BANNER = "rewards.banner";
     public static final String EVENT_ATTRIBUTE_CURRENCY = "currency";

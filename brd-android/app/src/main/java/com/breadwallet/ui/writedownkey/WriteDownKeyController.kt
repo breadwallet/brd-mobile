@@ -72,6 +72,7 @@ class WriteDownKeyController(args: Bundle? = null) :
 
     override val layoutId: Int = R.layout.controller_write_down
     override val defaultModel = M.createDefault(onComplete, requestAuth)
+    override val init = WriteDownKeyInit
     override val update = WriteDownKeyUpdate
     override val flowEffectHandler
         get() = createWriteDownKeyHandler(direct.instance())

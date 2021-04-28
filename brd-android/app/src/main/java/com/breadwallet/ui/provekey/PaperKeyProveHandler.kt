@@ -25,6 +25,7 @@
 package com.breadwallet.ui.provekey
 
 import com.breadwallet.tools.manager.BRSharedPrefs
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.provekey.PaperKeyProve.E
 import com.breadwallet.ui.provekey.PaperKeyProve.F
 import drewcarlson.mobius.flow.subtypeEffectHandler
@@ -33,5 +34,8 @@ fun createPaperKeyProveHandler() = subtypeEffectHandler<F, E> {
     addFunction<F.StoreWroteDownPhrase> {
         BRSharedPrefs.phraseWroteDown = true
         E.OnWroteDownKeySaved
+    }
+    addConsumer<F.TrackEvent> { (event) ->
+        EventUtils.pushEvent(event)
     }
 }

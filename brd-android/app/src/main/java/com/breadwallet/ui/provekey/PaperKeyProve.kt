@@ -98,5 +98,9 @@ object PaperKeyProve {
             val first: Boolean,
             val second: Boolean
         ) : F(), ViewEffect
+
+        data class TrackEvent(
+            val eventName: String
+        ) : F()
     }
 }

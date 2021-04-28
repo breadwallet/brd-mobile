@@ -109,5 +109,7 @@ object InputPin {
         data class GoToWriteDownKey(val onComplete: OnCompleteAction) : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.WriteDownKey(onComplete, false)
         }
+
+        data class TrackEvent(val event: String) : F()
     }
 }
