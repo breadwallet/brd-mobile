@@ -24,6 +24,7 @@
  */
 package com.breadwallet.ui.provekey
 
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.navigation.OnCompleteAction
 import com.breadwallet.ui.provekey.PaperKeyProve.E
 import com.breadwallet.ui.provekey.PaperKeyProve.F
@@ -88,7 +89,8 @@ object PaperKeyProveUpdate : Update<M, E, F>,
                 when (model.onComplete) {
                     OnCompleteAction.GO_TO_BUY -> F.GoToBuy
                     OnCompleteAction.GO_HOME -> F.GoToHome
-                } as F
+                } as F,
+                F.TrackEvent(EventUtils.EVENT_ONBOARDING_COMPLETE)
             )
         )
 

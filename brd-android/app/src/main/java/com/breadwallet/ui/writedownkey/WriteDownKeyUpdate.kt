@@ -24,6 +24,7 @@
  */
 package com.breadwallet.ui.writedownkey
 
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.navigation.OnCompleteAction
 import com.breadwallet.ui.writedownkey.WriteDownKey.E
 import com.breadwallet.ui.writedownkey.WriteDownKey.F
@@ -42,7 +43,13 @@ object WriteDownKeyUpdate : Update<M, E, F>, WriteDownKeyUpdateSpec {
             OnCompleteAction.GO_TO_BUY -> F.GoToBuy
             OnCompleteAction.GO_HOME -> F.GoToHome
         } as F
-        return dispatch(setOf(effect))
+        return dispatch(
+            setOf(
+                effect,
+                F.TrackEvent(EventUtils.EVENT_PAPER_KEY_INTRO_DISMISSED),
+                F.TrackEvent(EventUtils.EVENT_ONBOARDING_COMPLETE)
+            )
+        )
     }
 
     override fun onFaqClicked(model: M): Next<M, F> =
@@ -54,7 +61,8 @@ object WriteDownKeyUpdate : Update<M, E, F>, WriteDownKeyUpdateSpec {
                 when {
                     model.requestAuth -> F.ShowAuthPrompt
                     else -> F.GetPhrase
-                }
+                },
+                F.TrackEvent(EventUtils.EVENT_PAPER_KEY_INTRO_GENEREATE_KEY)
             )
         )
 

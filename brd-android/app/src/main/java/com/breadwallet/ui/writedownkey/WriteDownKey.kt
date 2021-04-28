@@ -84,5 +84,9 @@ object WriteDownKey {
                 onComplete
             )
         }
+
+        data class TrackEvent(
+            val eventName: String
+        ) : F()
     }
 }
