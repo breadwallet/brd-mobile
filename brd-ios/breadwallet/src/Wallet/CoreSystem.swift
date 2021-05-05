@@ -67,13 +67,13 @@ class CoreSystem: Subscriber, Trackable {
     }
     
     /// Creates and configures the System with the Account and BDB authentication token.
-    func create(account: Account, authToken: String?, btcWalletCreationCallback: @escaping () -> Void) {
+    func create(account: Account, authToken: String?, btcWalletCreationCallback: @escaping () -> Void, completion: @escaping () -> Void) {
         self.btcWalletCreationCallback = btcWalletCreationCallback
         guard let kvStore = Backend.kvStore else { return assertionFailure() }
         print("[SYS] create | account timestamp: \(account.timestamp)")
         assert(self.system == nil)
 
-        let backend = BlockChainDB(bdbBaseURL: "https://\(C.bdbHost)",
+        let backend = BlocksetSystemClient(bdbBaseURL: "https://\(C.bdbHost)",
             bdbDataTaskFunc: { (session, request, completion) -> URLSessionDataTask in
                 
                 var req = request
@@ -95,30 +95,23 @@ class CoreSystem: Subscriber, Trackable {
 
         try? FileManager.default.createDirectory(atPath: C.coreDataDirURL.path, withIntermediateDirectories: true, attributes: nil)
         
-        self.system = System.create(listener: self,
-                                    account: account,
-                                    onMainnet: !E.isTestnet,
-                                    path: C.coreDataDirURL.path,
-                                    query: backend,
-                                    listenerQueue: self.listenerQueue)
-
-        if let system = self.system {
-            System.wipeAll(atPath: C.coreDataDirURL.path, except: [system])
-        }
-        
         Backend.apiClient.getCurrencyMetaData { currencyMetaData in
             self.queue.async {
                 self.assetCollection = AssetCollection(kvStore: kvStore,
                                                        allTokens: currencyMetaData,
                                                        changeHandler: self.updateWalletStates)
-                let currencyModels = currencyMetaData.values.compactMap {
-                    System.asBlockChainDBModelCurrency(uids: $0.uid.rawValue,
-                                                       name: $0.name,
-                                                       code: $0.code,
-                                                       type: $0.type,
-                                                       decimals: $0.decimals)
+                self.system = System.create(client: backend,
+                                            listener: self,
+                                            account: account,
+                                            onMainnet: !E.isTestnet,
+                                            path: C.coreDataDirURL.path,
+                                            listenerQueue: self.listenerQueue)
+
+                if let system = self.system {
+                    System.wipeAll(atPath: C.coreDataDirURL.path, except: [system])
                 }
-                self.system?.configure(withCurrencyModels: currencyModels)
+                self.system?.configure()
+                completion()
             }
         }
     }
@@ -237,9 +230,6 @@ class CoreSystem: Subscriber, Trackable {
             return
         }
 
-        if system.migrateRequired(network: network) {
-            self.migrateLegacyDatabase(network: network)
-        }
         
         // networks tokens for which wallets are needed
         let requiredTokens = network.currencies.filter { assetCollection.isEnabled($0.uid) }
@@ -341,11 +331,6 @@ class CoreSystem: Subscriber, Trackable {
 
             print("[SYS] migrating \(network.currency.code) database: \(txBlobs.count) txns / \(blockBlobs.count) blocks / \(peerBlobs.count) peers")
 
-            try system.migrateStorage(network: network,
-                                      transactionBlobs: txBlobs,
-                                      blockBlobs: blockBlobs,
-                                      peerBlobs: peerBlobs)
-            print("[SYS] \(network.currency.code) database migrated")
         } catch let error {
             print("[SYS] database migration failed: \(error)")
         }
@@ -642,7 +627,7 @@ extension CoreSystem: SystemListener {
         // after all networks are added
         case .discoveredNetworks(let networks):
             guard !E.isRunningTests else { return }
-            let filteredNetworks = networks.filter { $0.isMainnet == !E.isTestnet }
+            let filteredNetworks = networks.filter { $0.onMainnet == !E.isTestnet }
             filteredNetworks.forEach { addCurrencies(for: $0) }
             DispatchQueue.main.async {
                 Store.perform(action: ManageWallets.AddWallets(self.placeholderWalletStates))
@@ -654,14 +639,17 @@ extension CoreSystem: SystemListener {
             if self.isWalletManagerNeeded(manager) {
                 manager.connect(using: manager.customPeer)
             }
+            
+        case .changed(_, _):
+            break
+            
+        case .deleted:
+            break
         }
     }
 
     func handleManagerEvent(system: System, manager: WalletKit.WalletManager, event: WalletManagerEvent) {
         print("[SYS] \(manager.network) manager event: \(event)")
-        if manager.network.name == "Tezos" {
-            print("[TEZOS] manager event: \(event)")
-        }
         switch event {
         case .created:
             break
@@ -759,9 +747,6 @@ extension CoreSystem: SystemListener {
 
     func handleWalletEvent(system: System, manager: WalletKit.WalletManager, wallet: WalletKit.Wallet, event: WalletEvent) {
         print("[SYS] \(manager.network) wallet event: \(wallet.currency.code) \(event)")
-        if manager.network.name == "Tezos" {
-            print("[TEZOS] wallet event: \(event)")
-        }
         switch event {
         case .created:
             if let wallet = addWallet(wallet) {

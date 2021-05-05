@@ -290,7 +290,8 @@ object WalletUpdate : Update<M, E, F>, WalletScreenUpdateSpec {
             dispatch(
                 setOf(
                     F.ConvertCryptoTransactions(
-                        event.transactions
+                        event.transactions,
+                        model.currencyId
                     )
                 )
             )

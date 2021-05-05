@@ -32,12 +32,7 @@ import androidx.core.content.FileProvider
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
 import com.breadwallet.app.BreadApp
-import com.breadwallet.breadbox.BdbAuthInterceptor
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.feeForToken
-import com.breadwallet.breadbox.hashString
-import com.breadwallet.breadbox.isNative
-import com.breadwallet.breadbox.toSanitizedString
+import com.breadwallet.breadbox.*
 import com.breadwallet.crypto.Transfer
 import com.breadwallet.crypto.TransferDirection
 import com.breadwallet.crypto.TransferState
@@ -528,7 +523,7 @@ class SettingsScreenHandler(
                     .sortedBy { it.confirmation.orNull()?.confirmationTime ?: Date()}
                     .forEach { transfer ->
                         val memo = getMemo(transfer)
-                        out.write("${transfer.export(memo, feeWallet)}\n")
+                        out.write("${transfer.export(memo, feeWallet, wallet.currencyId)}\n")
                     }
             }
 
@@ -541,13 +536,18 @@ class SettingsScreenHandler(
         output.accept(E.OnTransactionsExportFileGenerated(FileProvider.getUriForFile(context, authority, file)))
     }
 
-    private fun Transfer.export(memo: String, feeWallet: Wallet): String {
+    private fun Transfer.export(memo: String, feeWallet: Wallet, currencyId: String): String {
         var dir = ""
         var src = source.orNull()?.toSanitizedString() ?: ""
 
-        var amt = BigDecimal(
-            amount.toStringAsUnit(wallet.unit, df).or("")
-        ).stripTrailingZeros().toPlainString()
+        val feeForToken = feeForToken(currencyId)
+        var amt = if (feeForToken.isBlank()) {
+            BigDecimal(
+                amount.toStringAsUnit(wallet.unit, df).or("")
+            ).stripTrailingZeros().toPlainString()
+        } else {
+            ""
+        }
 
         var f = ""
         var feeCode = ""
@@ -557,15 +557,14 @@ class SettingsScreenHandler(
         } else {
             dir = "sent"
             src = if (wallet.currency.code.isBitcoinLike()) "" else src
-            amt = "-$amt"
+            amt = if (amt.isBlank()) "" else "-$amt"
             f = BigDecimal(
                 fee.toStringAsUnit(feeWallet.unit, df).or("")
             ).stripTrailingZeros().toPlainString()
             feeCode = feeWallet.unit.currency.code.toLowerCase(Locale.ROOT)
         }
 
-        val feeToken = feeForToken()
-        val memoOrFeeToken = if (feeToken.isNotBlank()) "Fee for token transfer: $feeToken" else memo
+        val memoOrFeeToken = if (feeForToken.isNotBlank()) "Fee for token transfer: $feeForToken" else memo
 
         return listOf(
             "\"${wallet.currency.code.toLowerCase(Locale.ROOT)}\"",

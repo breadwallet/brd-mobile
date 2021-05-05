@@ -103,7 +103,8 @@ object TxDetails {
         data class OnTransactionUpdated(
             val transaction: Transfer,
             val gasPrice: BigDecimal,
-            val gasLimit: BigDecimal
+            val gasLimit: BigDecimal,
+            val currencyId: String
         ) : E()
 
         data class OnFiatAmountNowUpdated(val fiatAmountNow: BigDecimal) : E()

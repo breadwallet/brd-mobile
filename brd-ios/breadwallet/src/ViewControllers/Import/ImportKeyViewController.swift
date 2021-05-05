@@ -268,7 +268,7 @@ class ImportKeyViewController: UIViewController, Subscriber {
             showErrorMessage(S.Import.Error.empty)
         case .unexpectedError:
             showErrorMessage(S.Alert.somethingWentWrong)
-        case .queryError(let error):
+        case .clientError(let error):
             showErrorMessage(error.localizedDescription)
         }
     }

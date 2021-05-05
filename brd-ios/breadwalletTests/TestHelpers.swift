@@ -16,7 +16,15 @@ let testWalletSecAttrService = "com.brd.testnetQA.tests"
 typealias CoreCurrency = WalletKit.Currency
 typealias AppCurrency = breadwallet.Currency
 
-private let networks = Network.installBuiltins()
+private let networks = [
+    "bitcoin-mainnet",
+    "bitcoincash-mainnet",
+    "ethereum-mainnet",
+    "ripple-mainnet",
+    "hedera-mainnet",
+].map { (networkId) -> Network in
+    Network.findBuiltin(uids: networkId)!
+}
 
 struct TestCurrencies {
     private static let btcMetaData = Data("""

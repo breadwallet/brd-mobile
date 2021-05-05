@@ -26,7 +26,6 @@
 
 package com.breadwallet.breadbox
 
-import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.crypto.Address
 import com.breadwallet.crypto.Currency
 import com.breadwallet.crypto.Network
@@ -138,18 +137,14 @@ fun Network.containsCurrencyCode(currencyCode: String) =
         )
     } != null
 
-/** Returns the [Currency] code if the [Transfer] is a ETH fee transfer, blank otherwise. */
-fun Transfer.feeForToken(): String {
-    val targetAddress = target.orNull()?.toSanitizedString() ?: return ""
-    val issuerCode = wallet.walletManager.network.currencies.find { networkCurrency ->
-        networkCurrency.issuer.or("").equals(targetAddress, true)
+/** Returns the [Currency] code if the [Transfer] is a fee transfer in the wallet
+ *  associated with [currencyId], blank otherwise. */
+fun Transfer.feeForToken(currencyId: String): String =
+    if (amount.currency.uids.equals(currencyId, true)) {
+        ""
+    } else {
+        amount.currency.code
     }
-    return when {
-        !wallet.walletManager.currency.isEthereum() -> ""
-        issuerCode == null || issuerCode.isEthereum() -> ""
-        else -> issuerCode.code
-    }
-}
 
 fun WalletManagerState.isTracked() =
     type == WalletManagerState.Type.CONNECTED ||

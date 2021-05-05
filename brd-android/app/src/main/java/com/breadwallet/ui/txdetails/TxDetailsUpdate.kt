@@ -46,6 +46,7 @@ import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Next.noChange
 import com.spotify.mobius.Update
+import java.math.BigDecimal
 import java.util.Date
 
 const val MAX_CRYPTO_DIGITS = 8
@@ -67,11 +68,12 @@ object TxDetailsUpdate : Update<M, E, F>, TxDetailsUpdateSpec {
             val confirmationsUntilFinal =
                 wallet.walletManager.network.confirmationsUntilFinal.toInt()
             val delegateAddr = attributes.find { it.key.equals(DELEGATE, true) }?.value?.orNull()
+            val feeForToken = feeForToken(event.currencyId)
             model.copy(
                 isEth = amount.currency.isEthereum(),
                 isErc20 = amount.currency.isErc20(),
-                cryptoTransferredAmount = amount.toBigDecimal(wallet.defaultUnit),
-                fee = fee.toBigDecimal(wallet.defaultUnit),
+                cryptoTransferredAmount = if (feeForToken.isBlank()) amount.toBigDecimal(wallet.defaultUnit) else BigDecimal.ZERO,
+                fee = fee.doubleAmount(unitForFee).or(0.0).toBigDecimal(),
                 feeCurrency = fee.currency.code,
                 isReceived = isReceived(),
                 blockNumber = confirmation.orNull()?.blockNumber?.toInt() ?: 0,
@@ -90,7 +92,7 @@ object TxDetailsUpdate : Update<M, E, F>, TxDetailsUpdateSpec {
                 isCompleted = confirmations >= confirmationsUntilFinal,
                 gasPrice = event.gasPrice,
                 gasLimit = event.gasLimit,
-                feeToken = feeForToken(),
+                feeToken = feeForToken,
                 confirmations = confirmations,
                 transferFields = event.transaction
                     .attributes
