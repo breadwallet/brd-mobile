@@ -248,7 +248,8 @@ object WalletScreen {
         object LoadCryptoPreferred : F()
 
         data class ConvertCryptoTransactions(
-            @Redacted val transactions: List<Transfer>
+            @Redacted val transactions: List<Transfer>,
+            val  currencyId: String
         ) : F()
 
         data class LoadChartInterval(

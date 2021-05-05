@@ -26,6 +26,7 @@ package com.breadwallet.ui.txdetails
 
 import android.content.Context
 import com.breadwallet.breadbox.BreadBox
+import com.breadwallet.breadbox.currencyId
 import com.breadwallet.breadbox.isEthereum
 import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.ext.throttleLatest
@@ -107,7 +108,12 @@ fun createTxDetailsHandler(
 
                         gasLimit = feeBasis.costFactor.toBigDecimal()
                     }
-                    E.OnTransactionUpdated(transfer, gasPrice, gasLimit)
+                    E.OnTransactionUpdated(
+                        transfer,
+                        gasPrice,
+                        gasLimit,
+                        breadBox.wallet(effect.currencyCode).first().currencyId
+                    )
                 }
         }
     }

@@ -35,12 +35,13 @@ object BrdRelease {
     private val marketing = ciTag?.firstOrNull() ?: 4
 
     /** Minor version. Usually affected by product. Maximum value: 99 */
-    private const val product = 10
+    private val product = ciTag?.get(1) ?: 10
+
     /** Hot fix version. Usually affected by engineering. Maximum value: 9 */
-    private val engineering = ciTag?.get(2) ?: 1
+    private val engineering = ciTag?.get(2) ?: 0
 
     /** Build version. Increase for each new build. Maximum value: 999 */
-    private const val build = 5
+    private val build = ciTag?.lastOrNull() ?: 103
 
     init {
         check(marketing in 0..99)

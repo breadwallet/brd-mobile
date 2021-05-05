@@ -157,7 +157,7 @@ internal class CoreBreadBox(
             blockchainDb
         ).apply {
             logDebug("Created new System instance")
-            configure(emptyList())
+            configure()
         }
 
         system = (system ?: newSystem()).also { system ->

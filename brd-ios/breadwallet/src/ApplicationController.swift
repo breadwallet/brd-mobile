@@ -164,15 +164,15 @@ class ApplicationController: Subscriber, Trackable {
         self.startBackendServices()
         self.setWalletInfo(account: account)
         authenticateWithBackend { jwt in
-            self.coreSystem.create(account: account,
+            self.coreSystem.create(account: account, 
                                    authToken: jwt,
-                                   btcWalletCreationCallback: self.handleDeferedLaunchURL)
-            
-            self.modalPresenter = ModalPresenter(keyStore: self.keyStore,
-                                                 system: self.coreSystem,
-                                                 window: self.window,
-                                                 alertPresenter: self.alertPresenter)
-            self.coreSystem.connect()
+                                   btcWalletCreationCallback: self.handleDeferedLaunchURL) {
+                self.modalPresenter = ModalPresenter(keyStore: self.keyStore,
+                                                     system: self.coreSystem,
+                                                     window: self.window,
+                                                     alertPresenter: self.alertPresenter)
+                self.coreSystem.connect()
+            }
         }
     }
     
