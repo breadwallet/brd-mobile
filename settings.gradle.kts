@@ -21,3 +21,12 @@ includeBuild("external/walletkit/WalletKitJava") {
             .with(project(":corecrypto-android"))
     }
 }
+
+includeBuild("external/redacted-compiler-plugin") {
+    dependencySubstitution {
+        substitute(module("dev.zacsweers.redacted:redacted-compiler-gradle-plugin"))
+            .with(project(":redacted-compiler-plugin-gradle"))
+        substitute(module("dev.zacsweers.redacted:redacted-compiler-plugin-annotations"))
+            .with(project(":redacted-compiler-plugin-annotations"))
+    }
+}
