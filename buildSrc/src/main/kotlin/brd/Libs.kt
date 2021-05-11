@@ -27,7 +27,7 @@ package brd
 const val KOTLIN_VERSION = "1.4.31"
 private const val KTOR_VERSION = "1.5.2"
 private const val KOTLINX_ATOMICFU_VERSION = "0.15.0"
-private const val KOTLINX_DATETIME_VERSION = "0.1.1"
+private const val KOTLINX_DATETIME_VERSION = "0.2.0"
 private const val KOTLINX_SERIALIZATION_VERSION = "1.1.0"
 private const val COROUTINES_VERSION = "1.4.3-native-mt"
 private const val WALLETKIT_VERSION = "6.3.5"
@@ -259,8 +259,8 @@ object Libs {
     }
 
     object Redacted {
-        const val Annotation = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations:$REDACTED_VERSION"
-        const val Plugin = "dev.zacsweers.redacted:redacted-compiler-gradle-plugin:$REDACTED_VERSION"
+        const val Annotation = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations"
+        const val Plugin = "dev.zacsweers.redacted:redacted-compiler-gradle-plugin"
     }
 
     object Detekt {

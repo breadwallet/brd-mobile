@@ -4,11 +4,6 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
-        maven(url = "https://dl.bintray.com/drewcarlson/redacted-plugin") {
-            content {
-                includeGroup("dev.zacsweers.redacted")
-            }
-        }
     }
 
     dependencies {
@@ -23,21 +18,8 @@ buildscript {
 
 allprojects {
     repositories {
-        exclusiveContent {
-            forRepository {
-                maven(url = "https://dl.bintray.com/brd/walletkit-java")
-            }
-            filter {
-                includeGroup("com.breadwallet.core")
-            }
-        }
         mavenCentral()
         google()
         jcenter()
-        maven(url = "https://dl.bintray.com/drewcarlson/redacted-plugin") {
-            content {
-                includeGroup("dev.zacsweers.redacted")
-            }
-        }
     }
 }
