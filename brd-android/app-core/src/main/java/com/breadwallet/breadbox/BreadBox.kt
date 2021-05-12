@@ -62,9 +62,6 @@ interface BreadBox {
     /** Emits the [Wallet] for [currencyCode]. */
     fun wallet(currencyCode: String): Flow<Wallet>
 
-    /** Emits the [WalletSyncState] for the [Wallet] of [currencyCode]. */
-    fun walletSyncState(currencyCode: String): Flow<WalletSyncState>
-
     /** Emits the [List] of [Transfer]s for the [Wallet] of [currencyCode]. */
     fun walletTransfers(currencyCode: String): Flow<List<Transfer>>
 

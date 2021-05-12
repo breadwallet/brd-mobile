@@ -537,8 +537,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         startedScope.launch {
             accountMetaData.recoverAll(migrate)
-            // Once item #6 in Core-1149 is resolved, can uncomment giftTracker logic
-            //giftTracker.checkUnclaimedGifts()
+            giftTracker.checkUnclaimedGifts()
         }
 
         ratesFetcher.start(startedScope)

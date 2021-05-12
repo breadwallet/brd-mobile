@@ -95,13 +95,7 @@ class WalletListItem(
                 syncProgress.isVisible = isSyncing || isLoading
                 syncingLabel.isVisible = isSyncing || isLoading
                 if (isSyncing) {
-                    val syncProgress = wallet.syncProgress
-                    var labelText = context.getString(R.string.SyncingView_syncing)
-                    if (syncProgress > 0) {
-                        labelText += " ${NumberFormat.getPercentInstance()
-                            .format(syncProgress.toDouble())}"
-                    }
-                    syncingLabel.text = labelText
+                    syncingLabel.text = context.getString(R.string.SyncingView_syncing)
                 } else if (isLoading) {
                     syncingLabel.setText(R.string.Account_loadingMessage)
                 }

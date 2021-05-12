@@ -25,10 +25,7 @@
 package com.breadwallet.ui.home
 
 import android.content.Context
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.WalletState
-import com.breadwallet.breadbox.currencyId
-import com.breadwallet.breadbox.toBigDecimal
+import com.breadwallet.breadbox.*
 import com.breadwallet.crypto.WalletManagerState
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.model.Experiments
@@ -191,23 +188,6 @@ fun createHomeScreenHandler(
             }
     }
 
-    addTransformer<F.LoadSyncStates> { effects ->
-        effects.flatMapLatest { breadBox.currencyCodes() }
-            .flatMapLatest { currencyCodes ->
-                currencyCodes.map {
-                    breadBox.walletSyncState(it)
-                        .throttleLatest(WALLET_UPDATE_THROTTLE)
-                        .map { syncState ->
-                            E.OnWalletSyncProgressUpdated(
-                                currencyCode = syncState.currencyCode,
-                                progress = syncState.percentComplete,
-                                syncThroughMillis = syncState.timestamp,
-                                isSyncing = syncState.isSyncing
-                            )
-                        }
-                }.merge()
-            }
-    }
     addAction<F.ClearRateAppPrompt> {
         AppReviewPromptManager.dismissPrompt()
     }
@@ -289,11 +269,9 @@ private fun CryptoWallet.asWallet(
         balance = balanceBig,
         fiatBalance = ratesRepo.getFiatForCrypto(balanceBig, currency.code, fiatIso)
             ?: BigDecimal.ZERO,
-        syncProgress = 0f, // will update via sync events
-        syncingThroughMillis = 0L, // will update via sync events
         priceChange = ratesRepo.getPriceChange(currency.code),
         state = Wallet.State.READY,
-        isSyncing = walletManager.state == WalletManagerState.SYNCING(),
+        isSyncing = isSyncing,
         startColor = tokenItem?.startColor,
         endColor = tokenItem?.endColor,
         isSupported = tokenItem?.isSupported ?: true

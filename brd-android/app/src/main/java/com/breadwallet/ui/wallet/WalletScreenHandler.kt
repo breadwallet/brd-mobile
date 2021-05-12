@@ -203,13 +203,11 @@ object WalletScreenHandler {
         flowTransformer<F.LoadSyncState, E> { effects ->
             effects
                 .flatMapLatest { (currencyId) ->
-                    breadBox.walletSyncState(currencyId)
+                    breadBox.wallet(currencyId)
                 }
-                .mapLatest { state ->
+                .mapLatest { wallet ->
                     E.OnSyncProgressUpdated(
-                        state.percentComplete,
-                        state.timestamp,
-                        state.isSyncing
+                        wallet.isSyncing
                     )
                 }
         }

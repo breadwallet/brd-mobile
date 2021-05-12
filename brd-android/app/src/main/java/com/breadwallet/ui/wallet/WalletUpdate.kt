@@ -206,9 +206,7 @@ object WalletUpdate : Update<M, E, F>, WalletScreenUpdateSpec {
     ): Next<M, F> =
         next(
             model.copy(
-                isSyncing = event.isSyncing,
-                syncProgress = event.progress,
-                syncingThroughMillis = event.syncThroughMillis
+                isSyncing = event.isSyncing
             )
         )
 

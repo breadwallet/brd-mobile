@@ -120,7 +120,6 @@ internal class CoreBreadBox(
     private val systemChannel = BroadcastChannel<Unit>(CONFLATED)
     private val accountChannel = BroadcastChannel<Unit>(CONFLATED)
     private val walletsChannel = BroadcastChannel<Unit>(CONFLATED)
-    private val walletSyncStateChannel = BroadcastChannel<WalletSyncState>(BUFFERED)
     private val walletTransfersChannelMap = BroadcastChannel<String>(BUFFERED)
     private val transferUpdatedChannelMap = BroadcastChannel<Transfer>(BUFFERED)
 
@@ -291,27 +290,6 @@ internal class CoreBreadBox(
         }.throttleLatest(AGGRESSIVE_THROTTLE_MS)
             .distinctUntilChanged()
 
-    override fun walletSyncState(currencyCode: String) =
-        walletSyncStateChannel
-            .asFlow()
-            .filter { it.currencyCode.equals(currencyCode, true) }
-            .throttleLatest(DEFAULT_THROTTLE_MS)
-            .onStart {
-                // Dispatch initial sync state
-                val isSyncing = wallet(currencyCode)
-                    .map { it.walletManager.state.type == WalletManagerState.Type.SYNCING }
-                    .first()
-                emit(
-                    WalletSyncState(
-                        currencyCode = currencyCode,
-                        percentComplete = if (isSyncing) 0f else 1f,
-                        timestamp = 0,
-                        isSyncing = isSyncing
-                    )
-                )
-            }
-            .distinctUntilChanged()
-
     override fun walletTransfers(currencyCode: String) =
         walletTransfersChannelMap
             .asFlow()
@@ -446,46 +424,10 @@ internal class CoreBreadBox(
                 logDebug("Wallet Manager Created: '${manager.name}' mode ${manager.mode}")
                 networkManager?.connectManager(manager)
             }
-            is WalletManagerSyncProgressEvent -> {
-                val timeStamp = event.timestamp?.get()?.time
-                logDebug("(${manager.currency.code}) Sync Progress progress=${event.percentComplete} time=$timeStamp")
-                // NOTE: Fulfill percentComplete fractional expectation of consumers
-                walletSyncStateChannel.offer(
-                    WalletSyncState(
-                        currencyCode = manager.currency.code,
-                        percentComplete = event.percentComplete / 100,
-                        timestamp = event.timestamp.orNull()?.time ?: 0L,
-                        isSyncing = true
-                    )
-                )
-            }
             is WalletManagerChangedEvent -> {
                 val fromStateType = event.oldState.type
                 val toStateType = event.newState.type
                 logDebug("(${manager.currency.code}) State Changed from='$fromStateType' to='$toStateType'")
-
-                // Syncing is complete, manually signal change to observers
-                if (fromStateType == WalletManagerState.Type.SYNCING) {
-                    walletSyncStateChannel.offer(
-                        WalletSyncState(
-                            currencyCode = manager.currency.code,
-                            percentComplete = 1f,
-                            timestamp = 0L,
-                            isSyncing = false
-                        )
-                    )
-                }
-
-                if (toStateType == WalletManagerState.Type.SYNCING) {
-                    walletSyncStateChannel.offer(
-                        WalletSyncState(
-                            currencyCode = manager.currency.code,
-                            percentComplete = 0f,
-                            timestamp = 0L,
-                            isSyncing = true
-                        )
-                    )
-                }
 
                 if (fromStateType != WalletManagerState.Type.CONNECTED &&
                     toStateType == WalletManagerState.Type.CONNECTED

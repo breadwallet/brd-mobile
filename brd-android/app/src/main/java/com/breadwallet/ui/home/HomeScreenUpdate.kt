@@ -46,21 +46,6 @@ val HomeScreenUpdate = Update<M, E, F> { model, event ->
             ),
             setOf(F.UpdateWalletOrder(event.displayOrder))
         )
-        is E.OnWalletSyncProgressUpdated -> {
-            when (val wallet = model.wallets[event.currencyCode]) {
-                null -> noChange<M, F>()
-                else -> {
-                    val wallets = model.wallets.toMutableMap()
-                    wallets[event.currencyCode] = wallet.copy(
-                        syncProgress = event.progress,
-                        syncingThroughMillis = event.syncThroughMillis,
-                        isSyncing = event.isSyncing,
-                        state = Wallet.State.READY
-                    )
-                    next(model.copy(wallets = wallets))
-                }
-            }
-        }
         is E.OnBuyBellNeededLoaded -> next(model.copy(isBuyBellNeeded = event.isBuyBellNeeded))
         is E.OnEnabledWalletsUpdated -> {
             next(
@@ -82,12 +67,8 @@ val HomeScreenUpdate = Update<M, E, F> { model, event ->
         is E.OnWalletsUpdated -> {
             val wallets = model.wallets.toMutableMap()
             event.wallets.forEach { wallet ->
-                val previousState = wallets[wallet.currencyCode]
                 wallets[wallet.currencyCode] = wallet.copy(
-                    syncingThroughMillis = previousState?.syncingThroughMillis
-                        ?: wallet.syncingThroughMillis,
-                    isSyncing = previousState?.isSyncing ?: wallet.isSyncing,
-                    syncProgress = previousState?.syncProgress ?: wallet.syncProgress
+                    isSyncing = wallet.isSyncing,
                 )
             }
             next(model.copy(wallets = wallets))

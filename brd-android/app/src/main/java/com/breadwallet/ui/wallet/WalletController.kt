@@ -410,16 +410,10 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
             }
 
             // Update sync progress
-            ifChanged(
-                M::syncProgress,
-                M::isSyncing,
-                M::syncingThroughMillis
-            ) {
+            ifChanged(M::isSyncing) {
                 val syncAdapter = syncAdapter!!
                 if (isSyncing) {
                     val item = syncAdapter.adapterItems.firstOrNull() ?: SyncingItem()
-                    item.syncProgress = syncProgress
-                    item.syncThroughMillis = syncingThroughMillis
 
                     if (syncAdapter.adapterItemCount == 0) {
                         syncAdapter.setNewList(listOf(item))
