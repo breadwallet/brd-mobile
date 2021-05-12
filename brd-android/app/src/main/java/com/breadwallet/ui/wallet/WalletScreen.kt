@@ -63,8 +63,6 @@ object WalletScreen {
         val filterReceived: Boolean = false,
         val filterPending: Boolean = false,
         val filterComplete: Boolean = false,
-        val syncProgress: Float = 0f,
-        val syncingThroughMillis: Long = 0,
         val isSyncing: Boolean = false,
         val hasInternet: Boolean = true,
         val priceChartIsLoading: Boolean = true,
@@ -93,16 +91,8 @@ object WalletScreen {
 
     sealed class E {
         data class OnSyncProgressUpdated(
-            val progress: Float,
-            val syncThroughMillis: Long,
             val isSyncing: Boolean
-        ) : E() {
-            init {
-                require(progress in 0.0..1.0) {
-                    "Sync progress must be in 0..1 but was $progress"
-                }
-            }
-        }
+        ) : E()
 
         data class OnQueryChanged(@Redacted val query: String) : E()
 

@@ -33,14 +33,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-private const val SYNCED_THROUGH_DATE_FORMAT = "MM/dd/yy HH:mm"
-
 class SyncingItem : AbstractItem<SyncingItem.ViewHolder>() {
-
-    var syncProgress = 1f
-    var syncThroughMillis = 0L
-    val hasSyncTime
-        get() = syncThroughMillis != 0L
 
     override val type: Int = R.id.syncing_item
     override val layoutRes: Int = R.layout.wallet_sync_progress_view
@@ -50,22 +43,7 @@ class SyncingItem : AbstractItem<SyncingItem.ViewHolder>() {
         v: View
     ) : FastAdapter.ViewHolder<SyncingItem>(v) {
 
-        private val resources = v.resources
-        private val dateFormat = SimpleDateFormat(SYNCED_THROUGH_DATE_FORMAT, Locale.US)
-        private val numberFormat = NumberFormat.getPercentInstance()
-
-        override fun bindView(item: SyncingItem, payloads: List<Any>) {
-            val syncingText = resources.getString(R.string.SyncingView_syncing)
-            val binding = WalletSyncProgressViewBinding.bind(itemView)
-            val syncingPercentText = numberFormat.format(item.syncProgress)
-            binding.syncingLabel.text = "%s %s".format(syncingText, syncingPercentText)
-
-            if (item.hasSyncTime) {
-                val syncedThroughDate = dateFormat.format(item.syncThroughMillis)
-                val syncedThroughText = resources.getString(R.string.SyncingView_syncedThrough)
-                binding.syncStatusLabel.text = syncedThroughText.format(syncedThroughDate)
-            }
-        }
+        override fun bindView(item: SyncingItem, payloads: List<Any>) = Unit
 
         override fun unbindView(item: SyncingItem) = Unit
     }

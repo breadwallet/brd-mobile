@@ -24,21 +24,8 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.TransferAttribute
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Currency
-import com.breadwallet.crypto.ExportablePaperWallet
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.NetworkFee
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.TransferFeeBasis
+import com.breadwallet.crypto.*
 import com.breadwallet.crypto.Unit
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletSweeper
 import com.breadwallet.crypto.errors.AccountInitializationError
 import com.breadwallet.crypto.errors.ExportablePaperWalletError
 import com.breadwallet.crypto.errors.FeeEstimationError
@@ -146,3 +133,5 @@ fun Wallet.feeForSpeed(speed: TransferSpeed): NetworkFee {
             ?: walletManager.defaultNetworkFee
     }
 }
+
+val Wallet.isSyncing get() = walletManager.state == WalletManagerState.SYNCING()

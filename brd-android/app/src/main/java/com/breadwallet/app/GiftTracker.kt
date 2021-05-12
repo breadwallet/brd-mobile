@@ -26,6 +26,7 @@ package com.breadwallet.app
 
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.createSweeper
+import com.breadwallet.breadbox.isSyncing
 import com.breadwallet.crypto.Amount
 import com.breadwallet.crypto.Key
 import com.breadwallet.crypto.errors.WalletSweeperError
@@ -51,7 +52,7 @@ class GiftTracker(
         if (millisSinceLastCheck < UNCLAIMED_GIFT_DELAY_MS) {
             return
         }
-        breadBox.walletSyncState(btc).first { !it.isSyncing }
+        breadBox.wallet(btc).first { !it.isSyncing }
 
         val unclaimedGifts = metaDataManager
             .txMetaData(onlyGifts = true)

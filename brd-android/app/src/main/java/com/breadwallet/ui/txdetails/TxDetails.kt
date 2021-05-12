@@ -84,10 +84,10 @@ object TxDetails {
         }
 
         val destinationTag: TransferField? =
-            transferFields.find { it.key == TransferField.DESTINATION_TAG }
+            transferFields.find { it.key.equals(TransferField.DESTINATION_TAG, true) }
 
         val hederaMemo: TransferField? =
-            transferFields.find { it.key == TransferField.HEDERA_MEMO }
+            transferFields.find { it.key.equals(TransferField.HEDERA_MEMO, true) }
 
         val transactionTotal: BigDecimal
             get() = cryptoTransferredAmount + fee

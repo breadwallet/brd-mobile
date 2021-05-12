@@ -106,37 +106,6 @@ class HomeScreenUpdateTests {
     }
 
     @Test
-    fun syncProgressUpdate() {
-        val wallets = mutableMapOf(WALLET_BITCOIN.currencyCode to WALLET_BITCOIN.copy())
-        val initState = M.createDefault().copy(wallets = wallets)
-
-        val progress = 0.15f
-        val expectedWallet =
-            WALLET_BITCOIN.copy(
-                syncProgress = progress,
-                isSyncing = true,
-                state = Wallet.State.READY
-            )
-        wallets[expectedWallet.currencyCode] = expectedWallet
-
-        spec.given(initState)
-            .`when`(
-                E.OnWalletSyncProgressUpdated(
-                    currencyCode = WALLET_BITCOIN.currencyCode,
-                    progress = progress,
-                    syncThroughMillis = 0L,
-                    isSyncing = true
-                )
-            )
-            .then(
-                assertThatNext(
-                    hasModel(initState.copy(wallets = wallets)),
-                    hasNoEffects()
-                )
-            )
-    }
-
-    @Test
     fun connectivityUpdate() {
         val initState = M.createDefault()
 

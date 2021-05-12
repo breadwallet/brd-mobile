@@ -58,20 +58,6 @@ object HomeScreen {
     }
 
     sealed class E {
-
-        data class OnWalletSyncProgressUpdated(
-            val currencyCode: String,
-            val progress: Float,
-            val syncThroughMillis: Long,
-            val isSyncing: Boolean
-        ) : E() {
-            init {
-                require(progress in 0f..1f) {
-                    "Sync progress must be in 0..1 but was $progress"
-                }
-            }
-        }
-
         data class OnEnabledWalletsUpdated(@Redacted val wallets: List<Wallet>) : E()
 
         data class OnWalletsUpdated(@Redacted val wallets: List<Wallet>) : E()
@@ -116,7 +102,6 @@ object HomeScreen {
 
         object LoadWallets : F()
         object LoadEnabledWallets : F()
-        object LoadSyncStates : F()
         object LoadIsBuyBellNeeded : F()
         object LoadPrompt : F()
         object LoadConnectivityState : F()
@@ -210,8 +195,6 @@ data class Wallet(
     val fiatPricePerUnit: BigDecimal = BigDecimal.ZERO,
     val balance: BigDecimal = BigDecimal.ZERO,
     val fiatBalance: BigDecimal = BigDecimal.ZERO,
-    val syncProgress: Float = 0f,
-    val syncingThroughMillis: Long = 0L,
     val isSyncing: Boolean = false,
     val priceChange: PriceChange? = null,
     val state: State = State.READY,
@@ -222,8 +205,6 @@ data class Wallet(
     enum class State {
         READY, LOADING, UNINITIALIZED
     }
-
-    val hasSyncTime: Boolean = syncingThroughMillis != 0L
 
     val hasPricePerUnit: Boolean = fiatPricePerUnit != BigDecimal.ZERO
 }
