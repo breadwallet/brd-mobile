@@ -99,11 +99,11 @@ android {
                     releaseNotes = brd.getChangelog()
                     groups = "android-team"
                 }
-            }
-            (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
-                nativeSymbolUploadEnabled = true
-                strippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
-                unstrippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
+                (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
+                    nativeSymbolUploadEnabled = true
+                    strippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
+                    unstrippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
+                }
             }
         }
         getByName("debug") {
