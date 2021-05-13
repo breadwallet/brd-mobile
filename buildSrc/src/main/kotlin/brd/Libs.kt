@@ -60,7 +60,7 @@ const val REDACTED_VERSION = "0.8.0"
 private const val DETEKT_VERSION = "1.0.1"
 private const val COMMONS_COMPRESS_VERSION = "1.20"
 private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
-private const val AGP_VERSION = "4.1.3"
+private const val AGP_VERSION = "7.0.0"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
 private const val AUTODESK_VERSION = "0.7.0"
 const val COMPOSE_VERSION = "1.0.0-beta02"
@@ -76,7 +76,7 @@ object Libs {
     const val Blockset = "org.drewcarlson:blockset:$BLOCKSET_VERSION"
 
     object WalletKit {
-        const val CoreAndroid = "com.breadwallet.core:corecrypto-android"
+        const val CoreAndroid = "com.blockset.walletkit:WalletKitBRD-Android"
     }
 
     object Android {

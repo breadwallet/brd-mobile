@@ -19,6 +19,10 @@ import androidx.camera.core.*
 import androidx.core.content.*
 import androidx.lifecycle.*
 import androidx.security.crypto.*
+import com.blockset.walletkit.Api
+import com.blockset.walletkit.SystemClient
+import com.blockset.walletkit.brd.ApiProvider
+import com.blockset.walletkit.brd.systemclient.BlocksetSystemClient
 import com.brd.addressresolver.*
 import com.brd.api.*
 import com.brd.bakerapi.*
@@ -27,9 +31,6 @@ import com.brd.prefs.*
 import com.breadwallet.*
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.*
-import com.breadwallet.corecrypto.*
-import com.breadwallet.crypto.CryptoApi
-import com.breadwallet.crypto.blockchaindb.*
 import com.breadwallet.logger.*
 import com.breadwallet.platform.interfaces.*
 import com.breadwallet.repository.*
@@ -71,7 +72,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
     companion object {
         init {
-            CryptoApi.initialize(CryptoApiProvider.getInstance())
+            Api.initialize(ApiProvider.getInstance())
         }
 
         // The wallet ID is in the form "xxxx xxxx xxxx xxxx" where x is a lowercase letter or a number.
@@ -255,10 +256,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        bind<BlockchainDb>() with singleton {
+        bind<SystemClient>() with singleton {
             val httpClient = instance<OkHttpClient>()
             val authInterceptor = instance<BdbAuthInterceptor>()
-            BlockchainDb(
+            BlocksetSystemClient(
                 httpClient.newBuilder()
                     .addInterceptor(authInterceptor)
                     .build()

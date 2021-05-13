@@ -11,10 +11,10 @@ package com.breadwallet.app
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.createSweeper
 import com.breadwallet.breadbox.isSyncing
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.errors.WalletSweeperError
-import com.breadwallet.crypto.errors.WalletSweeperInsufficientFundsError
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.Key
+import com.blockset.walletkit.errors.WalletSweeperError
+import com.blockset.walletkit.errors.WalletSweeperInsufficientFundsError
 import com.breadwallet.platform.entities.GiftMetaData
 import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider

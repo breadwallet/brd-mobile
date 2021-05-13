@@ -16,7 +16,7 @@ import com.breadwallet.breadbox.findByCurrencyId
 import com.breadwallet.breadbox.findCurrency
 import com.breadwallet.breadbox.isNative
 import com.breadwallet.breadbox.networkContainsCurrency
-import com.breadwallet.crypto.Wallet
+import com.blockset.walletkit.Wallet
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.model.TokenItem

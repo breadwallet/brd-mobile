@@ -11,8 +11,8 @@ package com.breadwallet.tools.util
 import android.net.Uri
 import android.util.Base64
 import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.Key
 import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.protocols.messageexchange.entities.PairingMetaData
 import com.breadwallet.tools.util.BRConstants.WALLET_LINK_PATH

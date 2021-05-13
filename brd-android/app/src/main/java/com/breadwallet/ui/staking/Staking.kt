@@ -10,7 +10,7 @@ package com.breadwallet.ui.staking
 
 import com.brd.bakerapi.models.Baker
 import com.breadwallet.R
-import com.breadwallet.crypto.TransferFeeBasis
+import com.blockset.walletkit.TransferFeeBasis
 import com.breadwallet.ext.isZero
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.navigation.NavigationEffect

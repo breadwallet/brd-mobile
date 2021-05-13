@@ -23,8 +23,8 @@ import android.net.*
 import android.os.*
 import androidx.annotation.*
 import com.brd.prefs.*
+import com.blockset.walletkit.Key
 import com.breadwallet.appcore.BuildConfig
-import com.breadwallet.crypto.Key
 import com.breadwallet.logger.*
 import com.breadwallet.repository.*
 import com.breadwallet.tools.animation.*

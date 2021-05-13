@@ -9,7 +9,7 @@
 package com.breadwallet.ui.importwallet
 
 import com.breadwallet.R
-import com.breadwallet.crypto.Amount
+import com.blockset.walletkit.Amount
 import com.breadwallet.tools.util.BRConstants.FAQ_IMPORT_WALLET
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.navigation.NavigationEffect

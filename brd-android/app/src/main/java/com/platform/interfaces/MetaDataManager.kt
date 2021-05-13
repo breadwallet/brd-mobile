@@ -12,8 +12,8 @@ import com.breadwallet.BuildConfig
 import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.isErc20
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.logger.logInfo

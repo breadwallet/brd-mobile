@@ -11,9 +11,9 @@ package com.breadwallet.ui.wallet
 import android.content.Context
 import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferDirection
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferDirection
 import com.breadwallet.effecthandler.metadata.MetaDataEffect
 import com.breadwallet.effecthandler.metadata.MetaDataEvent
 import com.breadwallet.logger.logError

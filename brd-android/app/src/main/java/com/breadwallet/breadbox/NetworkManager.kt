@@ -8,13 +8,13 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.NetworkPeer
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.AddressScheme
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.NetworkPeer
+import com.blockset.walletkit.System
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletManager
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.logger.logDebug
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.util.isBitcoin

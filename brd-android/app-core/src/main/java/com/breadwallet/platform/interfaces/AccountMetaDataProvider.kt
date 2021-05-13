@@ -12,9 +12,9 @@ import com.breadwallet.protocols.messageexchange.entities.PairingMetaData
 import kotlinx.coroutines.flow.Flow
 import com.breadwallet.platform.entities.TxMetaData
 import com.breadwallet.platform.entities.WalletInfoData
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.platform.entities.TxMetaDataValue
 import java.util.Date
 

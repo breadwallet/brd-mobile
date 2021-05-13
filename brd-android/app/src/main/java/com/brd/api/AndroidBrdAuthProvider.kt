@@ -8,7 +8,7 @@
  */
 package com.brd.api
 
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.crypto.CryptoHelper
 import com.breadwallet.tools.manager.BRSharedPrefs

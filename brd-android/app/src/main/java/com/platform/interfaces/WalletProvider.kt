@@ -8,7 +8,7 @@
  */
 package com.platform.interfaces
 
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.WalletManagerMode
 import kotlinx.coroutines.flow.Flow
 
 interface WalletProvider {

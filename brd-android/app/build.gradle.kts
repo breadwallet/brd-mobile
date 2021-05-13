@@ -95,7 +95,7 @@ android {
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher"))
+            manifestPlaceholders.putAll(mapOf("applicationIcon" to "@mipmap/ic_launcher"))
             isDebuggable = false
             isMinifyEnabled = false
             buildConfigField("boolean", "IS_INTERNAL_BUILD", "false")
@@ -116,7 +116,7 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
             applicationIdSuffix = ".debug"
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher_grayscale"))
+            manifestPlaceholders.putAll(mapOf("applicationIcon" to "@mipmap/ic_launcher_grayscale"))
             isDebuggable = true
             isJniDebuggable = true
             isMinifyEnabled = false

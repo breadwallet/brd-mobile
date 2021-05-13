@@ -10,15 +10,15 @@
 
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.Currency
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.NetworkPeer
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferDirection
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletManagerState
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.Currency
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.NetworkPeer
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferDirection
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletManager
+import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isBitcoinCash

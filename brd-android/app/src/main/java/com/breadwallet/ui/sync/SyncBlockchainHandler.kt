@@ -9,7 +9,7 @@
 package com.breadwallet.ui.sync
 
 import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.crypto.WalletManagerSyncDepth.FROM_CREATION
+import com.blockset.walletkit.WalletManagerSyncDepth.FROM_CREATION
 import com.breadwallet.ui.sync.SyncBlockchain.E
 import com.breadwallet.ui.sync.SyncBlockchain.F
 import drewcarlson.mobius.flow.subtypeEffectHandler

@@ -8,12 +8,12 @@
  */
 package com.breadwallet.ui.exchange
 
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.AddressScheme
+import com.blockset.walletkit.errors.LimitEstimationError
 import com.brd.exchange.WalletProvider
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.crypto.errors.LimitEstimationError
 import com.breadwallet.logger.logError
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import kotlinx.coroutines.runBlocking

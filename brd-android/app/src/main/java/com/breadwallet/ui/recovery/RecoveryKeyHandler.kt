@@ -11,8 +11,8 @@ package com.breadwallet.ui.recovery
 import android.content.Context
 import android.security.keystore.UserNotAuthenticatedException
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logError
 import com.breadwallet.logger.logInfo
 import com.breadwallet.tools.manager.BRSharedPrefs

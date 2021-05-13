@@ -8,13 +8,13 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.*
-import com.breadwallet.crypto.Unit
-import com.breadwallet.crypto.errors.AccountInitializationError
-import com.breadwallet.crypto.errors.ExportablePaperWalletError
-import com.breadwallet.crypto.errors.FeeEstimationError
-import com.breadwallet.crypto.errors.LimitEstimationError
-import com.breadwallet.crypto.errors.WalletSweeperError
+import com.blockset.walletkit.*
+import com.blockset.walletkit.Unit
+import com.blockset.walletkit.errors.AccountInitializationError
+import com.blockset.walletkit.errors.ExportablePaperWalletError
+import com.blockset.walletkit.errors.FeeEstimationError
+import com.blockset.walletkit.errors.LimitEstimationError
+import com.blockset.walletkit.errors.WalletSweeperError
 import com.breadwallet.util.asyncApiCall
 import java.math.BigDecimal
 import java.math.RoundingMode
