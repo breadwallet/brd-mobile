@@ -27,6 +27,7 @@ package com.breadwallet.ui.wallet
 import android.animation.AnimatorInflater
 import android.animation.LayoutTransition
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.transition.TransitionManager
@@ -68,6 +69,7 @@ import com.breadwallet.ui.wallet.spark.SparkAdapter
 import com.breadwallet.ui.wallet.spark.SparkView
 import com.breadwallet.ui.wallet.spark.animation.LineSparkAnimator
 import com.breadwallet.ui.web.WebController
+import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isTezos
 import com.google.android.material.appbar.AppBarLayout
 import com.mikepenz.fastadapter.FastAdapter
@@ -193,6 +195,10 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
             }
 
             appbar.addOnOffsetChangedListener(this@WalletController)
+
+            if (currencyCode.isBitcoin()) {
+                giftButton.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -216,6 +222,7 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                 buttonCreateAccount.clicks().map { E.OnCreateAccountClicked },
                 breadBar.searchIcon.clicks().map { E.OnSearchClicked },
                 breadBar.backIcon.clicks().map { E.OnBackClicked },
+                giftButton.clicks().map { E.OnGiftClicked },
                 bindTxList(),
                 bindIntervalClicks(),
                 bindSparkLineScrubbing(),
@@ -554,6 +561,7 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                 receiveButton.setColor(buttonColor)
                 buttonCreateAccount.setColor(buttonColor)
                 progressCreateAccount.indeterminateDrawable.setTint(buttonColor)
+                giftButton.background = ColorDrawable(buttonColor)
 
                 if (endColor != null) {
                     val color = Color.parseColor(endColor)
@@ -565,6 +573,7 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                     sendButton.setColor(it)
                     receiveButton.setColor(it)
                     buttonCreateAccount.setColor(it)
+                    giftButton.background = ColorDrawable(it)
                 }
             }
 
