@@ -69,7 +69,13 @@ class Transaction {
     var toAddress: String { return targetAddress }
     var fromAddress: String { return sourceAddress }
 
-    var amount: Amount { return Amount(cryptoAmount: transfer.amount, currency: currency) }
+    var amount: Amount {
+        if currency.uid == transfer.amount.currency.uid {
+            return Amount(cryptoAmount: transfer.amount, currency: currency)
+        } else {
+            return Amount.zero(currency)
+        }
+    }
     var fee: Amount { return Amount(cryptoAmount: transfer.fee, currency: wallet.feeCurrency) }
 
     var feeBasis: FeeBasis? {
