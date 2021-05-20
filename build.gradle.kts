@@ -7,5 +7,7 @@ allprojects {
     repositories {
         mavenCentral()
         google()
+        gradlePluginPortal() // TODO: required by com.android.tools.lint for org.jetbrains.trove4j:trove4j:20160824
     }
 }
+

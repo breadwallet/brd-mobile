@@ -1,8 +1,8 @@
 /**
  * BreadWallet
  *
- * Created by Drew Carlson <drew.carlson@breadwallet.com> on 8/13/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Created by Ahsan Butt <ahsan.butt@breadwallet.com> on 4/7/21.
+ * Copyright (c) 2021 breadwallet LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,39 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.breadwallet.mobius
+package com.brd.api
 
-import com.spotify.mobius.functions.Consumer
-import kt.mobius.functions.Consumer as KtConsumer
+import com.breadwallet.tools.security.BrdUserManager
+import drewcarlson.blockset.BdbService
 
-
-/**
- * Collects events and passes them in order to a new consumer via [dequeueAll].
- */
-class QueuedConsumer<V> : Consumer<V> {
-
-    private val queue = arrayListOf<V>()
-
-    override fun accept(value: V) = synchronized<Unit>(queue) {
-        queue.add(value)
-    }
-
-    fun dequeueAll(target: Consumer<V>) = synchronized(queue) {
-        queue.forEach(target::accept)
-        queue.clear()
-    }
-}
-
-class QueuedConsumerKt<V> : KtConsumer<V> {
-
-    private val queue = arrayListOf<V>()
-
-    override fun accept(value: V) = synchronized<Unit>(queue) {
-        queue.add(value)
-    }
-
-    fun dequeueAll(target: KtConsumer<V>) = synchronized(queue) {
-        queue.forEach(target::accept)
-        queue.clear()
-    }
+class AndroidBdbAuthProvider(private val userManager: BrdUserManager) : BdbService.AuthProvider {
+    override fun readUserJwt(): String? = userManager.getBdbJwt()
 }

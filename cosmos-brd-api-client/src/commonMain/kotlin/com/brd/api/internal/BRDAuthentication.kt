@@ -24,16 +24,13 @@
  */
 package com.brd.api.internal
 
-import com.brd.api.BRDAuthProvider
+import com.brd.api.BrdAuthProvider
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature
 import io.ktor.client.features.ResponseException
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.content.TextContent
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import io.ktor.http.withCharset
+import io.ktor.http.*
 import io.ktor.util.AttributeKey
 import io.ktor.util.pipeline.*
 import io.ktor.utils.io.charsets.Charsets.UTF_8
@@ -47,9 +44,9 @@ import kotlinx.serialization.json.put
 
 internal class BRDAuthentication {
 
-    private lateinit var brdAuthProvider: BRDAuthProvider
+    private lateinit var brdAuthProvider: BrdAuthProvider
 
-    fun brdAuthProvider(brdAuthProvider: BRDAuthProvider) {
+    fun brdAuthProvider(brdAuthProvider: BrdAuthProvider) {
         this.brdAuthProvider = brdAuthProvider
     }
 
@@ -66,13 +63,15 @@ internal class BRDAuthentication {
         override fun prepare(block: BRDAuthentication.() -> Unit): BRDAuthentication =
             BRDAuthentication().apply(block)
 
-        private suspend fun fetchToken(scope: HttpClient, brdAuthProvider: BRDAuthProvider): String? {
+        private suspend fun fetchToken(url: URLBuilder, scope: HttpClient, brdAuthProvider: BrdAuthProvider): String? {
             return brdAuthProvider.token ?: authMutex.withLock {
                 val latestToken = brdAuthProvider.token
                 if (latestToken != null) return latestToken
 
+                val requestUrl = url.path("token").build()
+
                 val token = try {
-                    val response = scope.post<JsonObject>("/token") {
+                    val response = scope.post<JsonObject>(requestUrl) {
                         contentType(ContentType.Application.Json.withCharset(UTF_8))
                         body = buildJsonObject {
                             put("pubKey", brdAuthProvider.publicKey())
@@ -94,7 +93,7 @@ internal class BRDAuthentication {
             scope.requestPipeline.insertPhaseBefore(HttpRequestPipeline.Render, AuthenticationPhase)
             scope.requestPipeline.intercept(AuthenticationPhase) { body ->
                 if (!context.headers.contains(ENABLE_AUTH_HEADER)) return@intercept
-                val token = fetchToken(scope, brdAuthProvider) ?: return@intercept
+                val token = fetchToken(context.url.clone(), scope, brdAuthProvider) ?: return@intercept
                 if (brdAuthProvider.hasKey()) {
                     val content = body as? TextContent
                     context.headers.remove(ENABLE_AUTH_HEADER)

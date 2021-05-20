@@ -25,12 +25,9 @@
 package com.brd.api
 
 import com.brd.api.models.*
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 
-private const val STAGING_API_HOST = "brd-web-staging.com"//"stage2.breadwallet.com"
-private const val PRODUCTION_API_HOST = "api.breadwallet.com"
-
-interface BRDAuthProvider {
+interface BrdAuthProvider {
     data class Signature(
         val signature: String,
         val timestamp: String,
@@ -43,25 +40,23 @@ interface BRDAuthProvider {
     fun sign(method: String, body: String, contentType: String, url: String): Signature
 }
 
-interface BRDApiClient {
+interface BrdApiClient {
 
     @Suppress("unused")
     companion object {
-        fun create(authProvider: BRDAuthProvider): BRDApiClient =
-            HydraApiClient(
-                STAGING_API_HOST,
-                brdAuthProvider = authProvider
-            )
+        fun create(
+            host: BrdApiHost,
+            authProvider: BrdAuthProvider
+        ): BrdApiClient = HydraApiClient(host, authProvider)
 
-        fun create(authProvider: BRDAuthProvider, httpClient: HttpClient): BRDApiClient =
-            HydraApiClient(STAGING_API_HOST, httpClient, authProvider)
-
-        fun create(authProvider: BRDAuthProvider, host: String): BRDApiClient =
-            HydraApiClient(host, brdAuthProvider = authProvider)
-
-        fun create(authProvider: BRDAuthProvider, host: String, httpClient: HttpClient): BRDApiClient =
-            HydraApiClient(host, httpClient, authProvider)
+        fun create(
+            host: BrdApiHost,
+            authProvider: BrdAuthProvider,
+            httpClient: HttpClient,
+        ): BrdApiClient = HydraApiClient(host, authProvider, httpClient)
     }
+
+    var host: BrdApiHost
 
     /**
      * Fetch a list of supported mainnet [BrdCurrency]s or testnet

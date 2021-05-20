@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,7 +60,7 @@
 		3A36328D225301D60043EBA4 /* PriceChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36328C225301D60043EBA4 /* PriceChangeView.swift */; };
 		3A3D63DC22F10B4F000DE920 /* AddWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D63DB22F10B4F000DE920 /* AddWalletsViewController.swift */; };
 		3A3D63DE22F10B58000DE920 /* ManageWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D63DD22F10B57000DE920 /* ManageWalletsViewController.swift */; };
-		3A4972C52602E0ED0002C3EC /* IosBRDAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4972C42602E0ED0002C3EC /* IosBRDAuthProvider.swift */; };
+		3A4972C52602E0ED0002C3EC /* IosBrdAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4972C42602E0ED0002C3EC /* IosBrdAuthProvider.swift */; };
 		3A529E4C253B957200BD0A17 /* StakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A529E4B253B957200BD0A17 /* StakingCell.swift */; };
 		3A529E5C253CAD3F00BD0A17 /* StakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A529E5B253CAD3F00BD0A17 /* StakeViewController.swift */; };
 		3A5C9B2B22A5676F00C907C1 /* PriceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C9B2A22A5676F00C907C1 /* PriceChange.swift */; };
@@ -774,7 +774,7 @@
 		3A36328C225301D60043EBA4 /* PriceChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PriceChangeView.swift; path = src/Views/PriceChangeView.swift; sourceTree = "<group>"; };
 		3A3D63DB22F10B4F000DE920 /* AddWalletsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddWalletsViewController.swift; path = src/ViewControllers/AddWalletsViewController.swift; sourceTree = "<group>"; };
 		3A3D63DD22F10B57000DE920 /* ManageWalletsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManageWalletsViewController.swift; path = src/ViewControllers/ManageWalletsViewController.swift; sourceTree = "<group>"; };
-		3A4972C42602E0ED0002C3EC /* IosBRDAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosBRDAuthProvider.swift; sourceTree = "<group>"; };
+		3A4972C42602E0ED0002C3EC /* IosBrdAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosBrdAuthProvider.swift; sourceTree = "<group>"; };
 		3A529E4B253B957200BD0A17 /* StakingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakingCell.swift; sourceTree = "<group>"; };
 		3A529E5B253CAD3F00BD0A17 /* StakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StakeViewController.swift; path = src/ViewControllers/StakeViewController.swift; sourceTree = "<group>"; };
 		3A5C9B2A22A5676F00C907C1 /* PriceChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PriceChange.swift; path = src/Models/PriceChange.swift; sourceTree = "<group>"; };
@@ -1497,7 +1497,7 @@
 		3A4972C32602E0D10002C3EC /* Cosmos */ = {
 			isa = PBXGroup;
 			children = (
-				3A4972C42602E0ED0002C3EC /* IosBRDAuthProvider.swift */,
+				3A4972C42602E0ED0002C3EC /* IosBrdAuthProvider.swift */,
 			);
 			path = Cosmos;
 			sourceTree = "<group>";
@@ -3206,7 +3206,7 @@
 				3A0915CA24D8B31200CDC6A4 /* EnableKeychainView.swift in Sources */,
 				CEBF29301EF9D76F005C330A /* Environment.swift in Sources */,
 				7C67B6362056FB13006487BE /* BRAPIClient+Currencies.swift in Sources */,
-				3A4972C52602E0ED0002C3EC /* IosBRDAuthProvider.swift in Sources */,
+				3A4972C52602E0ED0002C3EC /* IosBrdAuthProvider.swift in Sources */,
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
 				7CF9988D23202C75004AEC17 /* BRAPIClient+Experiments.swift in Sources */,
 				CEE0EF521EBD14B60018DB36 /* PinTransitioningDelegate.swift in Sources */,

@@ -28,17 +28,13 @@ import com.brd.api.internal.BRDAuthentication
 import com.brd.api.models.*
 import com.brd.api.models.ExchangeOrder.Action.CryptoReceiveAddress
 import com.brd.api.models.ExchangeOrder.Action.CryptoRefundAddress
+import com.brd.concurrent.AtomicReference
 import io.ktor.client.HttpClient
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.defaultRequest
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.*
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
+import io.ktor.client.request.*
 import io.ktor.client.statement.readText
 import io.ktor.http.*
 import io.ktor.utils.io.charsets.Charsets.UTF_8
@@ -56,7 +52,7 @@ import kotlinx.serialization.json.put
 import kotlin.native.concurrent.SharedImmutable
 
 @SharedImmutable
-internal val apiJson = Json {
+val brdJson = Json {
     isLenient = true
     ignoreUnknownKeys = true
     coerceInputValues = true
@@ -64,21 +60,17 @@ internal val apiJson = Json {
 }
 
 internal class HydraApiClient(
-    apiHost: String,
+    apiHost: BrdApiHost,
+    brdAuthProvider: BrdAuthProvider,
     httpClient: HttpClient = HttpClient(),
-    brdAuthProvider: BRDAuthProvider,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default
-) : BRDApiClient {
+) : BrdApiClient {
+
+    private val apiHost = AtomicReference(apiHost)
 
     private val http = httpClient.config {
-        defaultRequest {
-            url {
-                protocol = URLProtocol.HTTPS
-                host = apiHost
-            }
-        }
         Json {
-            serializer = KotlinxSerializer(apiJson)
+            serializer = KotlinxSerializer(brdJson)
             accept(ContentType.Application.Json.withCharset(UTF_8))
         }
         Logging {
@@ -89,6 +81,12 @@ internal class HydraApiClient(
             brdAuthProvider(brdAuthProvider)
         }
     }
+
+    override var host: BrdApiHost
+        get() = apiHost.value
+        set(value) {
+            apiHost.value = value
+        }
 
     override suspend fun getCurrencies(mainnet: Boolean): BrdCurrenciesResult {
         return withContext(dispatcher) {
@@ -189,7 +187,9 @@ internal class HydraApiClient(
             } catch (e: ResponseException) {
                 val bodyString = e.response.readText()
                 val jsonData = try {
-                    apiJson.parseToJsonElement(bodyString)
+                    if (e.response.contentType() == ContentType.Application.Json) {
+                        brdJson.parseToJsonElement(bodyString)
+                    } else null
                 } catch (e: SerializationException) {
                     null
                 }?.jsonObject
@@ -198,7 +198,7 @@ internal class HydraApiClient(
                     body = bodyString,
                     message = jsonData?.get("message")?.jsonPrimitive?.contentOrNull,
                     type = jsonData?.get("type")?.jsonPrimitive?.contentOrNull
-                        ?.let { apiJson.decodeFromString(it) }
+                        ?.let { brdJson.decodeFromString(it) }
                 )
             }
         }

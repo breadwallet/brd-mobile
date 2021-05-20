@@ -160,6 +160,9 @@ dependencies {
     implementation(project(":brd-android:app-core"))
     implementation(Libs.WalletKit.CoreAndroid)
 
+    implementation(Libs.Mobiuskt.Coroutines)
+    implementation(Libs.Mobiuskt.Android)
+
     // AndroidX
     implementation(Libs.Androidx.Biometric)
     implementation(Libs.Androidx.LifecycleExtensions)
