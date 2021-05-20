@@ -1,7 +1,7 @@
 /**
  * BreadWallet
  *
- * Created by Ahsan Butt <ahsan.butt@breadwallet.com> on 4/7/21.
+ * Created by Drew Carlson <drew.carlson@breadwallet.com> on 2/26/21.
  * Copyright (c) 2021 breadwallet LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,11 +22,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bdb.api
+package com.brd.api
 
-import com.breadwallet.tools.security.BrdUserManager
-import drewcarlson.blockset.BdbService
+sealed class BrdApiHost(open val host: String) {
+    object PRODUCTION : BrdApiHost("https://app.brd.com")
+    object STAGING : BrdApiHost("https://brd-web-staging.com")
+    object CANARY : BrdApiHost("https://canary.brd.com")
 
-class AndroidBdbAuthProvider(private val userManager: BrdUserManager) : BdbService.AuthProvider {
-    override fun readUserJwt(): String? = userManager.getBdbJwt()
+    object LEGACY_PRODUCTION : BrdApiHost("https://api.breadwallet.com")
+    object LEGACY_STAGING : BrdApiHost("https://stage2.breadwallet.com")
+
+    class Custom(host: String) : BrdApiHost(host) {
+        override fun hashCode(): Int = host.hashCode()
+        override fun equals(other: Any?): Boolean = ((other as? Custom)?.host ?: other) == host
+        override fun toString(): String = "Custom(host='$host')"
+    }
+
+    operator fun component1(): String = host
 }

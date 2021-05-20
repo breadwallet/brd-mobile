@@ -1,5 +1,5 @@
 //
-//  IosBRDAuthProvider.swift
+//  IosBrdAuthProvider.swift
 //  breadwallet
 //
 //  Created by Andrew Carlson on 2/25/21.
@@ -12,7 +12,7 @@ import Foundation
 import Cosmos
 import WalletKit
 
-class IosBRDAuthProvider: BRDAuthProvider {
+class IosBrdAuthProvider: BrdAuthProvider {
     
     private let authenticator: WalletAuthenticator
     
@@ -29,11 +29,11 @@ class IosBRDAuthProvider: BRDAuthProvider {
     
     var token: String? {
         get {
-            let tokenData = authenticator.apiUserAccount!
+            let tokenData = authenticator.apiUserAccount ?? [:]
             return tokenData["token"] as? String
         }
         set {
-            var tokenData = authenticator.apiUserAccount!
+            var tokenData = authenticator.apiUserAccount ?? [:]
             tokenData["token"] = newValue
         }
     }
@@ -50,7 +50,7 @@ class IosBRDAuthProvider: BRDAuthProvider {
         return authenticator.apiAuthKey!.encodeAsPublic.hexToData!.base58
     }
     
-    func sign(method: String, body: String, contentType: String, url: String) -> BRDAuthProviderSignature {
+    func sign(method: String, body: String, contentType: String, url: String) -> BrdAuthProviderSignature {
         let date = Date().RFC1123String()!
         var bodySignature: String = ""
         switch method {
@@ -65,6 +65,6 @@ class IosBRDAuthProvider: BRDAuthProvider {
         
         let signingData = signingString.data(using: .utf8)!
         let sig = signingData.sha256_2.compactSign(key: authKey!)!
-        return BRDAuthProviderSignature.init(signature: sig.base58, timestamp: date)
+        return BrdAuthProviderSignature.init(signature: sig.base58, timestamp: date)
     }
 }

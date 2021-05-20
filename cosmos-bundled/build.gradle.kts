@@ -38,6 +38,8 @@ kotlin {
                 export(project(":cosmos-brd-api-client"))
                 export(project(":cosmos-bakers-api-client"))
                 export(project(":cosmos-preferences"))
+                export(brd.Libs.Mobiuskt.Core)
+                export(brd.Libs.Mobiuskt.Extras)
                 export(brd.Libs.Blockset)
             }
         }
@@ -57,6 +59,14 @@ kotlin {
                 api(project(":cosmos-bakers-api-client"))
                 api(project(":cosmos-preferences"))
                 api(brd.Libs.Blockset)
+                api(brd.Libs.Mobiuskt.Core)
+                api(brd.Libs.Mobiuskt.Extras)
+
+                implementation(brd.Libs.Coroutines.Core) {
+                    version {
+                        strictly(brd.COROUTINES_VERSION)
+                    }
+                }
             }
         }
         named("androidMain") {

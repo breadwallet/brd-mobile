@@ -36,9 +36,9 @@ import java.util.TimeZone
 
 private const val GMT = "GMT"
 
-class AndroidBRDAuthProvider(
+class AndroidBrdAuthProvider(
     private val userManager: BrdUserManager,
-) : BRDAuthProvider {
+) : BrdAuthProvider {
 
     private var authKey: Key? = null
         get() {
@@ -71,7 +71,7 @@ class AndroidBRDAuthProvider(
         return BRSharedPrefs.getDeviceId()
     }
 
-    override fun sign(method: String, body: String, contentType: String, url: String): BRDAuthProvider.Signature {
+    override fun sign(method: String, body: String, contentType: String, url: String): BrdAuthProvider.Signature {
         val base58Body = try {
             if (body.isNotBlank()) {
                 CryptoHelper.base58ofSha256(body.toByteArray(Charsets.UTF_8))
@@ -93,7 +93,7 @@ class AndroidBRDAuthProvider(
             $url
         """.trimIndent()
 
-        return BRDAuthProvider.Signature(
+        return BrdAuthProvider.Signature(
             signature = checkNotNull(APIClient.signRequest(requestString, checkNotNull(authKey))),
             timestamp = httpDate
         )

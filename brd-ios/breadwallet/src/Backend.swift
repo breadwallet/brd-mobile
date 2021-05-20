@@ -15,9 +15,11 @@ class Backend {
     // MARK: - Singleton
     
     private static let shared = Backend()
+
     private init() {
-        apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
-        bdbClient = BdbServiceCompanion().create()
+        let authenticator = NoAuthWalletAuthenticator()
+        apiClient = BRAPIClient(authenticator: authenticator)
+        bdbClient = BdbServiceCompanion().createForTest(bdbAuthToken: "")
     }
     
     // MARK: - Private

@@ -39,11 +39,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.bdb.api.AndroidBdbAuthProvider
-import com.brd.api.AndroidBRDAuthProvider
-import com.brd.api.BRDApiClient
+import com.brd.api.AndroidBdbAuthProvider
+import com.brd.api.AndroidBrdAuthProvider
+import com.brd.api.BrdApiClient
+import com.brd.api.BrdApiHost
 import com.brd.bakerapi.BakersApiClient
 import com.brd.prefs.AndroidPreferences
+import com.brd.prefs.BrdPreferences
 import com.brd.prefs.Preferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.BdbAuthInterceptor
@@ -410,13 +412,17 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        bind<BRDApiClient>() with singleton {
-            BRDApiClient.create(AndroidBRDAuthProvider(instance()))
+        bind<BrdApiClient>() with singleton {
+            BrdApiClient.create(BrdApiHost.STAGING, AndroidBrdAuthProvider(instance()), instance())
         }
 
         bind<Preferences>() with singleton {
             val prefs = getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE)
             AndroidPreferences(prefs)
+        }
+
+        bind<BrdPreferences>() with singleton {
+            BrdPreferences(instance())
         }
 
         bind<BakersApiClient>() with singleton {
