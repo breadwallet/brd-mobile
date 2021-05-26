@@ -517,7 +517,7 @@ class StakeViewController: UIViewController, Subscriber, Trackable, ModalPresent
 
 extension StakeViewController {
     private func track(eventName: String) {
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code, eventName]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.lowercased(), eventName]))
     }
 }
 

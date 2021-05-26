@@ -282,7 +282,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
         }
         
         chartView.scrubberDidBegin = { [unowned self] in
-            self.saveEvent(self.makeEventName([EventContext.wallet.name, self.currency.code, Event.scrubbed.name]))
+            self.saveEvent(self.makeEventName([EventContext.wallet.name, self.currency.code.lowercased(), Event.scrubbed.name]))
             self.isScrubbing = true
             UIView.animate(withDuration: C.animationDuration, animations: {
                 self.priceChangeView.alpha = 0.0
@@ -414,7 +414,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
     }
     
     private func didTap(button: UIButton) {
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code, Event.axisToggle.name]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.lowercased(), Event.axisToggle.name]))
         updateHistoryPeriodPillPosition(button: button, withAnimation: true)
     }
 
