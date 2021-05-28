@@ -160,20 +160,40 @@ class ApplicationController: Subscriber, Trackable {
     }
     
     /// Initialize the core system with an account
+    /// Launch/authenticate with BRDAPI
+    /// Initiate KVStore sync
+    /// On KVStore sync complete, stand-up Core
+    /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
-        self.startBackendServices()
-        self.setWalletInfo(account: account)
-        authenticateWithBackend { jwt in
-            self.coreSystem.create(account: account, 
-                                   authToken: jwt,
-                                   btcWalletCreationCallback: self.handleDeferedLaunchURL) {
-                self.modalPresenter = ModalPresenter(keyStore: self.keyStore,
-                                                     system: self.coreSystem,
-                                                     window: self.window,
-                                                     alertPresenter: self.alertPresenter)
-                self.coreSystem.connect()
+        // Authenticate with BRDAPI backend
+        Backend.connect(authenticator: keyStore as WalletAuthenticator)
+        Backend.sendLaunchEvent()
+        Backend.apiClient.analytics?.onWalletReady()
+        // Begin KVStore key sync
+        DispatchQueue.global(qos: .userInitiated).async {
+            Backend.kvStore?.syncAllKeys { [weak self] error in
+                print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
+                Store.trigger(name: .didSyncKVStore)
+                guard let weakSelf = self else { return }
+                weakSelf.setWalletInfo(account: account)
+                weakSelf.authenticateWithBackend { jwt in
+                    // Begin Core stand-up
+                    weakSelf.coreSystem.create(account: account,
+                                           authToken: jwt,
+                                           btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
+                        weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
+                                                             system: weakSelf.coreSystem,
+                                                             window: weakSelf.window,
+                                                             alertPresenter: weakSelf.alertPresenter)
+                        weakSelf.coreSystem.connect()
+                    }
+                }
+                
             }
         }
+        Backend.apiClient.updateExperiments()
+        Backend.updateExchangeRates()
+        Backend.apiClient.fetchAnnouncements()
     }
     
     private func handleDeferedLaunchURL() {
@@ -294,13 +314,6 @@ class ApplicationController: Subscriber, Trackable {
     // MARK: Services/Assets
     
     func performFetch(_ completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    }
-    
-    /// Initialize backend services. Should only be called once per session.
-    private func startBackendServices() {
-        Backend.connect(authenticator: keyStore as WalletAuthenticator)
-        Backend.sendLaunchEvent()
-        Backend.apiClient.analytics?.onWalletReady()
     }
 
     /// Initialize WalletInfo in KV-store. Needed prior to creating the System.
