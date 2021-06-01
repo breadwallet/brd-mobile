@@ -133,6 +133,8 @@ class TxDetailsController(
                 memoInput.textChanges().map { E.OnMemoChanged(it) },
                 transactionId.clicks().map { E.OnTransactionHashClicked },
                 txToFromAddress.clicks().map { E.OnAddressClicked },
+                giftResend.clicks().map { E.OnGiftResendClicked },
+                giftReclaim.clicks().map { E.OnGiftReclaimClicked },
             )
         }
     }
