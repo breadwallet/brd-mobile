@@ -196,7 +196,7 @@ class WalletConnectionSettingsViewController: UIViewController, Trackable {
     
     private func makeToggleEvent() -> String {
         let event = toggleSwitch.isOn ? Event.enable.name : Event.disable.name
-        return makeEventName([EventContext.fastSync.name, currency.code.lowercased(), event])
+        return makeEventName([EventContext.fastSync.name, currency.code.uppercased(), event])
     }
 
     required init?(coder aDecoder: NSCoder) {

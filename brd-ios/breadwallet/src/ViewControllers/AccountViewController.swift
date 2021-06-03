@@ -138,7 +138,7 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
             self.footerView.jiggle()
         }
         
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code.lowercased(), Event.appeared.name]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.uppercased(), Event.appeared.name]))
     }
     
     override func viewSafeAreaInsetsDidChange() {
