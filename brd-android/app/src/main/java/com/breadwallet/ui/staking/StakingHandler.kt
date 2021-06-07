@@ -65,14 +65,13 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import java.util.Date
-import kotlin.time.milliseconds
 
 private const val DELEGATE = "Delegate"
 private const val UNSTAKE_KEY = "Type"
 private const val UNSTAKE_VALUE = "Delegation"
 private const val DELEGATION_OP = "DelegationOp"
 private const val DELEGATION_OP_VALUE = "1"
-private val WALLET_UPDATE_DEBOUNCE = 250L.milliseconds
+private const val WALLET_UPDATE_DEBOUNCE = 250L
 
 fun createStakingHandler(
     context: Context,
