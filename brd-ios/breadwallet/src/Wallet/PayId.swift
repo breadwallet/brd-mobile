@@ -232,21 +232,17 @@ private class UDomains: Resolvable {
     
     func fetchAddress(forCurrency currency: Currency, callback: @escaping (Result<(String, String?), ResolvableError>) -> Void) {
         Backend.bdbClient.addressLookup(domainName: address, currencyCodeList: [currency.code]) { (result, _) in
-            guard result != nil else {
+            guard result != nil,
+                  let success = result as? BdbAddresses else {
                 callback(.failure(.badResponse))
                 return
             }
-            guard let value = result?.embedded.addresses.first,
-                  let status = value.status,
-                  status == BdbAddress.Status.success else {
+            let value = success.embedded.addresses.first
+            if value?.status == BdbAddress.Status.success {
+                callback(.success((value!.address!, nil)))
+            } else {
                 callback(.failure(.badResponse))
-                return
             }
-            guard status == BdbAddress.Status.success else {
-                callback(.failure(.currencyNotSupported))
-                return
-            }
-            callback(.success((value.address!, nil)))
         }
     }
 }
@@ -261,21 +257,17 @@ private class ENS: Resolvable {
     
     func fetchAddress(forCurrency currency: Currency, callback: @escaping (Result<(String, String?), ResolvableError>) -> Void) {
         Backend.bdbClient.addressLookup(domainName: address, currencyCodeList: [currency.code]) { (result, _) in
-            guard result != nil else {
+            guard result != nil,
+                  let success = result as? BdbAddresses else {
                 callback(.failure(.badResponse))
                 return
             }
-            guard let value = result?.embedded.addresses.first,
-                  let status = value.status,
-                  status == BdbAddress.Status.success else {
+            let value = success.embedded.addresses.first
+            if value?.status == BdbAddress.Status.success {
+                callback(.success((value!.address!, nil)))
+            } else {
                 callback(.failure(.badResponse))
-                return
             }
-            guard status == BdbAddress.Status.success else {
-                callback(.failure(.currencyNotSupported))
-                return
-            }
-            callback(.success((value.address!, nil)))
         }
     }
 }
