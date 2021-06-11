@@ -24,7 +24,10 @@
  */
 package com.breadwallet.util
 
+import com.breadwallet.logger.logError
 import drewcarlson.blockset.BdbAddress
+import drewcarlson.blockset.BdbAddresses
+import drewcarlson.blockset.BdbAddressesError
 import drewcarlson.blockset.BdbService
 
 
@@ -49,14 +52,23 @@ class UnstoppableDomainService(private val bdbService: BdbService) : AddressReso
         currencyCode: CurrencyCode,
         nativeCurrencyCode: CurrencyCode
     ) : AddressResult {
-        val result = bdbService.addressLookup(target, listOf(currencyCode)).embedded.addresses.first()
-        return when (result.status) {
-            BdbAddress.Status.SUCCESS -> {
-                if (result.address != null) AddressResult.Success(result.address!!, null)
-                else AddressResult.NoAddress
+        return when (val response = bdbService.addressLookup(target, currencyCode)) {
+            is BdbAddresses -> {
+                val result = response.embedded.addresses.first()
+                when (result.status) {
+                    BdbAddress.Status.SUCCESS -> {
+                        result.address?.let { address ->
+                            AddressResult.Success(address, null)
+                        } ?: AddressResult.NoAddress
+                    }
+                    BdbAddress.Status.BLOCKCHAIN_IS_DOWN -> AddressResult.ExternalError
+                    else -> AddressResult.Invalid
+                }
             }
-            BdbAddress.Status.BLOCKCHAIN_IS_DOWN -> AddressResult.ExternalError
-            else -> AddressResult.Invalid
+            is BdbAddressesError -> {
+                logError("Address lookup failed: $response")
+                AddressResult.ExternalError
+            }
         }
     }
 }
