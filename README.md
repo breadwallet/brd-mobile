@@ -26,6 +26,12 @@ On iOS the user’s private key is stored in the device keychain, secured by Sec
 Users are also able to backup their wallet using iCloud Keychain to store an encrypted backup of their recovery phrase.
 The backup is encrypted with the BRD app PIN.
 
+#### Jailbreak Warning
+
+***Installation on jailbroken devices is strongly discouraged.***
+
+Any jailbreak app can grant itself access to every other app's keychain data. This means it can access your wallet and steal your bitcoin by self-signing as described [here](http://www.saurik.com/id/8) and including `<key>application-identifier</key><string>*</string>` in its .entitlements file.
+
 ### Designed with New Users in Mind
 
 Simplicity and ease-of-use is **BRD**'s core design principle. A simple recovery phrase (which we call a recovery key) is all that is needed to restore the user's wallet if they ever lose or replace their device. **BRD** is [deterministic](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki), which means the user's balance and transaction history can be recovered just from the recovery key.
@@ -154,14 +160,9 @@ To build BRD application versions before 4.10, please refer to the respective le
 
 A light clone of this repository can be created with `git clone git@github.com:breadwallet/brd-mobile.git --depth 50`
 
-### WARNING:
 
-***Installation on jailbroken devices is strongly discouraged.***
+## Licensing
 
-Any jailbreak app can grant itself access to every other app's keychain data. This means it can access your wallet and steal your bitcoin by self-signing as described [here](http://www.saurik.com/id/8) and including `<key>application-identifier</key><string>*</string>` in its .entitlements file.
+**BRD** source code is available under the terms of the Business Source License 1.1 (`BUSL-1.1`), see [`LICENSE`](./LICENSE).
 
----
-
-**BRD** is open source and available under the terms of the MIT license.
-
-Source code is available at https://github.com/breadwallet
+[WalletKit](https://github.com/blockset-corp/walletkit) is available under the terms of the MIT License.

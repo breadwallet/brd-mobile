@@ -3,7 +3,9 @@
 //  BreadWallet
 //
 //  Created by Samuel Sutch on 10/9/16.
-//  Copyright © 2016 Aaron Voisine. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import Foundation

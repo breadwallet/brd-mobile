@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2020-08-03.
-//  Copyright © 2020 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 //  See the LICENSE file at the project root for license information.
 //

@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by InfoView.swift on 2019-03-25.
-//  Copyright © 2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit
