@@ -3,7 +3,9 @@
 //  Bezier
 //
 //  Created by Ramsundar Shandilya on 10/12/15.
-//  Copyright © 2015 Y Media Labs. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 //  source: https://github.com/Ramshandilya/Bezier
 
