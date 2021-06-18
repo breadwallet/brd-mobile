@@ -2,25 +2,9 @@
  * BreadWallet
  *
  * Created by Drew Carlson <drew.carlson@breadwallet.com> on 10/21/20.
- * Copyright (c) 2020 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package brd
 
@@ -35,13 +19,13 @@ object BrdRelease {
     private val marketing = ciTag?.firstOrNull() ?: 4
 
     /** Minor version. Usually affected by product. Maximum value: 99 */
-    private val product = ciTag?.get(1) ?: 10
+    private val product = ciTag?.get(1) ?: 11
 
     /** Hot fix version. Usually affected by engineering. Maximum value: 9 */
     private val engineering = ciTag?.get(2) ?: 0
 
     /** Build version. Increase for each new build. Maximum value: 999 */
-    private val build = ciTag?.lastOrNull() ?: 103
+    private val build = ciTag?.lastOrNull() ?: 9
 
     init {
         check(marketing in 0..99)

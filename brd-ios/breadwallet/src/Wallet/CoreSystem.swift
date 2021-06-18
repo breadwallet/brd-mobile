@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Ehsan Rezaie on 2019-04-16.
-//  Copyright © 2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import Foundation
@@ -199,7 +201,6 @@ class CoreSystem: Subscriber, Trackable {
     private func addCurrencies(for network: Network) {
         guard let assetCollection = assetCollection else { return assertionFailure() }
         for coreCurrency in network.currencies {
-            guard currencies[coreCurrency.uid] == nil else { return }
             guard let metaData = assetCollection.allAssets[coreCurrency.uid] else {
                 print("[SYS] unknown currency omitted: \(network.currency.code) / \(coreCurrency.uid)")
                 continue
@@ -781,6 +782,19 @@ extension CoreSystem: SystemListener {
 
     func handleNetworkEvent(system: System, network: Network, event: NetworkEvent) {
         print("[SYS] network event: \(event) (\(network))")
+        switch event {
+        case .currenciesUpdated:
+            guard !E.isRunningTests else { return }
+            addCurrencies(for: network)
+            let timeout = DispatchTime.now() + .milliseconds(3000)
+            DispatchQueue.main.asyncAfter(deadline: timeout) { [weak self] in
+                self?.setupWalletManager(for: network)
+                self?.updateWalletStates()
+            }
+
+        default:
+            return
+        }
     }
 }
 

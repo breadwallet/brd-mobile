@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2019-04-01.
-//  Copyright © 2019 breadwallet LLC. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit

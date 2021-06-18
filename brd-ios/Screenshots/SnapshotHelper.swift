@@ -3,7 +3,9 @@
 //  Example
 //
 //  Created by Felix Krause on 10/8/15.
-//  Copyright © 2015 Felix Krause. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 // -----------------------------------------------------

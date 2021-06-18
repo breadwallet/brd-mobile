@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2016-11-16.
-//  Copyright © 2016-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit
@@ -138,7 +140,7 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
             self.footerView.jiggle()
         }
         
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code, Event.appeared.name]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.uppercased(), Event.appeared.name]))
     }
     
     override func viewSafeAreaInsetsDidChange() {

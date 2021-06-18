@@ -3,7 +3,9 @@
 //  breadwalletUITests
 //
 //  Created by ajv on 10/5/16.
-//  Copyright © 2016-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import XCTest

@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Ray Vander Veen on 8/14/19.
-//  Copyright © 2019 breadwallet LLC. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import Foundation
