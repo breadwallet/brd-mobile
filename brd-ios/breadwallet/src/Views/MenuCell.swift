@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Ehsan Rezaie on 2018-01-31.
-//  Copyright © 2018-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit

@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2020-10-18.
-//  Copyright © 2020 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 //  See the LICENSE file at the project root for license information.
 //
@@ -517,7 +519,7 @@ class StakeViewController: UIViewController, Subscriber, Trackable, ModalPresent
 
 extension StakeViewController {
     private func track(eventName: String) {
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code, eventName]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.uppercased(), eventName]))
     }
 }
 
