@@ -5,6 +5,8 @@
 //  Created by Drew Carlson on 2/5/21.
 //  Copyright © 2021 Breadwinner AG. All rights reserved.
 //
+//  SPDX-License-Identifier: BUSL-1.1
+//
 //  See the LICENSE file at the project root for license information.
 //
 

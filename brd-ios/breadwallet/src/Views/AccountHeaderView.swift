@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2016-11-16.
-//  Copyright © 2016-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit
@@ -282,7 +284,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
         }
         
         chartView.scrubberDidBegin = { [unowned self] in
-            self.saveEvent(self.makeEventName([EventContext.wallet.name, self.currency.code, Event.scrubbed.name]))
+            self.saveEvent(self.makeEventName([EventContext.wallet.name, self.currency.code.uppercased(), Event.scrubbed.name]))
             self.isScrubbing = true
             UIView.animate(withDuration: C.animationDuration, animations: {
                 self.priceChangeView.alpha = 0.0
@@ -414,7 +416,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
     }
     
     private func didTap(button: UIButton) {
-        saveEvent(makeEventName([EventContext.wallet.name, currency.code, Event.axisToggle.name]))
+        saveEvent(makeEventName([EventContext.wallet.name, currency.code.uppercased(), Event.axisToggle.name]))
         updateHistoryPeriodPillPosition(button: button, withAnimation: true)
     }
 

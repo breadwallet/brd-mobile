@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2017-06-13.
-//  Copyright © 2017-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import UIKit
@@ -268,7 +270,7 @@ class ImportKeyViewController: UIViewController, Subscriber {
             showErrorMessage(S.Import.Error.empty)
         case .unexpectedError:
             showErrorMessage(S.Alert.somethingWentWrong)
-        case .queryError(let error):
+        case .clientError(let error):
             showErrorMessage(error.localizedDescription)
         }
     }

@@ -7,10 +7,10 @@
     android:gravity="center"
     android:clickable="true">
 
-    <com.breadwallet.tools.qrcode.QRCodeReaderView
-        android:id="@+id/qrdecoderview"
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/scan_guide"

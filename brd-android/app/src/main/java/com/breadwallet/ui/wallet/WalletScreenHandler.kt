@@ -2,48 +2,25 @@
  * BreadWallet
  *
  * Created by Ahsan Butt <ahsan.butt@breadwallet.com> on 7/26/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package com.breadwallet.ui.wallet
 
 import android.content.Context
 import com.breadwallet.app.BreadApp
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.defaultUnit
-import com.breadwallet.breadbox.feeForToken
+import com.breadwallet.breadbox.*
 import com.breadwallet.ui.formatFiatForUi
-import com.breadwallet.breadbox.hashString
-import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.breadbox.toSanitizedString
 import com.breadwallet.crypto.Amount
 import com.breadwallet.crypto.Transfer
 import com.breadwallet.crypto.TransferDirection
 import com.breadwallet.effecthandler.metadata.MetaDataEffect
 import com.breadwallet.effecthandler.metadata.MetaDataEvent
+import com.breadwallet.logger.logError
 import com.breadwallet.model.PriceChange
 import com.breadwallet.repository.RatesRepository
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.tools.manager.ConnectivityState
-import com.breadwallet.tools.manager.ConnectivityStateProvider
-import com.breadwallet.tools.manager.RatesFetcher
+import com.breadwallet.tools.manager.*
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.models.TransactionState
@@ -54,13 +31,7 @@ import drewcarlson.mobius.flow.flowTransformer
 import drewcarlson.mobius.flow.subtypeEffectHandler
 import drewcarlson.mobius.flow.transform
 import kotlinx.coroutines.Dispatchers.Default
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.*
 import java.math.BigDecimal
 import kotlin.math.min
 
@@ -112,7 +83,7 @@ object WalletScreenHandler {
         effect: F.ConvertCryptoTransactions
     ) = effect.transactions
         .filter { it.hash.isPresent }
-        .map { it.asWalletTransaction() }
+        .mapNotNullOrExceptional { it.asWalletTransaction(effect.currencyId) }
         .run(E::OnTransactionsUpdated)
 
     private fun handleLoadIsTokenSupported(
@@ -170,16 +141,16 @@ object WalletScreenHandler {
             .flatMapLatest { effect ->
                 breadBox.walletTransfers(effect.currencyCode).combine(
                     breadBox.wallet(effect.currencyCode)
-                        .mapLatest { it.walletManager.network.height }
-                        .distinctUntilChanged()
+                        .mapLatest { Pair(it.walletManager.network.height, it.currencyId) }
+                        .distinctUntilChangedBy { it.first }
                 )
-                { transfers, _ -> transfers }
+                { transfers, (_, currencyId) -> Pair(transfers, currencyId) }
             }
-            .mapLatest { transactions ->
+            .mapLatest { (transactions, currencyId) ->
                 E.OnTransactionsUpdated(
                     transactions
                         .filter { it.hash.isPresent }
-                        .map { it.asWalletTransaction() }
+                        .mapNotNullOrExceptional { it.asWalletTransaction(currencyId) }
                         .sortedByDescending(WalletTransaction::timeStamp)
                 )
             }
@@ -216,13 +187,11 @@ object WalletScreenHandler {
         flowTransformer<F.LoadSyncState, E> { effects ->
             effects
                 .flatMapLatest { (currencyId) ->
-                    breadBox.walletSyncState(currencyId)
+                    breadBox.wallet(currencyId)
                 }
-                .mapLatest { state ->
+                .mapLatest { wallet ->
                     E.OnSyncProgressUpdated(
-                        state.percentComplete,
-                        state.timestamp,
-                        state.isSyncing
+                        wallet.isSyncing
                     )
                 }
         }
@@ -295,30 +264,26 @@ private fun getBalanceInFiat(balanceAmt: Amount): BigDecimal {
     ) ?: BigDecimal.ZERO
 }
 
-fun Transfer.asWalletTransaction(): WalletTransaction {
+// Note: Due to a WalletKit9 change, the wallet a Transfer is found in is no longer determinable
+// from within that Transfer, thus the need for the currencyId param. If a Transfer is a fee transfer
+// Transfer.wallet will resolve to the token wallet even if found in the ETH wallet
+fun Transfer.asWalletTransaction(currencyId: String): WalletTransaction {
     val confirmations = confirmations.orNull()?.toInt() ?: 0
     val confirmationsUntilFinal = wallet.walletManager.network.confirmationsUntilFinal.toInt()
     val isComplete = confirmations >= confirmationsUntilFinal
     val transferState = TransactionState.valueOf(state)
-    val feeForToken = feeForToken()
+    val feeForToken = feeForToken(currencyId)
     val amountInDefault = when {
+        feeForToken.isNotBlank() -> fee
         amount.unit == wallet.defaultUnit -> amount
-        else -> amount.convert(wallet.defaultUnit).get()
+        else -> checkNotNull(amount.convert(wallet.defaultUnit).orNull())
     }
     val isErrored = state.failedError.isPresent || confirmation.orNull()?.success == false
     val delegateAddr = attributes.find { it.key.equals(DELEGATE, true) }?.value?.orNull()
     return WalletTransaction(
         txHash = hashString(),
-        amount = when {
-            feeForToken.isBlank() -> amountInDefault.toBigDecimal()
-            else -> fee.toBigDecimal()
-        },
-        amountInFiat = getBalanceInFiat(
-            when {
-                feeForToken.isBlank() -> amountInDefault
-                else -> fee
-            }
-        ),
+        amount = amountInDefault.toBigDecimal(),
+        amountInFiat = getBalanceInFiat(amountInDefault),
         isStaking = delegateAddr != null,
         toAddress = delegateAddr ?: target.orNull()?.toSanitizedString() ?: "<unknown>",
         fromAddress = source.orNull()?.toSanitizedString() ?: "<unknown>",
@@ -341,4 +306,16 @@ fun Transfer.asWalletTransaction(): WalletTransaction {
         feeToken = feeForToken,
         confirmationsUntilFinal = wallet.walletManager.network.confirmationsUntilFinal.toInt()
     )
+}
+
+public inline fun <T, R : Any> Iterable<T>.mapNotNullOrExceptional(
+    crossinline transform: (T) -> R?
+): List<R> = mapNotNull { elem: T ->
+    try {
+        transform(elem)
+    } catch (e : Exception) {
+        logError("Exception caught, transform skipped", e)
+        BRReportsManager.reportBug(e)
+        null
+    }
 }

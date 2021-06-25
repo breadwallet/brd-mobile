@@ -2,28 +2,13 @@
  * BreadWallet
  *
  * Created by Pablo Budelli <pablo.budelli@breadwallet.com> on 10/10/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package com.breadwallet.ui.writedownkey
 
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.navigation.OnCompleteAction
 import com.breadwallet.ui.writedownkey.WriteDownKey.E
 import com.breadwallet.ui.writedownkey.WriteDownKey.F
@@ -42,7 +27,13 @@ object WriteDownKeyUpdate : Update<M, E, F>, WriteDownKeyUpdateSpec {
             OnCompleteAction.GO_TO_BUY -> F.GoToBuy
             OnCompleteAction.GO_HOME -> F.GoToHome
         } as F
-        return dispatch(setOf(effect))
+        return dispatch(
+            setOf(
+                effect,
+                F.TrackEvent(EventUtils.EVENT_PAPER_KEY_INTRO_DISMISSED),
+                F.TrackEvent(EventUtils.EVENT_ONBOARDING_COMPLETE)
+            )
+        )
     }
 
     override fun onFaqClicked(model: M): Next<M, F> =
@@ -54,7 +45,8 @@ object WriteDownKeyUpdate : Update<M, E, F>, WriteDownKeyUpdateSpec {
                 when {
                     model.requestAuth -> F.ShowAuthPrompt
                     else -> F.GetPhrase
-                }
+                },
+                F.TrackEvent(EventUtils.EVENT_PAPER_KEY_INTRO_GENEREATE_KEY)
             )
         )
 

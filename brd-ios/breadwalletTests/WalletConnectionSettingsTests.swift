@@ -3,7 +3,9 @@
 //  breadwalletTests
 //
 //  Created by Ehsan Rezaie on 2019-08-29.
-//  Copyright © 2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 //  See the LICENSE file at the project root for license information.
 //
@@ -27,7 +29,7 @@ class WalletConnectionSettingsTests: XCTestCase {
         Backend.connect(authenticator: keyStore)
         client = Backend.apiClient
         system = CoreSystem(keyStore: keyStore)
-        system.create(account: account!, authToken: "", btcWalletCreationCallback: {})
+        system.create(account: account!, authToken: "", btcWalletCreationCallback: {}, completion: {})
     }
 
     override func tearDown() {

@@ -2,41 +2,25 @@
  * BreadWallet
  *
  * Created by Drew Carlson <drew.carlson@breadwallet.com> on 10/21/20.
- * Copyright (c) 2020 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package brd
 
 const val KOTLIN_VERSION = "1.4.31"
 private const val KTOR_VERSION = "1.5.2"
 private const val KOTLINX_ATOMICFU_VERSION = "0.15.0"
-private const val KOTLINX_DATETIME_VERSION = "0.1.1"
+private const val KOTLINX_DATETIME_VERSION = "0.2.0"
 private const val KOTLINX_SERIALIZATION_VERSION = "1.1.0"
 private const val COROUTINES_VERSION = "1.4.3-native-mt"
 private const val WALLETKIT_VERSION = "6.3.5"
-private const val FIREBASE_APPDIST_VERSION = "2.0.1"
+private const val FIREBASE_APPDIST_VERSION = "2.1.1"
 private const val FIREBASE_MESSAGING_VERSION = "21.0.1"
 private const val FIREBASE_ANALYTICS_VERSION = "18.0.2"
 private const val FIREBASE_CONFIG_VERSION = "20.0.3"
-private const val CRASHLYTICS_VERSION = "17.3.1"
-private const val CRASHLYTICS_PLUGIN_VERSION = "2.2.0"
+private const val CRASHLYTICS_VERSION = "17.4.1"
+private const val CRASHLYTICS_PLUGIN_VERSION = "2.5.2"
 private const val GUAVA_VERSION = "25.1-android"
 private const val LIFECYCLE_EXT_VERSION = "2.2.0"
 private const val WORK_MANAGER_VERSION = "2.4.0"
@@ -81,7 +65,7 @@ private const val SERVICES_PLUGIN_VERSION = "4.3.4"
 private const val AUTODESK_VERSION = "0.6.2"
 const val COMPOSE_VERSION = "1.0.0-beta02"
 private const val ACCOMPANIST_VERSION = "0.6.2"
-private const val BLOCKSET_VERSION = "0.1.2"
+private const val BLOCKSET_VERSION = "0.1.3"
 
 object Libs {
 
@@ -133,7 +117,7 @@ object Libs {
         const val Messaging = "com.google.firebase:firebase-messaging-ktx:$FIREBASE_MESSAGING_VERSION"
         const val Analytics = "com.google.firebase:firebase-analytics-ktx:$FIREBASE_ANALYTICS_VERSION"
         const val ConfigKtx = "com.google.firebase:firebase-config-ktx:$FIREBASE_CONFIG_VERSION"
-        const val Crashlytics = "com.google.firebase:firebase-crashlytics-ktx:$CRASHLYTICS_VERSION"
+        const val Crashlytics = "com.google.firebase:firebase-crashlytics-ndk:$CRASHLYTICS_VERSION"
         const val DistributionPlugin = "com.google.firebase:firebase-appdistribution-gradle:$FIREBASE_APPDIST_VERSION"
         const val CrashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:$CRASHLYTICS_PLUGIN_VERSION"
     }
@@ -259,8 +243,8 @@ object Libs {
     }
 
     object Redacted {
-        const val Annotation = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations:$REDACTED_VERSION"
-        const val Plugin = "dev.zacsweers.redacted:redacted-compiler-gradle-plugin:$REDACTED_VERSION"
+        const val Annotation = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations"
+        const val Plugin = "dev.zacsweers.redacted:redacted-compiler-gradle-plugin"
     }
 
     object Detekt {

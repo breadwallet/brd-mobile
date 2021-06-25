@@ -2,28 +2,13 @@
  * BreadWallet
  *
  * Created by Pablo Budelli <pablo.budelli@breadwallet.com> on 9/23/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package com.breadwallet.ui.pin
 
+import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.pin.InputPin.E
 import com.breadwallet.ui.pin.InputPin.F
 import com.breadwallet.ui.pin.InputPin.M
@@ -69,12 +54,15 @@ object InputPinUpdate : Update<M, E, F>, InputPinUpdateSpec {
         next(model, setOf(F.GoToDisabledScreen))
 
     override fun onPinSaved(model: M): Next<M, F> {
-        val effect = if (model.pinUpdateMode || model.skipWriteDownKey) {
-            F.GoToHome
+        val effects = if (model.pinUpdateMode || model.skipWriteDownKey) {
+            setOf(F.GoToHome)
         } else {
-            F.GoToWriteDownKey(model.onComplete)
-        } as F
-        return next(model, setOf(effect))
+            setOf(
+                F.GoToWriteDownKey(model.onComplete),
+                F.TrackEvent(EventUtils.EVENT_ONBOARDING_PIN_CREATED)
+            )
+        }
+        return next(model, effects)
     }
 
     override fun onPinSaveFailed(model: M): Next<M, F> {

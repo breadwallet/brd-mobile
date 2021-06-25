@@ -2,33 +2,14 @@
  * BreadWallet
  *
  * Created by Ahsan Butt <ahsan.butt@breadwallet.com> on 8/1/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package com.breadwallet.ui.home
 
 import android.content.Context
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.WalletState
-import com.breadwallet.breadbox.currencyId
-import com.breadwallet.breadbox.toBigDecimal
+import com.breadwallet.breadbox.*
 import com.breadwallet.crypto.WalletManagerState
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.model.Experiments
@@ -191,23 +172,6 @@ fun createHomeScreenHandler(
             }
     }
 
-    addTransformer<F.LoadSyncStates> { effects ->
-        effects.flatMapLatest { breadBox.currencyCodes() }
-            .flatMapLatest { currencyCodes ->
-                currencyCodes.map {
-                    breadBox.walletSyncState(it)
-                        .throttleLatest(WALLET_UPDATE_THROTTLE)
-                        .map { syncState ->
-                            E.OnWalletSyncProgressUpdated(
-                                currencyCode = syncState.currencyCode,
-                                progress = syncState.percentComplete,
-                                syncThroughMillis = syncState.timestamp,
-                                isSyncing = syncState.isSyncing
-                            )
-                        }
-                }.merge()
-            }
-    }
     addAction<F.ClearRateAppPrompt> {
         AppReviewPromptManager.dismissPrompt()
     }
@@ -289,11 +253,9 @@ private fun CryptoWallet.asWallet(
         balance = balanceBig,
         fiatBalance = ratesRepo.getFiatForCrypto(balanceBig, currency.code, fiatIso)
             ?: BigDecimal.ZERO,
-        syncProgress = 0f, // will update via sync events
-        syncingThroughMillis = 0L, // will update via sync events
         priceChange = ratesRepo.getPriceChange(currency.code),
         state = Wallet.State.READY,
-        isSyncing = walletManager.state == WalletManagerState.SYNCING(),
+        isSyncing = isSyncing,
         startColor = tokenItem?.startColor,
         endColor = tokenItem?.endColor,
         isSupported = tokenItem?.isSupported ?: true

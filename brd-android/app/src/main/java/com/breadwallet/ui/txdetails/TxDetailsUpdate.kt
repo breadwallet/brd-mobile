@@ -2,25 +2,9 @@
  * BreadWallet
  *
  * Created by Drew Carlson <drew.carlson@breadwallet.com> on 9/17/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 package com.breadwallet.ui.txdetails
 
@@ -46,6 +30,7 @@ import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Next.noChange
 import com.spotify.mobius.Update
+import java.math.BigDecimal
 import java.util.Date
 
 const val MAX_CRYPTO_DIGITS = 8
@@ -67,11 +52,12 @@ object TxDetailsUpdate : Update<M, E, F>, TxDetailsUpdateSpec {
             val confirmationsUntilFinal =
                 wallet.walletManager.network.confirmationsUntilFinal.toInt()
             val delegateAddr = attributes.find { it.key.equals(DELEGATE, true) }?.value?.orNull()
+            val feeForToken = feeForToken(event.currencyId)
             model.copy(
                 isEth = amount.currency.isEthereum(),
                 isErc20 = amount.currency.isErc20(),
-                cryptoTransferredAmount = amount.toBigDecimal(wallet.defaultUnit),
-                fee = fee.toBigDecimal(wallet.defaultUnit),
+                cryptoTransferredAmount = if (feeForToken.isBlank()) amount.toBigDecimal(wallet.defaultUnit) else BigDecimal.ZERO,
+                fee = fee.doubleAmount(wallet.unitForFee).or(0.0).toBigDecimal(),
                 feeCurrency = fee.currency.code,
                 isReceived = isReceived(),
                 blockNumber = confirmation.orNull()?.blockNumber?.toInt() ?: 0,
@@ -90,7 +76,7 @@ object TxDetailsUpdate : Update<M, E, F>, TxDetailsUpdateSpec {
                 isCompleted = confirmations >= confirmationsUntilFinal,
                 gasPrice = event.gasPrice,
                 gasLimit = event.gasLimit,
-                feeToken = feeForToken(),
+                feeToken = feeForToken,
                 confirmations = confirmations,
                 transferFields = event.transaction
                     .attributes

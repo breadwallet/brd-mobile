@@ -2,31 +2,14 @@
  * BreadWallet
  *
  * Created by Drew Carlson <drew.carlson@breadwallet.com> on 9/25/19.
- * Copyright (c) 2019 breadwallet LLC
+ * Copyright (c) 2021 Breadwinner AG
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * SPDX-License-Identifier: BUSL-1.1
  */
 @file:Suppress("EXPERIMENTAL_API_USAGE", "TooManyFunctions")
 
 package com.breadwallet.breadbox
 
-import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.crypto.Address
 import com.breadwallet.crypto.Currency
 import com.breadwallet.crypto.Network
@@ -138,18 +121,14 @@ fun Network.containsCurrencyCode(currencyCode: String) =
         )
     } != null
 
-/** Returns the [Currency] code if the [Transfer] is a ETH fee transfer, blank otherwise. */
-fun Transfer.feeForToken(): String {
-    val targetAddress = target.orNull()?.toSanitizedString() ?: return ""
-    val issuerCode = wallet.walletManager.network.currencies.find { networkCurrency ->
-        networkCurrency.issuer.or("").equals(targetAddress, true)
+/** Returns the [Currency] code if the [Transfer] is a fee transfer in the wallet
+ *  associated with [currencyId], blank otherwise. */
+fun Transfer.feeForToken(currencyId: String): String =
+    if (amount.currency.uids.equals(currencyId, true)) {
+        ""
+    } else {
+        amount.currency.code
     }
-    return when {
-        !wallet.walletManager.currency.isEthereum() -> ""
-        issuerCode == null || issuerCode.isEthereum() -> ""
-        else -> issuerCode.code
-    }
-}
 
 fun WalletManagerState.isTracked() =
     type == WalletManagerState.Type.CONNECTED ||

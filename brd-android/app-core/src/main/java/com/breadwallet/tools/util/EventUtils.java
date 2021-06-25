@@ -1,26 +1,10 @@
 /**
  * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 8/3/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ *
+ * Created by Mihail Gutan <mihail@breadwallet.com> on 8/3/17.
+ * Copyright (c) 2021 Breadwinner AG
+ *
+ * SPDX-License-Identifier: BUSL-1.1
  */
 
 package com.breadwallet.tools.util;
@@ -115,6 +99,11 @@ public final class EventUtils {
     public static final String EVENT_FINAL_PAGE_BROWSE_FIRST = "onboarding.finalPage.browseFirst";
     public static final String EVENT_SKIP_BUTTON = "onboarding.skipButton";
     public static final String EVENT_BACK_BUTTON = "onboarding.backButton";
+    public static final String EVENT_ONBOARDING_PIN_CREATED = "onboarding.setPin.pinCreated";
+    public static final String EVENT_PAPER_KEY_INTRO_APPEARED = "onboarding.paperKeyIntro.appeared";
+    public static final String EVENT_PAPER_KEY_INTRO_DISMISSED = "onboarding.paperKeyIntro.dismissed";
+    public static final String EVENT_PAPER_KEY_INTRO_GENEREATE_KEY = "onboarding.paperKeyIntro.generatePaperKeyButton";
+    public static final String EVENT_ONBOARDING_COMPLETE = "onboarding.complete";
     public static final String EVENT_REWARDS_OPEN_WALLET = "rewards.openwallet";
     public static final String EVENT_REWARDS_BANNER = "rewards.banner";
     public static final String EVENT_ATTRIBUTE_CURRENCY = "currency";

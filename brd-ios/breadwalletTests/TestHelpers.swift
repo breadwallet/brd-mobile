@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Adrian Corscadden on 2017-02-26.
-//  Copyright © 2017-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import Foundation
@@ -16,7 +18,15 @@ let testWalletSecAttrService = "com.brd.testnetQA.tests"
 typealias CoreCurrency = WalletKit.Currency
 typealias AppCurrency = breadwallet.Currency
 
-private let networks = Network.installBuiltins()
+private let networks = [
+    "bitcoin-mainnet",
+    "bitcoincash-mainnet",
+    "ethereum-mainnet",
+    "ripple-mainnet",
+    "hedera-mainnet",
+].map { (networkId) -> Network in
+    Network.findBuiltin(uids: networkId)!
+}
 
 struct TestCurrencies {
     private static let btcMetaData = Data("""

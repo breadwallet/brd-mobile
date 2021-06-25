@@ -3,7 +3,9 @@
 //  breadwallet
 //
 //  Created by Ehsan Rezaie on 2018-01-13.
-//  Copyright © 2018-2019 Breadwinner AG. All rights reserved.
+//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//
+//  SPDX-License-Identifier: BUSL-1.1
 //
 
 import Foundation
@@ -69,7 +71,13 @@ class Transaction {
     var toAddress: String { return targetAddress }
     var fromAddress: String { return sourceAddress }
 
-    var amount: Amount { return Amount(cryptoAmount: transfer.amount, currency: currency) }
+    var amount: Amount {
+        if currency.uid == transfer.amount.currency.uid {
+            return Amount(cryptoAmount: transfer.amount, currency: currency)
+        } else {
+            return Amount.zero(currency)
+        }
+    }
     var fee: Amount { return Amount(cryptoAmount: transfer.fee, currency: wallet.feeCurrency) }
 
     var feeBasis: FeeBasis? {
