@@ -830,7 +830,7 @@
 /* Balance: $4.00 */
 "Send.balance" = "Balance: %1$@";
 /* Balance: $4.00 for iOS, the balance can't have a parameter */
-"Send.balanceString" = "Balance: ";
+"Send.balanceString" = "Maximum (after fees): ";
 /* Instructions how to allow the camera access for the app */
 "Send.cameraUnavailabeMessage.android" = "Allow camera access in \"Settings\" > \"Apps\" > \"BRD\" > \"Permissions\"";
 /* Permission required to access camera */
