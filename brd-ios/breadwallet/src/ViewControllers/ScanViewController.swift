@@ -54,6 +54,7 @@ class ScanViewController: UIViewController, Trackable {
     private var toolbarHeightConstraint: NSLayoutConstraint?
     private let toolbarHeight: CGFloat = 54.0
     private var hasCompleted = false
+    private var scannerQueue = DispatchQueue(label: "qrscanner")
     
     init(forPaymentRequestForCurrency currencyRestriction: Currency? = nil, forScanningPrivateKeysOnly: Bool = false, completion: @escaping ScanCompletion) {
         self.completion = completion
@@ -87,15 +88,25 @@ class ScanViewController: UIViewController, Trackable {
             NSLayoutConstraint(item: guide, attribute: .width, relatedBy: .equal, toItem: guide, attribute: .height, multiplier: 1.0, constant: 0.0) ])
         guide.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
 
-        close.tap = { [unowned self] in
-            self.saveEvent("scan.dismiss")
-            self.dismiss(animated: true, completion: {
-                self.completion(nil)
+        close.tap = { [weak self] in
+            let completion = self?.completion
+            self?.saveEvent("scan.dismiss")
+            self?.dismiss(animated: true, completion: {
+                completion?(nil)
             })
         }
         
-        cameraRoll.tap = importCameraRoll
+        cameraRoll.tap = { [weak self] in self?.importCameraRoll() }
         addCameraPreview()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scannerQueue.async { [weak self] in
+            if (self?.session.isRunning ?? false) == false {
+                self?.session.startRunning()
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -106,7 +117,14 @@ class ScanViewController: UIViewController, Trackable {
             self.guide.transform = .identity
         }, completion: { _ in })
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        scannerQueue.async { [weak self] in
+            self?.session.stopRunning()
+        }
+    }
+
     override func viewSafeAreaInsetsDidChange() {
         toolbarHeightConstraint?.constant = toolbarHeight + view.safeAreaInsets.bottom
     }
@@ -114,6 +132,8 @@ class ScanViewController: UIViewController, Trackable {
     private func addCameraPreview() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard let input = try? AVCaptureDeviceInput(device: device) else { return }
+        guard !session.isRunning else { return }
+
         session.addInput(input)
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.frame = view.bounds
@@ -129,10 +149,6 @@ class ScanViewController: UIViewController, Trackable {
             output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         } else {
             print("no qr code support")
-        }
-
-        DispatchQueue(label: "qrscanner").async {
-            self.session.startRunning()
         }
 
         if device.hasTorch {
@@ -152,7 +168,7 @@ class ScanViewController: UIViewController, Trackable {
             }
         }
     }
-    
+
     private func importCameraRoll() {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
@@ -218,9 +234,10 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
         hasCompleted = true
         // add a small delay so the green guide will be seen
         saveScanEvent(result)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-            self.dismiss(animated: true, completion: {
-                self.completion(result)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
+            let completion = self?.completion
+            self?.dismiss(animated: true, completion: {
+                completion?(result)
             })
         })
     }
