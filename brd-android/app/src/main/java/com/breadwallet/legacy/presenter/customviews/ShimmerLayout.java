@@ -18,7 +18,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
@@ -51,7 +50,6 @@ public class ShimmerLayout extends FrameLayout {
     private int[] mGradientColors = new int[COLOR_COUNT];
     // The base shimmering color (white).
     private int mShimmerColor;
-    private ViewTreeObserver.OnPreDrawListener mStartAnimationPreDrawListener;
 
     /**
      * @param context The context.
@@ -101,18 +99,7 @@ public class ShimmerLayout extends FrameLayout {
         if (mIsAnimationStarted) {
             return;
         }
-        // View not loaded yet, listen to it.
-        if (getWidth() == 0) {
-            mStartAnimationPreDrawListener = new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    getViewTreeObserver().removeOnPreDrawListener(this);
-                    animateShimmering();
-                    return true;
-                }
-            };
-            getViewTreeObserver().addOnPreDrawListener(mStartAnimationPreDrawListener);
-        } else {
+        if (getWidth() != 0)  {
             mIsAnimationStarted = true;
             animateShimmering();
         }
@@ -130,9 +117,6 @@ public class ShimmerLayout extends FrameLayout {
      * Stops the shimmering animation.
      */
     public void stopShimmerAnimation() {
-        if (mStartAnimationPreDrawListener != null) {
-            getViewTreeObserver().removeOnPreDrawListener(mStartAnimationPreDrawListener);
-        }
         resetShimmering();
     }
 
