@@ -20,12 +20,14 @@ class Backend {
     private init() {
         apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
         bdbClient = BdbServiceCompanion().create()
+        bdbClientAuthProvider = CosmosAuthProvider()
     }
     
     // MARK: - Private
     
     private var apiClient: BRAPIClient
     private var bdbClient: BdbService
+    private var bdbClientAuthProvider: BdbServiceAuthProvider
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
     private var eventManager: EventManager?
@@ -73,7 +75,8 @@ class Backend {
         shared.kvStore = try? BRReplicatedKVStore(encryptionKey: key, remoteAdaptor: KVStoreAdaptor(client: shared.apiClient))
         shared.exchangeUpdater = ExchangeUpdater()
         shared.eventManager = EventManager(adaptor: shared.apiClient)
-        shared.bdbClient = BdbServiceCompanion().createForTest(bdbAuthToken: authenticator.bdbAuthToken?.token ?? "")
+        shared.bdbClientAuthProvider = CosmosAuthProvider(authenticator: authenticator)
+        shared.bdbClient = BdbServiceCompanion().create(authProvider: shared.bdbClientAuthProvider)
     }
     
     /// Disconnect backend services and reset API auth
@@ -101,5 +104,41 @@ class UserAgentFetcher {
             }
             completion(agent)
         }
+    }
+}
+
+@objc class CosmosAuthProvider: NSObject, BdbServiceAuthProvider {
+    let authenticator: WalletAuthenticator?
+    
+    init(authenticator: WalletAuthenticator? = nil) {
+        self.authenticator = authenticator
+    }
+    func doNewTokenDetails() -> BdbServiceAuthProviderTokenDetails {
+        return BdbServiceAuthProviderTokenDetails(currentTimeSeconds: 0, expirationTimeSeconds: 0)
+    }
+    
+    func readDeviceId() -> String {
+        return ""
+    }
+    
+    func readPubKey() -> String {
+        return ""
+    }
+    
+    func saveUserJwt(jwt: String) {
+        return
+    }
+    
+    func signData(data: String) -> String {
+        return ""
+    }
+    
+    /// Return User-level JWT, or general Client JWT if User JWT hasn't been retrieved yet
+    func readUserJwt() -> String? {
+        return authenticator?.bdbAuthToken?.token ?? ""
+    }
+    
+    func readClientJwt() -> String? {
+        return ""
     }
 }
