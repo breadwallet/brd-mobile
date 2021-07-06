@@ -788,7 +788,7 @@ extension CoreSystem: SystemListener {
             addCurrencies(for: network)
             let timeout = DispatchTime.now() + .milliseconds(3000)
             DispatchQueue.main.asyncAfter(deadline: timeout) { [weak self] in
-                self?.updateWalletStates()
+                self?.requestCoreWalletCreation()
             }
 
         default:
