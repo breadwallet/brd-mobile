@@ -129,7 +129,7 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter, Trackab
                resolvedAddressTitle.topAnchor.constraint(equalTo: address.bottomAnchor, constant: C.padding[2]) ])
            resolvedAddressLabel.constrain([
                resolvedAddressLabel.leadingAnchor.constraint(equalTo: resolvedAddressTitle.leadingAnchor),
-               resolvedAddressLabel.topAnchor.constraint(equalTo: resolvedAddressTitle.bottomAnchor),
+               resolvedAddressLabel.topAnchor.constraint(equalTo: resolvedAddressTitle.bottomAnchor, constant: C.padding[3]),
                resolvedAddressLabel.trailingAnchor.constraint(equalTo: contentBox.trailingAnchor, constant: -C.padding[2]) ])
         }
         
