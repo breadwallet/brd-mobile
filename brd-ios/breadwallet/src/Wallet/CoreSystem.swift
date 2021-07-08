@@ -784,13 +784,10 @@ extension CoreSystem: SystemListener {
         print("[SYS] network event: \(event) (\(network))")
         switch event {
         case .currenciesUpdated:
-            guard !E.isRunningTests else { return }
+            guard !E.isRunningTests, let assetCollection = assetCollection else { return }
             addCurrencies(for: network)
-            let timeout = DispatchTime.now() + .milliseconds(3000)
-            DispatchQueue.main.asyncAfter(deadline: timeout) { [weak self] in
-                self?.requestCoreWalletCreation()
-            }
-
+            let newWallets = network.currencies.filter { assetCollection.isEnabled($0.uid) && wallets[$0.uid] == nil }
+            newWallets.forEach { system.managerBy(network: network)?.registerWalletFor(currency: $0) }
         default:
             return
         }
@@ -846,6 +843,12 @@ extension Address {
         return description
             .removing(prefix: "bitcoincash:")
             .removing(prefix: "bchtest:")
+    }
+}
+
+extension System {
+    func managerBy (network: Network) -> WalletManager? {
+        return self.managers.first(where: { $0.network == network })
     }
 }
 
