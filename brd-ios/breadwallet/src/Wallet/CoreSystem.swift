@@ -788,6 +788,10 @@ extension CoreSystem: SystemListener {
             addCurrencies(for: network)
             let newWallets = network.currencies.filter { assetCollection.isEnabled($0.uid) && wallets[$0.uid] == nil }
             newWallets.forEach { system.managerBy(network: network)?.registerWalletFor(currency: $0) }
+            Backend.updateExchangeRates(for:
+                currencies
+                .filter { $0.value.network == network }
+                .map { $0.value })
         default:
             return
         }
