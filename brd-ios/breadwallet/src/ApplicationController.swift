@@ -194,7 +194,6 @@ class ApplicationController: Subscriber, Trackable {
             }
         }
         Backend.apiClient.updateExperiments()
-        Backend.updateExchangeRates()
         Backend.apiClient.fetchAnnouncements()
     }
     
@@ -353,7 +352,6 @@ class ApplicationController: Subscriber, Trackable {
         }
 
         Backend.apiClient.updateExperiments()
-        Backend.updateExchangeRates()
         Backend.apiClient.fetchAnnouncements()
     }
     
