@@ -16,6 +16,8 @@ include(
     "brd-android:theme"
 )
 
+include("cosmos-address-resolver")
+
 includeBuild("external/walletkit/WalletKitJava") {
     dependencySubstitution {
         substitute(module("com.breadwallet.core:corecrypto-android"))

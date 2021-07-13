@@ -8,6 +8,7 @@
  */
 package com.breadwallet.ui.send
 
+import com.brd.addressresolver.AddressType
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.ext.isZero
 import com.breadwallet.tools.util.BRConstants
@@ -478,6 +479,7 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                         AddressType.Resolvable.UnstoppableDomain.ENS -> EventUtils.EVENT_SERVICE_ENS
                         AddressType.Resolvable.Fio -> EventUtils.EVENT_SERVICE_FIO
                         AddressType.Resolvable.PayId -> EventUtils.EVENT_SERVICE_PAY
+                        //AddressType.Resolvable.Yat -> EventUtils.EVENT_SERVICE_YAT
                     }
                     next(
                         model.copy(
