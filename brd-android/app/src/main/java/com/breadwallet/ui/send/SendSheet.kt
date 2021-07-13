@@ -9,6 +9,7 @@
 package com.breadwallet.ui.send
 
 import android.os.Parcelable
+import com.brd.addressresolver.AddressType
 import com.breadwallet.R
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
@@ -47,20 +48,6 @@ enum class TransferSpeedInput() {
     ECONOMY,
     REGULAR,
     PRIORITY
-}
-
-sealed class AddressType {
-    object NativePublic : AddressType()
-
-    sealed class Resolvable : AddressType() {
-        object PayId : Resolvable()
-        object Fio : Resolvable()
-
-        sealed class UnstoppableDomain : Resolvable() {
-            object ENS : UnstoppableDomain()
-            object CNS : UnstoppableDomain()
-        }
-    }
 }
 
 object SendSheet {

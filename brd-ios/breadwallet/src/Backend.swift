@@ -21,9 +21,9 @@ class Backend {
     private init() {
         let authenticator = NoAuthWalletAuthenticator()
         apiClient = BRAPIClient(authenticator: authenticator)
-        bdbClient = BdbServiceCompanion().createForTest(bdbAuthToken: "")
         bdbClient = BdbServiceCompanion().create()
         bdbClientAuthProvider = CosmosAuthProvider()
+        addressResolver = AddressResolver(bdbService: bdbClient, isMainnet: !E.isTestnet)
     }
     
     // MARK: - Private
@@ -34,6 +34,7 @@ class Backend {
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
     private var eventManager: EventManager?
+    private var addressResolver: AddressResolver
     private let userAgentFetcher = UserAgentFetcher()
     
     // MARK: - Public
@@ -48,6 +49,10 @@ class Backend {
     
     static var bdbClient: BdbService {
         return shared.bdbClient
+    }
+    
+    static var addressResolver: AddressResolver {
+        return shared.addressResolver
     }
     
     static var kvStore: BRReplicatedKVStore? {
@@ -80,6 +85,7 @@ class Backend {
         shared.eventManager = EventManager(adaptor: shared.apiClient)
         shared.bdbClientAuthProvider = CosmosAuthProvider(authenticator: authenticator)
         shared.bdbClient = BdbServiceCompanion().create(authProvider: shared.bdbClientAuthProvider)
+        shared.addressResolver = AddressResolver(bdbService: shared.bdbClient, isMainnet: !E.isTestnet)
     }
     
     /// Disconnect backend services and reset API auth
@@ -90,6 +96,7 @@ class Backend {
         shared.kvStore = nil
         shared.apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
         shared.bdbClient = BdbServiceCompanion().create()
+        shared.addressResolver = AddressResolver(bdbService: shared.bdbClient, isMainnet: !E.isTestnet)
     }
 }
 

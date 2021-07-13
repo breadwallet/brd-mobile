@@ -69,7 +69,6 @@
 		3A65DE812447E9AF0025C56E /* AccountInitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65DE802447E9AF0025C56E /* AccountInitializationTests.swift */; };
 		3A6785F1256F2F1A0065F835 /* RedeemGiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6785F0256F2F1A0065F835 /* RedeemGiftViewController.swift */; };
 		3A6785FB257019220065F835 /* RedeemTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6785FA257019220065F835 /* RedeemTransitioningDelegate.swift */; };
-		3A69884F24591F4A0084953D /* PayIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69884E24591F4A0084953D /* PayIdTests.swift */; };
 		3A69885E24591F890084953D /* PayId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69885D24591F890084953D /* PayId.swift */; };
 		3A6A3C7E24DDC90300ACAC70 /* BackupSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A3C7D24DDC90300ACAC70 /* BackupSynchronizer.swift */; };
 		3A6C13FF257D463300EA0689 /* GiftHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C13FE257D463300EA0689 /* GiftHeaderView.swift */; };
@@ -93,7 +92,6 @@
 		3AEA2C9C24D122EA00DA4C3A /* CloudBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA2C9B24D122EA00DA4C3A /* CloudBackupView.swift */; };
 		3AEA2CAB24D3219200DA4C3A /* SelectBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA2CAA24D3219200DA4C3A /* SelectBackupView.swift */; };
 		3AEF7B72234A4E3C005BE184 /* RequestUrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF7B71234A4E3C005BE184 /* RequestUrlTests.swift */; };
-		3AF78B3B2523B05E00FBB280 /* FioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF78B3A2523B05E00FBB280 /* FioTests.swift */; };
 		3AFAD9302567EE15005853E8 /* GiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFAD92F2567EE15005853E8 /* GiftViewController.swift */; };
 		3AFAD937256826F3005853E8 /* BorderedTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFAD936256826F3005853E8 /* BorderedTextInput.swift */; };
 		3AFAD94825698A74005853E8 /* Gift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFAD94725698A74005853E8 /* Gift.swift */; };
@@ -783,7 +781,6 @@
 		3A65DE802447E9AF0025C56E /* AccountInitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInitializationTests.swift; sourceTree = "<group>"; };
 		3A6785F0256F2F1A0065F835 /* RedeemGiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemGiftViewController.swift; sourceTree = "<group>"; };
 		3A6785FA257019220065F835 /* RedeemTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedeemTransitioningDelegate.swift; path = src/Views/RedeemTransitioningDelegate.swift; sourceTree = "<group>"; };
-		3A69884E24591F4A0084953D /* PayIdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayIdTests.swift; sourceTree = "<group>"; };
 		3A69885D24591F890084953D /* PayId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayId.swift; sourceTree = "<group>"; };
 		3A6A3C7D24DDC90300ACAC70 /* BackupSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackupSynchronizer.swift; path = src/BackupSynchronizer.swift; sourceTree = "<group>"; };
 		3A6C13FE257D463300EA0689 /* GiftHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GiftHeaderView.swift; path = src/Gifting/GiftHeaderView.swift; sourceTree = "<group>"; };
@@ -807,7 +804,6 @@
 		3AEA2C9B24D122EA00DA4C3A /* CloudBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CloudBackupView.swift; path = src/CloudBackup/CloudBackupView.swift; sourceTree = "<group>"; };
 		3AEA2CAA24D3219200DA4C3A /* SelectBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectBackupView.swift; path = src/CloudBackup/SelectBackupView.swift; sourceTree = "<group>"; };
 		3AEF7B71234A4E3C005BE184 /* RequestUrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUrlTests.swift; sourceTree = "<group>"; };
-		3AF78B3A2523B05E00FBB280 /* FioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FioTests.swift; sourceTree = "<group>"; };
 		3AFAD92F2567EE15005853E8 /* GiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GiftViewController.swift; path = src/Gifting/GiftViewController.swift; sourceTree = "<group>"; };
 		3AFAD936256826F3005853E8 /* BorderedTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BorderedTextInput.swift; path = src/Gifting/BorderedTextInput.swift; sourceTree = "<group>"; };
 		3AFAD94725698A74005853E8 /* Gift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Gift.swift; path = src/Platform/Gift.swift; sourceTree = "<group>"; };
@@ -1778,9 +1774,7 @@
 				3ADA10D824BE097D000A1D99 /* CoinGeckoTests.swift */,
 				7CF2B051228F478A004AA905 /* DataExtensionTests.swift */,
 				CEEC70971E96BF8800EF788E /* DefaultCurrencyTests.swift */,
-				3AF78B3A2523B05E00FBB280 /* FioTests.swift */,
 				7138BABA223062F40059091E /* NotificationTests.swift */,
-				3A69884E24591F4A0084953D /* PayIdTests.swift */,
 				CEC6F8461E8878B6000795B8 /* PaymentRequestTests.swift */,
 				CE6DCC281E63D0280044257B /* PhraseTests.swift */,
 				71249917222046EB00BEA491 /* PromptTests.swift */,
@@ -3534,11 +3528,9 @@
 				7CB3BCD52059B62200053687 /* UnitConversionTests.swift in Sources */,
 				710B036221F67888007E8A2A /* MockClasses.swift in Sources */,
 				CE6DCC291E63D0280044257B /* PhraseTests.swift in Sources */,
-				3A69884F24591F4A0084953D /* PayIdTests.swift in Sources */,
 				CEEC70881E943DC900EF788E /* TouchIdEnabledTests.swift in Sources */,
 				CE6DCC2D1E63D6B10044257B /* TestHelpers.swift in Sources */,
 				CE4CA7BA1EE0C8D900373F11 /* BitIdTests.swift in Sources */,
-				3AF78B3B2523B05E00FBB280 /* FioTests.swift in Sources */,
 				22C431301DF89DC00017CAEA /* BRReplicatedKVStoreTests.swift in Sources */,
 				71988B0921EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */,
 				22C431341DF89DFE0017CAEA /* BRCoderTests.swift in Sources */,

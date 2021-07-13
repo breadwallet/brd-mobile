@@ -129,13 +129,6 @@ class Currency: CurrencyWithIcon {
         return nil
     }
     
-    func doesMatchPayId(_ details: PayIdAddress) -> Bool {
-        let environment = (E.isTestnet || E.isRunningTests) ? "testnet" : "mainnet"
-        guard details.environment.lowercased() == environment else { return false }
-        guard let id = payId else { return false }
-        return details.paymentNetwork.lowercased() == id.lowercased()
-    }
-    
     var payId: String? {
         if isBitcoin { return "btc" }
         if isEthereum { return "eth" }

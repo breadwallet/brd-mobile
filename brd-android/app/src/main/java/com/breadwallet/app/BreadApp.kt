@@ -23,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.brd.addressresolver.AddressResolver
 import com.brd.api.AndroidBdbAuthProvider
 import com.brd.api.AndroidBrdAuthProvider
 import com.brd.api.BrdApiClient
@@ -312,14 +313,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        bind<PayIdService>() with singleton {
-            PayIdService(instance())
-        }
-
-        bind<FioService>() with singleton {
-            FioService(instance())
-        }
-
         bind<HttpClient>() with singleton {
             HttpClient(OkHttp) {
                 engine {
@@ -330,21 +323,12 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             }
         }
 
-        bind<UnstoppableDomainService>() with singleton {
-            UnstoppableDomainService(
-                BdbService.create(
-                    instance(),
-                    authProvider = AndroidBdbAuthProvider(instance())
-                )
-            )
+        bind<BdbService>() with singleton {
+            BdbService.create(AndroidBdbAuthProvider(instance()))
         }
 
-        bind<AddressResolverServiceLocator>() with singleton {
-            AddressResolverServiceLocator(
-                instance(),
-                instance(),
-                instance()
-            )
+        bind<AddressResolver>() with singleton {
+            AddressResolver(instance(), !BuildConfig.BITCOIN_TESTNET)
         }
 
         bind<BreadBox>() with singleton {
