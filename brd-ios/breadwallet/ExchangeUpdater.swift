@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import WalletKit
 import CoinGecko
 
 enum FiatPriceInfoResult {
@@ -31,6 +32,22 @@ class ExchangeUpdater: Subscriber {
     func refresh() {
         guard !Store.state.currencies.isEmpty else { return }
         fetchPriceInfo(currencies: Store.state.currencies) { result in
+            guard case .success(let priceInfo) = result else { return }
+            Store.state.currencies.forEach {
+                guard let info = priceInfo[$0.coinGeckoId ?? ""] else { return }
+                Store.perform(action: WalletChange($0).setFiatPriceInfo(info))
+                let fiatCode = Store.state.defaultCurrencyCode
+                let rate = Rate(code: fiatCode, name: $0.name, rate: info.price, reciprocalCode: $0.code)
+                //Cache result for next launch
+                UserDefaults.setCurrentRateData(newValue: rate.dictionary, forCode: $0.code)
+                Store.perform(action: WalletChange($0).setExchangeRate(rate))
+            }
+        }
+    }
+    
+    func refresh(currencies: [Currency]) {
+        guard !currencies.isEmpty else { return }
+        fetchPriceInfo(currencies: currencies) { result in
             guard case .success(let priceInfo) = result else { return }
             Store.state.currencies.forEach {
                 guard let info = priceInfo[$0.coinGeckoId ?? ""] else { return }
