@@ -8,13 +8,12 @@ stages:
 default:
 #  image: alvrme/alpine-android:android-29-jdk11
   tags:
-    - ios-12
-    - xcode-10
-    - macos-10_13
+    - macos
   before_script:
     - git submodule update --init --checkout
 
 variables:
+  ANDROID_SDK_ROOT: /Users/builder/Library/Android/sdk
   SIGNING_KEY: /builds/breadwallet/brd-mobile/brd-android/FakeSigningKey
   SIGNING_PASSWORD: qwerty
   SIGNING_ALIAS: key0
@@ -44,6 +43,10 @@ build-cosmos:
       - buildSrc/**/Libs.kt
       - cosmos-*/**/*
       - .gitlab-ci.yml
+  artifacts:
+    when: on_failure
+    paths:
+      - ./**/build/reports/tests
 
 build-android:
   stage: build
@@ -83,11 +86,9 @@ build-ios:
   script:
     - ./gradlew :cosmos-bundled:createXCFramework
     - xcodebuild clean -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet | xcpretty
-    - xcodebuild test -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.4' | xcpretty -s
+    - xcodebuild test -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' | xcpretty -s
   tags:
-    - ios-12
-    - xcode-10
-    - macos-10_13
+    - macos
 
 deploy-appetize:
   stage: deploy

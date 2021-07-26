@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hydra_quaternary_background"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/labelScreenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/HomeScreen.buy"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutInputContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="spread_inside"/>
+    <TextView
+        android:id="@+id/labelTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="#80FFFFFF"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/labelScreenTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/labelScreenTitle"
+        app:layout_constraintEnd_toStartOf="@+id/labelScreenTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        tools:ignore="HardcodedText"/>
+
+    <ImageButton
+        android:id="@+id/buttonClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close_white_24dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/AccessibilityLabels.close"
+        android:padding="16dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/labelScreenTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/labelScreenTitle"/>
+
+    <LinearLayout
+        android:id="@+id/layoutInputContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/layoutPinPad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelScreenTitle">
+
+        <TextView
+            android:id="@+id/labelSourceAmount"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mobile_font_bold"
+            android:singleLine="true"
+            android:textSize="48sp"
+            android:ellipsize="middle"
+            tools:text="$500"/>
+
+        <TextView
+            android:id="@+id/labelQuoteAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="1"
+            android:textColor="#BFFFFFFF"
+            tools:text="~ 0.000000 BTC"/>
+
+        <TextView
+            android:id="@+id/labelError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ui_error"
+            tools:text="Error message"/>
+        <include
+            android:id="@+id/cellQuoteCurrency"
+            layout="@layout/layout_selection_cell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <include
+            android:id="@+id/cellSelectedOffer"
+            layout="@layout/layout_selection_cell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+    <com.breadwallet.legacy.presenter.customviews.BRKeyboard
+        android:id="@+id/layoutPinPad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContinue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutInputContainer"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/Exchange.CTA.next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPinPad"
+        style="@style/PrimaryButton"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

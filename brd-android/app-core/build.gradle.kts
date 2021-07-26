@@ -13,6 +13,7 @@ redacted {
 }
 
 project.tasks.register<brd.DownloadBundles>("downloadBundles")
+project.tasks.register<brd.DownloadSupportArticles>("downloadSupportArticles")
 
 android {
     compileSdkVersion(BrdRelease.ANDROID_COMPILE_SDK)
@@ -36,8 +37,12 @@ android {
 
 dependencies {
     implementation(project(":brd-android:theme"))
+    implementation(project(":cosmos-preferences"))
+    implementation(project(":cosmos-brd-api-client"))
     implementation(Libs.Kotlin.StdLibJdk8)
-    implementation(Libs.Coroutines.Core)
+    implementation(Libs.Coroutines.Core) {
+        version { strictly(brd.COROUTINES_VERSION) }
+    }
     api(Libs.WalletKit.CoreAndroid)
 
     implementation(Libs.Androidx.LifecycleExtensions)

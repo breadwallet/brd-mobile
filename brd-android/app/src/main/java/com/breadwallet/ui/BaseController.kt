@@ -9,6 +9,7 @@
 package com.breadwallet.ui
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -115,6 +116,14 @@ abstract class BaseController(
 
     fun requireContext(): Context = checkNotNull(applicationContext) {
         "requireContext() cannot be called before onAttach(..)"
+    }
+
+    fun requireResources(): Resources = checkNotNull(resources) {
+        "requireResources() cannot be called before onCreateView(..)"
+    }
+
+    fun getColor(resId: Int): Int {
+        return requireResources().getColor(resId, view?.context?.theme)
     }
 
     inline fun <reified T> findListener(): T? =

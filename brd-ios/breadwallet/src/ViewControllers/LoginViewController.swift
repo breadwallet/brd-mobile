@@ -120,6 +120,7 @@ class LoginViewController: UIViewController, Subscriber, Trackable {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         guard UIApplication.shared.applicationState != .background else { return }
 
         if shouldUseBiometrics && !hasAttemptedToShowBiometrics && context.shouldAttemptBiometricUnlock {
@@ -247,8 +248,8 @@ class LoginViewController: UIViewController, Subscriber, Trackable {
         view.layoutIfNeeded()
 
         UIView.spring(0.6, animations: {
-            self.pinPadPottom?.constant = self.pinPad.height
-            self.topControlTop?.constant = -100.0
+            self.pinPadPottom?.constant = self.pinPad.height + self.view.safeAreaInsets.bottom
+            self.topControlTop?.constant = -self.logo.convert(self.logo.bounds, to: self.view).maxY
             lock.alpha = 1.0
             label.alpha = 1.0
             self.pinView.alpha = 0.0

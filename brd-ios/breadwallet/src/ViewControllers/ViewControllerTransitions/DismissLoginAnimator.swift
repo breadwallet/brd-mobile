@@ -17,11 +17,16 @@ class DismissLoginAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard transitionContext.isAnimated else { return }
+        guard transitionContext.isAnimated else {
+            return
+        }
         let duration = transitionDuration(using: transitionContext)
+
         guard let fromView = transitionContext.view(forKey: .from) else { assert(false, "Missing from view"); return }
+
         UIView.animate(withDuration: duration, animations: {
             fromView.alpha = 0.0
+
         }, completion: { _ in
             transitionContext.completeTransition(true)
         })

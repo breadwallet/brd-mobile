@@ -234,4 +234,17 @@
         app:layout_constraintRight_toRightOf="@+id/divider1"
         app:layout_constraintTop_toTopOf="@+id/textView21" />
 
+    <TextView
+        android:id="@+id/labelHydraActivated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hydra"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

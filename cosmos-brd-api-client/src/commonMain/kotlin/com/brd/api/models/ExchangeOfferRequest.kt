@@ -12,6 +12,7 @@ import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class ExchangeOfferRequest(
@@ -30,13 +31,8 @@ data class ExchangeOfferRequest(
     val quoteCurrencyCode: String,
     val offers: List<ExchangeOffer>,
 ) {
-
-    // Workaround for https://github.com/Kotlin/kotlinx.serialization/issues/848
-    val id: String
-
-    init {
-        id = url.substringAfterLast("/")
-    }
+    @Transient
+    val id: String = url.substringAfterLast("/")
 
     @Serializable
     enum class Status {

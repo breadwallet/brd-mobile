@@ -42,12 +42,12 @@ protocol BRDTheme {
     static var primaryText: UIColor { get }
     static var secondaryText: UIColor { get }
     static var tertiaryText: UIColor { get }
-    
+    static var quaternaryText: UIColor { get }
+
     static var accent: UIColor { get }
     static var accentHighlighted: UIColor { get }
     static var error: UIColor { get }
     static var success: UIColor { get }
-
 }
 
 //
@@ -80,9 +80,11 @@ class Theme: BRDTheme {
         case primaryBackground = "#141233"
         case secondaryBackground = "#211F3F"
         case tertiaryBackground = "#312F4C"
+        case quaternaryBackground = "#2E2954"
         
         case text = "#FFFFFF"
-        
+        case quaternaryText = "#8A9CFF"
+
         case accent = "#5B6DEE"
         case accentHighlighted = "#5667E0"
         case success = "#5BE081"
@@ -102,21 +104,33 @@ class Theme: BRDTheme {
     static var h0Title: UIFont {
         return font(.h0Title, .headline)
     }
-    
+
+    static var h0TitleAccent: UIFont {
+        return font(.bold, .h0Title, .headline)
+    }
+
     static var h1Title: UIFont {
         return font(.h1Title, .title1)
     }
-    
+
+    static var h1TitleAccent: UIFont {
+        return font(.bold, .h1Title, .title1)
+    }
+
     static var h2Title: UIFont {
         return font(.h2Title, .title2)
     }
-    
+
+    static var h2TitleAccent: UIFont {
+        return font(.bold, .h2Title, .title2)
+    }
+
     static var h3Title: UIFont {
         return font(.h3Title, .title3)
     }
-    
-    static var boldTitle: UIFont {
-        return UIFont(name: FontName.bold.rawValue, size: 16.0) ?? UIFont.header
+
+    static var h3TitleAccent: UIFont {
+        return font(.bold, .h3Title, .title3)
     }
     
     static var body1: UIFont {
@@ -142,7 +156,11 @@ class Theme: BRDTheme {
     static var caption: UIFont {
         return font(.caption, .caption1)
     }
-    
+
+    static var captionMedium: UIFont {
+        return font(.medium, .caption, .caption1)
+    }
+
     static var primaryButton: UIFont {
         return font(.body1, .body)
     }
@@ -162,7 +180,11 @@ class Theme: BRDTheme {
     static var tertiaryBackground: UIColor {
         return color(.tertiaryBackground)
     }
-    
+
+    static var quaternaryBackground: UIColor {
+        return color(.quaternaryBackground)
+    }
+
     static var primaryText: UIColor {
         return color(.text)
     }
@@ -174,7 +196,11 @@ class Theme: BRDTheme {
     static var tertiaryText: UIColor {
         return primaryText.withAlphaComponent(TextAlpha.tertiary.rawValue)
     }
-    
+
+    static var quaternaryText: UIColor {
+        return color(.quaternaryText)
+    }
+
     static var accent: UIColor {
         return color(.accent)
     }

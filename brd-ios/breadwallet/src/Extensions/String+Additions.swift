@@ -171,3 +171,42 @@ extension Optional where Wrapped == String {
         return self?.isEmpty ?? true
     }
 }
+
+// MARK: - HTML attributed string
+
+extension String {
+
+    func htmlAttributedString(font: UIFont, color: UIColor) -> NSAttributedString? {
+        let htmlTemplate = """
+         <!doctype html>
+         <html>
+           <head>
+             <style>
+               body {
+                 color: \(color.toHex);
+                 font-family: \(font.fontName),-apple-system;
+                 font-size: \(font.pointSize)px;
+               }
+             </style>
+           </head>
+           <body>
+             \(self)
+           </body>
+         </html>
+         """
+
+        guard let data = htmlTemplate.data(using: .utf8) else {
+            return nil
+        }
+
+        guard let attributedString = try? NSAttributedString(
+                data: data,
+                options: [.documentType: NSAttributedString.DocumentType.html],
+                documentAttributes: nil
+        ) else {
+            return nil
+        }
+
+        return attributedString
+    }
+}

@@ -216,7 +216,9 @@ dependencies {
 
     // Kotlin libraries
     implementation(Libs.Kotlin.StdLibJdk8)
-    implementation(Libs.Coroutines.Core)
+    implementation(Libs.Coroutines.Core) {
+        version { strictly(brd.COROUTINES_VERSION) }
+    }
     implementation(Libs.Coroutines.Android)
     testImplementation(Libs.Coroutines.Test)
     testImplementation(Libs.Kotlin.Test)

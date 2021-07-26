@@ -82,8 +82,8 @@ class IosPreferences(
         return if (contains(key)) prefs.doubleForKey(key) else defaultValue
     }
 
-    override fun getDoubleOrNull(name: String): Double? {
-        return if (contains(name)) prefs.doubleForKey(name) else null
+    override fun getDoubleOrNull(key: String): Double? {
+        return if (contains(key)) prefs.doubleForKey(key) else null
     }
 
     override fun putBoolean(key: String, value: Boolean) {

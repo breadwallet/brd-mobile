@@ -19,6 +19,7 @@ sealed class ExchangeInput {
     abstract val media: Media
     abstract val amount: String
     abstract val currency: ExchangeCurrency
+    abstract val actions: List<ExchangeOrder.Action>
     @SerialName("expires_at")
     @Serializable(with = InstantSerializer::class)
     abstract val expiresAt: Instant?
@@ -32,10 +33,13 @@ sealed class ExchangeInput {
         @SerialName("expires_at")
         @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant? = null,
+        override val actions: List<ExchangeOrder.Action>,
         @SerialName("crypto_transfer_status")
         val status: CryptoStatus,
         @SerialName("send_to_address")
         val sendToAddress: String,
+        @SerialName("send_to_destination_tag")
+        val sendToDestinationTag: String?,
         @SerialName("refund_address")
         val refundAddress: String,
         @SerialName("payment_detected_time")
@@ -59,6 +63,7 @@ sealed class ExchangeInput {
         @SerialName("expires_at")
         @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant?,
+        override val actions: List<ExchangeOrder.Action>,
     ) : ExchangeInput()
 
     @Serializable
@@ -72,6 +77,7 @@ sealed class ExchangeInput {
         override val expiresAt: Instant?,
         @SerialName("ach_transfer_status")
         val status: FiatStatus,
+        override val actions: List<ExchangeOrder.Action>,
     ) : ExchangeInput()
 
     @Serializable
@@ -83,6 +89,7 @@ sealed class ExchangeInput {
         @SerialName("expires_at")
         @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant?,
+        override val actions: List<ExchangeOrder.Action>,
     ) : ExchangeInput()
 
     @Serializable

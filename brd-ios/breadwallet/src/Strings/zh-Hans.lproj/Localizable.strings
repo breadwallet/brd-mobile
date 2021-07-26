@@ -28,19 +28,19 @@
 "Account.exchangeRate" = "%1$@ / %2$@";
 /* Loading Wallet Message */
 "Account.loadingMessage" = "正在加载钱包";
-/* Confirm Account Creation mesage body */
+/* Prompt text for confirmation dialog for Hedera account creation */
 "AccountCreation.body" = "仅当您打算在钱包中存储HBAR时，才创建一个Hedera帐户。";
-/* Create Account button label */
+/* Label for create Hedera account button */
 "AccountCreation.create" = "创建帐号";
 /* Creating Account progress Label */
 "AccountCreation.creating" = "建立帐户";
-/* Creating Account progress Label */
+/* Error message for Hedera account creation failure */
 "AccountCreation.error" = "创建帐户期间发生错误。请稍后再试。";
-/* Not Now button label. */
+/* Label for cancel button on confirmation dialog for Hedera account creation */
 "AccountCreation.notNow" = "现在不要";
 /* Creating Account progress Label */
 "AccountCreation.timeout" = "请求超时。请稍后再试。";
-/* Confirm Account Creation Title */
+/* Title for confirmation dialog for Hedera account creation */
 "AccountCreation.title" = "确认帐户创建";
 /* Default wallet name */
 "AccountHeader.defaultWalletName" = "我的 BRD";
@@ -215,7 +215,7 @@
 "Confirmation.amountLabel" = "发送金额：";
 "Confirmation.destinationTag" = "目的地标签";
 "Confirmation.destinationTag_EmptyHint" = "（空）";
-/* Network Fee: ($1.00) */
+/* Network Fee: */
 "Confirmation.feeLabel" = "网络费：";
 /* Network Fee: (ETH) */
 "Confirmation.feeLabelETH" = "网络费 (ETH):";
@@ -288,6 +288,181 @@
 "ErrorMessages.messagingUnavailableTitle" = "消息发送不可用";
 /* Fingerprint was not recognized by the scanner, please try scanning again */
 "ErrorMessages.touchIdFailed.android" = "未识别出指纹。请再试一次。";
+/* Exchange available balance label */
+"Exchange.available" = "Available: %@";
+/* Exchange buy title */
+"Exchange.buy" = "Buy";
+/* CTA button title exchange screen */
+"Exchange.CTA.loading" = "Loading ...";
+/* CTA button title exchange screen */
+"Exchange.CTA.next" = "Next";
+/* CTA button title exchange screen */
+"Exchange.CTA.preview" = "Preview";
+/* CTA button processing state */
+"Exchange.CTA.processing" = "Processing ...";
+/* CTA button title exchange screen */
+"Exchange.CTA.retry" = "Retry";
+/* CTA action exchange to set to max trade amount */
+"Exchange.CTA.setMax" = "Set amount to max %@";
+/* CTA action exchange to set to min trade amount
+CTA action exchange to set to min trade amount */
+"Exchange.CTA.setMin" = "Set amount to min %@";
+/* Initialization error alert body */
+"Exchange.ErrorState.initialization" = "Initialization error";
+/* Insufficient chain error alert body */
+"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some";
+/* Network error alert body */
+"Exchange.ErrorState.network" = "Network error";
+/* Order error alert body */
+"Exchange.ErrorState.order" = "Order error";
+/* Transaction error alert body */
+"Exchange.ErrorState.transaction" = "Transaction error";
+/* Unknown error alert body */
+"Exchange.ErrorState.unknown" = "Unknown error";
+/* Region error alert body */
+"Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region";
+/* Exchange label from */
+"Exchange.from" = "From";
+/* purchase limit */
+"Exchange.limit" = "limit";
+/* Loading available crypto assets */
+"Exchange.loadingAssets" = "Loading Assets";
+/* Exchange fee title */
+"Exchange.offer.fees" = "Fee";
+/* Loading offers subtitle */
+"Exchange.offer.gatheringSubtitle" = "Fetching partner rates";
+/* Loading offers title */
+"Exchange.offer.gatheringTitle" = "One moment...";
+/* Initializing offers title */
+"Exchange.offer.initTitle" = "Offers will appear here";
+/* Offer subtitle limit max */
+"Exchange.offer.limitMax" = "Limit max";
+/* Offer subtitle limit min */
+"Exchange.offer.limitMin" = "Limit min";
+/* Offer subtitle set max amount */
+"Exchange.offer.maxAmount" = "Maximum amount";
+/* Offer subtitle set min amount */
+"Exchange.offer.minAmount" = "Minimum amount";
+/* Network fee label */
+"Exchange.offer.networkFee" = "Network Fee";
+/* No offers subtitle */
+"Exchange.offer.noneSubtitle" = "Try another amount";
+/* No offers title */
+"Exchange.offer.noneTitle" = "No offers available";
+/* Offers navigation title */
+"Exchange.offer.offers" = "Offers";
+/* Processing fee label */
+"Exchange.offer.processingFee" = "Processing Fee";
+/* Provider fee label */
+"Exchange.offer.providerFee" = "Provider Fee";
+/* Exchange rate */
+"Exchange.offer.rate" = "Rate";
+/* Offers section title */
+"Exchange.offer.sectionTitle" = "All values displayed are estimates and susceptible to market price fluctuations.";
+/* Offer total */
+"Exchange.offer.total" = "Total";
+/* Receipt item label bought */
+"Exchange.Order.bought" = "Bought";
+/* "CTA button label */
+"Exchange.Order.CTA.great" = "Great!";
+/* "View receipt */
+"Exchange.Order.CTA.receipt" = "View Receipt";
+/* Receipt item label delivery */
+"Exchange.Order.delivery" = "Delivery";
+/* Receipt item label fees */
+"Exchange.Order.fees" = "Fees";
+/* Order footer info explaining exchange rate estimate */
+"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
+/* Receipt item label for */
+"Exchange.Order.for" = "For";
+/* Receipt item label method */
+"Exchange.Order.method" = "Method";
+/* Status creating order */
+"Exchange.Order.status.creating" = "Creating order";
+/* Status failed order */
+"Exchange.Order.status.failed" = "Order failed";
+/* Status processing order */
+"Exchange.Order.status.processing" = "Processing";
+/* Status sent order */
+"Exchange.Order.status.sent" = "Order sent!";
+/* Status successful order */
+"Exchange.Order.status.successful" = "Order Successful!";
+/* Over the min limit */
+"Exchange.over" = "Over";
+/* Rewards status active */
+"Exchange.Preview.active" = "Active";
+/* Trade preview CTA */
+"Exchange.Preview.CTA" = "Trade Now";
+/* Trade preview footer */
+"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
+/* Trade preview info item label */
+"Exchange.Preview.fulfilledBy" = "Fulfilled by";
+/* Rewards status inactive */
+"Exchange.Preview.inactive" = "Inactive";
+/* Rewards info */
+"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
+/* Trade preview info item label */
+"Exchange.Preview.networkFee" = "Network Fee";
+/* Trade preview info item label */
+"Exchange.Preview.partnerFee" = "Partner Fee";
+/* Trade preview info item label */
+"Exchange.Preview.rate" = "Rate";
+/* Preview items rewards label */
+"Exchange.Preview.rewards" = "BRD Rewards";
+/* Trade preview navigation title */
+"Exchange.Preview.title" = "Trade preview";
+/* Exchange select asset button label */
+"Exchange.selectAsset" = "Select Asset";
+/* Exchange sell title */
+"Exchange.sell" = "Sell";
+/* CTA button title for region settings */
+"Exchange.Settings.applyRegion" = "Apply region";
+/* County label */
+"Exchange.Settings.country" = "Country";
+/* Currency label */
+"Exchange.Settings.currency" = "Display Currency";
+/* Region label */
+"Exchange.Settings.region" = "State";
+/* Region settings screen title */
+"Exchange.Settings.title" = "Set Region";
+/* Exchange label to */
+"Exchange.to" = "To";
+/* Exchange trade title */
+"Exchange.trade" = "Trade";
+/* Trade cancel alert body */
+"Exchange.tradeCancelAlertBody" = "All your progress will be lost.";
+/* Trade cancel alert no button */
+"Exchange.tradeCancelAlertNo" = "No";
+/* Trade cancel alert title */
+"Exchange.tradeCancelAlertTitle" = "Are you sure?";
+/* Trade cancel alert yes button */
+"Exchange.tradeCancelAlertYes" = "Yes";
+/* Crypto transfer error description */
+"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
+/* Crypto transfer error description */
+"Exchange.TransferError.loadInput" = "Failed to load input";
+/* Crypto transfer error description */
+"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
+/* Crypto transfer error description */
+"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
+/* Crypto transfer error description */
+"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
+/* Under the min limit */
+"Exchange.under" = "Under";
+/* Offer purchase method ACH */
+"Exchange.viaACH" = "%@ via ACH";
+/* Offer purchase method card */
+"Exchange.viaCard" = "%@ via Card";
+/* Offer purchase method crypto */
+"Exchange.viaCrypto" = "%@ via Crypto";
+/* Offer purchase method SEPA */
+"Exchange.viaSEPA" = "%@ via SEPA";
+/* Exchange label with */
+"Exchange.with" = "With";
 "ExportConfirmation.cancel" = "取消";
 "ExportConfirmation.continue" = "继续";
 "ExportConfirmation.message" = "这将生成一个CSV文件，其中包括来自所有启用的钱包的所有已完成的交易。";
@@ -357,17 +532,17 @@
 "FingerprintSettings.unlockApp" = "使用指纹解锁BRD";
 /* This is the section that allows administration of the user's wallet */
 "HomeScreen.admin" = "管理";
-/* Home screen menu button to buy some bitcoin */
+/* "home screen toolbar button */
 "HomeScreen.buy" = "购买";
 /* home screen toolbar 'Buy & Sell' button */
 "HomeScreen.buyAndSell" = "买卖";
-/* Menu button on the home screen toolbar */
+/* "home screen toolbar button */
 "HomeScreen.menu" = "菜单";
 /* This section lists the users wallets */
 "HomeScreen.portfolio" = "钱包";
 /* Label for the total balance of all the user's assets (style is all lower case if your language permits) */
 "HomeScreen.totalAssets" = "总资产";
-/* (Tap here to) trade (your assets for other assets) */
+/* "home screen toolbar button */
 "HomeScreen.trade" = "换";
 /* Checking private key balance progress view text */
 "Import.checking" = "正在查看私人密钥余额...";
@@ -457,9 +632,9 @@
 "MenuButton.addWallet" = "添加钱包";
 /* Menu button title */
 "MenuButton.lock" = "锁住钱包";
-/* (Click here to) manage (your list of) wallets */
+/* "Menu button title */
 "MenuButton.manageWallets" = "管理钱包";
-/* (press here to) scan (a) QR code */
+/* "Menu button title */
 "MenuButton.scan" = "扫描QR";
 /* Menu button title */
 "MenuButton.security" = "安全中心";
@@ -609,7 +784,7 @@
 "Prompts.UpgradePin.body" = "BRD 已升级到使用 6 位 PIN。点击此处升级。";
 /* Upgrade PIN prompt title. */
 "Prompts.UpgradePin.title" = "升级 PIN";
-/* Body text for the push notifications prompt. */
+/* Body text for push notifications opt-in prompt. */
 "PushNotifications.body" = "打开推送通知，抢先了解新功能和特惠。";
 /* Push notifications are disabled alert title" */
 "PushNotifications.disabled" = "提示已禁用";
@@ -625,7 +800,7 @@
 "PushNotifications.off" = "关闭";
 /* Push notifications are on label */
 "PushNotifications.on" = "开启";
-/* Push notifications settings view title label */
+/* Title for push notifications opt-in prompt. */
 "PushNotifications.title" = "敬请保持同步";
 /* Push notifications settings failed to update settings on the back end */
 "PushNotifications.updateFailed" = "无法更新推送通知设置";
@@ -673,7 +848,7 @@
 "RecoverWallet.subheader" = "输入您要恢复的钱包的恢复短语。";
 /* Reset PIN with paper key: sub-header */
 "RecoverWallet.subheader_reset_pin" = "要重置PIN码，请在以下框中输入恢复短语中的单词。";
-/* Instructs the user to enter words from the set of recovery key words. */
+/* Instructs the user to enter words from the set of recovery phrase words. */
 "RecoveryKeyFlow.confirmRecoveryInputError" = "您输入的字词不正确。请再试一次。";
 /* Instructs the user to enter words from the set of recovery phrase words. */
 "RecoveryKeyFlow.confirmRecoveryKeySubtitle" = "快完成了！在您的恢复短语中输入以下单词。";
@@ -685,25 +860,25 @@
 "RecoveryKeyFlow.enterRecoveryKeySubtitle" = "请输入您的恢复短语以断开该钱包与设备的链接。";
 /* Body text for an alert dialog asking the user whether to set up the recovery phrase later */
 "RecoveryKeyFlow.exitRecoveryKeyPromptBody" = "您确定要稍后设置恢复短语吗？";
-/* Title for an alert dialog asking the user whether to set up the recovery key later */
+/* Title for an alert dialog asking the user whether to set up the recovery phrase later */
 "RecoveryKeyFlow.exitRecoveryKeyPromptTitle" = "稍后设置";
 /* Button text for the 'Generate Recovery Phrase' button */
 "RecoveryKeyFlow.generateKeyButton" = "生成恢复短语";
-/* Subtext for the recovery key landing page. */
+/* Subtext for the recovery phrase landing page. */
 "RecoveryKeyFlow.generateKeyExplanation" = "如果您升级或丢失手机,需要使用此密钥来恢复您的财产。";
 /* Default title for the recovery phrase landing page */
 "RecoveryKeyFlow.generateKeyTitle" = "生成您的私人恢复短语";
-/* Title for a button that takes the user to the wallet after setting up the recovery key. */
+/* Title for a button that takes the user to the wallet after setting up the recovery phrase. */
 "RecoveryKeyFlow.goToWalletButtonTitle" = "前往钱包";
-/* Hint text for recovery key intro page, e.g., Step 2 */
+/* Hint text for recovery phrase intro page, e.g., Step 2 */
 "RecoveryKeyFlow.howItWorksStep" = "如何进行 - 第 %1$@ 步";
 /* Error text displayed when the user enters an incorrect recovery phrase */
 "RecoveryKeyFlow.invalidPhrase" = "您输入的某些单词与您的恢复短语不匹配。请再试一遍。";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.keepSecure" = "妥善保管";
 /* Informs the user that the recovery is only required for recovering a wallet. */
 "RecoveryKeyFlow.keyUseHint" = "您的密钥仅用于恢复时,日常访问钱包时无需此密钥。";
-/* Reminds the user not to take screenshots or email the recovery key words */
+/* Reminds the user not to take screenshots or email the recovery phrase words */
 "RecoveryKeyFlow.noScreenshotsOrEmailWarning" = "出于安全考虑,请勿截图或通过电子邮件发送这些字词";
 /* Recommends that the user avoids capturing the paper key with a screenshot */
 "RecoveryKeyFlow.noScreenshotsRecommendation" = "请将您的密钥记录在纸上并确认无误。为安全起见,不建议使用屏幕截图。";
@@ -711,19 +886,19 @@
 "RecoveryKeyFlow.recoveryYourWallet" = "恢复您的钱包";
 /* Subtitle displayed when the user starts the process of recovering a wallet */
 "RecoveryKeyFlow.recoveryYourWalletSubtitle" = "请输入您要恢复的钱包的恢复短语。";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.relaxBuyTrade" = "放心,购买和交易";
-/* Reminds the user to write down the recovery key words. */
+/* Reminds the user to write down the recovery phrase words. */
 "RecoveryKeyFlow.rememberToWriteDownReminder" = "请记得将这些字词写下来。如果您忘记了,请滑动以返回。";
 /* Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered */
 "RecoveryKeyFlow.resetPINInstruction" = "请输入您的恢复短语以重置PIN码。";
 /* Assures the user that BRD will keep the user's funds secure. */
 "RecoveryKeyFlow.securityAssurance" = "鉴于在交易中您的资金可得到最佳的安全和隐私保障,您可放心购买和交易。";
-/* Recommends that the user stores the recovery key in a secure location */
+/* Recommends that the user stores the recovery phrase in a secure location */
 "RecoveryKeyFlow.storeSecurelyRecommendation" = "请将您的密钥存放在安全的地方。此密钥为恢复您的钱包的唯一方法。BRD 不会保留副本。";
 /* Title for the success page after the recovery phrase has been set up */
 "RecoveryKeyFlow.successHeading" = "恭喜你！您已完成恢复短语的设置。";
-/* Subtitle for the success page after the recovery key has been set up */
+/* Subtitle for the success page after the recovery phrase has been set up */
 "RecoveryKeyFlow.successSubheading" = "您现已可以在您的 BRD 钱包中进行存款,交易以及购买加密货币。";
 /* Title displayed to the user on the intro screen when unlinking a wallet */
 "RecoveryKeyFlow.unlinkWallet" = "取消钱包与此设备的关联。";
@@ -735,11 +910,11 @@
 "RecoveryKeyFlow.wipeWallet" = "取消钱包与此设备的关联。";
 /* Subtitle displayed to the user on the intro screen when wiping a wallet. */
 "RecoveryKeyFlow.wipeWalletSubtext" = "通过从设备中擦除当前钱包来启动新钱包。";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.writeItDown" = "记下您的密钥";
 /* Title for the recovery phrase landing page if the key has already been generated. */
 "RecoveryKeyFlow.writeKeyAgain" = "再次写下您的恢复短语";
-/* Subtitle for the write recovery key screen */
+/* Subtitle for the write recovery phrase screen */
 "RecoveryKeyFlow.writeKeyScreenSubtitle" = "按顺序记下下列字词。";
 /* Title for the write recovery phrase screen */
 "RecoveryKeyFlow.writeKeyScreenTitle" = "您的恢复短语";
@@ -779,6 +954,8 @@
 "RewardsView.normalTitle" = "奖励";
 /* Scan bitcoin address camera flash toggle */
 "Scanner.flashButtonLabel" = "相机闪光灯";
+/* Device without camera error */
+"Scanner.noCamera" = "No camera found";
 /* (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") */
 "Scanner.paymentPromptMessage" = "您想向此地址发送 %1$@ 付款吗？";
 /* alert dialog title */
@@ -879,7 +1056,7 @@
 "Send.legacyAddressWarning" = "警告：这是已停用的比特币地址。您确定要向这个地址发送比特币现金吗？";
 /* We are loading the request (now) */
 "Send.loadingRequest" = "加载请求中";
-/* Hedera Memo Tag Label */
+/* Placeholder text for Hedera Memo field on send screen */
 "Send.memoTag_optional" = "Hedera备忘（可选）";
 /* Transaction fee could not be be caluculated error. */
 "Send.nilFeeError" = "资金不够支付交易费。";
@@ -915,6 +1092,9 @@
 "Send.title" = "发送";
 /* Send money to label */
 "Send.toLabel" = "至";
+"Send.udomains_invalid" = "Invalid address.";
+"Send.udomains_noAddress" = "There is no %1$@ address associated with this address.";
+"Send.udomains_retrievalError" = "There was an error retrieving this address. Please try again later.";
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "比特币地址仅供一次性使用。";
 /* Adress already used alert message - second part */
@@ -963,6 +1143,8 @@
 "Settings.review" = "给我们评论";
 /* Rewards menu item */
 "Settings.rewards" = "奖励";
+/* Share logs sheet label */
+"Settings.share" = "Share";
 /* Share anonymous data label */
 "Settings.shareData" = "分享匿名数据";
 /* "Enables sharing balance to widget" */
@@ -1003,9 +1185,12 @@
 /* Baker cell: Free Space field header */
 "Staking.cellFreeSpaceHeader" = "可用空间";
 "Staking.changeValidator" = "改变";
+/* Body copy for staking modal */
 "Staking.descriptionTezos" = "将您的Tezos帐户委托给验证程序以赚取奖励，同时保持对硬币的完全安全性和控制力。";
 /* Baker cell: Fee field header */
 "Staking.feeHeader" = "费用：";
+/* Error loading bakers message */
+"Staking.loadingBakerError" = "An error occurred while loading baker information. Please try again later.";
 /* Status label: current staking transaction is pending */
 "Staking.pendingTransaction" = "交易待处理中...";
 /* Button label: remove selected baker */
@@ -1014,6 +1199,7 @@
 "Staking.roiHeader" = "美东时间。投资报酬率";
 /* Modal title: Select Baker modal */
 "Staking.selectBakerTitle" = "选择XTZ代表";
+/* Button label: Stake the selected baker */
 "Staking.stake" = "赌注";
 /* UI flag showing state of Tezos staking */
 "Staking.stakingActiveFlag" = "积极的";
@@ -1021,11 +1207,12 @@
 "Staking.stakingInactiveFlag" = "不活跃";
 /* UI flag showing state of Tezos staking */
 "Staking.stakingPendingFlag" = "待办的";
-/* Staking banner title */
+/* Modal title: Staking modal */
 "Staking.stakingTitle" = "放样";
 "Staking.stakingTo" = "下注到%1$s";
 "Staking.statusPending" = "待定";
 "Staking.statusStaked" = "臭！";
+/* Headline for staking modal */
 "Staking.subTitle" = "持有时赚钱";
 /* Tezos XTZ baker asset type */
 "Staking.tezosDune" = "特佐斯（Tezos）和沙丘（Dune）";
@@ -1034,6 +1221,7 @@
 /* Tezos XTZ baker asset type */
 "Staking.tezosOnly" = "仅限Tezos";
 "Staking.title" = "赌注%1$s";
+/* Button label: Unstake the selected baker */
 "Staking.unstake" = "放心";
 "Staking.validatorHint" = "输入验证人地址";
 /* button label */
@@ -1060,7 +1248,7 @@
 "SyncingView.activity" = "活动";
 /* Syncing view connectiong state header text */
 "SyncingView.connecting" = "连接中";
-/* The sync has failed (to complete) */
+/* "Sync failed label */
 "SyncingView.failed" = "同步失败";
 /* Syncing view header text */
 "SyncingView.header" = "正在同步";
@@ -1178,7 +1366,7 @@
 "TransactionDetails.addressViaHeader" = "通过";
 /* Amount section header */
 "TransactionDetails.amountHeader" = "金额";
-/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+/* "(it was worth) $100 when received, (and it is worth) $200 now" */
 "TransactionDetails.amountWhenReceived" = "收到时%1$@]，现在%2$@";
 /* "(it was worth) $100 when sent, (and it is worth) $200 now" */
 "TransactionDetails.amountWhenSent" = "发送时 %1$@，现在 %2$@";
@@ -1190,7 +1378,7 @@
 "TransactionDetails.commentsPlaceholder" = "添加备忘录...";
 /* Timestamp section header for complete tx */
 "TransactionDetails.completeTimestampHeader" = "完成";
-/* Block height and confirmations label
+/* Confirmations label
 eg. 182930 (45061 confirmations) */
 "TransactionDetails.confirmationsLabel" = "确认";
 "TransactionDetails.destinationTag" = "目的地标签";

@@ -151,6 +151,14 @@ class Wallet {
     var balance: Amount {
         return Amount(cryptoAmount: core.balance, currency: currency)
     }
+    
+    var balanceMaximum: Amount? {
+        let balance = core.balanceMaximum
+        if balance == nil {
+            return nil
+        }
+        return Amount(cryptoAmount: balance!, currency: currency)
+    }
 
     var transfers: [Transaction] {
         return core.transfers

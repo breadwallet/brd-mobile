@@ -54,4 +54,8 @@ extension UIViewController {
     var safeBottomAnchor: NSLayoutYAxisAnchor {
         return view.safeAreaLayoutGuide.bottomAnchor
     }
+    
+    func dismiss(_ animated: Bool = true, completion: (() -> Void)? = nil) {
+        self.dismiss(animated: true, completion: completion)
+    }
 }

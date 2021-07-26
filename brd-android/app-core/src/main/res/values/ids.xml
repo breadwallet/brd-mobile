@@ -21,6 +21,10 @@
     <item name="wallet_list_item" type="id"/>
     <item name="add_wallet_item" type="id"/>
     <item name="transaction_item" type="id"/>
+    <item name="country_item" type="id"/>
+    <item name="offer_item" type="id"/>
+    <item name="region_item" type="id"/>
+    <item name="currency_item" type="id"/>
     <item name="syncing_item" type="id"/>
     <item name="drawer_layout_id" type="id"/>
     <item name="staking_item" type="id"/>

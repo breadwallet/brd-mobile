@@ -54,7 +54,7 @@ data class ExchangeInvoiceEstimate(
         val quoteCurrencyAmount: String?,
         @SerialName("fee_type")
         val type: FeeType,
-        // val discounts: List<Discount> = emptyList(),
+        val discounts: List<Discount> = emptyList(),
     )
 
     @Serializable

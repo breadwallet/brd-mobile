@@ -504,7 +504,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         case .insufficientFunds:
             showAlert(title: S.Alert.error, message: S.Send.insufficientFunds, buttonLabel: S.Button.ok)
             
-        case .failed:
+        case .failed, .invalidAmountOrFee, .internalError:
             showAlert(title: S.Alert.error, message: S.Send.createTransactionError, buttonLabel: S.Button.ok)
             
         case .insufficientGas:
@@ -604,9 +604,9 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
                     let codeStr = code == 0 ? "" : " (\(code))"
                     self.showAlert(title: S.Send.sendError, message: message + codeStr, buttonLabel: S.Button.ok)
                     self.saveEvent("send.publishFailed", attributes: ["errorMessage": "\(message) (\(code))"])
-                case .insufficientGas(let rpcErrorMessage):
+                case .insufficientGas(let currencyCode, let amount):
                     self.showInsufficientGasError()
-                    self.saveEvent("send.publishFailed", attributes: ["errorMessage": rpcErrorMessage])
+                    self.saveEvent("send.publishFailed", attributes: ["errorMessage": "\(currencyCode) \(String(describing: amount))"])
                 }
             }
         }

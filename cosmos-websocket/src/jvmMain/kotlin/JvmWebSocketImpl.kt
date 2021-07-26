@@ -16,6 +16,10 @@ import okhttp3.WebSocket
 
 internal actual class WebSocketImpl actual constructor(url: String) {
 
+    actual companion object {
+        actual val implemented: Boolean = true
+    }
+
     private val logger = Logger.create("[WebSocketImpl (${url})]")
     private val client = OkHttpClient().newBuilder().build()
     private val urlString = url

@@ -23,25 +23,28 @@ enum ButtonType {
 private let minTargetSize: CGFloat = 48.0
 
 class BRDButton: UIControl {
-
-    init(title: String, type: ButtonType) {
-        self.title = title
-        self.type = type
-        super.init(frame: .zero)
-        accessibilityLabel = title
-        setupViews()
-    }
-
-    init(title: String, type: ButtonType, image: UIImage) {
+    
+    init(
+        title: String,
+        type: ButtonType = .primary,
+        image: UIImage? = nil,
+        target: Any? = nil,
+        action: Foundation.Selector? = nil,
+        event: UIControl.Event = .touchUpInside
+    ) {
         self.title = title
         self.type = type
         self.image = image
         super.init(frame: .zero)
         accessibilityLabel = title
         setupViews()
+        if let action = action {
+            addTarget(target, action: action, for: event)
+        }
     }
 
     var isToggleable = false
+
     var title: String {
         didSet {
             label.text = title
@@ -52,11 +55,17 @@ class BRDButton: UIControl {
             imageView?.image = image
         }
     }
+
+    var cornerRadius: CGFloat {
+        get { container.layer.cornerRadius }
+        set { container.layer.cornerRadius = newValue }
+    }
+
     private let type: ButtonType
     private let container = UIView()
     private let label = UILabel()
-    private let cornerRadius: CGFloat = 2.0
     private var imageView: UIImageView?
+    private var activityView = UIActivityIndicatorView(style: .white)
 
     override var isHighlighted: Bool {
         didSet {
@@ -102,6 +111,10 @@ class BRDButton: UIControl {
         }
     }
 
+    func setActivityViewVisible(_ visible: Bool) {
+        visible ? activityView.startAnimating() : activityView.stopAnimating()
+    }
+
     private func setupViews() {
         addContent()
         setColors()
@@ -110,12 +123,12 @@ class BRDButton: UIControl {
         label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         label.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
+        cornerRadius = Constant.defaultCornerRadius
     }
 
     private func addContent() {
         addSubview(container)
         container.backgroundColor = .primaryButton
-        container.layer.cornerRadius = cornerRadius
         container.isUserInteractionEnabled = false
         container.constrain(toSuperviewEdges: nil)
         label.text = title
@@ -124,6 +137,7 @@ class BRDButton: UIControl {
         label.isUserInteractionEnabled = false
         label.font = UIFont.customBody(size: 16.0)
         configureContentType()
+        container.addSubview(activityView)
     }
 
     private func configureContentType() {
@@ -200,6 +214,12 @@ class BRDButton: UIControl {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        activityView.frame.origin.x = container.bounds.minX + C.padding[1]
+        activityView.center.y = container.bounds.midY
+    }
+
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard !isHidden || isUserInteractionEnabled else { return nil }
         let deltaX = max(minTargetSize - bounds.width, 0)
@@ -214,5 +234,18 @@ class BRDButton: UIControl {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height = C.Sizes.buttonHeight
+        return size
+    }
+}
+
+extension BRDButton {
+    
+    enum Constant {
+        static let defaultCornerRadius: CGFloat = 2
     }
 }

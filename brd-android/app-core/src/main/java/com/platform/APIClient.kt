@@ -23,6 +23,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.NetworkOnMainThreadException
 import androidx.annotation.VisibleForTesting
+import com.brd.prefs.BrdPreferences
 
 import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.crypto.Key
@@ -73,15 +74,10 @@ import org.kodein.di.erased.instance
 
 private const val UNAUTHED_HTTP_STATUS = 401
 
-// The server(s) on which the API is hosted
-private val HOST = when {
-    BuildConfig.DEBUG -> "stage2.breadwallet.com"
-    else -> "api.breadwallet.com"
-}
-
 class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
+    private val brdPreferences: BrdPreferences,
     headers: Map<String, String>
 ) {
 
@@ -119,7 +115,7 @@ class APIClient(
 
     val token: String?
         @Synchronized get() {
-            if (mIsFetchingToken) {
+            if (mIsFetchingToken || brdPreferences.hydraActivated) {
                 return null
             }
             mIsFetchingToken = true
@@ -327,7 +323,7 @@ class APIClient(
                 val code = res.code
                 val headers = HashMap<String, String>()
                 for (name in res.headers.names()) {
-                    headers[name.toLowerCase()] = res.header(name)!!
+                    headers[name.lowercase()] = res.header(name)!!
                     if (name.equals(DATE, true)) {
                         val dateValue = res.header(name)!!
                         DATE_FORMAT.parse(dateValue)
@@ -578,7 +574,7 @@ class APIClient(
                         return host
                     }
                 }
-                return HOST
+                return BRSharedPrefs.getApiHost()
             }
 
         @JvmStatic

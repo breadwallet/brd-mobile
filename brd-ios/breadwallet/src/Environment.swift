@@ -88,7 +88,7 @@ struct E {
         return bounds?.width == 375 && bounds?.height == 667
         #endif
     }
-    
+
     static let isIPhoneX: Bool = {
         #if IS_EXTENSION_ENVIRONMENT
         return false
@@ -102,6 +102,24 @@ struct E {
         return false
         #else
         return isIPhone6 || isIPhone5 || isIPhone4
+        #endif
+    }
+    
+    static var isIPhone6HeightOrLesser: Bool {
+        #if IS_EXTENSION_ENVIRONMENT
+        return false
+        #else
+        let bounds = UIApplication.shared.keyWindow?.bounds
+        return (bounds?.height ?? 0) <= 667
+        #endif
+    }
+    
+    static var isIPhone5HeightOrLesser: Bool {
+        #if IS_EXTENSION_ENVIRONMENT
+        return false
+        #else
+        let bounds = UIApplication.shared.keyWindow?.bounds
+        return (bounds?.height ?? 0) <= 568
         #endif
     }
     

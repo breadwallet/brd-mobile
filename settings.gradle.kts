@@ -3,12 +3,14 @@ rootProject.name = "brd-mobile"
 include(
     "cosmos-core",
     "cosmos-brd-api-client",
-    //"cosmos-websocket",
+    "cosmos-websocket",
     "cosmos-bundled",
     "cosmos-support",
     "cosmos-preferences",
     "cosmos-bakers-api-client"
 )
+
+include("cosmos-exchange")
 
 include(
     "brd-android:app",

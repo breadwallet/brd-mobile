@@ -33,8 +33,13 @@ extension UILabel {
         self.font = font
     }
 
-    convenience init(font: UIFont, color: UIColor) {
+    convenience init(
+            text: String? = nil,
+            font: UIFont = Theme.body1,
+            color: UIColor = Theme.primaryText
+    ) {
         self.init()
+        self.text = text
         self.font = font
         self.textColor = color
     }

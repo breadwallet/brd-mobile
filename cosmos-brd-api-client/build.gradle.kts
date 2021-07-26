@@ -24,7 +24,9 @@ kotlin {
                 implementation(project(":cosmos-core"))
                 implementation(kotlin("stdlib-common"))
                 implementation(brd.Libs.Kotlinx.SerializationRuntime)
-                implementation(brd.Libs.Coroutines.Core)
+                implementation(brd.Libs.Coroutines.Core) {
+                    version { strictly(brd.COROUTINES_VERSION) }
+                }
                 api(brd.Libs.Kotlinx.DateTime)
                 api(brd.Libs.Ktor.Client.Core)
                 api(brd.Libs.Ktor.Client.Json)
@@ -55,12 +57,6 @@ kotlin {
         named("iosMain") {
             dependencies {
                 implementation(brd.Libs.Ktor.Client.IosClientEngine)
-            }
-        }
-
-        named("iosTest") {
-            dependencies {
-                implementation("com.autodesk:coroutineworker:0.6.2")
             }
         }
     }

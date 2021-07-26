@@ -54,46 +54,51 @@ struct State {
 
 extension State {
     static var initial: State {
-        return State(   isLoginRequired: true,
-                        rootModal: .none,
-                        showFiatAmounts: UserDefaults.showFiatAmounts,
-                        alert: .none,
-                        defaultCurrencyCode: UserDefaults.defaultCurrencyCode,
-                        isPushNotificationsEnabled: UserDefaults.pushToken != nil,
-                        isPromptingBiometrics: false,
-                        pinLength: 6,
-                        walletID: nil,
-                        wallets: [:],
-                        experiments: nil,
-                        creationRequired: []
+        return State(
+            isLoginRequired: true,
+            rootModal: .none,
+            showFiatAmounts: UserDefaults.showFiatAmounts,
+            alert: .none,
+            defaultCurrencyCode: UserDefaults.defaultCurrencyCode,
+            isPushNotificationsEnabled: UserDefaults.pushToken != nil,
+            isPromptingBiometrics: false,
+            pinLength: 6,
+            walletID: nil,
+            wallets: [:],
+            experiments: nil,
+            creationRequired: []
         )
     }
     
-    func mutate(   isOnboardingEnabled: Bool? = nil,
-                   isLoginRequired: Bool? = nil,
-                   rootModal: RootModal? = nil,
-                   showFiatAmounts: Bool? = nil,
-                   alert: AlertType? = nil,
-                   defaultCurrencyCode: String? = nil,
-                   isPushNotificationsEnabled: Bool? = nil,
-                   isPromptingBiometrics: Bool? = nil,
-                   pinLength: Int? = nil,
-                   walletID: String? = nil,
-                   wallets: [CurrencyId: WalletState]? = nil,
-                   experiments: [Experiment]? = nil,
-                   creationRequired: [CurrencyId]? = nil) -> State {
-        return State(isLoginRequired: isLoginRequired ?? self.isLoginRequired,
-                     rootModal: rootModal ?? self.rootModal,
-                     showFiatAmounts: showFiatAmounts ?? self.showFiatAmounts,
-                     alert: alert ?? self.alert,
-                     defaultCurrencyCode: defaultCurrencyCode ?? self.defaultCurrencyCode,
-                     isPushNotificationsEnabled: isPushNotificationsEnabled ?? self.isPushNotificationsEnabled,
-                     isPromptingBiometrics: isPromptingBiometrics ?? self.isPromptingBiometrics,
-                     pinLength: pinLength ?? self.pinLength,
-                     walletID: walletID ?? self.walletID,
-                     wallets: wallets ?? self.wallets,
-                     experiments: experiments ?? self.experiments,
-                     creationRequired: creationRequired ?? self.creationRequired)
+    func mutate(
+        isOnboardingEnabled: Bool? = nil,
+        isLoginRequired: Bool? = nil,
+        rootModal: RootModal? = nil,
+        showFiatAmounts: Bool? = nil,
+        alert: AlertType? = nil,
+        defaultCurrencyCode: String? = nil,
+        isPushNotificationsEnabled: Bool? = nil,
+        isPromptingBiometrics: Bool? = nil,
+        pinLength: Int? = nil,
+        walletID: String? = nil,
+        wallets: [CurrencyId: WalletState]? = nil,
+        experiments: [Experiment]? = nil,
+        creationRequired: [CurrencyId]? = nil
+    ) -> State {
+        return State(
+            isLoginRequired: isLoginRequired ?? self.isLoginRequired,
+            rootModal: rootModal ?? self.rootModal,
+            showFiatAmounts: showFiatAmounts ?? self.showFiatAmounts,
+            alert: alert ?? self.alert,
+            defaultCurrencyCode: defaultCurrencyCode ?? self.defaultCurrencyCode,
+            isPushNotificationsEnabled: isPushNotificationsEnabled ?? self.isPushNotificationsEnabled,
+            isPromptingBiometrics: isPromptingBiometrics ?? self.isPromptingBiometrics,
+            pinLength: pinLength ?? self.pinLength,
+            walletID: walletID ?? self.walletID,
+            wallets: wallets ?? self.wallets,
+            experiments: experiments ?? self.experiments,
+            creationRequired: creationRequired ?? self.creationRequired
+        )
     }
 
     func mutate(walletState: WalletState) -> State {
@@ -129,6 +134,9 @@ enum RootModal {
     case buy(currency: Currency?)
     case sell(currency: Currency?)
     case trade
+    case buyLegacy(currency: Currency?)
+    case sellLegacy(currency: Currency?)
+    case tradeLegacy
     case receiveLegacy
     case stake(currency: Currency)
     case gift
@@ -225,13 +233,19 @@ func == (lhs: RootModal, rhs: RootModal) -> Bool {
         return lhsCurrency == rhsCurrency && lhsAddress == rhsAddress
     case (.buy(let lhsCurrency?), .buy(let rhsCurrency?)):
         return lhsCurrency == rhsCurrency
-    case (.buy(nil), .buy(nil)):
+    case (.buyLegacy(let lhsCurrency?), .buyLegacy(let rhsCurrency?)):
+        return lhsCurrency == rhsCurrency
+    case (.buyLegacy(nil), .buyLegacy(nil)):
         return true
     case (.sell(let lhsCurrency?), .sell(let rhsCurrency?)):
         return lhsCurrency == rhsCurrency
-    case (.sell(nil), .sell(nil)):
+    case (.sellLegacy(let lhsCurrency?), .sellLegacy(let rhsCurrency?)):
+        return lhsCurrency == rhsCurrency
+    case (.sellLegacy(nil), .sellLegacy(nil)):
         return true
     case (.trade, .trade):
+        return true
+    case (.tradeLegacy, .tradeLegacy):
         return true
     case (.receiveLegacy, .receiveLegacy):
         return true

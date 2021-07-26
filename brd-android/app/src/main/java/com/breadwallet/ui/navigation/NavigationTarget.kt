@@ -34,6 +34,10 @@ sealed class NavigationTarget : INavigationTarget {
     object QRScanner : NavigationTarget()
     object LogcatViewer : NavigationTarget()
     object MetadataViewer : NavigationTarget()
+    object RegionPreferences : NavigationTarget()
+    data class OrderHistory(
+        val orderId: String? = null
+    ) : NavigationTarget()
 
     data class DeepLink(
         val url: String? = null,

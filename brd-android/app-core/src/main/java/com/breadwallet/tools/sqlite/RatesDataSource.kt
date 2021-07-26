@@ -49,8 +49,8 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
             database!!.beginTransaction()
             var failed = 0
             for (c in currencyEntities) {
-                val code = c.code.toUpperCase(Locale.ROOT)
-                val iso = c.iso.toUpperCase(Locale.ROOT)
+                val code = c.code.uppercase()
+                val iso = c.iso.uppercase()
                 val values = ContentValues()
                 if (Utils.isNullOrEmpty(code) || c.rate <= 0) {
                     failed++
@@ -90,7 +90,7 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
             database!!.delete(
                 BRSQLiteHelper.CURRENCY_TABLE_NAME,
                 BRSQLiteHelper.CURRENCY_ISO + " = ?",
-                arrayOf(iso.toUpperCase(Locale.ROOT))
+                arrayOf(iso.uppercase())
             )
         } finally {
             closeDatabase()
@@ -106,7 +106,7 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
                 BRSQLiteHelper.CURRENCY_TABLE_NAME,
                 allColumns,
                 BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
-                arrayOf(iso.toUpperCase(Locale.ROOT)),
+                arrayOf(iso.uppercase()),
                 null,
                 null,
                 "\'" + BRSQLiteHelper.CURRENCY_CODE + "\'"
@@ -140,7 +140,7 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
             cursor = database!!.query(
                 BRSQLiteHelper.CURRENCY_TABLE_NAME,
                 allColumns, BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
-                arrayOf(iso.toUpperCase(Locale.ROOT)),
+                arrayOf(iso.uppercase()),
                 null, null, null
             )
             cursor.moveToFirst()
@@ -167,7 +167,7 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
                 BRSQLiteHelper.CURRENCY_TABLE_NAME,
                 allColumns,
                 BRSQLiteHelper.CURRENCY_CODE + " = ? AND " + BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
-                arrayOf(code.toUpperCase(Locale.ROOT), iso.toUpperCase(Locale.ROOT)),
+                arrayOf(code.uppercase(), iso.uppercase()),
                 null,
                 null,
                 null

@@ -8,6 +8,7 @@
  */
 package com.breadwallet.ui.staking
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.brd.bakerapi.models.Baker
 import com.breadwallet.R
@@ -28,17 +29,15 @@ class BakerItem (
 
     class ViewHolder(v: View) : FastAdapter.ViewHolder<BakerItem>(v) {
 
+        @SuppressLint("SetTextI18n")
         override fun bindView(item: BakerItem, payloads: List<Any>) {
             with(BakerListItemBinding.bind(itemView).baker) {
                 val formatter =  NumberFormat.getPercentInstance()
                 name.text = item.baker.name
-                feePct.text = itemView.context.getString(
-                    R.string.Staking_feePct,
-                    "${formatter.format(item.baker.fee)}"
-                )
+                feePct.text = itemView.context.getString(R.string.Staking_feeHeader) + formatter.format(item.baker.fee)
                 formatter.maximumFractionDigits = 3
                 formatter.minimumFractionDigits = 3
-                roiPct.text = "${formatter.format(item.baker.estimatedRoi)}"
+                roiPct.text = formatter.format(item.baker.estimatedRoi)
                 Picasso.get().load(item.baker.logo).into(bakerTokenIcon)
             }
         }

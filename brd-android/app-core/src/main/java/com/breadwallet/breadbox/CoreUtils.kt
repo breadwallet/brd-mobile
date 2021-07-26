@@ -67,7 +67,7 @@ fun BigDecimal.formatCryptoForUi(
     currencyFormat.decimalFormatSymbols = decimalFormatSymbols
     currencyFormat.maximumFractionDigits = scale
     currencyFormat.minimumFractionDigits = 0
-    return "${currencyFormat.format(amount)} ${currencyCode.toUpperCase()}"
+    return "${currencyFormat.format(amount)} ${currencyCode.uppercase()}"
 }
 
 val Wallet.currencyId: String
