@@ -120,4 +120,22 @@ extension UIImage {
         }
     }
 
+    static func gradient(_ colors: [UIColor], size: CGSize, vertical: Bool = false) -> UIImage? {
+        let layer = CAGradientLayer()
+        layer.bounds = CGRect(origin: .zero, size: size)
+        layer.colors = colors.map { $0.cgColor }
+        if vertical {
+            layer.startPoint = CGPoint(x: 0, y: 0)
+            layer.endPoint = CGPoint(x: 1, y: 1)
+        }
+
+        UIGraphicsBeginImageContext(size)
+        if let context = UIGraphicsGetCurrentContext() {
+            layer.render(in: context)
+        }
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return image
+    }
 }

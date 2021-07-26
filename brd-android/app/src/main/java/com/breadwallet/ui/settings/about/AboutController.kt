@@ -12,7 +12,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
+import com.brd.prefs.BrdPreferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerAboutBinding
@@ -32,6 +34,8 @@ class AboutController(args: Bundle? = null) : BaseController(args) {
 
     private var versionClickedCount = 0
     private val supportManager: SupportManager by instance()
+    private val brdPreferences: BrdPreferences by instance()
+
     private val binding by viewBinding(ControllerAboutBinding::inflate)
 
     override fun onCreateView(view: View) {
@@ -39,6 +43,7 @@ class AboutController(args: Bundle? = null) : BaseController(args) {
         val res = checkNotNull(resources)
 
         with(binding) {
+            labelHydraActivated.isVisible = brdPreferences.hydraActivated
             backButton.setOnClickListener {
                 router.popCurrentController()
             }

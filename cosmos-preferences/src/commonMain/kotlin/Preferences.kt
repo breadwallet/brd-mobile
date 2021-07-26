@@ -32,7 +32,7 @@ interface Preferences {
 
     fun putDouble(key: String, value: Double)
     fun getDouble(key: String, defaultValue: Double = 0.0): Double
-    fun getDoubleOrNull(name: String): Double?
+    fun getDoubleOrNull(key: String): Double?
 
     fun putBoolean(key: String, value: Boolean)
     fun getBoolean(key: String, defaultValue: Boolean = false): Boolean

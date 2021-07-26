@@ -12,6 +12,7 @@ import UIKit
 import LocalAuthentication
 import SwiftUI
 import WalletKit
+import Cosmos
 
 // swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
@@ -20,10 +21,7 @@ class ModalPresenter: Subscriber, Trackable {
 
     // MARK: - Public
     let keyStore: KeyStore
-    lazy var supportCenter: SupportCenterContainer = {
-        return SupportCenterContainer(walletAuthenticator: keyStore)
-    }()
-    
+
     init(keyStore: KeyStore, system: CoreSystem, window: UIWindow, alertPresenter: AlertPresenter?) {
         self.system = system
         self.window = window
@@ -164,7 +162,21 @@ class ModalPresenter: Subscriber, Trackable {
                 
             }
         }
-        
+
+        Store.subscribe(self, name: .presentRewardsInfo) { [weak self] in
+            guard let trigger = $0, case .presentRewardsInfo = trigger else {
+                return
+            }
+            self?.presentRewardsInfo()
+        }
+
+        Store.subscribe(self, name: .presentOrderHistory) { [weak self] in
+            guard let trigger = $0, case .presentOrderHistory = trigger else {
+                return
+            }
+            self?.presentOrderHistory()
+        }
+
         Store.subscribe(self, name: .openPlatformUrl("")) { [weak self] in
             guard let trigger = $0 else { return }
             if case let .openPlatformUrl(url) = trigger {
@@ -221,26 +233,13 @@ class ModalPresenter: Subscriber, Trackable {
             Store.trigger(name: .hideStatusBar)
         }
     }
-    
-    func preloadSupportCenter() {
-        supportCenter.preload() // pre-load contents for faster access
-    }
 
     func presentFaq(articleId: String? = nil, currency: Currency? = nil) {
-        supportCenter.modalPresentationStyle = .overFullScreen
-        supportCenter.modalPresentationCapturesStatusBarAppearance = true
-        supportCenter.transitioningDelegate = supportCenter
-        var url: String
-        if let articleId = articleId {
-            url = "/support/article?slug=\(articleId)"
-            if let currency = currency {
-                url += "&currency=\(currency.supportCode)"
-            }
-        } else {
-            url = "/support?"
-        }
-        supportCenter.navigate(to: url)
-        topViewController?.present(supportCenter, animated: true, completion: {})
+        let vc = SupportViewController(slug: articleId, currencyCode: currency?.code)
+        let navVC = UINavigationController(darkWith: vc)
+        navVC.modalPresentationStyle = .overFullScreen
+        navVC.modalPresentationCapturesStatusBarAppearance = true
+        topViewController?.present(navVC, animated: true, completion: {})
     }
 
     private func rootModalViewController(_ type: RootModal) -> UIViewController? {
@@ -263,21 +262,43 @@ class ModalPresenter: Subscriber, Trackable {
             }
                         
             return ModalViewController(childViewController: requestVc)
-        case .buy(let currency):
+        case .buy:
+            let vc = ExchangeBuySellViewController(system: system, keyStore: keyStore, mode: .buy)
+            let navVc = UINavigationController(darkWith: vc)
+            navVc.modalPresentationStyle = .overCurrentContext
+            topViewController?.present(navVc, animated: true)
+            return nil
+        case .sell:
+            guard ((topViewController as? UINavigationController)?
+                  .topViewController as? ExchangeTradeViewController) == nil else {
+                return nil
+            }
+            let vc = ExchangeBuySellViewController(system: system, keyStore: keyStore, mode: .sell)
+            let navVc = UINavigationController(darkWith: vc)
+            navVc.modalPresentationStyle = .overCurrentContext
+            topViewController?.present(navVc, animated: true)
+            return nil
+        case .trade:
+            let vc = ExchangeTradeViewController(system: system, keyStore: keyStore, mode: .trade)
+            let navVc = UINavigationController(darkWith: vc)
+            navVc.modalPresentationStyle = .overCurrentContext
+            topViewController?.present(navVc, animated: true)
+            return nil
+        case .buyLegacy(let currency):
             var url = "/buy"
             if let currency = currency {
                 url += "?currency=\(currency.code)"
             }
             presentPlatformWebViewController(url)
             return nil
-        case .sell(let currency):
+        case .sellLegacy(let currency):
             var url = "/sell"
             if let currency = currency {
                 url += "?currency=\(currency.code)"
             }
             presentPlatformWebViewController(url)
             return nil
-        case .trade:
+        case .tradeLegacy:
             presentPlatformWebViewController("/trade")
             return nil
         case .receiveLegacy:
@@ -521,18 +542,38 @@ class ModalPresenter: Subscriber, Trackable {
         var ethMenu = MenuItem(title: String(format: S.Settings.currencyPageTitle, Currencies.eth.instance?.name ?? "Ethereum"), subMenu: ethItems, rootNav: menuNav)
         ethMenu.shouldShow = { return !ethItems.isEmpty }
 
-        // MARK: Preferences
-        let preferencesItems: [MenuItem] = [
-            // Display Currency
-            MenuItem(title: S.Settings.currency, accessoryText: {
+        let regionMenuItem: MenuItem
+        if UserDefaults.cosmos.hydraActivated {
+             regionMenuItem = MenuItem(
+                 title: S.Settings.region,
+                 accessoryText: {
+                     let code = Store.state.defaultCurrencyCode
+                     let components: [String: String] = [NSLocale.Key.currencyCode.rawValue: code]
+                     let identifier = Locale.identifier(fromComponents: components)
+                     return Locale(identifier: identifier).currencyCode ?? ""
+                 },
+                 callback: {
+                     let vc = RegionSettingsViewController(
+                         system: self.system,
+                         keyStore: self.keyStore
+                     )
+                     menuNav.pushViewController(vc, animated: true)
+                })
+        } else {
+            regionMenuItem =  MenuItem(title: S.Settings.currency, accessoryText: {
                 let code = Store.state.defaultCurrencyCode
                 let components: [String: String] = [NSLocale.Key.currencyCode.rawValue: code]
                 let identifier = Locale.identifier(fromComponents: components)
                 return Locale(identifier: identifier).currencyCode ?? ""
             }, callback: {
                 menuNav.pushViewController(DefaultCurrencyViewController(), animated: true)
-            }),
-            
+            })
+        }
+
+        // MARK: Preferences
+        let preferencesItems: [MenuItem] = [
+            // Display Currency
+            regionMenuItem,
             btcMenu,
             bchMenu,
             ethMenu,
@@ -622,8 +663,18 @@ class ModalPresenter: Subscriber, Trackable {
                 guard let `self` = self, let assetCollection = self.system.assetCollection else { return }
                 let vc = ManageWalletsViewController(assetCollection: assetCollection, coreSystem: self.system)
                 menuNav.pushViewController(vc, animated: true)
-            },
-            
+            }
+        ]
+
+        // Order history
+        if UserDefaults.cosmos.hydraActivated {
+            rootItems.append(MenuItem(title: S.MenuButton.orderHistory, icon: MenuItem.Icon.orderHistory) {
+                Store.trigger(name: .presentOrderHistory)
+            })
+        }
+
+        rootItems += [
+
             // Preferences
             MenuItem(title: S.Settings.preferences, icon: MenuItem.Icon.preferences, subMenu: preferencesItems, rootNav: menuNav),
             
@@ -640,13 +691,16 @@ class ModalPresenter: Subscriber, Trackable {
             },
                         
             // Rewards
-            MenuItem(title: S.Settings.rewards, icon: MenuItem.Icon.rewards) { [weak self] in
-                self?.presentPlatformWebViewController("/rewards")
+            MenuItem(title: S.Settings.rewards, icon: MenuItem.Icon.rewards) {
+                Store.trigger(name: .presentRewardsInfo)
             },
             
             // About
-            MenuItem(title: S.Settings.about, icon: MenuItem.Icon.about) {
-                menuNav.pushViewController(AboutViewController(), animated: true)
+            MenuItem(title: S.Settings.about, icon: MenuItem.Icon.about) { [weak self] in
+                menuNav.pushViewController(
+                    AboutViewController(keyStore: self?.keyStore),
+                    animated: true
+                )
             },
             
             // Export Transfer History
@@ -775,31 +829,33 @@ class ModalPresenter: Subscriber, Trackable {
             
             developerItems.append(
                 MenuItem(title: "API Host",
-                         accessoryText: { Backend.apiClient.host }, callback: {
+                         accessoryText: {
+                            UserDefaults.cosmos.debugApiHost ?? Backend.apiClient.host
+                         }, callback: {
                             let alert = UIAlertController(title: "Set API Host", message: "Clear and save to reset", preferredStyle: .alert)
                             alert.addTextField(configurationHandler: { textField in
-                                textField.text = Backend.apiClient.host
+                                textField.text = UserDefaults.cosmos.debugApiHost ?? Backend.apiClient.host
                                 textField.keyboardType = .URL
-                                textField.clearButtonMode = .always
+                                 textField.clearButtonMode = .always
                             })
 
                             alert.addAction(UIAlertAction(title: "Save", style: .default) { (_) in
                                 guard let newHost = alert.textFields?.first?.text, !newHost.isEmpty else {
                                     UserDefaults.debugBackendHost = nil
-                                    Backend.apiClient.host = C.backendHost
+                                    Backend.brdApi.host = BrdApiHost.Custom(host: C.backendHost)
                                     (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                                     return
                                 }
-                                let originalHost = Backend.apiClient.host
-                                Backend.apiClient.host = newHost
-                                Backend.apiClient.me { (success, _, _) in
-                                    if success {
-                                        UserDefaults.debugBackendHost = newHost
-                                        (menuNav.topViewController as? MenuViewController)?.reloadMenu()
-                                    } else {
-                                        Backend.apiClient.host = originalHost
-                                    }
-                                }
+
+                                let authProvider = IosBrdAuthProvider(walletAuthenticator: self.keyStore)
+
+                                // New hydra backend
+                                let host = BrdApiHost.Custom(host: newHost)
+                                authProvider.token = nil
+                                UserDefaults.cosmos.debugApiHost = newHost
+                                UserDefaults.debugBackendHost = newHost
+                                Backend.brdApi.host = host
+                                (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                             })
 
                             alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
@@ -877,6 +933,18 @@ class ModalPresenter: Subscriber, Trackable {
                 fatalError("Debug crash")
             })
 
+            developerItems.append(MenuItem(title: "Native exchange",
+                                           accessoryText: { UserDefaults.debugNativeExchangeEnabled ? "On" : "Off"},
+                                           callback: {
+                                               UserDefaults.debugNativeExchangeEnabled.toggle()
+                                               IosBrdAuthProvider(walletAuthenticator: self.keyStore).token = nil
+                                               Backend.brdApi.host = BrdApiHost.Companion().hostFor(
+                                                       isDebug: (E.isDebug || E.isTestFlight),
+                                                       isHydraActivated: UserDefaults.cosmos.hydraActivated
+                                               )
+                                               (menuNav.topViewController as? MenuViewController)?.reloadMenu()
+                                           }))
+
             rootItems.append(MenuItem(title: "Developer Options", icon: nil, subMenu: developerItems, rootNav: menuNav, faqButton: nil))
         }
                 
@@ -928,6 +996,49 @@ class ModalPresenter: Subscriber, Trackable {
                                                        from: vc,
                                                        context: .none,
                                                        dismissAction: nil)
+    }
+
+    private func presentRewardsInfo() {
+        let (navVc, vc) = WebViewController.embeddedInNavigationController(
+            .brd,
+            showToolbar: false
+        )
+
+        let url = IosBrdAuthProvider(walletAuthenticator: keyStore).signedGetUrl(
+            host: Backend.brdApi.host.component1(),
+            path: "/web/rewards"
+        )
+
+        vc.load(url)
+        vc.nativeDestinationAction = { [weak vc, weak self] destination in
+            let active = UserDefaults.cosmos.hydraActivated
+            let rootModal: RootModal = active ? .trade : .tradeLegacy
+            vc?.dismiss {
+                self?.topViewController?.dismiss {
+                    Store.perform(action: RootModalActions.Present(modal: rootModal))
+                }
+            }
+        }
+        vc.title = S.RewardsView.normalTitle
+        navVc.modalPresentationStyle = .overFullScreen
+        topViewController?.present(navVc, animated: true, completion: nil)
+    }
+
+    private func presentOrderHistory() {
+        let (navVc, vc) = WebViewController.embeddedInNavigationController(
+            .brd,
+            showToolbar: false
+        )
+
+        let url = IosBrdAuthProvider(walletAuthenticator: keyStore).signedGetUrl(
+            host: Backend.brdApi.host.component1(),
+            path: "/web/exchange/order/list"
+        )
+
+        vc.load(url)
+        vc.title = S.MenuButton.orderHistory
+        navVc.modalPresentationStyle = .overFullScreen
+        topViewController?.present(navVc, animated: true, completion: nil)
     }
 
     private func presentPlatformWebViewController(_ mountPoint: String) {

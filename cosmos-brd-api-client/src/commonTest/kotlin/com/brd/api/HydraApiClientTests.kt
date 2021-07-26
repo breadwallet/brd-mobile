@@ -31,6 +31,9 @@ class HydraApiClientTests {
             contentType: String,
             url: String
         ): BrdAuthProvider.Signature = fail()
+
+        override fun signUrl(apiHost: BrdApiHost, path: String): String = ""
+        override fun walletId(): String? = null
     }
     @BeforeTest
     fun before() {

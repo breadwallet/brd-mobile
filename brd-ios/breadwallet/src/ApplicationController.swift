@@ -11,11 +11,10 @@
 import UIKit
 import WalletKit
 import UserNotifications
+import Cosmos
 #if canImport(WidgetKit)
 import WidgetKit
 #endif
-
-
 
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
@@ -167,6 +166,7 @@ class ApplicationController: Subscriber, Trackable {
     /// On KVStore sync complete, stand-up Core
     /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
+        preflightCheck()
         // Authenticate with BRDAPI backend
         Backend.connect(authenticator: keyStore as WalletAuthenticator)
         Backend.sendLaunchEvent()
@@ -181,22 +181,51 @@ class ApplicationController: Subscriber, Trackable {
                 weakSelf.authenticateWithBackend { jwt in
                     // Begin Core stand-up
                     weakSelf.coreSystem.create(account: account,
-                                           authToken: jwt,
-                                           btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
-                        weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
-                                                             system: weakSelf.coreSystem,
-                                                             window: weakSelf.window,
-                                                             alertPresenter: weakSelf.alertPresenter)
+                       authToken: jwt,
+                       btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
+                    ) {
+                        weakSelf.modalPresenter = ModalPresenter(
+                             keyStore: weakSelf.keyStore,
+                             system: weakSelf.coreSystem,
+                             window: weakSelf.window,
+                             alertPresenter: weakSelf.alertPresenter
+                        )
                         weakSelf.coreSystem.connect()
                     }
                 }
-                
             }
         }
         Backend.apiClient.updateExperiments()
         Backend.apiClient.fetchAnnouncements()
     }
-    
+
+    private func preflightCheck() {
+        DispatchQueue.main.async {
+
+            let authProvider = IosBrdAuthProvider(
+                walletAuthenticator: self.keyStore
+            )
+
+            guard !UserDefaults.cosmos.hydraActivated, authProvider.hasKey() else {
+                return
+            }
+
+            let key = authProvider.publicKey()
+
+            Backend.brdApi.preflight(publicKey: key) { [weak self] preflight, _ in
+                if preflight?.activated ?? false {
+                    UserDefaults.cosmos.hydraActivated = true
+                    authProvider.token = nil
+                    Backend.brdApi.host = BrdApiHost.Companion().hostFor(
+                            isDebug: (E.isDebug || E.isTestFlight),
+                            isHydraActivated: true
+                    )
+                    self?.fetchBackendUpdates()
+                }
+            }
+        }
+    }
+
     private func handleDeferedLaunchURL() {
         // deep link handling
         self.urlController = URLController(walletAuthenticator: self.keyStore)
@@ -361,9 +390,6 @@ class ApplicationController: Subscriber, Trackable {
                 for (n, e) in errors {
                     print("Bundle \(n) ran update. err: \(String(describing: e))")
                 }
-                DispatchQueue.main.async {
-                    self.modalPresenter?.preloadSupportCenter()
-                }
             }
         }
     }
@@ -405,11 +431,19 @@ class ApplicationController: Subscriber, Trackable {
         }
         
         homeScreen.didTapBuy = {
-            Store.perform(action: RootModalActions.Present(modal: .buy(currency: nil)))
+            if UserDefaults.debugNativeExchangeEnabled {
+                Store.perform(action: RootModalActions.Present(modal: .buy(currency: nil)))
+            } else {
+                Store.perform(action: RootModalActions.Present(modal: .buyLegacy(currency: nil)))
+            }
         }
         
         homeScreen.didTapTrade = {
-            Store.perform(action: RootModalActions.Present(modal: .trade))
+            if UserDefaults.debugNativeExchangeEnabled {
+                Store.perform(action: RootModalActions.Present(modal: .trade))
+            } else {
+                Store.perform(action: RootModalActions.Present(modal: .tradeLegacy))
+            }
         }
         
         homeScreen.didTapMenu = { [unowned self] in
@@ -465,15 +499,16 @@ class ApplicationController: Subscriber, Trackable {
         while let newTopViewController = topViewController?.presentedViewController {
             topViewController = newTopViewController
         }
+
         topViewController?.present(activity, animated: true, completion: nil)
-        
+        WebViewController.cleanAllCookies()
         let success = keyStore.wipeWallet()
         guard success else { // unexpected error writing to keychain
             activity.dismiss(animated: true)
             topViewController?.showAlert(title: S.WipeWallet.failedTitle, message: S.WipeWallet.failedMessage)
             return
         }
-        
+
         self.coreSystem.shutdown {
             DispatchQueue.main.async {
                 Backend.disconnectWallet()

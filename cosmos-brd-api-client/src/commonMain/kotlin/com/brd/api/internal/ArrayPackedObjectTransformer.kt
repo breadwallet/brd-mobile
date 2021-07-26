@@ -13,12 +13,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.elementDescriptors
 import kotlinx.serialization.descriptors.elementNames
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonTransformingSerializer
-import kotlinx.serialization.json.buildJsonArray
-import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.*
 
 /**
  * A [JsonTransformingSerializer] capable of interpreting packed
@@ -72,7 +67,13 @@ internal open class ArrayPackedObjectTransformer<T>(
             check(child is JsonArray) { "Expected element '$child' to be a JsonArray." }
             buildJsonObject {
                 elementNames.forEachIndexed { index, name ->
-                    put(name, child[index])
+                    // TODO: Temporary workaround for bad rate data
+                    val elementValue = child[index]
+                    if (elementValue is JsonPrimitive && elementValue.contentOrNull == "None") {
+                        put(name, JsonPrimitive(0.0))
+                    } else {
+                        put(name, elementValue)
+                    }
                 }
             }
         }.let(::JsonArray)

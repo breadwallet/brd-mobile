@@ -20,6 +20,8 @@ enum class SettingsOption {
     ATM_FINDER,
     EXPORT_TRANSACTIONS,
     DEVELOPER_OPTIONS,
+    ORDER_HISTORY,
+    REGION_PREFERENCES,
 
     // PREFERENCES
     CURRENCY,
@@ -49,6 +51,7 @@ enum class SettingsOption {
     VIEW_LOGS,
     COPY_PAPER_KEY,
     METADATA_VIEWER,
+    NATIVE_EXCHANGE_UI,
 
     // BTC
     REDEEM_PRIVATE_KEY,

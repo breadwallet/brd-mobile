@@ -15,6 +15,9 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import com.bluelinelabs.conductor.changehandler.VerticalChangeHandler
+import com.brd.api.BrdApiClient
+import com.brd.exchange.ExchangeModel
+import com.brd.prefs.BrdPreferences
 import com.breadwallet.R
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.legacy.presenter.settings.NotificationSettingsController
@@ -32,6 +35,7 @@ import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.controllers.SignalController
 import com.breadwallet.ui.disabled.DisabledController
+import com.breadwallet.ui.exchange.ExchangeController
 import com.breadwallet.ui.home.HomeController
 import com.breadwallet.ui.importwallet.ImportController
 import com.breadwallet.ui.login.LoginController
@@ -92,6 +96,8 @@ class RouterNavigator(
 
     private val breadBox by instance<BreadBox>()
     private val uriParser by instance<CryptoUriParser>()
+    private val brdApiClient by instance<BrdApiClient>()
+    private val brdPreferences by instance<BrdPreferences>()
 
     override fun navigateTo(target: INavigationTarget) =
         patch(target as NavigationTarget)
@@ -121,8 +127,31 @@ class RouterNavigator(
         }
     }
 
+    override fun orderHistory(effect: NavigationTarget.OrderHistory) {
+        val orderHistory = brdApiClient.signUrl("/web/exchange/order/list")
+        router.pushController(
+            WebController(orderHistory).asTransaction(
+                VerticalChangeHandler(),
+                VerticalChangeHandler()
+            )
+        )
+    }
+
+    override fun regionPreferences() {
+        router.pushController(
+            ExchangeController().asTransaction(
+                VerticalChangeHandler(),
+                VerticalChangeHandler()
+            )
+        )
+    }
+
     override fun brdRewards() {
-        val rewardsUrl = HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS)
+        val rewardsUrl = if (brdPreferences.hydraActivated) {
+            brdApiClient.signUrl("/web/rewards")
+        } else {
+            HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS)
+        }
         router.pushController(
             WebController(rewardsUrl).asTransaction(
                 VerticalChangeHandler(),
@@ -137,16 +166,19 @@ class RouterNavigator(
     }
 
     override fun buy() {
-        val url = String.format(
-            BRConstants.CURRENCY_PARAMETER_STRING_FORMAT,
-            HTTPServer.getPlatformUrl(HTTPServer.URL_BUY),
-            btc.toUpperCase(Locale.ROOT)
-        )
-        val webTransaction =
-            WebController(url).asTransaction(
-                VerticalChangeHandler(),
-                VerticalChangeHandler()
+        val webTransaction = if (brdPreferences.hydraActivated) {
+            ExchangeController(ExchangeModel.Mode.BUY)
+        } else {
+            val url = String.format(
+                BRConstants.CURRENCY_PARAMETER_STRING_FORMAT,
+                HTTPServer.getPlatformUrl(HTTPServer.URL_BUY),
+                btc.toUpperCase(Locale.ROOT)
             )
+            WebController(url)
+        }.asTransaction(
+            VerticalChangeHandler(),
+            VerticalChangeHandler()
+        )
 
         when (router.backstack.lastOrNull()?.controller) {
             is HomeController -> router.pushController(webTransaction)
@@ -163,13 +195,17 @@ class RouterNavigator(
     }
 
     override fun trade() {
-        val url = HTTPServer.getPlatformUrl(HTTPServer.URL_TRADE)
-        router.pushController(
-            WebController(url).asTransaction(
-                VerticalChangeHandler(),
-                VerticalChangeHandler()
-            )
+        val transaction = if (brdPreferences.hydraActivated) {
+            ExchangeController(ExchangeModel.Mode.TRADE)
+        } else {
+            val url = HTTPServer.getPlatformUrl(HTTPServer.URL_TRADE)
+            WebController(url)
+        }.asTransaction(
+            VerticalChangeHandler(),
+            VerticalChangeHandler()
         )
+
+        router.pushController(transaction)
     }
 
     override fun menu(effect: NavigationTarget.Menu) {

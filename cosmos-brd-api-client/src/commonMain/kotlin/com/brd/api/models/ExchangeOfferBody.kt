@@ -10,6 +10,7 @@ package com.brd.api.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class ExchangeOfferBody(
@@ -23,5 +24,7 @@ data class ExchangeOfferBody(
     val quoteCurrencyCode: String,
     @SerialName("source_currency_amount")
     val sourceCurrencyAmount: Double,
+    @Transient
+    val currencyId: String = "",
     val test: Boolean = false,
 )

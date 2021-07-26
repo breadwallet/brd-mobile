@@ -23,8 +23,10 @@ kotlin {
         }
         named("commonMain") {
             dependencies {
-                implementation(Libs.Kotlin.StdLibJdk8)
-                implementation(Libs.Coroutines.Core)
+                implementation(Libs.Coroutines.Core) {
+                    version { strictly(brd.COROUTINES_VERSION) }
+                }
+                implementation(Libs.Kotlinx.SerializationRuntime)
                 api(Libs.Ktor.Client.Core)
                 implementation(Libs.Ktor.Client.Json)
                 implementation(Libs.Ktor.Client.Serialization)
@@ -53,12 +55,6 @@ kotlin {
         named("iosMain") {
             dependencies {
                 implementation(Libs.Ktor.Client.IosClientEngine)
-            }
-        }
-
-        named("iosTest") {
-            dependencies {
-                implementation(Libs.AutoDesk.CoroutineWorker)
             }
         }
     }

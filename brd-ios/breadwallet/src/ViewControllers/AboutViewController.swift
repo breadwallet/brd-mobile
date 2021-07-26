@@ -22,12 +22,24 @@ class AboutViewController: UIViewController {
     private let reddit = AboutCell(text: S.About.reddit)
     private let privacy = UIButton(type: .system)
     private let footer = UILabel.wrapping(font: .customBody(size: 13.0), color: Theme.primaryText)
-    
+
+    private weak var keyStore: KeyStore?
+
+    init(keyStore: KeyStore?) {
+        super.init(nibName: nil, bundle: nil)
+        self.keyStore = keyStore
+    }
+
     override func viewDidLoad() {
         addSubviews()
         addConstraints()
         setData()
         setActions()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError("Not supported")
     }
 
     private func addSubviews() {
@@ -89,7 +101,20 @@ class AboutViewController: UIViewController {
         privacy.tintColor = .primaryButton
         footer.textAlignment = .center
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-            footer.text = String(format: S.About.footer, version, build)
+            let hydra = UserDefaults.cosmos.hydraActivated ? "\nHydra" : ""
+            var text = String(format: S.About.footer, version, build) + hydra
+
+            if let keyStore = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
+                let authProvider = IosBrdAuthProvider(walletAuthenticator: keyStore)
+                let pubKey = "\n\nPublic key:\n" + authProvider.publicKey()
+                let token = "\n\nToken:\n" + (authProvider.token ?? "")
+                let deviceId = "\n\nDevice Id:\n" + authProvider.deviceId()
+                let walletId = "\n\nWallet Id:\n" + (authProvider.walletId() ?? "")
+                let pushToken = "\n\nPush token:\n" + "\(UserDefaults.pushToken)"
+                text += pubKey + token + deviceId + walletId + pushToken
+            }
+
+            footer.text =  text
         }
     }
 
@@ -106,6 +131,17 @@ class AboutViewController: UIViewController {
         privacy.tap = strongify(self) { myself in
             myself.presentURL(string: "https://brd.com/privacy")
         }
+
+        if let keyStore = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
+            footer.isUserInteractionEnabled = true
+            footer.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(footerAction(_:)))
+            )
+        }
+    }
+
+    @objc private func footerAction(_ sender: Any?) {
+        UIPasteboard.general.string = footer.text
     }
 
     private func presentURL(string: String) {

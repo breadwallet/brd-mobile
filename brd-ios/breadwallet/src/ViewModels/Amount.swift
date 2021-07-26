@@ -10,6 +10,7 @@
 
 import Foundation
 import WalletKit
+import Cosmos
 
 typealias CryptoAmount = WalletKit.Amount
 
@@ -143,7 +144,7 @@ public struct Amount {
         }
         // override precision digits if the value is too small to show
         if !isZero && tokenFormat.number(from: formattedValue) == 0.0 {
-            guard let formatter = tokenFormat.copy() as? NumberFormatter else { assertionFailure(); return "" }
+            guard let formatter = tokenFormat.copy() as? Foundation.NumberFormatter else { assertionFailure(); return "" }
             formatter.maximumFractionDigits = Int(unit.decimals)
             formattedValue = cryptoAmount.string(as: unit, formatter: formatter) ?? formattedValue
         }
@@ -166,7 +167,7 @@ public struct Amount {
         return "\(tokenFormattedString(in: unit)) \(currency.name(forUnit: unit))"
     }
     
-    var tokenFormat: NumberFormatter {
+    var tokenFormat: Foundation.NumberFormatter {
         let format = NumberFormatter()
         format.locale = locale
         format.isLenient = true
@@ -181,7 +182,7 @@ public struct Amount {
     }
 
     /// formatter for raw value with maximum precision and no symbols or separators
-    private var rawTokenFormat: NumberFormatter {
+    private var rawTokenFormat: Foundation.NumberFormatter {
         let format = NumberFormatter()
         format.locale = locale
         format.isLenient = true
@@ -208,21 +209,35 @@ public struct Amount {
     }
     
     func fiatDescription(forLocale locale: Locale? = nil) -> String {
-        let formatter = localFormat
+        let nativeFormatter = localFormat
+        let code = UserDefaults.cosmos.fiatCurrencyCode
+
+        var formatter: Cosmos.NumberFormatter
+
         if let locale = locale {
-            formatter.locale = locale
+            formatter = Formatters().fiat(currencyCode: code, locale: locale)
+        } else {
+            formatter = Formatters().fiat(currencyCode: code)
         }
-        
-        guard var fiatString = formatter.string(from: fiatValue as NSDecimalNumber) else { return "" }
-        if let stringValue = formatter.number(from: fiatString), abs(fiatValue) > 0.0, stringValue == 0 {
+
+
+        nativeFormatter.locale = locale ?? self.locale
+
+        var fiatString = formatter.format(double: fiatValue.doubleValue)
+        let fiatStringInitial = fiatString
+
+        if let stringValue = nativeFormatter.number(from: fiatString),
+           abs(fiatValue) > 0.0,
+           stringValue == 0 {
             // if non-zero values show as 0, show minimum fractional value for fiat
             let minimumValue = pow(10.0, Double(-formatter.minimumFractionDigits)) * (negative ? -1.0 : 1.0)
-            fiatString = formatter.string(from: NSDecimalNumber(value: minimumValue)) ?? fiatString
+            fiatString = formatter.format(double: minimumValue) ?? fiatString
         }
+
         return fiatString
     }
     
-    var localFormat: NumberFormatter {
+    var localFormat: Foundation.NumberFormatter {
         let format = NumberFormatter()
         format.locale = locale
         format.isLenient = true

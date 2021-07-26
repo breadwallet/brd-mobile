@@ -47,41 +47,26 @@ data class ExchangeOrder(
     }
 
     @Serializable
-    sealed class Action {
-        abstract val url: String
-        abstract val title: String
-        abstract val message: String
+    data class Action(
+        val url: String,
+        val title: String,
+        val message: String,
+        val type: Type,
+    ) {
 
         @Serializable
-        @SerialName("crypto_receive_address")
-        data class CryptoReceiveAddress(
-            override val url: String,
-            override val title: String,
-            override val message: String,
-        ) : Action()
+        enum class Type {
+            @SerialName("crypto_receive_address")
+            CRYPTO_RECEIVE_ADDRESS,
 
-        @Serializable
-        @SerialName("crypto_refund_address")
-        data class CryptoRefundAddress(
-            override val url: String,
-            override val title: String = "",
-            override val message: String = "",
-        ) : Action()
+            @SerialName("crypto_refund_address")
+            CRYPTO_REFUND_ADDRESS,
 
-        @Serializable
-        @SerialName("crypto_send")
-        data class CryptoSend(
-            override val url: String,
-            override val title: String,
-            override val message: String,
-        ) : Action()
+            @SerialName("crypto_send")
+            CRYPTO_SEND,
 
-        @Serializable
-        @SerialName("browser")
-        data class Browser(
-            override val url: String,
-            override val title: String,
-            override val message: String,
-        ) : Action()
+            @SerialName("browser")
+            BROWSER,
+        }
     }
 }

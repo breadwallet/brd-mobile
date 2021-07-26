@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -48,13 +49,14 @@
         android:textColor="?attr/secondary_text_color"
         android:textSize="18sp"
         android:fontFamily="@font/mobile_font_bold"
+        tools:text="Title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_header" />
 
     <com.breadwallet.legacy.presenter.customviews.BaseTextView
         android:id="@+id/dialog_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -62,6 +64,8 @@
         android:gravity="center_horizontal|center_vertical"
         android:textColor="?attr/secondary_text_color"
         android:textSize="16sp"
+        android:layout_gravity="center"
+        tools:text="Hello world."
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
@@ -104,11 +108,11 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1.0"
             android:background="@android:color/transparent"
-            android:textColor="@color/white"
             android:fontFamily="@font/mobile_font_bold"
-            app:buttonType="4"
+            android:textColor="@color/white"
+            app:buttonType="6"
             app:hasShadow="false"
-            app:isBreadButton="true" />
+            app:isBreadButton="true"/>
 
     </LinearLayout>
 

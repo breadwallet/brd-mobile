@@ -9,6 +9,7 @@
 package com.brd.api.internal
 
 import com.brd.api.BrdAuthProvider
+import com.brd.logger.Logger
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature
 import io.ktor.client.features.ResponseException
@@ -38,6 +39,8 @@ internal class BRDAuthentication {
 
         private val authMutex = Mutex()
 
+        private val logger = Logger.create("BRDAuthentication")
+
         private val AuthenticationPhase = PipelinePhase("Authentication")
 
         const val ENABLE_AUTH_HEADER = "__brd_auth__"
@@ -55,6 +58,7 @@ internal class BRDAuthentication {
                 val requestUrl = url.path("token").build()
 
                 val token = try {
+                    logger.debug("Fetching API token")
                     val response = scope.post<JsonObject>(requestUrl) {
                         contentType(ContentType.Application.Json.withCharset(UTF_8))
                         body = buildJsonObject {
@@ -63,9 +67,9 @@ internal class BRDAuthentication {
                         }
                     }
                     response["token"]?.jsonPrimitive?.contentOrNull
-                } catch (e: ResponseException) {
-                    e.printStackTrace()
-                    null
+                } catch (e: Throwable) {
+                    logger.error("Failed to fetch API token", e)
+                    throw e
                 }
                 brdAuthProvider.token = token
                 token
@@ -77,7 +81,13 @@ internal class BRDAuthentication {
             scope.requestPipeline.insertPhaseBefore(HttpRequestPipeline.Render, AuthenticationPhase)
             scope.requestPipeline.intercept(AuthenticationPhase) { body ->
                 if (!context.headers.contains(ENABLE_AUTH_HEADER)) return@intercept
-                val token = fetchToken(context.url.clone(), scope, brdAuthProvider) ?: return@intercept
+                val path = context.url.encodedPath
+                logger.debug("Applying authentication for: '$path'")
+                val token = fetchToken(context.url.clone(), scope, brdAuthProvider)
+                if (token == null) {
+                    logger.error("Failed to restore or fetch token for: '$path'")
+                    return@intercept
+                }
                 if (brdAuthProvider.hasKey()) {
                     val content = body as? TextContent
                     context.headers.remove(ENABLE_AUTH_HEADER)
@@ -91,6 +101,7 @@ internal class BRDAuthentication {
 
                     context.header("Date", date)
                     context.header("Authorization", "bread $token:$signature")
+                    context.header("X-Wallet-Id", brdAuthProvider.walletId())
                 }
             }
         }

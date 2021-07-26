@@ -12,6 +12,7 @@ import android.net.Uri
 import com.breadwallet.R
 import com.breadwallet.tools.util.Link
 import com.breadwallet.ui.ViewEffect
+import com.breadwallet.ui.navigation.INavigationTarget
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget
 import com.breadwallet.util.CurrencyCode
@@ -86,6 +87,14 @@ object SettingsScreen {
         data class SetPlatformBundle(val bundle: String) : F()
         data class SetTokenBundle(val bundle: String) : F()
         data class LoadOptions(val section: SettingsSection) : F()
+
+        object GoToOrderHistory : F(), NavigationEffect {
+            override val navigationTarget = NavigationTarget.OrderHistory()
+        }
+
+        object GoToRegionPreferences : F(), NavigationEffect {
+            override val navigationTarget = NavigationTarget.RegionPreferences
+        }
 
         data class GoToSection(val section: SettingsSection) : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.Menu(section)
@@ -216,6 +225,9 @@ object SettingsScreen {
         }
 
         object GenerateTransactionsExportFile: F()
+
+        object EnableNativeExchangeUI : F()
+
         data class ExportTransactions(val uri: Uri) : F(), ViewEffect
     }
 }

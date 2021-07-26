@@ -129,6 +129,10 @@ DerivedData/
 ## Gcc Patch
 /*.gcno
 
+*/google-services.json
+/app/src/main/res/font/*.otf
+/app/src/main/res/font/*.ttf
+
 ## xcode-frameworks folders and plists so that xcode does not complain prior first build of Cosmos.xcframework
 cosmos-bundled/build-frameworks/
 !cosmos-bundled/build-frameworks/Cosmos.xcframework/Info.plist

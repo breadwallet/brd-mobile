@@ -10,8 +10,23 @@ package com.brd.api
 
 import com.brd.api.models.*
 import io.ktor.client.*
+import io.ktor.http.*
+
+abstract class BaseBrdAuthProvider : BrdAuthProvider {
+    override fun signUrl(apiHost: BrdApiHost, path: String): String {
+        val (signature, timestamp) = sign("GET", "", "", path)
+        val authorization = "bread $token:$signature"
+        return URLBuilder(apiHost.host).apply {
+            protocol = URLProtocol.HTTPS
+            path(path.trim('/').split('/'))
+            parameters["Authorization"] = authorization
+            parameters["Date"] = timestamp
+        }.buildString()
+    }
+}
 
 interface BrdAuthProvider {
+
     data class Signature(
         val signature: String,
         val timestamp: String,
@@ -22,6 +37,9 @@ interface BrdAuthProvider {
     fun publicKey(): String
     fun deviceId(): String
     fun sign(method: String, body: String, contentType: String, url: String): Signature
+    fun walletId(): String?
+
+    fun signUrl(apiHost: BrdApiHost, path: String): String
 }
 
 interface BrdApiClient {
@@ -69,7 +87,7 @@ interface BrdApiClient {
 
     suspend fun createOfferRequest(configuration: ExchangeOfferBody): ExchangeOfferRequestResult
 
-    suspend fun getOfferRequest(id: String): ExchangeOfferRequest?
+    suspend fun getOfferRequest(id: String): ExchangeOfferRequestResult
 
     suspend fun createOrder(offerId: String): ExchangeOrderResult
 
@@ -77,7 +95,15 @@ interface BrdApiClient {
 
     suspend fun submitCryptoAddress(action: ExchangeOrder.Action, address: String): Boolean
 
-    suspend fun submitCryptoSendTransactionId(action: ExchangeOrder.Action.CryptoSend, transactionId: String): Boolean
+    suspend fun submitCryptoSendTransactionId(action: ExchangeOrder.Action, transactionId: String): Boolean
 
     suspend fun getMe(): Boolean
+
+    suspend fun setMe(ethereumAddress: String): Boolean
+
+    suspend fun deleteMe(): Boolean
+
+    suspend fun preflight(publicKey: String): Preflight?
+
+    fun signUrl(path: String): String
 }

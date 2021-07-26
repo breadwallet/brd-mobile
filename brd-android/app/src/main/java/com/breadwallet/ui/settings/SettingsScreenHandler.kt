@@ -13,6 +13,9 @@ import android.content.Context
 import android.security.keystore.UserNotAuthenticatedException
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.brd.api.BrdApiClient
+import com.brd.api.BrdApiHost
+import com.brd.prefs.BrdPreferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
 import com.breadwallet.app.BreadApp
@@ -76,7 +79,6 @@ import kotlin.text.Charsets.UTF_8
 private const val DEVELOPER_OPTIONS_TITLE = "Developer Options"
 private const val DETAILED_LOGGING_MESSAGE = "Detailed logging is enabled for this session."
 private const val CLEAR_BLOCKCHAIN_DATA_MESSAGE = "Clearing blockchain data"
-private const val TEZOS_ID = "tezos-mainnet:__native__"  // TODO: DROID-1854 remove tezos filter
 private const val OPTION_UPDATE_THROTTLE = 1000L
 private const val TRANSACTIONS_FILE_PREFIX = "BRD-transactions-"
 private const val AUTHORITY_BASE = "com.breadwallet"
@@ -98,7 +100,9 @@ class SettingsScreenHandler(
     private val userManager: BrdUserManager,
     private val breadBox: BreadBox,
     private val bdbAuthInterceptor: BdbAuthInterceptor,
-    private val supportManager: SupportManager
+    private val supportManager: SupportManager,
+    private val brdPreferences: BrdPreferences,
+    private val brdClient: BrdApiClient,
 ) : Connection<F>, CoroutineScope {
 
     override val coroutineContext = SupervisorJob() + Dispatchers.Default + errorHandler()
@@ -121,7 +125,10 @@ class SettingsScreenHandler(
             }
             is F.SetApiServer -> {
                 if (BuildConfig.DEBUG) {
-                    BRSharedPrefs.putDebugHost(value.host)
+                    userManager.removeToken()
+                    brdPreferences.debugApiHost = value.host
+                    brdPreferences.hydraActivated = true
+                    brdClient.host = BrdApiHost.Custom(value.host)
                 }
                 loadOptions(SettingsSection.DEVELOPER_OPTION)
             }
@@ -206,6 +213,11 @@ class SettingsScreenHandler(
                 }
             }
             F.GenerateTransactionsExportFile -> launch { exportTransactionsToFile() }
+            F.EnableNativeExchangeUI -> launch {
+                userManager.removeToken()
+                brdPreferences.hydraActivated = true
+                brdClient.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
+            }
         }
     }
 
@@ -281,6 +293,13 @@ class SettingsScreenHandler(
                 R.drawable.ic_about
             )
         ).apply {
+            if (brdPreferences.hydraActivated) {
+                add(3, SettingsItem(
+                    title = "Order History",
+                    option = SettingsOption.ORDER_HISTORY,
+                    iconResId = R.drawable.ic_order_history
+                ))
+            }
             if (experimentsRepository.isExperimentActive(Experiments.ATM_MAP)) {
                 add(
                     SettingsItem(
@@ -309,12 +328,20 @@ class SettingsScreenHandler(
         }
     }
 
-    private val preferences get() = listOf(
-        SettingsItem(
-            context.getString(R.string.Settings_currency),
-            SettingsOption.CURRENCY,
-            addOn = BRSharedPrefs.getPreferredFiatIso()
-        ),
+    private val preferences get() = listOfNotNull(
+        if (brdPreferences.hydraActivated) {
+            SettingsItem(
+                title = "Region Preferences",
+                option = SettingsOption.REGION_PREFERENCES,
+                addOn = brdPreferences.fiatCurrencyCode
+            )
+        } else {
+            SettingsItem(
+                context.getString(R.string.Settings_currency),
+                SettingsOption.CURRENCY,
+                addOn = BRSharedPrefs.getPreferredFiatIso()
+            )
+        },
         SettingsItem(
             "Bitcoin ${context.getString(R.string.Settings_title)}", // TODO move Bitcoin to a constant
             SettingsOption.BTC_MENU
@@ -430,6 +457,10 @@ class SettingsScreenHandler(
                 SettingsOption.TOGGLE_RATE_APP_PROMPT,
                 addOn = "show=$toggleRateAppPromptAddOn"
             ),
+            SettingsItem(
+                "Activate Hydra (Native Exchange UI)",
+                SettingsOption.NATIVE_EXCHANGE_UI,
+            )
         ) + getHiddenOptions()
     }
 

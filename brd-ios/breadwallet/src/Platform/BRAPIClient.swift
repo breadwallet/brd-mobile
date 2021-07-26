@@ -8,6 +8,7 @@
 
 import Foundation
 import WalletKit
+import Cosmos
 
 let BRAPIClientErrorDomain = "BRApiClientErrorDomain"
 
@@ -33,6 +34,7 @@ public protocol BRAPIAdaptor {
 
 open class BRAPIClient: NSObject, URLSessionDelegate, URLSessionTaskDelegate, BRAPIAdaptor {
     private var authenticator: WalletAuthenticator
+    private var brdApiClient: BrdApiClient
     
     // whether or not to emit log messages from this instance of the client
     private var logEnabled = true
@@ -41,7 +43,9 @@ open class BRAPIClient: NSObject, URLSessionDelegate, URLSessionTaskDelegate, BR
     var proto = "https"
     
     // host is the server(s) on which the API is hosted
-    var host = C.backendHost
+    var host: String {
+        self.brdApiClient.host.host
+    }
     
     // isFetchingAuth is set to true when a request is currently trying to renew authentication (the token)
     // it is useful because fetching auth is not idempotent and not reentrant, so at most one auth attempt
@@ -59,11 +63,12 @@ open class BRAPIClient: NSObject, URLSessionDelegate, URLSessionTaskDelegate, BR
     
     // convenience getter for the API endpoint
     var baseUrl: String {
-        return "\(proto)://\(host)"
+        return host
     }
     
-    init(authenticator: WalletAuthenticator) {
+    init(authenticator: WalletAuthenticator, brdApiClient: BrdApiClient) {
         self.authenticator = authenticator
+        self.brdApiClient = brdApiClient
         super.init()
         if !self.authenticator.noWallet {
             getToken { _ in } // pre-fetch token

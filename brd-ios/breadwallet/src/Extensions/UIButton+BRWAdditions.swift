@@ -19,8 +19,8 @@ extension UIButton {
         button.contentMode = .center
         button.imageView?.contentMode = .center
         if let imageSize = button.imageView?.image?.size,
-            let font = button.titleLabel?.font {
-            let spacing: CGFloat = C.padding[1]/2.0
+           let font = button.titleLabel?.font {
+            let spacing: CGFloat = C.padding[1] / 2.0
             let titleSize = NSString(string: title).size(withAttributes: [NSAttributedString.Key.font: font])
 
             // These edge insets place the image vertically above the title label
@@ -29,7 +29,7 @@ extension UIButton {
         }
         return button
     }
-    
+
     static func rounded(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
@@ -39,7 +39,7 @@ extension UIButton {
         button.layer.masksToBounds = true
         return button
     }
-    
+
     static func rounded(image: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: image), for: .normal)
@@ -98,7 +98,7 @@ extension UIButton {
         button.accessibilityLabel = accessibilityLabel
         return button
     }
-    
+
     static func icon(image: UIImage, title: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
@@ -113,7 +113,19 @@ extension UIButton {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: { [weak self] in
             self?.isEnabled = true
         })
-    }    
+    }
+
+    static func title(_ title: String? = nil, image: UIImage? = nil, tap: (() -> Void)? = nil) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
+        button.setImage(image, for: .normal)
+        button.tap = tap
+        return button
+    }
+
+    static func image(_ image: UIImage? = nil, title: String? = nil, tap: (() -> Void)? = nil) -> UIButton {
+        return self.title(title, image: image, tap: tap)
+    }
 }
 
 extension UIBarButtonItem {

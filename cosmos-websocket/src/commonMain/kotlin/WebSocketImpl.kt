@@ -9,6 +9,10 @@
 package com.brd.websocket
 
 internal expect class WebSocketImpl(url: String) {
+    companion object {
+        val implemented: Boolean
+    }
+
     fun openSocket(listener: WebSocketListener)
     fun closeSocket(code: Int, reason: String)
     fun sendMessage(message: String)

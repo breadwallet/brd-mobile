@@ -147,6 +147,9 @@ object SettingsUpdate : Update<M, E, F>, SettingsScreenUpdateSpec {
                     SettingsOption.COPY_PAPER_KEY -> F.CopyPaperKey
                     SettingsOption.METADATA_VIEWER -> F.ViewMetadata
                     SettingsOption.EXPORT_TRANSACTIONS -> F.ShowConfirmExportTransactions
+                    SettingsOption.NATIVE_EXCHANGE_UI -> F.EnableNativeExchangeUI
+                    SettingsOption.ORDER_HISTORY -> F.GoToOrderHistory
+                    SettingsOption.REGION_PREFERENCES -> F.GoToRegionPreferences
                 }
             )
         )

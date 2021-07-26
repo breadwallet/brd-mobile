@@ -29,6 +29,7 @@ import com.brd.api.AndroidBrdAuthProvider
 import com.brd.api.BrdApiClient
 import com.brd.api.BrdApiHost
 import com.brd.bakerapi.BakersApiClient
+import com.brd.exchange.ExchangeDataLoader
 import com.brd.prefs.AndroidPreferences
 import com.brd.prefs.BrdPreferences
 import com.brd.prefs.Preferences
@@ -39,6 +40,7 @@ import com.breadwallet.breadbox.BreadBoxCloseWorker
 import com.breadwallet.breadbox.CoreBreadBox
 import com.breadwallet.corecrypto.CryptoApiProvider
 import com.breadwallet.crypto.CryptoApi
+import com.breadwallet.crypto.Key
 import com.breadwallet.crypto.WalletManagerMode
 import com.breadwallet.crypto.blockchaindb.BlockchainDb
 import com.breadwallet.installHooks
@@ -275,7 +277,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<APIClient>() with singleton {
-            APIClient(this@BreadApp, direct.instance(), createHttpHeaders())
+            APIClient(this@BreadApp, direct.instance(), direct.instance(), createHttpHeaders())
         }
 
         bind<BrdUserManager>() with singleton {
@@ -381,7 +383,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<BrdApiClient>() with singleton {
-            BrdApiClient.create(BrdApiHost.STAGING, AndroidBrdAuthProvider(instance()), instance())
+            val brdPreferences = instance<BrdPreferences>()
+            val customHost = brdPreferences.debugApiHost?.run(BrdApiHost::Custom)
+            val host = customHost ?: BrdApiHost.hostFor(BuildConfig.DEBUG, brdPreferences.hydraActivated)
+            BrdApiClient.create(host, AndroidBrdAuthProvider(instance()), instance())
         }
 
         bind<Preferences>() with singleton {
@@ -395,6 +400,11 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         bind<BakersApiClient>() with singleton {
             BakersApiClient.create(instance())
+        }
+
+        bind<ExchangeDataLoader>() with singleton {
+            val exchangePrefs = applicationContext.getSharedPreferences("ExchangeDataLoader", MODE_PRIVATE)
+            ExchangeDataLoader(instance(), AndroidPreferences(exchangePrefs))
         }
     }
 
@@ -434,9 +444,35 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             TokenUtil.initialize(mInstance, false, !BuildConfig.BITCOIN_TESTNET)
         }
 
-        // Start our local server as soon as the application instance is created, since we need to
-        // display support WebViews during onboarding.
-        HTTPServer.getInstance().startServer(this)
+        val brdPreferences = direct.instance<BrdPreferences>()
+        if (brdPreferences.hydraActivated) {
+            direct.instance<ExchangeDataLoader>().fetchData()
+        } else {
+            // Start our local server as soon as the application instance is created, since we need to
+            // display support WebViews during onboarding.
+            HTTPServer.getInstance().startServer(this)
+        }
+
+
+        applicationScope.launch {
+            val userManager = direct.instance<BrdUserManager>()
+            if (userManager.isInitialized() && !brdPreferences.hydraActivated) {
+                val brdApi = direct.instance<BrdApiClient>()
+                val key = userManager.getAuthKey()?.let { keyBytes ->
+                    if (keyBytes.isNotEmpty()) {
+                        Key.createFromPrivateKeyString(keyBytes).orNull()
+                    } else null
+                } ?: return@launch
+                val publicKey = CryptoHelper.base58Encode(key.encodeAsPublic())
+                brdApi.preflight(publicKey)?.also { preflight ->
+                    if (preflight.activated) {
+                        userManager.removeToken()
+                        brdPreferences.hydraActivated = true
+                        brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -503,8 +539,11 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         initializeWalletId()
         BRDFirebaseMessagingService.initialize(context)
-        HTTPServer.getInstance().startServer(this)
-        apiClient.updatePlatform(applicationScope)
+        val brdPreferences = direct.instance<BrdPreferences>()
+        if (!brdPreferences.hydraActivated) {
+            HTTPServer.getInstance().startServer(this)
+            apiClient.updatePlatform(applicationScope)
+        }
         applicationScope.launch {
             UserMetricsUtil.makeUserMetricsRequest(context)
         }

@@ -1,9 +1,29 @@
+import brd.hasAndroidSdK
+
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
+}
+
+// Generates "local.properties" file with path to SDK (needed for buidling outside Android Studio)
+hasAndroidSdK()
+
+android {
+    compileSdkVersion(brd.BrdRelease.ANDROID_COMPILE_SDK)
+    buildToolsVersion(brd.BrdRelease.ANDROID_BUILD_TOOLS)
+    defaultConfig {
+        minSdkVersion(brd.BrdRelease.ANDROID_MINIMUM_SDK)
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 kotlin {
-    jvm {
+    android {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -21,11 +41,15 @@ kotlin {
         named("commonMain") {
             dependencies {
                 implementation(project(":cosmos-core"))
-                implementation(project(":cosmos-brd-api-client"))
-                implementation(project(":cosmos-preferences"))
                 implementation(kotlin("stdlib-common"))
-                implementation(brd.Libs.Coroutines.Core)
+                implementation(brd.Libs.Coroutines.Core) {
+                    version { strictly(brd.COROUTINES_VERSION) }
+                }
                 implementation(brd.Libs.Mobiuskt.Core)
+                implementation(brd.Libs.Ktor.Client.Core)
+                implementation(brd.Libs.Kotlinx.SerializationRuntime)
+                implementation(brd.Libs.Ktor.Client.Json)
+                implementation(brd.Libs.Ktor.Client.Serialization)
             }
         }
         named("commonTest") {
@@ -35,7 +59,7 @@ kotlin {
             }
         }
 
-        named("jvmTest") {
+        named("androidTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))

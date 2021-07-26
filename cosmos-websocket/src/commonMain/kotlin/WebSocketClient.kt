@@ -11,7 +11,7 @@ package com.brd.websocket
 class WebSocketClient(url: String) {
 
     private val ws = WebSocketImpl(url)
-    private val socketListener = object : WebSocketListener {
+    private val socketListener: WebSocketListener = object : WebSocketListener {
         override fun onOpen() {
             currentState = State.CONNECTED
         }

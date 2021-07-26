@@ -8,18 +8,23 @@
  */
 package com.brd.websocket
 
-import com.brd.logger.Logger
-import platform.Foundation.*
-import platform.darwin.NSObject
+//import com.brd.logger.Logger
+//import platform.Foundation.*
+//import platform.darwin.NSObject
 
+// TODO: Requires new api with outdated OS target https://youtrack.jetbrains.com/issue/KT-37180
 internal actual class WebSocketImpl actual constructor(url: String) {
 
-    private val logger = Logger.create("[WebSocketImpl (${url.takeLast(10)})]")
-    private val nsUrl = checkNotNull(NSURL.URLWithString(url))
-    private var webSocket: NSURLSessionWebSocketTask? = null
+    actual companion object {
+        actual val implemented: Boolean = false
+    }
+
+    //private val logger = Logger.create("[WebSocketImpl (${url.takeLast(10)})]")
+    //private val nsUrl = checkNotNull(NSURL.URLWithString(url))
+    //private var webSocket: NSURLSessionWebSocketTask? = null
 
     actual fun openSocket(listener: WebSocketListener) {
-        val delegate = object : NSObject(), NSURLSessionWebSocketDelegateProtocol {
+        /*val delegate = object : NSObject(), NSURLSessionWebSocketDelegateProtocol {
             override fun URLSession(
                 session: NSURLSession,
                 webSocketTask: NSURLSessionWebSocketTask,
@@ -47,10 +52,10 @@ internal actual class WebSocketImpl actual constructor(url: String) {
         webSocket = urlSession.webSocketTaskWithURL(nsUrl).apply {
             handleMessages(listener)
             resume()
-        }
+        }*/
     }
 
-    private fun NSURLSessionWebSocketTask.handleMessages(listener: WebSocketListener) {
+    /*private fun NSURLSessionWebSocketTask.handleMessages(listener: WebSocketListener) {
         receiveMessageWithCompletionHandler { message, nsError ->
             when {
                 nsError != null -> {
@@ -65,20 +70,20 @@ internal actual class WebSocketImpl actual constructor(url: String) {
             }
             handleMessages(listener)
         }
-    }
+    }*/
 
     actual fun closeSocket(code: Int, reason: String) {
-        webSocket?.cancelWithCloseCode(code.toLong(), null)
-        webSocket = null
+        //webSocket?.cancelWithCloseCode(code.toLong(), null)
+        //webSocket = null
     }
 
     actual fun sendMessage(message: String) {
-        webSocket?.apply {
+        /*webSocket?.apply {
             sendMessage(NSURLSessionWebSocketMessage(message)) { error ->
                 error?.let {
                     logger.error("Failed to send message!", it, message)
                 }
             }
-        }
+        }*/
     }
 }

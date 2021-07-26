@@ -21,21 +21,36 @@ class Backend {
 
     private init() {
         let authenticator = NoAuthWalletAuthenticator()
-        apiClient = BRAPIClient(authenticator: authenticator)
+        let authProvider = IosBrdAuthProvider(walletAuthenticator: authenticator)
+        let customHost = BrdApiHost.Custom(UserDefaults.cosmos.debugApiHost)
+        brdApi = BrdApiClientCompanion().create(
+            host: customHost ?? BrdApiHost.Companion().hostFor(
+                isDebug: (E.isDebug || E.isTestFlight),
+                isHydraActivated: UserDefaults.cosmos.hydraActivated
+            ),
+            authProvider: authProvider
+        )
+        apiClient = BRAPIClient(authenticator: authenticator, brdApiClient: brdApi)
         bdbClient = BdbServiceCompanion().create()
         bdbClientAuthProvider = CosmosAuthProvider()
         addressResolver = AddressResolver(bdbService: bdbClient, isMainnet: !E.isTestnet)
+        exchangeDataLoader = ExchangeDataLoader(
+            brdApiClient: brdApi,
+            preferences: IosPreferences(prefs: UserDefaults(suiteName: "ExchangeDataStore")!)
+        )
     }
     
     // MARK: - Private
     
     private var apiClient: BRAPIClient
+    private var brdApi: BrdApiClient
     private var bdbClient: BdbService
     private var bdbClientAuthProvider: BdbServiceAuthProvider
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
     private var eventManager: EventManager?
     private var addressResolver: AddressResolver
+    private var exchangeDataLoader: ExchangeDataLoader
     private let userAgentFetcher = UserAgentFetcher()
     
     // MARK: - Public
@@ -47,13 +62,21 @@ class Backend {
     static var apiClient: BRAPIClient {
         return shared.apiClient
     }
-    
+
+    static var brdApi: BrdApiClient {
+        return shared.brdApi
+    }
+
     static var bdbClient: BdbService {
         return shared.bdbClient
     }
     
     static var addressResolver: AddressResolver {
         return shared.addressResolver
+    }
+    
+    static var exchangeDataLoader: ExchangeDataLoader {
+        return shared.exchangeDataLoader
     }
     
     static var kvStore: BRReplicatedKVStore? {
@@ -84,8 +107,20 @@ class Backend {
     
     static func connect(authenticator: WalletAuthenticator) {
         guard let key = authenticator.apiAuthKey else { return assertionFailure() }
-        shared.apiClient = BRAPIClient(authenticator: authenticator)
-        shared.kvStore = try? BRReplicatedKVStore(encryptionKey: key, remoteAdaptor: KVStoreAdaptor(client: shared.apiClient))
+        let authProvider = IosBrdAuthProvider(walletAuthenticator: authenticator)
+        let customHost = BrdApiHost.Custom(UserDefaults.cosmos.debugApiHost)
+        shared.brdApi = BrdApiClientCompanion().create(
+                host: customHost ?? BrdApiHost.Companion().hostFor(
+                    isDebug: (E.isDebug || E.isTestFlight),
+                    isHydraActivated: UserDefaults.cosmos.hydraActivated
+                ),
+                authProvider: authProvider
+        )
+        shared.apiClient = BRAPIClient(authenticator: authenticator, brdApiClient: shared.brdApi)
+        shared.kvStore = try? BRReplicatedKVStore(
+            encryptionKey: key,
+            remoteAdaptor: KVStoreAdaptor(client: shared.apiClient)
+        )
         shared.exchangeUpdater = ExchangeUpdater()
         shared.eventManager = EventManager(adaptor: shared.apiClient)
         shared.bdbClientAuthProvider = CosmosAuthProvider(authenticator: authenticator)
@@ -99,7 +134,17 @@ class Backend {
         shared.eventManager = nil
         shared.exchangeUpdater = nil
         shared.kvStore = nil
-        shared.apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
+        let authenticator = NoAuthWalletAuthenticator()
+        let authProvider = IosBrdAuthProvider(walletAuthenticator: authenticator)
+        let customHost = BrdApiHost.Custom(UserDefaults.cosmos.debugApiHost)
+        shared.brdApi = BrdApiClientCompanion().create(
+                host: customHost ?? BrdApiHost.Companion().hostFor(
+                    isDebug: (E.isDebug || E.isTestFlight),
+                    isHydraActivated: UserDefaults.cosmos.hydraActivated
+                ),
+                authProvider: authProvider
+        )
+        shared.apiClient = BRAPIClient(authenticator: authenticator, brdApiClient: shared.brdApi)
         shared.bdbClient = BdbServiceCompanion().create()
         shared.addressResolver = AddressResolver(bdbService: shared.bdbClient, isMainnet: !E.isTestnet)
     }
@@ -108,6 +153,7 @@ class Backend {
 // MARK: - 
 
 class UserAgentFetcher {
+
     lazy var webView: WKWebView = { return WKWebView(frame: .zero) }()
     
     func getUserAgent(completion: @escaping (String) -> Void) {
