@@ -181,6 +181,13 @@ public struct Amount {
         return format
     }
 
+    var cosmosTokenFormat: Cosmos.NumberFormatter {
+        let format = Formatters().crypto(currencyCode: currency.code)
+        format.maximumFractionDigits = Int32(min(Int(currency.defaultUnit.decimals), maximumFractionDigits))
+        format.minimumFractionDigits = Int32(minimumFractionDigits ?? 0)
+        return format
+    }
+
     /// formatter for raw value with maximum precision and no symbols or separators
     private var rawTokenFormat: Foundation.NumberFormatter {
         let format = NumberFormatter()
@@ -252,6 +259,22 @@ public struct Amount {
             format.maximumFractionDigits = rate.maxFractionalDigits
         }
         format.minimumFractionDigits = minimumFractionDigits ?? format.minimumFractionDigits
+        return format
+    }
+
+    var cosmosLocalFormat: Cosmos.NumberFormatter {
+        let code = UserDefaults.cosmos.fiatCurrencyCode
+        let format = Formatters().fiat(currencyCode: code)
+        if let rate = rate {
+            format.currencySymbol = rate.currencySymbol
+            format.maximumFractionDigits = Int32(rate.maxFractionalDigits)
+        } else if let rate = currency.state?.currentRate {
+            format.currencySymbol = rate.currencySymbol
+            format.maximumFractionDigits = Int32(rate.maxFractionalDigits)
+        }
+        if let minimumFractionDigits = self.minimumFractionDigits {
+            format.minimumFractionDigits = Int32(minimumFractionDigits)
+        }
         return format
     }
     

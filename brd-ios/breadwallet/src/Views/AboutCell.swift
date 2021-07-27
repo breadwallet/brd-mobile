@@ -30,11 +30,11 @@ class AboutCell: UIView {
         addSubview(separator)
 
         label.constrain([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
             label.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]),
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[2]) ])
         button.constrain([
-            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
+            button.trailingAnchor.constraint(equalTo: trailingAnchor),
             button.centerYAnchor.constraint(equalTo: label.centerYAnchor) ])
         separator.constrain([
             separator.leadingAnchor.constraint(equalTo: label.leadingAnchor),
@@ -68,11 +68,11 @@ class WalletIDCell: UIView {
         
         // constraints
         label.constrain([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
             label.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]),
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[2]) ])
         button.constrain([
-            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
+            button.trailingAnchor.constraint(equalTo: trailingAnchor),
             button.centerYAnchor.constraint(equalTo: label.centerYAnchor) ])
         separator.constrain([
             separator.leadingAnchor.constraint(equalTo: label.leadingAnchor),

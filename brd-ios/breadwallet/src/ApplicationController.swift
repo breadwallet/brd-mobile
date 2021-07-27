@@ -217,9 +217,10 @@ class ApplicationController: Subscriber, Trackable {
                     UserDefaults.cosmos.hydraActivated = true
                     authProvider.token = nil
                     Backend.brdApi.host = BrdApiHost.Companion().hostFor(
-                            isDebug: (E.isDebug || E.isTestFlight),
-                            isHydraActivated: true
+                        isDebug: (E.isDebug || E.isTestFlight),
+                        isHydraActivated: true
                     )
+                    Backend.brdApi.getMe { _, _ in () }
                     self?.fetchBackendUpdates()
                 }
             }

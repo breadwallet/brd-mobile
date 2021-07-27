@@ -55,10 +55,7 @@ class PushNotificationsViewController: UIViewController, Trackable {
 
     private func updateForNotificationStatus(status: UNAuthorizationStatus) {
         self.body.text = bodyText(notificationsStatus: status)
-        toggle.isEnabled = (status == .authorized)
-        if !toggle.isEnabled {
-            toggle.setOn(false, animated: false)
-        }
+        toggle.isOn = (status == .authorized)
         openSettingsButton.isHidden = (status == .authorized)
     }
     
@@ -146,6 +143,16 @@ class PushNotificationsViewController: UIViewController, Trackable {
                             Store.trigger(name: .registerForPushNotificationToken)
                             self.updateForNotificationStatus(status: .authorized)
                             self.saveEvent(context: .pushNotifications, screen: .pushNotificationSettings, event: .pushNotificationsToggleOn)
+                        case .notDetermined:
+                            NotificationAuthorizer().requestAuthorization(fromViewController: self) { [weak self] granted in
+                                self?.checkNotificationsSettings()
+                                if granted {
+                                    Store.perform(action: PushNotifications.SetIsEnabled(true))
+                                    Store.trigger(name: .registerForPushNotificationToken)
+                                    self?.updateForNotificationStatus(status: .authorized)
+                                    self?.saveEvent(context: .pushNotifications, screen: .pushNotificationSettings, event: .pushNotificationsToggleOn)
+                                }
+                            }
                         default:
                             break
                         }

@@ -8,16 +8,16 @@
  */
 package com.brd.support
 
-import com.brd.support.SupportEffectHandler
 import platform.Foundation.*
 
 
-class IosSupportDataProvider() :  SupportDataProvider {
+class IosSupportDataProvider :  SupportDataProvider {
 
-    fun load(fileName: String): String {
+    override fun load(fileName: String): String {
         val (name, extension) = fileName.split(".")
-        return NSBundle.main.path(forResource: name, ofType: extension)?.let {
-            String(contentsOfFile: it)
-        } ?: "[]"
+        return NSBundle.mainBundle.pathForResource(name, extension)
+            ?.let { NSString.stringWithContentsOfFile(it) }
+            ?.toString()
+            ?: "[]"
     }
 }

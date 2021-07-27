@@ -12,6 +12,8 @@ import UIKit
 
 final class PickerTableViewCell: UITableViewCell {
 
+    var tap: (() -> Void)?
+
     private(set) lazy var cellLayoutView = CellLayoutView()
 
     private lazy var cellBackgroundView = UIView()
@@ -49,6 +51,11 @@ final class PickerTableViewCell: UITableViewCell {
         setHighlightedUI(isSelected, animated: false)
         cellLayoutView.setNeedsLayout()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        tap = nil
+    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -73,10 +80,22 @@ final class PickerTableViewCell: UITableViewCell {
         selectionStyle = .none
         cellBackgroundView.layer.cornerRadius = C.padding[1]
         cellBackgroundView.clipsToBounds = true
+        clipsToBounds = true
+        contentView.clipsToBounds = true
         cellBackgroundView.backgroundColor = Theme.quaternaryBackground
         backgroundColor = Theme.primaryBackground
         cellLayoutView.backgroundColor = .clear
         cellLayoutView.contentStack.spacing = C.padding[1] + Padding.half
+        cellLayoutView.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(tapAction(_:))
+            )
+        )
+    }
+
+    @objc private func tapAction(_ sender: Any?) {
+        tap?()
     }
 
     private func setHighlightedUI(_ highlighted: Bool, animated: Bool) {
@@ -92,6 +111,7 @@ final class PickerTableViewCell: UITableViewCell {
             block()
             return
         }
+        
         UIView.animate(withDuration: C.animationDuration / 2, animations: block)
     }
 

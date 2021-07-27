@@ -24,6 +24,7 @@ class WebViewController: UIViewController {
     var closeAction: Action?
     var flowEndUrlComponents: [String] = []
     var flowEndedAction: ((_ url: URL?) -> Void)?
+    var transparentBg: Bool = false
 
     private var back: UIBarButtonItem?
     private var forward: UIBarButtonItem?
@@ -145,7 +146,9 @@ extension WebViewController: WKNavigationDelegate {
             presentMailCompose(emailAddress: address ?? "support@brd.com")
         }
 
-        webView.backgroundColor = .white
+        if !transparentBg {
+            webView.backgroundColor = .white
+        }
     }
 
     func webView(
