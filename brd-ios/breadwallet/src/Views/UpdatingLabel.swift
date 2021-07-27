@@ -9,19 +9,21 @@
 //
 
 import UIKit
+import Cosmos
 
 class UpdatingLabel: UILabel {
 
-    var formatter: NumberFormatter {
+
+    var formatter: Cosmos.NumberFormatter? {
         didSet {
             setFormattedText(forValue: value)
         }
     }
 
-    init(formatter: NumberFormatter) {
+    init(formatter: Cosmos.NumberFormatter?) {
         self.formatter = formatter
         super.init(frame: .zero)
-        text = self.formatter.string(from: 0 as NSNumber)
+        text = self.formatter?.format(double: 0)
     }
 
     var completion: (() -> Void)?
@@ -34,9 +36,16 @@ class UpdatingLabel: UILabel {
 
     func setValueAnimated(_ endingValue: Decimal, completion: @escaping () -> Void) {
         self.completion = completion
-        guard let currentText = text else { return }
-        guard let startingValue = formatter.number(from: currentText)?.decimalValue else { return }
-        self.startingValue = startingValue
+
+        guard let currentText = text else {
+            return
+        }
+
+        guard let startingValue = try? currentText.double() else {
+            return
+        }
+
+        self.startingValue = Decimal(startingValue)
         self.endingValue = endingValue
 
         timer?.invalidate()
@@ -79,7 +88,7 @@ class UpdatingLabel: UILabel {
 
     private func setFormattedText(forValue: Decimal) {
         value = forValue
-        text = formatter.string(from: value as NSDecimalNumber)
+        text = formatter?.format(double: value.doubleValue) ?? ""
         sizeToFit()
     }
 

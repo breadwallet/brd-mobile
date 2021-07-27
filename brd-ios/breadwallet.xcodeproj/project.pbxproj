@@ -12,7 +12,6 @@
 		1A4C35814CA45D45399EFADE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3276CDDBA1936D76A13D /* WebViewController.swift */; };
 		1A4C3963FCCE51F46478D9B8 /* GradientWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C31148DA8D06B90730228 /* GradientWrapperView.swift */; };
 		1A4C399263F14DB0A8DF4577 /* ExchangeTradeEmptyWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3B9ABE2154DD621C767F /* ExchangeTradeEmptyWalletView.swift */; };
-		1A4C3B091BAD1F3B73D18CD5 /* IosSupportDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3D2490468419070D130A /* IosSupportDataProvider.swift */; };
 		1A4C3C3B9F08D70B72B1338A /* SupportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3A9DD04542A015F8DF2B /* SupportHeaderView.swift */; };
 		1A4C3D232ADC0ED5241A52C4 /* SupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3A2A9DF80F4F1ACD636D /* SupportCell.swift */; };
 		1B1AFFA01FB7EF7C00E61908 /* BiometricsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1AFF9E1FB7EF7C00E61908 /* BiometricsSettingsViewController.swift */; };
@@ -797,7 +796,6 @@
 		1A4C3A2A9DF80F4F1ACD636D /* SupportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportCell.swift; sourceTree = "<group>"; };
 		1A4C3A9DD04542A015F8DF2B /* SupportHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportHeaderView.swift; sourceTree = "<group>"; };
 		1A4C3B9ABE2154DD621C767F /* ExchangeTradeEmptyWalletView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeTradeEmptyWalletView.swift; sourceTree = "<group>"; };
-		1A4C3D2490468419070D130A /* IosSupportDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosSupportDataProvider.swift; sourceTree = "<group>"; };
 		1B1AFF9E1FB7EF7C00E61908 /* BiometricsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BiometricsSettingsViewController.swift; path = src/ViewControllers/BiometricsSettingsViewController.swift; sourceTree = "<group>"; };
 		22122B711F0B8996000E9AB9 /* BRAPIClient+Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Events.swift"; path = "src/Platform/BRAPIClient+Events.swift"; sourceTree = "<group>"; };
 		2218BD761E8F55430091D5E8 /* BRAPIClient+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Assets.swift"; path = "src/Platform/BRAPIClient+Assets.swift"; sourceTree = "<group>"; };
@@ -2954,7 +2952,6 @@
 				D123D643269420FA00A7F030 /* SupportViewModel.swift */,
 				D123D6452694215400A7F030 /* SupportViewConnection.swift */,
 				1A4C3D59027742421197BD2B /* Views */,
-				1A4C3D2490468419070D130A /* IosSupportDataProvider.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -3525,7 +3522,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# cd .. && ./gradlew cosmos-bundled:createXCFramework\n# cd brd-ios && ./scripts/cosmos_to_m1_simulator.sh\n";
+			shellScript = "cd .. && ./gradlew cosmos-bundled:createXCFramework\n# cd brd-ios && ./scripts/cosmos_to_m1_simulator.sh\n";
 		};
 		3ADA3F8924C8D2FE00E1CBCF /* Copy Fonts */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3978,7 +3975,6 @@
 				1A4C35814CA45D45399EFADE /* WebViewController.swift in Sources */,
 				1A4C3D232ADC0ED5241A52C4 /* SupportCell.swift in Sources */,
 				1A4C3C3B9F08D70B72B1338A /* SupportHeaderView.swift in Sources */,
-				1A4C3B091BAD1F3B73D18CD5 /* IosSupportDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

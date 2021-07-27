@@ -110,8 +110,18 @@ class PickerViewController: UITableViewController {
         pickerCell?.cellLayoutView.titleStyle = .alwaysProminentTitle
         pickerCell?.cellLayoutView.rightTitleStyle = .alwaysProminentTitle
         pickerCell?.backgroundColor = view.backgroundColor
-        if viewModel.selectedIndexes.contains(indexPath.row) {
-            pickerCell?.setSelected(true, animated: false)
+        pickerCell?.isSelected = viewModel.selectedIndexes.contains(indexPath.row)
+    
+        // NOTE: This is a workaround for the issue where tapping search bar
+        // selects cell and results on viewModel update. This assures
+        // action is called only when user actually taps. Hacky solution but
+        // I was not able to get to the bottom of why is cell being selected
+        let idxPath = indexPath
+        pickerCell?.tap = { [weak self] in
+            self?.closeOnDeinit = false
+            if let idx = self?.indexForItem(at: idxPath) {
+                self?.viewModel.selectedAction?(idx)
+            }
         }
         return cell
     }
@@ -122,16 +132,12 @@ class PickerViewController: UITableViewController {
 
     // MARK: - UITableViewDelegate
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        closeOnDeinit = false
-        viewModel.selectedAction?(indexForItem(at: indexPath))
-    }
-
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let selected = viewModel.selectedIndexes.contains(indexPath.row)
         cell.setSelected(selected, animated: true)
         // NOTE: Workaround for broken layout
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            let selected = self?.viewModel.selectedIndexes.contains(indexPath.row) ?? false
             cell.setSelected(selected, animated: true)
         }
     }

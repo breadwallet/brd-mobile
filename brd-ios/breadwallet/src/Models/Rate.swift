@@ -59,8 +59,7 @@ struct Rate: Equatable {
     
     func localString(forCurrency currency: Currency) -> String {
         let placeholderAmount = Amount.zero(currency, rate: self)
-        guard let rateText = placeholderAmount.localFormat.string(from: NSNumber(value: rate)) else { return "" }
-        return rateText
+        return placeholderAmount.cosmosLocalFormat.format(double: rate)
     }
 
     static var empty: Rate {

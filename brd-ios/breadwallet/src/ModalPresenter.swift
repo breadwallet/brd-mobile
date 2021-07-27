@@ -942,6 +942,9 @@ class ModalPresenter: Subscriber, Trackable {
                                                        isDebug: (E.isDebug || E.isTestFlight),
                                                        isHydraActivated: UserDefaults.cosmos.hydraActivated
                                                )
+                                               if UserDefaults.cosmos.hydraActivated {
+                                                   Backend.brdApi.getMe { _, _ in () }
+                                               }
                                                (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                                            }))
 
@@ -999,6 +1002,11 @@ class ModalPresenter: Subscriber, Trackable {
     }
 
     private func presentRewardsInfo() {
+        guard UserDefaults.cosmos.hydraActivated else {
+            presentPlatformWebViewController("/rewards")
+            return
+        }
+
         let (navVc, vc) = WebViewController.embeddedInNavigationController(
             .brd,
             showToolbar: false
@@ -1010,6 +1018,7 @@ class ModalPresenter: Subscriber, Trackable {
         )
 
         vc.load(url)
+        vc.transparentBg = true
         vc.nativeDestinationAction = { [weak vc, weak self] destination in
             let active = UserDefaults.cosmos.hydraActivated
             let rootModal: RootModal = active ? .trade : .tradeLegacy
@@ -1036,6 +1045,7 @@ class ModalPresenter: Subscriber, Trackable {
         )
 
         vc.load(url)
+        vc.transparentBg = true
         vc.title = S.MenuButton.orderHistory
         navVc.modalPresentationStyle = .overFullScreen
         topViewController?.present(navVc, animated: true, completion: nil)
