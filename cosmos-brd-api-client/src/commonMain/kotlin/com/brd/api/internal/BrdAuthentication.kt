@@ -12,7 +12,6 @@ import com.brd.api.BrdAuthProvider
 import com.brd.logger.Logger
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature
-import io.ktor.client.features.ResponseException
 import io.ktor.client.request.*
 import io.ktor.content.TextContent
 import io.ktor.http.*
@@ -27,7 +26,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
-internal class BRDAuthentication {
+internal class BrdAuthentication {
 
     private lateinit var brdAuthProvider: BrdAuthProvider
 
@@ -35,7 +34,7 @@ internal class BRDAuthentication {
         this.brdAuthProvider = brdAuthProvider
     }
 
-    companion object : HttpClientFeature<BRDAuthentication, BRDAuthentication> {
+    companion object : HttpClientFeature<BrdAuthentication, BrdAuthentication> {
 
         private val authMutex = Mutex()
 
@@ -45,10 +44,10 @@ internal class BRDAuthentication {
 
         const val ENABLE_AUTH_HEADER = "__brd_auth__"
 
-        override val key: AttributeKey<BRDAuthentication> = AttributeKey("BRDAuthentication")
+        override val key: AttributeKey<BrdAuthentication> = AttributeKey("BRDAuthentication")
 
-        override fun prepare(block: BRDAuthentication.() -> Unit): BRDAuthentication =
-            BRDAuthentication().apply(block)
+        override fun prepare(block: BrdAuthentication.() -> Unit): BrdAuthentication =
+            BrdAuthentication().apply(block)
 
         private suspend fun fetchToken(url: URLBuilder, scope: HttpClient, brdAuthProvider: BrdAuthProvider): String? {
             return brdAuthProvider.token ?: authMutex.withLock {
@@ -76,7 +75,7 @@ internal class BRDAuthentication {
             }
         }
 
-        override fun install(feature: BRDAuthentication, scope: HttpClient) {
+        override fun install(feature: BrdAuthentication, scope: HttpClient) {
             val brdAuthProvider = feature.brdAuthProvider
             scope.requestPipeline.insertPhaseBefore(HttpRequestPipeline.Render, AuthenticationPhase)
             scope.requestPipeline.intercept(AuthenticationPhase) { body ->
@@ -100,7 +99,7 @@ internal class BRDAuthentication {
                     )
 
                     context.header("Date", date)
-                    context.header("Authorization", "bread $token:$signature")
+                    context.header("Authorization", brdAuthProvider.authorization(signature))
                     context.header("X-Wallet-Id", brdAuthProvider.walletId())
                 }
             }

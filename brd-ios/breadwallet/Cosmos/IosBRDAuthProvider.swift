@@ -12,7 +12,7 @@ import Foundation
 import Cosmos
 import WalletKit
 
-class IosBrdAuthProvider: BaseBrdAuthProvider {
+class IosBrdAuthProvider: BrdAuthProviderBase {
     
     private var authenticator: WalletAuthenticator
     
@@ -75,13 +75,12 @@ class IosBrdAuthProvider: BaseBrdAuthProvider {
 
     func signedGetUrl(host: String, path: String) -> URL? {
         let signature = sign(method: "GET", body: "", contentType: "", url: path)
-        let authorization = "bread \(token ?? ""):\(signature.signature)"
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = host.replacingOccurrences(of: "https://", with: "")
         urlComponents.path = path
         urlComponents.queryItems = [
-            URLQueryItem(name: "Authorization", value: authorization),
+            URLQueryItem(name: "Authorization", value: authorization(signature: signature.signature)),
             URLQueryItem(name: "Date", value: signature.timestamp),
         ]
         return urlComponents.url

@@ -125,7 +125,6 @@ private suspend fun submitCryptoTransferHash(
     if (success) OnCryptoSendHashUpdateSuccess else OnCryptoSendHashUpdateFailed
 }
 
-@OptIn(ExperimentalStdlibApi::class)
 private suspend fun loadUserPreferences(
     brdApi: BrdApiClient,
     brdPrefs: BrdPreferences,
@@ -420,7 +419,6 @@ private fun List<ExchangeInvoiceEstimate.Fee>.formattedAmount(
     }
 }
 
-@OptIn(ExperimentalStdlibApi::class)
 private fun List<ExchangePair>.formatFiatRates(
     currencyCode: String?
 ): Map<String, String> {

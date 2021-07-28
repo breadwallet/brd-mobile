@@ -32,7 +32,7 @@ internal fun String?.isENS() =
 
 internal class UnstoppableDomainService(private val bdbService: BdbService) : AddressResolverService {
     private val logger = Logger.create("UnstoppableDomains")
-    @OptIn(ExperimentalStdlibApi::class)
+
     override suspend fun resolveAddress(
         target: String,
         currencyCode: String,
