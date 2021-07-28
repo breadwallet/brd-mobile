@@ -22,7 +22,7 @@ private const val GMT = "GMT"
 
 class AndroidBrdAuthProvider(
     private val userManager: BrdUserManager,
-) : BaseBrdAuthProvider() {
+) : BrdAuthProvider.Base() {
 
     private var authKey: Key? = null
         get() {

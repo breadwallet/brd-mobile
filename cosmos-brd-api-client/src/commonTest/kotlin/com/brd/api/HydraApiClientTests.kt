@@ -18,7 +18,7 @@ class HydraApiClientTests {
 
     private lateinit var apiClient: BrdApiClient
 
-    private val authProvider: BrdAuthProvider = object : BrdAuthProvider {
+    private val authProvider: BrdAuthProvider = object : BrdAuthProvider.Base() {
         override var token: String?
             get() = fail()
             set(value) {}

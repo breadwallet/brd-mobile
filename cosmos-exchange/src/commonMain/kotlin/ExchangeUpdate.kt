@@ -335,18 +335,24 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                         else -> model.quoteCurrencyCode
                     }
                 ),
-                setOfNotNull(
-                    trackingEffect,
-                    if (model.settingsOnly) F.UpdateCurrencyPreference(event.currency.code) else null,
-                    F.LoadWalletBalances(
-                        event.currency.code,
-                        model.pairs,
-                    ),
-                    if (model.mode == Mode.TRADE) null else {
-                        val country = checkNotNull(model.selectedCountry)
-                        F.LoadPairs(country.code, model.selectedRegion?.code, event.currency.code)
-                    }
-                )
+                if (model.settingsOnly) {
+                    setOfNotNull(
+                        trackingEffect,
+                        F.UpdateCurrencyPreference(event.currency.code),
+                    )
+                } else {
+                    setOfNotNull(
+                        trackingEffect,
+                        F.LoadWalletBalances(
+                            event.currency.code,
+                            model.pairs,
+                        ),
+                        if (model.mode == Mode.TRADE) null else {
+                            val country = checkNotNull(model.selectedCountry)
+                            F.LoadPairs(country.code, model.selectedRegion?.code, event.currency.code)
+                        }
+                    )
+                }
             )
         }
         is State.SelectAsset -> {
@@ -421,7 +427,9 @@ private fun onRegionClicked(model: M, event: OnRegionClicked): Next<M, F> {
                     model.selectedCountry?.code?.let { countryCode ->
                         F.UpdateRegionPreferences(countryCode, event.region.code)
                     },
-                    model.selectedCountry?.let {
+                    if (model.settingsOnly || model.selectedCountry == null) {
+                        null
+                    } else {
                         F.LoadPairs(
                             model.selectedCountry.code,
                             event.region.code,
@@ -442,7 +450,7 @@ private fun onCountryClicked(model: M, event: OnCountryClicked): Next<M, F> {
             val preselectedRegion = country.regions.firstOrNull()
             val showMenu = model.selectedCountry?.currency?.code == model.selectedFiatCurrency?.code
             val target = when {
-                country.regions.isNullOrEmpty() -> {
+                country.regions.isEmpty() -> {
                     if (showMenu) ConfigTarget.MENU else ConfigTarget.CURRENCY
                 }
                 else -> ConfigTarget.REGION
@@ -457,9 +465,11 @@ private fun onCountryClicked(model: M, event: OnCountryClicked): Next<M, F> {
                 ),
                 setOfNotNull(
                     F.UpdateRegionPreferences(country.code, preselectedRegion?.code),
-                    if (preselectedRegion == null) {
+                    if (model.settingsOnly || country.regions.isNotEmpty()) {
+                        null
+                    } else {
                         F.LoadPairs(country.code, null, selectedFiatCurrency.code)
-                    } else null
+                    }
                 )
             )
         }
@@ -502,9 +512,8 @@ private fun onUserPreferencesLoaded(model: M, event: OnUserPreferencesLoaded): N
                     )
                 ),
                 setOfNotNull(
-                    // todo: use event country/region/currency codes
-                    model.selectedCountry?.let { selectedCountry ->
-                        F.LoadPairs(selectedCountry.code, model.selectedRegion?.code, model.selectedFiatCurrency?.code)
+                    model.selectedCountry?.let {
+                        F.LoadPairs(it.code, model.selectedRegion?.code, model.selectedFiatCurrency?.code)
                     }
                 )
             )
@@ -524,7 +533,7 @@ private fun onUserPreferencesLoaded(model: M, event: OnUserPreferencesLoaded): N
                 newModel,
                 setOfNotNull(
                     selectedCountry?.let {
-                        F.LoadPairs(selectedCountry.code, selectedRegion?.code, newModel.selectedFiatCurrency?.code)
+                        F.LoadPairs(selectedCountry.code, selectedRegion?.code, selectedFiatCurrency?.code)
                     },
                     F.RequestOffers(model.offerBodyOrNull(), model.mode),
                 )

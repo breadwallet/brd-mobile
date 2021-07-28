@@ -8,7 +8,7 @@
  */
 package com.brd.api
 
-import com.brd.api.internal.BRDAuthentication
+import com.brd.api.internal.BrdAuthentication
 import com.brd.api.models.*
 import com.brd.api.models.ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS
 import com.brd.api.models.ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS
@@ -71,7 +71,7 @@ internal class HydraApiClient(
                 level = LogLevel.HEADERS
                 logger = Logger.SIMPLE
             }
-            install(BRDAuthentication) {
+            install(BrdAuthentication) {
                 brdAuthProvider(brdAuthProvider)
             }
         }
@@ -323,7 +323,7 @@ internal class HydraApiClient(
     }
 
     private fun HttpRequestBuilder.authenticated() {
-        header(BRDAuthentication.ENABLE_AUTH_HEADER, "")
+        header(BrdAuthentication.ENABLE_AUTH_HEADER, "")
     }
 
     private fun urlFor(vararg pathComponents: String): String {

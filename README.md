@@ -77,9 +77,14 @@ Each module contains only code related to a single feature, helping keep the pro
 
 The following modules are available, click on the name to learn more.
 
-- [`cosmos-core`](/cosmos-core) Internal shared utilities for all other modules to leverage.
+- [`cosmos-address-resolver`](/cosmos-address-resolver) Utilities for resolving addresses from name services ([UnstoppableDomains](https://unstoppabledomains.com/), [ENS](https://ens.domains/), [Fio](https://fioprotocol.io/), and [PayString](https://paystring.org/)).
+- [`cosmos-bakers-api-client`](/cosmos-bakers-api-client) Tezos baker data API client ([baking-bad.org](http://baking-bad.org)).
 - [`cosmos-brd-api-client`](/cosmos-brd-api-client) A Hydra compatible API wrapper for Kotlin and Swift.
 - [`cosmos-bundled`](/cosmos-bundled) Depends on all other modules to produce final dependency artifacts.
+- [`cosmos-exchange`](/cosmos-exchange) Presentation module for crypto exchange features.
+- [`cosmos-core`](/cosmos-core) Internal shared utilities for all other modules to leverage.
+- [`cosmos-preferences`](/cosmos-preferences) SharedPreferences and UserDefaults wrapper for common Kotlin code.
+- [`cosmos-websocket`](/cosmos-websocket) WebSocket client APIs for common Kotlin.
 
 **Mobile Applications**
 
