@@ -55,7 +55,7 @@ class PushNotificationsViewController: UIViewController, Trackable {
 
     private func updateForNotificationStatus(status: UNAuthorizationStatus) {
         self.body.text = bodyText(notificationsStatus: status)
-        toggle.isOn = (status == .authorized)
+        toggle.isOn = Store.state.isPushNotificationsEnabled && status == .authorized
         openSettingsButton.isHidden = (status == .authorized)
     }
     
@@ -165,6 +165,7 @@ class PushNotificationsViewController: UIViewController, Trackable {
                 }
                 self.saveEvent(context: .pushNotifications, screen: .pushNotificationSettings, event: .pushNotificationsToggleOff)
                 self.updateForNotificationStatus(status: .authorized)
+                self.checkNotificationsSettings()
             }
         }
         

@@ -166,40 +166,43 @@ class ApplicationController: Subscriber, Trackable {
     /// On KVStore sync complete, stand-up Core
     /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
-        preflightCheck()
         // Authenticate with BRDAPI backend
-        Backend.connect(authenticator: keyStore as WalletAuthenticator)
-        Backend.sendLaunchEvent()
-        Backend.apiClient.analytics?.onWalletReady()
-        // Begin KVStore key sync
-        DispatchQueue.global(qos: .userInitiated).async {
-            Backend.kvStore?.syncAllKeys { [weak self] error in
-                print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
-                Store.trigger(name: .didSyncKVStore)
-                guard let weakSelf = self else { return }
-                weakSelf.setWalletInfo(account: account)
-                weakSelf.authenticateWithBackend { jwt in
-                    // Begin Core stand-up
-                    weakSelf.coreSystem.create(account: account,
-                       authToken: jwt,
-                       btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
-                    ) {
-                        weakSelf.modalPresenter = ModalPresenter(
-                             keyStore: weakSelf.keyStore,
-                             system: weakSelf.coreSystem,
-                             window: weakSelf.window,
-                             alertPresenter: weakSelf.alertPresenter
-                        )
-                        weakSelf.coreSystem.connect()
+        Backend.connect(authenticator: self.keyStore as WalletAuthenticator)
+        preflightCheck {
+            Backend.sendLaunchEvent()
+            Backend.apiClient.analytics?.onWalletReady()
+            // Begin KVStore key sync
+            DispatchQueue.global(qos: .userInitiated).async {
+                Backend.kvStore?.syncAllKeys { [weak self] error in
+                    print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
+                    Store.trigger(name: .didSyncKVStore)
+                    guard let weakSelf = self else {
+                        return
+                    }
+                    weakSelf.setWalletInfo(account: account)
+                    weakSelf.authenticateWithBackend { jwt in
+                        // Begin Core stand-up
+                        weakSelf.coreSystem.create(account: account,
+                                authToken: jwt,
+                                btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
+                        ) {
+                            weakSelf.modalPresenter = ModalPresenter(
+                                    keyStore: weakSelf.keyStore,
+                                    system: weakSelf.coreSystem,
+                                    window: weakSelf.window,
+                                    alertPresenter: weakSelf.alertPresenter
+                            )
+                            weakSelf.coreSystem.connect()
+                        }
                     }
                 }
             }
+            Backend.apiClient.updateExperiments()
+            Backend.apiClient.fetchAnnouncements()
         }
-        Backend.apiClient.updateExperiments()
-        Backend.apiClient.fetchAnnouncements()
     }
 
-    private func preflightCheck() {
+    private func preflightCheck(_ handler: (() -> Void)? = nil) {
         DispatchQueue.main.async {
 
             let authProvider = IosBrdAuthProvider(
@@ -212,17 +215,18 @@ class ApplicationController: Subscriber, Trackable {
 
             let key = authProvider.publicKey()
 
-            Backend.brdApi.preflight(publicKey: key) { [weak self] preflight, _ in
-                if preflight?.activated ?? false {
+            Backend.brdApi.preflight(publicKey: key) { [weak self] preflight, error in
+                if preflight?.activate ?? false {
                     UserDefaults.cosmos.hydraActivated = true
                     authProvider.token = nil
                     Backend.brdApi.host = BrdApiHost.Companion().hostFor(
                         isDebug: (E.isDebug || E.isTestFlight),
                         isHydraActivated: true
                     )
+                    // NOTE: Here to refresh the token for order history and rewards pages auth.
                     Backend.brdApi.getMe { _, _ in () }
-                    self?.fetchBackendUpdates()
                 }
+                handler?()
             }
         }
     }
