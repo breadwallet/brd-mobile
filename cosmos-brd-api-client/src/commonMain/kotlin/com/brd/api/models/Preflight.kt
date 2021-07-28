@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Preflight(
-    val activated: Boolean,
+    val activate: Boolean,
     val exists: Boolean,
 )

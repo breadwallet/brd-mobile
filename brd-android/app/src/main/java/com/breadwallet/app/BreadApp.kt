@@ -465,7 +465,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 } ?: return@launch
                 val publicKey = CryptoHelper.base58Encode(key.encodeAsPublic())
                 brdApi.preflight(publicKey)?.also { preflight ->
-                    if (preflight.activated) {
+                    if (preflight.activate) {
                         userManager.removeToken()
                         brdPreferences.hydraActivated = true
                         brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
