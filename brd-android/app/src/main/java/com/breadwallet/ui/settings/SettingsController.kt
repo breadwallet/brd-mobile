@@ -139,7 +139,7 @@ class SettingsController(
                 settingsList.adapter = adapter
             }
             ifChanged(M::isLoading) {
-                loadingView.root.visibility = if(isLoading) View.VISIBLE else View.GONE
+                loadingView.root.isVisible = isLoading
             }
         }
     }

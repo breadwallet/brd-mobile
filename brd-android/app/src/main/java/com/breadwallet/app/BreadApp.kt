@@ -225,7 +225,13 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<APIClient>() with singleton {
-            APIClient(this@BreadApp, direct.instance(), direct.instance(), createHttpHeaders())
+            APIClient(
+                context = this@BreadApp,
+                userManager = direct.instance(),
+                brdPreferences = direct.instance(),
+                okHttpClient = direct.instance(),
+                headers = createHttpHeaders()
+            )
         }
 
         bind<BrdUserManager>() with singleton {
@@ -246,7 +252,14 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         bind<AccountMetaDataProvider>() with singleton { metaDataManager }
 
-        bind<OkHttpClient>() with singleton { OkHttpClient() }
+        bind<OkHttpClient>() with singleton {
+            OkHttpClient().newBuilder().apply {
+                // conditionally apply flipper interceptor on debug builds
+                getFlipperOkhttpInterceptor()?.let {
+                    addNetworkInterceptor(it)
+                }
+            }.build()
+        }
 
         bind<BdbAuthInterceptor>() with singleton {
             val httpClient = instance<OkHttpClient>()
@@ -266,6 +279,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         bind<HttpClient>() with singleton {
             HttpClient(OkHttp) {
                 engine {
+                    preconfigured = instance()
                     config {
                         retryOnConnectionFailure(true)
                     }
@@ -283,11 +297,11 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         bind<BreadBox>() with singleton {
             CoreBreadBox(
-                File(filesDir, WALLETKIT_DATA_DIR_NAME),
-                !BuildConfig.BITCOIN_TESTNET,
-                instance(),
-                instance(),
-                instance()
+                storageFile = File(filesDir, WALLETKIT_DATA_DIR_NAME),
+                isMainnet = !BuildConfig.BITCOIN_TESTNET,
+                walletProvider = instance(),
+                blockchainDb = instance(),
+                userManager = instance()
             )
         }
 
@@ -297,9 +311,9 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         bind<RatesFetcher>() with singleton {
             RatesFetcher(
-                instance(),
-                instance(),
-                this@BreadApp
+                accountMetaData = instance(),
+                okhttp = instance(),
+                context = this@BreadApp
             )
         }
 
@@ -579,8 +593,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 .firstOrNull()
 
         // The BRD server expects the following user agent: appName/appVersion engine/engineVersion plaform/plaformVersion
-        val brdUserAgent =
-            "${APIClient.UA_APP_NAME}${BuildConfig.VERSION_CODE} $deviceUserAgent ${APIClient.UA_PLATFORM}${Build.VERSION.RELEASE}"
+        val brdUserAgent = "${APIClient.UA_APP_NAME}${BuildConfig.VERSION_CODE} $deviceUserAgent ${APIClient.UA_PLATFORM}${Build.VERSION.RELEASE}"
 
         return mapOf(
             APIClient.HEADER_IS_INTERNAL to if (BuildConfig.IS_INTERNAL_BUILD) BRConstants.TRUE else BRConstants.FALSE,

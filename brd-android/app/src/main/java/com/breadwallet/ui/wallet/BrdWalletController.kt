@@ -154,8 +154,7 @@ class BrdWalletController : WalletController("BRD") {
 
     companion object {
         private val CONFETTI_VIDEO_URI = Uri.parse(
-            "android.resource://"
-                + BuildConfig.APPLICATION_ID + File.separator + R.raw.confetti
+            "android.resource://${BuildConfig.APPLICATION_ID}${File.separator}${R.raw.confetti}"
         )
         private const val UNINITIALIZED_POSITION = -1
         private const val COLLAPSE_REWARDS_DELAY_MILLISECONDS = 6000

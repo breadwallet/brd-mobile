@@ -248,6 +248,9 @@ dependencies {
     // Debugging/Monitoring
     debugImplementation(Libs.LeakCanary.Core)
     debugImplementation(Libs.AnrWatchdog.Core)
+    debugImplementation(Libs.Flipper.flipper)
+    debugImplementation(Libs.Flipper.flipperNetwork)
+    debugImplementation(Libs.Flipper.flipperSo)
 
     compileOnly(Libs.Redacted.Annotation)
 
