@@ -102,6 +102,7 @@ object BRSharedPrefs {
     private const val APP_RATE_PROMPT_DONT_ASK_AGAIN = "app-rate-prompt-dont-ask-again"
     private const val APP_RATE_PROMPT_SHOULD_PROMPT = "app-rate-prompt-should-prompt"
     private const val APP_RATE_PROMPT_SHOULD_PROMPT_DEBUG = "app-rate-prompt-should-prompt-debug"
+    private const val FLIPPER_ENABLED_DEBUG = "flipper-enabled-debug"
     const val APP_FOREGROUNDED_COUNT = "appForegroundedCount"
     const val APP_RATE_PROMPT_HAS_RATED = "appReviewPromptHasRated"
 
@@ -609,6 +610,11 @@ object BRSharedPrefs {
     var appRatePromptDontAskAgain: Boolean
         get() = brdPrefs.getBoolean(APP_RATE_PROMPT_DONT_ASK_AGAIN, false)
         set(value) = brdPrefs.edit { putBoolean(APP_RATE_PROMPT_DONT_ASK_AGAIN, value) }
+            .also { promptChangeChannel.offer(Unit) }
+
+    var flipperEnabledDebug: Boolean
+        get() = brdPrefs.getBoolean(FLIPPER_ENABLED_DEBUG, false)
+        set(value) = brdPrefs.edit { putBoolean(FLIPPER_ENABLED_DEBUG, value) }
             .also { promptChangeChannel.offer(Unit) }
 
     fun promptChanges(): Flow<Unit> =
