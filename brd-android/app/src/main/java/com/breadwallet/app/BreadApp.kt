@@ -379,7 +379,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private val accountMetaData by instance<AccountMetaDataProvider>()
     private val conversionTracker by instance<ConversionTracker>()
     private val connectivityStateProvider by instance<ConnectivityStateProvider>()
-    private val brdPreferences = direct.instance<BrdPreferences>()
+    private val brdPreferences by instance<BrdPreferences>()
 
     override fun onCreate() {
         super.onCreate()
@@ -407,7 +407,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             TokenUtil.initialize(mInstance, false, !BuildConfig.BITCOIN_TESTNET)
         }
 
-        val brdPreferences = direct.instance<BrdPreferences>()
         if (brdPreferences.hydraActivated) {
             direct.instance<ExchangeDataLoader>().fetchData()
         } else {
