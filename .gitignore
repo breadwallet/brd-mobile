@@ -137,4 +137,5 @@ DerivedData/
 cosmos-bundled/build-frameworks/
 !cosmos-bundled/build-frameworks/Cosmos.xcframework/Info.plist
 !cosmos-bundled/build-frameworks/Cosmos.xcframework/ios-arm64/Cosmos.framework/Info.plist
+!cosmos-bundled/build-frameworks/Cosmos.xcframework/ios-arm64-simulator/Cosmos.framework/Info.plist
 !cosmos-bundled/build-frameworks/Cosmos.xcframework/ios-x86_64-simulator/Cosmos.framework/Info.plist
