@@ -167,6 +167,7 @@ class ApplicationController: Subscriber, Trackable {
     /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
         // Authenticate with BRDAPI backend
+        let hydraActivated = UserDefaults.cosmos.hydraActivated
         Backend.connect(authenticator: self.keyStore as WalletAuthenticator)
         preflightCheck {
             Backend.sendLaunchEvent()
@@ -199,6 +200,18 @@ class ApplicationController: Subscriber, Trackable {
             }
             Backend.apiClient.updateExperiments()
             Backend.apiClient.fetchAnnouncements()
+
+            if UserDefaults.cosmos.hydraActivated && !hydraActivated {
+                let wallets = self.coreSystem.wallets
+                guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
+                    return
+                }
+
+                Backend.brdApi.setMe(
+                    ethereumAddress: pair.1.receiveAddress,
+                    completionHandler: { _, _ in  }
+                )
+            }
         }
     }
 
