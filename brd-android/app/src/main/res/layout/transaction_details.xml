@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                     android:layout_marginTop="12dp"
                     android:textColor="@color/total_assets_usd_color"
                     android:textSize="16sp"
-                    tools:text="Send"/>
+                    tools:text="Send" />
 
                 <ImageButton
                     android:id="@+id/close_button"
@@ -44,7 +44,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/ic_close_light_grey"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:textSize="26sp"
                     tools:text="-0.10965 BTC"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/label_when_sent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     android:textColor="@color/settings_chevron_right"
                     tools:text="@string/TransactionDetails.amountWhenSent"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/amount_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:layout_marginTop="14dp"
                     android:background="@color/light_gray"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -94,8 +94,7 @@
                     android:drawablePadding="5dp"
                     android:textColor="@color/settings_chevron_right"/>
 
-
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,8 +114,7 @@
                     android:layout_marginTop="14dp"
                     android:background="@color/light_gray"/>
 
-
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_to_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +125,7 @@
                     android:textColor="@color/settings_chevron_right"
                     tools:text="@string/TransactionDetails.addressToHeader"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/tx_to_from_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,7 +150,7 @@
                     android:layout_marginTop="14dp"
                     android:background="@color/light_gray"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/memo_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,18 +197,18 @@
                     android:visibility="gone"
                     tools:visibility="visible">
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <TextView
                         android:id="@+id/gift_label"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginTop="14dp"
                         android:text="@string/TransactionDetails.gift"
                         android:textColor="@color/settings_chevron_right"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"/>
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/gift_reclaim"
@@ -263,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/destination_tag_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -276,7 +274,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/destination_tag_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -308,7 +306,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/hedera_memo_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -321,7 +319,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/hedera_memo_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -352,7 +350,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/gas_price_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -365,7 +363,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/gas_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -389,7 +387,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/gas_limit_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -402,7 +400,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/gas_limit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -426,7 +424,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/fee_primary_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -439,7 +437,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/fee_primary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -463,7 +461,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/fee_secondary_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -476,7 +474,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/fee_secondary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -498,7 +496,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/exchange_rate_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -511,7 +509,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/exchange_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -542,7 +540,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/confirmed_in_block_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -555,7 +553,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/confirmed_in_block_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -581,7 +579,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/confirmations_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -594,7 +592,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/confirmations_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -618,7 +616,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/transaction_id_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -631,7 +629,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/transaction_id"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -657,7 +655,7 @@
                         android:background="@color/light_gray"/>
                 </LinearLayout>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/show_hide_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

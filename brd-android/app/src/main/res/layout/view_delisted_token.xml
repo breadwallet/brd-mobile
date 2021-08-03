@@ -4,11 +4,11 @@
     android:layout_height="wrap_content"
     android:background="@color/primary_background">
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/message_token_delisted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="21dp"
+        android:paddingStart="21dp"
         android:paddingTop="21dp"
         android:text="@string/Account.delistedToken"
         android:textSize="14sp" />

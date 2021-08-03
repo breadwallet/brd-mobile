@@ -54,7 +54,7 @@
             app:layout_constraintStart_toEndOf="@+id/brd_logo"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,14 +73,12 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Hello!" />
 
-
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/dialog_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/mobile_font_book"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="?attr/secondary_text_color"
             android:textSize="16sp"

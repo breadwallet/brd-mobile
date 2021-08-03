@@ -7,26 +7,24 @@
                                                    android:layout_height="match_parent"
                                                    tools:context="com.breadwallet.legacy.presenter.activities.settings.SyncBlockchainActivity">
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/bread_margin"
         android:layout_marginTop="32dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/Settings.sync"
         android:textSize="@dimen/header"
         android:fontFamily="@font/mobile_font_bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/ReScan.subheader2"
         android:textSize="@dimen/sub_header"
         android:fontFamily="@font/mobile_font_bold"
@@ -35,37 +33,33 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/ReScan.body2"
         android:textSize="@dimen/sub_header"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/textView13"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/ReScan.body3"
         android:textSize="@dimen/sub_header"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintLeft_toLeftOf="@+id/textView15"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView17"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,7 +69,6 @@
         android:lineSpacingMultiplier="1.1"
         android:text="@string/ReScan.footer"
         android:textSize="@dimen/sub_header"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
