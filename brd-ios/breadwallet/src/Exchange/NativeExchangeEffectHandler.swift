@@ -274,12 +274,14 @@ private extension NativeExchangeEffectHandler {
 
         guard case .ok = result else {
             if case .insufficientGas(let currencyCode, let amount) = result {
-                self.output.accept(ExchangeEvent.OnCryptoSendActionFailed(
-                    reason: ExchangeEvent.SendFailedReasonInsufficientNativeWalletBalance(
-                        currencyCode: currencyCode,
-                        requiredAmount: amount.tokenValue.doubleValue
-                    )
-                ))
+                DispatchQueue.main.async {
+                    self.output.accept(ExchangeEvent.OnCryptoSendActionFailed(
+                        reason: ExchangeEvent.SendFailedReasonInsufficientNativeWalletBalance(
+                            currencyCode: currencyCode,
+                            requiredAmount: amount.tokenValue.doubleValue
+                        )
+                    ))
+                }
             } else {
                 handleError(.transactionValidation(error: result), effect: effect)
             }

@@ -1110,7 +1110,9 @@ enum S {
             static let unknown = NSLocalizedString("Exchange.ErrorState.unknown", value: "Unknown error", comment: "Unknown error alert body")
             static let transaction = NSLocalizedString("Exchange.ErrorState.transaction", value: "Transaction error", comment: "Transaction error alert body")
             static let unsupportedRegionError = NSLocalizedString("Exchange.ErrorState.unsupportedRegionError", value: "Region you selected is not supported, please select different region", comment: "Region error alert body")
-            static let insufficientNativeBalanceError = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceError", value: "Insufficient chain currency, please buy some", comment: "Insufficient chain error alert body")
+            static let insufficientNativeBalanceErrorTitle = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceErrorTitle", value: "More ETH required", comment: "Insufficient chain error alert title")
+            static let insufficientNativeBalanceError = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceError", value: "You don't have enough ETH to cover network fees to send", comment: "Insufficient chain error alert body")
+            static let insufficientNativeBalanceErrorConfirm = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceErrorConfirm", value: "Buy ETH", comment: "Insufficient chain error alert ok action")
         }
 
         static let buy = NSLocalizedString("Exchange.buy", value: "Buy", comment: "Exchange buy title")

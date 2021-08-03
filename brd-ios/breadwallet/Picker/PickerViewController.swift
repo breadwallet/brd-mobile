@@ -111,19 +111,13 @@ class PickerViewController: UITableViewController {
         pickerCell?.cellLayoutView.rightTitleStyle = .alwaysProminentTitle
         pickerCell?.backgroundColor = view.backgroundColor
         pickerCell?.isSelected = viewModel.selectedIndexes.contains(indexPath.row)
-    
-        // NOTE: This is a workaround for the issue where tapping search bar
-        // selects cell and results on viewModel update. This assures
-        // action is called only when user actually taps. Hacky solution but
-        // I was not able to get to the bottom of why is cell being selected
-        let idxPath = indexPath
-        pickerCell?.tap = { [weak self] in
-            self?.closeOnDeinit = false
-            if let idx = self?.indexForItem(at: idxPath) {
-                self?.viewModel.selectedAction?(idx)
-            }
-        }
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("=== DID SELECT", indexPath.row)
+        closeOnDeinit = false
+        viewModel.selectedAction?(indexForItem(at: indexPath))
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -12,8 +12,6 @@ import UIKit
 
 final class PickerTableViewCell: UITableViewCell {
 
-    var tap: (() -> Void)?
-
     private(set) lazy var cellLayoutView = CellLayoutView()
 
     private lazy var cellBackgroundView = UIView()
@@ -54,7 +52,6 @@ final class PickerTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        tap = nil
     }
 
     required init?(coder: NSCoder) {
@@ -86,16 +83,6 @@ final class PickerTableViewCell: UITableViewCell {
         backgroundColor = Theme.primaryBackground
         cellLayoutView.backgroundColor = .clear
         cellLayoutView.contentStack.spacing = C.padding[1] + Padding.half
-        cellLayoutView.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(tapAction(_:))
-            )
-        )
-    }
-
-    @objc private func tapAction(_ sender: Any?) {
-        tap?()
     }
 
     private func setHighlightedUI(_ highlighted: Bool, animated: Bool) {
