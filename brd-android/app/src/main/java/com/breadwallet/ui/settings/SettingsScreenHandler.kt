@@ -104,6 +104,7 @@ class SettingsScreenHandler(
     private val supportManager: SupportManager,
     private val brdPreferences: BrdPreferences,
     private val brdClient: BrdApiClient,
+    private val scope: CoroutineScope,
 ) : Connection<F>, CoroutineScope {
 
     override val coroutineContext = SupervisorJob() + Dispatchers.Default + errorHandler()
@@ -191,7 +192,7 @@ class SettingsScreenHandler(
                     !BRSharedPrefs.appRatePromptShouldPromptDebug
             }
             F.RefreshTokens -> {
-                BreadApp.applicationScope.launch {
+                scope.launch {
                     userManager.putBdbJwt("", 0)
                     userManager.removeToken()
                     bdbAuthInterceptor.refreshClientToken()
@@ -205,7 +206,7 @@ class SettingsScreenHandler(
                 }
             }
             F.CopyPaperKey -> {
-                BreadApp.applicationScope.launch {
+                scope.launch {
                     val phrase = userManager.getPhrase()?.toString(UTF_8)
                     Main {
                         BRClipboardManager.putClipboard(phrase)

@@ -9,7 +9,6 @@
 package com.breadwallet.effecthandler.metadata
 
 import android.text.format.DateUtils
-import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.getSize
 import com.breadwallet.breadbox.hashString
@@ -45,7 +44,8 @@ import java.math.BigDecimal
 class MetaDataEffectHandler(
     private val output: Consumer<MetaDataEvent>,
     private val metaDataProvider: AccountMetaDataProvider,
-    private val breadBox: BreadBox
+    private val breadBox: BreadBox,
+    private val scope: CoroutineScope,
 ) : Connection<MetaDataEffect>, CoroutineScope {
 
     companion object {
@@ -170,7 +170,7 @@ class MetaDataEffectHandler(
             creationTime
         )
 
-        BreadApp.applicationScope.launch {
+        scope.launch {
             metaDataProvider.putTxMetaData(transaction, metaData)
         }
     }

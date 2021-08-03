@@ -102,7 +102,7 @@ class RouterNavigator(
     override fun navigateTo(target: INavigationTarget) =
         patch(target as NavigationTarget)
 
-    fun Controller.asTransaction(
+    private fun Controller.asTransaction(
         popChangeHandler: ControllerChangeHandler? = FadeChangeHandler(),
         pushChangeHandler: ControllerChangeHandler? = FadeChangeHandler()
     ) = RouterTransaction.with(this)

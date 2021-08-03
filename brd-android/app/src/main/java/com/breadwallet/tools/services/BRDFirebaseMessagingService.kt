@@ -19,7 +19,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import android.util.Log
 import com.breadwallet.R
-import com.breadwallet.app.BreadApp
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserState
 import com.breadwallet.tools.security.BrdUserManager
@@ -30,6 +29,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.platform.network.NotificationsSettingsClientImpl
 import com.platform.util.getStringOrNull
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -103,8 +103,9 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
         // Save token in shared preferences.
         Log.d(TAG, "onNewToken: token value: $token")
         BRSharedPrefs.putFCMRegistrationToken(token)
-        BreadApp.applicationScope.launch {
-            val kodein by closestKodein(applicationContext)
+        val kodein by closestKodein(applicationContext)
+        val scope = kodein.direct.instance<CoroutineScope>()
+        scope.launch {
             val userManager = kodein.direct.instance<BrdUserManager>()
             userManager.stateChanges()
                 .filter { it !is BrdUserState.Uninitialized }

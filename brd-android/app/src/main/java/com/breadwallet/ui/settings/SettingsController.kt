@@ -76,16 +76,17 @@ class SettingsController(
     override val update = SettingsUpdate
     override val effectHandler = Connectable<F, E> { output ->
         SettingsScreenHandler(
-            output,
-            applicationContext!!,
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
+            output = output,
+            context = applicationContext!!,
+            experimentsRepository = direct.instance(),
+            metaDataManager = direct.instance(),
+            userManager = direct.instance(),
+            breadBox = direct.instance(),
+            bdbAuthInterceptor = direct.instance(),
+            supportManager = direct.instance(),
+            brdPreferences = direct.instance(),
+            brdClient = direct.instance(),
+            scope = direct.instance()
         )
     }
 

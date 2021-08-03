@@ -120,7 +120,12 @@ class SendSheetController(args: Bundle? = null) :
             apiClient = direct.instance(),
             ratesRepository = direct.instance(),
             metaDataEffectHandler = {
-                MetaDataEffectHandler(it, direct.instance(), direct.instance())
+                MetaDataEffectHandler(
+                    output = it,
+                    metaDataProvider = direct.instance(),
+                    breadBox = direct.instance(),
+                    scope = direct.instance()
+                )
             },
             addressResolver = direct.instance()
         )

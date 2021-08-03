@@ -123,7 +123,7 @@ class HomeController(
             rvWalletList.layoutManager = LinearLayoutManager(view.context)
         }
 
-        addWalletAdapter!!.add(AddWalletItem())
+        addWalletAdapter?.add(AddWalletItem())
     }
 
     override fun onAttach(view: View) {

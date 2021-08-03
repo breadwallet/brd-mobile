@@ -2,20 +2,21 @@ package com.platform.jsbridge
 
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
-import com.breadwallet.app.BreadApp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PromiseJs(
     private val webView: WebView,
-    private val apiNames: String
+    private val apiNames: String,
+    private val scope: CoroutineScope
 ) {
     companion object {
         const val JS_NAME = "PromiseJs"
     }
 
     @JavascriptInterface
-    fun injectPromiseHooks() = BreadApp.applicationScope.launch(Dispatchers.Main) {
+    fun injectPromiseHooks() = scope.launch(Dispatchers.Main) {
         webView.evaluateJavascript(
             """
                 (function() {
