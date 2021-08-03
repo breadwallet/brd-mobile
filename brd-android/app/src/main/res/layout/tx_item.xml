@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/tx_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Dec 2, 2020"/>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/txDescriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,13 +47,13 @@
         android:singleLine="true"
         android:textColor="@color/settings_chevron_right"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/imageTransferDirection"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx_date"
         app:layout_constraintEnd_toStartOf="@+id/descriptionSpacer"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        tools:text="sent to"/>
+        app:layout_constraintStart_toEndOf="@id/imageTransferDirection"
+        app:layout_constraintTop_toBottomOf="@+id/tx_date"
+        tools:text="sent to" />
 
     <Space
         android:id="@+id/descriptionSpacer"
@@ -66,7 +66,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/txDescriptionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,26 +75,26 @@
         android:singleLine="true"
         android:textColor="@color/settings_chevron_right"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/descriptionSpacer"
         app:layout_constraintBottom_toBottomOf="@+id/txDescriptionLabel"
-        app:layout_constraintTop_toTopOf="@+id/txDescriptionLabel"
         app:layout_constraintEnd_toStartOf="@+id/tx_amount"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        tools:text="f94c57...74cd8"/>
+        app:layout_constraintStart_toEndOf="@+id/descriptionSpacer"
+        app:layout_constraintTop_toTopOf="@+id/txDescriptionLabel"
+        tools:text="f94c57...74cd8" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/tx_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:fontFamily="@font/mobile_font_bold"
         android:textColor="@color/total_assets_usd_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"
-        tools:text="-$839.30"/>
+        tools:text="-$839.30" />
 
     <View
         android:layout_width="match_parent"

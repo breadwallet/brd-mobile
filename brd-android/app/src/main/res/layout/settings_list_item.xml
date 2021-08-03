@@ -10,14 +10,13 @@
     android:background="?attr/secondary_background"
     android:orientation="horizontal">
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/mobile_font_book"
         android:textColor="@color/white"
         android:textSize="@dimen/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +25,7 @@
         app:layout_constraintVertical_bias="0.0"
         tools:text="Display Currency" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/item_addon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,13 +50,12 @@
         app:layout_constraintTop_toTopOf="@+id/item_title"
         tools:visibility="visible" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/item_sub_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/mobile_font_book"
         android:textColor="@color/white_60_percent_opaque"
         android:textSize="12sp"
         android:visibility="gone"

@@ -14,7 +14,7 @@
         android:background="@drawable/token_icon_background_transparent"
         android:orientation="vertical">
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/icon_letter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,18 +31,16 @@
             android:layout_centerVertical="true" />
     </RelativeLayout>
 
-
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/token_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="12dp"
         android:layout_toEndOf="@id/icon_parent"
-        android:textSize="18sp"
-        android:fontFamily="@font/mobile_font_book" />
+        android:textSize="18sp" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/token_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

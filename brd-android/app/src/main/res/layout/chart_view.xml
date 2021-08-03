@@ -11,14 +11,14 @@
                                                    tools:showIn="@layout/controller_wallet">
 
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/currency_usd_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:textColor="@color/white"
         android:textSize="@dimen/large_header"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,8 +42,7 @@
         app:spark_scrubLineColor="@color/trans_white"
         app:spark_scrubLineWidth="1dp" />
 
-
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/chart_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,84 +56,82 @@
         app:layout_constraintVertical_bias="0.0"
         tools:text="TextView" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/one_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.one_day"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintEnd_toStartOf="@id/one_week"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spark_line" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/one_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.one_week"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintBottom_toBottomOf="@+id/one_day"
         app:layout_constraintEnd_toStartOf="@id/one_month"
         app:layout_constraintStart_toEndOf="@id/one_day"
         app:layout_constraintTop_toTopOf="@+id/one_day" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/one_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.one_month"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintBottom_toBottomOf="@+id/one_week"
         app:layout_constraintEnd_toStartOf="@id/three_months"
         app:layout_constraintStart_toEndOf="@id/one_week"
         app:layout_constraintTop_toTopOf="@+id/one_week" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/three_months"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.three_months"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintBottom_toBottomOf="@+id/one_month"
         app:layout_constraintEnd_toStartOf="@id/one_year"
         app:layout_constraintStart_toEndOf="@id/one_month"
         app:layout_constraintTop_toTopOf="@+id/one_month" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/one_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.one_year"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintBottom_toBottomOf="@+id/three_months"
         app:layout_constraintEnd_toStartOf="@id/three_years"
         app:layout_constraintStart_toEndOf="@id/three_months"
         app:layout_constraintTop_toTopOf="@+id/three_months" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/three_years"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:fontFamily="@font/mobile_font_medium"
         android:text="@string/Wallet.three_years"
         android:textColor="@color/white"
-        android:fontFamily="@font/mobile_font_medium"
         app:layout_constraintBottom_toBottomOf="@+id/one_year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/one_year"
         app:layout_constraintTop_toTopOf="@+id/one_year" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

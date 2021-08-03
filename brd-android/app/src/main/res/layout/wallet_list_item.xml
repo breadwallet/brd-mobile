@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/icon_letter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintStart_toEndOf="@+id/icon_container" tools:text="CryptoCurrency"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_trade_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,8 +83,7 @@
             app:layout_constraintStart_toEndOf="@+id/icon_container"
             app:layout_constraintTop_toTopOf="@+id/guideline2" tools:text="$534.29"/>
 
-
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/price_change"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -95,9 +94,10 @@
             android:textColor="@color/balance_crypto_color"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" tools:text="4.32%"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:text="4.32%" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_balance_fiat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,9 +108,9 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="$12.00"/>
+            tools:text="$12.00" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_balance_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,7 +122,6 @@
             app:layout_constraintEnd_toEndOf="@+id/wallet_balance_fiat"
             app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat" tools:text="0.07832 CC"
             tools:visibility="invisible"/>
-
 
         <ProgressBar
             android:id="@+id/sync_progress"
@@ -139,7 +138,7 @@
             app:layout_constraintEnd_toEndOf="@+id/wallet_balance_fiat"
             app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/syncing_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

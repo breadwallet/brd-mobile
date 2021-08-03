@@ -25,6 +25,7 @@
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/mobile_font_book</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
 
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">

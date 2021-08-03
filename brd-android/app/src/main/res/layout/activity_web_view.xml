@@ -33,26 +33,26 @@
             android:orientation="horizontal">
 
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/webview_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/mobile_font_bold"
                 android:text="Simplex Checkout"
-                android:textColor="@color/black"
-                android:fontFamily="@font/mobile_font_bold" />
+                android:textColor="@color/black" />
 
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/mobile_font_bold"
                 android:paddingEnd="8dp"
                 android:text="@string/AccessibilityLabels.close"
-                android:textColor="@color/button_primary_normal"
-                android:fontFamily="@font/mobile_font_bold" />
+                android:textColor="@color/button_primary_normal" />
 
 
         </RelativeLayout>
