@@ -63,8 +63,9 @@ data class ExchangeInvoiceEstimate(
         val message: String? = null,
         val percentage: Float,
         /** Amount that will be removed from fee. */
-        @SerialName("source_currency_amount")
+        @SerialName("amount")
         val sourceCurrencyAmount: String,
+        @SerialName("discount_type")
         val type: DiscountType,
     )
 }

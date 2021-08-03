@@ -223,7 +223,7 @@ private extension ExchangeTradePreviewViewController {
     func isInactiveRewards(_ indexPath: IndexPath) -> Bool {
         switch items()[indexPath.row] {
         case let .reward(active):
-            return true
+            return active == false
         default:
             return false
         }
