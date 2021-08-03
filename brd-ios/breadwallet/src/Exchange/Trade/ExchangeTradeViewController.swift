@@ -141,8 +141,7 @@ extension ExchangeTradeViewController: ExchangeView {
     }
 
     func closeAction() {
-        disconnect()
-        dismiss()
+        dismiss { self.disconnect() }
     }
 
     func exitFlow() {
