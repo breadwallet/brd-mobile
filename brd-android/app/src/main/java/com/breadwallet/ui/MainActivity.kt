@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     private val userManager by instance<BrdUserManager>()
+    private val appScope by instance<CoroutineScope>()
 
     lateinit var router: Router
     private var trackingListener: ControllerTrackingListener? = null
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         trackingListener = ControllerTrackingListener(this).also(router::addChangeListener)
 
-        BreadApp.applicationScope.launch(Main) {
+        appScope.launch(Main) {
             try {
                 userManager.checkAccountInvalidated()
             } catch (e: UserNotAuthenticatedException) {
@@ -225,7 +226,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         super.onNewIntent(intent)
         intent ?: return
 
-        val data = processIntentData(intent) ?: ""
+        val data = processIntentData(intent).orEmpty()
         if (data.isNotBlank() && userManager.isInitialized()) {
             val hasRoot = router.hasRootController()
             val isTopLogin = router.backstack.lastOrNull()?.controller is LoginController

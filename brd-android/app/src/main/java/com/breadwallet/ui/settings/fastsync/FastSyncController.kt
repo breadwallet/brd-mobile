@@ -85,7 +85,12 @@ class FastSyncController(
                         }
                     }
                     .transform(Connectable<MetaDataEffect, MetaDataEvent> { consumer ->
-                        MetaDataEffectHandler(consumer, direct.instance(), direct.instance())
+                        MetaDataEffectHandler(
+                            output = consumer,
+                            metaDataProvider = direct.instance(),
+                            breadBox = direct.instance(),
+                            scope = direct.instance()
+                        )
                     })
                     .mapNotNull { event ->
                         when (event) {

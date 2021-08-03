@@ -30,6 +30,7 @@ import com.breadwallet.tools.crypto.CryptoHelper.hexEncode
 import com.breadwallet.tools.manager.BRReportsManager
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.Main
@@ -92,7 +93,8 @@ private const val MANUFACTURER_GOOGLE = "Google"
 class CryptoUserManager(
     context: Context,
     private val createStore: () -> SharedPreferences?,
-    private val metaDataProvider: AccountMetaDataProvider
+    private val metaDataProvider: AccountMetaDataProvider,
+    private val scope: CoroutineScope,
 ) : BrdUserManager {
 
     private var store: SharedPreferences? = null
@@ -154,7 +156,7 @@ class CryptoUserManager(
             .first()
             .creationDate
             .run(::Date)
-        BreadApp.applicationScope.launch {
+        scope.launch {
             metaDataProvider.recoverAll(true)
         }
         return initAccount(phrase, creationDate, apiKey)
@@ -187,7 +189,7 @@ class CryptoUserManager(
         putFailCount(BRKeyStore.getFailCount())
         putFailTimestamp(BRKeyStore.getFailTimeStamp())
 
-        BreadApp.applicationScope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.IO) {
             BRKeyStore.wipeAfterMigration()
         }
 
@@ -494,7 +496,7 @@ class CryptoUserManager(
                     disabledSeconds.set(0)
                     stateChangeChannel.offer(Unit)
                 }
-                .launchIn(BreadApp.applicationScope)
+                .launchIn(scope)
         }
     }
 

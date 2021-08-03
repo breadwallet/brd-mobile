@@ -98,13 +98,18 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
     override val update = WalletUpdate
     override val flowEffectHandler
         get() = WalletScreenHandler.createEffectHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            { output ->
-                MetaDataEffectHandler(output, direct.instance(), direct.instance())
+            context = checkNotNull(applicationContext),
+            breadBox = direct.instance(),
+            metadataEffectHandler = { output ->
+                MetaDataEffectHandler(
+                    output = output,
+                    metaDataProvider = direct.instance(),
+                    breadBox = direct.instance(),
+                    scope = direct.instance()
+                )
             },
-            direct.instance(),
-            direct.instance()
+            ratesFetcher = direct.instance(),
+            connectivityStateProvider = direct.instance()
         )
 
     protected val binding by viewBinding(ControllerWalletBinding::inflate)
