@@ -85,14 +85,6 @@ class CoreSystem: Subscriber, Trackable {
                 
                 //TODO:CRYPTO does not handle 401, other headers, redirects
                 return session.dataTask(with: req, completionHandler: completion)
-        },
-            apiBaseURL: "https://\(C.backendHost)",
-            apiDataTaskFunc: { (_, req, completion) -> URLSessionDataTask in
-                return Backend.apiClient.dataTaskWithRequest(req,
-                                                             authenticated: Backend.isConnected,
-                                                             retryCount: 0,
-                                                             responseQueue: self.queue,
-                                                             handler: completion)
         })
 
         try? FileManager.default.createDirectory(atPath: C.coreDataDirURL.path, withIntermediateDirectories: true, attributes: nil)
