@@ -463,7 +463,7 @@ private extension ExchangeViewConnection {
     }
 
     func errorConfirm(for errorState: ExchangeModel.ErrorState) -> String {
-        switch errorState {
+        switch errorState.type {
         case is ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError:
             return S.Exchange.ErrorState.insufficientNativeBalanceErrorConfirm
         default:
@@ -473,7 +473,7 @@ private extension ExchangeViewConnection {
 
 
     func errorTitle(for errorState: ExchangeModel.ErrorState) -> String {
-        switch errorState {
+        switch errorState.type {
         case is ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError:
             return S.Exchange.ErrorState.insufficientNativeBalanceErrorTitle
         default:
