@@ -224,7 +224,7 @@ public struct Amount {
         if let locale = locale {
             formatter = Formatters().fiat(currencyCode: code, locale: locale)
         } else {
-            formatter = Formatters().fiat(currencyCode: code)
+            formatter = cosmosLocalFormat
         }
 
 
