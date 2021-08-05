@@ -29,7 +29,6 @@ import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.*
 import com.breadwallet.corecrypto.*
 import com.breadwallet.crypto.CryptoApi
-import com.breadwallet.crypto.Key
 import com.breadwallet.crypto.WalletManagerMode
 import com.breadwallet.crypto.blockchaindb.*
 import com.breadwallet.logger.*
@@ -358,6 +357,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
     private var accountLockJob: Job? = null
 
+    private val brdApi by instance<BrdApiClient>()
     private val apiClient by instance<APIClient>()
     private val giftTracker by instance<GiftTracker>()
     private val userManager by instance<BrdUserManager>()
@@ -488,18 +488,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     }
 
     private suspend fun preflight() {
-        val brdApi = direct.instance<BrdApiClient>()
-        val key = userManager.getAuthKey()?.let { keyBytes ->
-            if (keyBytes.isNotEmpty()) {
-                Key.createFromPrivateKeyString(keyBytes)
-                    .orNull()
-                    ?.encodeAsPublic()
-                    ?.toString(Charsets.UTF_8)
-            } else null
-        } ?: return
-        val publicBytes = CryptoHelper.hexDecode(key)
-        val publicKey = CryptoHelper.base58Encode(publicBytes ?: byteArrayOf())
-        val preflight = brdApi.preflight(publicKey)
+        val preflight = brdApi.preflight()
         if (preflight?.activate == true) {
             brdPreferences.hydraActivated = true
             userManager.removeToken()

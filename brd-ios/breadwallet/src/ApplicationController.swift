@@ -227,9 +227,7 @@ class ApplicationController: Subscriber, Trackable {
                 return
             }
 
-            let key = authProvider.publicKey()
-
-            Backend.brdApi.preflight(publicKey: key) { preflight, _ in
+            Backend.brdApi.preflight() { preflight, _ in
                 if preflight?.activate ?? false {
                     UserDefaults.cosmos.hydraActivated = true
                     authProvider.token = nil

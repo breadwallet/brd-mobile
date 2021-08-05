@@ -72,7 +72,7 @@ interface BrdApiClient {
 
     suspend fun deleteMe(): Boolean
 
-    suspend fun preflight(publicKey: String): Preflight?
+    suspend fun preflight(): Preflight?
 
     fun signUrl(path: String): String
 }
