@@ -306,10 +306,10 @@ internal class HydraApiClient(
         }
     }
 
-    override suspend fun preflight(publicKey: String): Preflight? {
+    override suspend fun preflight(): Preflight? {
         return withContext(dispatcher) {
             try {
-                http.get(urlFor("me", "preflight", publicKey)) {
+                http.get(urlFor("me", "preflight")) {
                     authenticated()
                 }
             } catch (e: Throwable) {
