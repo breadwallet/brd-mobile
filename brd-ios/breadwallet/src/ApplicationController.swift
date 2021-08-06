@@ -194,6 +194,13 @@ class ApplicationController: Subscriber, Trackable {
                                     alertPresenter: weakSelf.alertPresenter
                             )
                             weakSelf.coreSystem.connect()
+
+                            DispatchQueue.global(qos: .utility).async {
+                                Backend.kvStore?.syncAllKeys { error in
+                                    print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
+                                    Store.trigger(name: .didSyncKVStore)
+                                }
+                            }
                         }
                     }
                 }
