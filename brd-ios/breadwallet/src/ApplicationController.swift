@@ -195,6 +195,10 @@ class ApplicationController: Subscriber, Trackable {
                             )
                             weakSelf.coreSystem.connect()
 
+                            guard UserDefaults.cosmos.hydraActivated else {
+                                return
+                            }
+
                             DispatchQueue.global(qos: .utility).async {
                                 Backend.kvStore?.syncAllKeys { error in
                                     print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
