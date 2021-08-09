@@ -95,7 +95,7 @@ extension ExchangeTradeViewController: ExchangeView {
             return
         }
 
-        guard model.mode != .buy else {
+        guard model.mode == .trade else {
             exitAndNavigateToBuyFlow()
             return
         }
@@ -291,8 +291,8 @@ private extension ExchangeTradeViewController {
     }
 
     private func exitAndNavigateToBuyFlow() {
-        disconnect()
         dismiss {
+            self.disconnect()
             let action = RootModalActions.Present(modal: .buy(currency: nil))
             Store.perform(action: action)
         }
