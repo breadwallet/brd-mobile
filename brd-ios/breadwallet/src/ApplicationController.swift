@@ -235,10 +235,12 @@ class ApplicationController: Subscriber, Trackable {
                         isDebug: (E.isDebug || E.isTestFlight),
                         isHydraActivated: true
                     )
-                    // NOTE: Here to refresh the token for order history and rewards pages auth.
-                    Backend.brdApi.getMe { _, _ in () }
+                    Backend.brdApi.getMe { _, _ in
+                        handler?()
+                    }
+                } else {
+                    handler?()
                 }
-                handler?()
             }
         }
     }
