@@ -10,8 +10,8 @@ package com.breadwallet.tools.manager
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.core.content.edit
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

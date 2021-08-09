@@ -20,8 +20,10 @@ class InAppNotificationViewModel(val notification: InAppMessage) : ViewModel() {
      * Getter of a map with the id and the message_id to be used for analytics.
      */
     private val idsAsAttributes: Map<String, String>
-        get() = mapOf(EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_ID to notification.id,
-                EventUtils.EVENT_ATTRIBUTE_MESSAGE_ID to notification.messageId)
+        get() = mapOf(
+            EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_ID to notification.id,
+            EventUtils.EVENT_ATTRIBUTE_MESSAGE_ID to notification.messageId
+        )
 
     /**
      * Mark message as read, this is done when the message is dismissed or the action button is
@@ -32,10 +34,12 @@ class InAppNotificationViewModel(val notification: InAppMessage) : ViewModel() {
             MessagesRepository.markAsRead(notification.messageId)
 
             if (actionButtonClicked) {
-                EventUtils.pushEvent(EventUtils.EVENT_IN_APP_NOTIFICATION_CTA_BUTTON,
-                        idsAsAttributes.toMutableMap().apply {
-                            put(EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_CTA_URL, notification.actionButtonUrl.orEmpty())
-                        })
+                EventUtils.pushEvent(
+                    EventUtils.EVENT_IN_APP_NOTIFICATION_CTA_BUTTON,
+                    idsAsAttributes.toMutableMap().apply {
+                        put(EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_CTA_URL, notification.actionButtonUrl.orEmpty())
+                    }
+                )
             } else {
                 EventUtils.pushEvent(EventUtils.EVENT_IN_APP_NOTIFICATION_DISMISSED, idsAsAttributes)
             }

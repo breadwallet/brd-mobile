@@ -9,7 +9,6 @@
 package com.breadwallet.ui.exchange
 
 import android.view.View
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
@@ -17,7 +16,6 @@ import com.breadwallet.databinding.OfferListItemBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem
 import com.squareup.picasso.Picasso
-
 
 class OfferListItem(
     offerDetails: ExchangeModel.OfferDetails
@@ -52,7 +50,6 @@ class OfferListItem(
         }
     }
 }
-
 
 fun OfferListItemBinding.bindToModel(model: ExchangeModel.OfferDetails) {
     when (model) {

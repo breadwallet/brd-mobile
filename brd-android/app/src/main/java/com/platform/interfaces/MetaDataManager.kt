@@ -110,8 +110,7 @@ class MetaDataManager(
                 emit(
                     getOrSync(
                         KEY_WALLET_INFO
-                    )
-                    { WalletInfoData().toJSON() }
+                    ) { WalletInfoData().toJSON() }
                     !!.run { WalletInfoData.fromJsonObject(this) }
                 )
             }
@@ -270,8 +269,8 @@ class MetaDataManager(
             is TxMetaDataEmpty -> {
                 needsUpdate =
                     !newTxMetaData.comment.isNullOrBlank() ||
-                        newTxMetaData.exchangeRate != 0.0 ||
-                        !newTxMetaData.gift?.keyData.isNullOrBlank()
+                    newTxMetaData.exchangeRate != 0.0 ||
+                    !newTxMetaData.gift?.keyData.isNullOrBlank()
                 txMetaData = newTxMetaData
             }
             is TxMetaDataValue -> {
@@ -286,8 +285,10 @@ class MetaDataManager(
                         needsUpdate = true
                     } else if (
                         oldGift?.keyData != null &&
-                        (oldGift.claimed != newGift.claimed ||
-                            oldGift.reclaimed != newGift.reclaimed)
+                        (
+                            oldGift.claimed != newGift.claimed ||
+                                oldGift.reclaimed != newGift.reclaimed
+                            )
                     ) {
                         txMetaData = txMetaData.copy(
                             gift = oldGift.copy(

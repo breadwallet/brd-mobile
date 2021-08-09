@@ -25,7 +25,6 @@ import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerSendSheetBinding
 import com.breadwallet.effecthandler.metadata.MetaDataEffectHandler
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.legacy.presenter.customviews.BRKeyboard
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.animation.SlideDetector
@@ -35,13 +34,14 @@ import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.Link
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.BaseMobiusController
-import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.auth.AuthMode
+import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.flowbind.clicks
 import com.breadwallet.ui.flowbind.focusChanges
 import com.breadwallet.ui.flowbind.textChanges
+import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.scanner.ScannerController
 import com.breadwallet.ui.send.SendSheet.E
 import com.breadwallet.ui.send.SendSheet.E.OnAmountChange
@@ -209,9 +209,9 @@ class SendSheetController(args: Bundle? = null) :
     private fun EditText.bindActionComplete(output: E) =
         callbackFlow<E> {
             setOnEditorActionListener { _, actionId, event ->
-                if (event?.keyCode == KeyEvent.KEYCODE_ENTER
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || actionId == EditorInfo.IME_ACTION_NEXT
+                if (event?.keyCode == KeyEvent.KEYCODE_ENTER ||
+                    actionId == EditorInfo.IME_ACTION_DONE ||
+                    actionId == EditorInfo.IME_ACTION_NEXT
                 ) {
                     offer(output)
                     Utils.hideKeyboard(activity)
@@ -482,8 +482,10 @@ class SendSheetController(args: Bundle? = null) :
 
                     if (destinationTag.value.isNullOrBlank() &&
                         !textInputDestinationTag.text.isNullOrBlank() ||
-                        (!destinationTag.value.isNullOrBlank() &&
-                            textInputDestinationTag.text.isNullOrBlank()) || isDestinationTagFromResolvedAddress
+                        (
+                            !destinationTag.value.isNullOrBlank() &&
+                                textInputDestinationTag.text.isNullOrBlank()
+                            ) || isDestinationTagFromResolvedAddress
                     ) {
                         textInputDestinationTag.setText(currentModel.destinationTag?.value)
                     }

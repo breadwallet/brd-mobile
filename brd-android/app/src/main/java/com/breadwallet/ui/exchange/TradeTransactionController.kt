@@ -39,7 +39,8 @@ import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 import java.math.BigDecimal
 
-class TradeTransactionController(args: Bundle? = null) : ExchangeController.ChildController(args),
+class TradeTransactionController(args: Bundle? = null) :
+    ExchangeController.ChildController(args),
     ConfirmTradeController.Listener,
     AuthenticationController.Listener {
 

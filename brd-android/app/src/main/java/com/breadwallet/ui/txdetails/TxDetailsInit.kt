@@ -16,7 +16,8 @@ import com.spotify.mobius.Init
 object TxDetailsInit : Init<M, F> {
     override fun init(model: M): First<M, F> {
         return First.first(
-            model, setOf(
+            model,
+            setOf(
                 F.LoadTransaction(model.currencyCode, model.transactionHash),
                 F.LoadTransactionMetaData(model.currencyCode, model.transactionHash)
             )

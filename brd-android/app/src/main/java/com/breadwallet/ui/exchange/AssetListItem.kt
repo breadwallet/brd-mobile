@@ -16,7 +16,6 @@ import com.brd.api.models.ExchangeCurrency
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.ExchangeAssetListItemBinding
-import com.breadwallet.databinding.ExchangeCurrencyListItemBinding
 import com.breadwallet.tools.util.TokenUtil
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem

@@ -10,17 +10,12 @@ package com.breadwallet.ui.staking
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.bakerapi.models.Baker
 import com.breadwallet.databinding.ControllerSelectBakerBinding
-import com.breadwallet.logger.logError
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.uistaking.ConfirmationListener
-import com.breadwallet.ui.wallet.TransactionListItem
-import com.breadwallet.ui.wallet.spark.SparkAdapter
 import com.breadwallet.ui.web.WebController
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter

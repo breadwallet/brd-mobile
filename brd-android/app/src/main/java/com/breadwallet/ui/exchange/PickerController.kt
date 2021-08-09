@@ -10,7 +10,6 @@ package com.breadwallet.ui.exchange
 
 import android.animation.LayoutTransition
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -32,7 +31,6 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.mikepenz.fastadapter.select.getSelectExtension
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
@@ -63,23 +61,23 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
     init {
         countriesAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         assetAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         currencyAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         regionAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
     }
 

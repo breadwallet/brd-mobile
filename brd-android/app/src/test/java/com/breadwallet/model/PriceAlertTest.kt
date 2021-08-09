@@ -36,289 +36,289 @@ class PriceAlertTest {
     class PriceTargetIncrease {
         @Test
         fun testTriggeredWhenTargetPriceAboveTarget() =
-                assertTriggeredTrue(101f) { priceTargetIncrease("ETH", 100f, "USD") }
+            assertTriggeredTrue(101f) { priceTargetIncrease("ETH", 100f, "USD") }
 
         @Test
         fun testTriggerIsUnmetWhenPriceGoesBelowTarget() =
-                assertTriggerUnmetTrue(99f) { priceTargetIncrease("ETH", 100f, "USD") }
+            assertTriggerUnmetTrue(99f) { priceTargetIncrease("ETH", 100f, "USD") }
 
         @Test
         fun testNotTriggeredWhenCurrentPriceUnchanged() =
-                assertTriggeredFalse(100f) { priceTargetIncrease("ETH", 100f, "USD") }
+            assertTriggeredFalse(100f) { priceTargetIncrease("ETH", 100f, "USD") }
     }
 
     class PriceTargetDecrease {
         @Test
         fun testTriggeredWhenTargetPriceBelowTarget() =
-                assertTriggeredTrue(99f) { priceTargetDecrease("ETH", 100f, "USD") }
+            assertTriggeredTrue(99f) { priceTargetDecrease("ETH", 100f, "USD") }
 
         @Test
         fun testTriggerUnmetWhenTargetPriceAboveTarget() =
-                assertTriggerUnmetTrue(101f) { priceTargetDecrease("ETH", 100f, "USD") }
+            assertTriggerUnmetTrue(101f) { priceTargetDecrease("ETH", 100f, "USD") }
 
         @Test
         fun testNotTriggeredWhenCurrentPriceUnchanged() =
-                assertTriggeredFalse(100f) { priceTargetDecrease("ETH", 100f, "USD") }
+            assertTriggeredFalse(100f) { priceTargetDecrease("ETH", 100f, "USD") }
     }
 
     class PercentageChangeIncrease {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercent() =
-                assertTriggeredTrue(110f) { percentageIncreased("BCH", 10f, "USD", 100f) }
+            assertTriggeredTrue(110f) { percentageIncreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testNotTriggeredWhenDecreasedByTargetPercent() =
-                assertTriggeredFalse(90f) { percentageIncreased("BCH", 10f, "USD", 100f) }
+            assertTriggeredFalse(90f) { percentageIncreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testTriggeredUnmetWhenDecreasedByTargetPercent() =
-                assertTriggerUnmetTrue(90f) { percentageIncreased("BCH", 10f, "USD", 100f) }
+            assertTriggerUnmetTrue(90f) { percentageIncreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testNotTriggeredWhenCurrentPriceUnchanged() =
-                assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
+            assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
     }
 
     class PercentageChangeDecrease {
         @Test
         fun testTriggeredWhenDecreasedByTargetPercent() =
-                assertTriggeredTrue(90f) { percentageDecreased("BCH", 10f, "USD", 100f) }
+            assertTriggeredTrue(90f) { percentageDecreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testNotTriggeredWhenIncreasedByTargetPercent() =
-                assertTriggeredFalse(110f) { percentageDecreased("BCH", 10f, "USD", 100f) }
+            assertTriggeredFalse(110f) { percentageDecreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testTriggeredUnmetWhenIncreasedByTargetPercent() =
-                assertTriggerUnmetTrue(110f) { percentageDecreased("BCH", 10f, "USD", 100f) }
+            assertTriggerUnmetTrue(110f) { percentageDecreased("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testNotTriggeredWhenCurrentPriceUnchanged() =
-                assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
+            assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
     }
 
     class PercentageChangeBoth {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercent() =
-                assertTriggeredTrue(110f) { percentageChanged("BCH", 10f, "USD", 100f) }
+            assertTriggeredTrue(110f) { percentageChanged("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testTriggeredWhenDecreasedByTargetPercent() =
-                assertTriggeredTrue(90f) { percentageChanged("BCH", 10f, "USD", 100f) }
+            assertTriggeredTrue(90f) { percentageChanged("BCH", 10f, "USD", 100f) }
 
         @Test
         fun testNotTriggeredWhenCurrentPriceUnchanged() =
-                assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
+            assertTriggeredFalse(100f) { percentageChanged("BCH", 10F, "USD", 100f) }
     }
 
     class PercentageChangeIncreaseInDay {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInDay() =
-                assertTriggeredTrue(110f, inDay()) { startTime ->
-                    percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inDay()) { startTime ->
+                percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenIncreasedByTargetPercentInOverADay() =
-                assertTriggeredFalse(110f, overDay()) { startTime ->
-                    percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(110f, overDay()) { startTime ->
+                percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenDecreasedByTargetPercentInDay() =
-                assertTriggeredFalse(90f, inDay()) { startTime ->
-                    percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(90f, inDay()) { startTime ->
+                percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetTrue(110f, overDay()) { startTime ->
-                    percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(110f, overDay()) { startTime ->
+                percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsUnderADay() =
-                assertTriggerUnmetFalse(110f, inDay()) { startTime ->
-                    percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(110f, inDay()) { startTime ->
+                percentageIncreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 
     class PercentageChangeIncreaseInDayAndWeek {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInDay() =
-                assertTriggeredTrue(110f, inDay()) { startTime ->
-                    percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inDay()) { startTime ->
+                percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInWeek() =
-                assertTriggeredTrue(110f, inWeek()) { startTime ->
-                    percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inWeek()) { startTime ->
+                percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenIncreasedByTargetPercentInOverAWeek() =
-                assertTriggeredFalse(110f, overWeek()) { startTime ->
-                    percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(110f, overWeek()) { startTime ->
+                percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetFalse(110f, overDay()) { startTime ->
-                    percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(110f, overDay()) { startTime ->
+                percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimeIsOverAWeek() =
-                assertTriggerUnmetTrue(110f, overWeek()) { startTime ->
-                    percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(110f, overWeek()) { startTime ->
+                percentageIncreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 
     class PercentageChangeDecreaseInDay {
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInDay() =
-                assertTriggeredTrue(90f, inDay()) { startTime ->
-                    percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inDay()) { startTime ->
+                percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenDecreasedByTargetPercentInOverADay() =
-                assertTriggeredFalse(90f, overDay()) { startTime ->
-                    percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(90f, overDay()) { startTime ->
+                percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenIncreasedByTargetPercentInDay() =
-                assertTriggeredFalse(110f, inDay()) { startTime ->
-                    percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(110f, inDay()) { startTime ->
+                percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetTrue(110f, overDay()) { startTime ->
-                    percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(110f, overDay()) { startTime ->
+                percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeInDay() =
-                assertTriggerUnmetFalse(110f, inDay()) { startTime ->
-                    percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(110f, inDay()) { startTime ->
+                percentageDecreasedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 
     class PercentageChangeDecreaseInDayAndWeek {
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInDay() =
-                assertTriggeredTrue(90f, inDay()) { startTime ->
-                    percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inDay()) { startTime ->
+                percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInWeek() =
-                assertTriggeredTrue(90f, inWeek()) { startTime ->
-                    percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inWeek()) { startTime ->
+                percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenDecreasedByTargetPercentInOverAWeek() =
-                assertTriggeredFalse(90f, overWeek()) { startTime ->
-                    percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(90f, overWeek()) { startTime ->
+                percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetFalse(90f, overDay()) { startTime ->
-                    percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(90f, overDay()) { startTime ->
+                percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimeIsOverAWeek() =
-                assertTriggerUnmetTrue(90f, overWeek()) { startTime ->
-                    percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(90f, overWeek()) { startTime ->
+                percentageDecreasedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 
     class PercentageChangeBothInDay {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInDay() =
-                assertTriggeredTrue(110f, inDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInDay() =
-                assertTriggeredTrue(90f, inDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenIncreasedByTargetPercentInOverADay() =
-                assertTriggeredFalse(110f, overDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(110f, overDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testNotTriggeredWhenDecreasedByTargetPercentInOverADay() =
-                assertTriggeredFalse(90f, overDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredFalse(90f, overDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsInDay() =
-                assertTriggerUnmetFalse(90f, inDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(90f, inDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetTrue(90f, overDay()) { startTime ->
-                    percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(90f, overDay()) { startTime ->
+                percentageChangedInDay("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 
     class PercentageChangeBothInDayAndWeek {
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInDay() =
-                assertTriggeredTrue(110f, inDay()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inDay()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInDay() =
-                assertTriggeredTrue(90f, inDay()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inDay()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenIncreasedByTargetPercentInWeek() =
-                assertTriggeredTrue(110f, inWeek()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(110f, inWeek()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggeredWhenDecreasedByTargetPercentInWeek() =
-                assertTriggeredTrue(90f, inWeek()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggeredTrue(90f, inWeek()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsInDay() =
-                assertTriggerUnmetFalse(90f, inDay()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(90f, inDay()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerNotUnmetWhenStartTimeIsOverADay() =
-                assertTriggerUnmetFalse(90f, overDay()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetFalse(90f, overDay()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
 
         @Test
         fun testTriggerUnmetWhenStartTimIsOverAWeek() =
-                assertTriggerUnmetTrue(90f, overWeek()) { startTime ->
-                    percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
-                }
+            assertTriggerUnmetTrue(90f, overWeek()) { startTime ->
+                percentageChangedInDayAndWeek("BCH", 10f, "USD", startTime, 100f)
+            }
     }
 }
 
@@ -334,10 +334,10 @@ typealias AlertFactory = (@ParameterName("startTime") Long) -> PriceAlert
  * @param offsetMs Offset to subtract from the current instant in ms for [alertFactory].
  */
 private fun assertTriggeredTrue(currentPrice: Float, offsetMs: Long = 0, alertFactory: AlertFactory) =
-        assertTrue("Expected isTriggerMet to be true.") {
-            val now = Date().time
-            alertFactory(now - offsetMs).isTriggerMet(currentPrice, now)
-        }
+    assertTrue("Expected isTriggerMet to be true.") {
+        val now = Date().time
+        alertFactory(now - offsetMs).isTriggerMet(currentPrice, now)
+    }
 
 /**
  * Assert that calling [PriceAlert.isTriggerMet] on the [PriceAlert]
@@ -346,10 +346,10 @@ private fun assertTriggeredTrue(currentPrice: Float, offsetMs: Long = 0, alertFa
  * @param offsetMs Offset to subtract from the current instant in ms for [alertFactory].
  */
 private fun assertTriggeredFalse(currentPrice: Float, offsetMs: Long = 0, alertFactory: AlertFactory) =
-        assertFalse("Expected isTriggerMet to be false") {
-            val now = Date().time
-            alertFactory(now - offsetMs).isTriggerMet(currentPrice, now)
-        }
+    assertFalse("Expected isTriggerMet to be false") {
+        val now = Date().time
+        alertFactory(now - offsetMs).isTriggerMet(currentPrice, now)
+    }
 
 /**
  * Assert that calling [PriceAlert.isTriggerUnmet] on the [PriceAlert]
@@ -358,10 +358,10 @@ private fun assertTriggeredFalse(currentPrice: Float, offsetMs: Long = 0, alertF
  * @param offsetMs Offset to subtract from the current instant in ms for [alertFactory].
  */
 private fun assertTriggerUnmetTrue(currentPrice: Float, offsetMs: Long = 0, alertFactory: AlertFactory) =
-        assertTrue("Expected isTriggerUnmet to be true") {
-            val now = Date().time
-            alertFactory(now - offsetMs).isTriggerUnmet(currentPrice, now)
-        }
+    assertTrue("Expected isTriggerUnmet to be true") {
+        val now = Date().time
+        alertFactory(now - offsetMs).isTriggerUnmet(currentPrice, now)
+    }
 
 /**
  * Assert that calling [PriceAlert.isTriggerUnmet] on the [PriceAlert]
@@ -370,10 +370,10 @@ private fun assertTriggerUnmetTrue(currentPrice: Float, offsetMs: Long = 0, aler
  * @param offsetMs Offset to subtract from the current instant in ms for [alertFactory].
  */
 private fun assertTriggerUnmetFalse(currentPrice: Float, offsetMs: Long = 0, alertFactory: AlertFactory) =
-        assertFalse("Expected isTriggerUnmet to be false") {
-            val now = Date().time
-            alertFactory(now - offsetMs).isTriggerUnmet(currentPrice, now)
-        }
+    assertFalse("Expected isTriggerUnmet to be false") {
+        val now = Date().time
+        alertFactory(now - offsetMs).isTriggerUnmet(currentPrice, now)
+    }
 
 /**
  * Just over one week ago.

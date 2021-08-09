@@ -11,7 +11,6 @@ package com.breadwallet
 import android.content.Context
 import com.breadwallet.app.BreadApp
 import com.breadwallet.tools.manager.BRSharedPrefs
-import com.github.anrwatchdog.ANRWatchDog
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
@@ -21,6 +20,7 @@ import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.facebook.soloader.SoLoader
+import com.github.anrwatchdog.ANRWatchDog
 import okhttp3.Interceptor
 
 internal fun BreadApp.installHooks() {

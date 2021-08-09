@@ -69,6 +69,7 @@ private const val MOBIUSKT_VERSION = "0.1.9"
 private const val BLOCKSET_VERSION = "0.1.3.1"
 private const val FLIPPER_VERSION = "0.100.0"
 private const val FLIPPER_SO_VERSION = "0.10.1"
+const val KTLINT_VERSION = "10.0.0"
 
 object Libs {
 

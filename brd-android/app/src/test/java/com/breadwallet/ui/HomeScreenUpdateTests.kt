@@ -8,9 +8,9 @@
  */
 package com.breadwallet.ui
 
-import com.breadwallet.ui.home.HomeScreen.M
 import com.breadwallet.ui.home.HomeScreen.E
 import com.breadwallet.ui.home.HomeScreen.F
+import com.breadwallet.ui.home.HomeScreen.M
 import com.breadwallet.ui.home.HomeScreenUpdate
 import com.breadwallet.ui.home.PromptItem
 import com.breadwallet.ui.home.Wallet
@@ -43,10 +43,12 @@ class HomeScreenUpdateTests {
             )
             .then(
                 assertThatNext(
-                    hasModel(initState.copy(
-                        wallets = wallets,
-                        displayOrder = wallets.values.map { it.currencyId }
-                    )),
+                    hasModel(
+                        initState.copy(
+                            wallets = wallets,
+                            displayOrder = wallets.values.map { it.currencyId }
+                        )
+                    ),
                     hasEffects<M, F>(F.LoadWallets)
                 )
             )

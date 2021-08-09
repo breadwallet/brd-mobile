@@ -13,10 +13,10 @@ import android.util.Log
 import com.breadwallet.model.InAppMessage
 import com.breadwallet.tools.manager.BRReportsManager
 import com.platform.APIClient
+import com.platform.util.getStringOrNull
 import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONException
-import com.platform.util.getStringOrNull
 import org.json.JSONObject
 
 /**
@@ -41,9 +41,9 @@ object InAppMessagesClient {
     fun fetchMessages(context: Context, type: InAppMessage.Type? = null): List<InAppMessage> {
         val url = APIClient.getBaseURL() + NOTIFICATIONS_ENDPOINT
         val request = Request.Builder()
-                .url(url)
-                .get()
-                .build()
+            .url(url)
+            .get()
+            .build()
         val response = APIClient.getInstance(context).sendRequest(request, true)
 
         if (!response.isSuccessful) {
@@ -59,24 +59,24 @@ object InAppMessagesClient {
     }
 
     private fun parseMessages(responseBody: String): List<InAppMessage> =
-            try {
-                val jsonArray = JSONArray(responseBody)
-                List(jsonArray.length()) { parseMessage(jsonArray.getJSONObject(it)) }
-            } catch (e: JSONException) {
-                Log.e(TAG, "Failed to parse the notification", e)
-                BRReportsManager.reportBug(e)
-                emptyList()
-            }
+        try {
+            val jsonArray = JSONArray(responseBody)
+            List(jsonArray.length()) { parseMessage(jsonArray.getJSONObject(it)) }
+        } catch (e: JSONException) {
+            Log.e(TAG, "Failed to parse the notification", e)
+            BRReportsManager.reportBug(e)
+            emptyList()
+        }
 
     private fun parseMessage(messageJson: JSONObject) =
-            InAppMessage(
-                    messageJson.getString(JSON_ID),
-                    InAppMessage.Type.fromString(messageJson.getString(JSON_TYPE)),
-                    messageJson.getString(JSON_MESSAGE_ID),
-                    messageJson.getString(JSON_TITLE),
-                    messageJson.getString(JSON_BODY),
-                    messageJson.getStringOrNull(JSON_CTA),
-                    messageJson.getStringOrNull(JSON_CTA_URL),
-                    messageJson.getStringOrNull(JSON_IMAGE_URL))
-
+        InAppMessage(
+            messageJson.getString(JSON_ID),
+            InAppMessage.Type.fromString(messageJson.getString(JSON_TYPE)),
+            messageJson.getString(JSON_MESSAGE_ID),
+            messageJson.getString(JSON_TITLE),
+            messageJson.getString(JSON_BODY),
+            messageJson.getStringOrNull(JSON_CTA),
+            messageJson.getStringOrNull(JSON_CTA_URL),
+            messageJson.getStringOrNull(JSON_IMAGE_URL)
+        )
 }

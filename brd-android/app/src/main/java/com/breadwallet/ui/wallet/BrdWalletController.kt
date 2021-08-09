@@ -46,7 +46,7 @@ class BrdWalletController : WalletController("BRD") {
         binding.transactionListCoordinatorLayout.addView(mAppBarLayoutRoot, 0)
         lockRewardsViewToCollapsed(mAppBarLayoutRoot!!, binding.txList)
         mAppBarLayoutRoot!!.setOnClickListener {
-            //Collapse without animation before showing the rewards webview.
+            // Collapse without animation before showing the rewards webview.
             EventUtils.pushEvent(EventUtils.EVENT_REWARDS_BANNER)
             mAppBarLayoutRoot!!.setExpanded(false, true)
             val rewardsUrl = HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS)

@@ -51,7 +51,7 @@ class PromiseJs(
                         }
                     })
                 })()
-        """.trimIndent(),
+            """.trimIndent(),
             null
         )
     }

@@ -103,7 +103,8 @@ class BrdApiJs(
             put("status", code)
             put("headers", JSONObject(headers))
             put(
-                "body", try {
+                "body",
+                try {
                     when {
                         bodyText.isBlank() || contentType != "application/json" -> null
                         bodyText.startsWith("[") -> JSONArray(bodyText)

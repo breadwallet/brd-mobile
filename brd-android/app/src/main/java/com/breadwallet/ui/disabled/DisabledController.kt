@@ -13,7 +13,6 @@ import android.view.View
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
-import com.breadwallet.R
 import com.breadwallet.databinding.ControllerDisabledBinding
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError

@@ -255,25 +255,34 @@ class MainActivity : AppCompatActivity(), KodeinAware {
                     closeDrawer(drawerDirection)
                 }
             }
-            addView(root, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.MATCH_PARENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ))
-            addView(NavigationView(context).apply {
-                addView(ChangeHandlerFrameLayout(context).apply {
-                    id = R.id.drawer_layout_id
-                    Conductor.attachRouter(this@MainActivity, this, bundle)
-                        .setRoot(RouterTransaction.with(controller))
-                }, FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                ))
-            }, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.WRAP_CONTENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ).apply {
-                gravity = drawerDirection
-            })
+            addView(
+                root,
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.MATCH_PARENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            addView(
+                NavigationView(context).apply {
+                    addView(
+                        ChangeHandlerFrameLayout(context).apply {
+                            id = R.id.drawer_layout_id
+                            Conductor.attachRouter(this@MainActivity, this, bundle)
+                                .setRoot(RouterTransaction.with(controller))
+                        },
+                        FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.WRAP_CONTENT,
+                            FrameLayout.LayoutParams.MATCH_PARENT
+                        )
+                    )
+                },
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.WRAP_CONTENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                ).apply {
+                    gravity = drawerDirection
+                }
+            )
         }
     }
 

@@ -157,7 +157,7 @@ class SettingsController(
             F.ShowPlatformBundleDialog -> showPlatformBundleDialog(
                 ServerBundlesHelper.getBundle(ServerBundlesHelper.Type.WEB)
             )
-            is F.ExportTransactions ->  exportTransactions(effect.uri)
+            is F.ExportTransactions -> exportTransactions(effect.uri)
         }
     }
 

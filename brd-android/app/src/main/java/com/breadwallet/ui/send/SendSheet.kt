@@ -184,7 +184,7 @@ object SendSheet {
 
         /** True when the necessary inputs to estimate a fee are available. */
         val canEstimateFee: Boolean =
-                (balance >= amount || isSendingMax) &&
+            (balance >= amount || isSendingMax) &&
                 targetInputError == null &&
                 !amount.isZero()
 
@@ -615,5 +615,3 @@ fun List<TransferField>.copy(key: String, value: String): List<TransferField> = 
         transferField
     }
 }
-
-

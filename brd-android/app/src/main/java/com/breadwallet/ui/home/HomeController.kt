@@ -82,7 +82,7 @@ class HomeController(
     private var addWalletAdapter: ItemAdapter<AddWalletItem>? = null
 
     override fun bindView(output: Consumer<E>): Disposable {
-        return with (binding) {
+        return with(binding) {
             buyLayout.setOnClickListener { output.accept(E.OnBuyClicked) }
             tradeLayout.setOnClickListener { output.accept(E.OnTradeClicked) }
             menuLayout.setOnClickListener { output.accept(E.OnMenuClicked) }
@@ -272,7 +272,6 @@ class HomeController(
             } else {
                 SpringAnimator.failShakeAnimation(act, emailEditText)
             }
-
         }
         return customLayout
     }

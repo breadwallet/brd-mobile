@@ -11,7 +11,6 @@ package com.breadwallet.ui.wallet
 import android.content.Context
 import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.*
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.crypto.Amount
 import com.breadwallet.crypto.Transfer
 import com.breadwallet.crypto.TransferDirection
@@ -23,6 +22,7 @@ import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.manager.*
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.TokenUtil
+import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.models.TransactionState
 import com.breadwallet.ui.wallet.WalletScreen.E
 import com.breadwallet.ui.wallet.WalletScreen.F
@@ -143,8 +143,7 @@ object WalletScreenHandler {
                     breadBox.wallet(effect.currencyCode)
                         .mapLatest { Pair(it.walletManager.network.height, it.currencyId) }
                         .distinctUntilChangedBy { it.first }
-                )
-                { transfers, (_, currencyId) -> Pair(transfers, currencyId) }
+                ) { transfers, (_, currencyId) -> Pair(transfers, currencyId) }
             }
             .mapLatest { (transactions, currencyId) ->
                 E.OnTransactionsUpdated(
@@ -248,7 +247,6 @@ object WalletScreenHandler {
                 .mapLatest { state ->
                     E.OnConnectionUpdated(state == ConnectivityState.Connected)
                 }
-
         }
 
     private fun handleCreateAccount(breadBox: BreadBox): suspend (F.CreateAccount) -> Unit =
@@ -313,7 +311,7 @@ public inline fun <T, R : Any> Iterable<T>.mapNotNullOrExceptional(
 ): List<R> = mapNotNull { elem: T ->
     try {
         transform(elem)
-    } catch (e : Exception) {
+    } catch (e: Exception) {
         logError("Exception caught, transform skipped", e)
         BRReportsManager.reportBug(e)
         null

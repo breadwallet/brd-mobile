@@ -74,7 +74,6 @@ class SparkView @JvmOverloads constructor(
         }
     }
 
-
     @ColorInt private var lineColor: Int = -1
     @ColorInt private var fillColor: Int = -1
     private var lineWidth: Float = 0f
@@ -104,7 +103,7 @@ class SparkView @JvmOverloads constructor(
 
     private val xPoints: MutableList<Float> = mutableListOf()
     private val yPoints: MutableList<Float> = mutableListOf()
-    val sparkLinePath : Path get() = Path(sparkPath)
+    val sparkLinePath: Path get() = Path(sparkPath)
     var sparkAnimator: SparkAnimator? = null
     val animator: Animator? get() = sparkAnimator?.getAnimator(this)
     private var pathAnimator: Animator? = null
@@ -284,12 +283,11 @@ class SparkView @JvmOverloads constructor(
         setScrubLine(x)
     }
 
-    override  fun onScrubEnded() {
+    override fun onScrubEnded() {
         scrubLinePath.reset()
         if (scrubListener != null) scrubListener!!.onScrubbed(null)
         invalidate()
     }
-
 
     private fun clearData() {
         renderPath.reset()
@@ -349,7 +347,6 @@ class SparkView @JvmOverloads constructor(
         return if (x > rightBound) {
             rightBound
         } else x
-
     }
 
     /**

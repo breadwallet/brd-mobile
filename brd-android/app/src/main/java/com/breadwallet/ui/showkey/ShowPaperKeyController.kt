@@ -68,7 +68,7 @@ class ShowPaperKeyController(args: Bundle) : BaseMobiusController<M, E, F>(args)
     private val binding by viewBinding(ControllerPaperKeyBinding::inflate)
 
     override fun bindView(modelFlow: Flow<M>): Flow<E> {
-        return with (binding) {
+        return with(binding) {
             merge(
                 nextButton.clicks().map { E.OnNextClicked },
                 previousButton.clicks().map { E.OnPreviousClicked },
