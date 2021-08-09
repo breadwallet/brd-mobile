@@ -122,7 +122,7 @@ class ExchangeController(args: Bundle) :
                 }
                 is ExchangeModel.State.Initializing -> {
                     val matchesMode = (mode == BUY && topController is BuyController) ||
-                            (mode == TRADE && topController is TradeController)
+                        (mode == TRADE && topController is TradeController)
                     if (topController == null || !matchesMode) {
                         val transaction = when (mode) {
                             BUY -> RouterTransaction.with(BuyController())

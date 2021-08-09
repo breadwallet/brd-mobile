@@ -16,7 +16,8 @@ import com.spotify.mobius.Init
 val ImportInit = Init<M, F> { model ->
     if (model.privateKey != null && !model.isKeyValid) {
         first(
-            model, setOf(
+            model,
+            setOf(
                 F.ValidateKey(model.privateKey, model.keyPassword)
             )
         )

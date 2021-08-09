@@ -9,20 +9,20 @@
 package com.breadwallet.ui.uigift
 
 import com.breadwallet.breadbox.toBigDecimal
-import com.spotify.mobius.Next.next
-import com.spotify.mobius.Next.dispatch
-import com.spotify.mobius.Update
-import com.breadwallet.ui.uigift.CreateGift.M
 import com.breadwallet.ui.uigift.CreateGift.E
-import com.breadwallet.ui.uigift.CreateGift.F
-import com.breadwallet.ui.uigift.CreateGift.State
-import com.breadwallet.ui.uigift.CreateGift.FiatAmountOption
-import com.breadwallet.ui.uigift.CreateGift.MAX_DIGITS
 import com.breadwallet.ui.uigift.CreateGift.Error
+import com.breadwallet.ui.uigift.CreateGift.F
 import com.breadwallet.ui.uigift.CreateGift.FeeEstimateError
+import com.breadwallet.ui.uigift.CreateGift.FiatAmountOption
+import com.breadwallet.ui.uigift.CreateGift.M
+import com.breadwallet.ui.uigift.CreateGift.MAX_DIGITS
 import com.breadwallet.ui.uigift.CreateGift.MaxEstimateError
+import com.breadwallet.ui.uigift.CreateGift.State
 import com.spotify.mobius.Next
+import com.spotify.mobius.Next.dispatch
+import com.spotify.mobius.Next.next
 import com.spotify.mobius.Next.noChange
+import com.spotify.mobius.Update
 import java.math.BigDecimal
 
 object CreateGiftUpdate : Update<M, E, F> {

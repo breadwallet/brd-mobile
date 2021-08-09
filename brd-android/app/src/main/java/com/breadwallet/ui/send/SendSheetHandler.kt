@@ -272,8 +272,10 @@ object SendSheetHandler {
             AddressResult.Invalid -> E.OnAddressValidated.InvalidAddress(effect.type)
             AddressResult.ExternalError -> E.OnAddressValidated.ResolveError(effect.type)
 
-            is AddressResult.Success -> when (val validateResult =
-                validateTargetString(breadBox, addressResolver, uriParser, effect.currencyCode, result.address)) {
+            is AddressResult.Success -> when (
+                val validateResult =
+                    validateTargetString(breadBox, addressResolver, uriParser, effect.currencyCode, result.address)
+            ) {
                 is E.OnAddressValidated.ValidAddress -> E.OnAddressValidated.ValidAddress(
                     effect.type,
                     validateResult.address,

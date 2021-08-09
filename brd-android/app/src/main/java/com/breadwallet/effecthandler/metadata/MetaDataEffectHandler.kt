@@ -16,10 +16,10 @@ import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.crypto.Transfer
 import com.breadwallet.crypto.WalletManagerMode
 import com.breadwallet.mobius.bindConsumerIn
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.util.errorHandler
 import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import com.breadwallet.tools.manager.BRSharedPrefs
+import com.breadwallet.util.errorHandler
 import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 import kotlinx.coroutines.CoroutineScope

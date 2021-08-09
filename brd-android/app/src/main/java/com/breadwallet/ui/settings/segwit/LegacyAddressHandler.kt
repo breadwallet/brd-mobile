@@ -15,8 +15,8 @@ import com.bluelinelabs.conductor.Controller
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.toSanitizedString
 import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.mobius.bindConsumerIn
 import com.breadwallet.legacy.presenter.entities.CryptoRequest
+import com.breadwallet.mobius.bindConsumerIn
 import com.breadwallet.tools.manager.BRClipboardManager
 import com.breadwallet.tools.qrcode.QRUtils
 import com.breadwallet.tools.util.btc

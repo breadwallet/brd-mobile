@@ -14,12 +14,12 @@ import android.util.Base64
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.addressFor
 import com.breadwallet.breadbox.createExportablePaperWallet
-import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.defaultUnit
 import com.breadwallet.breadbox.estimateFee
 import com.breadwallet.breadbox.estimateMaximum
 import com.breadwallet.breadbox.feeForSpeed
 import com.breadwallet.breadbox.getSize
+import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.crypto.Amount
 import com.breadwallet.crypto.TransferState
@@ -40,9 +40,9 @@ import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.uigift.CreateGift.E
 import com.breadwallet.ui.uigift.CreateGift.F
-import com.breadwallet.ui.uigift.CreateGift.PaperWalletError
-import com.breadwallet.ui.uigift.CreateGift.MaxEstimateError
 import com.breadwallet.ui.uigift.CreateGift.FeeEstimateError
+import com.breadwallet.ui.uigift.CreateGift.MaxEstimateError
+import com.breadwallet.ui.uigift.CreateGift.PaperWalletError
 import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.first

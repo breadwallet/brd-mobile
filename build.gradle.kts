@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform") version brd.KOTLIN_VERSION apply false
     kotlin("plugin.serialization") version brd.KOTLIN_VERSION apply false
+    id("org.jlleitschuh.gradle.ktlint") version brd.KTLINT_VERSION
 }
 
 allprojects {
@@ -11,3 +12,11 @@ allprojects {
     }
 }
 
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}
+
+afterEvaluate {
+    tasks["clean"].dependsOn(tasks.getByName("ktlintApplyToIdea"))
+    tasks["clean"].dependsOn(tasks.getByName("addKtlintFormatGitPreCommitHook"))
+}

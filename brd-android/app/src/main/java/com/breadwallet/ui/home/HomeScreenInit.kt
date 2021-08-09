@@ -15,11 +15,14 @@ import com.spotify.mobius.First.first
 import com.spotify.mobius.Init
 
 val HomeScreenInit = Init<M, F> { model ->
-    first(model, effects(
+    first(
+        model,
+        effects(
             F.LoadEnabledWallets,
             F.LoadIsBuyBellNeeded,
             F.LoadPrompt,
             F.CheckIfShowBuyAndSell,
             F.LoadConnectivityState
-    ))
+        )
+    )
 }

@@ -139,7 +139,8 @@ class AuthenticationController(
                             findListener<Listener>()?.onAuthenticationFailed()
                             router.popCurrentController()
                         }
-                    })
+                    }
+                )
             }
             AuthMode.BIOMETRIC_REQUIRED, AuthMode.USER_PREFERRED -> {
                 val resources = checkNotNull(resources)

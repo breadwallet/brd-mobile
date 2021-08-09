@@ -13,11 +13,17 @@ plugins {
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt") version "1.0.1"
     id("dev.zacsweers.redacted")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 plugins.apply(AppetizePlugin::class)
 apply(from = rootProject.file("gradle/google-services.gradle"))
 apply(from = rootProject.file("gradle/copy-font-files.gradle"))
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    verbose.set(true)
+    outputToConsole.set(true)
+}
 
 val BDB_CLIENT_TOKEN: String by project
 val useGoogleServices: Boolean by ext
@@ -69,7 +75,6 @@ android {
             dimension = "mode"
             resValue("string", "app_name", "BRD")
             buildConfigField("boolean", "BITCOIN_TESTNET", "false")
-
         }
         create("brdTestnet") {
             applicationId = "com.breadwallet.testnet"
@@ -101,8 +106,10 @@ android {
                 }
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
-                    strippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
-                    unstrippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
+                    strippedNativeLibsDir =
+                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
+                    unstrippedNativeLibsDir =
+                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
                 }
             }
         }
@@ -124,8 +131,10 @@ android {
                 }
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
-                    strippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/debug/out").absolutePath
-                    unstrippedNativeLibsDir = rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/debug/obj").absolutePath
+                    strippedNativeLibsDir =
+                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/debug/out").absolutePath
+                    unstrippedNativeLibsDir =
+                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/debug/obj").absolutePath
                 }
             }
         }

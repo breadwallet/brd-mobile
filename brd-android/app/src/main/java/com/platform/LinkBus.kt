@@ -31,4 +31,3 @@ sealed class LinkResultMessage : LinkMessage() {
     object LinkSuccess : LinkResultMessage()
     data class LinkFailure(val exception: Exception) : LinkResultMessage()
 }
-

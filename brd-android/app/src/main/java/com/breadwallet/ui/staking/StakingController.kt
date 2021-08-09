@@ -169,7 +169,6 @@ class StakingController(
                 loadingBakersView.root.isVisible = isLoadingBakers
             }
 
-
             ifChanged(M.SetValidator::selectedBaker, M.SetValidator::isCancellable) {
                 bakerLayout.isVisible = selectedBaker != null
                 selectBakerLayout.isVisible = selectedBaker == null
@@ -231,7 +230,6 @@ class StakingController(
         val theme = checkNotNull(activity).theme
         with(binding) {
 
-
             ifChanged(M.ViewValidator::isLoadingBakers) {
                 loadingBakersView.root.isVisible = isLoadingBakers
             }
@@ -248,7 +246,6 @@ class StakingController(
                     formatter.minimumFractionDigits = 3
                     stakedBaker.roiPct.text = formatter.format(baker.estimatedRoi)
                     Picasso.get().load(baker.logo).into(stakedBaker.bakerTokenIcon)
-
                 }
             }
 

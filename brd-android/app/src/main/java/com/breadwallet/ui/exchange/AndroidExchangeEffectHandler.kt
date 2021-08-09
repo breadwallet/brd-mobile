@@ -9,14 +9,11 @@
 package com.breadwallet.ui.exchange
 
 import com.bluelinelabs.conductor.Router
-import com.brd.api.models.ExchangeOrder
 import com.brd.exchange.ExchangeEffect
-import com.brd.exchange.ExchangeEvent
 import com.breadwallet.tools.util.EventUtils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import kt.mobius.Connection
-import kt.mobius.functions.Consumer
 
 class AndroidExchangeEffectHandler(
     private val router: Router,

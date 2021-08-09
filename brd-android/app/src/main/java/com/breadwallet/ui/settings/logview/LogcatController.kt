@@ -134,10 +134,16 @@ class LogcatController(args: Bundle? = null) : BaseController(args) {
                         .apply { weight = 1f }
                 )
             }
-            addView(recycler, LinearLayout.LayoutParams(LL_MATCH_PARENT, LL_MATCH_PARENT)
-                .apply { weight = .8f })
-            addView(actions, LinearLayout.LayoutParams(LL_MATCH_PARENT, LL_WRAP_CONTENT)
-                .apply { weight = .2f })
+            addView(
+                recycler,
+                LinearLayout.LayoutParams(LL_MATCH_PARENT, LL_MATCH_PARENT)
+                    .apply { weight = .8f }
+            )
+            addView(
+                actions,
+                LinearLayout.LayoutParams(LL_MATCH_PARENT, LL_WRAP_CONTENT)
+                    .apply { weight = .2f }
+            )
         }
     }
 

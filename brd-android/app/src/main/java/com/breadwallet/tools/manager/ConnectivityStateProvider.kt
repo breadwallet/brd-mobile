@@ -16,6 +16,6 @@ sealed class ConnectivityState {
 }
 
 interface ConnectivityStateProvider {
-    fun state() : Flow<ConnectivityState>
+    fun state(): Flow<ConnectivityState>
     fun close()
 }

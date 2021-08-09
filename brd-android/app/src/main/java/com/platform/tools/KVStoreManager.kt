@@ -118,7 +118,7 @@ class KVStoreManager(
         val kvstore = getReplicatedKvStore(context)
         return if (mutex.isLocked) {
             flow {
-                mutex.withLock {  }
+                mutex.withLock { }
                 emit(kvstore.rawKVs.map(KVItem::key))
             }
         } else {

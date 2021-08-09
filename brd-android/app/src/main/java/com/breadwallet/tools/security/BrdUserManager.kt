@@ -25,11 +25,11 @@ import com.breadwallet.app.BreadApp
 import com.breadwallet.crypto.Account
 import com.breadwallet.crypto.Key
 import com.breadwallet.logger.logInfo
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.crypto.CryptoHelper.hexDecode
 import com.breadwallet.tools.crypto.CryptoHelper.hexEncode
 import com.breadwallet.tools.manager.BRReportsManager
 import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
@@ -509,7 +509,7 @@ class CryptoUserManager(
     private suspend fun <T> executeWithAuth(action: (context: Activity) -> T): T {
         val activity = getActivity()
         return try {
-            runOnMain{ action(activity) }
+            runOnMain { action(activity) }
         } catch (e: UserNotAuthenticatedException) {
             logInfo("Attempting authentication")
 
@@ -520,10 +520,10 @@ class CryptoUserManager(
         }
     }
 
-    private suspend fun <T> runOnMain(block : () -> T): T {
+    private suspend fun <T> runOnMain(block: () -> T): T {
         return Main {
             try {
-               block()
+                block()
             } catch (e: Throwable) {
                 e
             }
@@ -639,4 +639,3 @@ fun SharedPreferences.getBytes(key: String, defaultValue: ByteArray?): ByteArray
 fun SharedPreferences.Editor.putBytes(key: String, value: ByteArray) {
     putString(key, hexEncode(value))
 }
-

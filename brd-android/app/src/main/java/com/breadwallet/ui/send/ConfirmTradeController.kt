@@ -104,13 +104,12 @@ class ConfirmTradeController(
 
     private fun ConfirmTradeModel.render() {
         val res = checkNotNull(resources)
-        with (binding) {
+        with(binding) {
             val feeCode = if (currencyCode.isErc20()) eth else currencyCode
 
             sendValue.text = amount.formatCryptoForUi(currencyCode)
             toAddress.text = targetAddress
             networkFeeValue.text = networkFee.formatCryptoForUi(feeCode)
-
 
             val processingTime = res.getString(
                 when {

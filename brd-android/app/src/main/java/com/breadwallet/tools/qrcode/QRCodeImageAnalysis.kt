@@ -9,12 +9,12 @@
 package com.breadwallet.tools.qrcode
 
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.UseCase
 import androidx.camera.core.ImageProxy
+import androidx.camera.core.UseCase
 import com.breadwallet.logger.logError
+import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
-import com.google.zxing.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import java.util.concurrent.Executor
@@ -25,7 +25,7 @@ class QRCodeImageAnalysis(
 
     private val decodedTextFlow = MutableSharedFlow<String>(replay = 1)
 
-    fun decodedTextFlow() : Flow<String> = decodedTextFlow
+    fun decodedTextFlow(): Flow<String> = decodedTextFlow
 
     val useCase: UseCase
         get() {
@@ -51,7 +51,7 @@ class QRCodeImageAnalysis(
             val decodedBarcode = QRCodeReader().decode(zxingBinaryBitmap)
             decodedTextFlow.tryEmit(decodedBarcode.text)
         } catch (e: NotFoundException) {
-           logError( "QR Code decoding error", e)
+            logError("QR Code decoding error", e)
         } catch (e: ChecksumException) {
             logError("QR Code decoding error", e)
         } catch (e: FormatException) {

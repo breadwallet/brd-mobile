@@ -84,7 +84,6 @@ class PartnerBrowserController(args: Bundle? = null) : ExchangeController.ChildC
         }
     }
 
-
     override fun handleBack(): Boolean {
         return if (binding.webview.canGoBack()) {
             binding.webview.goBack()
@@ -95,6 +94,5 @@ class PartnerBrowserController(args: Bundle? = null) : ExchangeController.ChildC
     }
 
     override fun ExchangeModel.render() {
-
     }
 }

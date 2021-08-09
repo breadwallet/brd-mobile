@@ -10,11 +10,11 @@ package com.breadwallet.ui.home
 
 import android.content.Context
 import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.WalletManagerState
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.model.Experiments
 import com.breadwallet.model.InAppMessage
 import com.breadwallet.model.TokenItem
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.repository.ExperimentsRepositoryImpl
 import com.breadwallet.repository.MessagesRepository
 import com.breadwallet.repository.RatesRepository
@@ -31,7 +31,6 @@ import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.home.HomeScreen.E
 import com.breadwallet.ui.home.HomeScreen.F
 import com.breadwallet.util.usermetrics.UserMetricsUtil
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.platform.interfaces.WalletProvider
 import com.platform.util.AppReviewPromptManager
 import com.squareup.picasso.Callback
@@ -42,7 +41,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.math.BigDecimal
 import java.util.Locale
@@ -90,9 +88,11 @@ fun createHomeScreenHandler(
                 brdUser.pinCodeNeedsUpgrade() -> PromptItem.UPGRADE_PIN
                 !BRSharedPrefs.phraseWroteDown -> PromptItem.PAPER_KEY
                 AppReviewPromptManager.shouldPrompt() -> PromptItem.RATE_APP
-                (!BRSharedPrefs.unlockWithFingerprint
-                    && Utils.isFingerprintAvailable(context)
-                    && !BRSharedPrefs.getPromptDismissed(PROMPT_DISMISSED_FINGERPRINT)) -> {
+                (
+                    !BRSharedPrefs.unlockWithFingerprint &&
+                        Utils.isFingerprintAvailable(context) &&
+                        !BRSharedPrefs.getPromptDismissed(PROMPT_DISMISSED_FINGERPRINT)
+                    ) -> {
                     PromptItem.FINGER_PRINT
                 }
                 // BRSharedPrefs.getScanRecommended(iso = "BTC") -> PromptItem.RECOMMEND_RESCAN
@@ -127,8 +127,8 @@ fun createHomeScreenHandler(
     }
     addAction<F.CheckIfShowBuyAndSell> {
         val showBuyAndSell =
-            ExperimentsRepositoryImpl.isExperimentActive(Experiments.BUY_SELL_MENU_BUTTON)
-                && BRSharedPrefs.getPreferredFiatIso() == BRConstants.USD
+            ExperimentsRepositoryImpl.isExperimentActive(Experiments.BUY_SELL_MENU_BUTTON) &&
+                BRSharedPrefs.getPreferredFiatIso() == BRConstants.USD
         EventUtils.pushEvent(
             EventUtils.EVENT_EXPERIMENT_BUY_SELL_MENU_BUTTON,
             mapOf(EventUtils.EVENT_ATTRIBUTE_SHOW to showBuyAndSell.toString())
@@ -165,10 +165,12 @@ fun createHomeScreenHandler(
             .throttleLatest(WALLET_UPDATE_THROTTLE)
             .mapLatest { wallets ->
                 val fiatIso = BRSharedPrefs.getPreferredFiatIso()
-                E.OnWalletsUpdated(wallets.map {
-                    val name = TokenUtil.tokenForCode(it.currency.code)?.name
-                    it.asWallet(name, fiatIso, ratesRepo)
-                })
+                E.OnWalletsUpdated(
+                    wallets.map {
+                        val name = TokenUtil.tokenForCode(it.currency.code)?.name
+                        it.asWallet(name, fiatIso, ratesRepo)
+                    }
+                )
             }
     }
 

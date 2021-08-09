@@ -66,29 +66,38 @@ internal object GiftCard {
         }
 
         // Recipient Name
-        nextY = drawNextText(recipientName, nextY, 52f, 24f, {
-            textAlign = Paint.Align.CENTER
-            color = Color.WHITE
-            typeface = boldFont
-        }) { y, paint ->
+        nextY = drawNextText(
+            recipientName, nextY, 52f, 24f,
+            {
+                textAlign = Paint.Align.CENTER
+                color = Color.WHITE
+                typeface = boldFont
+            }
+        ) { y, paint ->
             canvas.drawText(recipientName, halfWidth, y, paint)
         }
 
         // Tag line
         val tagLine = context.getString(R.string.ShareGift_tagLine)
-        nextY = drawNextText(tagLine, nextY, 48f, 12f, {
-            textAlign = Paint.Align.CENTER
-            color = Color.WHITE
-            typeface = boldFont
-        }) { y, paint ->
+        nextY = drawNextText(
+            tagLine, nextY, 48f, 12f,
+            {
+                textAlign = Paint.Align.CENTER
+                color = Color.WHITE
+                typeface = boldFont
+            }
+        ) { y, paint ->
             canvas.drawText(tagLine, halfWidth, y, paint)
         }
 
         // Divider
         nextY = drawNext(nextY, 4f, cardMargin) { y, height ->
-            canvas.drawLine(cardMargin, y, canvas.width - cardMargin, y + height, paint {
-                color = context.getColor(R.color.light_gray)
-            })
+            canvas.drawLine(
+                cardMargin, y, canvas.width - cardMargin, y + height,
+                paint {
+                    color = context.getColor(R.color.light_gray)
+                }
+            )
         }
 
         // Logo (do not update nextY)
@@ -99,20 +108,26 @@ internal object GiftCard {
 
         // Approx label
         val totalLabel = context.getString(R.string.ShareGift_approximateTotal)
-        nextY = drawNextText(totalLabel, nextY, 28f, cardMargin, {
-            textAlign = Paint.Align.RIGHT
-            color = Color.WHITE
-            typeface = font
-        }) { y, paint ->
+        nextY = drawNextText(
+            totalLabel, nextY, 28f, cardMargin,
+            {
+                textAlign = Paint.Align.RIGHT
+                color = Color.WHITE
+                typeface = font
+            }
+        ) { y, paint ->
             canvas.drawText(totalLabel, canvas.width - cardMargin, y, paint)
         }
 
         // Approx val label
-        nextY = drawNextText(fiatValue, nextY, 52f, cardMargin, {
-            textAlign = Paint.Align.RIGHT
-            color = Color.WHITE
-            typeface = boldFont
-        }) { y, paint ->
+        nextY = drawNextText(
+            fiatValue, nextY, 52f, cardMargin,
+            {
+                textAlign = Paint.Align.RIGHT
+                color = Color.WHITE
+                typeface = boldFont
+            }
+        ) { y, paint ->
             canvas.drawText(fiatValue, canvas.width - cardMargin, y, paint)
         }
 
@@ -134,46 +149,58 @@ internal object GiftCard {
             // Wallet Name
             val walletNameSize = 36f
             val walletName = context.getString(R.string.ShareGift_walletName)
-            val leftTextY = drawNextText(walletName, cardHalfY - walletNameSize, walletNameSize, 6f, {
-                textAlign = Paint.Align.LEFT
-                color = Color.WHITE
-                typeface = boldFont
-            }) { labelY, paint ->
+            val leftTextY = drawNextText(
+                walletName, cardHalfY - walletNameSize, walletNameSize, 6f,
+                {
+                    textAlign = Paint.Align.LEFT
+                    color = Color.WHITE
+                    typeface = boldFont
+                }
+            ) { labelY, paint ->
                 val x = (cardMargin * 3) + btcBitmap.width
                 canvas.drawText(walletName, x, labelY, paint)
             }
 
             // BTC Price
             val btcPriceSize = 32f
-            drawNextText(fiatPricePerUnit, leftTextY, btcPriceSize, 6f, {
-                textAlign = Paint.Align.LEFT
-                color = Color.WHITE
-                typeface = boldFont
-                alpha = 90
-            }) { labelY, paint ->
+            drawNextText(
+                fiatPricePerUnit, leftTextY, btcPriceSize, 6f,
+                {
+                    textAlign = Paint.Align.LEFT
+                    color = Color.WHITE
+                    typeface = boldFont
+                    alpha = 90
+                }
+            ) { labelY, paint ->
                 val x = (cardMargin * 3) + btcBitmap.width
                 canvas.drawText(fiatPricePerUnit, x, labelY, paint)
             }
 
             // Fiat Amount
             val fiatAmountSize = 36f
-            val rightTextY = drawNextText(fiatValue, cardHalfY - fiatAmountSize, fiatAmountSize, 6f, {
-                textAlign = Paint.Align.RIGHT
-                color = Color.WHITE
-                typeface = boldFont
-            }) { labelY, paint ->
+            val rightTextY = drawNextText(
+                fiatValue, cardHalfY - fiatAmountSize, fiatAmountSize, 6f,
+                {
+                    textAlign = Paint.Align.RIGHT
+                    color = Color.WHITE
+                    typeface = boldFont
+                }
+            ) { labelY, paint ->
                 val x = canvas.width - (cardMargin * 2)
                 canvas.drawText(fiatValue, x, labelY, paint)
             }
 
             // BTC Amount
             val btcAmountSize = 32f
-            drawNextText(giftAmount, rightTextY, btcAmountSize, 6f, {
-                textAlign = Paint.Align.RIGHT
-                color = Color.WHITE
-                typeface = boldFont
-                alpha = 90
-            }) { labelY, paint ->
+            drawNextText(
+                giftAmount, rightTextY, btcAmountSize, 6f,
+                {
+                    textAlign = Paint.Align.RIGHT
+                    color = Color.WHITE
+                    typeface = boldFont
+                    alpha = 90
+                }
+            ) { labelY, paint ->
                 val x = canvas.width - (cardMargin * 2)
                 canvas.drawText(giftAmount, x, labelY, paint)
             }
@@ -183,11 +210,14 @@ internal object GiftCard {
         nextY += cardMargin
         val msg = context.getString(R.string.ShareGift_footerMessage1)
         nextY = msg.split("\n").fold(nextY) { accY, s ->
-            drawNextText(s, accY, 22f, 6f, {
-                textAlign = Paint.Align.CENTER
-                color = Color.GRAY
-                typeface = font
-            }) { y, paint ->
+            drawNextText(
+                s, accY, 22f, 6f,
+                {
+                    textAlign = Paint.Align.CENTER
+                    color = Color.GRAY
+                    typeface = font
+                }
+            ) { y, paint ->
                 canvas.drawText(s, halfWidth, y, paint)
             }
         }
@@ -196,11 +226,14 @@ internal object GiftCard {
         val msg2 = context.getString(R.string.ShareGift_footerMessage2)
         nextY += cardMargin
         msg2.split("\n").fold(nextY) { accY, s ->
-            drawNextText(s, accY, 22f, 6f, {
-                textAlign = Paint.Align.CENTER
-                color = Color.WHITE
-                typeface = font
-            }) { y, paint ->
+            drawNextText(
+                s, accY, 22f, 6f,
+                {
+                    textAlign = Paint.Align.CENTER
+                    color = Color.WHITE
+                    typeface = font
+                }
+            ) { y, paint ->
                 canvas.drawText(s, halfWidth, y, paint)
             }
         }

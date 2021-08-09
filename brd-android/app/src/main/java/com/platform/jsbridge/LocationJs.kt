@@ -68,11 +68,13 @@ class LocationJs(
         check(locationPermissionFlow.first()) {
             "Location permission denied."
         }
-        check(locationManager.run {
-            isProviderEnabled(GPS_PROVIDER)
-                || isProviderEnabled(NETWORK_PROVIDER)
-                || isProviderEnabled(PASSIVE_PROVIDER)
-        }) { "No location providers enabled." }
+        check(
+            locationManager.run {
+                isProviderEnabled(GPS_PROVIDER) ||
+                    isProviderEnabled(NETWORK_PROVIDER) ||
+                    isProviderEnabled(PASSIVE_PROVIDER)
+            }
+        ) { "No location providers enabled." }
 
         withTimeout(LOCATION_REQUEST_TIMEOUT) {
             locationUpdateChannel.asFlow()
@@ -115,4 +117,3 @@ class LocationJs(
         override fun onProviderDisabled(provider: String) = Unit
     }
 }
-

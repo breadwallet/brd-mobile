@@ -10,12 +10,8 @@ package com.breadwallet.ui.wallet
 
 import android.view.View
 import com.breadwallet.R
-import com.breadwallet.databinding.WalletSyncProgressViewBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class SyncingItem : AbstractItem<SyncingItem.ViewHolder>() {
 

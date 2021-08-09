@@ -68,10 +68,12 @@ fun createRecoveryKeyHandler(
     }
 
     addFunction<F.ValidatePhrase> { effect ->
-        E.OnPhraseValidated(List(RECOVERY_KEY_WORDS_COUNT) { i ->
-            val word = effect.phrase[i]
-            !Bip39Reader.isWordValid(breadApp, word)
-        })
+        E.OnPhraseValidated(
+            List(RECOVERY_KEY_WORDS_COUNT) { i ->
+                val word = effect.phrase[i]
+                !Bip39Reader.isWordValid(breadApp, word)
+            }
+        )
     }
 
     addFunction<F.MonitorLoading> {
