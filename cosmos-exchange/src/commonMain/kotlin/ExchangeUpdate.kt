@@ -688,8 +688,9 @@ private fun onWalletBalancesLoaded(model: M, event: OnWalletBalancesLoaded): Nex
         .sortedByDescending { (_, balance) -> balance }
         .toMap()
     val greatestBalance = sortedBalances.values.firstOrNull() ?: 0.0
+    val inConfig = model.state is State.ConfigureSettings
     val nextModel = model.copy(
-        state = if (model.mode == Mode.BUY || greatestBalance > 0) model.state else State.EmptyWallets,
+        state = if (model.mode == Mode.BUY || greatestBalance > 0 || inConfig) model.state else State.EmptyWallets,
         cryptoBalances = sortedBalances,
         formattedCryptoBalances = event.formattedCryptoBalances,
     )
