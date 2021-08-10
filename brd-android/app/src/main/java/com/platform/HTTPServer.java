@@ -52,7 +52,6 @@ public class HTTPServer extends AbstractLifeCycle {
     public static final String URL_BUY = "/buy";
     public static final String URL_TRADE = "/trade";
     public static final String URL_SELL = "/sell";
-    public static final String URL_SUPPORT = "/support";
     public static final String URL_REWARDS = "/rewards";
     public static final String URL_MAP = "/map";
     private static final String PLATFORM_BASE_URL = "http://127.0.0.1:";

@@ -16,12 +16,11 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.bakerapi.models.Baker
 import com.breadwallet.databinding.ControllerSelectBakerBinding
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.web.WebController
+import com.breadwallet.ui.support.SupportController
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericModelAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
-import com.platform.HTTPServer
 
 interface SelectBakerListener {
     fun onSelected(baker: Baker)
@@ -48,9 +47,7 @@ class SelectBakersController(
             bakersList.layoutManager = LinearLayoutManager(view.context)
             buttonClose.setOnClickListener { onCancel() }
             buttonFaq.setOnClickListener {
-                val supportBaseUrl = HTTPServer.getPlatformUrl(HTTPServer.URL_SUPPORT)
-                val url = "$supportBaseUrl/article?slug=staking"
-                router.pushController(RouterTransaction.with(WebController(url)))
+                router.pushController(RouterTransaction.with(SupportController(slug = "staking")))
             }
         }
         bakerAdapter!!.setNewList(bakers)

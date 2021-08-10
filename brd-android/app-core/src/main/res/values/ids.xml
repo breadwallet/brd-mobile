@@ -29,4 +29,8 @@
     <item name="drawer_layout_id" type="id"/>
     <item name="staking_item" type="id"/>
     <item name="baker_item" type="id"/>
+    <item name="support_article_item" type="id"/>
+    <item name="support_section_item" type="id"/>
+    <item name="support_title_item" type="id"/>
+    <item name="support_article_body_item" type="id"/>
 </resources>

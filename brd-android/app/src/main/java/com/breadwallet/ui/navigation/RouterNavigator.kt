@@ -30,7 +30,6 @@ import com.breadwallet.tools.util.asLink
 import com.breadwallet.tools.util.btc
 import com.breadwallet.ui.addwallets.AddWalletsController
 import com.breadwallet.ui.auth.AuthenticationController
-import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.controllers.SignalController
@@ -60,6 +59,7 @@ import com.breadwallet.ui.settings.segwit.LegacyAddressController
 import com.breadwallet.ui.settings.wipewallet.WipeWalletController
 import com.breadwallet.ui.showkey.ShowPaperKeyController
 import com.breadwallet.ui.staking.SelectBakersController
+import com.breadwallet.ui.support.*
 import com.breadwallet.ui.sync.SyncBlockchainController
 import com.breadwallet.ui.txdetails.TxDetailsController
 import com.breadwallet.ui.uigift.CreateGiftController
@@ -271,9 +271,12 @@ class RouterNavigator(
 
     override fun supportPage(effect: NavigationTarget.SupportPage) {
         router.pushController(
-            WebController(effect.asSupportUrl()).asTransaction(
-                BottomSheetChangeHandler(),
-                BottomSheetChangeHandler()
+            SupportController(
+                slug = effect.articleId,
+                currencyCode = effect.currencyCode
+            ).asTransaction(
+                VerticalChangeHandler(),
+                VerticalChangeHandler(),
             )
         )
     }

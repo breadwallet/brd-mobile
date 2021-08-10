@@ -43,8 +43,7 @@ import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.flowbind.clicks
 import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.home.MAX_CRYPTO_DIGITS
-import com.breadwallet.ui.navigation.NavigationTarget
-import com.breadwallet.ui.navigation.asSupportUrl
+import com.breadwallet.ui.support.SupportController
 import com.breadwallet.ui.wallet.WalletScreen.DIALOG_CREATE_ACCOUNT
 import com.breadwallet.ui.wallet.WalletScreen.E
 import com.breadwallet.ui.wallet.WalletScreen.F
@@ -52,7 +51,6 @@ import com.breadwallet.ui.wallet.WalletScreen.M
 import com.breadwallet.ui.wallet.spark.SparkAdapter
 import com.breadwallet.ui.wallet.spark.SparkView
 import com.breadwallet.ui.wallet.spark.animation.LineSparkAnimator
-import com.breadwallet.ui.web.WebController
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isTezos
 import com.google.android.material.appbar.AppBarLayout
@@ -138,10 +136,9 @@ open class WalletController(args: Bundle) :
             updateUi()
             setPriceTags(BRSharedPrefs.isCryptoPreferred(), false)
             delistedTokenLayout.moreInfoButton.setOnClickListener {
-                val url = NavigationTarget.SupportPage(BRConstants.FAQ_UNSUPPORTED_TOKEN).asSupportUrl()
                 router.pushController(
                     RouterTransaction.with(
-                        WebController(url)
+                        SupportController(slug = BRConstants.FAQ_UNSUPPORTED_TOKEN)
                     )
                 )
             }
