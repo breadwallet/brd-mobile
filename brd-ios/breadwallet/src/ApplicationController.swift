@@ -183,35 +183,28 @@ class ApplicationController: Subscriber, Trackable {
                     weakSelf.setWalletInfo(account: account)
                     weakSelf.authenticateWithBackend { jwt in
                         // Begin Core stand-up
-                        weakSelf.coreSystem.create(account: account,
-                                authToken: jwt,
-                                btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
+                        weakSelf.coreSystem.create(
+                            account: account,
+                            authToken: jwt,
+                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
                         ) {
                             weakSelf.modalPresenter = ModalPresenter(
-                                    keyStore: weakSelf.keyStore,
-                                    system: weakSelf.coreSystem,
-                                    window: weakSelf.window,
-                                    alertPresenter: weakSelf.alertPresenter
+                                keyStore: weakSelf.keyStore,
+                                system: weakSelf.coreSystem,
+                                window: weakSelf.window,
+                                alertPresenter: weakSelf.alertPresenter
                             )
                             weakSelf.coreSystem.connect()
+                            weakSelf.updateETHAddress(
+                                initial: hydraActivated,
+                                current: UserDefaults.cosmos.hydraActivated
+                            )
                         }
                     }
                 }
             }
             Backend.apiClient.updateExperiments()
             Backend.apiClient.fetchAnnouncements()
-
-            if UserDefaults.cosmos.hydraActivated && !hydraActivated {
-                let wallets = self.coreSystem.wallets
-                guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
-                    return
-                }
-
-                Backend.brdApi.setMe(
-                    ethereumAddress: pair.1.receiveAddress,
-                    completionHandler: { _, _ in  }
-                )
-            }
         }
     }
 
@@ -243,6 +236,31 @@ class ApplicationController: Subscriber, Trackable {
                 }
             }
         }
+    }
+
+    private func updateETHAddress(initial: Bool, current: Bool, retry: Int = 3) {
+        guard current && !initial else {
+            return
+        }
+
+        let wallets = coreSystem.wallets
+
+        guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
+            // NOTE: There is not easy way of knowing when exactly eth wallet
+            // is loaded in core. Hence we retry couple of times
+            if retry == 0 {
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                self.updateETHAddress(initial: initial, current: current, retry: retry - 1)
+            }
+            return
+        }
+
+        Backend.brdApi.setMe(
+            ethereumAddress: pair.1.receiveAddress,
+            completionHandler: { _, _ in  }
+        )
     }
 
     private func handleDeferedLaunchURL() {
