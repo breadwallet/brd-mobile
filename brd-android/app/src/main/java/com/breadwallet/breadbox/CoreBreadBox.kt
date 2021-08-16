@@ -24,7 +24,6 @@ import com.blockset.walletkit.events.wallet.WalletTransferSubmittedEvent
 import com.blockset.walletkit.events.walletmanager.WalletManagerChangedEvent
 import com.blockset.walletkit.events.walletmanager.WalletManagerCreatedEvent
 import com.blockset.walletkit.events.walletmanager.WalletManagerEvent
-import com.blockset.walletkit.events.walletmanager.WalletManagerSyncProgressEvent
 import com.blockset.walletkit.events.walletmanager.WalletManagerSyncRecommendedEvent
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.logger.logDebug

@@ -23,6 +23,7 @@ apply(from = rootProject.file("gradle/copy-font-files.gradle"))
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     verbose.set(true)
     outputToConsole.set(true)
+    disabledRules.addAll("import-ordering", "no-wildcard-imports")
 }
 
 val BDB_CLIENT_TOKEN: String by project
