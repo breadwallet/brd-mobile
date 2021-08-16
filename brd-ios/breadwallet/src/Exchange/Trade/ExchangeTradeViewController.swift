@@ -95,7 +95,7 @@ extension ExchangeTradeViewController: ExchangeView {
             return
         }
 
-        guard model.mode != .buy else {
+        guard model.mode == .trade else {
             exitAndNavigateToBuyFlow()
             return
         }
@@ -141,7 +141,7 @@ extension ExchangeTradeViewController: ExchangeView {
     }
 
     func closeAction() {
-        dismiss()
+        dismiss { self.disconnect() }
     }
 
     func exitFlow() {
@@ -149,10 +149,10 @@ extension ExchangeTradeViewController: ExchangeView {
         let visible = navigationController?.visibleViewController
 
         if visible == self {
-            dismiss()
+            closeAction()
         } else {
             dismiss(animated: true) { [weak self] in
-                self?.dismiss()
+                self?.closeAction()
             }
         }
     }
@@ -292,9 +292,9 @@ private extension ExchangeTradeViewController {
 
     private func exitAndNavigateToBuyFlow() {
         dismiss {
-            Store.perform(
-                action: RootModalActions.Present(modal: .buy(currency: nil))
-            )
+            self.disconnect()
+            let action = RootModalActions.Present(modal: .buy(currency: nil))
+            Store.perform(action: action)
         }
     }
 }

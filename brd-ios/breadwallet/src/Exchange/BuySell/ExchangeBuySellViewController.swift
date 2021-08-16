@@ -120,7 +120,7 @@ extension ExchangeBuySellViewController: ExchangeView {
     }
 
     func closeAction() {
-        dismiss()
+        dismiss { self.disconnect() }
     }
 
     func exitFlow() {
@@ -128,10 +128,10 @@ extension ExchangeBuySellViewController: ExchangeView {
         let visible = navigationController?.visibleViewController
 
         if visible == self {
-            dismiss()
+            closeAction()
         } else {
             dismiss(animated: true) { [weak self] in
-                self?.dismiss()
+                self?.closeAction()
             }
         }
     }
@@ -212,7 +212,7 @@ private extension ExchangeBuySellViewController {
     func addNavigationBarButtons() {
         navigationItem.rightBarButtonItem = .close()
 
-        guard E.isDebug || E.isTestFlight else {
+        guard E.isDebug else {
             return
         }
 

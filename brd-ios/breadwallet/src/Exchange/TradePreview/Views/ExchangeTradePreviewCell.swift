@@ -56,7 +56,7 @@ class ExchangeTradePreviewCell: UITableViewCell {
             cellLayoutView.update(
                 with: .init(
                     title: value ?? cellLayoutView.titleLabel.text,
-                    subtitle: detail ?? cellLayoutView.subtitleLabel.text
+                    subtitle: detail
                 )
             )
             cellLayoutView.subtitleLabel.textColor = detailColor

@@ -167,6 +167,7 @@ class ApplicationController: Subscriber, Trackable {
     /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
         // Authenticate with BRDAPI backend
+        let hydraActivated = UserDefaults.cosmos.hydraActivated
         Backend.connect(authenticator: self.keyStore as WalletAuthenticator)
         preflightCheck {
             Backend.sendLaunchEvent()
@@ -182,17 +183,22 @@ class ApplicationController: Subscriber, Trackable {
                     weakSelf.setWalletInfo(account: account)
                     weakSelf.authenticateWithBackend { jwt in
                         // Begin Core stand-up
-                        weakSelf.coreSystem.create(account: account,
-                                authToken: jwt,
-                                btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
+                        weakSelf.coreSystem.create(
+                            account: account,
+                            authToken: jwt,
+                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
                         ) {
                             weakSelf.modalPresenter = ModalPresenter(
-                                    keyStore: weakSelf.keyStore,
-                                    system: weakSelf.coreSystem,
-                                    window: weakSelf.window,
-                                    alertPresenter: weakSelf.alertPresenter
+                                keyStore: weakSelf.keyStore,
+                                system: weakSelf.coreSystem,
+                                window: weakSelf.window,
+                                alertPresenter: weakSelf.alertPresenter
                             )
                             weakSelf.coreSystem.connect()
+                            weakSelf.updateETHAddress(
+                                initial: hydraActivated,
+                                current: UserDefaults.cosmos.hydraActivated
+                            )
                         }
                     }
                 }
@@ -214,9 +220,7 @@ class ApplicationController: Subscriber, Trackable {
                 return
             }
 
-            let key = authProvider.publicKey()
-
-            Backend.brdApi.preflight(publicKey: key) { preflight, _ in
+            Backend.brdApi.preflight() { preflight, _ in
                 if preflight?.activate ?? false {
                     UserDefaults.cosmos.hydraActivated = true
                     authProvider.token = nil
@@ -224,12 +228,39 @@ class ApplicationController: Subscriber, Trackable {
                         isDebug: (E.isDebug || E.isTestFlight),
                         isHydraActivated: true
                     )
-                    // NOTE: Here to refresh the token for order history and rewards pages auth.
-                    Backend.brdApi.getMe { _, _ in () }
+                    Backend.brdApi.getMe { _, _ in
+                        handler?()
+                    }
+                } else {
+                    handler?()
                 }
-                handler?()
             }
         }
+    }
+
+    private func updateETHAddress(initial: Bool, current: Bool, retry: Int = 3) {
+        guard current && !initial else {
+            return
+        }
+
+        let wallets = coreSystem.wallets
+
+        guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
+            // NOTE: There is not easy way of knowing when exactly eth wallet
+            // is loaded in core. Hence we retry couple of times
+            if retry == 0 {
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                self.updateETHAddress(initial: initial, current: current, retry: retry - 1)
+            }
+            return
+        }
+
+        Backend.brdApi.setMe(
+            ethereumAddress: pair.1.receiveAddress,
+            completionHandler: { _, _ in  }
+        )
     }
 
     private func handleDeferedLaunchURL() {

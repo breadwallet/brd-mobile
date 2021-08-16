@@ -187,7 +187,7 @@ extension SupportViewController: SupportView {
     }
 
     func closeAction() {
-        dismiss()
+        dismiss { self.disconnect() }
     }
 }
 
