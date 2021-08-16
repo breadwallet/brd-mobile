@@ -309,8 +309,12 @@ CTA action exchange to set to min trade amount */
 "Exchange.CTA.setMin" = "Set amount to min %@";
 /* Initialization error alert body */
 "Exchange.ErrorState.initialization" = "Initialization error";
+/* Insufficient chain error alert title */
+"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "More ETH required";
 /* Insufficient chain error alert body */
-"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some";
+"Exchange.ErrorState.insufficientNativeBalanceError" = "You don't have enough ETH to cover network fees to send";
+/* Insufficient chain error alert ok action */
+"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Buy ETH";
 /* Network error alert body */
 "Exchange.ErrorState.network" = "Network error";
 /* Order error alert body */

@@ -398,8 +398,8 @@ private extension ExchangeViewConnection {
         }
 
         let alert = UIAlertController(
-            title: errorState.title ?? S.Alert.error,
-            message: message(for: errorState),
+            title: errorTitle(for: errorState),
+            message: errorMessage(for: errorState),
             preferredStyle: .alert
         )
 
@@ -415,7 +415,7 @@ private extension ExchangeViewConnection {
                     }
                 ),
                 .init(
-                    title: S.Exchange.CTA.retry,
+                    title: errorConfirm(for: errorState),
                     style: .default,
                     handler: { [weak self] _ in
                         self?.consumer.accept(.OnDialogConfirmClicked())
@@ -438,7 +438,7 @@ private extension ExchangeViewConnection {
         view.present(alert, animated: true)
     }
 
-    func message(for errorState: ExchangeModel.ErrorState) -> String {
+    func errorMessage(for errorState: ExchangeModel.ErrorState) -> String {
         if let message = errorState.message {
             return message
         }
@@ -459,6 +459,25 @@ private extension ExchangeViewConnection {
             return S.Exchange.ErrorState.insufficientNativeBalanceError
         default:
             return ""
+        }
+    }
+
+    func errorConfirm(for errorState: ExchangeModel.ErrorState) -> String {
+        switch errorState.type {
+        case is ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError:
+            return S.Exchange.ErrorState.insufficientNativeBalanceErrorConfirm
+        default:
+            return S.Exchange.CTA.retry
+        }
+    }
+
+
+    func errorTitle(for errorState: ExchangeModel.ErrorState) -> String {
+        switch errorState.type {
+        case is ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError:
+            return S.Exchange.ErrorState.insufficientNativeBalanceErrorTitle
+        default:
+            return errorState.title ?? S.Alert.error
         }
     }
 }

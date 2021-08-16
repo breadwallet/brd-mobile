@@ -945,6 +945,17 @@ class ModalPresenter: Subscriber, Trackable {
                                                if UserDefaults.cosmos.hydraActivated {
                                                    Backend.brdApi.getMe { _, _ in () }
                                                }
+                                               if UserDefaults.cosmos.hydraActivated {
+                                                   let wallets = self.system.wallets
+                                                   guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
+                                                       return
+                                                   }
+
+                                                   Backend.brdApi.setMe(
+                                                       ethereumAddress: pair.1.receiveAddress,
+                                                       completionHandler: { _, _ in  }
+                                                   )
+                                               }
                                                (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                                            }))
 

@@ -2233,6 +2233,11 @@ users in a future update. ";
 "Exchange.ErrorState.transaction" = "Transaction error"
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region"
+/* Insufficient chain error alert title */
+"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "More ETH required"
 /* Insufficient chain error alert body */
-"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some"
+"Exchange.ErrorState.insufficientNativeBalanceError" = "You don't have enough ETH to cover network fees to send"
+/* Insufficient chain error alert ok action */
+"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Buy ETH"
+
 

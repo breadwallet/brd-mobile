@@ -118,6 +118,9 @@ sealed class ExchangeInput {
         @SerialName("refunded")
         REFUNDED,
 
+        @SerialName("failed")
+        FAILED,
+
         @SerialName("complete")
         COMPLETE,
     }

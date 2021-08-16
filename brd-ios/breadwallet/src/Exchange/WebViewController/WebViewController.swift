@@ -68,10 +68,24 @@ class WebViewController: UIViewController {
             navVc.toolbar.tintColor = Theme.primaryText
             navVc.toolbar.barStyle = .blackOpaque
             navVc.toolbar.isTranslucent = false
+            // NOTE: On iOS 13 when document picker in invoked from javascript
+            // and not `.overFullScreen` app crashes
+            // https://stackoverflow.com/questions/58164583/wkwebview-with-the-new-ios13-modal-crash-when-a-file-picker-is-invoked
+            guard #available(iOS 14, *) else {
+                navVc.modalPresentationStyle = .overFullScreen
+                return (navVc, vc)
+            }
             return (navVc, vc)
         default:
             let navVc = UINavigationController(rootViewController: vc)
             navVc.setToolbarHidden(false, animated: false)
+            // NOTE: On iOS 13 when document picker in invoked from javascript
+            // and not `.overFullScreen` app crashes
+            // https://stackoverflow.com/questions/58164583/wkwebview-with-the-new-ios13-modal-crash-when-a-file-picker-is-invoked
+            guard #available(iOS 14, *) else {
+                navVc.modalPresentationStyle = .overFullScreen
+                return (navVc, vc)
+            }
             return (navVc, vc)
         }
     }

@@ -67,10 +67,12 @@ class CosmosTableViewController: UITableViewController, EventSource, Disposable 
         self.eventConsumerDelegate?.consumer
     }
 
-    deinit {
+    func disconnect() {
+        eventConsumerDelegate?.consumer = nil
+        eventConsumerDelegate = nil
         loopController?.stopIfNeeded()
         loopController?.disconnect()
-        print("==|| Support deinit")
+        loopController = nil
     }
 
     // MARK: - EventSource
