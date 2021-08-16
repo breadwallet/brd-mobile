@@ -447,7 +447,7 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
     @objc private func rewardsViewTapped() {
         if currency.isBRDToken {
             saveEvent(rewardsTappedEvent)
-            Store.trigger(name: .openPlatformUrl("/rewards"))
+            Store.trigger(name: .presentRewardsInfo)
         } else if currency.isTezos {
             Store.perform(action: RootModalActions.Present(modal: .stake(currency: self.currency)))
         }

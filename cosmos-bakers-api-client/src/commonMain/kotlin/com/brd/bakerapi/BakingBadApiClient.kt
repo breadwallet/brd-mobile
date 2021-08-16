@@ -34,6 +34,7 @@ private val json = Json {
     isLenient = true
     ignoreUnknownKeys = true
     coerceInputValues = true
+    useAlternativeNames = false
 }
 
 private const val API_HOST = "api.baking-bad.org"

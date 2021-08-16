@@ -30,6 +30,7 @@ struct Padding {
 struct C {
     static let padding = Padding(increment: 8.0)
     struct Sizes {
+        static let barHeight: CGFloat = 44.0
         static let buttonHeight: CGFloat = 48.0
         static let headerHeight: CGFloat = 48.0
         static let largeHeaderHeight: CGFloat = 220.0

@@ -3,6 +3,8 @@
 
     <item name="white" type="color">#ffffff</item>
     <item name="white_transparent_75" type="color">#BFffffff</item>
+    <item name="white_transparent_60" type="color">#99FFFFFF</item>
+    <item name="white_transparent_50" type="color">#80ffffff</item>
     <item name="white_transparent_25" type="color">#40ffffff</item>
     <item name="white_transparent_15" type="color">#26ffffff</item>
     <item name="white_transparent_10" type="color">#14ffffff</item>
@@ -44,6 +46,16 @@
     <color name="shimmer_color">#a2ffffff</color>
     <color name="text_secondary">#bfffffff</color>
     <color name="action_icon_background">#312F4C</color>
+
+    <item name="primary_button_default" type="color">#416DE9</item>
+    <item name="primary_button_disabled" type="color">#80416DE9</item>
+    <item name="primary_button_pressed" type="color">#80416DE9</item>
+
+    <item name="secondary_button_default" type="color">#2E2A4A</item>
+    <item name="secondary_button_disabled" type="color">#802E2A4A</item>
+    <item name="secondary_button_pressed" type="color">#802E2A4A</item>
+
+    <item name="interactive_surface" type="color">#171717</item>
 
     <item name="logo_gradient_start" type="color">#F8A445</item>
     <item name="logo_gradient_end" type="color">#fc5394</item>
@@ -122,6 +134,10 @@
     <color name="primary_background">#251935</color>
     <color name="secondary_background">#302442</color>
     <color name="tertiary_background">#2E2540</color>
+    <color name="hydra_primary_background">#141233</color>
+    <color name="hydra_secondary_background">#211F3F</color>
+    <color name="hydra_tertiary_background">#312F4C</color>
+    <color name="hydra_quaternary_background">#2E2954</color>
     <color name="prompt_background">#1E1C41</color>
     <color name="prompt_input">#f8f7fc</color>
     <color name="button_gradient_start_color">#FF5193</color>

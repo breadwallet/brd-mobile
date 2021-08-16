@@ -23,4 +23,12 @@ data class ExchangeCountry(
     val currency: ExchangeCurrency,
     /** Possible region options for this country. */
     val regions: List<ExchangeRegion>,
-)
+) {
+    override fun toString(): String {
+        return "ExchangeCountry(" +
+                "code='$code', " +
+                "name='$name', " +
+                "currency=$currency, " +
+                "regions=${regions.size})"
+    }
+}

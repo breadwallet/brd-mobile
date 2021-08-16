@@ -22,6 +22,7 @@ struct MenuItem {
         static let about = UIImage(named: "about")
         static let atmMap = UIImage(named: "placemark")
         static let export = UIImage(named: "Export")
+        static let orderHistory = UIImage(named: "orderHistory")
     }
     
     var title: String

@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class URLController: Trackable, Subscriber {
 
@@ -175,7 +176,7 @@ class URLController: Trackable, Subscriber {
 
         if let backendHost = params["api_server"] {
             UserDefaults.debugBackendHost = backendHost
-            Backend.apiClient.host = backendHost
+            Backend.brdApi.host = BrdApiHost.Custom(host: backendHost)
         }
 
         if let webBundleName = params["web_bundle"] {

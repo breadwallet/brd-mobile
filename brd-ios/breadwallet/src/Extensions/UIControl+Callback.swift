@@ -78,3 +78,33 @@ extension UIControl {
         editingChanged?()
     }
 }
+
+extension UIBarButtonItem {
+
+    var tap: (() -> Void)? {
+        get {
+            let obj = objc_getAssociatedObject(self, &AssociatedKeys.didTapCallback)
+            guard let callbackWrapper = obj as? CallbackWrapper else {
+                return nil
+            }
+            return callbackWrapper.callback
+        }
+        set {
+            guard let newValue = newValue else {
+                return
+            }
+            target = self
+            action = #selector(didTap)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.didTapCallback,
+                CallbackWrapper(newValue),
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
+        }
+    }
+
+    @objc private func didTap() {
+        tap?()
+    }
+}

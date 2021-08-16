@@ -107,6 +107,9 @@ class ManageCurrencyCell: SeparatorCell {
     private func setInitialData() {
         selectionStyle = .none
         icon.contentMode = .scaleAspectFill
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .dark
+        }
     }
     
     private func setState() {

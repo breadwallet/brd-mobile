@@ -8,12 +8,12 @@
  */
 package brd
 
-const val KOTLIN_VERSION = "1.4.31"
-private const val KTOR_VERSION = "1.5.2"
-private const val KOTLINX_ATOMICFU_VERSION = "0.15.0"
-private const val KOTLINX_DATETIME_VERSION = "0.2.0"
-private const val KOTLINX_SERIALIZATION_VERSION = "1.1.0"
-private const val COROUTINES_VERSION = "1.4.3-native-mt"
+const val KOTLIN_VERSION = "1.5.20"
+private const val KTOR_VERSION = "1.6.1"
+private const val KOTLINX_ATOMICFU_VERSION = "0.16.2"
+private const val KOTLINX_DATETIME_VERSION = "0.2.1"
+private const val KOTLINX_SERIALIZATION_VERSION = "1.2.2"
+const val COROUTINES_VERSION = "1.5.1-native-mt"
 private const val WALLETKIT_VERSION = "6.3.5"
 private const val FIREBASE_APPDIST_VERSION = "2.1.1"
 private const val FIREBASE_MESSAGING_VERSION = "21.0.1"
@@ -62,9 +62,10 @@ private const val COMMONS_COMPRESS_VERSION = "1.20"
 private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
 private const val AGP_VERSION = "4.1.3"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
-private const val AUTODESK_VERSION = "0.6.2"
+private const val AUTODESK_VERSION = "0.7.0"
 const val COMPOSE_VERSION = "1.0.0-beta02"
 private const val ACCOMPANIST_VERSION = "0.6.2"
+private const val MOBIUSKT_VERSION = "0.1.9"
 private const val BLOCKSET_VERSION = "0.1.3.1"
 
 object Libs {
@@ -251,10 +252,6 @@ object Libs {
         const val Formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$DETEKT_VERSION"
     }
 
-    object AutoDesk {
-        const val CoroutineWorker = "com.autodesk:coroutineworker:$AUTODESK_VERSION"
-    }
-
     object Compose {
         const val Ui = "androidx.compose.ui:ui:$COMPOSE_VERSION"
         const val Tooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
@@ -262,5 +259,12 @@ object Libs {
         const val Material = "androidx.compose.material:material:$COMPOSE_VERSION"
         const val MaterialIcons = "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
         const val AccompanistPicasso = "dev.chrisbanes.accompanist:accompanist-picasso:$ACCOMPANIST_VERSION"
+    }
+
+    object Mobiuskt {
+        const val Core = "org.drewcarlson:mobiuskt-core:$MOBIUSKT_VERSION"
+        const val Extras = "org.drewcarlson:mobiuskt-extras:$MOBIUSKT_VERSION"
+        const val Android = "org.drewcarlson:mobiuskt-android:$MOBIUSKT_VERSION"
+        const val Coroutines = "org.drewcarlson:mobiuskt-coroutines:$MOBIUSKT_VERSION"
     }
 }

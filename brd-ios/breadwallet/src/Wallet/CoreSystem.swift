@@ -230,7 +230,6 @@ class CoreSystem: Subscriber, Trackable {
             print("[SYS] \(network) wallet manager not created. \(network.currency.uid) not supported.")
             return
         }
-
         
         // networks tokens for which wallets are needed
         let requiredTokens = network.currencies.filter { assetCollection.isEnabled($0.uid) }

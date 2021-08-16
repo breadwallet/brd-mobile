@@ -130,6 +130,11 @@ class HomeController(
         addWalletAdapter!!.add(AddWalletItem())
     }
 
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        walletAdapter?.set(currentModel.wallets.values.toList())
+    }
+
     override fun onDestroyView(view: View) {
         walletAdapter = null
         addWalletAdapter = null

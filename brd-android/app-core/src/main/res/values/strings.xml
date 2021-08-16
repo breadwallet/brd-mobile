@@ -30,19 +30,19 @@
     <string name="Account.exchangeRate">%1$s per %2$s</string>
     <!-- Loading Wallet Message -->
     <string name="Account.loadingMessage">Loading Wallet</string>
-    <!-- Confirm Account Creation mesage body -->
+    <!-- Prompt text for confirmation dialog for Hedera account creation -->
     <string name="AccountCreation.body">Only create a Hedera account if you intend on storing HBAR in your wallet.</string>
-    <!-- Create Account button label -->
+    <!-- Label for create Hedera account button -->
     <string name="AccountCreation.create">Create Account</string>
     <!-- Creating Account progress Label -->
     <string name="AccountCreation.creating">Creating Account</string>
-    <!-- Creating Account progress Label -->
+    <!-- Error message for Hedera account creation failure -->
     <string name="AccountCreation.error">An error occurred during account creation. Please try again later.</string>
-    <!-- Not Now button label. -->
+    <!-- Label for cancel button on confirmation dialog for Hedera account creation -->
     <string name="AccountCreation.notNow">Not Now</string>
     <!-- Creating Account progress Label -->
     <string name="AccountCreation.timeout">The Request timed out. Please try again later.</string>
-    <!-- Confirm Account Creation Title -->
+    <!-- Title for confirmation dialog for Hedera account creation -->
     <string name="AccountCreation.title">Confirm Account Creation</string>
     <!-- Default wallet name -->
     <string name="AccountHeader.defaultWalletName">My BRD</string>
@@ -73,7 +73,7 @@
     <!-- Addresses Copied Alert sub header -->
     <string name="Alerts.copiedAddressesSubheader">All wallet addresses successfully copied.</string>
     <!-- Alert Header Label (the paper key was set) -->
-    <string name="Alerts.paperKeySet">Recovery Key Set</string>
+    <string name="Alerts.paperKeySet">Recovery Phrase Set</string>
     <!-- Alert Subheader label (playfully positive) -->
     <string name="Alerts.paperKeySetSubheader">Awesome!</string>
     <!-- Alert Header label (the PIN was set) -->
@@ -202,7 +202,7 @@
     <string name="CloudBackup.mainTitle">iCloud Recovery Backup</string>
     <string name="CloudBackup.mainWarning">iCloud Keychain must be turned on in the iOS Settings app for this feature to work</string>
     <string name="CloudBackup.mainWarningConfirmation">Are you sure you want to disable iCloud Backup? This will delete your backup from all devices.</string>
-    <string name="CloudBackup.pinAttempts">Attempts remaining before erasing backup: %1$@</string>
+    <string name="CloudBackup.pinAttempts">Attempts remaining before erasing backup: %1$s</string>
     <string name="CloudBackup.recoverButton">Restore from Recovery Phrase</string>
     <string name="CloudBackup.recoverHeader">Enter PIN to unlock iCloud backup</string>
     <string name="CloudBackup.restoreButton">Restore from iCloud Backup</string>
@@ -212,12 +212,12 @@
     <string name="CloudBackup.step3">Tap iCloud.</string>
     <string name="CloudBackup.step4">Verify that iCloud Keychain is ON</string>
     <string name="CloudBackup.understandText">I understand that this feature will not work unless iCloud Keychain is enabled.</string>
-    <string name="CloudBackup.warningBody">Your iCloud backup will be erased after %1$@ more incorrect PIN attempts.</string>
+    <string name="CloudBackup.warningBody">Your iCloud backup will be erased after %1$s more incorrect PIN attempts.</string>
     <!-- Amount to Send: ($1.00) -->
     <string name="Confirmation.amountLabel">Amount to Send:</string>
     <string name="Confirmation.destinationTag">Destination Tag</string>
     <string name="Confirmation.destinationTag_EmptyHint">(empty)</string>
-    <!-- Network Fee: ($1.00) -->
+    <!-- Network Fee: -->
     <string name="Confirmation.feeLabel">Network Fee:</string>
     <!-- Network Fee: (ETH) -->
     <string name="Confirmation.feeLabelETH">Network Fee (ETH):</string>
@@ -244,7 +244,7 @@
     <string name="CreateGift.amountLabel">Choose amount ($USD)</string>
     <string name="CreateGift.create">Create</string>
     <string name="CreateGift.customAmountHint">Custom amount ($500 max)</string>
-    <string name="CreateGift.description">We\'ll create what\'s called a "paper wallet" with a qr code and instructions for installing BRD that you can email or text to friends and family.</string>
+    <string name="CreateGift.description">We\'ll create what\'s called a </string>
     <string name="CreateGift.inputAmountError">You must select a gift amount.</string>
     <string name="CreateGift.inputRecipientNameError">You must enter the name of the recipient.</string>
     <string name="CreateGift.insufficientBalanceError">You have insufficient funds to send a gift.</string>
@@ -290,6 +290,167 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Messaging Unavailable</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">Fingerprint not recognized. Please try again.</string>
+    <!-- Exchange available balance label -->
+    <string name="Exchange.available">Available: %s</string>
+    <!-- Exchange buy title -->
+    <string name="Exchange.buy">Buy</string>
+    <!-- CTA button title exchange screen -->
+    <string name="Exchange.CTA.loading">Loading ...</string>
+    <!-- CTA button title exchange screen -->
+    <string name="Exchange.CTA.next">Next</string>
+    <!-- CTA button title exchange screen -->
+    <string name="Exchange.CTA.preview">Preview</string>
+    <!-- CTA button processing state -->
+    <string name="Exchange.CTA.processing">Processing ...</string>
+    <!-- CTA button title exchange screen -->
+    <string name="Exchange.CTA.retry">Retry</string>
+    <!-- CTA action exchange to set to max trade amount -->
+    <string name="Exchange.CTA.setMax">Set amount to max %s</string>
+    <!-- CTA action exchange to set to min trade amount -->
+    <!--CTA action exchange to set to min trade amount-->
+    <string name="Exchange.CTA.setMin">Set amount to min %s</string>
+    <!-- Exchange label from -->
+    <string name="Exchange.from">From</string>
+    <!-- purchase limit -->
+    <string name="Exchange.limit">limit</string>
+    <!-- Loading available crypto assets -->
+    <string name="Exchange.loadingAssets">Loading Assets</string>
+    <!-- Exchange fee title -->
+    <string name="Exchange.offer.fees">Fee</string>
+    <!-- Loading offers subtitle -->
+    <string name="Exchange.offer.gatheringSubtitle">Fetching partner rates</string>
+    <!-- Loading offers title -->
+    <string name="Exchange.offer.gatheringTitle">One moment...</string>
+    <!-- Initializing offers title -->
+    <string name="Exchange.offer.initTitle">Offers will appear here</string>
+    <!-- Offer subtitle limit max -->
+    <string name="Exchange.offer.limitMax">Limit max</string>
+    <!-- Offer subtitle limit min -->
+    <string name="Exchange.offer.limitMin">Limit min</string>
+    <!-- Offer subtitle set max amount -->
+    <string name="Exchange.offer.maxAmount">Maximum amount</string>
+    <!-- Offer subtitle set min amount -->
+    <string name="Exchange.offer.minAmount">Minimum amount</string>
+    <!-- Network fee label -->
+    <string name="Exchange.offer.networkFee">Network Fee</string>
+    <!-- No offers subtitle -->
+    <string name="Exchange.offer.noneSubtitle">Try another amount</string>
+    <!-- No offers title -->
+    <string name="Exchange.offer.noneTitle">No offers available</string>
+    <!-- Offers navigation title -->
+    <string name="Exchange.offer.offers">Offers</string>
+    <!-- Processing fee label -->
+    <string name="Exchange.offer.processingFee">Processing Fee</string>
+    <!-- Provider fee label -->
+    <string name="Exchange.offer.providerFee">Provider Fee</string>
+    <!-- Exchange rate -->
+    <string name="Exchange.offer.rate">Rate</string>
+    <!-- Offers section title -->
+    <string name="Exchange.offer.sectionTitle">All values displayed are estimates and susceptible to market price fluctuations.</string>
+    <!-- Offer total -->
+    <string name="Exchange.offer.total">Total</string>
+    <!-- Receipt item label bought -->
+    <string name="Exchange.Order.bought">Bought</string>
+    <!-- "CTA button label -->
+    <string name="Exchange.Order.CTA.great">Great!</string>
+    <!-- "View receipt -->
+    <string name="Exchange.Order.CTA.receipt">View Receipt</string>
+    <!-- Receipt item label delivery -->
+    <string name="Exchange.Order.delivery">Delivery</string>
+    <!-- Receipt item label fees -->
+    <string name="Exchange.Order.fees">Fees</string>
+    <!-- Order footer info explaining exchange rate estimate -->
+    <string name="Exchange.Order.footer">This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.</string>
+    <!-- Receipt item label for -->
+    <string name="Exchange.Order.for">For</string>
+    <!-- Receipt item label method -->
+    <string name="Exchange.Order.method">Method</string>
+    <!-- Status creating order -->
+    <string name="Exchange.Order.status.creating">Creating order</string>
+    <!-- Status failed order -->
+    <string name="Exchange.Order.status.failed">Order failed</string>
+    <!-- Status processing order -->
+    <string name="Exchange.Order.status.processing">Processing</string>
+    <!-- Status sent order -->
+    <string name="Exchange.Order.status.sent">Order sent!</string>
+    <!-- Status successful order -->
+    <string name="Exchange.Order.status.successful">Order Successful!</string>
+    <!-- Over the min limit -->
+    <string name="Exchange.over">Over</string>
+    <!-- Rewards status active -->
+    <string name="Exchange.Preview.active">Active</string>
+    <!-- Trade preview CTA -->
+    <string name="Exchange.Preview.CTA">Trade Now</string>
+    <!-- Trade preview footer -->
+    <string name="Exchange.Preview.footer">This is an estimate. The amount you will receive will depend on the market conditions.</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.fulfilledBy">Fulfilled by</string>
+    <!-- Rewards status inactive -->
+    <string name="Exchange.Preview.inactive">Inactive</string>
+    <!-- Rewards info -->
+    <string name="Exchange.Preview.info">Hold 1000 BRD and receive 25% off trading fees </string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.networkFee">Network Fee</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.partnerFee">Partner Fee</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.rate">Rate</string>
+    <!-- Preview items rewards label -->
+    <string name="Exchange.Preview.rewards">BRD Rewards</string>
+    <!-- Trade preview navigation title -->
+    <string name="Exchange.Preview.title">Trade preview</string>
+    <!-- Exchange select asset button label -->
+    <string name="Exchange.selectAsset">Select Asset</string>
+    <!-- Exchange sell title -->
+    <string name="Exchange.sell">Sell</string>
+    <!-- CTA button title for region settings -->
+    <string name="Exchange.Settings.applyRegion">Apply region</string>
+    <!-- County label -->
+    <string name="Exchange.Settings.country">Country</string>
+    <!-- Currency label -->
+    <string name="Exchange.Settings.currency">Currency</string>
+    <!-- Region label -->
+    <string name="Exchange.Settings.region">Region</string>
+    <!-- Region settings screen title -->
+    <string name="Exchange.Settings.title">My preferred region</string>
+    <!-- Exchange label to -->
+    <string name="Exchange.to">To</string>
+    <!-- Exchange trade title -->
+    <string name="Exchange.trade">Trade</string>
+    <!-- Trade cancel alert body -->
+    <string name="Exchange.tradeCancelAlertBody">All your progress will be lost.</string>
+    <!-- Trade cancel alert no button -->
+    <string name="Exchange.tradeCancelAlertNo">No</string>
+    <!-- Trade cancel alert title -->
+    <string name="Exchange.tradeCancelAlertTitle">Are you sure?</string>
+    <!-- Trade cancel alert yes button -->
+    <string name="Exchange.tradeCancelAlertYes">Yes</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.confirmation">Failed to confirm transaction</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.loadInput">Failed to load input</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.noFeeBasis">Failed with no fee bases error</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.pinVerifier">Failed to verify pin</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.sendResult">Failed send transaction with error %s</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.transactionValidation">Failed transaction validation with %s</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.validateCurrencyOrAddress">Failed to validate currency or address</string>
+    <!-- Under the min limit -->
+    <string name="Exchange.under">Under</string>
+    <!-- Offer purchase method ACH -->
+    <string name="Exchange.viaACH">%s via ACH</string>
+    <!-- Offer purchase method card -->
+    <string name="Exchange.viaCard">%s via Card</string>
+    <!-- Offer purchase method crypto -->
+    <string name="Exchange.viaCrypto">%s via Crypto</string>
+    <!-- Offer purchase method SEPA -->
+    <string name="Exchange.viaSEPA">%s via SEPA</string>
+    <!-- Exchange label with -->
+    <string name="Exchange.with">With</string>
     <string name="ExportConfirmation.cancel">Cancel</string>
     <string name="ExportConfirmation.continue">Continue</string>
     <string name="ExportConfirmation.message">This will generate a CSV file including all completed transactions from all enabled wallets.</string>
@@ -359,17 +520,17 @@
     <string name="FingerprintSettings.unlockApp">Use fingerprint to unlock BRD</string>
     <!-- This is the section that allows administration of the user's wallet -->
     <string name="HomeScreen.admin">Admin</string>
-    <!-- Home screen menu button to buy some bitcoin -->
+    <!-- "home screen toolbar button -->
     <string name="HomeScreen.buy">Buy</string>
     <!-- home screen toolbar 'Buy & Sell' button -->
     <string name="HomeScreen.buyAndSell">Buy &amp; Sell</string>
-    <!-- Menu button on the home screen toolbar -->
+    <!-- "home screen toolbar button -->
     <string name="HomeScreen.menu">Menu</string>
     <!-- This section lists the users wallets -->
     <string name="HomeScreen.portfolio">Wallets</string>
     <!-- Label for the total balance of all the user's assets (style is all lower case if your language permits) -->
     <string name="HomeScreen.totalAssets">Total Assets</string>
-    <!-- (Tap here to) trade (your assets for other assets) -->
+    <!-- "home screen toolbar button -->
     <string name="HomeScreen.trade">Trade</string>
     <!-- Checking private key balance progress view text -->
     <string name="Import.checking">Checking private key balance...</string>
@@ -459,9 +620,9 @@
     <string name="MenuButton.addWallet">Add Wallet</string>
     <!-- Menu button title -->
     <string name="MenuButton.lock">Lock Wallet</string>
-    <!-- (Click here to) manage (your list of) wallets -->
+    <!-- "Menu button title -->
     <string name="MenuButton.manageWallets">Manage Wallets</string>
-    <!-- (press here to) scan (a) QR code -->
+    <!-- "Menu button title -->
     <string name="MenuButton.scan">Scan QR Code</string>
     <!-- Menu button title -->
     <string name="MenuButton.security">Security Settings</string>
@@ -579,7 +740,7 @@
     <!-- Device encryption prompt title -->
     <string name="Prompts.NoScreenLock.title.android">Screen lock disabled</string>
     <!-- Warning about recovery phrase (formerly paper key). -->
-    <string name="Prompts.PaperKey.body">Your recovery phrase must be saved in case you lose or change your phone.</string>
+    <string name="Prompts.PaperKey.body">Please write down your recovery phrase and store it somewhere that is safe and secure.</string>
     <!-- Warning about paper key (Android-version) -->
     <string name="Prompts.PaperKey.Body.Android">Set up your recovery phrase in case you ever lose or replace your phone. Your key is also required if you change your phone\'s security settings.</string>
     <!-- An action is required (You must do this action). -->
@@ -611,7 +772,7 @@
     <string name="Prompts.UpgradePin.body">BRD has upgraded to using a 6-digit PIN. Tap Continue to upgrade.</string>
     <!-- Upgrade PIN prompt title. -->
     <string name="Prompts.UpgradePin.title">Upgrade PIN</string>
-    <!-- Body text for the push notifications prompt. -->
+    <!-- Body text for push notifications opt-in prompt. -->
     <string name="PushNotifications.body">Turn on push notifications and be the first to hear about new features and special offers.</string>
     <!-- Push notifications are disabled alert title" -->
     <string name="PushNotifications.disabled">Notifications Disabled</string>
@@ -627,7 +788,7 @@
     <string name="PushNotifications.off">Off</string>
     <!-- Push notifications are on label -->
     <string name="PushNotifications.on">On</string>
-    <!-- Push notifications settings view title label -->
+    <!-- Title for push notifications opt-in prompt. -->
     <string name="PushNotifications.title">Stay in the Loop</string>
     <!-- Push notifications settings failed to update settings on the back end -->
     <string name="PushNotifications.updateFailed">Failed to update push notifications settings</string>
@@ -675,7 +836,7 @@
     <string name="RecoverWallet.subheader">Enter the recovery phrase for the wallet you want to recover.</string>
     <!-- Reset PIN with paper key: sub-header -->
     <string name="RecoverWallet.subheader_reset_pin">To reset your PIN, enter the words from your recovery phrase into the boxes below.</string>
-    <!-- Instructs the user to enter words from the set of recovery key words. -->
+    <!-- Instructs the user to enter words from the set of recovery phrase words. -->
     <string name="RecoveryKeyFlow.confirmRecoveryInputError">The word you entered is incorrect. Please try again.</string>
     <!-- Instructs the user to enter words from the set of recovery phrase words. -->
     <string name="RecoveryKeyFlow.confirmRecoveryKeySubtitle">Almost done! Enter the following words from your recovery phrase.</string>
@@ -687,25 +848,25 @@
     <string name="RecoveryKeyFlow.enterRecoveryKeySubtitle">Please enter your recovery phrase to unlink this wallet from your device.</string>
     <!-- Body text for an alert dialog asking the user whether to set up the recovery phrase later -->
     <string name="RecoveryKeyFlow.exitRecoveryKeyPromptBody">Are you sure you want to set up your recovery phrase later?</string>
-    <!-- Title for an alert dialog asking the user whether to set up the recovery key later -->
+    <!-- Title for an alert dialog asking the user whether to set up the recovery phrase later -->
     <string name="RecoveryKeyFlow.exitRecoveryKeyPromptTitle">Set Up Later</string>
     <!-- Button text for the 'Generate Recovery Phrase' button -->
     <string name="RecoveryKeyFlow.generateKeyButton">Generate Recovery Phrase</string>
-    <!-- Subtext for the recovery key landing page. -->
+    <!-- Subtext for the recovery phrase landing page. -->
     <string name="RecoveryKeyFlow.generateKeyExplanation">This key is required to recover your money if you upgrade or lose your phone.</string>
     <!-- Default title for the recovery phrase landing page -->
     <string name="RecoveryKeyFlow.generateKeyTitle">Generate your private recovery phrase</string>
-    <!-- Title for a button that takes the user to the wallet after setting up the recovery key. -->
+    <!-- Title for a button that takes the user to the wallet after setting up the recovery phrase. -->
     <string name="RecoveryKeyFlow.goToWalletButtonTitle">Go to Wallet</string>
-    <!-- Hint text for recovery key intro page, e.g., Step 2 -->
-    <string name="RecoveryKeyFlow.howItWorksStep">How it works - Step %1$@</string>
+    <!-- Hint text for recovery phrase intro page, e.g., Step 2 -->
+    <string name="RecoveryKeyFlow.howItWorksStep">How it works - Step %1$s</string>
     <!-- Error text displayed when the user enters an incorrect recovery phrase -->
     <string name="RecoveryKeyFlow.invalidPhrase">Some of the words you entered do not match your recovery phrase. Please try again.</string>
-    <!-- Title for recovery key intro page -->
+    <!-- Title for recovery phrase intro page -->
     <string name="RecoveryKeyFlow.keepSecure">Keep it secure</string>
     <!-- Informs the user that the recovery is only required for recovering a wallet. -->
     <string name="RecoveryKeyFlow.keyUseHint">Your key is only needed for recovery, not for everyday wallet access.</string>
-    <!-- Reminds the user not to take screenshots or email the recovery key words -->
+    <!-- Reminds the user not to take screenshots or email the recovery phrase words -->
     <string name="RecoveryKeyFlow.noScreenshotsOrEmailWarning">For security purposes, do not screenshot or email these words</string>
     <!-- Recommends that the user avoids capturing the paper key with a screenshot -->
     <string name="RecoveryKeyFlow.noScreenshotsRecommendation">Write down your key on paper and confirm it. Screenshots are not recommended for security reasons.</string>
@@ -713,19 +874,19 @@
     <string name="RecoveryKeyFlow.recoveryYourWallet">Recover Your Wallet</string>
     <!-- Subtitle displayed when the user starts the process of recovering a wallet -->
     <string name="RecoveryKeyFlow.recoveryYourWalletSubtitle">Please enter the recovery phrase of the wallet you want to recover.</string>
-    <!-- Title for recovery key intro page -->
+    <!-- Title for recovery phrase intro page -->
     <string name="RecoveryKeyFlow.relaxBuyTrade">Relax, buy, and trade</string>
-    <!-- Reminds the user to write down the recovery key words. -->
+    <!-- Reminds the user to write down the recovery phrase words. -->
     <string name="RecoveryKeyFlow.rememberToWriteDownReminder">Remember to write these words down. Swipe back if you forgot.</string>
     <!-- Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered -->
     <string name="RecoveryKeyFlow.resetPINInstruction">Please enter your recovery phrase to reset your PIN.</string>
     <!-- Assures the user that BRD will keep the user's funds secure. -->
     <string name="RecoveryKeyFlow.securityAssurance">Buy and trade knowing that your funds are protected by the best security and privacy in the business.</string>
-    <!-- Recommends that the user stores the recovery key in a secure location -->
+    <!-- Recommends that the user stores the recovery phrase in a secure location -->
     <string name="RecoveryKeyFlow.storeSecurelyRecommendation">Store your key in a secure location. This is the only way to recover your wallet. BRD does not keep a copy.</string>
     <!-- Title for the success page after the recovery phrase has been set up -->
     <string name="RecoveryKeyFlow.successHeading">Congratulations! You completed your recovery phrase setup.</string>
-    <!-- Subtitle for the success page after the recovery key has been set up -->
+    <!-- Subtitle for the success page after the recovery phrase has been set up -->
     <string name="RecoveryKeyFlow.successSubheading">You\'re all set to deposit, trade, and buy crypto from your BRD wallet.</string>
     <!-- Title displayed to the user on the intro screen when unlinking a wallet -->
     <string name="RecoveryKeyFlow.unlinkWallet">Unlink your wallet from this device.</string>
@@ -737,16 +898,16 @@
     <string name="RecoveryKeyFlow.wipeWallet">Wipe your wallet from this device.</string>
     <!-- Subtitle displayed to the user on the intro screen when wiping a wallet. -->
     <string name="RecoveryKeyFlow.wipeWalletSubtext">Start a new wallet by wiping the current wallet from your device.</string>
-    <!-- Title for recovery key intro page -->
+    <!-- Title for recovery phrase intro page -->
     <string name="RecoveryKeyFlow.writeItDown">Write down your key</string>
     <!-- Title for the recovery phrase landing page if the key has already been generated. -->
     <string name="RecoveryKeyFlow.writeKeyAgain">Write down your recovery phrase again</string>
-    <!-- Subtitle for the write recovery key screen -->
+    <!-- Subtitle for the write recovery phrase screen -->
     <string name="RecoveryKeyFlow.writeKeyScreenSubtitle">Write down the following words in order.</string>
     <!-- Title for the write recovery phrase screen -->
     <string name="RecoveryKeyFlow.writeKeyScreenTitle">Your Recovery Phrase</string>
     <!-- Title for the step number when the user pages through the recovery words -->
-    <string name="RecoveryKeyFlow.writeKeyStepTitle">%1$@ of %2$@</string>
+    <string name="RecoveryKeyFlow.writeKeyStepTitle">%1$s of %2$s</string>
     <!-- No amount entered error message. -->
     <string name="RequestAnAmount.noAmount">Please enter an amount first.</string>
     <!-- Request a specific amount of bitcoin -->
@@ -781,8 +942,10 @@
     <string name="RewardsView.normalTitle">Rewards</string>
     <!-- Scan bitcoin address camera flash toggle -->
     <string name="Scanner.flashButtonLabel">Camera Flash</string>
+    <!-- Device without camera error -->
+    <string name="Scanner.noCamera">No camera found</string>
     <!-- (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") -->
-    <string name="Scanner.paymentPromptMessage">Would you like to send a %1$@ payment to this address?</string>
+    <string name="Scanner.paymentPromptMessage">Would you like to send a %1$s payment to this address?</string>
     <!-- alert dialog title -->
     <string name="Scanner.paymentPromptTitle">Send Payment</string>
     <!-- Complete filter label -->
@@ -881,7 +1044,7 @@
     <string name="Send.legacyAddressWarning">Warning: this is a legacy bitcoin address. Are you sure you want to send Bitcoin Cash to it?</string>
     <!-- We are loading the request (now) -->
     <string name="Send.loadingRequest">Loading Request</string>
-    <!-- Hedera Memo Tag Label -->
+    <!-- Placeholder text for Hedera Memo field on send screen -->
     <string name="Send.memoTag_optional">Hedera Memo (Optional)</string>
     <!-- Transaction fee could not be be caluculated error. -->
     <string name="Send.nilFeeError">Insufficient funds to cover the transaction fee.</string>
@@ -894,14 +1057,13 @@
     <!-- Paste button label -->
     <string name="Send.pasteLabel">Paste</string>
     <!-- Error message for invalid PayID -->
-    <string name="Send.payId_invalid">Invalid PayID.</string>
+    <string name="Send.payId_invalid">Invalid PayString.</string>
     <!-- Error message for no address associated with a PayID for a given currency -->
-    <string name="Send.payId_noAddress">There is no %1$s address associated with this PayID.</string>
+    <string name="Send.payId_noAddress">There is no %1$s address associated with this PayString.</string>
     <!-- Error message for error in retrieving the address from the PayID endpoint -->
-    <string name="Send.payId_retrievalError">There was an error retrieving the address for this PayID. Please try again later.</string>
+    <string name="Send.payId_retrievalError">There was an error retrieving the address for this PayString. Please try again later.</string>
     <!-- PayID label -->
-    <string name="Send.payId_toLabel">PayID</string>
-    <string name="Send.unstoppableDomain_toLabel">Unstoppable Domain</string>
+    <string name="Send.payId_toLabel">PayString</string>
     <!-- Could not publish transaction alert title -->
     <string name="Send.publishTransactionError">Could not publish transaction.</string>
     <!-- Could not load remote request error message -->
@@ -918,6 +1080,9 @@
     <string name="Send.title">Send</string>
     <!-- Send money to label -->
     <string name="Send.toLabel">To</string>
+    <string name="Send.udomains_invalid">Invalid address.</string>
+    <string name="Send.udomains_noAddress">There is no %1$s address associated with this address.</string>
+    <string name="Send.udomains_retrievalError">There was an error retrieving this address. Please try again later.</string>
     <!-- Adress already used alert message - first part -->
     <string name="Send.UsedAddress.firstLine">Bitcoin addresses are intended for single use only.</string>
     <!-- Adress already used alert message - second part -->
@@ -966,11 +1131,12 @@
     <string name="Settings.review">Leave us a Review</string>
     <!-- Rewards menu item -->
     <string name="Settings.rewards">Rewards</string>
+    <!-- Share logs sheet label -->
+    <string name="Settings.share">Share</string>
     <!-- Share anonymous data label -->
     <string name="Settings.shareData">Share Anonymous Data</string>
     <!-- "Enables sharing balance to widget" -->
     <string name="Settings.shareWithWidget">Share portfolio data with widgets</string>
-    <string name="Settings.share">Share</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Sync Blockchain</string>
     <!-- Settings title -->
@@ -1007,10 +1173,11 @@
     <!-- Baker cell: Free Space field header -->
     <string name="Staking.cellFreeSpaceHeader">Free Space</string>
     <string name="Staking.changeValidator">Change</string>
+    <!-- Body copy for staking modal -->
     <string name="Staking.descriptionTezos">Delegate your Tezos account to a validator to earn a reward while keeping full security and control of your coins.</string>
     <!-- Baker cell: Fee field header -->
     <string name="Staking.feeHeader">Fee:</string>
-    <string name="Staking.feePct">Fee: %1$s</string>
+    <!-- Error loading bakers message -->
     <string name="Staking.loadingBakerError">An error occurred while loading baker information. Please try again later.</string>
     <!-- Status label: current staking transaction is pending -->
     <string name="Staking.pendingTransaction">Transaction pending...</string>
@@ -1020,6 +1187,7 @@
     <string name="Staking.roiHeader">Est. ROI</string>
     <!-- Modal title: Select Baker modal -->
     <string name="Staking.selectBakerTitle">Select XTZ Delegate</string>
+    <!-- Button label: Stake the selected baker -->
     <string name="Staking.stake">Stake</string>
     <!-- UI flag showing state of Tezos staking -->
     <string name="Staking.stakingActiveFlag">ACTIVE</string>
@@ -1027,11 +1195,12 @@
     <string name="Staking.stakingInactiveFlag">INACTIVE</string>
     <!-- UI flag showing state of Tezos staking -->
     <string name="Staking.stakingPendingFlag">PENDING</string>
-    <!-- Staking banner title -->
+    <!-- Modal title: Staking modal -->
     <string name="Staking.stakingTitle">Staking</string>
     <string name="Staking.stakingTo">staking to %1$s</string>
     <string name="Staking.statusPending">Pending</string>
     <string name="Staking.statusStaked">Staked!</string>
+    <!-- Headline for staking modal -->
     <string name="Staking.subTitle">Earn money while holding</string>
     <!-- Tezos XTZ baker asset type -->
     <string name="Staking.tezosDune">Tezos &amp; Dune</string>
@@ -1040,6 +1209,7 @@
     <!-- Tezos XTZ baker asset type -->
     <string name="Staking.tezosOnly">Tezos-only</string>
     <string name="Staking.title">Stake %1$s</string>
+    <!-- Button label: Unstake the selected baker -->
     <string name="Staking.unstake">Unstake</string>
     <string name="Staking.validatorHint">Enter Validator Address</string>
     <!-- button label -->
@@ -1051,7 +1221,7 @@
     <!-- button label -->
     <string name="StartPaperPhrase.buttonTitle">Write Down Recovery Phrase</string>
     <!-- Argument is date; date should be on a new line -->
-    <string name="StartPaperPhrase.date">Last written down on\n %1$@</string>
+    <string name="StartPaperPhrase.date">Last written down on\n %1$s</string>
     <!-- button label -->
     <string name="StartViewController.createButton">Create New Wallet</string>
     <!-- Start view message -->
@@ -1066,7 +1236,7 @@
     <string name="SyncingView.activity">Activity</string>
     <!-- Syncing view connectiong state header text -->
     <string name="SyncingView.connecting">Connecting</string>
-    <!-- The sync has failed (to complete) -->
+    <!-- "Sync failed label -->
     <string name="SyncingView.failed">Sync Failed</string>
     <!-- Syncing view header text -->
     <string name="SyncingView.header">Syncing</string>
@@ -1184,7 +1354,7 @@
     <string name="TransactionDetails.addressViaHeader">Via</string>
     <!-- Amount section header -->
     <string name="TransactionDetails.amountHeader">Amount</string>
-    <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
+    <!-- "(it was worth) $100 when received, (and it is worth) $200 now" -->
     <string name="TransactionDetails.amountWhenReceived">%1$s when received, %2$s now</string>
     <!-- "(it was worth) $100 when sent, (and it is worth) $200 now" -->
     <string name="TransactionDetails.amountWhenSent">%1$s when sent, %2$s now</string>
@@ -1196,7 +1366,7 @@
     <string name="TransactionDetails.commentsPlaceholder">Add memo...</string>
     <!-- Timestamp section header for complete tx -->
     <string name="TransactionDetails.completeTimestampHeader">Complete</string>
-    <!-- Block height and confirmations label -->
+    <!-- Confirmations label -->
     <!--eg. 182930 (45061 confirmations)-->
     <string name="TransactionDetails.confirmationsLabel">Confirmations</string>
     <string name="TransactionDetails.destinationTag">Destination Tag</string>
@@ -1459,6 +1629,4 @@
     <string name="WritePaperPhrase.previous">Previous</string>
     <!-- 1 of 3 -->
     <string name="WritePaperPhrase.step">%1$d of %2$d</string>
-
-    <string name="Scanner.noCamera">No camera found</string>
 </resources>

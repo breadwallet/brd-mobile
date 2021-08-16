@@ -11,6 +11,7 @@ package com.brd.api.models
 import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import kotlin.math.absoluteValue
 
 @Serializable
 data class ExchangePair(
@@ -19,4 +20,18 @@ data class ExchangePair(
     val rate: Double,
     @Serializable(with = InstantSerializer::class)
     val timestamp: Instant,
-)
+) {
+    fun estimatedOutput(sourceAmount: Double): Double? {
+        if (sourceAmount == 0.0) return null
+        return (sourceAmount / rate).absoluteValue.let { result ->
+            if (result.isInfinite() || result.isNaN()) null else result
+        }
+    }
+
+    fun inputFromOutput(quoteAmount: Double): Double? {
+        if (quoteAmount == 0.0) return null
+        return (quoteAmount * rate).absoluteValue.let { result ->
+            if (result.isInfinite() || result.isNaN()) null else result
+        }
+    }
+}

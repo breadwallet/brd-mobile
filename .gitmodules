@@ -10,10 +10,6 @@
 	path = external/google-services
 	url = ../../breadwallet/google-services.git
     update = none
-[submodule "external/in-app-i18n"]
-	path = external/in-app-i18n
-	url = ../../breadwallet/in-app-i18n.git
-	update = none
 [submodule "external/redacted-compiler-plugin"]
 	path = external/redacted-compiler-plugin
 	url = https://github.com/ZacSweers/redacted-compiler-plugin.git

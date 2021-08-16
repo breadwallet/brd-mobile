@@ -13,7 +13,10 @@ import android.content.SharedPreferences
 import android.text.format.DateUtils
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.edit
+import com.brd.api.BrdApiHost
+import com.brd.prefs.BrdPreferences
 import com.breadwallet.app.Conversion
+import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.model.PriceAlert
 import com.breadwallet.tools.util.Bip39Reader
 import com.breadwallet.tools.util.ServerBundlesHelper
@@ -29,6 +32,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import org.kodein.di.android.closestKodein
+import org.kodein.di.direct
+import org.kodein.di.erased.instance
 import java.util.Currency
 import java.util.Locale
 import java.util.UUID
@@ -106,6 +112,8 @@ object BRSharedPrefs {
      * This removes the need for a context parameter.
      */
     fun initialize(context: Context, applicationScope: CoroutineScope) {
+        val kodein by closestKodein(context)
+        brdPreferences = kodein.direct.instance()
         brdPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         applicationScope.launch {
             _trackedConversionChanges.value = getTrackedConversions()
@@ -115,6 +123,7 @@ object BRSharedPrefs {
     }
 
     private lateinit var brdPrefs: SharedPreferences
+    private lateinit var brdPreferences: BrdPreferences
     private val promptChangeChannel = BroadcastChannel<Unit>(Channel.CONFLATED)
 
     var lastGiftCheckTime: Long
@@ -149,10 +158,10 @@ object BRSharedPrefs {
         }
 
     fun getReceiveAddress(iso: String): String? =
-        brdPrefs.getString(RECEIVE_ADDRESS + iso.toUpperCase(), "")
+        brdPrefs.getString(RECEIVE_ADDRESS + iso.uppercase(), "")
 
     fun putReceiveAddress(tmpAddr: String, iso: String) =
-        brdPrefs.edit { putString(RECEIVE_ADDRESS + iso.toUpperCase(), tmpAddr) }
+        brdPrefs.edit { putString(RECEIVE_ADDRESS + iso.uppercase(), tmpAddr) }
 
     @JvmStatic
     fun getSecureTime() =
@@ -169,19 +178,19 @@ object BRSharedPrefs {
     }
 
     fun getLastSyncTime(iso: String) =
-        brdPrefs.getLong(LAST_SYNC_TIME_PREFIX + iso.toUpperCase(), 0)
+        brdPrefs.getLong(LAST_SYNC_TIME_PREFIX + iso.uppercase(), 0)
 
     fun putLastSyncTime(iso: String, time: Long) =
-        brdPrefs.edit { putLong(LAST_SYNC_TIME_PREFIX + iso.toUpperCase(), time) }
+        brdPrefs.edit { putLong(LAST_SYNC_TIME_PREFIX + iso.uppercase(), time) }
 
     fun getLastSendTransactionBlockheight(iso: String) =
-        brdPrefs.getLong(LAST_SEND_TRANSACTION_BLOCK_HEIGHT_PREFIX + iso.toUpperCase(), 0)
+        brdPrefs.getLong(LAST_SEND_TRANSACTION_BLOCK_HEIGHT_PREFIX + iso.uppercase(), 0)
 
     fun putLastSendTransactionBlockheight(
         iso: String,
         blockHeight: Long
     ) = brdPrefs.edit {
-        putLong(LAST_SEND_TRANSACTION_BLOCK_HEIGHT_PREFIX + iso.toUpperCase(), blockHeight)
+        putLong(LAST_SEND_TRANSACTION_BLOCK_HEIGHT_PREFIX + iso.uppercase(), blockHeight)
     }
 
     //if the user prefers all in crypto units, not fiat currencies
@@ -218,31 +227,31 @@ object BRSharedPrefs {
         brdPrefs.edit { putBoolean(GEO_PERMISSIONS_REQUESTED, requested) }
 
     fun getStartHeight(iso: String): Long =
-        brdPrefs.getLong(START_HEIGHT_PREFIX + iso.toUpperCase(), 0)
+        brdPrefs.getLong(START_HEIGHT_PREFIX + iso.uppercase(), 0)
 
     fun putStartHeight(iso: String, startHeight: Long) =
-        brdPrefs.edit { putLong(START_HEIGHT_PREFIX + iso.toUpperCase(), startHeight) }
+        brdPrefs.edit { putLong(START_HEIGHT_PREFIX + iso.uppercase(), startHeight) }
 
     fun getLastRescanTime(iso: String): Long =
-        brdPrefs.getLong(RESCAN_TIME_PREFIX + iso.toUpperCase(), 0)
+        brdPrefs.getLong(RESCAN_TIME_PREFIX + iso.uppercase(), 0)
 
     fun putLastRescanTime(iso: String, time: Long) =
-        brdPrefs.edit { putLong(RESCAN_TIME_PREFIX + iso.toUpperCase(), time) }
+        brdPrefs.edit { putLong(RESCAN_TIME_PREFIX + iso.uppercase(), time) }
 
     fun getLastBlockHeight(iso: String): Int =
-        brdPrefs.getInt(LAST_BLOCK_HEIGHT_PREFIX + iso.toUpperCase(), 0)
+        brdPrefs.getInt(LAST_BLOCK_HEIGHT_PREFIX + iso.uppercase(), 0)
 
     fun putLastBlockHeight(iso: String, lastHeight: Int) =
         brdPrefs.edit {
-            putInt(LAST_BLOCK_HEIGHT_PREFIX + iso.toUpperCase(), lastHeight)
+            putInt(LAST_BLOCK_HEIGHT_PREFIX + iso.uppercase(), lastHeight)
         }
 
     fun getScanRecommended(iso: String): Boolean =
-        brdPrefs.getBoolean(SCAN_RECOMMENDED_PREFIX + iso.toUpperCase(), false)
+        brdPrefs.getBoolean(SCAN_RECOMMENDED_PREFIX + iso.uppercase(), false)
 
     fun putScanRecommended(iso: String, recommended: Boolean) =
         brdPrefs.edit {
-            putBoolean(SCAN_RECOMMENDED_PREFIX + iso.toUpperCase(), recommended)
+            putBoolean(SCAN_RECOMMENDED_PREFIX + iso.uppercase(), recommended)
         }
 
     @JvmStatic
@@ -258,10 +267,11 @@ object BRSharedPrefs {
         }
 
     fun getDebugHost(): String? =
-        brdPrefs.getString(DEBUG_HOST, "")
+        brdPreferences.debugApiHost
 
-    fun putDebugHost(host: String) =
-        brdPrefs.edit { putString(DEBUG_HOST, host) }
+    fun getApiHost(): String {
+        return BrdApiHost.hostFor(BuildConfig.DEBUG, brdPreferences.hydraActivated).host
+    }
 
     fun clearAllPrefs() = brdPrefs.edit { clear() }
 
@@ -286,10 +296,10 @@ object BRSharedPrefs {
         brdPrefs.edit { putBoolean(PROMPT_PREFIX + promptName, dismissed) }
 
     fun getTrustNode(iso: String): String? =
-        brdPrefs.getString(TRUST_NODE_PREFIX + iso.toUpperCase(), "")
+        brdPrefs.getString(TRUST_NODE_PREFIX + iso.uppercase(), "")
 
     fun putTrustNode(iso: String, trustNode: String) =
-        brdPrefs.edit { putString(TRUST_NODE_PREFIX + iso.toUpperCase(), trustNode) }
+        brdPrefs.edit { putString(TRUST_NODE_PREFIX + iso.uppercase(), trustNode) }
 
     fun putFCMRegistrationToken(token: String) =
         brdPrefs.edit { putString(FCM_TOKEN, token) }

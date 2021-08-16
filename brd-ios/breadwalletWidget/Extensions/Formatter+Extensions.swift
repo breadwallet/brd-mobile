@@ -43,23 +43,6 @@ enum WidgetFormatter {
         formatter.timeStyle = .short
         return formatter
     }()
-
-    static func currencySymbolByCode(_ currencyCode: String) -> String? {
-        guard let locale = localeByCurrencyCode(currencyCode) else {
-            print("locale for \(currencyCode) is nil")
-            return nil
-        }
-
-        let symbol = locale.object(forKey: NSLocale.Key.currencySymbol) as? String
-        return (symbol?.contains("$") ?? false) ? "$" : symbol
-    }
-
-    static func localeByCurrencyCode(_ currencyCode: String) -> NSLocale? {
-        return NSLocale.availableLocaleIdentifiers
-            .map { NSLocale(localeIdentifier: $0) }
-            .filter { $0.object(forKey: .currencyCode) as? String == currencyCode }
-            .first
-    }
 }
 
 // MARK: - suffix number

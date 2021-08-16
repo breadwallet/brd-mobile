@@ -74,7 +74,7 @@ enum S {
         static let emptyPasteboard = NSLocalizedString("Send.emptyPasteboard", value: "Pasteboard is empty", comment: "Empty pasteboard error message")
         static let cameraUnavailableTitle = NSLocalizedString("Send.cameraUnavailableTitle", value:"BRD is not allowed to access the camera", comment: "Camera not allowed alert title")
         static let cameraUnavailableMessage = NSLocalizedString("Send.cameraunavailableMessage", value:"Go to Settings to allow camera access.", comment: "Camera not allowed message")
-        static let balanceString = NSLocalizedString("Send.balanceString", value:"Balance: ", comment: "Balance: $4.00")
+        static let balanceString = NSLocalizedString("Send.balanceString", value:"Maximum (after fees):  ", comment: "Maximum (after fees): $4.00")
         static let sendingMax = NSLocalizedString("Send.sendingMax", value:"Sending Max: ", comment: "Sending Max: $4.00")
         static let fee = NSLocalizedString("Send.fee", value:"Network Fee: %1$@", comment: "Network Fee: $0.01")
         static let containsAddress = NSLocalizedString("Send.containsAddress", value: "The destination is your own address. You cannot send to yourself.", comment: "Warning when sending to self.")
@@ -311,6 +311,7 @@ enum S {
         static let importTile = NSLocalizedString("Settings.importTitle", value:"Redeem Private Key", comment: "Import wallet label")
         static let notifications = NSLocalizedString("Settings.notifications", value:"Notifications", comment: "Notifications label")
         static let currency = NSLocalizedString("Settings.currency", value:"Display Currency", comment: "Default currency label")
+        static let region = NSLocalizedString("Settings.region", value:"Region & Currency", comment: "Region & Currency setup")
         static let sync = NSLocalizedString("Settings.sync", value:"Sync Blockchain", comment: "Sync blockchain label")
         static let shareData = NSLocalizedString("Settings.shareData", value:"Share Anonymous Data", comment: "Share anonymous data label")
         static let earlyAccess = NSLocalizedString("Settings.earlyAccess", value:"Join Early Access", comment: "Join Early access label")
@@ -440,6 +441,7 @@ enum S {
         static let addWallet = NSLocalizedString("MenuButton.addWallet", value: "Add Wallet", comment: "Menu button title")
         static let manageWallets = NSLocalizedString("MenuButton.manageWallets", value: "Manage Wallets", comment: "Menu button title")
         static let scan = NSLocalizedString("MenuButton.scan", value: "Scan QR Code", comment: "Menu button title")
+        static let orderHistory = NSLocalizedString("MenuButton.orderHistory", value: "Order History", comment: "Menu button title")
     }
     
     enum HomeScreen {
@@ -1006,5 +1008,136 @@ enum S {
             static let secondaryText = NSLocalizedString("Widget.Color.secondaryText", value: "Secondary", comment: "Name of color - Secondary Text")
             static let tertiaryText = NSLocalizedString("Widget.Color.tertiaryText", value: "Tertiary", comment: "Name of color - Tertiary Text")
         }
+    }
+
+    enum Exchange {
+
+        enum CTA {
+            static let setMin = NSLocalizedString("Exchange.CTA.setMin", value: "Set amount to min", comment: "CTA action exchange to set to min trade amount")
+            static let setMax = NSLocalizedString("Exchange.CTA.setMax", value: "Set amount to max", comment: "CTA action exchange to set to max trade amount")
+            static let processing = NSLocalizedString("Exchange.CTA.processing", value: "Processing ...", comment: "CTA button processing state")
+            static let next = NSLocalizedString("Exchange.CTA.next", value: "Next", comment: "CTA button title exchange screen")
+            static let preview = NSLocalizedString("Exchange.CTA.preview", value: "Preview", comment: "CTA button title exchange screen")
+            static let retry = NSLocalizedString("Exchange.CTA.retry", value: "Retry", comment: "CTA button title exchange screen")
+            static let loading = NSLocalizedString("Exchange.CTA.loading", value: "Loading ...", comment: "CTA button title exchange screen")
+        }
+
+        enum Offer {
+            static let noneTitle = NSLocalizedString("Exchange.offer.noneTitle", value: "No offers available", comment: "No offers title")
+            static let noneSubtitle = NSLocalizedString("Exchange.offer.noneSubtitle", value: "Try another amount", comment: "No offers subtitle")
+            static let gatheringTitle = NSLocalizedString("Exchange.offer.gatheringTitle", value: "One moment...", comment: "Loading offers title")
+            static let gatheringSubtitle = NSLocalizedString("Exchange.offer.gatheringSubtitle", value: "Fetching partner rates", comment: "Loading offers subtitle")
+            static let initTitle = NSLocalizedString("Exchange.offer.initTitle", value: "Offers will appear here", comment: "Initializing offers title")
+            static let minAmount = NSLocalizedString("Exchange.offer.minAmount", value: "Minimum amount", comment: "Offer subtitle set min amount")
+            static let maxAmount = NSLocalizedString("Exchange.offer.maxAmount", value: "Maximum amount", comment: "Offer subtitle set max amount")
+            static let limitMin = NSLocalizedString("Exchange.offer.limitMin", value: "Limit min", comment: "Offer subtitle limit min")
+            static let limitMax = NSLocalizedString("Exchange.offer.limitMax", value: "Limit max", comment: "Offer subtitle limit max")
+            static let limitTradeMin = NSLocalizedString("Exchange.offer.limitTradeMin", value: "Minimum trade requires ", comment: "Error string shown when balance is less than min trade amount")
+            static let insufficientBalance = NSLocalizedString("Exchange.offer.insufficientBalance", value: "Insufficient balance ", comment: "Error string shown when balance is less than min trade amount")
+            static let rate = NSLocalizedString("Exchange.offer.rate", value: "Rate", comment: "Exchange rate")
+            static let fees = NSLocalizedString("Exchange.offer.fees", value: "Fee", comment: "Exchange fee title")
+            static let total = NSLocalizedString("Exchange.offer.total", value: "Total", comment: "Offer total")
+            static let offers = NSLocalizedString("Exchange.offer.offers", value: "Offers", comment: "Offers navigation title")
+            static let sectionTitle = NSLocalizedString("Exchange.offer.sectionTitle", value: "All values displayed are estimates and susceptible to market price fluctuations.", comment: "Offers section title")
+            static let processingFee = NSLocalizedString("Exchange.offer.processingFee", value: "Processing Fee", comment: "Processing fee label")
+            static let networkFee = NSLocalizedString("Exchange.offer.networkFee", value: "Network Fee", comment: "Network fee label")
+            static let providerFee = NSLocalizedString("Exchange.offer.providerFee", value: "Provider Fee", comment: "Provider fee label")
+        }
+
+        enum Order {
+
+            enum Status {
+                static let creating = NSLocalizedString("Exchange.Order.status.creating", value: "Creating order", comment: "Status creating order")
+                static let processing = NSLocalizedString("Exchange.Order.status.processing", value: "Processing", comment: "Status processing order")
+                static let failed = NSLocalizedString("Exchange.Order.status.failed", value: "Order failed", comment: "Status failed order")
+                static let sent = NSLocalizedString("Exchange.Order.status.sent", value: "Order sent!", comment: "Status sent order")
+                static let successful = NSLocalizedString("Exchange.Order.status.successful", value: "Order Successful!", comment: "Status successful order")
+            }
+
+            enum CTA {
+                static let receipt = NSLocalizedString("Exchange.Order.CTA.receipt", value: "View Receipt", comment: "View receipt")
+                static let great = NSLocalizedString("Exchange.Order.CTA.great", value: "Great!", comment: "CTA button label")
+            }
+
+            static let bought = NSLocalizedString("Exchange.Order.bought", value: "Bought", comment: "Receipt item label bought")
+            static let `for` = NSLocalizedString("Exchange.Order.for", value: "For", comment: "Receipt item label for")
+            static let method = NSLocalizedString("Exchange.Order.method", value: "Method", comment: "Receipt item label method")
+            static let delivery = NSLocalizedString("Exchange.Order.delivery", value: "Delivery", comment: "Receipt item label delivery")
+            static let fees = NSLocalizedString("Exchange.Order.fees", value: "Fees", comment: "Receipt item label fees")
+            static let footer = NSLocalizedString("Exchange.Order.footer", value: "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.", comment: "Order footer info explaining exchange rate estimate")
+        }
+
+        enum Settings {
+            static let title = NSLocalizedString("Exchange.Settings.title", value: "Set Region", comment: "Region settings screen title")
+            static let applyRegion = NSLocalizedString("Exchange.Settings.applyRegion", value: "Apply region", comment: "CTA button title for region settings")
+            static let country = NSLocalizedString("Exchange.Settings.country", value: "Country", comment: "County label")
+            static let region = NSLocalizedString("Exchange.Settings.region", value: "State", comment: "Region label")
+            static let state = NSLocalizedString("Exchange.Settings.state", value: "State", comment: "State label")
+            static let currency = NSLocalizedString("Exchange.Settings.currency", value: "Display Currency", comment: "Currency label")
+        }
+
+        enum Preview {
+            static let rewards = NSLocalizedString("Exchange.Preview.rewards", value: "BRD Rewards", comment: "Preview items rewars label")
+            static let active = NSLocalizedString("Exchange.Preview.active", value: "Active ⓘ", comment: "Rewards status active")
+            static let inactive = NSLocalizedString("Exchange.Preview.inactive", value: "Inactive ⓘ", comment: "Rewards status inactive")
+            static let info = NSLocalizedString("Exchange.Preview.info", value: "Hold 1000 BRD and receive 25% off trading fees ", comment: "Rewards info")
+            static let cta = NSLocalizedString("Exchange.Preview.CTA", value: "Trade Now", comment: "Trade preview CTA")
+            static let title = NSLocalizedString("Exchange.Preview.title", value: "Trade preview", comment: "Trade preview navigation title")
+            static let delivery = NSLocalizedString("Exchange.Preview.delivery", value: "Delivery", comment: "Trade preview info item label")
+            static let partnerFee = NSLocalizedString("Exchange.Preview.partnerFee", value: "Partner Fee", comment: "Trade preview info item label")
+            static let networkFee = NSLocalizedString("Exchange.Preview.networkFee", value: "Network Fee", comment: "Trade preview info item label")
+            static let rate = NSLocalizedString("Exchange.Preview.rate", value: "Rate", comment: "Trade preview info item label")
+            static let footer = NSLocalizedString("Exchange.Preview.footer", value: "This is an estimate. The amount you will receive will depend on the market conditions.", comment: "Trade preview footer")
+        }
+
+        enum TransferError {
+            static let loadInput = NSLocalizedString("Exchange.TransferError.loadInput", value: "Failed to load input", comment: "Crypto transfer error description")
+            static let validateCurrencyOrAddress = NSLocalizedString("Exchange.TransferError.validateCurrencyOrAddress", value: "Failed to validate currency or address", comment: "Crypto transfer error description")
+            static let noFeeBasis = NSLocalizedString("Exchange.TransferError.noFeeBasis", value: "Failed with no fee bases error", comment: "Crypto transfer error description")
+            static let transactionValidation = NSLocalizedString("Exchange.TransferError.transactionValidation", value: "Failed transaction validation with ", comment: "Crypto transfer error description")
+            static let pinVerifier = NSLocalizedString("Exchange.TransferError.pinVerifier", value: "Failed to verify pin", comment: "Crypto transfer error description")
+            static let confirmation = NSLocalizedString("Exchange.TransferError.confirmation", value: "Failed to confirm transaction", comment: "Crypto transfer error description")
+            static let sendResult = NSLocalizedString("Exchange.TransferError.sendResult", value: "Failed send transaction with error ", comment: "Crypto transfer error description")
+            static let serviceUnavailable = NSLocalizedString("Exchange.TransferError.serviceUnavailable", value: "Service unavailable", comment: "Limit estimator error")
+            static let serviceError = NSLocalizedString("Exchange.TransferError.serviceError", value: "Service error", comment: "Limit estimator error")
+            static let insufficientFunds = NSLocalizedString("Exchange.TransferError.insufficientFunds", value: "Insufficient funds", comment: "Limit estimator error")
+        }
+
+        enum ErrorState {
+            static let initialization = NSLocalizedString("Exchange.ErrorState.initialization", value: "Initialization error", comment: "Initialization error alert body")
+            static let network = NSLocalizedString("Exchange.ErrorState.network", value: "Network error", comment: "Network error alert body")
+            static let order = NSLocalizedString("Exchange.ErrorState.order", value: "Order error", comment: "Order error alert body")
+            static let unknown = NSLocalizedString("Exchange.ErrorState.unknown", value: "Unknown error", comment: "Unknown error alert body")
+            static let transaction = NSLocalizedString("Exchange.ErrorState.transaction", value: "Transaction error", comment: "Transaction error alert body")
+            static let unsupportedRegionError = NSLocalizedString("Exchange.ErrorState.unsupportedRegionError", value: "Region you selected is not supported, please select different region", comment: "Region error alert body")
+            static let insufficientNativeBalanceErrorTitle = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceErrorTitle", value: "More ETH required", comment: "Insufficient chain error alert title")
+            static let insufficientNativeBalanceError = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceError", value: "You don't have enough ETH to cover network fees to send", comment: "Insufficient chain error alert body")
+            static let insufficientNativeBalanceErrorConfirm = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceErrorConfirm", value: "Buy ETH", comment: "Insufficient chain error alert ok action")
+        }
+
+        static let buy = NSLocalizedString("Exchange.buy", value: "Buy", comment: "Exchange buy title")
+        static let sell = NSLocalizedString("Exchange.sell", value: "Sell", comment: "Exchange sell title")
+        static let viaSEPA = NSLocalizedString("Exchange.viaSEPA", value: " via SEPA", comment: "Offer purchase method SEPA")
+        static let viaACH = NSLocalizedString("Exchange.viaACH", value: " via ACH", comment: "Offer purchase method ACH")
+        static let viaCard = NSLocalizedString("Exchange.viaCard", value: " via Card", comment: "Offer purchase method card")
+        static let viaCrypto = NSLocalizedString("Exchange.viaCrypto", value: " via Crypto", comment: "Offer purchase method crypto")
+        static let loadingAssets = NSLocalizedString("Exchange.loadingAssets", value: "Loading Assets", comment: "Loading available crypto assets")
+        static let under = NSLocalizedString("Exchange.under", value: "Under", comment: "Under the min limit")
+        static let over = NSLocalizedString("Exchange.over", value: "Over", comment: "Over the min limit")
+        static let limit = NSLocalizedString("Exchange.limit", value: "limit", comment: "purchase limit")
+        static let from = NSLocalizedString("Exchange.from", value: "From", comment: "Exchange label from")
+        static let to = NSLocalizedString("Exchange.to", value: "To", comment: "Exchange label to")
+        static let with = NSLocalizedString("Exchange.with", value: "With", comment: "Exchange label with")
+        static let fulfilledBy = NSLocalizedString("Exchange.fulfilledBy", value: "Fulfilled by", comment: "Trade preview info item label")
+        static let available = NSLocalizedString("Exchange.available", value: "Available: ", comment: "Exchange available balance label")
+        static let selectAsset = NSLocalizedString("Exchange.selectAsset", value: "Select Asset", comment: "Exchange select asset button label")
+        static let trade = NSLocalizedString("Exchange.trade", value: "Trade", comment: "Exchange trade title")
+        static let partnerWebViewAlertTitle = NSLocalizedString("Exchange.partnerWebViewAlertTitle", value: "Exit Checkout?", comment: "Exit partner webview flow alter title")
+        static let partnerWebViewAlertBody = NSLocalizedString("Exchange.partnerWebViewAlertBody", value: "View order details in Menu -> Order History", comment: "Exit partner webview flow alter title")
+        static let partnerWebViewAlertCancel = NSLocalizedString("Exchange.partnerWebViewAlertCancel", value: "Cancel", comment: "Exit partner webview flow alter cancel action")
+        static let partnerWebViewAlertOkay = NSLocalizedString("Exchange.partnerWebViewAlertOkay", value: "Okay", comment: "Exit partner webview flow alter Okay action")
+        static let emptyWalletTitle = NSLocalizedString("Exchange.emptyWalletTitle", value: "Your wallet is empty", comment: "Empty wallet message title")
+        static let emptyWalletBody = NSLocalizedString("Exchange.emptyWalletBody", value: "It looks like you don’t have any coins in your wallet to swap.", comment: "Empty wallet message body")
+        static let emptyWalletCTA = NSLocalizedString("Exchange.emptyWalletCTA", value: "Buy Some", comment: "CTA title for empty wallet trade screen")
     }
 }

@@ -43,11 +43,5 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
-
-        named("iosTest") {
-            dependencies {
-                implementation("com.autodesk:coroutineworker:0.6.2")
-            }
-        }
     }
 }

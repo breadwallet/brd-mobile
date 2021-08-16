@@ -16,13 +16,15 @@ enum SendResult {
     case success(hash: String?, rawTx: String?)
     case creationError(message: String)
     case publishFailure(code: Int, message: String)
-    case insufficientGas(message: String)
+    case insufficientGas(message: String, amount: Amount? = nil)
 }
 
 enum SenderValidationResult {
     case ok
     case failed
     case invalidAddress
+    case invalidAmountOrFee
+    case internalError
     case ownAddress
     case insufficientFunds
     case noExchangeRate
@@ -38,7 +40,7 @@ enum SenderValidationResult {
     case identityNotCertified(String)
     
     // token errors
-    case insufficientGas // no eth for token transfer gas
+    case insufficientGas(currencyCode: String, amount: Amount) // no eth for token transfer gas
 }
 
 typealias PinVerifier = (@escaping (String) -> Void) -> Void
@@ -127,7 +129,7 @@ class Sender: Subscriber {
             if let feeBalance = wallet.feeCurrency.state?.balance, let feeBasis = feeBasis {
                 let feeAmount = Amount(cryptoAmount: feeBasis.fee, currency: wallet.feeCurrency)
                 if feeBalance.tokenValue < feeAmount.tokenValue {
-                    return .insufficientGas
+                    return .insufficientGas(currencyCode: wallet.feeCurrency.code, amount: feeAmount - feeBalance)
                 }
             }
         }
@@ -142,8 +144,19 @@ class Sender: Subscriber {
                            gift: Gift? = nil) -> SenderValidationResult {
         assert(transfer == nil)
         let result = validate(address: address, amount: amount, feeBasis: feeBasis)
-        guard case .ok = result else { return result }
-        switch wallet.createTransfer(to: address, amount: amount, feeBasis: feeBasis, attribute: attribute) {
+
+        guard case .ok = result else {
+            return result
+        }
+
+        let transferResult = wallet.createTransfer(
+            to: address,
+            amount: amount,
+            feeBasis: feeBasis,
+            attribute: attribute
+        )
+
+        switch transferResult {
         case .success(let transfer):
             self.comment = comment
             self.gift = gift
@@ -151,6 +164,10 @@ class Sender: Subscriber {
             return .ok
         case .failure(let error) where error == .invalidAddress:
             return .invalidAddress
+        case .failure(let error) where error == .invalidAmountOrFee:
+            return .invalidAmountOrFee
+        case .failure(let error) where error == .internalError:
+            return .internalError
         default:
             return .failed
         }

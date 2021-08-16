@@ -3,17 +3,22 @@ rootProject.name = "brd-mobile"
 include(
     "cosmos-core",
     "cosmos-brd-api-client",
-    //"cosmos-websocket",
+    "cosmos-websocket",
     "cosmos-bundled",
+    "cosmos-support",
     "cosmos-preferences",
     "cosmos-bakers-api-client"
 )
+
+include("cosmos-exchange")
 
 include(
     "brd-android:app",
     "brd-android:app-core",
     "brd-android:theme"
 )
+
+include("cosmos-address-resolver")
 
 includeBuild("external/walletkit/WalletKitJava") {
     dependencySubstitution {

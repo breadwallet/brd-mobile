@@ -122,7 +122,7 @@ class RatesRepository private constructor(private val mContext: Context) {
         return if (fromCurrency.isNullOrBlank() || toCurrency.isNullOrBlank()) {
             null
         } else {
-            "$fromCurrency$CACHE_KEY_DELIMITER$toCurrency".toLowerCase(Locale.ROOT)
+            "$fromCurrency$CACHE_KEY_DELIMITER$toCurrency".lowercase()
         }
     }
 
@@ -165,7 +165,7 @@ class RatesRepository private constructor(private val mContext: Context) {
      * @return the price change.
      */
     fun getPriceChange(currencyCode: String): PriceChange? {
-        return mPriceChanges[currencyCode.toUpperCase(Locale.ROOT)]
+        return mPriceChanges[currencyCode.uppercase()]
     }
 
     @get:Synchronized

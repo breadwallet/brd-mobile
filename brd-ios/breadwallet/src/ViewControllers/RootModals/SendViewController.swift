@@ -11,6 +11,7 @@
 import UIKit
 import LocalAuthentication
 import WalletKit
+import Cosmos
 
 typealias PresentScan = ((@escaping ScanCompletion) -> Void)
 
@@ -33,7 +34,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         self.sender = sender
         self.initialRequest = initialRequest
         self.balance = currency.state?.balance ?? Amount.zero(currency)
-        addressCell = AddressCell(currency: currency)
+        addressCell = AddressCell(currency: currency, nativeCurrencyCode: sender.wallet.manager.primaryWallet.currency.code)
         amountView = AmountViewController(currency: currency, isPinPadExpandedAtLaunch: false)
         attributeCell = AttributeCell(currency: currency)
         
@@ -343,12 +344,16 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             return showAlert(title: S.Alert.error, message: S.Send.emptyPasteboard, buttonLabel: S.Button.ok)
         }
         
-        if let resolver = ResolvableFactory.resolver(pasteboard) {
+        if let type = Backend.addressResolver.getAddressType(address: pasteboard),
+           type is AddressType.Resolvable {
             self.addressCell.setContent(pasteboard)
             self.addressCell.showResolvingSpinner()
-            resolver.fetchAddress(forCurrency: currency) { response in
-                DispatchQueue.main.async {
-                    self.handleResolvableResponse(response, type: resolver.type, id: pasteboard, shouldShowError: true)
+            DispatchQueue.main.async {
+                let nativeCurrencyCode = self.sender.wallet.manager.primaryWallet.currency.code
+                Backend.addressResolver.resolveAddress(target: pasteboard,
+                                                       currencyCode: self.currency.code,
+                                                       nativeCurrencyCode: nativeCurrencyCode) { (result, _) in
+                    self.handleResolvableResponse(result, type: type, id: pasteboard, shouldShowError: true)
                 }
             }
             return
@@ -362,14 +367,14 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         handleRequest(request)
     }
     
-    private func handleResolvableResponse(_ response: Result<(String, String?), ResolvableError>,
-                                          type: ResolvableType,
+    private func handleResolvableResponse(_ result: AddressResult?,
+                                          type: AddressType,
                                           id: String,
                                           shouldShowError: Bool) {
-        switch response {
-        case .success(let addressDetails):
-            let address = addressDetails.0
-            let tag = addressDetails.1
+        switch result {
+        case let success as AddressResult.Success:
+            let address = success.address
+            let tag = success.destinationTag
             guard currency.isValidAddress(address) else {
                 let message = String(format: S.Send.invalidAddressMessage, currency.name)
                 showAlert(title: S.Send.invalidAddressTitle, message: message, buttonLabel: S.Button.ok)
@@ -392,14 +397,14 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             if let destinationTag = tag {
                 attributeCell?.setContent(destinationTag)
             }
-        case .failure:
+        default:
             if shouldShowError {
                 switch type {
-                case .fio:
+                case AddressType.ResolvableFio():
                     showErrorMessage(S.FIO.invalid)
-                case .payId:
+                case AddressType.ResolvablePayId():
                     showErrorMessage(S.PayId.invalidPayID)
-                case .uDomains:
+                case is AddressType.ResolvableUnstoppableDomain:
                     showErrorMessage(S.UDomains.invalid)
                 default:
                     showErrorMessage(S.UDomains.invalid)
@@ -499,7 +504,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         case .insufficientFunds:
             showAlert(title: S.Alert.error, message: S.Send.insufficientFunds, buttonLabel: S.Button.ok)
             
-        case .failed:
+        case .failed, .invalidAmountOrFee, .internalError:
             showAlert(title: S.Alert.error, message: S.Send.createTransactionError, buttonLabel: S.Button.ok)
             
         case .insufficientGas:
@@ -599,9 +604,9 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
                     let codeStr = code == 0 ? "" : " (\(code))"
                     self.showAlert(title: S.Send.sendError, message: message + codeStr, buttonLabel: S.Button.ok)
                     self.saveEvent("send.publishFailed", attributes: ["errorMessage": "\(message) (\(code))"])
-                case .insufficientGas(let rpcErrorMessage):
+                case .insufficientGas(let currencyCode, let amount):
                     self.showInsufficientGasError()
-                    self.saveEvent("send.publishFailed", attributes: ["errorMessage": rpcErrorMessage])
+                    self.saveEvent("send.publishFailed", attributes: ["errorMessage": "\(currencyCode) \(String(describing: amount))"])
                 }
             }
         }

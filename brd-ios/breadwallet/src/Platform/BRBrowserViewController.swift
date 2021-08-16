@@ -23,6 +23,7 @@ private class BRBrowserViewControllerInternal: UIViewController, WKNavigationDel
     }
     var didCallLoadRequest = false
     var closeOnURL: URL?
+    var closeOnURLComponent: String?
     var onClose: (() -> Void)?
     var showsBottomToolbar = true
     var statusBarStyle: UIStatusBarStyle = .default
@@ -245,6 +246,10 @@ private class BRBrowserViewControllerInternal: UIViewController, WKNavigationDel
             if let onClose = onClose, closeOnURLsMatch(webView.url) {
                 onClose()
             }
+            if let closeOnURLComponent = closeOnURLComponent,
+               webView.url?.absoluteString.contains(closeOnURLComponent) ?? false {
+                    onClose?()
+            }
         }
     }
     
@@ -304,6 +309,10 @@ private class BRBrowserViewControllerInternal: UIViewController, WKNavigationDel
 open class BRBrowserViewController: UINavigationController {
     var onDone: (() -> Void)?
     var isClosing = false
+    var closeOnURLComponent: String? {
+        get { browser.closeOnURLComponent }
+        set { browser.closeOnURLComponent = newValue }
+    }
     var closeOnURL: String {
         get {
             return browser.closeOnURL == nil ? "" : "\(browser.closeOnURL!)"

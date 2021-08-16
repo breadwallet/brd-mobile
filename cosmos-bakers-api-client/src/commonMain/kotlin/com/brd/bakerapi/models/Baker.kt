@@ -45,7 +45,7 @@ enum class ServiceType {
     @SerialName("tezos_dune")
     TEZOS_DUNE;
 
-    override fun toString() = name.toLowerCase()
+    override fun toString() = name.lowercase()
 }
 
 @Serializable
@@ -57,7 +57,7 @@ enum class ServiceHealth{
     @SerialName("dead")
     DEAD;
 
-    override fun toString() = name.toLowerCase()
+    override fun toString() = name.lowercase()
 }
 
 @Serializable
@@ -71,7 +71,7 @@ enum class PayoutTiming {
     @SerialName("no_data")
     NO_DATA;
 
-    override fun toString() = name.toLowerCase()
+    override fun toString() = name.lowercase()
 }
 
 @Serializable
@@ -85,5 +85,5 @@ enum class PayoutAccuracy {
     @SerialName("no_data")
     NO_DATA;
 
-    override fun toString() = name.toLowerCase()
+    override fun toString() = name.lowercase()
 }

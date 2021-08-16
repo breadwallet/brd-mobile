@@ -40,7 +40,7 @@ class GiftViewController: UIViewController, Trackable {
     private let gradientView = GradientView()
     private let headerView = GiftHeaderView()
     private let qr = UIImageView(image: UIImage(named: "GiftQR"))
-    private let header = UILabel.wrapping(font: Theme.boldTitle, color: .white)
+    private let header = UILabel.wrapping(font: Theme.body1Accent, color: .white)
     private let subHeader = UILabel.wrapping(font: Theme.body1, color: UIColor.white.withAlphaComponent(0.85))
     private let amountHeader = UILabel(font: Theme.caption, color: .white)
     private let name = BorderedTextInput(placeholder: "Recipient's Name", keyboardType: .default)

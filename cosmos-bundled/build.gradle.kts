@@ -32,12 +32,18 @@ kotlin {
         }
     }
     ios {
-        compilations.named("main") {
+        compilations["main"].apply {
             binaries.framework {
                 baseName = "Cosmos"
+                export(project(":cosmos-address-resolver"))
                 export(project(":cosmos-brd-api-client"))
                 export(project(":cosmos-bakers-api-client"))
                 export(project(":cosmos-preferences"))
+                export(project(":cosmos-core"))
+                export(project(":cosmos-exchange"))
+                export(project(":cosmos-support"))
+                export(brd.Libs.Mobiuskt.Core)
+                export(brd.Libs.Mobiuskt.Extras)
                 export(brd.Libs.Blockset)
             }
         }
@@ -46,17 +52,20 @@ kotlin {
     sourceSets {
         named("commonMain") {
             dependencies {
-                // Work around a transitive dependency on Atomicfu that
-                // causes the Kotlin compiler to fail when proccing an
-                // outdated klib package.  This is reported twice as
-                // https://youtrack.jetbrains.com/issue/KT-43911 and
-                // https://youtrack.jetbrains.com/issue/KT-41821
-                implementation(brd.Libs.Kotlinx.Atomicfu)
-
+                api(project(":cosmos-address-resolver"))
                 api(project(":cosmos-brd-api-client"))
                 api(project(":cosmos-bakers-api-client"))
                 api(project(":cosmos-preferences"))
+                api(project(":cosmos-core"))
+                api(project(":cosmos-exchange"))
+                api(project(":cosmos-support"))
                 api(brd.Libs.Blockset)
+                api(brd.Libs.Mobiuskt.Core)
+                api(brd.Libs.Mobiuskt.Extras)
+
+                implementation(brd.Libs.Coroutines.Core) {
+                    version { strictly(brd.COROUTINES_VERSION) }
+                }
             }
         }
         named("androidMain") {

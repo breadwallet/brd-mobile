@@ -56,11 +56,11 @@ class BalanceCell: UIView, Subscriber {
         if let rate = currency.state?.currentRate {
             let placeholderAmount = Amount.zero(currency, rate: rate)
             self.exchangeRate = rate
-            self.secondaryBalance = UpdatingLabel(formatter: placeholderAmount.localFormat)
-            self.primaryBalance = UpdatingLabel(formatter: placeholderAmount.tokenFormat)
+            self.secondaryBalance = UpdatingLabel(formatter: placeholderAmount.cosmosLocalFormat)
+            self.primaryBalance = UpdatingLabel(formatter: placeholderAmount.cosmosTokenFormat)
         } else {
-            self.secondaryBalance = UpdatingLabel(formatter: NumberFormatter())
-            self.primaryBalance = UpdatingLabel(formatter: NumberFormatter())
+            self.secondaryBalance = UpdatingLabel(formatter: nil)
+            self.primaryBalance = UpdatingLabel(formatter: nil)
         }
         super.init(frame: .zero)
         addSubviews()
@@ -84,8 +84,8 @@ class BalanceCell: UIView, Subscriber {
                                 guard let `self` = self else { return }
                                 if let rate = $0[self.currency]?.currentRate {
                                     let placeholderAmount = Amount.zero(self.currency, rate: rate)
-                                    self.secondaryBalance.formatter = placeholderAmount.localFormat
-                                    self.primaryBalance.formatter = placeholderAmount.tokenFormat
+                                    self.secondaryBalance.formatter = placeholderAmount.cosmosLocalFormat
+                                    self.primaryBalance.formatter = placeholderAmount.cosmosTokenFormat
                                 }
                                 self.exchangeRate = $0[self.currency]?.currentRate
         })

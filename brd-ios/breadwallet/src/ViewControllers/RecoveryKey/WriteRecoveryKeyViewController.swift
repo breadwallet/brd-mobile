@@ -635,19 +635,18 @@ class WordPagingCollectionView: UICollectionView {
     var savedContentOffset: CGPoint?
     
     override var contentOffset: CGPoint {
+        get {
+            guard obscured else {
+                return super.contentOffset
+            }
+            return savedContentOffset ?? super.contentOffset
+        }
         set {
             guard obscured else {
                 super.contentOffset = newValue
                 return
             }
             super.contentOffset = savedContentOffset ?? newValue
-        }
-        
-        get {
-            guard obscured else {
-                return super.contentOffset
-            }
-            return savedContentOffset ?? super.contentOffset
         }
     }
     

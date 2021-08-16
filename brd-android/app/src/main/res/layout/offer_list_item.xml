@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/hydra_quaternary_background"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="16dp"
+    android:foreground="?selectableItemBackground"
+    android:filterTouchesWhenObscured="false">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <ImageView
+            android:id="@+id/imageProviderLogo"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:contentDescription="@null"
+            app:layout_constraintBottom_toTopOf="@+id/labelRateText"
+            app:layout_constraintEnd_toStartOf="@+id/labelProviderName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            tools:src="@color/blue"/>
+        <TextView
+            android:id="@+id/labelProviderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="20sp"
+            tools:text="Provider"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@+id/iconEnabled"
+            app:layout_constraintStart_toEndOf="@+id/imageProviderLogo"
+            app:layout_constraintTop_toTopOf="@+id/imageProviderLogo"
+            app:layout_constraintBottom_toTopOf="@+id/labelSubtitle"/>
+
+        <ImageView
+            android:id="@+id/iconEnabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_selected"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@null"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageProviderLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageProviderLogo"/>
+
+        <TextView
+            android:id="@+id/labelSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/light_gray"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Delivery 1-3 Hours"
+            app:layout_constraintTop_toBottomOf="@+id/labelProviderName"
+            app:layout_constraintBottom_toBottomOf="@+id/imageProviderLogo"
+            app:layout_constraintStart_toEndOf="@+id/imageProviderLogo"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/labelOutputAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="$50.00"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/labelTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/labelTotal"
+            app:layout_constraintBottom_toTopOf="@+id/labelOutputAmountAlt"/>
+
+        <TextView
+            android:id="@+id/labelOutputAmountAlt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0.024889623 ETH"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toEndOf="@+id/labelTotal"
+            app:layout_constraintTop_toBottomOf="@+id/labelOutputAmount"
+            app:layout_constraintBottom_toBottomOf="@+id/labelTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"/>
+
+
+        <TextView
+            android:id="@+id/labelRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_gray"
+            android:layout_marginTop="16dp"
+            android:text="Rate:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageProviderLogo"
+            app:layout_constraintBottom_toTopOf="@+id/viewFeeDivider"
+            app:layout_constraintEnd_toStartOf="@+id/labelRateValue"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <TextView
+            android:id="@+id/labelRateValue"
+            tools:text="$5.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/labelRateText"
+            app:layout_constraintBottom_toBottomOf="@+id/labelRateText"
+            app:layout_constraintStart_toEndOf="@+id/labelRateText"
+            app:layout_constraintEnd_toEndOf="@+id/viewFeeDivider"/>
+
+
+        <View
+            android:id="@+id/viewFeeDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_transparent_15"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/labelRateText"
+            app:layout_constraintBottom_toTopOf="@+id/labelFee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/labelFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fee:"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewFeeDivider"
+            app:layout_constraintBottom_toTopOf="@+id/viewFooterDivider"
+            app:layout_constraintEnd_toStartOf="@+id/labelFeeValue"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <TextView
+            android:id="@+id/labelFeeValue"
+            tools:text="$55.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/labelFee"
+            app:layout_constraintBottom_toBottomOf="@+id/labelFee"
+            app:layout_constraintStart_toEndOf="@+id/labelFee"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/viewFooterDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_transparent_15"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/labelFee"
+            app:layout_constraintBottom_toTopOf="@+id/labelTotal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/labelTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/labelOutputAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewFooterDivider"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupValid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="viewFooterDivider,viewFeeDivider,labelTotal,labelOutputAmount,labelOutputAmountAlt,labelRateText,labelRateValue,labelFee,labelFeeValue"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageProviderLogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Next"
+            android:layout_marginTop="8dp"
+            style="@style/PrimaryButton"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -9,12 +9,26 @@
 package com.breadwallet.mobius
 
 import com.spotify.mobius.functions.Consumer
+import kt.mobius.functions.Consumer as KtConsumer
 
 class ConsumerDelegate<V>(
     initial: Consumer<V>? = null
 ) : Consumer<V> {
 
     var consumer: Consumer<V>? = initial
+        @Synchronized get
+        @Synchronized set
+
+    override fun accept(value: V) {
+        consumer?.accept(value)
+    }
+}
+
+class ConsumerDelegateKt<V>(
+    initial: KtConsumer<V>? = null
+) : KtConsumer<V> {
+
+    var consumer: KtConsumer<V>? = initial
         @Synchronized get
         @Synchronized set
 

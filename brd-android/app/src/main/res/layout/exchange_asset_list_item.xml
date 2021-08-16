@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:layout_margin="8dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/hydra_quaternary_background"
+        app:cardCornerRadius="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:id="@+id/imageCurrencyIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/labelCurrencyCode"
+                app:layout_constraintBottom_toBottomOf="@+id/labelCurrencyName"
+                app:layout_constraintEnd_toStartOf="@id/labelCurrencyCode"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"/>
+
+            <TextView
+                android:id="@+id/labelCurrencyCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                tools:text="Hello"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/labelCurrencyName"
+                app:layout_constraintEnd_toStartOf="@+id/imageItemValue"
+                app:layout_constraintStart_toEndOf="@+id/imageCurrencyIcon"
+                app:layout_constraintHorizontal_bias="0"/>
+
+            <TextView
+                android:id="@+id/labelCurrencyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                tools:text="World"
+                android:textColor="@color/white_60_percent_opaque"
+                app:layout_constraintTop_toBottomOf="@+id/labelCurrencyCode"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageItemValue"
+                app:layout_constraintStart_toEndOf="@+id/imageCurrencyIcon"
+                app:layout_constraintHorizontal_bias="0"/>
+
+            <TextView
+                android:id="@+id/labelCurrencyRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelCurrencyCode"
+                app:layout_constraintEnd_toStartOf="@+id/imageItemValue"
+                app:layout_constraintBottom_toTopOf="@+id/labelCurrencyBalance"
+                app:layout_constraintHorizontal_bias="1"
+                android:textAlignment="viewEnd"
+                tools:text="$583.42"/>
+
+            <TextView
+                android:id="@+id/labelCurrencyBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/white_60_percent_opaque"
+                app:layout_constraintTop_toBottomOf="@+id/labelCurrencyRate"
+                app:layout_constraintStart_toEndOf="@+id/labelCurrencyRate"
+                app:layout_constraintEnd_toStartOf="@+id/imageItemValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                tools:text="Balance 1.3972 BRD"/>
+
+
+            <ImageView
+                android:id="@+id/imageItemValue"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_selected"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Selected"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="1"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white_transparent_10"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+</LinearLayout>

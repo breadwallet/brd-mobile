@@ -28,19 +28,27 @@ data class ExchangeOffer(
     @SerialName("source_currency_method")
     val sourceCurrencyMethod: CurrencyMethod,
     val provider: Provider,
+    @SerialName("provider_delivery_estimate")
+    val deliveryEstimate: String? = null,
     val limits: List<Limit>,
     @SerialName("invoice_estimate")
     val invoiceEstimate: ExchangeInvoiceEstimate? = null
 ) {
 
+    val discounts: List<ExchangeInvoiceEstimate.Discount>
+        get() = invoiceEstimate?.fees?.flatMap(ExchangeInvoiceEstimate.Fee::discounts).orEmpty()
+
     @Serializable
     enum class LimitType {
         @SerialName("source_currency_min")
         SOURCE_CURRENCY_MIN,
+
         @SerialName("source_currency_max")
         SOURCE_CURRENCY_MAX,
+
         @SerialName("quote_currency_min")
         QUOTE_CURRENCY_MIN,
+
         @SerialName("quote_currency_max")
         QUOTE_CURRENCY_MAX,
     }
@@ -52,7 +60,10 @@ data class ExchangeOffer(
         val logoUrl: String? = null,
         val slug: String,
         val url: String? = null,
-    )
+    ) {
+        val imageSlug: String
+            get() = slug.replace("-test", "")
+    }
 
     @Serializable
     data class Limit(

@@ -59,7 +59,6 @@ class AppetizePlugin : Plugin<Project> {
         }
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     private val ApplicationVariant.uploadTaskName: String
         get() = buildString {
             append("appetizeUpload")
@@ -67,7 +66,6 @@ class AppetizePlugin : Plugin<Project> {
             append(buildType.name.capitalize(Locale.ROOT))
         }
 
-    @OptIn(ExperimentalStdlibApi::class)
     private val ApplicationVariant.removeTaskName: String
         get() = buildString {
             append("appetizeRemove")

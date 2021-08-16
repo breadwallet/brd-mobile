@@ -70,6 +70,8 @@ enum TriggerName {
     case showCurrency(Currency?)
     case fetchInbox
     case optInSegWit
+    case presentRewardsInfo
+    case presentOrderHistory
     case openPlatformUrl(String)
     case didViewTransactions([Transaction]?)
     case showInAppNotification(BRDMessage?)
@@ -137,6 +139,10 @@ func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     case (.fetchInbox, .fetchInbox):
         return true
     case (.optInSegWit, .optInSegWit):
+        return true
+    case (.presentRewardsInfo, .presentRewardsInfo):
+        return true
+    case (.presentOrderHistory, .presentOrderHistory):
         return true
     case (.openPlatformUrl, .openPlatformUrl):
         return true

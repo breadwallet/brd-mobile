@@ -136,7 +136,7 @@ object TokenUtil {
      * @return The TokenItem with the given currency code or null.
      */
     fun tokenForCode(currencyCode: String): TokenItem? {
-        return tokenMap[currencyCode.toLowerCase(Locale.ROOT)]
+        return tokenMap[currencyCode.lowercase()]
     }
 
     fun tokenForCoingeckoId(coingeckoId: String): TokenItem? {
@@ -152,7 +152,7 @@ object TokenUtil {
     }
 
     fun coingeckoIdForCode(code: String): String? {
-        return coingeckoIdMap[code.toUpperCase(Locale.ROOT)]
+        return coingeckoIdMap[code.uppercase()]
             ?: tokenForCode(code)?.coingeckoId
     }
 
@@ -217,7 +217,7 @@ object TokenUtil {
                 ServerBundlesHelper.getBundle(ServerBundlesHelper.Type.TOKEN),
                 null
             )
-        val iconFileName = ICON_FILE_NAME_FORMAT.format(currencyCode.toLowerCase(Locale.ROOT))
+        val iconFileName = ICON_FILE_NAME_FORMAT.format(currencyCode.lowercase())
         val iconDirectoryName = if (withBackground) {
             ICON_DIRECTORY_NAME_WHITE_SQUARE_BACKGROUND
         } else {
@@ -229,7 +229,7 @@ object TokenUtil {
     }
 
     fun getTokenStartColor(currencyCode: String): String? {
-        val tokenItem = tokenMap[currencyCode.toLowerCase(Locale.ROOT)]
+        val tokenItem = tokenMap[currencyCode.lowercase()]
         return if (tokenItem != null && !tokenItem.startColor.isNullOrBlank()) {
             tokenItem.startColor
         } else {
@@ -238,7 +238,7 @@ object TokenUtil {
     }
 
     fun getTokenEndColor(currencyCode: String): String? {
-        val tokenItem = tokenMap[currencyCode.toLowerCase(Locale.ROOT)]
+        val tokenItem = tokenMap[currencyCode.lowercase()]
         return if (tokenItem != null && !tokenItem.endColor.isNullOrBlank()) {
             tokenItem.endColor
         } else {
@@ -247,7 +247,7 @@ object TokenUtil {
     }
 
     fun isTokenSupported(symbol: String): Boolean {
-        return tokenMap[symbol.toLowerCase(Locale.ROOT)]?.isSupported ?: true
+        return tokenMap[symbol.lowercase()]?.isSupported ?: true
     }
 
     private fun loadTokens(tokenItems: List<TokenItem>) {
@@ -255,7 +255,7 @@ object TokenUtil {
         val tokens = tokenItems.filterNot(TokenItem::isNative).sortedBy { it.symbol }
         TokenUtil.tokenItems = native + tokens
         tokenMap = TokenUtil.tokenItems.associateBy { item ->
-            item.symbol.toLowerCase(Locale.ROOT)
+            item.symbol.lowercase()
         }
     }
 

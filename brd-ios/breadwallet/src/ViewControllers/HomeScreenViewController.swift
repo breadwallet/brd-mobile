@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class HomeScreenViewController: UIViewController, Subscriber, Trackable {
 
@@ -17,7 +18,7 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     private let assetList = AssetListTableView()
     private let subHeaderView = UIView()
     private let logo = UIImageView(image: UIImage(named: "LogoGradientSmall"))
-    private let total = UILabel(font: Theme.boldTitle.withSize(Theme.FontSize.h1Title.rawValue), color: Theme.primaryText)
+    private let total = UILabel(font: Theme.h1TitleAccent, color: Theme.primaryText)
     private let totalAssetsLabel = UILabel(font: Theme.caption, color: Theme.tertiaryText)
     private let debugLabel = UILabel(font: .customBody(size: 12.0), color: .transparentWhiteText) // debug info
     private let prompt = UIView()
@@ -27,6 +28,9 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     private let notificationHandler = NotificationHandler()
     
     private var shouldShowBuyAndSell: Bool {
+        if UserDefaults.cosmos.hydraActivated {
+            return false
+        }
         return (Store.state.experimentWithName(.buyAndSell)?.active ?? false) && (Store.state.defaultCurrencyCode == C.usdCurrencyCode)
     }
     
@@ -62,14 +66,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
         // There's already a lot going on, so don't show the home-screen prompts right away.
         return !Store.state.wallets.isEmpty
     }
-    
-    private lazy var totalAssetsNumberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.isLenient = true
-        formatter.numberStyle = .currency
-        formatter.generatesDecimalNumbers = true
-        return formatter
-    }()
 
     // MARK: -
     
@@ -317,19 +313,15 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     
     private func updateTotalAssets() {
         let fiatTotal: Decimal = Store.state.wallets.values.map {
-            guard let balance = $0.balance,
-                let rate = $0.currentRate else { return 0.0 }
-            let amount = Amount(amount: balance,
-                                rate: rate)
-            return amount.fiatValue
+            guard let balance = $0.balance, let rate = $0.currentRate else {
+                return 0.0
+            }
+            return Amount(amount: balance, rate: rate).fiatValue
         }.reduce(0.0, +)
-        
-        let localeComponents = [NSLocale.Key.currencyCode.rawValue: UserDefaults.defaultCurrencyCode]
-        let localeIdentifier = Locale.identifier(fromComponents: localeComponents)
-        totalAssetsNumberFormatter.locale = Locale(identifier: localeIdentifier)
-        totalAssetsNumberFormatter.currencySymbol = Store.state.orderedWallets.first?.currentRate?.currencySymbol ?? ""
-        
-        self.total.text = totalAssetsNumberFormatter.string(from: fiatTotal as NSDecimalNumber)
+
+        let code = UserDefaults.cosmos.fiatCurrencyCode
+        let formatter = Formatters().fiat(currencyCode: code)
+        total.text = formatter.format(double: fiatTotal.doubleValue)
     }
     
     private func updateAmountsForWidgets() {

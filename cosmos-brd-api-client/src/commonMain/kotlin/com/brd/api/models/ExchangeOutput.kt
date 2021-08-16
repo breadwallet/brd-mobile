@@ -20,6 +20,7 @@ sealed class ExchangeOutput {
     abstract val amount: String
     abstract val actions: List<ExchangeOrder.Action>
     abstract val currency: ExchangeCurrency
+    abstract val expiresAt: Instant?
 
     @Serializable
     @SerialName("crypto_transfer")
@@ -30,32 +31,14 @@ sealed class ExchangeOutput {
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
         @Serializable(with = InstantSerializer::class)
-        val expiresAt: Instant? = null,
+        override val expiresAt: Instant? = null,
         @SerialName("crypto_transfer_status")
-        val status: Status,
+        val status: CryptoStatus,
         @SerialName("send_to_address")
         val sendToAddress: String,
         @SerialName("transaction_id")
         val transactionId: String,
     ) : ExchangeOutput() {
-
-        @Serializable
-        enum class Status {
-            @SerialName("waiting_for_address")
-            WAITING_FOR_ADDRESS,
-
-            @SerialName("ready")
-            READY,
-
-            @SerialName("failed")
-            FAILED,
-
-            @SerialName("processing")
-            PROCESSING,
-
-            @SerialName("complete")
-            COMPLETE,
-        }
     }
 
     @SerialName("ach")
@@ -67,27 +50,45 @@ sealed class ExchangeOutput {
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
         @Serializable(with = InstantSerializer::class)
-        val expiresAt: Instant? = null,
+        override val expiresAt: Instant? = null,
         @SerialName("ach_transfer_status")
-        val status: Status,
-    ) : ExchangeOutput() {
+        val status: FiatStatus,
+    ) : ExchangeOutput()
 
-        @Serializable
-        enum class Status {
-            @SerialName("waiting_for_media")
-            WAITING_FOR_MEDIA,
+    @Serializable
+    enum class CryptoStatus {
+        @SerialName("waiting_for_address")
+        WAITING_FOR_ADDRESS,
 
-            @SerialName("ready")
-            READY,
+        @SerialName("ready")
+        READY,
 
-            @SerialName("failed")
-            FAILED,
+        @SerialName("failed")
+        FAILED,
 
-            @SerialName("processing")
-            PROCESSING,
+        @SerialName("processing")
+        PROCESSING,
 
-            @SerialName("complete")
-            COMPLETE,
-        }
+        @SerialName("complete")
+        COMPLETE,
+    }
+
+
+    @Serializable
+    enum class FiatStatus {
+        @SerialName("waiting_for_media")
+        WAITING_FOR_MEDIA,
+
+        @SerialName("ready")
+        READY,
+
+        @SerialName("failed")
+        FAILED,
+
+        @SerialName("processing")
+        PROCESSING,
+
+        @SerialName("complete")
+        COMPLETE,
     }
 }

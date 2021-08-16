@@ -1,22 +1,20 @@
 //
-//  IosBRDAuthProvider.swift
+//  IosBrdAuthProvider.swift
 //  breadwallet
 //
-//  Created by Andrew Carlson on 2/25/21.
-//  Copyright © 2021 Breadwinner AG. All rights reserved.
+//  Created by blockexplorer <michael.inger@brd.com> on 2/26/21.
+//  Copyright (c) 2021 Breadwinner AG
 //
 //  SPDX-License-Identifier: BUSL-1.1
-//
-//  See the LICENSE file at the project root for license information.
 //
 
 import Foundation
 import Cosmos
 import WalletKit
 
-class IosBRDAuthProvider: BRDAuthProvider {
+class IosBrdAuthProvider: BrdAuthProviderBase {
     
-    private let authenticator: WalletAuthenticator
+    private var authenticator: WalletAuthenticator
     
     init(walletAuthenticator: WalletAuthenticator) {
         self.authenticator = walletAuthenticator
@@ -29,30 +27,35 @@ class IosBRDAuthProvider: BRDAuthProvider {
         return key
     }
     
-    var token: String? {
+    override var token: String? {
         get {
-            let tokenData = authenticator.apiUserAccount!
+            let tokenData = authenticator.apiUserAccount ?? [:]
             return tokenData["token"] as? String
         }
         set {
-            var tokenData = authenticator.apiUserAccount!
+            var tokenData = authenticator.apiUserAccount ?? [:]
             tokenData["token"] = newValue
+            authenticator.apiUserAccount = tokenData 
         }
     }
     
-    func deviceId() -> String {
+    override func deviceId() -> String {
         return UserDefaults.deviceID
     }
     
-    func hasKey() -> Bool {
+    override func hasKey() -> Bool {
         return authenticator.apiAuthKey != nil
     }
     
-    func publicKey() -> String {
+    override func publicKey() -> String {
         return authenticator.apiAuthKey!.encodeAsPublic.hexToData!.base58
     }
+
+    override func walletId() -> String? {
+        return Store.state.walletID
+    }
     
-    func sign(method: String, body: String, contentType: String, url: String) -> BRDAuthProviderSignature {
+    override func sign(method: String, body: String, contentType: String, url: String) -> BrdAuthProviderSignature {
         let date = Date().RFC1123String()!
         var bodySignature: String = ""
         switch method {
@@ -67,6 +70,19 @@ class IosBRDAuthProvider: BRDAuthProvider {
         
         let signingData = signingString.data(using: .utf8)!
         let sig = signingData.sha256_2.compactSign(key: authKey!)!
-        return BRDAuthProviderSignature.init(signature: sig.base58, timestamp: date)
+        return BrdAuthProviderSignature.init(signature: sig.base58, timestamp: date)
+    }
+
+    func signedGetUrl(host: String, path: String) -> URL? {
+        let signature = sign(method: "GET", body: "", contentType: "", url: path)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = host.replacingOccurrences(of: "https://", with: "")
+        urlComponents.path = path
+        urlComponents.queryItems = [
+            URLQueryItem(name: "Authorization", value: authorization(signature: signature.signature)),
+            URLQueryItem(name: "Date", value: signature.timestamp),
+        ]
+        return urlComponents.url
     }
 }

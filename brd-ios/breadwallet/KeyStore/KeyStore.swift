@@ -187,6 +187,11 @@ class KeyStore {
         if try keychainItem(key: KeychainKey.fixerAPIToken) as String? == nil {
             KeyStore.fetchCloudKitToken(id: C.fixerAPITokenRecordId, keyChainID: KeychainKey.fixerAPIToken, completion: { _ in })
         }
+
+        // If app was deleted, and key restored from keychain clear user token
+        if UserDefaults.appLaunchCount == 0 {
+            self.apiUserAccount?["token"] = nil
+        }
     }
     
     /// Returns true if old masterPubKey record is in the keychain and removes them

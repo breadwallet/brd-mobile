@@ -11,6 +11,7 @@
 import XCTest
 @testable import breadwallet
 import WalletKit
+import Cosmos
 
 private var authenticator: WalletAuthenticator { return keyStore as WalletAuthenticator }
 private var client: BRAPIClient!
@@ -24,7 +25,9 @@ class BRAPIClientTests: XCTestCase {
         clearKeychain()
         keyStore = try! KeyStore.create()
         _ = setupNewAccount(keyStore: keyStore) // each test will get its own account
-        client = BRAPIClient(authenticator: authenticator)
+        let authProvider = IosBrdAuthProvider(walletAuthenticator: authenticator)
+        let brdApi = BrdApiClientCompanion().create(host: BrdApiHost.LEGACY_PRODUCTION(), authProvider: authProvider)
+        client = BRAPIClient(authenticator: authenticator, brdApiClient: brdApi)
     }
     
     override class func tearDown() {

@@ -83,7 +83,9 @@ class SettingsController(
             direct.instance(),
             direct.instance(),
             direct.instance(),
-            direct.instance()
+            direct.instance(),
+            direct.instance(),
+            direct.instance(),
         )
     }
 
