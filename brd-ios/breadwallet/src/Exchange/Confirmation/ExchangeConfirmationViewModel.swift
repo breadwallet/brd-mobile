@@ -90,7 +90,6 @@ extension ExchangeConfirmationViewModel {
 extension ExchangeConfirmationViewModel {
 
     struct Order {
-
         let baseAmount: String
         let baseColor: UIColor
         let quoteAmount: String
@@ -99,6 +98,7 @@ extension ExchangeConfirmationViewModel {
         let delivery: String
         let fees: [Fee]
         let feeTotal: String
+        let baseCode: String?
 
         init(
             _ order: ExchangeOrder,
@@ -136,6 +136,8 @@ extension ExchangeConfirmationViewModel {
             feeTotal = sourceFees
                 ? offer.formattedSourceFees ?? ""
                 : offer.formattedQuoteFees ?? ""
+
+            baseCode = assets.last?.code
         }
 
         init(
@@ -144,7 +146,8 @@ extension ExchangeConfirmationViewModel {
             method: String,
             delivery: String,
             fees: [Fee],
-            feeTotal: String
+            feeTotal: String,
+            baseCode: String
         ) {
             self.baseAmount = baseAmount
             self.baseColor = Theme.primaryText
@@ -154,6 +157,7 @@ extension ExchangeConfirmationViewModel {
             self.delivery = delivery
             self.fees = fees
             self.feeTotal = feeTotal
+            self.baseCode = baseCode
         }
     }
 }
@@ -207,7 +211,8 @@ extension ExchangeConfirmationViewModel.Order {
             method: "Wyre with ApplePay",
             delivery: "Instant",
             fees: Fee.mock(),
-            feeTotal: "$15.53 USD"
+            feeTotal: "$15.53 USD",
+            baseCode: "btc"
         )
     }
 }

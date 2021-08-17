@@ -190,6 +190,8 @@ enum Currencies: String, CaseIterable {
     case xrp
     case hbar
     case xtz
+    case doge
+    case ltc
     
     var code: String { return rawValue }
     var uid: CurrencyId {
@@ -211,6 +213,10 @@ enum Currencies: String, CaseIterable {
             uids = "hedera-mainnet:__native__"
         case .xtz:
             uids = "tezos-mainnet:__native__"
+        case .doge:
+            uids = "dogecoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
+        case .ltc:
+            uids = "litecoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         }
         return CurrencyId(rawValue: uids)
     }

@@ -8,7 +8,7 @@
 //  SPDX-License-Identifier: BUSL-1.1
 //
 
-import Foundation
+import UIKit
 
 struct HomeScreenAssetViewModel {
     let currency: Currency
@@ -31,5 +31,23 @@ struct HomeScreenAssetViewModel {
         guard let balance = currency.state?.balance else { return "" }
         return Amount(amount: balance,
                       rate: rate).description
+    }
+
+    var backgroundOverlayImage: UIImage? {
+        let balance = currency.state?.balance?.tokenValue ?? 0
+
+        if currency.isDoge && balance >= Constant.dogeBackgroundOverlayLimit {
+            return currency.backgroundOverlayImage
+        }
+
+        return nil
+    }
+}
+
+// MARK: - Constant
+
+private extension HomeScreenAssetViewModel {
+    enum Constant {
+        static let dogeBackgroundOverlayLimit: Decimal = 1000
     }
 }
