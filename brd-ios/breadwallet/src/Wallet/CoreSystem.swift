@@ -24,12 +24,38 @@ class CoreSystem: Subscriber, Trackable {
     // MARK: Wallets + Currencies
 
     private(set) var assetCollection: AssetCollection?
+
     /// All supported currencies
-    private(set) var currencies = [CurrencyId: Currency]()
+    private(set) var currencies: [CurrencyId: Currency] {
+        get {
+            var currencies: [CurrencyId: Currency] = [:]
+            currenciesQueue.sync { currencies = _currencies }
+            return _currencies
+        }
+        set {
+            currenciesQueue.sync { _currencies = newValue }
+        }
+    }
+
     /// Active wallets
-    private(set) var wallets = [CurrencyId: Wallet]()
+    private(set) var wallets: [CurrencyId: Wallet] {
+        get {
+            var wallets: [CurrencyId: Wallet] = [:]
+            walletsQueue.sync { wallets = _wallets }
+            return wallets
+        }
+        set {
+            walletsQueue.sync { _wallets = newValue }
+        }
+    }
+
     // Service that manages sharing data with widget extension
     private(set) var widgetDataShareService: WidgetDataShareService
+
+    private var _currencies = [CurrencyId: Currency]()
+    private var _wallets = [CurrencyId: Wallet]()
+    private let currenciesQueue = DispatchQueue(label: "com.brd.currencies")
+    private let walletsQueue = DispatchQueue(label: "com.brd.wallets")
 
     func wallet(for currency: Currency) -> Wallet? {
         return wallets[currency.uid]
@@ -154,8 +180,8 @@ class CoreSystem: Subscriber, Trackable {
             
             System.wipe(system: system)
             
-            self.wallets.removeAll()
-            self.currencies.removeAll()
+            self.wallets = [:]
+            self.currencies = [:]
             self.system = nil
             
             completion?()
@@ -182,9 +208,10 @@ class CoreSystem: Subscriber, Trackable {
         queue.async {
             guard walletManager.isConnected else { return assertionFailure() }
             walletManager.syncToDepth(depth: depth)
+            let currencies = self.currencies
             DispatchQueue.main.async {
                 walletManager.network.currencies
-                    .compactMap { self.currencies[$0.uid] }
+                    .compactMap { currencies[$0.uid] }
                     .forEach { Store.perform(action: WalletChange($0).setIsRescanning(true)) }
             }
         }
@@ -218,7 +245,9 @@ class CoreSystem: Subscriber, Trackable {
                                             assertionFailure("unable to create view model for \(coreCurrency.code)")
                                             continue
             }
-            currencies[coreCurrency.uid] = currency
+            currenciesQueue.sync {
+                _currencies[coreCurrency.uid] = currency
+            }
         }
         print("[SYS] \(network) currencies: \(network.currencies.map { $0.code }.joined(separator: ","))")
     }
@@ -355,7 +384,10 @@ class CoreSystem: Subscriber, Trackable {
         let wallet = Wallet(core: coreWallet,
                             currency: currency,
                             system: self)
-        wallets[coreWallet.currency.uid] = wallet
+        walletsQueue.sync {
+            _wallets[coreWallet.currency.uid] = wallet
+        }
+
         if currency.isHBAR && createWalletCallback != nil {
             createWalletCallback?(wallet)
             createWalletCallback = nil
@@ -368,8 +400,13 @@ class CoreSystem: Subscriber, Trackable {
     
     /// Triggered by Core wallet deleted event -- normally never triggered
     private func removeWallet(_ coreWallet: WalletKit.Wallet) {
-        guard wallets[coreWallet.currency.uid] != nil else { return assertionFailure() }
-        wallets[coreWallet.currency.uid] = nil
+        let coreUid = coreWallet.currency.uid
+        walletsQueue.sync {
+            guard _wallets[coreUid] != nil else {
+                return assertionFailure()
+            }
+            _wallets[coreUid] = nil
+        }
         updateWalletStates()
     }
     
@@ -393,12 +430,13 @@ class CoreSystem: Subscriber, Trackable {
     private func updateActiveWallets() {
         guard let assetCollection = assetCollection else { return }
         let enabledIds = Set(assetCollection.enabledAssets.map { $0.uid })
+        let wallets = self.wallets
         let newWallets = enabledIds
             .filter { wallets[$0] == nil }
             .compactMap { coreWallet($0) }
             .compactMap { addWallet($0) }
             .map { ($0.currency.uid, $0) }
-        wallets = wallets
+        self.wallets = wallets
             .filter { enabledIds.contains($0.key) } // remove disabled wallets
             .merging(newWallets, uniquingKeysWith: { (_, new) in new }) // add enabled wallets
     }
@@ -483,8 +521,9 @@ class CoreSystem: Subscriber, Trackable {
         guard let assetCollection = assetCollection,
             let currency = currencies[currencyId],
             currency.tokenType == .native else { return false }
+        let currencies = self.currencies
         return !assetCollection.enabledAssets
-            .compactMap { self.currencies[$0.uid] }
+            .compactMap { currencies[$0.uid] }
             .filter { $0.uid != currency.uid && $0.network == currency.network }
             .isEmpty
     }
@@ -502,9 +541,11 @@ class CoreSystem: Subscriber, Trackable {
     /// Creates placeholder WalletStates for all enabled currencies which do not have a Wallet yet.
     private var placeholderWalletStates: [CurrencyId: WalletState] {
         guard let assetCollection = assetCollection else { assertionFailure(); return [:] }
+        let wallets = self.wallets
+        let currencies = self.currencies
         return assetCollection.enabledAssets
-            .filter { self.wallets[$0.uid] == nil }
-            .compactMap { self.currencies[$0.uid] }
+            .filter { wallets[$0.uid] == nil }
+            .compactMap { currencies[$0.uid] }
             .reduce(into: [CurrencyId: WalletState](), { (walletStates, currency) in
                 guard let displayOrder = assetCollection.displayOrder(for: currency.metaData) else { return }
                 walletStates[currency.uid] = WalletState.initial(currency, displayOrder: displayOrder).mutate(syncState: .connecting)
@@ -665,10 +706,12 @@ extension CoreSystem: SystemListener {
             break
 
         case .syncStarted:
+            let currencies = self.currencies
             DispatchQueue.main.async {
                 // only show the initial sync for API-mode wallets
                 let isP2Psync = manager.mode == .p2p_only
-                manager.network.currencies.compactMap { self.currencies[$0.uid] }
+                manager.network.currencies
+                    .compactMap { currencies[$0.uid] }
                     .filter { isP2Psync || (Store.state[$0]?.syncState == .connecting) }
                     .forEach { Store.perform(action: WalletChange($0).setSyncingState(.syncing)) }
                 if isP2Psync {
@@ -678,11 +721,14 @@ extension CoreSystem: SystemListener {
 
         case .syncProgress(let timestamp, let percentComplete):
             guard manager.mode == .p2p_only else { break }
+            let currencies = self.currencies
             DispatchQueue.main.async {
-                manager.network.currencies.compactMap { self.currencies[$0.uid] }.forEach {
-                    let seconds = UInt32(timestamp?.timeIntervalSince1970 ?? 0)
-                    let progress = Float(percentComplete / 100.0)
-                    Store.perform(action: WalletChange($0).setProgress(progress: progress, timestamp: seconds))
+                manager.network.currencies
+                    .compactMap { currencies[$0.uid] }
+                    .forEach {
+                        let seconds = UInt32(timestamp?.timeIntervalSince1970 ?? 0)
+                        let progress = Float(percentComplete / 100.0)
+                        Store.perform(action: WalletChange($0).setProgress(progress: progress, timestamp: seconds))
                 }
             }
 
@@ -715,18 +761,22 @@ extension CoreSystem: SystemListener {
             let syncingCount = system.managers
                 .filter { $0.mode == .p2p_only }
                 .filter { $0.state == .syncing || $0.state == .created }.count
-            
+
+            let currencies = self.currencies
+            let wallets = self.wallets
+
             DispatchQueue.main.async {
-                manager.network.currencies.compactMap { self.currencies[$0.uid] }.forEach {
-                    if isComplete {
-                        Store.perform(action: WalletChange($0).setIsRescanning(false))
-                        if let balance = self.wallets[$0.uid]?.balance {
-                            Store.perform(action: WalletChange($0).setBalance(balance))
+                manager.network.currencies
+                    .compactMap { currencies[$0.uid] }
+                    .forEach {
+                        if isComplete {
+                            Store.perform(action: WalletChange($0).setIsRescanning(false))
+                            if let balance = wallets[$0.uid]?.balance {
+                                Store.perform(action: WalletChange($0).setBalance(balance))
+                            }
                         }
+                        Store.perform(action: WalletChange($0).setSyncingState(syncState))
                     }
-                    Store.perform(action: WalletChange($0).setSyncingState(syncState))
-                }
-                
                 // If there are no more p2p wallets syncing, hide
                 // the network activity indicator and resume
                 // the idle timer
