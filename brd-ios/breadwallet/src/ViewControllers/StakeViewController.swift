@@ -12,6 +12,7 @@
 
 import UIKit
 
+// swiftlint:disable:next type_body_length
 class StakeViewController: UIViewController, Subscriber, Trackable, ModalPresentable {
     
     fileprivate let midContentHeight: CGFloat = 90.0
@@ -203,7 +204,7 @@ class StakeViewController: UIViewController, Subscriber, Trackable, ModalPresent
                     self.showAlert(title: S.Alerts.sendFailure, message: message, buttonLabel: S.Button.ok)
                 case .publishFailure(let code, let message):
                     self.showAlert(title: S.Alerts.sendFailure, message: "\(message) (\(code))", buttonLabel: S.Button.ok)
-                case .insufficientGas(let rpcErrorMessage):
+                case .insufficientGas(let rpcErrorMessage, _):
                     print("insufficientGas: \(rpcErrorMessage)")
                 }
             }
@@ -231,7 +232,8 @@ class StakeViewController: UIViewController, Subscriber, Trackable, ModalPresent
     
     private func selectBakerTapped() {
         let stakeSelectViewController = SelectBakerViewController(currency: currency)
-        stakeSelectViewController.transitioningDelegate = ModalTransitionDelegate(type: .regular)
+        let transitioningDelegate = ModalTransitionDelegate(type: .regular)
+        stakeSelectViewController.transitioningDelegate = transitioningDelegate
         stakeSelectViewController.modalPresentationStyle = .overFullScreen
         stakeSelectViewController.modalPresentationCapturesStatusBarAppearance = true
         let vc = ModalViewController(childViewController: stakeSelectViewController)

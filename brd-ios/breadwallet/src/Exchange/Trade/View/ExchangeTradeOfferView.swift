@@ -40,8 +40,6 @@ class ExchangeTradeOfferView: UIView {
         case let .offer(offer):
             hideAll(except: offer != nil ? offerView : nil)
             updateOfferView(offer)
-        default:
-            hideAll(except: nil)
         }
         invalidateIntrinsicContentSize()
         backgroundColor = !viewModel.isNoOffer()

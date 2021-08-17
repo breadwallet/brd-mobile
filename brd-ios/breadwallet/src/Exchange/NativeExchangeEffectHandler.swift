@@ -12,7 +12,6 @@ import UIKit
 import Cosmos
 import WalletKit
 
-
 // MARK: - NativeExchangeConnectable
 
 class NativeExchangeConnectable: NSObject, Connectable {
@@ -71,7 +70,6 @@ class NativeExchangeEffectHandler: NSObject, Connection, Trackable {
     }
 
     func accept(value: Any?) {
-        print("=== Native event", value)
         switch value {
         case is ExchangeEffect.ExitFlow:
             exitFlow()
@@ -244,6 +242,7 @@ private extension NativeExchangeEffectHandler {
         }
     }
 
+    // swiftlint:disable:next function_parameter_count
     func verifyAndMakeTransfer(
         wallet: Wallet,
         toAddress: String,

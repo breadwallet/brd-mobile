@@ -25,7 +25,6 @@ class RegionSettingsViewController: CosmosViewController {
         self.system = system
         super.init(nibName: nil, bundle: nil)
 
-        let isTest =  E.isDebug || E.isTestnet
         let factory = Mobius().loop(
             update: ExchangeUpdate(),
             effectHandler: CompositeEffectHandlerCompanion.from([

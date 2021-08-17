@@ -49,7 +49,7 @@ extension ExchangeBuySellViewModel {
     ) {
         let quoteCode = model.quoteCurrencyCode
         let baseCode = model.sourceCurrencyCode ?? Store.state.defaultCurrencyCode
-        let baseSymbol = Locale.currencySymbolByCode(baseCode) ?? baseCode ?? ""
+        let baseSymbol = Locale.currencySymbolByCode(baseCode) ?? baseCode
         let baseString = model.formattedSourceAmount
 
         title = ExchangeBuySellViewModel.title(model)
@@ -109,7 +109,7 @@ private extension ExchangeBuySellViewModel {
         NSAttributedString(
             string: string,
             attributes: [
-                .font: UIFont.customBold(size: 60) ?? Theme.body1,
+                .font: UIFont.customBold(size: 60),
                 .foregroundColor: Theme.primaryText.withAlphaComponent(0.3)
             ]
         )
@@ -118,7 +118,6 @@ private extension ExchangeBuySellViewModel {
     static func offer(_ model: ExchangeModel) -> CellLayoutView.ViewModel {
         let method = model.selectedOffer?.formattedViaMethod() ?? ""
         let name = String(format: method, model.selectedOffer?.offer.provider.name ?? "Unknown")
-        let valid = model.selectedOffer as? ExchangeModel.OfferDetailsValidOffer
 
         switch model.offerState {
         case .noOffers:
@@ -239,7 +238,7 @@ extension ExchangeBuySellViewModel {
 extension ExchangeBuySellViewModel.CTAState {
 
     static func from(_ model: ExchangeModel) -> ExchangeBuySellViewModel.CTAState {
-        guard let offer = model.selectedOffer else {
+        if model.selectedOffer == nil {
             return .nextDisabled
         }
 

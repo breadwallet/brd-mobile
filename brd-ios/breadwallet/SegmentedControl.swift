@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol SegmentedControlDelegate: class {
+protocol SegmentedControlDelegate: AnyObject {
     func segmentedControl(_ segmentedControl: SegmentedControl, didSelect index: Int)
 }
 
@@ -89,7 +89,6 @@ class SegmentedControl: UIView {
 extension SegmentedControl {
 
     func setupUI() {
-        let padding = C.padding[1]
         container.translatesAutoresizingMaskIntoConstraints = false
         addSubview(highlightView)
         addSubview(container)
@@ -98,7 +97,7 @@ extension SegmentedControl {
             container.leadingAnchor.constraint(equalTo: leadingAnchor),
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
             container.topAnchor.constraint(equalTo: topAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         container.distribution = .fillEqually
         layer.cornerRadius = C.padding[1]
@@ -178,4 +177,3 @@ extension SegmentedControl {
         }
     }
 }
-

@@ -211,11 +211,7 @@ extension PickerViewModel {
         self.init(
             id: state?.target.name ?? "",
             withTitle: S.Exchange.Settings.currency,
-            selectedIndexes: [
-                currencies.firstIndex(where: {
-                    $0.code == model.selectedFiatCurrency?.code ?? ""
-                })
-            ].compactMap { $0 },
+            selectedIndexes: [selected].compactMap { $0 },
             items: currencies.map {
                 let symbol = Locale.currencySymbolByCode($0.code) ?? ""
                 let name = "\($0.code.uppercased()) (\(symbol)) - \($0.name)"

@@ -14,6 +14,7 @@ import UIKit
 import WalletKit
 import CoinGecko
 
+// swiftlint:disable:next type_body_length
 class GiftViewController: UIViewController, Trackable {
     
     var presentVerifyPin: ((String, @escaping ((String) -> Void)) -> Void)?
@@ -380,7 +381,7 @@ class GiftViewController: UIViewController, Trackable {
                     self.showAlert(title: S.Alerts.sendFailure, message: message, buttonLabel: S.Button.ok)
                 case .publishFailure(let code, let message):
                     self.showAlert(title: S.Alerts.sendFailure, message: "\(message) (\(code))", buttonLabel: S.Button.ok)
-                case .insufficientGas(let rpcErrorMessage):
+                case .insufficientGas(let rpcErrorMessage, _):
                     print("blah: \(rpcErrorMessage)")
                     //self.showInsufficientGasError()
                 }

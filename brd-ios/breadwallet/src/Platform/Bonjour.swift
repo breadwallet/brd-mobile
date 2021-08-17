@@ -19,7 +19,7 @@ public class Bonjour: NSObject, NetServiceBrowserDelegate {
     var serviceFoundClosure: (([NetService]) -> Void)
     
     override init() {
-        serviceFoundClosure = { (v) in return }
+        serviceFoundClosure = { _ in return }
         super.init()
         serviceBrowser.delegate = self
     }

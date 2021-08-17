@@ -149,7 +149,7 @@ extension SupportViewModel {
                 .init(
                     id: 4,
                     title: "BRD rewards"
-                ),
+                )
             ],
             articles: [
                 .init(
@@ -175,7 +175,7 @@ extension SupportViewModel {
                     sectionId: 2,
                     title: "BRD rewards",
                     body: "This is article about rewards. Lorem ipsum."
-                ),
+                )
             ],
             faqArticles: [
                 .init(
