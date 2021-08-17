@@ -203,6 +203,7 @@ extension WebViewController: WKNavigationDelegate {
         }
 
         for closeURLComponent in flowEndUrlComponents {
+            // swiftlint:disable:next for_where
             if url.lastPathComponent == closeURLComponent {
                 return true
             }

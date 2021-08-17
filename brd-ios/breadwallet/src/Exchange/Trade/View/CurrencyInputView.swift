@@ -1,4 +1,4 @@
- //
+//
 //  ExchangeViewController.swift
 //  breadwallet
 //
@@ -47,7 +47,7 @@ class CurrencyInputView: UIView {
         minAction = viewModel.minAction
         maxAction = viewModel.maxAction
         currencyAction = viewModel.currencyAction
-        detailLabel.isHidden = viewModel.detail == nil || viewModel.detail == ""
+        detailLabel.isHidden = viewModel.detail?.isEmpty ?? true
 
         if let symbol = viewModel.symbol {
             let icon = viewModel.icon
@@ -137,7 +137,7 @@ private extension CurrencyInputView {
             string: "0",
             attributes: [
                 .foregroundColor: Theme.tertiaryText,
-                .font: textField.font
+                .font: textField.font ?? UIFont.header
             ]
         )
 

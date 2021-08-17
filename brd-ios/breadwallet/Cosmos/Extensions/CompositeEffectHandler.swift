@@ -13,7 +13,7 @@ import Cosmos
 
 extension CompositeEffectHandlerCompanion {
 
-    static func from(_ handlers: Array<Connectable>) -> Connectable {
+    static func from(_ handlers: [Connectable]) -> Connectable {
         CompositeEffectHandlerCompanion().from(effectHandlers: handlers.kotlin)
     }
 }

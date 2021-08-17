@@ -152,7 +152,6 @@ class ExchangeOfferCell: UITableViewCell {
     }
 }
 
-
 // MARK: - Constant
 
 extension ExchangeOfferCell {

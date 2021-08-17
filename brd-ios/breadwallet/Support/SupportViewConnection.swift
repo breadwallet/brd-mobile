@@ -40,7 +40,7 @@ class SupportViewConnectable: NSObject, Connectable {
 
 // MARK: - SupportView
 
-protocol SupportView: class {
+protocol SupportView: AnyObject {
 
     func update(with viewModel: SupportViewModel)
     func presentIndex(with viewModel: SupportViewModel)

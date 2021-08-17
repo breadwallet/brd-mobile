@@ -98,9 +98,6 @@ class ExchangeViewConnection: NSObject, Connection {
             return
         }
 
-        print("=== STATE", model.state)
-        print("=== ERROR STATE", model.errorState?.type)
-
         switch model.state {
         case is ExchangeModel.StateInitializing:
             // loading
@@ -134,7 +131,7 @@ class ExchangeViewConnection: NSObject, Connection {
 private extension ExchangeViewConnection {
 
     func handleStateInitializing(model: ExchangeModel) {
-        guard let state = model.state as? ExchangeModel.StateInitializing else {
+        if model.state as? ExchangeModel.StateInitializing == nil {
             return
         }
 
@@ -304,7 +301,7 @@ private extension ExchangeViewConnection {
                 rewardsDetailAction: { [weak self] in self?.presentRewards() }
             )
 
-            if let visibleVC = (view as? UIViewController)?
+            if let visibleVC = view
                 .navigationController?
                 .visibleViewController as? ExchangeTradePreviewViewController {
                     visibleVC.update(with: viewModel)
@@ -470,7 +467,6 @@ private extension ExchangeViewConnection {
             return S.Exchange.CTA.retry
         }
     }
-
 
     func errorTitle(for errorState: ExchangeModel.ErrorState) -> String {
         switch errorState.type {

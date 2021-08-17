@@ -19,6 +19,7 @@ import WidgetKit
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
 
+// swiftlint:disable:next type_body_length
 class ApplicationController: Subscriber, Trackable {
 
     fileprivate var application: UIApplication?
@@ -220,7 +221,7 @@ class ApplicationController: Subscriber, Trackable {
                 return
             }
 
-            Backend.brdApi.preflight() { preflight, _ in
+            Backend.brdApi.preflight { preflight, _ in
                 if preflight?.activate ?? false {
                     UserDefaults.cosmos.hydraActivated = true
                     authProvider.token = nil
@@ -422,7 +423,7 @@ class ApplicationController: Subscriber, Trackable {
     }
     
     private func updateAssetBundles() {
-        DispatchQueue.global(qos: .utility).async { [unowned self] in
+        DispatchQueue.global(qos: .utility).async {
             Backend.apiClient.updateBundles { errors in
                 for (n, e) in errors {
                     print("Bundle \(n) ran update. err: \(String(describing: e))")

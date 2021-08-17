@@ -300,7 +300,8 @@ class CoreSystem: Subscriber, Trackable {
     /// Migrates the old sqlite persistent storage data to Core, if present.
     /// Deletes old database after successful migration.
     private func migrateLegacyDatabase(network: Network) {
-        guard let system = system,
+        // swiftlint:disable:next unused_optional_binding
+        guard let _ = system,
             let currency = currencies[network.currency.uid],
             (currency.isBitcoin || currency.isBitcoinCash) else { return assertionFailure() }
         let fm = FileManager.default
@@ -778,7 +779,7 @@ extension CoreSystem: SystemListener {
             guard !E.isRunningTests, let assetCollection = assetCollection else { return }
             addCurrencies(for: network)
             let newWallets = network.currencies.filter { assetCollection.isEnabled($0.uid) && wallets[$0.uid] == nil }
-            newWallets.forEach { system.managerBy(network: network)?.registerWalletFor(currency: $0) }
+            newWallets.forEach { _ = system.managerBy(network: network)?.registerWalletFor(currency: $0) }
             Backend.updateExchangeRates(for:
                 currencies
                 .filter { $0.value.network == network }

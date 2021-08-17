@@ -127,12 +127,11 @@ final class CellLayoutView: UIView {
     }
 
     private func updateHiddenBasedOnContent() {
-        titleLabel.isHidden = titleLabel.text == nil || titleLabel.text == ""
-        subtitleLabel.isHidden = subtitleLabel.text == nil || subtitleLabel.text == ""
-        rightTitleLabel.isHidden = rightTitleLabel.text == nil || rightTitleLabel.text == ""
-        rightSubtitleLabel.isHidden = rightSubtitleLabel.text == nil || rightSubtitleLabel.text == ""
-        accessoryLabel.isHidden = (accessoryLabel.text == nil && accessoryLabel.attributedText == nil) ||
-            (accessoryLabel.attributedText?.string == "" && accessoryLabel.text == "")
+        titleLabel.isHidden = titleLabel.text?.isEmpty ?? true
+        subtitleLabel.isHidden = subtitleLabel.text?.isEmpty ?? true
+        rightTitleLabel.isHidden = rightTitleLabel.text?.isEmpty ?? true
+        rightSubtitleLabel.isHidden = rightSubtitleLabel.text?.isEmpty ?? true
+        accessoryLabel.isHidden = accessoryLabel.text?.isEmpty ?? true && accessoryLabel.attributedText?.string.isEmpty ?? true
         iconImageView.isHidden = iconImageView.image == nil
         iconLabel.isHidden = iconLabel.text == nil
         let hideIcon = iconStyle.isDefault && iconImageView.image == nil && iconLabel.text == nil

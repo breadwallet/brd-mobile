@@ -13,7 +13,6 @@ import Cosmos
 
 class UpdatingLabel: UILabel {
 
-
     var formatter: Cosmos.NumberFormatter? {
         didSet {
             setFormattedText(forValue: value)

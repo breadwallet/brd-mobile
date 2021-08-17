@@ -38,7 +38,7 @@ class ExchangeTradePreviewCell: UITableViewCell {
         switch viewModel {
         case let .simple(key, value, color, bold):
             titleLabel.text = key
-            cellLayoutView.update(with: .init(title: value ?? cellLayoutView.titleLabel.text))
+            cellLayoutView.update(with: .init(title: value))
             cellLayoutView.titleLabel.textColor = textColor(for: color)
             cellLayoutView.titleLabel.font = bold ? Theme.body1Accent : Theme.body1
         case let .feeTotal(value, detail, color):
@@ -54,10 +54,7 @@ class ExchangeTradePreviewCell: UITableViewCell {
         case let .fee(key, value, detail, detailColor):
             titleLabel.text = key
             cellLayoutView.update(
-                with: .init(
-                    title: value ?? cellLayoutView.titleLabel.text,
-                    subtitle: detail
-                )
+                with: .init(title: value, subtitle: detail)
             )
             cellLayoutView.subtitleLabel.textColor = detailColor
         case let .reward(active):

@@ -58,7 +58,8 @@ extension ExchangeConfirmationViewModel {
         case complete(order: Order)
 
         static func from(_ model: ExchangeModel, assetCollection: AssetCollection?) -> State? {
-            if let state = model.state as? ExchangeModel.StateCreatingOrder {
+            // swiftlint:disable:next unused_optional_binding
+            if let _ = model.state as? ExchangeModel.StateCreatingOrder {
                 return .creating
             }
             if let state = model.state as? ExchangeModel.StateProcessingOrder {
@@ -112,7 +113,7 @@ extension ExchangeConfirmationViewModel {
             baseColor = assets.last?.colors.0 ?? Theme.primaryText
             quoteAmount = offer.formattedSourceTotal
             quoteColor = assets.first?.colors.0 ?? Theme.primaryText
-            method = String(format: offer.formattedViaMethod(), offer.offer.provider.name ?? "")
+            method = String(format: offer.formattedViaMethod(), offer.offer.provider.name)
             delivery = offer.offer.deliveryEstimate ?? "N/A"
             fees = [
                 .init(

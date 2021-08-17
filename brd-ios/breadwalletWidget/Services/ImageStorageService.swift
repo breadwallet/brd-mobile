@@ -12,7 +12,7 @@
 
 import Foundation
 
-protocol ImageStoreService: class {
+protocol ImageStoreService: AnyObject {
     func loadImagesIfNeeded()
     func bgFolder() -> URL
     func noBgFolder() -> URL

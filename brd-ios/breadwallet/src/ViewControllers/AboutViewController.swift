@@ -92,7 +92,7 @@ class AboutViewController: UIViewController {
                 let token = "\n\nToken:\n" + (authProvider.token ?? "")
                 let deviceId = "\n\nDevice Id:\n" + authProvider.deviceId()
                 let walletId = "\n\nWallet Id:\n" + (authProvider.walletId() ?? "")
-                let pushToken = "\n\nPush token:\n" + "\(UserDefaults.pushToken)"
+                let pushToken = "\n\nPush token:\n" + "\(UserDefaults.pushToken ?? Data())"
                 text += pubKey + token + deviceId + walletId + pushToken
             }
 
@@ -114,7 +114,8 @@ class AboutViewController: UIViewController {
             myself.presentURL(string: "https://brd.com/privacy")
         }
 
-        if let keyStore = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
+        // swiftlint:disable:next unused_optional_binding
+        if let _ = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
             footer.isUserInteractionEnabled = true
             footer.addGestureRecognizer(
                 UITapGestureRecognizer(target: self, action: #selector(footerAction(_:)))

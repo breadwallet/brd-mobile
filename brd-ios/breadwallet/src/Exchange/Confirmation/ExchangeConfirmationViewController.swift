@@ -53,7 +53,7 @@ class ExchangeConfirmationViewController: UIViewController {
             headerView.setState(.creating)
             tableView.reloadData()
             buttonsContainer.isHidden = true
-        case let .processing(order):
+        case .processing:
             headerView.setState(.processing)
             tableView.reloadData()
             buttonsContainer.isHidden = true

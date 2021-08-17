@@ -227,7 +227,6 @@ private extension ExchangeTradePreviewViewController {
         default:
             return false
         }
-        return false
     }
 
     @objc func ctaAction(_ sender: Any?) {
