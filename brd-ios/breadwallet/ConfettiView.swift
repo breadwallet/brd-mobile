@@ -12,6 +12,11 @@ import UIKit
 
 class ConfettyView: UIView {
 
+    enum Style {
+        case `default`
+        case doge
+    }
+
     private lazy var colors = [
         UIColor.fromHex("FD4E1F"), UIColor.fromHex("5B6DEE"),
         UIColor.fromHex("2AB8E6"), UIColor.fromHex("F5A623"),
@@ -24,8 +29,16 @@ class ConfettyView: UIView {
         UIImage(named: "confetty04")
     ]
 
+    private lazy var dogeImages = [
+        UIImage(named: "confettyDoge00"), UIImage(named: "confettyDoge01"),
+        UIImage(named: "confettyDoge02"), UIImage(named: "confettyDoge03"),
+        UIImage(named: "confettyDoge00")
+    ]
+
     private lazy var haptics = UINotificationFeedbackGenerator()
     private weak var emitter: CAEmitterLayer?
+
+    var style: Style = .doge
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -105,9 +118,18 @@ private extension ConfettyView {
         emitter.emitterShape = .line
         emitter.renderMode = .oldestLast
         emitter.lifetime = 0
-        emitter.emitterCells = images.enumerated().map {
+
+        var emitterCells = images.enumerated().map {
             ConfettyView.newEmitterCell(image: $0.1, color: colors[$0.0])
         }
+
+        if style == .doge {
+            emitterCells += dogeImages.enumerated().map {
+                ConfettyView.newDogeEmitterCell(image: $0.1)
+            }
+        }
+
+        emitter.emitterCells = emitterCells
 
         self.emitter = emitter
         layer.addSublayer(emitter)
@@ -130,6 +152,20 @@ private extension ConfettyView {
         cell.velocity = -300
         cell.velocityRange = -50.0
         cell.color = color?.cgColor
+        return cell
+    }
+
+    class func newDogeEmitterCell(image: UIImage? = nil) -> CAEmitterCell {
+        let cell = CAEmitterCell()
+        cell.contents = image?.cgImage
+        cell.birthRate = 2
+        cell.lifetime = 25
+        cell.scale = 0.35
+        cell.scaleRange = 0.1
+        cell.spin = 1
+        cell.spinRange = 1
+        cell.velocity = -300
+        cell.velocityRange = -50.0
         return cell
     }
 }
