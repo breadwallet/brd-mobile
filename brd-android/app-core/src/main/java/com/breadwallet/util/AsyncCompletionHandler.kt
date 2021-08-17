@@ -8,7 +8,7 @@
  */
 package com.breadwallet.util
 
-import com.breadwallet.crypto.utility.CompletionHandler
+import com.blockset.walletkit.utility.CompletionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first

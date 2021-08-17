@@ -8,31 +8,23 @@
  */
 package com.breadwallet.breadbox
 
+import com.blockset.walletkit.*
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletManagerState
-import com.breadwallet.crypto.blockchaindb.BlockchainDb
-import com.breadwallet.crypto.events.network.NetworkEvent
-import com.breadwallet.crypto.events.system.SystemDiscoveredNetworksEvent
-import com.breadwallet.crypto.events.system.SystemEvent
-import com.breadwallet.crypto.events.system.SystemListener
-import com.breadwallet.crypto.events.system.SystemNetworkAddedEvent
-import com.breadwallet.crypto.events.transfer.TranferEvent
-import com.breadwallet.crypto.events.wallet.WalletEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferAddedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferChangedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferDeletedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferSubmittedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerChangedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerCreatedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerSyncRecommendedEvent
+import com.blockset.walletkit.events.network.NetworkEvent
+import com.blockset.walletkit.events.system.SystemDiscoveredNetworksEvent
+import com.blockset.walletkit.events.system.SystemEvent
+import com.blockset.walletkit.events.system.SystemListener
+import com.blockset.walletkit.events.system.SystemNetworkAddedEvent
+import com.blockset.walletkit.events.transfer.TranferEvent
+import com.blockset.walletkit.events.wallet.WalletEvent
+import com.blockset.walletkit.events.wallet.WalletTransferAddedEvent
+import com.blockset.walletkit.events.wallet.WalletTransferChangedEvent
+import com.blockset.walletkit.events.wallet.WalletTransferDeletedEvent
+import com.blockset.walletkit.events.wallet.WalletTransferSubmittedEvent
+import com.blockset.walletkit.events.walletmanager.WalletManagerChangedEvent
+import com.blockset.walletkit.events.walletmanager.WalletManagerCreatedEvent
+import com.blockset.walletkit.events.walletmanager.WalletManagerEvent
+import com.blockset.walletkit.events.walletmanager.WalletManagerSyncRecommendedEvent
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logInfo
@@ -80,7 +72,7 @@ internal class CoreBreadBox(
     private val storageFile: File,
     override val isMainnet: Boolean = false,
     private val walletProvider: WalletProvider,
-    private val blockchainDb: BlockchainDb,
+    private val blockchainDb: SystemClient,
     private val userManager: BrdUserManager
 ) : BreadBox,
     SystemListener {

@@ -8,10 +8,10 @@
  */
 package com.breadwallet.util
 
-import com.breadwallet.crypto.PaymentProtocolPayment
-import com.breadwallet.crypto.PaymentProtocolRequest
-import com.breadwallet.crypto.PaymentProtocolRequestType
-import com.breadwallet.crypto.Wallet
+import com.blockset.walletkit.PaymentProtocolPayment
+import com.blockset.walletkit.PaymentProtocolRequest
+import com.blockset.walletkit.PaymentProtocolRequestType
+import com.blockset.walletkit.Wallet
 import com.breadwallet.tools.util.BRConstants
 import com.platform.APIClient
 

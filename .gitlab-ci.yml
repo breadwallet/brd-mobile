@@ -63,11 +63,13 @@ build-android:
       - cosmos-*/**/*
       - .gitlab-ci.yml
   artifacts:
+    when: always
     paths:
       - brd-android/app/build/outputs/apk/brd/debug/
       - brd-android/app/build/outputs/apk/brd/release/
       - brd-android/app/build/outputs/apk/brdTestnet/debug/
       - brd-android/app/build/outputs/apk/brdTestnet/release/
+      - ./**/build/reports/**/*
     reports:
       junit: ./brd-android/**/build/test-results/**/TEST-*.xml
 

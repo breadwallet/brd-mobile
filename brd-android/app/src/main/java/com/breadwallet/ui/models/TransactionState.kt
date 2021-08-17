@@ -8,7 +8,7 @@
  */
 package com.breadwallet.ui.models
 
-import com.breadwallet.crypto.TransferState
+import com.blockset.walletkit.TransferState
 
 enum class TransactionState {
     CONFIRMED, CONFIRMING, FAILED, DELETED;

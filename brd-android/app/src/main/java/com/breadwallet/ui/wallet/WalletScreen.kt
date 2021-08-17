@@ -10,7 +10,7 @@ package com.breadwallet.ui.wallet
 
 import com.breadwallet.R
 import com.breadwallet.breadbox.WalletState
-import com.breadwallet.crypto.Transfer
+import com.blockset.walletkit.Transfer
 import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.model.PriceChange
 import com.breadwallet.model.PriceDataPoint

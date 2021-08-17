@@ -12,11 +12,11 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat.checkSelfPermission
 import com.bluelinelabs.conductor.Controller
+import com.blockset.walletkit.AddressScheme
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.toSanitizedString
-import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.mobius.bindConsumerIn
+import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.tools.manager.BRClipboardManager
 import com.breadwallet.tools.qrcode.QRUtils
 import com.breadwallet.tools.util.btc

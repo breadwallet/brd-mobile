@@ -19,9 +19,9 @@ import com.breadwallet.BuildConfig
 import com.breadwallet.app.BreadApp.Companion.generateWalletId
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.isEthereum
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.TransferState
-import com.breadwallet.crypto.errors.TransferSubmitPosixError
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.TransferState
+import com.blockset.walletkit.errors.TransferSubmitPosixError
 import com.breadwallet.tools.manager.BRSharedPrefs.getBundleHash
 import com.breadwallet.tools.manager.BRSharedPrefs.getDeviceId
 import com.breadwallet.tools.manager.BRSharedPrefs.getWalletRewardId

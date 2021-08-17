@@ -8,11 +8,11 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.errors.AccountInitializationCantCreateError
-import com.breadwallet.crypto.errors.AccountInitializationError
-import com.breadwallet.crypto.errors.AccountInitializationMultipleHederaAccountsError
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.System
+import com.blockset.walletkit.errors.AccountInitializationCantCreateError
+import com.blockset.walletkit.errors.AccountInitializationError
+import com.blockset.walletkit.errors.AccountInitializationMultipleHederaAccountsError
 import com.breadwallet.tools.security.BrdUserManager
 
 class DefaultNetworkInitializer(private val userManager: BrdUserManager) : NetworkInitializer {

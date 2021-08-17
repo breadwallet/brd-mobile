@@ -20,8 +20,8 @@ import android.util.Log;
 
 import com.breadwallet.app.ApplicationLifecycleObserver;
 import com.breadwallet.app.BreadApp;
-import com.breadwallet.crypto.Cipher;
-import com.breadwallet.crypto.Key;
+import com.blockset.walletkit.Cipher;
+import com.blockset.walletkit.Key;
 import com.breadwallet.logger.Logger;
 import com.breadwallet.tools.crypto.CryptoHelper;
 import com.breadwallet.tools.security.BrdUserManager;
@@ -150,7 +150,7 @@ public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
         final Cipher cipher = Cipher.createForChaCha20Poly1305(key, nonce, ad);
 
         // Fix for encryption issue in < 4.0 builds
-        byte[] migratedText = com.breadwallet.crypto.System.migrateBRCoreKeyCiphertext(
+        byte[] migratedText = com.blockset.walletkit.System.migrateBRCoreKeyCiphertext(
                 key,
                 nonce,
                 ad,

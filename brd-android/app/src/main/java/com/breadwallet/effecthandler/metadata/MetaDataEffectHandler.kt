@@ -13,8 +13,8 @@ import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.getSize
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.mobius.bindConsumerIn
 import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider

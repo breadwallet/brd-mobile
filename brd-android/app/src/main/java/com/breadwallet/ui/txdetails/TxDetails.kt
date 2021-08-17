@@ -8,7 +8,7 @@
  */
 package com.breadwallet.ui.txdetails
 
-import com.breadwallet.crypto.Transfer
+import com.blockset.walletkit.Transfer
 import com.breadwallet.platform.entities.GiftMetaData
 import com.breadwallet.platform.entities.TxMetaData
 import com.breadwallet.ui.ViewEffect
