@@ -217,7 +217,7 @@ public struct Amount {
     
     func fiatDescription(forLocale locale: Locale? = nil) -> String {
         let nativeFormatter = localFormat
-        let code = UserDefaults.cosmos.fiatCurrencyCode
+        let code = UserDefaults.defaultCurrencyCode
 
         var formatter: Cosmos.NumberFormatter
 
@@ -263,7 +263,7 @@ public struct Amount {
     }
 
     var cosmosLocalFormat: Cosmos.NumberFormatter {
-        let code = UserDefaults.cosmos.fiatCurrencyCode
+        let code = UserDefaults.defaultCurrencyCode
         let format = Formatters().fiat(currencyCode: code)
         if let rate = rate {
             format.currencySymbol = rate.currencySymbol

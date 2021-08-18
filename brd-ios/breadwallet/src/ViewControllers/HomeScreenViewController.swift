@@ -319,7 +319,7 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
             return Amount(amount: balance, rate: rate).fiatValue
         }.reduce(0.0, +)
 
-        let code = UserDefaults.cosmos.fiatCurrencyCode
+        let code = UserDefaults.defaultCurrencyCode
         let formatter = Formatters().fiat(currencyCode: code)
         total.text = formatter.format(double: fiatTotal.doubleValue)
     }
