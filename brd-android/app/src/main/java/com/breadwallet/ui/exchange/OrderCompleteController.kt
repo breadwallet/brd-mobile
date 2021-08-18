@@ -15,10 +15,14 @@ import androidx.core.view.isVisible
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.databinding.ControllerExchangeOrderCompleteBinding
+import com.breadwallet.ui.navigation.NavigationTarget
+import com.breadwallet.ui.navigation.RouterNavigator
+import org.kodein.di.erased.instance
 
 class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildController(args) {
 
     private val binding by viewBinding(ControllerExchangeOrderCompleteBinding::inflate)
+    private val routerNavigator by instance<RouterNavigator>()
 
     override fun onCreateView(view: View) {
         super.onCreateView(view)
@@ -27,7 +31,7 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
             buttonContinue.setOnClickListener {
                 eventConsumer.accept(ExchangeEvent.OnContinueClicked)
             }
-            var expanded = false // TODO: save state in bundle
+            var expanded = false
             buttonExpandFees.setOnClickListener {
                 expanded = !expanded
                 groupNetworkFee.isVisible = expanded && labelNetworkFeeValue.text.isNotBlank()
@@ -35,6 +39,22 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
                 groupPlatformFee.isVisible = expanded && labelPlatformFeeValue.text.isNotBlank()
                 iconFeeExpandArrow.rotation = if (expanded) 270f else 90f
             }
+            buttonReceipt.setOnClickListener {
+                val state = (currentModel.state as? ExchangeModel.State.OrderComplete)
+                    ?: return@setOnClickListener
+                routerNavigator.orderHistory(NavigationTarget.OrderHistory(state.order.orderId))
+            }
+        }
+    }
+
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        with(binding) {
+            confetti.y = -confetti.height.toFloat()
+            confetti.isVisible = true
+            confetti.animate()
+                .translationYBy(confetti.height.toFloat())
+                .start()
         }
     }
 
