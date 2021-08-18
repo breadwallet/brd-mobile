@@ -15,7 +15,7 @@ import com.blockset.walletkit.events.system.SystemDiscoveredNetworksEvent
 import com.blockset.walletkit.events.system.SystemEvent
 import com.blockset.walletkit.events.system.SystemListener
 import com.blockset.walletkit.events.system.SystemNetworkAddedEvent
-import com.blockset.walletkit.events.transfer.TranferEvent
+import com.blockset.walletkit.events.transfer.TransferEvent
 import com.blockset.walletkit.events.wallet.WalletEvent
 import com.blockset.walletkit.events.wallet.WalletTransferAddedEvent
 import com.blockset.walletkit.events.wallet.WalletTransferChangedEvent
@@ -438,7 +438,7 @@ internal class CoreBreadBox(
         manager: WalletManager,
         wallet: Wallet,
         transfer: Transfer,
-        event: TranferEvent
+        event: TransferEvent
     ) {
         transferUpdatedChannelMap.offer(transfer)
         walletTransfersChannelMap.offer(wallet.eventKey())
