@@ -173,7 +173,7 @@ internal val currencyToLocaleMap = mapOf(
     "rsd" to "sr",
     "scr" to "en_SC",
     "sll" to "en_SL",
-    "sgd" to "ar_SD",
+    "sgd" to "en_SD",
     "sbd" to "en_SB",
     "sos" to "so_SO",
     "zar" to "zu",
