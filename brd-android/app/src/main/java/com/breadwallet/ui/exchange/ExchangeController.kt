@@ -24,11 +24,17 @@ import com.brd.exchange.ExchangeModel.Mode.*
 import com.brd.exchange.ExchangeModel.OfferDetails
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
+import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerExchangeBinding
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.MobiusKtController
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import kt.mobius.Connectable
 import kt.mobius.Connection
 import kt.mobius.disposables.Disposable
@@ -80,13 +86,18 @@ class ExchangeController(args: Bundle) :
             object : Connectable<ExchangeEffect, ExchangeEvent> {
                 override fun connect(output: Consumer<ExchangeEvent>): Connection<ExchangeEffect> {
                     return object : Connection<ExchangeEffect> {
+                        val scope = CoroutineScope(Main + SupervisorJob())
                         override fun accept(value: ExchangeEffect) {
-                            val childRouter = getChildRouter(binding.exchangeRoot)
-                            val topController = childRouter.backstack.lastOrNull()?.controller
-                            (topController as? ChildController)?.handleEffect(value)
+                            scope.launch(Main) {
+                                val childRouter = getChildRouter(binding.exchangeRoot)
+                                val topController = childRouter.backstack.lastOrNull()?.controller
+                                (topController as? ChildController)?.handleEffect(value)
+                            }
                         }
 
-                        override fun dispose() = Unit
+                        override fun dispose() {
+                            scope.cancel()
+                        }
                     }
                 }
             }
@@ -105,6 +116,7 @@ class ExchangeController(args: Bundle) :
     }
 
     override fun ExchangeModel.render(): Unit = with(binding) {
+        val res = requireResources()
         val childRouter = getChildRouter(exchangeRoot)
 
         val topController = childRouter.backstack.lastOrNull()?.controller
@@ -278,19 +290,15 @@ class ExchangeController(args: Bundle) :
 
         ifChanged(ExchangeModel::confirmingClose, ExchangeModel::errorState) {
             if (confirmingClose) {
-                dialog.dialogTitle.text = "Exit Checkout?"
-                dialog.dialogText.text = "View order details in Menu → Order History"
-                dialog.posButton.isAllCaps = true
-                dialog.negButton.isAllCaps = true
-                dialog.posButton.setText(R.string.Button_ok)
-                dialog.negButton.setText(R.string.Button_cancel)
+                dialog.dialogTitle.setText(R.string.Exchange_tradeCancelAlertTitle)
+                dialog.dialogText.setText(R.string.Exchange_tradeCancelAlertBody)
+                dialog.posButton.setText(R.string.Exchange_tradeCancelAlertYes)
+                dialog.negButton.setText(R.string.Exchange_tradeCancelAlertNo)
                 dialog.helpIcon.isVisible = false
             }
 
             val errorState = errorState
             if (errorState != null) {
-                dialog.dialogTitle.text = errorState.title
-                dialog.dialogText.text = errorState.message
                 if (errorState.isRecoverable) {
                     dialog.posButton.setText(R.string.Exchange_CTA_retry)
                     dialog.negButton.setText(R.string.Button_cancel)
@@ -300,6 +308,43 @@ class ExchangeController(args: Bundle) :
                 }
 
                 dialog.helpIcon.isVisible = false
+                dialog.dialogTitle.isVisible = false
+                when (val type = errorState.type) {
+                    is ExchangeModel.ErrorState.Type.TransactionError -> {
+                        when (type.sendFailedReason) {
+                            ExchangeEvent.SendFailedReason.FeeEstimateFailed -> {
+                                dialog.dialogText.setText(R.string.Send_noFeesError)
+                            }
+                            else -> {
+                                dialog.dialogText.setText(R.string.Exchange_ErrorState_transaction)
+                            }
+                        }
+                    }
+                    is ExchangeModel.ErrorState.Type.OrderError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_order)
+                    }
+                    is ExchangeModel.ErrorState.Type.NetworkError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_network)
+                    }
+                    is ExchangeModel.ErrorState.Type.InitializationError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_initialization)
+                    }
+                    is ExchangeModel.ErrorState.Type.UnsupportedRegionError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_unsupportedRegionError)
+                    }
+                    is ExchangeModel.ErrorState.Type.InsufficientNativeBalanceError -> {
+                        dialog.posButton.setText(R.string.Exchange_ErrorState_insufficientNativeBalanceErrorConfirm)
+                        dialog.dialogTitle.isVisible = true
+                        dialog.dialogTitle.setText(R.string.Send_insufficientGasTitle)
+                        dialog.dialogText.text = res.getString(
+                            R.string.Send_insufficientGasMessage,
+                            type.amount.toBigDecimal().formatCryptoForUi(type.currencyCode)
+                        )
+                    }
+                    is ExchangeModel.ErrorState.Type.UnknownError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_unknown)
+                    }
+                }
             }
 
             layoutDialog.isVisible = confirmingClose || errorState != null

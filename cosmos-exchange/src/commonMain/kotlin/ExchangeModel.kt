@@ -128,7 +128,9 @@ data class ExchangeModel(
             object NetworkError : Type()
             object OrderError : Type()
             object UnknownError : Type()
-            object TransactionError : Type()
+            data class TransactionError(
+                val sendFailedReason: ExchangeEvent.SendFailedReason? = null
+            ) : Type()
             object UnsupportedRegionError : Type()
             data class InsufficientNativeBalanceError(
                 val currencyCode: String,

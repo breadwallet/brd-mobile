@@ -15,11 +15,20 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.api.models.ExchangeInput
 import com.brd.api.models.ExchangeOrder
+import com.brd.exchange.ExchangeEffect
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
-import com.breadwallet.breadbox.*
+import com.breadwallet.breadbox.BreadBox
+import com.breadwallet.breadbox.TransferSpeed
+import com.breadwallet.breadbox.addressFor
+import com.breadwallet.breadbox.estimateFee
+import com.breadwallet.breadbox.feeForSpeed
+import com.breadwallet.breadbox.hashString
+import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.crypto.Amount
+import com.breadwallet.crypto.TransferAttribute
+import com.breadwallet.crypto.TransferFeeBasis
 import com.breadwallet.crypto.TransferState
 import com.breadwallet.crypto.errors.FeeEstimationError
 import com.breadwallet.databinding.ControllerTradeTransactionBinding
@@ -29,16 +38,16 @@ import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
 import com.breadwallet.ui.auth.AuthMode
 import com.breadwallet.ui.auth.AuthenticationController
-import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.send.ConfirmTradeController
 import com.breadwallet.ui.send.TransferField
 import com.breadwallet.util.isHedera
 import com.breadwallet.util.isRipple
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
-import java.math.BigDecimal
 
 class TradeTransactionController(args: Bundle? = null) :
     ExchangeController.ChildController(args),
@@ -48,6 +57,20 @@ class TradeTransactionController(args: Bundle? = null) :
     private val binding by viewBinding(ControllerTradeTransactionBinding::inflate)
     private val userManager by instance<BrdUserManager>()
     private val breadBox by instance<BreadBox>()
+
+    private var transferFeeBasis: TransferFeeBasis? = null
+    private var transferAttrs: Set<TransferAttribute>? = null
+
+    override fun handleEffect(effect: ExchangeEffect) {
+        super.handleEffect(effect)
+        if (effect is ExchangeEffect.ProcessUserAction) {
+            val childRouter = getChildRouter(binding.container)
+            if (transferFeeBasis == null && !childRouter.hasRootController()) {
+                val state = (currentModel.state as? ExchangeModel.State.ProcessingOrder) ?: return
+                launchTrade(state, childRouter)
+            }
+        }
+    }
 
     override fun onPositiveClicked() {
         val res = requireResources()
@@ -90,22 +113,10 @@ class TradeTransactionController(args: Bundle? = null) :
                 return@launch
             }
 
-            val coreTransferAttrs = wallet.transferAttributes
-            val transferAttributes = transferFieldsFor(sourceCurrencyCode, input)
-                .mapNotNull { field ->
-                    coreTransferAttrs.find { it.key.equals(field.key, true) }
-                        ?.apply { setValue(field.value) }
-                }
-                .toSet()
             val address = wallet.addressFor(input.sendToAddress) ?: return@launch
             val amount = Amount.create(input.amount.toDouble(), wallet.unit)
-            val networkFee = wallet.feeForSpeed(TransferSpeed.Priority(input.currency.code))
-            val feeBasis = try {
-                wallet.estimateFee(address, amount, networkFee, transferAttributes)
-            } catch (e: FeeEstimationError) {
-                logError("Failed to estimate fee", e)
-                return@launch
-            }
+            val feeBasis = checkNotNull(transferFeeBasis)
+            val transferAttributes = checkNotNull(transferAttrs)
 
             val primaryWallet = wallet.walletManager.primaryWallet
             if (primaryWallet != wallet && primaryWallet.balance < feeBasis.fee) {
@@ -148,17 +159,18 @@ class TradeTransactionController(args: Bundle? = null) :
                     }
                 }.first()
 
-            if (transfer == null) {
-                // TODO: handle failure
+            val result = if (transfer == null) {
+                ExchangeEvent.OnCryptoSendActionFailed(
+                    reason = ExchangeEvent.SendFailedReason.CreateTransferFailed
+                )
             } else {
-                eventConsumer.accept(
-                    ExchangeEvent.OnCryptoSendActionCompleted(
-                        input.actions.first(),
-                        transactionHash = transfer.hashString(),
-                        cancelled = false
-                    )
+                ExchangeEvent.OnCryptoSendActionCompleted(
+                    input.actions.first(),
+                    transactionHash = transfer.hashString(),
+                    cancelled = false
                 )
             }
+            eventConsumer.accept(result)
         }
     }
 
@@ -182,11 +194,13 @@ class TradeTransactionController(args: Bundle? = null) :
 
     override fun ExchangeModel.render() {
         val state = state as? ExchangeModel.State.ProcessingOrder ?: return
-        state.userAction?.run {
-            check(action.type == ExchangeOrder.Action.Type.CRYPTO_SEND)
-            val childRouter = getChildRouter(binding.container)
-            if (!childRouter.hasRootController()) {
-                launchTrade(state, childRouter)
+        if (errorState == null) {
+            state.userAction?.run {
+                check(action.type == ExchangeOrder.Action.Type.CRYPTO_SEND)
+                val childRouter = getChildRouter(binding.container)
+                if (!childRouter.hasRootController()) {
+                    launchTrade(state, childRouter)
+                }
             }
         }
     }
@@ -194,23 +208,50 @@ class TradeTransactionController(args: Bundle? = null) :
     private fun launchTrade(state: ExchangeModel.State.ProcessingOrder, childRouter: Router) {
         binding.layoutLoader.isVisible = false
         binding.scrim.isVisible = true
-        val input = state.order.inputs
-            .filterIsInstance<ExchangeInput.CryptoTransfer>()
-            .first()
-        val sourceCurrencyCode = checkNotNull(currentModel.sourceCurrencyCode)
-        val transferFields = transferFieldsFor(sourceCurrencyCode, input)
-        val transaction = RouterTransaction.with(
-            ConfirmTradeController(
-                sourceCurrencyCode,
-                input.sendToAddress,
-                TransferSpeed.Priority(sourceCurrencyCode),
-                input.amount.toBigDecimal(),
-                BigDecimal.ZERO,
-                transferFields
-            )
-        ).pushChangeHandler(DialogChangeHandler())
-            .popChangeHandler(DialogChangeHandler())
-        childRouter.setRoot(transaction)
+        viewAttachScope.launch {
+            val sourceCurrencyCode = checkNotNull(currentModel.sourceCurrencyCode)
+            val wallet = breadBox.wallet(sourceCurrencyCode).first()
+            val input = state.order.inputs
+                .filterIsInstance<ExchangeInput.CryptoTransfer>()
+                .first()
+            val coreTransferAttrs = wallet.transferAttributes
+            val transferAttributes = transferFieldsFor(sourceCurrencyCode, input)
+                .mapNotNull { field ->
+                    coreTransferAttrs.find { it.key.equals(field.key, true) }
+                        ?.apply { setValue(field.value) }
+                }
+                .toSet()
+            transferAttrs = transferAttributes
+            val address = wallet.addressFor(input.sendToAddress) ?: return@launch
+            val amount = Amount.create(input.amount.toDouble(), wallet.unit)
+            val networkFee = wallet.feeForSpeed(TransferSpeed.Priority(input.currency.code))
+            val feeBasis = try {
+                wallet.estimateFee(address, amount, networkFee, transferAttributes)
+            } catch (e: FeeEstimationError) {
+                logError("Failed to estimate fee", e)
+                eventConsumer.accept(
+                    ExchangeEvent.OnCryptoSendActionFailed(
+                        ExchangeEvent.SendFailedReason.FeeEstimateFailed
+                    )
+                )
+                return@launch
+            }
+            transferFeeBasis = feeBasis
+            val transferFields = transferFieldsFor(sourceCurrencyCode, input)
+            Main {
+                val transaction = RouterTransaction.with(
+                    ConfirmTradeController(
+                        sourceCurrencyCode,
+                        input.sendToAddress,
+                        TransferSpeed.Priority(sourceCurrencyCode),
+                        input.amount.toBigDecimal(),
+                        feeBasis.fee.toBigDecimal(unit = wallet.unit),
+                        transferFields
+                    )
+                )
+                childRouter.setRoot(transaction)
+            }
+        }
     }
 
     private fun transferFieldsFor(currencyCode: String, input: ExchangeInput.CryptoTransfer): List<TransferField> {

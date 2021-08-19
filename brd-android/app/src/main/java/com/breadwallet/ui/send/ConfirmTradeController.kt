@@ -18,7 +18,6 @@ import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerConfirmTradeDetailsBinding
 import com.breadwallet.tools.util.eth
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.util.isErc20
 import java.math.BigDecimal
 
@@ -67,11 +66,6 @@ class ConfirmTradeController(
         BigDecimal(arg<Double>(KEY_NETWORK_FEE)),
         arg(KEY_TRANSFER_FIELDS)
     )
-
-    init {
-        overridePushHandler(DialogChangeHandler())
-        overridePopHandler(DialogChangeHandler())
-    }
 
     private val binding by viewBinding(ControllerConfirmTradeDetailsBinding::inflate)
 

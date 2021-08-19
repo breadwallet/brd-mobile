@@ -1243,7 +1243,7 @@ private fun onCryptoSendActionCompleted(model: M, event: OnCryptoSendActionCompl
                         ),
                         errorState = ErrorState(
                             debugMessage = "Missing transaction hash",
-                            type = ErrorState.Type.TransactionError,
+                            type = ErrorState.Type.TransactionError(),
                             isRecoverable = false,
                         )
                     )
@@ -1268,7 +1268,25 @@ private fun onCryptoSendActionCompleted(model: M, event: OnCryptoSendActionCompl
 private fun onCryptoSendActionFailed(model: M, event: OnCryptoSendActionFailed): Next<M, F> {
     return when (model.state) {
         is State.ProcessingOrder -> when (event.reason) {
-            is E.SendFailedReason.InsufficientNativeWalletBalance -> next(
+            is SendFailedReason.CreateTransferFailed -> next(
+                model.copy(
+                    errorState = ErrorState(
+                        debugMessage = "Failed to create transfer",
+                        type = ErrorState.Type.TransactionError(event.reason),
+                        isRecoverable = false,
+                    )
+                )
+            )
+            is SendFailedReason.FeeEstimateFailed -> next(
+                model.copy(
+                    errorState = ErrorState(
+                        debugMessage = "Failed to estimate fee",
+                        type = ErrorState.Type.TransactionError(event.reason),
+                        isRecoverable = true,
+                    )
+                )
+            )
+            is SendFailedReason.InsufficientNativeWalletBalance -> next(
                 model.copy(
                     errorState = ErrorState(
                         debugMessage = "Insufficient native wallet balance: ${event.reason.requiredAmount}",
@@ -1314,6 +1332,13 @@ private fun onDialogConfirmClicked(model: M): Next<M, F> {
             quoteCurrencyCode = type.currencyCode,
         )
         return next(newModel, F.RequestOffers(newModel.offerBodyOrNull(), Mode.BUY))
+    }
+    val transactionError = model.errorState?.type as? ErrorState.Type.TransactionError
+    if (transactionError?.sendFailedReason == SendFailedReason.FeeEstimateFailed) {
+        val newModel = model.copy(
+            errorState = null,
+        )
+        return next(newModel, setOfNotNull((model.state as State.ProcessingOrder).userAction))
     }
     return when (model.state) {
         is State.Initializing -> {
