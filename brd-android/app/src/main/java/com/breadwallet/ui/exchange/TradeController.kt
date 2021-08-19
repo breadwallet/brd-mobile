@@ -25,7 +25,7 @@ import com.breadwallet.databinding.LayoutTradeAssetBinding
 import com.breadwallet.tools.util.TokenUtil
 import com.squareup.picasso.Picasso
 import java.io.File
-import java.util.*
+import java.util.Locale
 
 private const val KEYBOARD_CHANGE_DURATION = 200L
 
@@ -131,10 +131,13 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
         }
 
         ifChanged(ExchangeModel::formattedQuoteAmount) {
-            toAsset.labelInput.text = formattedQuoteAmount
+            toAsset.labelInput.text = formattedQuoteAmount?.filter {
+                it.isDigit() || it == '.' || it == '≈' || it == ' '
+            }
         }
 
-        ifChanged(ExchangeModel::offerState) { offerState ->
+        ifChanged(ExchangeModel::selectedOffer, ExchangeModel::offerState) {
+            val offerState = offerState
             when (offerState) {
                 ExchangeModel.OfferState.IDLE -> {
                     labelWith.isVisible = false
@@ -166,9 +169,8 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                     hidePinPad()
                 }
             }
-        }
 
-        ifChanged(ExchangeModel::selectedOffer) { selectedOffer ->
+            val selectedOffer = selectedOffer
             if (offerState == ExchangeModel.OfferState.COMPLETED) {
                 when (selectedOffer) {
                     is ExchangeModel.OfferDetails.ValidOffer -> {
