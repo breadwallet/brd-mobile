@@ -68,8 +68,6 @@ class ConfirmTradeController(
         arg(KEY_TRANSFER_FIELDS)
     )
 
-    override val layoutId = R.layout.controller_confirm_tx_details
-
     init {
         overridePushHandler(DialogChangeHandler())
         overridePopHandler(DialogChangeHandler())
