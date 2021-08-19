@@ -1149,6 +1149,8 @@
 /* Rewards menu item */
 "Settings.rewards" = "Rewards";
 
+"Settings.orderHistory" = "Order History"
+
 /* Share anonymous data label */
 "Settings.shareData" = "Share Anonymous Data";
 
@@ -2240,4 +2242,5 @@ users in a future update. ";
 /* Insufficient chain error alert ok action */
 "Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Buy ETH"
 
-
+"Exchange.Browser.orderHistoryTitle" = "Order History"
+"Exchange.Browser.rewardsTitle" = "Rewards"
