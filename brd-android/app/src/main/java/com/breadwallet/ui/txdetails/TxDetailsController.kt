@@ -18,7 +18,6 @@ import androidx.core.view.isVisible
 import com.breadwallet.R
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.TransactionDetailsBinding
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.tools.manager.BRClipboardManager
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.util.BRDateUtil
@@ -28,6 +27,7 @@ import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.flowbind.clicks
 import com.breadwallet.ui.flowbind.textChanges
+import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.models.TransactionState
 import com.breadwallet.ui.txdetails.TxDetails.E
 import com.breadwallet.ui.txdetails.TxDetails.F

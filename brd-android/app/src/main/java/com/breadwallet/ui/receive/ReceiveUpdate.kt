@@ -146,9 +146,10 @@ object ReceiveUpdate : Update<M, E, F>, ReceiveScreenUpdateSpec {
                 isAmountCrypto = isAmountCrypto,
                 rawAmount = when {
                     isAmountCrypto -> model.amount.toPlainString()
-                    else -> model.fiatAmount
-                        .setScale(2, BRConstants.ROUNDING_MODE)
-                        .toPlainString()
+                    else ->
+                        model.fiatAmount
+                            .setScale(2, BRConstants.ROUNDING_MODE)
+                            .toPlainString()
                 }
             )
         )
@@ -171,10 +172,12 @@ object ReceiveUpdate : Update<M, E, F>, ReceiveScreenUpdateSpec {
             }
         } else {
             newFiatAmount = model.fiatAmount
-            newAmount = (model.fiatAmount.setScale(
-                model.amount.scale().coerceIn(2..MAX_DIGITS),
-                BRConstants.ROUNDING_MODE
-            ) / pricePerUnit)
+            newAmount = (
+                model.fiatAmount.setScale(
+                    model.amount.scale().coerceIn(2..MAX_DIGITS),
+                    BRConstants.ROUNDING_MODE
+                ) / pricePerUnit
+                )
         }
 
         return next(

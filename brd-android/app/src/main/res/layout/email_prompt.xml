@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="@+id/prompt_description"
         app:layout_constraintTop_toTopOf="@+id/submit_button" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/prompt_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,12 +43,11 @@
         android:text="@string/Prompts.PaperKey.body"
         android:textColor="@color/text_secondary"
         android:textSize="16sp"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/prompt_title"
         app:layout_constraintTop_toBottomOf="@+id/prompt_title" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/prompt_footnote"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -59,12 +58,11 @@
         android:textColor="@color/text_secondary"
         android:textSize="16sp"
         android:visibility="gone"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/prompt_title"
         app:layout_constraintTop_toBottomOf="@+id/prompt_description" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/prompt_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +70,6 @@
         android:text="@string/Prompts.PaperKey.title"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:fontFamily="@font/mobile_font_book"
         app:layout_constraintEnd_toStartOf="@+id/close_button"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
@@ -98,7 +95,7 @@
         android:layout_marginEnd="16dp"
         android:background="@null"
         android:src="@drawable/ic_close_black_24dp"
-        android:tint="@color/text_secondary"
+        app:tint="@color/text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/prompt_title" />
 

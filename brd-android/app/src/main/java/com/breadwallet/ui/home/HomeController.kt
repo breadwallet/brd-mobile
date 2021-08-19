@@ -10,10 +10,7 @@ package com.breadwallet.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,7 +20,6 @@ import com.breadwallet.R
 import com.breadwallet.databinding.ControllerHomeBinding
 import com.breadwallet.legacy.presenter.customviews.BRButton
 import com.breadwallet.legacy.presenter.customviews.BREdit
-import com.breadwallet.legacy.presenter.customviews.BaseTextView
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.animation.SpringAnimator
 import com.breadwallet.tools.manager.BRSharedPrefs
@@ -86,7 +82,7 @@ class HomeController(
     private var addWalletAdapter: ItemAdapter<AddWalletItem>? = null
 
     override fun bindView(output: Consumer<E>): Disposable {
-        return with (binding) {
+        return with(binding) {
             buyLayout.setOnClickListener { output.accept(E.OnBuyClicked) }
             tradeLayout.setOnClickListener { output.accept(E.OnTradeClicked) }
             menuLayout.setOnClickListener { output.accept(E.OnMenuClicked) }
@@ -127,7 +123,7 @@ class HomeController(
             rvWalletList.layoutManager = LinearLayoutManager(view.context)
         }
 
-        addWalletAdapter!!.add(AddWalletItem())
+        addWalletAdapter?.add(AddWalletItem())
     }
 
     override fun onAttach(view: View) {
@@ -200,8 +196,8 @@ class HomeController(
         val act = checkNotNull(activity)
 
         val baseLayout = act.layoutInflater.inflate(R.layout.base_prompt, null)
-        val title = baseLayout.findViewById<BaseTextView>(R.id.prompt_title)
-        val description = baseLayout.findViewById<BaseTextView>(R.id.prompt_description)
+        val title = baseLayout.findViewById<TextView>(R.id.prompt_title)
+        val description = baseLayout.findViewById<TextView>(R.id.prompt_description)
         val continueButton = baseLayout.findViewById<Button>(R.id.continue_button)
         val dismissButton = baseLayout.findViewById<ImageButton>(R.id.dismiss_button)
         dismissButton.setOnClickListener {
@@ -247,10 +243,10 @@ class HomeController(
     private fun getEmailPrompt(): View {
         val act = checkNotNull(activity)
         val customLayout = act.layoutInflater.inflate(R.layout.email_prompt, null)
-        val customTitle = customLayout.findViewById<BaseTextView>(R.id.prompt_title)
+        val customTitle = customLayout.findViewById<TextView>(R.id.prompt_title)
         val customDescription =
-            customLayout.findViewById<BaseTextView>(R.id.prompt_description)
-        val footNote = customLayout.findViewById<BaseTextView>(R.id.prompt_footnote)
+            customLayout.findViewById<TextView>(R.id.prompt_description)
+        val footNote = customLayout.findViewById<TextView>(R.id.prompt_footnote)
         val submitButton = customLayout.findViewById<BRButton>(R.id.submit_button)
         val closeButton = customLayout.findViewById<ImageView>(R.id.close_button)
         val emailEditText = customLayout.findViewById<BREdit>(R.id.email_edit)
@@ -276,7 +272,6 @@ class HomeController(
             } else {
                 SpringAnimator.failShakeAnimation(act, emailEditText)
             }
-
         }
         return customLayout
     }

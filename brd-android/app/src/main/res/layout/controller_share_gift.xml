@@ -161,7 +161,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/wallet_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintStart_toEndOf="@+id/icon_container"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/labelPricePerUnit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,8 +191,7 @@
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
                     tools:text="$12,083.23"/>
 
-
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/labelWalletFiat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,8 +204,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="$250.00"/>
 
-
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:id="@+id/labelWalletCrypto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

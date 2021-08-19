@@ -46,7 +46,7 @@ class BrdWalletController : WalletController("BRD") {
         binding.transactionListCoordinatorLayout.addView(mAppBarLayoutRoot, 0)
         lockRewardsViewToCollapsed(mAppBarLayoutRoot!!, binding.txList)
         mAppBarLayoutRoot!!.setOnClickListener {
-            //Collapse without animation before showing the rewards webview.
+            // Collapse without animation before showing the rewards webview.
             EventUtils.pushEvent(EventUtils.EVENT_REWARDS_BANNER)
             mAppBarLayoutRoot!!.setExpanded(false, true)
             val rewardsUrl = HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS)
@@ -154,8 +154,7 @@ class BrdWalletController : WalletController("BRD") {
 
     companion object {
         private val CONFETTI_VIDEO_URI = Uri.parse(
-            "android.resource://"
-                + BuildConfig.APPLICATION_ID + File.separator + R.raw.confetti
+            "android.resource://${BuildConfig.APPLICATION_ID}${File.separator}${R.raw.confetti}"
         )
         private const val UNINITIALIZED_POSITION = -1
         private const val COLLAPSE_REWARDS_DELAY_MILLISECONDS = 6000

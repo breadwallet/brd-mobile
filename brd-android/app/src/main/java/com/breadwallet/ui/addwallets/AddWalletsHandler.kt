@@ -20,11 +20,10 @@ import com.breadwallet.crypto.Wallet
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.model.TokenItem
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.addwallets.AddWallets.E
 import com.breadwallet.ui.addwallets.AddWallets.F
-import com.breadwallet.util.isTezos
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import drewcarlson.mobius.flow.flowTransformer
 import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.flow.first
@@ -133,8 +132,10 @@ private fun walletIsNeeded(wallet: Wallet, trackedWallets: List<String>) =
 
 private fun List<TokenItem>.applyFilter(query: String) =
     filter { token ->
-        (token.name.contains(query, true) ||
-            token.symbol.contains(query, true))
+        (
+            token.name.contains(query, true) ||
+                token.symbol.contains(query, true)
+            )
     }
 
 private fun TokenItem.asToken(enabled: Boolean, removable: Boolean): Token {
@@ -147,5 +148,3 @@ private fun TokenItem.asToken(enabled: Boolean, removable: Boolean): Token {
         removable
     )
 }
-
-

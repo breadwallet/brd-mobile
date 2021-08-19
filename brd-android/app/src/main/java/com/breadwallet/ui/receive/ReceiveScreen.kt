@@ -72,10 +72,12 @@ object ReceiveScreen {
                 val hasRate = fiatPricePerUnit > BigDecimal.ZERO
                 val hasFiatAmount = newFiatAmount > BigDecimal.ZERO
                 newAmount = if (hasRate && hasFiatAmount) {
-                    (newFiatAmount.setScale(
-                        fiatPricePerUnit.scale().coerceAtMost(MAX_DIGITS),
-                        BRConstants.ROUNDING_MODE
-                    ) / fiatPricePerUnit)
+                    (
+                        newFiatAmount.setScale(
+                            fiatPricePerUnit.scale().coerceAtMost(MAX_DIGITS),
+                            BRConstants.ROUNDING_MODE
+                        ) / fiatPricePerUnit
+                        )
                 } else {
                     amount
                 }

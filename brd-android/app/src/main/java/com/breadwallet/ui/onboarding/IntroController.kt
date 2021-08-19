@@ -18,7 +18,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.net.toUri
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
-import com.breadwallet.R
 import com.breadwallet.databinding.ControllerIntroBinding
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.EventUtils

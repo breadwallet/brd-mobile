@@ -209,22 +209,22 @@ class WebController(
                 val locationJs =
                     LocationJs(nativePromiseFactory, locationPermissionFlow, locationManager)
                 val kvStoreJs = KVStoreJs(
-                    nativePromiseFactory,
-                    direct.instance()
+                    nativePromiseFactory = nativePromiseFactory,
+                    context = direct.instance()
                 )
                 val linkJs = LinkJs(nativePromiseFactory)
                 val walletJs = WalletJs(
-                    nativePromiseFactory,
-                    direct.instance(),
-                    direct.instance(),
-                    direct.instance(),
-                    direct.instance(),
-                    direct.instance(),
-                    direct.instance()
+                    promise = nativePromiseFactory,
+                    context = direct.instance(),
+                    metaDataProvider = direct.instance(),
+                    breadBox = direct.instance(),
+                    ratesRepository = direct.instance(),
+                    userManager = direct.instance(),
+                    conversionTracker = direct.instance()
                 )
                 val supportJs = SupportJs(
-                    nativePromiseFactory,
-                    direct.instance()
+                    promise = nativePromiseFactory,
+                    supportManager = direct.instance()
                 )
                 val nativeApis = if (BuildConfig.DEBUG) {
                     NativeApisJs.with(
@@ -240,7 +240,7 @@ class WebController(
                     NativeApisJs.with(walletJs, linkJs, supportJs)
                 }
 
-                nativeApis.attachToWebView(binding.webView)
+                nativeApis.attachToWebView(webView = binding.webView, scope = direct.instance())
                 binding.webView.addJavascriptInterface(BrdNativeJs, BrdNativeJs.JS_NAME)
             }
             val jsonRequest: String? = argOptional(ARG_JSON_REQUEST)

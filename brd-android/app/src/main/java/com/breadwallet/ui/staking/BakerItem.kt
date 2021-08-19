@@ -13,13 +13,12 @@ import android.view.View
 import com.brd.bakerapi.models.Baker
 import com.breadwallet.R
 import com.breadwallet.databinding.BakerListItemBinding
-import com.breadwallet.databinding.BakerViewBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 
-class BakerItem (
+class BakerItem(
     val baker: Baker
 ) : AbstractItem<BakerItem.ViewHolder>() {
 
@@ -32,7 +31,7 @@ class BakerItem (
         @SuppressLint("SetTextI18n")
         override fun bindView(item: BakerItem, payloads: List<Any>) {
             with(BakerListItemBinding.bind(itemView).baker) {
-                val formatter =  NumberFormat.getPercentInstance()
+                val formatter = NumberFormat.getPercentInstance()
                 name.text = item.baker.name
                 feePct.text = itemView.context.getString(R.string.Staking_feeHeader) + formatter.format(item.baker.fee)
                 formatter.maximumFractionDigits = 3

@@ -13,7 +13,7 @@
         android:layout_height="200dp"
         android:background="@drawable/write_down_gradient">
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 
     </FrameLayout>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +60,6 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/bread_margin"
         android:layout_marginTop="51dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/StartPaperPhrase.body"
         android:textSize="18sp" />
 

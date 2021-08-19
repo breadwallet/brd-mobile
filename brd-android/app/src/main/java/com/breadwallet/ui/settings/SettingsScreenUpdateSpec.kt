@@ -18,7 +18,7 @@ interface SettingsScreenUpdateSpec {
         SettingsScreen.E.OnWalletsUpdated -> onWalletsUpdated(model)
         SettingsScreen.E.ShowHiddenOptions -> showHiddenOptions(model)
         SettingsScreen.E.OnCloseHiddenMenu -> onCloseHiddenMenu(model)
-        SettingsScreen.E.OnExportTransactionsConfirmed  -> onExportTransactionsConfirmed(model)
+        SettingsScreen.E.OnExportTransactionsConfirmed -> onExportTransactionsConfirmed(model)
         is SettingsScreen.E.OnLinkScanned -> onLinkScanned(model, event)
         is SettingsScreen.E.OnOptionClicked -> onOptionClicked(model, event)
         is SettingsScreen.E.OnOptionsLoaded -> onOptionsLoaded(model, event)
@@ -29,7 +29,6 @@ interface SettingsScreenUpdateSpec {
         is SettingsScreen.E.SetTokenBundle -> setTokenBundle(model, event)
         is SettingsScreen.E.OnATMMapClicked -> onATMMapClicked(model, event)
         is SettingsScreen.E.OnTransactionsExportFileGenerated -> onTransactionsExportFileGenerated(model, event)
-
     }
 
     fun onBackClicked(model: SettingsScreen.M): Next<SettingsScreen.M, SettingsScreen.F>
@@ -62,7 +61,7 @@ interface SettingsScreenUpdateSpec {
 
     fun onATMMapClicked(model: SettingsScreen.M, event: SettingsScreen.E.OnATMMapClicked): Next<SettingsScreen.M, SettingsScreen.F>
 
-    fun onExportTransactionsConfirmed(model: SettingsScreen.M) : Next<SettingsScreen.M, SettingsScreen.F>
+    fun onExportTransactionsConfirmed(model: SettingsScreen.M): Next<SettingsScreen.M, SettingsScreen.F>
 
-    fun onTransactionsExportFileGenerated(model: SettingsScreen.M, event: SettingsScreen.E.OnTransactionsExportFileGenerated) : Next<SettingsScreen.M, SettingsScreen.F>
+    fun onTransactionsExportFileGenerated(model: SettingsScreen.M, event: SettingsScreen.E.OnTransactionsExportFileGenerated): Next<SettingsScreen.M, SettingsScreen.F>
 }

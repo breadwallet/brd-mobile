@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import androidx.annotation.Nullable;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import com.breadwallet.R;
 
@@ -16,11 +17,6 @@ import com.breadwallet.R;
  * SPDX-License-Identifier: BUSL-1.1
  */
 public class BRNotificationBar extends androidx.appcompat.widget.Toolbar {
-
-    private static final String TAG = BRNotificationBar.class.getName();
-
-    private BaseTextView description;
-    private BRButton close;
 
     public BRNotificationBar(Context context) {
         super(context);
@@ -39,8 +35,8 @@ public class BRNotificationBar extends androidx.appcompat.widget.Toolbar {
 
     private void init(AttributeSet attrs) {
         inflate(getContext(), R.layout.notification_bar, this);
-        description = findViewById(R.id.description);
-        close = findViewById(R.id.cancel_button);
+        TextView description = findViewById(R.id.description);
+        BRButton close = findViewById(R.id.cancel_button);
 
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.BRNotificationBar);
         final int N = attributes.getIndexCount();

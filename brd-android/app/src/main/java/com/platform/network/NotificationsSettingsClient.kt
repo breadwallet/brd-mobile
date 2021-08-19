@@ -15,7 +15,6 @@ import com.breadwallet.tools.util.BRConstants
 import com.platform.APIClient
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -37,7 +36,6 @@ interface NotificationsSettingsClient {
      * otherwise false.
      */
     fun unregisterToken(context: Context, token: String): Boolean
-
 }
 
 object NotificationsSettingsClientImpl : NotificationsSettingsClient {
@@ -77,13 +75,12 @@ object NotificationsSettingsClientImpl : NotificationsSettingsClient {
             val requestBody = payload.toString().toRequestBody(json)
 
             val request = Request.Builder()
-                    .url(url)
-                    .header(BRConstants.HEADER_CONTENT_TYPE, BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8)
-                    .header(BRConstants.HEADER_ACCEPT, BRConstants.CONTENT_TYPE_JSON).post(requestBody).build()
+                .url(url)
+                .header(BRConstants.HEADER_CONTENT_TYPE, BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8)
+                .header(BRConstants.HEADER_ACCEPT, BRConstants.CONTENT_TYPE_JSON).post(requestBody).build()
 
             val response = APIClient.getInstance(context).sendRequest(request, true)
             return response.isSuccessful
-
         } catch (e: JSONException) {
             Log.e(TAG, "Error constructing JSON payload while updating FCM registration token.", e)
         }
@@ -93,11 +90,10 @@ object NotificationsSettingsClientImpl : NotificationsSettingsClient {
     override fun unregisterToken(context: Context, token: String): Boolean {
         val url = APIClient.getBaseURL() + ENDPOINT_DELETE_PUSH_DEVICES + token
         val request = Request.Builder()
-                .url(url)
-                .delete()
-                .build()
+            .url(url)
+            .delete()
+            .build()
         val response = APIClient.getInstance(context).sendRequest(request, true)
         return response.isSuccessful
     }
-
 }

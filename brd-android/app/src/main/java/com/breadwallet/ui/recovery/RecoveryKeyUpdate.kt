@@ -47,7 +47,8 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
             else -> next(
                 model.copy(
                     errors = model.errors.replaceAt(event.index, event.hasError)
-                ), setOf(F.ErrorShake)
+                ),
+                setOf(F.ErrorShake)
             )
         }
     }
@@ -86,7 +87,8 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
                     errors = event.errors,
                     isLoading = false,
                     showContactSupport = false
-                ), setOf(F.ErrorShake)
+                ),
+                setOf(F.ErrorShake)
             )
         }
     }
@@ -104,7 +106,8 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
                     next(nextModel)
                 } else {
                     next(
-                        nextModel, setOf<F>(
+                        nextModel,
+                        setOf<F>(
                             F.ValidateWord(
                                 model.focusedWordIndex,
                                 model.phrase[model.focusedWordIndex]
@@ -121,10 +124,12 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
     }
 
     override fun onPhraseSaveFailed(model: M): Next<M, F> {
-        return next(model.copy(
-            isLoading = false,
-            showContactSupport = false
-        ))
+        return next(
+            model.copy(
+                isLoading = false,
+                showContactSupport = false
+            )
+        )
     }
 
     override fun onPhraseInvalid(model: M): Next<M, F> {
@@ -132,7 +137,8 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
             model.copy(
                 isLoading = false,
                 showContactSupport = false
-            ), setOf<F>(
+            ),
+            setOf<F>(
                 F.ErrorShake,
                 F.GoToPhraseError
             )
@@ -173,11 +179,13 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
                         ),
                         setOf<F>(F.ValidatePhrase(phrase))
                     )
-                    else -> next(model.copy(
-                        phrase = List(12) { index ->
-                            phrase.getOrElse(index) { "" }
-                        }
-                    ))
+                    else -> next(
+                        model.copy(
+                            phrase = List(12) { index ->
+                                phrase.getOrElse(index) { "" }
+                            }
+                        )
+                    )
                 }
             }
         }
@@ -188,7 +196,8 @@ object RecoveryKeyUpdate : Update<M, E, F>, RecoveryKeyUpdateSpec {
             model.copy(
                 isLoading = false,
                 showContactSupport = false
-            ), setOf<F>(
+            ),
+            setOf<F>(
                 F.ErrorShake,
                 F.GoToPhraseError
             )

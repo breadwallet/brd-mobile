@@ -24,12 +24,11 @@
                 android:layout_marginRight="8dp"
                 android:layout_gravity="center_vertical"/>
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Wallet.stakingTitle"
                 android:textColor="@color/almost_black"
-                android:fontFamily="@font/mobile_font_book"
                 android:layout_gravity="center_vertical"/>
 
             <LinearLayout

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,14 +30,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="42dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/RecoverWallet.subheader"
         android:textAlignment="center"
         android:textSize="@dimen/sub_header"
@@ -109,7 +108,7 @@
                     android:textAlignment="center"
                     android:textCursorDrawable="@null"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -139,7 +138,7 @@
                     android:nextFocusForward="@+id/word3"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -169,7 +168,7 @@
                     android:nextFocusForward="@+id/word4"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -205,7 +204,7 @@
                     android:nextFocusForward="@+id/word5"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -235,7 +234,7 @@
                     android:nextFocusForward="@+id/word6"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -265,7 +264,7 @@
                     android:nextFocusForward="@+id/word7"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -302,7 +301,7 @@
                     android:nextFocusForward="@+id/word8"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -332,7 +331,7 @@
                     android:nextFocusForward="@+id/word9"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -362,7 +361,7 @@
                     android:nextFocusForward="@+id/word10"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -401,7 +400,7 @@
                     android:nextFocusForward="@+id/word11"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -432,7 +431,7 @@
                     android:nextFocusForward="@+id/word12"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -462,7 +461,7 @@
                     android:maxLines="1"
                     android:textAlignment="center"/>
 
-                <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"

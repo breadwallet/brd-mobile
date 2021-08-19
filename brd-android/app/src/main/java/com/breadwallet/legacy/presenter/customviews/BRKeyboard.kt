@@ -9,15 +9,9 @@
 package com.breadwallet.legacy.presenter.customviews
 
 import android.content.Context
-import android.widget.LinearLayout
-import com.breadwallet.legacy.presenter.customviews.BRKeyboard.OnInsertListener
-import android.widget.ImageButton
-import com.breadwallet.R
-import android.content.res.TypedArray
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import com.breadwallet.legacy.presenter.customviews.BRKeyboard
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
@@ -25,12 +19,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.core.content.getSystemService
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.breadwallet.R
 import com.breadwallet.databinding.PinPadBinding
+import com.breadwallet.legacy.presenter.customviews.BRKeyboard.OnInsertListener
 import com.breadwallet.tools.util.Utils
-import java.util.ArrayList
 
 class BRKeyboard : LinearLayout, View.OnClickListener {
     private var mKeyInsertListener: OnInsertListener? = null

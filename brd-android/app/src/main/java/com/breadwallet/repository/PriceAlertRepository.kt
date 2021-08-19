@@ -57,66 +57,66 @@ interface PriceAlertRepository {
  * disk storage.
  */
 private open class PriceAlertRepositoryImpl(
-        initialList: List<PriceAlert> = emptyList()
+    initialList: List<PriceAlert> = emptyList()
 ) : PriceAlertRepository {
 
     private val alerts = initialList.toMutableSet()
 
     override fun getAlerts(): List<PriceAlert> =
-            synchronized(alerts) {
-                if (alerts.isEmpty()) {
-                    alerts.addAll(BRSharedPrefs.getPriceAlerts())
-                }
-                alerts.toList()
+        synchronized(alerts) {
+            if (alerts.isEmpty()) {
+                alerts.addAll(BRSharedPrefs.getPriceAlerts())
             }
+            alerts.toList()
+        }
 
     override fun setAlerts(newAlerts: List<PriceAlert>) =
-            synchronized(alerts) {
-                alerts.clear()
-                alerts.addAll(newAlerts)
-                writeToDisk()
-            }
+        synchronized(alerts) {
+            alerts.clear()
+            alerts.addAll(newAlerts)
+            writeToDisk()
+        }
 
     override fun toggleHasBeenTriggered(priceAlert: PriceAlert) =
-            synchronized(alerts) {
-                check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
-                alerts.replace(priceAlert) {
-                    copy(hasBeenTriggered = !hasBeenTriggered)
-                }
-                writeToDisk()
+        synchronized(alerts) {
+            check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
+            alerts.replace(priceAlert) {
+                copy(hasBeenTriggered = !hasBeenTriggered)
             }
+            writeToDisk()
+        }
 
     override fun updatePinnedPrice(priceAlert: PriceAlert, pinnedPrice: Float) =
-            synchronized(alerts) {
-                check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
-                alerts.replace(priceAlert) {
-                    copy(pinnedPrice = pinnedPrice)
-                }
-                writeToDisk()
+        synchronized(alerts) {
+            check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
+            alerts.replace(priceAlert) {
+                copy(pinnedPrice = pinnedPrice)
             }
+            writeToDisk()
+        }
 
     override fun updateStartTime(priceAlert: PriceAlert, currentTime: Long) =
-            synchronized(alerts) {
-                check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
-                alerts.replace(priceAlert) {
-                    copy(startTime = currentTime)
-                }
-                writeToDisk()
+        synchronized(alerts) {
+            check(alerts.contains(priceAlert)) { "Could not find alert $priceAlert" }
+            alerts.replace(priceAlert) {
+                copy(startTime = currentTime)
             }
+            writeToDisk()
+        }
 
     override fun putAlert(priceAlert: PriceAlert) =
-            synchronized(alerts) {
-                check(!alerts.contains(priceAlert)) { "Cannot add duplicate alerts." }
-                alerts.add(priceAlert)
-                writeToDisk()
-            }
+        synchronized(alerts) {
+            check(!alerts.contains(priceAlert)) { "Cannot add duplicate alerts." }
+            alerts.add(priceAlert)
+            writeToDisk()
+        }
 
     override fun removeAlert(priceAlert: PriceAlert) =
-            synchronized(alerts) {
-                check(alerts.contains(priceAlert)) { "Cannot remove non-existent alert." }
-                alerts.remove(priceAlert)
-                writeToDisk()
-            }
+        synchronized(alerts) {
+            check(alerts.contains(priceAlert)) { "Cannot remove non-existent alert." }
+            alerts.remove(priceAlert)
+            writeToDisk()
+        }
 
     override fun removeAll() = synchronized(alerts) {
         alerts.clear()
@@ -124,14 +124,14 @@ private open class PriceAlertRepositoryImpl(
     }
 
     override fun batch(process: PriceAlertRepository.() -> Unit) =
-            synchronized(alerts) {
-                val repo = object : PriceAlertRepositoryImpl(getAlerts()) {
-                    // Disable writing to database.
-                    override fun writeToDisk() = Unit
-                }
-                process(repo)
-                setAlerts(repo.getAlerts())
+        synchronized(alerts) {
+            val repo = object : PriceAlertRepositoryImpl(getAlerts()) {
+                // Disable writing to database.
+                override fun writeToDisk() = Unit
             }
+            process(repo)
+            setAlerts(repo.getAlerts())
+        }
 
     /**
      * Saves [alerts] with [BRSharedPrefs].
@@ -143,8 +143,8 @@ private open class PriceAlertRepositoryImpl(
     }
 
     private fun MutableSet<PriceAlert>.replace(
-            target: PriceAlert,
-            mutate: PriceAlert.() -> PriceAlert
+        target: PriceAlert,
+        mutate: PriceAlert.() -> PriceAlert
     ) {
         val targetIndex = indexOf(target)
         val newAlerts = mapIndexed { index, alert ->
@@ -164,31 +164,31 @@ private open class PriceAlertRepositoryImpl(
  */
 // When modifying the schema, only add fields and omit values of deprecated fields.
 fun PriceAlert.asJsonArrayString(): String =
-        JSONArray().apply {
-            put(0, PriceAlert.Type.values().indexOf(type))
-            put(1, PriceAlert.Direction.values().indexOf(direction))
-            put(2, forCurrencyCode)
-            put(3, value)
-            put(4, toCurrencyCode)
-            put(5, startTime)
-            put(6, pinnedPrice)
-            put(7, hasBeenTriggered)
-        }.toString()
+    JSONArray().apply {
+        put(0, PriceAlert.Type.values().indexOf(type))
+        put(1, PriceAlert.Direction.values().indexOf(direction))
+        put(2, forCurrencyCode)
+        put(3, value)
+        put(4, toCurrencyCode)
+        put(5, startTime)
+        put(6, pinnedPrice)
+        put(7, hasBeenTriggered)
+    }.toString()
 
 /**
  * Returns a [PriceAlert] from a JSON array string created
  * using [asJsonArrayString].
  */
 fun PriceAlert.Companion.fromJsonArrayString(jsonArray: String): PriceAlert =
-        JSONArray(jsonArray).run {
-            PriceAlert(
-                    PriceAlert.Type.values()[getInt(0)],
-                    PriceAlert.Direction.values()[getInt(1)],
-                    getString(2),
-                    (get(3) as Number).toFloat(),
-                    getString(4),
-                    getLong(5),
-                    (get(6) as Number).toFloat(),
-                    getBoolean(7)
-            )
-        }
+    JSONArray(jsonArray).run {
+        PriceAlert(
+            PriceAlert.Type.values()[getInt(0)],
+            PriceAlert.Direction.values()[getInt(1)],
+            getString(2),
+            (get(3) as Number).toFloat(),
+            getString(4),
+            getLong(5),
+            (get(6) as Number).toFloat(),
+            getBoolean(7)
+        )
+    }

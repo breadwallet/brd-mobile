@@ -53,14 +53,16 @@ object StakingUpdate : Update<M, E, F> {
     ): Next<M, F> =
         when (event) {
             is E.AccountUpdated.Unstaked ->
-                next(M.SetValidator.createDefault(
-                    event.balance,
-                    model.currencyId,
-                    event.currencyCode,
-                    isFingerprintEnabled = model.isFingerprintEnabled,
-                    bakers = model.bakers,
-                    selectedBaker = (model as? M.SetValidator)?.selectedBaker,
-                ))
+                next(
+                    M.SetValidator.createDefault(
+                        event.balance,
+                        model.currencyId,
+                        event.currencyCode,
+                        isFingerprintEnabled = model.isFingerprintEnabled,
+                        bakers = model.bakers,
+                        selectedBaker = (model as? M.SetValidator)?.selectedBaker,
+                    )
+                )
             is E.AccountUpdated.Staked -> {
                 val baker = model.bakers.find { it.address == event.address }
                 next(
@@ -262,13 +264,15 @@ object StakingUpdate : Update<M, E, F> {
     }
 
     private fun onPasteClicked(model: M): Next<M, F> = when (model) {
-        is M.SetValidator -> dispatch(setOf(
-            if (model.originalAddress.isNotBlank()) {
-                F.PasteFromClipboard(model.originalAddress)
-            } else {
-                F.PasteFromClipboard(model.address)
-            }
-        ))
+        is M.SetValidator -> dispatch(
+            setOf(
+                if (model.originalAddress.isNotBlank()) {
+                    F.PasteFromClipboard(model.originalAddress)
+                } else {
+                    F.PasteFromClipboard(model.address)
+                }
+            )
+        )
         else -> noChange()
     }
 
@@ -306,7 +310,7 @@ object StakingUpdate : Update<M, E, F> {
             else -> noChange()
         }
 
-    private fun onAuthCancelled(model:M): Next<M, F> =
+    private fun onAuthCancelled(model: M): Next<M, F> =
         when (model) {
             is M.ViewValidator -> next(model.copy(isAuthenticating = false, state = STAKED))
             is M.SetValidator -> next(model.copy(isAuthenticating = false))
@@ -341,26 +345,26 @@ object StakingUpdate : Update<M, E, F> {
             else -> noChange()
         }
 
-    private fun onBakersLoaded(model: M, event: E.OnBakersLoaded): Next<M,F> =
+    private fun onBakersLoaded(model: M, event: E.OnBakersLoaded): Next<M, F> =
         next(
             when (model) {
-                is M.ViewValidator  -> model.copy(bakers = event.bakers, isLoadingBakers = false)
+                is M.ViewValidator -> model.copy(bakers = event.bakers, isLoadingBakers = false)
                 is M.SetValidator -> model.copy(bakers = event.bakers, isLoadingBakers = false)
                 else -> model
             },
             setOf(F.GoToSelectBaker(event.bakers))
         )
 
-    private fun onBakerLoaded(model: M, event: E.OnBakerLoaded): Next<M,F> =
+    private fun onBakerLoaded(model: M, event: E.OnBakerLoaded): Next<M, F> =
         next(
             when (model) {
-                is M.ViewValidator  -> model.copy(baker = event.baker)
+                is M.ViewValidator -> model.copy(baker = event.baker)
                 is M.SetValidator -> model.copy(selectedBaker = event.baker)
                 else -> model
             }
         )
 
-    private fun onBakersFailed(model: M): Next<M,F> = next(
+    private fun onBakersFailed(model: M): Next<M, F> = next(
         when (model) {
             is M.ViewValidator -> model.copy(isLoadingBakers = false)
             is M.SetValidator -> model.copy(isLoadingBakers = false)
@@ -368,5 +372,5 @@ object StakingUpdate : Update<M, E, F> {
         },
         setOf(F.ShowBakerError)
     )
-    private fun onBakerFailed(model: M): Next<M,F> = dispatch(setOf(F.ShowBakerError))
+    private fun onBakerFailed(model: M): Next<M, F> = dispatch(setOf(F.ShowBakerError))
 }

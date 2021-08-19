@@ -226,11 +226,11 @@ abstract class BaseMobiusController<M, E, F>(
     }
 
     private fun connectView(loop: MobiusLoop<M, E, F>) {
-        val legacyDispose = bindView(Consumer { event ->
+        val legacyDispose = bindView { event ->
             if (isLoopActive.get()) {
                 loop.dispatchEvent(event)
             }
-        })
+        }
 
         val job = SupervisorJob()
         val scope = CoroutineScope(job + Dispatchers.Main + errorHandler("modelConsumer"))

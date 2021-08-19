@@ -189,11 +189,14 @@ class KHomeScreen : Screen<KHomeScreen>() {
         withId(R.id.menu_layout)
     }
 
-    val wallets = KRecyclerView({
-        withId(R.id.rv_wallet_list)
-    }, itemTypeBuilder = {
-        itemType(::KWalletItem)
-    })
+    val wallets = KRecyclerView(
+        {
+            withId(R.id.rv_wallet_list)
+        },
+        itemTypeBuilder = {
+            itemType(::KWalletItem)
+        }
+    )
 
     class KWalletItem(parent: Matcher<View>) : KRecyclerItem<KWalletItem>(parent) {
         val name = KTextView(parent) { withId(R.id.wallet_name) }
@@ -216,12 +219,15 @@ object KSettingsScreen : KScreen<KSettingsScreen>() {
         withId(R.id.close_button)
     }
 
-    val recycler = KRecyclerView({
-        isCompletelyDisplayed()
-        withId(R.id.settings_list)
-    }, itemTypeBuilder = {
-        itemType(::KSettingsItem)
-    })
+    val recycler = KRecyclerView(
+        {
+            isCompletelyDisplayed()
+            withId(R.id.settings_list)
+        },
+        itemTypeBuilder = {
+            itemType(::KSettingsItem)
+        }
+    )
 
     class KSettingsItem(parent: Matcher<View>) : KRecyclerItem<KSettingsItem>(parent) {
         val title = KTextView(parent) { withId(R.id.item_title) }
@@ -280,12 +286,15 @@ class KWalletScreen : Screen<KWalletScreen>() {
         withId(R.id.receive_button)
     }
 
-    val transactions = KRecyclerView({
-        isDisplayed()
-        withId(R.id.tx_list)
-    }, itemTypeBuilder = {
-        itemType(::KTransactionItem)
-    })
+    val transactions = KRecyclerView(
+        {
+            isDisplayed()
+            withId(R.id.tx_list)
+        },
+        itemTypeBuilder = {
+            itemType(::KTransactionItem)
+        }
+    )
 
     class KTransactionItem(parent: Matcher<View>) : KRecyclerItem<KTransactionItem>(parent)
 }

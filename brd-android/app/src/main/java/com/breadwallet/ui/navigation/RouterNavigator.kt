@@ -62,13 +62,13 @@ import com.breadwallet.ui.showkey.ShowPaperKeyController
 import com.breadwallet.ui.staking.SelectBakersController
 import com.breadwallet.ui.sync.SyncBlockchainController
 import com.breadwallet.ui.txdetails.TxDetailsController
+import com.breadwallet.ui.uigift.CreateGiftController
+import com.breadwallet.ui.uigift.ShareGiftController
+import com.breadwallet.ui.uistaking.StakingController
 import com.breadwallet.ui.wallet.BrdWalletController
 import com.breadwallet.ui.wallet.WalletController
 import com.breadwallet.ui.web.WebController
 import com.breadwallet.ui.writedownkey.WriteDownKeyController
-import com.breadwallet.ui.uistaking.StakingController
-import com.breadwallet.ui.uigift.CreateGiftController
-import com.breadwallet.ui.uigift.ShareGiftController
 import com.breadwallet.util.CryptoUriParser
 import com.breadwallet.util.isBrd
 import com.platform.HTTPServer
@@ -102,7 +102,7 @@ class RouterNavigator(
     override fun navigateTo(target: INavigationTarget) =
         patch(target as NavigationTarget)
 
-    fun Controller.asTransaction(
+    private fun Controller.asTransaction(
         popChangeHandler: ControllerChangeHandler? = FadeChangeHandler(),
         pushChangeHandler: ControllerChangeHandler? = FadeChangeHandler()
     ) = RouterTransaction.with(this)
@@ -663,8 +663,8 @@ class RouterNavigator(
             pricePerUnit = effect.pricePerUnit
         )
         val transaction = RouterTransaction.with(controller)
-                .popChangeHandler(DialogChangeHandler())
-                .pushChangeHandler(DialogChangeHandler())
+            .popChangeHandler(DialogChangeHandler())
+            .pushChangeHandler(DialogChangeHandler())
         if (effect.replaceTop) {
             router.replaceTopController(transaction)
         } else {

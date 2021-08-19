@@ -19,8 +19,8 @@ import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.auth.AuthMode
+import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.send.ConfirmTxController
 import com.platform.ConfirmTransactionMessage

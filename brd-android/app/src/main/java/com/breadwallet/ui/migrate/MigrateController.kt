@@ -20,6 +20,7 @@ import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.keystore.KeyStoreController
 import com.breadwallet.ui.login.LoginController
 import com.breadwallet.ui.onboarding.IntroController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,13 +37,14 @@ class MigrateController(
     private val binding by viewBinding(ControllerLoginBinding::inflate)
 
     private val userManager: BrdUserManager by instance()
+    private val appScope: CoroutineScope by instance()
 
     private val mutex = Mutex()
 
     override fun onAttach(view: View) {
         super.onAttach(view)
         val context = applicationContext!!
-        BreadApp.applicationScope.launch(Main) {
+        appScope.launch(Main) {
             mutex.withLock<Unit> {
                 if (userManager.isMigrationRequired()) {
                     try {

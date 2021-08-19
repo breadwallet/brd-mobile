@@ -18,7 +18,8 @@ import com.spotify.mobius.Init
 object InputPinInit : Init<M, F> {
     override fun init(model: M): First<M, F> {
         return first(
-            model, effects<F, F>(
+            model,
+            effects<F, F>(
                 F.CheckIfPinExists
             )
         )

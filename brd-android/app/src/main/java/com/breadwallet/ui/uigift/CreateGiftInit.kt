@@ -8,10 +8,10 @@
  */
 package com.breadwallet.ui.uigift
 
+import com.breadwallet.ui.uigift.CreateGift.F
+import com.breadwallet.ui.uigift.CreateGift.M
 import com.spotify.mobius.First
 import com.spotify.mobius.Init
-import com.breadwallet.ui.uigift.CreateGift.M
-import com.breadwallet.ui.uigift.CreateGift.F
 
 object CreateGiftInit : Init<M, F> {
     override fun init(model: M): First<M, F> =
