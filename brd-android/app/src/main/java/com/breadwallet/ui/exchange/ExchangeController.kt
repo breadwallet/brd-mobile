@@ -240,24 +240,26 @@ class ExchangeController(args: Bundle) :
                     }
                 }
                 is ExchangeModel.State.ProcessingOrder -> {
-                    state.userAction?.run {
-                        when (action.type) {
-                            ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS,
-                            ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS -> error("Invalid user action type")
-                            ExchangeOrder.Action.Type.CRYPTO_SEND -> {
-                                if (topController !is TradeTransactionController) {
-                                    val transaction = RouterTransaction.with(TradeTransactionController())
-                                        .pushChangeHandler(FadeChangeHandler(false))
-                                        .popChangeHandler(FadeChangeHandler())
-                                    childRouter.pushController(transaction)
-                                }
-                            }
-                            ExchangeOrder.Action.Type.BROWSER -> {
-                                if (topController !is PartnerBrowserController) {
-                                    val transaction = RouterTransaction.with(PartnerBrowserController())
-                                        .pushChangeHandler(HorizontalChangeHandler())
-                                        .popChangeHandler(HorizontalChangeHandler())
-                                    childRouter.pushController(transaction)
+                    if (state.userAction == null) {
+                        if (mode == TRADE && topController !is TradeTransactionController) {
+                            val transaction = RouterTransaction.with(TradeTransactionController())
+                                .pushChangeHandler(FadeChangeHandler(false))
+                                .popChangeHandler(FadeChangeHandler())
+                            childRouter.pushController(transaction)
+                        }
+                    } else {
+                        state.userAction?.run {
+                            when (action.type) {
+                                ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS,
+                                ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS -> error("Invalid user action type")
+                                ExchangeOrder.Action.Type.CRYPTO_SEND -> Unit
+                                ExchangeOrder.Action.Type.BROWSER -> {
+                                    if (topController !is PartnerBrowserController) {
+                                        val transaction = RouterTransaction.with(PartnerBrowserController())
+                                            .pushChangeHandler(HorizontalChangeHandler())
+                                            .popChangeHandler(HorizontalChangeHandler())
+                                        childRouter.pushController(transaction)
+                                    }
                                 }
                             }
                         }

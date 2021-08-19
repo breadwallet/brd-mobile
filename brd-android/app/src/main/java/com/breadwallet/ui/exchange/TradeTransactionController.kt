@@ -10,10 +10,11 @@ package com.breadwallet.ui.exchange
 
 import android.os.Bundle
 import android.security.keystore.UserNotAuthenticatedException
-import android.view.View
 import androidx.core.view.isVisible
+import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.api.models.ExchangeInput
+import com.brd.api.models.ExchangeOrder
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
@@ -50,8 +51,9 @@ class TradeTransactionController(args: Bundle? = null) :
 
     override fun onPositiveClicked() {
         val res = requireResources()
+        val activity = checkNotNull(activity)
         val authenticationMode =
-            if (isFingerPrintAvailableAndSetup(activity!!) && BRSharedPrefs.sendMoneyWithFingerprint) {
+            if (isFingerPrintAvailableAndSetup(activity) && BRSharedPrefs.sendMoneyWithFingerprint) {
                 AuthMode.USER_PREFERRED
             } else {
                 AuthMode.PIN_REQUIRED
@@ -178,35 +180,38 @@ class TradeTransactionController(args: Bundle? = null) :
         )
     }
 
-    override fun onAttach(view: View) {
-        super.onAttach(view)
-        val childRouter = getChildRouter(binding.container)
-        val state = (currentModel.state as? ExchangeModel.State.ProcessingOrder) ?: return
-
-        if (!childRouter.hasRootController()) {
-            binding.layoutLoader.isVisible = false
-            binding.scrim.isVisible = true
-            val input = state.order.inputs
-                .filterIsInstance<ExchangeInput.CryptoTransfer>()
-                .first()
-            val sourceCurrencyCode = checkNotNull(currentModel.sourceCurrencyCode)
-            val transferFields = transferFieldsFor(sourceCurrencyCode, input)
-            val transaction = RouterTransaction.with(
-                ConfirmTradeController(
-                    sourceCurrencyCode,
-                    input.sendToAddress,
-                    TransferSpeed.Priority(sourceCurrencyCode),
-                    input.amount.toBigDecimal(),
-                    BigDecimal.ZERO,
-                    transferFields
-                )
-            ).pushChangeHandler(DialogChangeHandler())
-                .popChangeHandler(DialogChangeHandler())
-            childRouter.setRoot(transaction)
+    override fun ExchangeModel.render() {
+        val state = state as? ExchangeModel.State.ProcessingOrder ?: return
+        state.userAction?.run {
+            check(action.type == ExchangeOrder.Action.Type.CRYPTO_SEND)
+            val childRouter = getChildRouter(binding.container)
+            if (!childRouter.hasRootController()) {
+                launchTrade(state, childRouter)
+            }
         }
     }
 
-    override fun ExchangeModel.render() = Unit
+    private fun launchTrade(state: ExchangeModel.State.ProcessingOrder, childRouter: Router) {
+        binding.layoutLoader.isVisible = false
+        binding.scrim.isVisible = true
+        val input = state.order.inputs
+            .filterIsInstance<ExchangeInput.CryptoTransfer>()
+            .first()
+        val sourceCurrencyCode = checkNotNull(currentModel.sourceCurrencyCode)
+        val transferFields = transferFieldsFor(sourceCurrencyCode, input)
+        val transaction = RouterTransaction.with(
+            ConfirmTradeController(
+                sourceCurrencyCode,
+                input.sendToAddress,
+                TransferSpeed.Priority(sourceCurrencyCode),
+                input.amount.toBigDecimal(),
+                BigDecimal.ZERO,
+                transferFields
+            )
+        ).pushChangeHandler(DialogChangeHandler())
+            .popChangeHandler(DialogChangeHandler())
+        childRouter.setRoot(transaction)
+    }
 
     private fun transferFieldsFor(currencyCode: String, input: ExchangeInput.CryptoTransfer): List<TransferField> {
         return if (input.sendToDestinationTag.isNullOrBlank()) {
