@@ -10,7 +10,7 @@
     tools:ignore="KeyboardInaccessibleWidget">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/success_gradient"
@@ -37,13 +37,29 @@
             android:text="@string/Exchange.Order.status.successful"
             android:textSize="26sp"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/confetti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:contentDescription="@null"
+        android:src="@drawable/confetti"/>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:background="@color/hydra_primary_background"
+        app:layout_constraintTop_toBottomOf="@+id/layoutHeader"
         app:layout_constraintBottom_toTopOf="@+id/buttonReceipt">
 
         <androidx.constraintlayout.widget.ConstraintLayout

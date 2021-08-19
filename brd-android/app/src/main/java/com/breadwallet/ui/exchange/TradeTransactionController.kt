@@ -163,7 +163,7 @@ class TradeTransactionController(args: Bundle? = null) :
     }
 
     override fun onAuthenticationFailed() {
-        // TODO: handle failure
+        onAuthenticationCancelled()
     }
 
     override fun onAuthenticationCancelled() {

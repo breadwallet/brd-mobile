@@ -11,18 +11,27 @@ package com.breadwallet.ui.exchange
 import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
+import android.view.animation.LinearInterpolator
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.databinding.ControllerExchangeOrderCompleteBinding
 import com.breadwallet.ui.navigation.NavigationTarget
 import com.breadwallet.ui.navigation.RouterNavigator
-import org.kodein.di.erased.instance
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+
+private const val CONFETTI_DURATION = 4_000L
 
 class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildController(args) {
 
     private val binding by viewBinding(ControllerExchangeOrderCompleteBinding::inflate)
-    private val routerNavigator by instance<RouterNavigator>()
+    private val routerNavigator by lazy {
+        RouterNavigator { checkNotNull(parentController).router }
+    }
+
+    private var hasPlayedConfetti = false
 
     override fun onCreateView(view: View) {
         super.onCreateView(view)
@@ -47,17 +56,6 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
         }
     }
 
-    override fun onAttach(view: View) {
-        super.onAttach(view)
-        with(binding) {
-            confetti.y = -confetti.height.toFloat()
-            confetti.isVisible = true
-            confetti.animate()
-                .translationYBy(confetti.height.toFloat())
-                .start()
-        }
-    }
-
     override fun ExchangeModel.render() {
         val state = (state as? ExchangeModel.State.OrderComplete) ?: return
         with(binding) {
@@ -70,6 +68,23 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
             labelPlatformFeeValue.text = state.offerDetails.formattedPlatformFee
             labelMethodValue.text =
                 "${state.order.provider.name} by ${state.offerDetails.offer.sourceCurrencyMethod::class.simpleName}"
+
+            if (!hasPlayedConfetti) {
+                hasPlayedConfetti = true
+                viewAttachScope.launch(Main) {
+                    confetti.translationY = -confetti.drawable.intrinsicHeight.toFloat()
+                    confetti.isVisible = true
+                    ViewCompat.animate(confetti)
+                        .translationY(layoutHeader.measuredHeight.toFloat())
+                        .setDuration(CONFETTI_DURATION)
+                        .setInterpolator(LinearInterpolator())
+                        .withEndAction {
+                            if (isAttached) {
+                                confetti.isVisible = false
+                            }
+                        }
+                }
+            }
         }
     }
 }
