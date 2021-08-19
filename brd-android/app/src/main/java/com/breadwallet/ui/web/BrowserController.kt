@@ -9,6 +9,7 @@
 package com.breadwallet.ui.web
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
@@ -18,6 +19,7 @@ import androidx.core.os.bundleOf
 import com.bluelinelabs.conductor.asTransaction
 import com.bluelinelabs.conductor.changehandler.VerticalChangeHandler
 import com.brd.exchange.ExchangeModel
+import com.breadwallet.BuildConfig
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePartnerBrowserBinding
 import com.breadwallet.ui.BaseController
@@ -45,6 +47,7 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
     override fun onCreateView(view: View) {
         super.onCreateView(view)
         with(binding) {
+            WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
             webview.settings.apply {
                 @SuppressLint("SetJavaScriptEnabled")
                 javaScriptEnabled = true
@@ -55,20 +58,14 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
                 override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
                     return when {
                         request.url.path == TRADE_PATH -> {
-                            val home = router.backstack.first { it.controller is HomeController }
-                            router.setBackstack(
-                                listOf(
-                                    home,
-                                    ExchangeController(mode = ExchangeModel.Mode.TRADE).asTransaction(
-                                        VerticalChangeHandler(),
-                                        VerticalChangeHandler(),
-                                    )
-                                ),
-                                VerticalChangeHandler()
-                            )
+                            goToTrade()
                             true
                         }
-                        else -> false
+                        request.url.toString().startsWith("mailto:") -> {
+                            createEmail(request.url.toString().substringAfter(':'))
+                            true
+                        }
+                        else -> super.shouldOverrideUrlLoading(view, request)
                     }
                 }
             }
@@ -88,5 +85,26 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
             }
             labelTitle.text = argOptional(ARG_TITLE)
         }
+    }
+
+    private fun goToTrade() {
+        val home = router.backstack.first { it.controller is HomeController }
+        router.setBackstack(
+            listOf(
+                home,
+                ExchangeController(mode = ExchangeModel.Mode.TRADE).asTransaction(
+                    VerticalChangeHandler(),
+                    VerticalChangeHandler(),
+                )
+            ),
+            VerticalChangeHandler()
+        )
+    }
+
+    private fun createEmail(email: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+        intent.type = "message/rfc822"
+        activity?.startActivity(intent)
     }
 }
