@@ -29,10 +29,10 @@
             android:src="@drawable/ic_close_white_24dp"
             android:stateListAnimator="@null"
             app:layout_constraintBottom_toTopOf="@+id/layoutSearch"
-            app:layout_constraintEnd_toStartOf="@+id/title"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/title"
