@@ -22,6 +22,13 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/labelItemFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginEnd="12dp"/>
             <TextView
                 android:id="@+id/labelItemValue"
                 android:layout_width="0dp"

@@ -50,6 +50,14 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp">
 
+        <TextView
+            android:id="@+id/labelFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="120dp"
+            tools:ignore="SpUsage"
+            android:layout_marginBottom="24dp"/>
+
         <include
             android:id="@+id/cellCountry"
             layout="@layout/layout_selection_cell"

@@ -55,6 +55,7 @@ class ExchangeSettingsController(args: Bundle? = null) : ExchangeController.Chil
         }
 
         ifChanged(ExchangeModel::selectedCountry) { selectedCountry ->
+            labelFlag.text = selectedCountry?.code?.run(::countryCodeToFlag)
             cellCountry.labelValue.text = selectedCountry?.name
             cellCountry.labelValue.isGone = selectedCountry == null
 
