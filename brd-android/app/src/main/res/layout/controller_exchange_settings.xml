@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="@string/Exchange.Settings.region"
+        android:text="@string/Exchange.Settings.title"
         android:textSize="20sp"
         android:layout_margin="16dp"
         app:layout_constraintVertical_bias="0"
