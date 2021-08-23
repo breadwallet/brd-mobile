@@ -16,7 +16,7 @@ actual val CommonLocale.currencyCode: String
     get() = currencyCode() ?: "usd"
 
 actual val CommonLocale.countryCode: String
-    get() = countryCode() ?: ""
+    get() = countryCode() ?: "us"
 
 actual object CommonLocales {
 
