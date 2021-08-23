@@ -13,10 +13,10 @@ import platform.Foundation.*
 actual typealias CommonLocale = NSLocale
 
 actual val CommonLocale.currencyCode: String
-    get() = checkNotNull(currencyCode())
+    get() = currencyCode() ?: "usd"
 
 actual val CommonLocale.countryCode: String
-    get() = countryCode() ?: ""
+    get() = countryCode() ?: "us"
 
 actual object CommonLocales {
 

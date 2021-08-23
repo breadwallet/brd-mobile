@@ -17,7 +17,7 @@ object Formatters {
     }
 
     fun fiat(currencyCode: String): NumberFormatter {
-        val localeId = currencyToLocaleMap.getValue(currencyCode.lowercase())
+        val localeId = currencyToLocaleMap[currencyCode.lowercase()] ?: "en_US"
         return fiat(currencyCode, CommonLocales.forId(localeId))
     }
 
@@ -173,7 +173,7 @@ internal val currencyToLocaleMap = mapOf(
     "rsd" to "sr",
     "scr" to "en_SC",
     "sll" to "en_SL",
-    "sgd" to "ar_SD",
+    "sgd" to "en_SD",
     "sbd" to "en_SB",
     "sos" to "so_SO",
     "zar" to "zu",
