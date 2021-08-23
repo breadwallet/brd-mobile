@@ -138,6 +138,7 @@
 	<array>
 		<string>AssetIntent</string>
 		<string>AssetListIntent</string>
+		<string>BlockClockIntent</string>
 		<string>PortfolioIntent</string>
 	</array>
 	<key>UIAppFonts</key>
