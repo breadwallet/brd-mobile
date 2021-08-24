@@ -68,6 +68,7 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
             labelPlatformFeeValue.text = state.offerDetails.formattedPlatformFee
             labelMethodValue.text =
                 "${state.order.provider.name} by ${state.offerDetails.offer.sourceCurrencyMethod::class.simpleName}"
+            labelDeliveryValue.text = state.offerDetails.offer.deliveryEstimate
 
             if (!hasPlayedConfetti) {
                 hasPlayedConfetti = true
