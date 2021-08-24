@@ -105,7 +105,7 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
             if (selectionType != SelectionType.OFFER) {
                 recycler.setDivider(R.drawable.recycler_view_divider)
             }
-            recycler.addItemDecoration(MarginItemDecoration(36))
+            recycler.addItemDecoration(MarginItemDecoration(12, root.context))
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = fastAdapter.apply {
                 addEventHook(object : ClickEventHook<OfferListItem>() {
