@@ -41,7 +41,7 @@ class AssetListItem(
         override fun bindView(item: AssetListItem, payloads: List<Any>) = with(binding) {
             val currentModel = item.currentModel()
             imageItemValue.isVisible = item.isSelected
-            val color = binding.root.resources.getColor(R.color.hydra_quaternary_background, itemView.context.theme)
+            val color = root.resources.getColor(R.color.hydra_quaternary_background, itemView.context.theme)
             card.setCardBackgroundColor(if (item.isSelected) ColorStateList.valueOf(color) else null)
             labelCurrencyName.text = item.model.name
             labelCurrencyCode.text = item.model.code.toUpperCase(Locale.ROOT)
@@ -59,7 +59,7 @@ class AssetListItem(
                 labelCurrencyBalance.apply {
                     val balance = currentModel.formattedCryptoBalances[item.model.code]
                     isGone = balance.isNullOrBlank() || balance.startsWith("0 ")
-                    text = "Balance $balance"
+                    text = String.format("Balance %s", balance)
                 }
             }
 

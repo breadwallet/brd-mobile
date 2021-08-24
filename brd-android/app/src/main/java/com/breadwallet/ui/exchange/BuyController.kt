@@ -38,6 +38,7 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
 
             layoutPinPad.setDeleteButtonTint(white)
             layoutPinPad.setButtonTextColor(IntArray(11) { white })
+            layoutPinPad.setBRButtonBackgroundResId(R.drawable.keyboard_blue_pill_button, true)
             cellSelectedOffer.apply {
                 val titleColors = labelTitle.textColors
                 val valueColors = labelValue.textColors
@@ -253,14 +254,22 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
                 when {
                     !selectedOffer.formattedMinSourceAmount.isNullOrBlank() -> {
                         buttonContinue.isEnabled = true
-                        buttonContinue.text = res.getText(R.string.Exchange_CTA_setMin, selectedOffer.formattedMinSourceAmount)
-                        cellSelectedOffer.labelValue.text = "Minimum amount ${selectedOffer.formattedMinSourceAmount}"
+                        buttonContinue.text = res.getText(
+                            R.string.Exchange_CTA_setMin,
+                            selectedOffer.formattedMinSourceAmount
+                        )
+                        cellSelectedOffer.labelValue.text =
+                            "Minimum amount ${selectedOffer.formattedMinSourceAmount}"
                         cellSelectedOffer.labelValue.setTextColor(getColor(R.color.ui_error))
                     }
                     !selectedOffer.formattedMaxSourceAmount.isNullOrBlank() -> {
                         buttonContinue.isEnabled = true
-                        buttonContinue.text = res.getText(R.string.Exchange_CTA_setMax, selectedOffer.formattedMaxSourceAmount)
-                        cellSelectedOffer.labelValue.text = "Maximum amount ${selectedOffer.formattedMaxSourceAmount}"
+                        buttonContinue.text = res.getText(
+                            R.string.Exchange_CTA_setMax,
+                            selectedOffer.formattedMaxSourceAmount
+                        )
+                        cellSelectedOffer.labelValue.text =
+                            "Maximum amount ${selectedOffer.formattedMaxSourceAmount}"
                         cellSelectedOffer.labelValue.setTextColor(getColor(R.color.ui_error))
                     }
                     else -> {
