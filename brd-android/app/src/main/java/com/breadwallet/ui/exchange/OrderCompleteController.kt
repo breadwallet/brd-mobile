@@ -62,7 +62,8 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
             root.isVisible = true
             labelPurchaseAmountValue.text = state.offerDetails.formattedQuoteTotal
             labelPurchaseCostValue.text = state.offerDetails.formattedSourceTotal
-            labelFeesValue.text = state.offerDetails.formattedSourceFees
+            labelFeesValue.text =
+                state.offerDetails.run { formattedSourceFees ?: formattedQuoteFees }
             labelNetworkFeeValue.text = state.offerDetails.formattedNetworkFee
             labelProviderFeeValue.text = state.offerDetails.formattedProviderFee
             labelPlatformFeeValue.text = state.offerDetails.formattedPlatformFee
