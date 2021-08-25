@@ -59,7 +59,10 @@ struct BlockClockEntry: TimelineEntry {
         self.date = Date()
         self.blockInfo = blockInfo
         self.intent = intent
-        self.viewModel = BlockClockViewModel(blockInfo: blockInfo)
+        self.viewModel = BlockClockViewModel(
+            blockInfo: blockInfo,
+            isPlaceholder: isPlaceholder
+        )
     }
 }
 
@@ -68,10 +71,19 @@ struct BlockClockWidgetEntryView: View {
 
     var body: some View {
         if entry.viewModel.isPlaceholder {
-            BlockClockView(viewModel: entry.viewModel)
-                .redacted(reason: .placeholder)
+            if entry.intent.style == .default {
+                BlockClockView(viewModel: entry.viewModel)
+                    .redacted(reason: .placeholder)
+            } else {
+                BlockClockViewAlt(viewModel: entry.viewModel)
+                    .redacted(reason: .placeholder)
+            }
         } else {
-            BlockClockView(viewModel: entry.viewModel)
+            if entry.intent.style == .default {
+                BlockClockView(viewModel: entry.viewModel)
+            } else {
+                BlockClockViewAlt(viewModel: entry.viewModel)
+            }
         }
     }
 }

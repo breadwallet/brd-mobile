@@ -11,21 +11,51 @@
 import Foundation
 
 struct BlockClockViewModel {
-    
-    var isPlaceholder: Bool
-    
-    private var blockInfo: BlockInfo
-    
-    init(blockInfo: BlockInfo, isPlaceholder: Bool = false) {
-        self.blockInfo = blockInfo
+
+    let currentBlock: String
+    let blocksToHalvening: String
+    let blocksToHalveningDescription: String
+    let progress: Float
+    let days: String
+    let isPlaceholder: Bool
+
+    init(blockInfo: BlockInfo, isPlaceholder: Bool) {
+        let formatter = NumberFormatter()
+        let blocksDelta = blockInfo.halveningBlock - blockInfo.currentBlock
+
+        currentBlock = formatter.string(
+            from: NSNumber(value: blockInfo.currentBlock)
+        ) ?? ""
+        blocksToHalvening = formatter.string(
+            from: NSNumber(value: blocksDelta)
+        ) ?? ""
+        blocksToHalveningDescription = String(
+            format: "Next halving in %d",
+            blocksDelta
+        )
+        progress = 1 - Float(blocksDelta) / Constant.halveningBlockCount
+        days = String(
+            format: "%d days", blockInfo.secondsLeft / Constant.secondsInDay
+        )
+
         self.isPlaceholder = isPlaceholder
     }
 }
 
-// MARK: - BlockClockViewModel
+// MARK: - Constant
+
+private extension BlockClockViewModel {
+
+    enum Constant {
+        static let halveningBlockCount: Float = 210000
+        static let secondsInDay: Int = 86400
+    }
+}
+
+// MARK: - Mock
 
 extension BlockClockViewModel {
-    
+
     static func mock() -> BlockClockViewModel {
         return .init(blockInfo: .mock(), isPlaceholder: true)
     }

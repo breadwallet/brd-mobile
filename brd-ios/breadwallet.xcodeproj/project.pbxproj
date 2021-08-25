@@ -693,6 +693,7 @@
 		D15BAC1426CBFF43007DE23A /* BlockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1326CBFF43007DE23A /* BlockClockView.swift */; };
 		D15BAC1626CC0023007DE23A /* BlockClockWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */; };
 		D172F77926D0502F00E35886 /* BlockInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */; };
+		D179FAF526D6C25C0037B916 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */; };
 		D19D7C942634180A00689324 /* ExchangeTradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */; };
 		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
 		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
@@ -1493,6 +1494,7 @@
 		D15BAC1326CBFF43007DE23A /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
 		D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockWidget.swift; sourceTree = "<group>"; };
 		D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInfoViewModel.swift; sourceTree = "<group>"; };
+		D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTradeViewModel.swift; sourceTree = "<group>"; };
 		E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
 		E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRAnalyticsEvent.swift; path = src/Platform/BRAnalyticsEvent.swift; sourceTree = "<group>"; };
@@ -2420,6 +2422,7 @@
 				9F2118F425DDBC6200ABD2C8 /* Formatter+Extensions.swift */,
 				9F00EAAF25DDF15200A99218 /* Bundle+Extensions.swift */,
 				9F00EAF325DDFC9600A99218 /* Currency+Extensions.swift */,
+				D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4101,6 +4104,7 @@
 				9F3C315725DACF3300C7C398 /* PortfolioView.swift in Sources */,
 				9FDDE55B25D5B79D00E42BE3 /* ChartView.swift in Sources */,
 				9F3C315825DACF3300C7C398 /* AssetListView.swift in Sources */,
+				D179FAF526D6C25C0037B916 /* UIColor+Extension.swift in Sources */,
 				D15BAC0426CB1129007DE23A /* BlockClockService.swift in Sources */,
 				9F29A9BB25D5C75B000FEB40 /* AssetView.swift in Sources */,
 				9F3C314725DACF1300C7C398 /* AssetListViewModel.swift in Sources */,

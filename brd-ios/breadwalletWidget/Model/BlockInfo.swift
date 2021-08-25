@@ -33,16 +33,17 @@ extension BlockInfo: Decodable {
 // MARK: - Mock
 
 extension BlockInfo {
-    
+
     static func mock() -> BlockInfo {
         return .init(
-            currentBlock: 643509,
-            currentReward: 12.5,
-            halveningBlock: 1204983,
-            halveningReward: 6.75,
-            halveningTime: Date().addingTimeInterval(100000),
-            secondsLeft: 100000,
-            blocksLeft: 10000
+                currentBlock: 643509,
+                currentReward: 1250000000,
+                halveningBlock: 943509,
+                halveningReward: 6750000000,
+                halveningTime: Date().addingTimeInterval(100000),
+                secondsLeft: 10000000,
+                blocksLeft: 300000
         )
     }
 }
+
