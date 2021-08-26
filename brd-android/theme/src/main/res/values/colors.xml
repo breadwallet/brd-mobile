@@ -138,6 +138,7 @@
     <color name="hydra_secondary_background">#211F3F</color>
     <color name="hydra_tertiary_background">#312F4C</color>
     <color name="hydra_quaternary_background">#2E2954</color>
+    <color name="hydra_quaternary_background_90">#E62E2954</color>
     <color name="hydra_quaternary_text">#8A9CFF</color>
     <color name="prompt_background">#1E1C41</color>
     <color name="prompt_input">#f8f7fc</color>

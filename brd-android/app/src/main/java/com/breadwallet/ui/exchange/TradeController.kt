@@ -8,13 +8,18 @@
  */
 package com.breadwallet.ui.exchange
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.brd.exchange.ExchangeEvent
@@ -36,6 +41,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
     private var editingSourceAmount = false
     private var isPinPadVisible = false
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(view: View) {
         super.onCreateView(view)
 
@@ -48,6 +54,18 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
             toAsset.labelAlt.isVisible = false
             toAsset.labelInput.setOnClickListener { togglePinPad(sourceAmount = false) }
             fromAsset.labelInput.setOnClickListener { togglePinPad(sourceAmount = true) }
+
+            tradeTouchInterceptor.setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_DOWN && isPinPadVisible) {
+                    hidePinPad()
+                    return@setOnTouchListener true
+                }
+                false
+            }
+
+            fromAsset.labelInput.doOnTextChanged { text, _, _, _ ->
+                fromAsset.labelInput.updateToAssetVisibility()
+            }
 
             toAsset.buttonAsset.setOnClickListener {
                 eventConsumer.accept(ExchangeEvent.OnSelectPairClicked(false))
@@ -70,6 +88,10 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
             buttonMax.setOnClickListener {
                 eventConsumer.accept(ExchangeEvent.OnMaxAmountClicked)
+                hidePinPad()
+            }
+
+            buttonDone.setOnClickListener {
                 hidePinPad()
             }
 
@@ -132,8 +154,8 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
         ifChanged(ExchangeModel::formattedQuoteAmount) {
             toAsset.labelInput.text = formattedQuoteAmount?.filter {
-                it.isDigit() || it == '.' || it == '≈' || it == ' '
-            }
+                it.isDigit() || it == '.' || it == ' '
+            }?.trimStart()
         }
 
         ifChanged(ExchangeModel::selectedOffer, ExchangeModel::offerState) {
@@ -311,6 +333,10 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
             R.drawable.crypto_card_shape,
             view?.context?.theme
         )
+
+        // hides zero value for the From Asset label when pin pad is visible
+        binding.fromAsset.labelInput.updateToAssetVisibility()
+
         val foreground = checkNotNull(background).mutate() as GradientDrawable
         foreground.setColor(inactiveColor)
         foreground.alpha = 125
@@ -334,5 +360,10 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                 binding.toAsset.card.strokeWidth = 0
             }
         }
+    }
+
+    /** hides zero value for the From Asset label when pin pad is visible */
+    private fun TextView.updateToAssetVisibility() {
+        isInvisible = text.toString() == "0" && isPinPadVisible && editingSourceAmount
     }
 }

@@ -62,10 +62,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Exchange.from"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                app:backgroundTint="@color/hydra_primary_background"
+                android:letterSpacing=".03"
                 android:layout_weight=".5"
+                android:textAllCaps="false"
+                android:textStyle="normal"
+                app:backgroundTint="@color/hydra_primary_background"
                 app:iconSize="16dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -73,7 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:textStyle="bold"
+                android:textStyle="normal"
+                android:letterSpacing=".03"
                 android:text="@string/Exchange.to"
                 app:backgroundTint="@color/hydra_primary_background"
                 android:layout_weight=".5"
@@ -125,6 +127,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="6dp"
+        tools:layout_marginStart="16dp"
+        tools:layout_marginEnd="16dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

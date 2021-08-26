@@ -228,7 +228,7 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 }
 
                 val activeColor = getColor(R.color.white)
-                val inactiveColor = getColor(R.color.hydra_quaternary_background)
+                val inactiveColor = getColor(R.color.hydra_primary_background)
                 if (state.source) {
                     buttonFrom.backgroundTintList = ColorStateList.valueOf(activeColor)
                     buttonTo.backgroundTintList = ColorStateList.valueOf(inactiveColor)
