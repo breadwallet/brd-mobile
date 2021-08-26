@@ -2216,9 +2216,9 @@ users in a future update. ";
 /* Exchange trade title */
 "Exchange.trade" = "Trade"
 /* Trade cancel alert title */
-"Exchange.tradeCancelAlertTitle" = "Are you sure?"
+"Exchange.tradeCancelAlertTitle" = "Exit Checkout?"
 /* Trade cancel alert body */
-"Exchange.tradeCancelAlertBody" = "All your progress will be lost."
+"Exchange.tradeCancelAlertBody" = "View order details in Menu -> Order History"
 /* Trade cancel alert no button */
 "Exchange.tradeCancelAlertNo" = "No"
 /* Trade cancel alert yes button */
