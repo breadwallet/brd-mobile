@@ -101,6 +101,7 @@ struct BlockClockWidget: Widget {
         }
         .configurationDisplayName("Block clock")
         .description("Block clock to next halving")
+        .supportedFamilies([.systemSmall])
     }
 }
 

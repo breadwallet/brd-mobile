@@ -13,5 +13,5 @@ import UIKit
 extension UIColor {
     static var primaryBackground = UIColor.fromHex("#242542")
     static var textSecondary = UIColor.white.withAlphaComponent(0.75)
-    static var gradientSuccessBRD = UIColor.fromHex("#41BB85")
+    static var gradientSuccessBRD = UIColor.fromHex("#3CBA78")
 }

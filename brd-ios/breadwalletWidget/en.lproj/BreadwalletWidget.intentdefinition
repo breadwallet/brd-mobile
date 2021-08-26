@@ -239,7 +239,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>default</string>
+					<string>Default</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>he5h6K</string>
 					<key>INEnumValueIndex</key>
@@ -249,7 +249,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>alternative</string>
+					<string>Minimal</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>72qHdb</string>
 					<key>INEnumValueIndex</key>

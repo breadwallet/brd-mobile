@@ -48,7 +48,7 @@ struct BlockClockView: View {
                             .scaledToFit()
                         Spacer()
                         Text(viewModel.blocksToHalvening)
-                            .font(.system(size: 12))
+                            .font(.system(size: 12, weight: .medium))
                             .foregroundColor(Color(UIColor.brdGreen))
                             .minimumScaleFactor(0.9)
                             .scaledToFit()
@@ -99,7 +99,7 @@ struct BlockClockViewAlt: View {
                 Spacer()
                 VStack(spacing: 4) {
                     Text(viewModel.blocksToHalveningDescription)
-                        .font(.system(size: 12))
+                        .font(.system(size: 12, weight: .medium))
                         .foregroundColor(Color(UIColor.gradientSuccessBRD))
                         .minimumScaleFactor(0.5)
                         .scaledToFit()

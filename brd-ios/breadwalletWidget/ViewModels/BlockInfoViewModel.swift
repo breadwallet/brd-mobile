@@ -21,6 +21,7 @@ struct BlockClockViewModel {
 
     init(blockInfo: BlockInfo, isPlaceholder: Bool) {
         let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         let blocksDelta = blockInfo.halveningBlock - blockInfo.currentBlock
 
         currentBlock = formatter.string(
@@ -30,8 +31,8 @@ struct BlockClockViewModel {
             from: NSNumber(value: blocksDelta)
         ) ?? ""
         blocksToHalveningDescription = String(
-            format: "Next halving in %d",
-            blocksDelta
+            format: "Next halving in %@",
+            formatter.string(from: NSNumber(value: blocksDelta)) ?? ""
         )
         progress = 1 - Float(blocksDelta) / Constant.halveningBlockCount
         days = String(
