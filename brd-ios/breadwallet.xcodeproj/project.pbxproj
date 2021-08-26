@@ -683,6 +683,16 @@
 		D123D6462694215400A7F030 /* SupportViewConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D123D6452694215400A7F030 /* SupportViewConnection.swift */; };
 		D123D6482694A2AE00A7F030 /* SupportArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D123D6472694A2AE00A7F030 /* SupportArticleViewController.swift */; };
 		D123D64A2694A2D200A7F030 /* SupportSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D123D6492694A2D200A7F030 /* SupportSectionViewController.swift */; };
+		D15BAC0426CB1129007DE23A /* BlockClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC0326CB1129007DE23A /* BlockClockService.swift */; };
+		D15BAC0526CB1129007DE23A /* BlockClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC0326CB1129007DE23A /* BlockClockService.swift */; };
+		D15BAC0926CB16F9007DE23A /* BlockInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3B7EB9CC1C4239EB510A /* BlockInfo.swift */; };
+		D15BAC0A26CB16FA007DE23A /* BlockInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3B7EB9CC1C4239EB510A /* BlockInfo.swift */; };
+		D15BAC0B26CBBCEC007DE23A /* BlockInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C3B7EB9CC1C4239EB510A /* BlockInfo.swift */; };
+		D15BAC0C26CBBCF0007DE23A /* BlockClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC0326CB1129007DE23A /* BlockClockService.swift */; };
+		D15BAC1426CBFF43007DE23A /* BlockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1326CBFF43007DE23A /* BlockClockView.swift */; };
+		D15BAC1626CC0023007DE23A /* BlockClockWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */; };
+		D172F77926D0502F00E35886 /* BlockInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */; };
+		D179FAF526D6C25C0037B916 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */; };
 		D19D7C942634180A00689324 /* ExchangeTradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */; };
 		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
 		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
@@ -794,6 +804,7 @@
 		1A4C384BA3B51F944DD7CE1C /* BrdApiHost+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrdApiHost+Extension.swift"; sourceTree = "<group>"; };
 		1A4C3A2A9DF80F4F1ACD636D /* SupportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportCell.swift; sourceTree = "<group>"; };
 		1A4C3A9DD04542A015F8DF2B /* SupportHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportHeaderView.swift; sourceTree = "<group>"; };
+		1A4C3B7EB9CC1C4239EB510A /* BlockInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockInfo.swift; sourceTree = "<group>"; };
 		1A4C3B9ABE2154DD621C767F /* ExchangeTradeEmptyWalletView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeTradeEmptyWalletView.swift; sourceTree = "<group>"; };
 		1B1AFF9E1FB7EF7C00E61908 /* BiometricsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BiometricsSettingsViewController.swift; path = src/ViewControllers/BiometricsSettingsViewController.swift; sourceTree = "<group>"; };
 		22122B711F0B8996000E9AB9 /* BRAPIClient+Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Events.swift"; path = "src/Platform/BRAPIClient+Events.swift"; sourceTree = "<group>"; };
@@ -1477,6 +1488,11 @@
 		D123D6472694A2AE00A7F030 /* SupportArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportArticleViewController.swift; sourceTree = "<group>"; };
 		D123D6492694A2D200A7F030 /* SupportSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSectionViewController.swift; sourceTree = "<group>"; };
 		D1423EF52602AB9C00709CCA /* WalletKitSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WalletKitSwift; path = ../external/walletkit/WalletKitSwift; sourceTree = "<group>"; };
+		D15BAC0326CB1129007DE23A /* BlockClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockService.swift; sourceTree = "<group>"; };
+		D15BAC1326CBFF43007DE23A /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
+		D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockWidget.swift; sourceTree = "<group>"; };
+		D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInfoViewModel.swift; sourceTree = "<group>"; };
+		D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTradeViewModel.swift; sourceTree = "<group>"; };
 		E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
 		E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRAnalyticsEvent.swift; path = src/Platform/BRAnalyticsEvent.swift; sourceTree = "<group>"; };
@@ -2236,6 +2252,7 @@
 				9FDDE57125D5B82A00E42BE3 /* AssetWidget.swift */,
 				9FDDE57825D5B85000E42BE3 /* AssetListWidget.swift */,
 				9FDDE58B25D5B88F00E42BE3 /* PortfolioWidget.swift */,
+				D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -2249,6 +2266,7 @@
 				9F3C315525DACF3300C7C398 /* PortfolioView.swift */,
 				9F9F89DF25D7E202004AC3C3 /* MinimalistAssetView.swift */,
 				A2439874424CF77054369327 /* SharedComponentViews.swift */,
+				D15BAC1326CBFF43007DE23A /* BlockClockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2277,6 +2295,7 @@
 				9F3C305525DA902E00C7C398 /* Currency.swift */,
 				A24399A172C828ECD708E17D /* MarketInfo.swift */,
 				A243988A5DA12A405BFEB9F6 /* Configuration.swift */,
+				1A4C3B7EB9CC1C4239EB510A /* BlockInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2341,6 +2360,7 @@
 				9F00EAA725DDEF7800A99218 /* ImageStorageService.swift */,
 				9F0EA16325E2902700D4225E /* WidgetDataShareService.swift */,
 				A2439F5D8263945E73EFF4A3 /* CacheService.swift */,
+				D15BAC0326CB1129007DE23A /* BlockClockService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2380,6 +2400,7 @@
 				9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */,
 				9F3C314625DACF1300C7C398 /* AssetListViewModel.swift */,
 				A243907548F9B61AEED41A04 /* PortfolioViewModel.swift */,
+				D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2396,6 +2417,7 @@
 				9F2118F425DDBC6200ABD2C8 /* Formatter+Extensions.swift */,
 				9F00EAAF25DDF15200A99218 /* Bundle+Extensions.swift */,
 				9F00EAF325DDFC9600A99218 /* Currency+Extensions.swift */,
+				D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3886,6 +3908,7 @@
 				3A3D63DE22F10B58000DE920 /* ManageWalletsViewController.swift in Sources */,
 				22A9A9471DF61945000F0016 /* BRAPIProxy.swift in Sources */,
 				CE20C9011DBBFFF800C8397A /* Actions.swift in Sources */,
+				D15BAC0B26CBBCEC007DE23A /* BlockInfo.swift in Sources */,
 				CE20C9191DBE7B8200C8397A /* State.swift in Sources */,
 				CEEC70811E90C04700EF788E /* SeparatorCell.swift in Sources */,
 				9F2D134F2629D04200036BD2 /* ImageCacheService.swift in Sources */,
@@ -3968,6 +3991,7 @@
 				A24393576937790122C5ED7C /* QueuedConsumer.swift in Sources */,
 				A24395EDDAE561899B67445D /* ConsumerDelegate.swift in Sources */,
 				A24395A110CB0AC5BC8E33F0 /* TypedConsumer.swift in Sources */,
+				D15BAC0C26CBBCF0007DE23A /* BlockClockService.swift in Sources */,
 				A243955C386DBB3E324F8B81 /* ExchangeTradeOfferView.swift in Sources */,
 				A24392CB6512C41D08BAB231 /* CurrencyInputView.swift in Sources */,
 				A243910B7D349D3892AED791 /* CosmosViewController.swift in Sources */,
@@ -4047,8 +4071,10 @@
 			files = (
 				9F3C305725DA902E00C7C398 /* Currency.swift in Sources */,
 				9F3C311B25DAC14900C7C398 /* Numeric+Extensions.swift in Sources */,
+				D15BAC0526CB1129007DE23A /* BlockClockService.swift in Sources */,
 				9F8DE03E2613968B0030102B /* String+Extension.swift in Sources */,
 				9FC529D22604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */,
+				D15BAC0A26CB16FA007DE23A /* BlockInfo.swift in Sources */,
 				9F2118C025DD7D7D00ABD2C8 /* CoinGecko+Extesions.swift in Sources */,
 				9F29A99F25D5C605000FEB40 /* IntentHandler.swift in Sources */,
 				9F1143BE261B04E900848E7B /* Date+Extension.swift in Sources */,
@@ -4073,6 +4099,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D15BAC1626CC0023007DE23A /* BlockClockWidget.swift in Sources */,
 				9F3C308D25DA94C400C7C398 /* UIColor+BRWAdditions.swift in Sources */,
 				9F8F22A526125B0A0065AB20 /* Locale+Extensions.swift in Sources */,
 				9F3C316C25DACFF000C7C398 /* LogoStyle+Extensions.swift in Sources */,
@@ -4082,11 +4109,15 @@
 				9F2118AC25DD74EA00ABD2C8 /* CoinGecko+Extesions.swift in Sources */,
 				9FD519D525E310D300F9D856 /* Strings.swift in Sources */,
 				9FC529D12604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */,
+				D15BAC1426CBFF43007DE23A /* BlockClockView.swift in Sources */,
 				9FB0CA1525D5AD180057DD11 /* BreadwalletWidget.swift in Sources */,
 				9F3C302525DA8B2F00C7C398 /* WidgetService.swift in Sources */,
+				D172F77926D0502F00E35886 /* BlockInfoViewModel.swift in Sources */,
 				9F3C315725DACF3300C7C398 /* PortfolioView.swift in Sources */,
 				9FDDE55B25D5B79D00E42BE3 /* ChartView.swift in Sources */,
 				9F3C315825DACF3300C7C398 /* AssetListView.swift in Sources */,
+				D179FAF526D6C25C0037B916 /* UIColor+Extension.swift in Sources */,
+				D15BAC0426CB1129007DE23A /* BlockClockService.swift in Sources */,
 				9F29A9BB25D5C75B000FEB40 /* AssetView.swift in Sources */,
 				9F3C314725DACF1300C7C398 /* AssetListViewModel.swift in Sources */,
 				9F9F89E025D7E202004AC3C3 /* MinimalistAssetView.swift in Sources */,
@@ -4109,6 +4140,7 @@
 				9F3C313E25DACEDA00C7C398 /* ColorOption+ExtensionUI.swift in Sources */,
 				A2439D019C08106D6E14D70A /* MarketInfo.swift in Sources */,
 				A243915E84E4AA2AE09D687F /* SharedComponentViews.swift in Sources */,
+				D15BAC0926CB16F9007DE23A /* BlockInfo.swift in Sources */,
 				A24391B09865778F327FD609 /* PortfolioViewModel.swift in Sources */,
 				9F00EAF425DDFC9600A99218 /* Currency+Extensions.swift in Sources */,
 				A24395E9DFDD64D08DDC45B4 /* Configuration.swift in Sources */,

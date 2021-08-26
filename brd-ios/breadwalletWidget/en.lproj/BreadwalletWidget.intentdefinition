@@ -214,17 +214,62 @@
 				</dict>
 			</array>
 		</dict>
+		<dict>
+			<key>INEnumClassName</key>
+			<string>BlockClockStyle</string>
+			<key>INEnumDisplayName</key>
+			<string>Style</string>
+			<key>INEnumDisplayNameID</key>
+			<string>teojXC</string>
+			<key>INEnumGeneratesHeader</key>
+			<true/>
+			<key>INEnumName</key>
+			<string>BlockClockStyle</string>
+			<key>INEnumType</key>
+			<string>Regular</string>
+			<key>INEnumValues</key>
+			<array>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>unknown</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>uYZk0R</string>
+					<key>INEnumValueName</key>
+					<string>unknown</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>Default</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>he5h6K</string>
+					<key>INEnumValueIndex</key>
+					<integer>1</integer>
+					<key>INEnumValueName</key>
+					<string>default</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>Minimal</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>72qHdb</string>
+					<key>INEnumValueIndex</key>
+					<integer>2</integer>
+					<key>INEnumValueName</key>
+					<string>alternative</string>
+				</dict>
+			</array>
+		</dict>
 	</array>
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.2</string>
 	<key>INIntentDefinitionNamespace</key>
 	<string>88xZPY</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20D74</string>
+	<string>20G95</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>12D4e</string>
+	<string>12E507</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>12.4</string>
+	<string>12.5.1</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -1694,6 +1739,113 @@
 			<string>Portfolio</string>
 			<key>INIntentTitleID</key>
 			<string>uTB17L</string>
+			<key>INIntentType</key>
+			<string>Custom</string>
+			<key>INIntentVerb</key>
+			<string>View</string>
+		</dict>
+		<dict>
+			<key>INIntentCategory</key>
+			<string>information</string>
+			<key>INIntentClassName</key>
+			<string>BlockClockIntent</string>
+			<key>INIntentClassPrefix</key>
+			<string>BR</string>
+			<key>INIntentDescription</key>
+			<string>Bitcoin block clock</string>
+			<key>INIntentDescriptionID</key>
+			<string>17fahO</string>
+			<key>INIntentEligibleForWidgets</key>
+			<true/>
+			<key>INIntentIneligibleForSuggestions</key>
+			<true/>
+			<key>INIntentLastParameterTag</key>
+			<integer>4</integer>
+			<key>INIntentName</key>
+			<string>BlockClock</string>
+			<key>INIntentParameters</key>
+			<array>
+				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
+					<key>INIntentParameterDisplayName</key>
+					<string>Style</string>
+					<key>INIntentParameterDisplayNameID</key>
+					<string>rKBnee</string>
+					<key>INIntentParameterDisplayPriority</key>
+					<integer>1</integer>
+					<key>INIntentParameterEnumType</key>
+					<string>BlockClockStyle</string>
+					<key>INIntentParameterEnumTypeNamespace</key>
+					<string>88xZPY</string>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<string>default</string>
+					</dict>
+					<key>INIntentParameterName</key>
+					<string>style</string>
+					<key>INIntentParameterPromptDialogs</key>
+					<array>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Configuration</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Primary</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>There are ${count} options matching ‘${style}’.</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>2VQNwM</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>DisambiguationIntroduction</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Just to confirm, you wanted ‘${style}’?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>JUbZzA</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Confirmation</string>
+						</dict>
+					</array>
+					<key>INIntentParameterTag</key>
+					<integer>4</integer>
+					<key>INIntentParameterType</key>
+					<string>Integer</string>
+				</dict>
+			</array>
+			<key>INIntentResponse</key>
+			<dict>
+				<key>INIntentResponseCodes</key>
+				<array>
+					<dict>
+						<key>INIntentResponseCodeName</key>
+						<string>success</string>
+						<key>INIntentResponseCodeSuccess</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>INIntentResponseCodeName</key>
+						<string>failure</string>
+					</dict>
+				</array>
+			</dict>
+			<key>INIntentTitle</key>
+			<string>Block Clock</string>
+			<key>INIntentTitleID</key>
+			<string>kj6dyv</string>
 			<key>INIntentType</key>
 			<string>Custom</string>
 			<key>INIntentVerb</key>
