@@ -125,6 +125,9 @@ class Currency: CurrencyWithIcon {
         if isHBAR {
             return ["hbar"]
         }
+        if isDoge {
+            return ["dogecoin"]
+        }
         return nil
     }
     
@@ -167,6 +170,9 @@ class Currency: CurrencyWithIcon {
         }
         if isHBAR {
             return "0.0.39768"
+        }
+        if isDoge {
+            return "DUP4XYb33EGHezJs7RYsuEqcHNhMWum2Te"
         }
         return nil
     }

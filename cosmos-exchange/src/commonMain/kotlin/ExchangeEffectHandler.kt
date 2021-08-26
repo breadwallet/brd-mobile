@@ -443,4 +443,5 @@ private val estimateTransferTargets = mapOf(
     "tezos-mainnet" to "tz1S6qLbynndxDKkwUhYuficdTr2VwA2LUsV",
     "hedera-mainnet" to "0.0.293290",
     "ripple-mainnet" to "rDYKg1yYeghq8v1a9Xoy9WQzAU5cTUqdH4",
+    "dogecoin-mainnet" to "DUP4XYb33EGHezJs7RYsuEqcHNhMWum2Te",
 )
