@@ -2233,6 +2233,12 @@ users in a future update. ";
 "Exchange.ErrorState.unknown" = "Unknown error"
 /* Transaction error alert body */
 "Exchange.ErrorState.transaction" = "Transaction error"
+/* Transaction error alert body */
+"Exchange.ErrorState.insufficientNativeWalletBalance" = "Insufficient %1$@ native wallet balance, you will need at least %1$@ to proceed."
+/* Transaction error alert body */
+"Exchange.ErrorState.CreateTransferFailed" = "Create transfer failed"
+/* Transaction error alert body */
+"Exchange.ErrorState.feeEstimateFailed" = "Fee Estimate Failed"
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region"
 /* Insufficient chain error alert title */
