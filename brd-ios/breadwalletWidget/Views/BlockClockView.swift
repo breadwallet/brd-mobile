@@ -67,6 +67,23 @@ struct BlockClockView: View {
                     Spacer()
                 }
             }.padding()
+            if viewModel.updated != nil {
+                VStack {
+                    HStack {
+                        Spacer()
+                        UpdateTimeView(
+                                updated: viewModel.updated ?? "",
+                                iconFont: .system(size: 6),
+                                textFont: .system(size: 6)
+                        )
+                        .foregroundColor(Color(UIColor.textSecondary))
+                        .opacity(0.5)
+                    }
+                    Spacer()
+                }
+                .padding(.trailing)
+                .padding(.top, 6.0)
+            }
         }
     }
 }
@@ -111,7 +128,6 @@ struct BlockClockViewAlt: View {
         }
     }
 }
-
 
 struct ProgressView: View {
     var progress: CGFloat
