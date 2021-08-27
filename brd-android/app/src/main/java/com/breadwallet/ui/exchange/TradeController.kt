@@ -153,9 +153,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
         }
 
         ifChanged(ExchangeModel::formattedQuoteAmount) {
-            toAsset.labelInput.text = formattedQuoteAmount?.filter {
-                it.isDigit() || it == '.' || it == ' '
-            }?.trimStart()
+            toAsset.labelInput.text = formattedQuoteAmount
         }
 
         ifChanged(ExchangeModel::selectedOffer, ExchangeModel::offerState) {

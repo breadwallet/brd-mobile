@@ -213,11 +213,16 @@ data class ExchangeModel(
             if (currency?.isFiat() == true) {
                 Formatters.fiat(quoteCurrencyCode).format(quoteAmount)
             } else {
-                val amountString = quoteAmountInput ?:
-                    (selectedOffer as? OfferDetails.ValidOffer)?.formattedQuoteTotal
+                val amountString = quoteAmountInput
+                    ?: (selectedOffer as? OfferDetails.ValidOffer)?.formattedQuoteTotal
                     ?: Formatters.crypto(quoteCurrencyCode).format(quoteAmount)
 
-                amountString.let { output -> "${if (quoteAmount > 0) "≈" else ""} $output" }
+                when (mode) {
+                    Mode.TRADE -> amountString.split(' ').firstOrNull()
+                    Mode.BUY, Mode.SELL -> amountString.let { output ->
+                        "${if (quoteAmount > 0) "≈" else ""} $output"
+                    }
+                }
             }
         }
 
