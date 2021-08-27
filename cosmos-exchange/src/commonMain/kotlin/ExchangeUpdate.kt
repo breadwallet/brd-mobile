@@ -888,9 +888,9 @@ private fun onContinueClicked(model: M): Next<M, F> {
         }
         is State.ProcessingOrder -> noChange()
         is State.OrderComplete -> {
-            if(model.mode == Mode.TRADE){
+            if (model.mode == Mode.TRADE) {
                 dispatch(F.ExitFlow) // Exiting to Home on trade continue completed to match iOS
-            }else {
+            } else {
                 next(
                     model.copy(
                         state = State.OrderSetup(),
