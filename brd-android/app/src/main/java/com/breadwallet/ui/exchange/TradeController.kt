@@ -50,6 +50,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
             pinpad.setDeleteButtonTint(white)
             pinpad.setButtonTextColor(IntArray(11) { white })
+            pinpad.setBRButtonBackgroundResId(R.drawable.keyboard_blue_pill_button, true)
 
             toAsset.labelAlt.isVisible = false
             toAsset.labelInput.setOnClickListener { togglePinPad(sourceAmount = false) }
