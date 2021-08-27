@@ -213,14 +213,14 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                         when {
                             !selectedOffer.formattedMinSourceAmount.isNullOrBlank() -> {
                                 buttonPreview.isEnabled = true
-                                buttonPreview.text = res.getText(
+                                buttonPreview.text = res.getString(
                                     R.string.Exchange_CTA_setMin,
                                     selectedOffer.formattedMinSourceAmount
                                 )
                             }
                             !selectedOffer.formattedMaxSourceAmount.isNullOrBlank() -> {
                                 buttonPreview.isEnabled = true
-                                buttonPreview.text = res.getText(
+                                buttonPreview.text = res.getString(
                                     R.string.Exchange_CTA_setMax,
                                     selectedOffer.formattedMaxSourceAmount
                                 )
