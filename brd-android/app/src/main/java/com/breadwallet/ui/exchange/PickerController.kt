@@ -101,6 +101,12 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 selectionType == SelectionType.ASSET && currentModel.mode == ExchangeModel.Mode.TRADE
             title.isVisible = !displayAssetToggle
             tradeToggleGroup.isVisible = displayAssetToggle
+            tradeToggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                eventConsumer.accept(
+                    ExchangeEvent.OnSelectPairClicked(checkedId == R.id.buttonFrom)
+                )
+            }
+
             recycler.itemAnimator = DefaultItemAnimator()
             if (selectionType != SelectionType.OFFER) {
                 recycler.setDivider(R.drawable.recycler_view_divider)
