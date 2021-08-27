@@ -10,11 +10,13 @@ package com.breadwallet.ui.exchange
 
 import android.os.Bundle
 import android.security.keystore.UserNotAuthenticatedException
+import android.text.format.DateUtils
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.api.models.ExchangeInput
 import com.brd.api.models.ExchangeOrder
+import com.brd.api.models.ExchangeOutput
 import com.brd.exchange.ExchangeEffect
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
@@ -24,6 +26,7 @@ import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.addressFor
 import com.breadwallet.breadbox.estimateFee
 import com.breadwallet.breadbox.feeForSpeed
+import com.breadwallet.breadbox.getSize
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.crypto.Amount
@@ -33,6 +36,7 @@ import com.breadwallet.crypto.TransferState
 import com.breadwallet.crypto.errors.FeeEstimationError
 import com.breadwallet.databinding.ControllerTradeTransactionBinding
 import com.breadwallet.logger.logError
+import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
@@ -42,12 +46,14 @@ import com.breadwallet.ui.send.ConfirmTradeController
 import com.breadwallet.ui.send.TransferField
 import com.breadwallet.util.isHedera
 import com.breadwallet.util.isRipple
+import com.platform.interfaces.MetaDataManager
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
+import java.util.Locale
 
 class TradeTransactionController(args: Bundle? = null) :
     ExchangeController.ChildController(args),
@@ -57,6 +63,7 @@ class TradeTransactionController(args: Bundle? = null) :
     private val binding by viewBinding(ControllerTradeTransactionBinding::inflate)
     private val userManager by instance<BrdUserManager>()
     private val breadBox by instance<BreadBox>()
+    private val metaDataManager by instance<MetaDataManager>()
 
     private var transferFeeBasis: TransferFeeBasis? = null
     private var transferAttrs: Set<TransferAttribute>? = null
@@ -103,6 +110,9 @@ class TradeTransactionController(args: Bundle? = null) :
         val input = state.order.inputs
             .filterIsInstance<ExchangeInput.CryptoTransfer>()
             .first()
+        val output = state.order.outputs
+            .filterIsInstance<ExchangeOutput.CryptoTransfer>()
+            .firstOrNull()
         controllerScope.launch {
             val sourceCurrencyCode = checkNotNull(currentModel.sourceCurrencyCode)
             val wallet = breadBox.wallet(sourceCurrencyCode).first()
@@ -134,7 +144,8 @@ class TradeTransactionController(args: Bundle? = null) :
                 return@launch
             }
 
-            val newTransfer = wallet.createTransfer(address, amount, feeBasis, transferAttributes).orNull()
+            val newTransfer =
+                wallet.createTransfer(address, amount, feeBasis, transferAttributes).orNull()
             if (newTransfer == null) {
                 logError("Failed to create transfer.")
                 return@launch
@@ -164,6 +175,22 @@ class TradeTransactionController(args: Bundle? = null) :
                     reason = ExchangeEvent.SendFailedReason.CreateTransferFailed
                 )
             } else {
+                val deviceId = BRSharedPrefs.getDeviceId()
+                val size = transfer.getSize()?.toInt() ?: 0
+                val fee = transfer.fee.toBigDecimal().toDouble()
+                val creationTime =
+                    (System.currentTimeMillis() / DateUtils.SECOND_IN_MILLIS).toInt()
+
+                val metaData = TxMetaDataValue(
+                    deviceId = deviceId,
+                    comment = getTransferComment(output),
+                    blockHeight = transfer.wallet.walletManager.network.height.toLong(),
+                    fee = fee,
+                    txSize = size,
+                    creationTime = creationTime,
+                )
+                metaDataManager.putTxMetaData(transfer, metaData)
+
                 ExchangeEvent.OnCryptoSendActionCompleted(
                     input.actions.first(),
                     transactionHash = transfer.hashString(),
@@ -254,7 +281,10 @@ class TradeTransactionController(args: Bundle? = null) :
         }
     }
 
-    private fun transferFieldsFor(currencyCode: String, input: ExchangeInput.CryptoTransfer): List<TransferField> {
+    private fun transferFieldsFor(
+        currencyCode: String,
+        input: ExchangeInput.CryptoTransfer
+    ): List<TransferField> {
         return if (input.sendToDestinationTag.isNullOrBlank()) {
             emptyList()
         } else {
@@ -277,6 +307,12 @@ class TradeTransactionController(args: Bundle? = null) :
                 )
                 else -> emptyList()
             }
+        }
+    }
+
+    private fun getTransferComment(output: ExchangeOutput.CryptoTransfer?): String? {
+        return if (output == null) null else {
+            "Sold for ${output.amount}${output.currency.code.toUpperCase(Locale.ROOT)}."
         }
     }
 }
