@@ -887,16 +887,22 @@ private fun onContinueClicked(model: M): Next<M, F> {
             else -> noChange()
         }
         is State.ProcessingOrder -> noChange()
-        is State.OrderComplete -> next(
-            model.copy(
-                state = State.OrderSetup(),
-            ),
-            F.LoadPairs(
-                countryCode = checkNotNull(model.selectedCountry).code,
-                regionCode = model.selectedRegion?.code,
-                selectedFiatCurrencyCode = model.selectedFiatCurrency?.code
-            )
-        )
+        is State.OrderComplete -> {
+            if(model.mode == Mode.TRADE){
+                dispatch(F.ExitFlow) // Exiting to Home on trade continue completed to match iOS
+            }else {
+                next(
+                    model.copy(
+                        state = State.OrderSetup(),
+                    ),
+                    F.LoadPairs(
+                        countryCode = checkNotNull(model.selectedCountry).code,
+                        regionCode = model.selectedRegion?.code,
+                        selectedFiatCurrencyCode = model.selectedFiatCurrency?.code
+                    )
+                )
+            }
+        }
         else -> noChange()
     }
 }
