@@ -119,6 +119,7 @@ class ExchangeController(args: Bundle) :
         val res = requireResources()
         val childRouter = getChildRouter(exchangeRoot)
 
+        val rootController = childRouter.backstack.firstOrNull()?.controller
         val topController = childRouter.backstack.lastOrNull()?.controller
 
         ifChanged(ExchangeModel::state) {
@@ -148,6 +149,8 @@ class ExchangeController(args: Bundle) :
                     }
                 }
                 is ExchangeModel.State.OrderSetup -> {
+                    val shouldUpdateRoot = (mode == BUY && rootController !is BuyController) ||
+                        (mode == TRADE && rootController !is TradeController)
                     if (state.selectingOffer) {
                         val currentSelectionType = (topController as? PickerController)?.selectionType
                         if (currentSelectionType != PickerController.SelectionType.OFFER) {
@@ -162,6 +165,15 @@ class ExchangeController(args: Bundle) :
                                     .popChangeHandler(popHandler)
                             childRouter.pushController(transaction)
                         }
+                    } else if (shouldUpdateRoot) {
+                        val transaction = when (mode) {
+                            BUY -> RouterTransaction.with(BuyController())
+                            TRADE -> RouterTransaction.with(TradeController())
+                            SELL -> error("SELL not implemented")
+                        }.pushChangeHandler(VerticalChangeHandler())
+                            .popChangeHandler(VerticalChangeHandler())
+                        childRouter.setRoot(transaction)
+                        childRouter.popToRoot()
                     } else if (childRouter.backstackSize > 1) {
                         childRouter.popToRoot()
                     }
