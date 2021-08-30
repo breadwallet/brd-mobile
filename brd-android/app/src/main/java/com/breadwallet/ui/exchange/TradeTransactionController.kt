@@ -72,7 +72,7 @@ class TradeTransactionController(args: Bundle? = null) :
         super.handleEffect(effect)
         if (effect is ExchangeEffect.ProcessUserAction) {
             val childRouter = getChildRouter(binding.container)
-            if (transferFeeBasis == null && !childRouter.hasRootController()) {
+            if (transferFeeBasis == null) {
                 val state = (currentModel.state as? ExchangeModel.State.ProcessingOrder) ?: return
                 launchTrade(state, childRouter)
             }
@@ -89,13 +89,13 @@ class TradeTransactionController(args: Bundle? = null) :
                 AuthMode.PIN_REQUIRED
             }
 
+        val childRouter = getChildRouter(binding.container)
         val authController = AuthenticationController(
             mode = authenticationMode,
             title = res.getString(R.string.VerifyPin_title),
             message = res.getString(R.string.VerifyPin_authorize)
         )
-        authController.targetController = this
-        router.pushController(RouterTransaction.with(authController))
+        childRouter.pushController(RouterTransaction.with(authController))
     }
 
     override fun onNegativeClicked() {
@@ -129,14 +129,13 @@ class TradeTransactionController(args: Bundle? = null) :
             val transferAttributes = checkNotNull(transferAttrs)
 
             val primaryWallet = wallet.walletManager.primaryWallet
-            if (primaryWallet != wallet && primaryWallet.balance < feeBasis.fee) {
+            if (primaryWallet.balance < feeBasis.fee) {
                 eventConsumer.accept(
                     ExchangeEvent.OnCryptoSendActionFailed(
                         reason = ExchangeEvent.SendFailedReason.InsufficientNativeWalletBalance(
                             currencyCode = primaryWallet.currency.code,
-                            requiredAmount = primaryWallet.balance.sub(feeBasis.fee)
-                                ?.orNull()
-                                ?.doubleAmount(primaryWallet.unit)
+                            requiredAmount = feeBasis.fee
+                                .doubleAmount(primaryWallet.unit)
                                 ?.orNull() ?: 0.0
                         )
                     )
@@ -225,14 +224,13 @@ class TradeTransactionController(args: Bundle? = null) :
             state.userAction?.run {
                 check(action.type == ExchangeOrder.Action.Type.CRYPTO_SEND)
                 val childRouter = getChildRouter(binding.container)
-                if (!childRouter.hasRootController()) {
-                    launchTrade(state, childRouter)
-                }
+                launchTrade(state, childRouter)
             }
         }
     }
 
     private fun launchTrade(state: ExchangeModel.State.ProcessingOrder, childRouter: Router) {
+        if (childRouter.hasRootController()) return
         binding.layoutLoader.isVisible = false
         binding.scrim.isVisible = true
         viewAttachScope.launch {
@@ -266,13 +264,14 @@ class TradeTransactionController(args: Bundle? = null) :
             transferFeeBasis = feeBasis
             val transferFields = transferFieldsFor(sourceCurrencyCode, input)
             Main {
+                val primaryWallet = wallet.walletManager.primaryWallet
                 val transaction = RouterTransaction.with(
                     ConfirmTradeController(
                         sourceCurrencyCode,
                         input.sendToAddress,
                         TransferSpeed.Priority(sourceCurrencyCode),
                         input.amount.toBigDecimal(),
-                        feeBasis.fee.toBigDecimal(unit = wallet.unit),
+                        feeBasis.fee.doubleAmount(primaryWallet.unit).get().toBigDecimal(),
                         transferFields
                     )
                 )
