@@ -198,8 +198,12 @@ data class ExchangeModel(
             val fiatCode = selectedFiatCurrency.code
             val rate = pairs
                 .find { it.fromCode == fiatCode && it.toCode == sourceCurrencyCode }
-                ?.rate ?: 0.0
-            Formatters.fiat(fiatCode).format(sourceAmount * rate)
+                ?.rate
+            // If fiat Currency pair not found, return null, until we
+            // can integrate market data interface with CoinGecko
+            rate?.let {
+                Formatters.fiat(fiatCode).format(sourceAmount * it)
+            }
         }
 
     /**
