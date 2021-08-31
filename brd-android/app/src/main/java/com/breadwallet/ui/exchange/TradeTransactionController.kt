@@ -37,6 +37,7 @@ import com.breadwallet.crypto.errors.FeeEstimationError
 import com.breadwallet.databinding.ControllerTradeTransactionBinding
 import com.breadwallet.logger.logError
 import com.breadwallet.platform.entities.TxMetaDataValue
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.isFingerPrintAvailableAndSetup
@@ -46,7 +47,6 @@ import com.breadwallet.ui.send.ConfirmTradeController
 import com.breadwallet.ui.send.TransferField
 import com.breadwallet.util.isHedera
 import com.breadwallet.util.isRipple
-import com.platform.interfaces.MetaDataManager
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.transform
@@ -63,7 +63,7 @@ class TradeTransactionController(args: Bundle? = null) :
     private val binding by viewBinding(ControllerTradeTransactionBinding::inflate)
     private val userManager by instance<BrdUserManager>()
     private val breadBox by instance<BreadBox>()
-    private val metaDataManager by instance<MetaDataManager>()
+    private val metaDataManager by instance<AccountMetaDataProvider>()
 
     private var transferFeeBasis: TransferFeeBasis? = null
     private var transferAttrs: Set<TransferAttribute>? = null
