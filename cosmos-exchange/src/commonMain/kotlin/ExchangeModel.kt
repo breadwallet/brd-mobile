@@ -347,6 +347,9 @@ data class ExchangeModel(
                 TRADE, BUY -> currency.isCrypto()
                 SELL -> currency.isFiat()
             }
+
+        val isTrade: Boolean
+            get() = this == TRADE
     }
 
     enum class OfferState {

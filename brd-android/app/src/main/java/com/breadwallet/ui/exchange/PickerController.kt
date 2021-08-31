@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.brd.api.models.ExchangeCurrency
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
-import com.brd.exchange.isTrade
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePickerBinding
 import com.breadwallet.tools.recyclerview.MarginItemDecoration

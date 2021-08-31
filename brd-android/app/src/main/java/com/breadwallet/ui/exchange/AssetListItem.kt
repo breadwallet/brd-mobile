@@ -14,7 +14,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.brd.api.models.ExchangeCurrency
 import com.brd.exchange.ExchangeModel
-import com.brd.exchange.isTrade
 import com.breadwallet.R
 import com.breadwallet.databinding.ExchangeAssetListItemBinding
 import com.breadwallet.tools.util.TokenUtil
