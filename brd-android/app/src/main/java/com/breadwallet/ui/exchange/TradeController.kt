@@ -38,7 +38,6 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
     private val binding by viewBinding(ControllerExchangeTradeBinding::inflate)
 
-    private var editingSourceAmount = false
     private var isPinPadVisible = false
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,8 +52,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
             pinpad.setBRButtonBackgroundResId(R.drawable.keyboard_blue_pill_button, true)
 
             toAsset.labelAlt.isVisible = false
-            toAsset.labelInput.setOnClickListener { togglePinPad(sourceAmount = false) }
-            fromAsset.labelInput.setOnClickListener { togglePinPad(sourceAmount = true) }
+            fromAsset.labelInput.setOnClickListener { togglePinPad() }
 
             tradeTouchInterceptor.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN && isPinPadVisible) {
@@ -64,7 +62,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                 false
             }
 
-            fromAsset.labelInput.doOnTextChanged { text, _, _, _ ->
+            fromAsset.labelInput.doOnTextChanged { _, _, _, _ ->
                 fromAsset.labelInput.updateToAssetVisibility()
             }
 
@@ -105,8 +103,6 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                             key[0] == '.' -> ExchangeEvent.OnAmountChange.Decimal
                             Character.isDigit(key[0]) -> ExchangeEvent.OnAmountChange.Digit(key.toInt())
                             else -> return@setOnInsertListener
-                        }.let { change ->
-                            if (editingSourceAmount) change else ExchangeEvent.OnQuoteAmountChange(change)
                         }
                     )
                 }
@@ -151,6 +147,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
         ifChanged(ExchangeModel::formattedSourceAmountFiatValue) {
             fromAsset.labelAlt.text = formattedSourceAmountFiatValue
+            fromAsset.labelAlt.isVisible = formattedSourceAmountFiatValue != null
         }
 
         ifChanged(ExchangeModel::formattedQuoteAmount) {
@@ -278,17 +275,12 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
         }
     }
 
-    private fun togglePinPad(sourceAmount: Boolean) {
+    private fun togglePinPad() {
         if (isPinPadVisible) {
-            if (sourceAmount == editingSourceAmount) {
-                hidePinPad()
-            } else {
-                showPinPad()
-            }
+            hidePinPad()
         } else {
             showPinPad()
         }
-        editingSourceAmount = sourceAmount
         updateActiveAsset()
     }
 
@@ -320,7 +312,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
         val activeBorderColor = getColor(R.color.primary_action_button)
         val inactiveColor = getColor(R.color.black)
         val (fromColor, toColor) = if (isPinPadVisible) {
-            if (editingSourceAmount) activeBorderColor to 0 else 0 to activeBorderColor
+            activeBorderColor to 0
         } else {
             0 to 0
         }
@@ -363,6 +355,6 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
 
     /** hides zero value for the From Asset label when pin pad is visible */
     private fun TextView.updateToAssetVisibility() {
-        isInvisible = text.toString() == "0" && isPinPadVisible && editingSourceAmount
+        isInvisible = text.toString() == "0" && isPinPadVisible
     }
 }

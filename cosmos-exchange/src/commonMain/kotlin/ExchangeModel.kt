@@ -202,7 +202,9 @@ data class ExchangeModel(
             // If fiat Currency pair not found, return null, until we
             // can integrate market data interface with CoinGecko
             rate?.let {
-                Formatters.fiat(fiatCode).format(sourceAmount * it)
+                Formatters.fiat(fiatCode).format(sourceAmount * it).run {
+                    if (mode.isTrade) "≈ $this" else this
+                }
             }
         }
 

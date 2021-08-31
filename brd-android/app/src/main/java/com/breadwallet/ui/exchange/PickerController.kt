@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.brd.api.models.ExchangeCurrency
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
+import com.brd.exchange.isTrade
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePickerBinding
 import com.breadwallet.tools.recyclerview.MarginItemDecoration
@@ -98,7 +99,7 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
             toolbar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             layoutSearch.isVisible = selectionType != SelectionType.OFFER
             val displayAssetToggle =
-                selectionType == SelectionType.ASSET && currentModel.mode == ExchangeModel.Mode.TRADE
+                selectionType == SelectionType.ASSET && currentModel.mode.isTrade
             title.isVisible = !displayAssetToggle
             tradeToggleGroup.isVisible = displayAssetToggle
             tradeToggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
