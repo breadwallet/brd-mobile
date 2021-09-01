@@ -264,7 +264,7 @@ class CoreSystem: Subscriber, Trackable {
 
         var mode = self.connectionMode(for: currency)
         if !network.supportsMode(mode) {
-//            assertionFailure("invalid wallet manager mode \(mode) for \(network.currency.code)")
+            assertionFailure("invalid wallet manager mode \(mode) for \(network.currency.code)")
             mode = network.defaultMode
         }
         var success = false

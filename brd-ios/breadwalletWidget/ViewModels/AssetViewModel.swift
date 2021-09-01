@@ -26,6 +26,7 @@ class AssetViewModel: Identifiable {
     let bgColor: [Color]
     let textColor: Color?
     let logoStyle: LogoStyle
+    let compact: Bool
     let chartUpColor: Color
     let chartDownColor: Color
     let chartViewModel: ChartViewModel
@@ -45,6 +46,7 @@ class AssetViewModel: Identifiable {
          bgColor: [Color],
          textColor: Color?,
          logoStyle: LogoStyle,
+         compact: Bool,
          chartUpColor: Color,
          chartDownColor: Color,
          chartViewModel: ChartViewModel,
@@ -64,6 +66,7 @@ class AssetViewModel: Identifiable {
         self.bgColor = bgColor
         self.textColor = textColor
         self.logoStyle = logoStyle
+        self.compact = compact
         self.chartUpColor = chartUpColor
         self.chartDownColor = chartDownColor
         self.chartViewModel = chartViewModel
@@ -89,7 +92,8 @@ extension AssetViewModel {
             ticker: currency?.code ?? "-",
             name: currency?.name ?? "-",
             price: AssetViewModel.formattedPrice(info?.price, config: config),
-            pctChange: AssetViewModel.formattedPctChange(info?.change24hr),
+            pctChange: AssetViewModel.formattedPctChange(info?.change24hr,
+                                                         compact: config.layout == .compact),
             marketCap: info?.marketCap?.int.abbreviated ?? "-",
             updated: WidgetFormatter.time.string(from: config.updated),
             showUpdateTime: config.showUpdatedTime,
@@ -97,10 +101,13 @@ extension AssetViewModel {
             bgColor: bgColor,
             textColor: textColor,
             logoStyle: config.logoStyle,
+            compact: config.layout == .compact,
             chartUpColor: config.chartUpColor?.color() ?? .green,
             chartDownColor: config.chartDownColor?.color() ?? .red,
             chartViewModel: ChartViewModel(
-                candles: ChartViewModel.Candle.candles(info?.candles ?? []),
+                lineCandles: ChartViewModel.Candle.candles(info?.lineCandles ?? []),
+                barCandles: ChartViewModel.Candle.candles(info?.barCandles ?? []),
+                lineChart: config.chartStyle != .candle,
                 greenCandle: config.chartUpColor?.color() ?? .green,
                 redCandle: config.chartDownColor?.color() ?? .red,
                 colorOverride: AssetViewModel.chartColorOverride(config: config,
@@ -155,17 +162,20 @@ extension AssetViewModel {
         return WidgetFormatter.price.string(from: NSNumber(value: price)) ?? "-"
     }
     
-    static func formattedPctChange(_ pctChange: Double?) -> String {
+    static func formattedPctChange(_ pctChange: Double?, compact: Bool = false) -> String {
         guard let pctChange = pctChange else {
             return "-"
         }
         if pctChange > 10 {
             WidgetFormatter.pctChange.maximumFractionDigits = 0
-        } else if pctChange > 1 {
+        } else if pctChange > 1 || compact {
+            WidgetFormatter.pctChange.minimumFractionDigits = 1
             WidgetFormatter.pctChange.maximumFractionDigits = 1
         } else {
             WidgetFormatter.pctChange.maximumFractionDigits = 2
         }
+        WidgetFormatter.pctChange.positivePrefix = compact ? "" : "+"
+        WidgetFormatter.pctChange.negativePrefix = compact ? "" : "-"
         let number = NSNumber(value: pctChange / 100)
         return WidgetFormatter.pctChange.string(from: number) ?? "-"
     }
@@ -228,6 +238,7 @@ extension AssetViewModel {
                bgColor: [],
                textColor: nil,
                logoStyle: .tickerAndName,
+               compact: false,
                chartUpColor: .green,
                chartDownColor: .red,
                chartViewModel: .mock(),

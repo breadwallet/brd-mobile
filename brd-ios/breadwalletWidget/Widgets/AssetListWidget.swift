@@ -66,7 +66,7 @@ struct AssetListProvider: IntentTimelineProvider {
     func getTimeline(for configuration: AssetListIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         getSnapshot(for: configuration, in: context) { entry in
             let timeline = Timeline(entries: [entry],
-                policy: .after(Date().adding(minutes: 30)))
+                policy: .after(configuration.refresh.nextRefresh()))
             completion(timeline)
         }
     }
