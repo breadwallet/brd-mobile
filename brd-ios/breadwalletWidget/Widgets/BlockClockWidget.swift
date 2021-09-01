@@ -43,7 +43,7 @@ struct BlockClockProvider: IntentTimelineProvider {
     func getTimeline(for configuration: BlockClockIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         getSnapshot(for: configuration, in: context) { entry in
             let timeline = Timeline(entries: [entry],
-                policy: .after(Date().adding(minutes: 30)))
+                policy: .after(Date().adding(minutes: 10)))
             completion(timeline)
         }
     }
@@ -61,6 +61,7 @@ struct BlockClockEntry: TimelineEntry {
         self.intent = intent
         self.viewModel = BlockClockViewModel(
             blockInfo: blockInfo,
+            showLastUpdated: intent.showUpdatedTime?.boolValue ?? false,
             isPlaceholder: isPlaceholder
         )
     }
