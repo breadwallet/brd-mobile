@@ -1279,7 +1279,7 @@ private fun onCryptoSendActionFailed(model: M, event: OnCryptoSendActionFailed):
                     errorState = ErrorState(
                         debugMessage = "Failed to create transfer",
                         type = ErrorState.Type.TransactionError(event.reason),
-                        isRecoverable = false,
+                        isRecoverable = true,
                     )
                 )
             )
@@ -1410,7 +1410,16 @@ private fun onDialogConfirmClicked(model: M): Next<M, F> {
                     F.RequestOffers(model.offerBodyOrNull(), model.mode)
                 )
             )
-        } else noChange()
+        } else {
+            next(
+                model.copy(
+                    errorState = null,
+                ),
+                setOfNotNull(
+                    model.state.userAction
+                )
+            )
+        }
         else -> if (model.confirmingClose) dispatch(F.ExitFlow) else noChange()
     }
 }
