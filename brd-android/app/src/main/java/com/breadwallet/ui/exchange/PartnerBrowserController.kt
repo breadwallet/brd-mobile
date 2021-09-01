@@ -62,8 +62,8 @@ class PartnerBrowserController(args: Bundle? = null) :
         registerForActivityResult(BRConstants.REQUEST_IMAGE_RC)
     }
 
-    private val fileSelect = MutableSharedFlow<Uri?>(replay = 1)
-    private val cameraPermission = MutableSharedFlow<Boolean>(replay = 1)
+    private val fileSelect = MutableSharedFlow<Uri?>(extraBufferCapacity = 1)
+    private val cameraPermission = MutableSharedFlow<Boolean>(extraBufferCapacity = 1)
 
     private val cameraPermissionFlow: Flow<Boolean> = cameraPermission
         .onStart {
@@ -77,7 +77,7 @@ class PartnerBrowserController(args: Bundle? = null) :
         .take(1)
         .flowOn(Dispatchers.Main)
 
-    private val cameraResult = MutableSharedFlow<String?>(replay = 1)
+    private val cameraResult = MutableSharedFlow<String?>(extraBufferCapacity = 1)
     private val imageRequestFlow = cameraPermissionFlow
         .flatMapLatest { hasPermissions ->
             if (hasPermissions) {
@@ -87,7 +87,7 @@ class PartnerBrowserController(args: Bundle? = null) :
         }
         .flowOn(Dispatchers.Main)
 
-    private val locationPermission = MutableSharedFlow<Boolean>(replay = 1)
+    private val locationPermission = MutableSharedFlow<Boolean>(extraBufferCapacity = 1)
 
     override fun onCreateView(view: View) {
         super.onCreateView(view)
