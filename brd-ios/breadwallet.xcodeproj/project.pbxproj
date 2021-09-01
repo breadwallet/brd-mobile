@@ -691,9 +691,9 @@
 		D15BAC0C26CBBCF0007DE23A /* BlockClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC0326CB1129007DE23A /* BlockClockService.swift */; };
 		D15BAC1426CBFF43007DE23A /* BlockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1326CBFF43007DE23A /* BlockClockView.swift */; };
 		D15BAC1626CC0023007DE23A /* BlockClockWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */; };
-		D172F77926D0502F00E35886 /* BlockInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */; };
 		D179FAF526D6C25C0037B916 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */; };
 		D19D7C942634180A00689324 /* ExchangeTradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */; };
+		D1B6787726DFD2B0005B7327 /* BlockClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6787626DFD2B0005B7327 /* BlockClockViewModel.swift */; };
 		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
 		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
 		E821D4CD21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
@@ -1491,9 +1491,9 @@
 		D15BAC0326CB1129007DE23A /* BlockClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockService.swift; sourceTree = "<group>"; };
 		D15BAC1326CBFF43007DE23A /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
 		D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockWidget.swift; sourceTree = "<group>"; };
-		D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInfoViewModel.swift; sourceTree = "<group>"; };
 		D179FAF426D6C25C0037B916 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D19D7C932634180A00689324 /* ExchangeTradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTradeViewModel.swift; sourceTree = "<group>"; };
+		D1B6787626DFD2B0005B7327 /* BlockClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockClockViewModel.swift; sourceTree = "<group>"; };
 		E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
 		E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRAnalyticsEvent.swift; path = src/Platform/BRAnalyticsEvent.swift; sourceTree = "<group>"; };
 		E837FCFC219D1C0600F59D99 /* onboarding-video-globe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onboarding-video-globe.mp4"; path = "Resources/onboarding-videos/onboarding-video-globe.mp4"; sourceTree = "<group>"; };
@@ -2400,7 +2400,7 @@
 				9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */,
 				9F3C314625DACF1300C7C398 /* AssetListViewModel.swift */,
 				A243907548F9B61AEED41A04 /* PortfolioViewModel.swift */,
-				D172F77826D0502F00E35886 /* BlockInfoViewModel.swift */,
+				D1B6787626DFD2B0005B7327 /* BlockClockViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -4112,7 +4112,6 @@
 				D15BAC1426CBFF43007DE23A /* BlockClockView.swift in Sources */,
 				9FB0CA1525D5AD180057DD11 /* BreadwalletWidget.swift in Sources */,
 				9F3C302525DA8B2F00C7C398 /* WidgetService.swift in Sources */,
-				D172F77926D0502F00E35886 /* BlockInfoViewModel.swift in Sources */,
 				9F3C315725DACF3300C7C398 /* PortfolioView.swift in Sources */,
 				9FDDE55B25D5B79D00E42BE3 /* ChartView.swift in Sources */,
 				9F3C315825DACF3300C7C398 /* AssetListView.swift in Sources */,
@@ -4127,6 +4126,7 @@
 				9F0EA16425E2902700D4225E /* WidgetDataShareService.swift in Sources */,
 				9F2118F525DDBC6200ABD2C8 /* Formatter+Extensions.swift in Sources */,
 				9F3C307F25DA929600C7C398 /* Identifier.swift in Sources */,
+				D1B6787726DFD2B0005B7327 /* BlockClockViewModel.swift in Sources */,
 				9FDDE55725D5B79D00E42BE3 /* Date+Extension.swift in Sources */,
 				9F3C305625DA902E00C7C398 /* Currency.swift in Sources */,
 				9FDDE55C25D5B79D00E42BE3 /* ChartViewModel.swift in Sources */,

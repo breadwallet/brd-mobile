@@ -1,8 +1,14 @@
+"17fahO" = "Bitcoin block clock";
+
 "1BT6DH" = "daily";
 
 "1CykkH" = "false";
 
 "1J9VT8" = "Falling price chart color";
+
+"2VQNwM-IVQPjt" = "There are ${count} options matching ‘Minimalist’.";
+
+"2VQNwM-Ka6r47" = "There are ${count} options matching ‘Max Info’.";
 
 "2aZ6E9" = "Text Color";
 
@@ -19,6 +25,8 @@
 "6lj7GI" = "true";
 
 "6rfFPo" = "Logo Style";
+
+"72qHdb" = "Minimal";
 
 "7Ghefw-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
 
@@ -61,6 +69,10 @@
 "H1mfaZ-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
 
 "IVQPjt" = "Minimalist";
+
+"JUbZzA-IVQPjt" = "Just to confirm, you wanted ‘Minimalist’?";
+
+"JUbZzA-Ka6r47" = "Just to confirm, you wanted ‘Max Info’?";
 
 "Ka6r47" = "Max Info";
 
@@ -168,17 +180,25 @@
 
 "hFEYdE" = "Falling price chart color";
 
+"he5h6K" = "Default";
+
 "hew4na" = "Interval";
 
 "hth234" = "Text Color";
+
+"i14M10" = "false";
 
 "i8t9EV" = "Icon no Background";
 
 "iUdqod" = "Rising price chart color";
 
+"kj6dyv" = "Block Clock";
+
 "lWct3E" = "true";
 
 "mpveDb" = "false";
+
+"n7MRgF" = "Show last updated time";
 
 "nY3Viw" = "Logo Style";
 
@@ -190,6 +210,8 @@
 
 "phdmY1-siy8Gj" = "Just to confirm, you wanted ‘none’?";
 
+"q1MC5a" = "true";
+
 "qhi5M1" = "Chart Location";
 
 "rDgGMR-af9EDB" = "Just to confirm, you wanted ‘trailing’?";
@@ -197,6 +219,8 @@
 "rDgGMR-e3XSIN" = "Just to confirm, you wanted ‘middle’?";
 
 "rDgGMR-siy8Gj" = "Just to confirm, you wanted ‘none’?";
+
+"rKBnee" = "Style";
 
 "rfa0Mf" = "Background Color";
 
@@ -213,6 +237,8 @@
 "tPX7Gc-i8t9EV" = "There are ${count} options matching ‘Icon no Background’.";
 
 "tVvJ9c" = "Stay up to date with your favorite crypto asset";
+
+"teojXC" = "Style";
 
 "uTB17L" = "Portfolio";
 

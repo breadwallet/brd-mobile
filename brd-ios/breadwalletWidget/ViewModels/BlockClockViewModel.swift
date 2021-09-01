@@ -1,5 +1,5 @@
 // 
-//  BlockInfoViewModel.swift
+//  BlockClockViewModel.swift
 //  breadwalletWidgetExtension
 //
 //  Created by blockexplorer on 21/08/2021.
@@ -18,8 +18,13 @@ struct BlockClockViewModel {
     let progress: Float
     let days: String
     let isPlaceholder: Bool
+    let updated: String?
 
-    init(blockInfo: BlockInfo, isPlaceholder: Bool) {
+    init(
+        blockInfo: BlockInfo,
+        showLastUpdated: Bool = false,
+        isPlaceholder: Bool = false
+    ) {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         let blocksDelta = blockInfo.halveningBlock - blockInfo.currentBlock
@@ -38,7 +43,7 @@ struct BlockClockViewModel {
         days = String(
             format: "%d days", blockInfo.secondsLeft / Constant.secondsInDay
         )
-
+        updated = showLastUpdated ? WidgetFormatter.time.string(from: Date()) : nil
         self.isPlaceholder = isPlaceholder
     }
 }
