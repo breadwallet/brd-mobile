@@ -20,6 +20,25 @@ extension Array where Element: AnyObject {
 
 // MARK: -
 
+extension Array {
+
+    func last(n: Int) -> Array {
+        guard count > n else {
+            return self
+        }
+        return Array(self[count - n..<count])
+    }
+
+    func first(n: Int) -> Array {
+        guard count > n else {
+            return self
+        }
+        return Array(self[0..<n])
+    }
+}
+
+// MARK: -
+
 extension Array where Element: Equatable {
 
     func indexes(for elements: [Element?]) -> [Int] {

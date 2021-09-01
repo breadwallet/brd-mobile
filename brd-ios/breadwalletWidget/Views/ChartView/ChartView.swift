@@ -18,18 +18,50 @@ struct ChartView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            
-            let points = self.points(viewModel.candles, size: geometry.size)
-            
-            ZStack {
-                path(with: points, close: false)
-                    .stroke(viewModel.chartColor, lineWidth: 1)
-                path(with: points + [geometry.size.maxXmaxY, geometry.size.minXmaxY], close: true)
-                    .fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: colors(for: viewModel)),
-                            startPoint: .top, endPoint: .bottom)
-                    )
+
+            let size = geometry.size
+
+            // Line chart
+            if viewModel.lineChart {
+                let points = self.points(
+                    viewModel.lineCandleViewModels(in: size),
+                    size: size
+                )
+                ZStack {
+                    path(with: points, close: false)
+                        .stroke(viewModel.chartColor, lineWidth: 1)
+                    path(with: points + [geometry.size.maxXmaxY, geometry.size.minXmaxY], close: true)
+                        .fill(
+                            LinearGradient(
+                                gradient: Gradient(colors: colors(for: viewModel)),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                }
+            // Candle chart
+            } else {
+                let candles = viewModel.barCandleViewModels(in: size)
+                ZStack {
+                    ForEach(0..<candles.count) { idx in
+                        let candle = candles[idx]
+
+                        Path { path in
+                            path.move(to: candle.wick.midXminY)
+                            path.addLine(to: candle.wick.midXmaxY)
+                        }
+                            .stroke(candle.color, lineWidth: 1)
+
+                        Path { path in
+                            path.move(to: candle.body.minXminY)
+                            path.addLine(to: candle.body.maxXminY)
+                            path.addLine(to: candle.body.maxXmaxY)
+                            path.addLine(to: candle.body.minXmaxY)
+                            path.closeSubpath()
+                        }
+                            .fill(candle.color)
+                    }
+                }
             }
         }
     }

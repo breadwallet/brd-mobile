@@ -20,7 +20,8 @@ struct MarketInfo {
     let vol24hr: Double?
     let change24hr: Double?
     let lastUpdatedAt: Int?
-    let candles: [Candle]
+    let lineCandles: [Candle]
+    let barCandles: [Candle]
 }
 
 // MARK: - Convenience initializer
@@ -30,7 +31,8 @@ extension MarketInfo {
     init(id: CurrencyId,
          amount: Double?,
          simplePrice: SimplePrice,
-         chart: MarketChart?) {
+         lineCandles: MarketChart?,
+         barCandles: CandleList?) {
         self.id = id
         self.price = simplePrice.price
         self.amount = amount
@@ -38,9 +40,16 @@ extension MarketInfo {
         self.vol24hr = simplePrice.vol24hr
         self.change24hr = simplePrice.change24hr
         self.lastUpdatedAt = simplePrice.lastUpdatedAt
-        self.candles = chart?.dataPoints.map {
-            .init(uniformPrice: $0.price.float, timestamp: $0.timestamp)
-        } ?? []
+        self.barCandles = (barCandles ?? []).last(n: 30)
+        self.lineCandles = (lineCandles?.dataPoints.map {
+             Candle(
+                date: Date(timeIntervalSince1970: Double($0.timestamp) / 1000),
+                open: $0.price,
+                high: $0.price,
+                low: $0.price,
+                close: $0.price
+            )
+        } ?? barCandles ?? []).last(n: 90)
     }
 }
 
@@ -50,27 +59,5 @@ extension MarketInfo {
     
     var isChange24hrUp: Bool {
         return (change24hr ?? 0) < 0 ? false : true
-    }
-}
-
-// MARK: - MarketInfo.Candle
-
-extension MarketInfo {
-
-    struct Candle {
-        let open: Float
-        let close: Float
-        let high: Float
-        let low: Float
-        let timestamp: Int
-        
-        // Convenience init
-        init(uniformPrice: Float, timestamp: Int) {
-            open = uniformPrice
-            close = uniformPrice
-            high = uniformPrice
-            low = uniformPrice
-            self.timestamp = timestamp
-        }
     }
 }

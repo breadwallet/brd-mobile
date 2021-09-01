@@ -15,6 +15,7 @@ import Foundation
 struct Configuration {
     let assets: [AssetOption]
     let interval: IntervalOption
+    let layout: WidgetListLayout
     let quoteCurrencyCode: String
     let style: StyleOption
     let textColor: ColorOption?
@@ -23,6 +24,7 @@ struct Configuration {
     let showUpdatedTime: Bool
     let showSeparators: Bool
     let chartLocation: ChartLocation
+    let chartStyle: ChartStyle
     let chartUpColor: ColorOption?
     let chartDownColor: ColorOption?
     let updated: Date
@@ -39,6 +41,7 @@ extension Configuration {
     init(intent: AssetIntent, quoteCurrencyCode: String, updated: Date) {
         assets = [intent.asset].compactMap { $0 }
         interval = intent.interval
+        layout = .standard
         self.quoteCurrencyCode = quoteCurrencyCode
         self.updated = updated
         style = intent.style
@@ -48,6 +51,7 @@ extension Configuration {
         showUpdatedTime = intent.showUpdatedTime?.boolValue ?? false
         showSeparators = false
         chartLocation = .middle
+        chartStyle = intent.chartStyle
         chartUpColor = intent.chartUpColor
         chartDownColor = intent.chartDownColor
     }
@@ -60,6 +64,7 @@ extension Configuration {
     init(intent: AssetListIntent, quoteCurrencyCode: String, updated: Date) {
         assets = intent.assets ?? []
         interval = intent.interval
+        layout = intent.layout
         self.quoteCurrencyCode = quoteCurrencyCode
         self.updated = updated
         style = .maxInfo
@@ -69,6 +74,7 @@ extension Configuration {
         showUpdatedTime = intent.showUpdatedTime?.boolValue ?? false
         showSeparators = intent.showSeparators?.boolValue ?? true
         chartLocation = intent.chartLocation
+        chartStyle = intent.chartStyle
         chartUpColor = intent.chartUpColor
         chartDownColor = intent.chartDownColor
     }
@@ -81,6 +87,7 @@ extension Configuration {
     init(intent: PortfolioIntent, quoteCurrencyCode: String, updated: Date) {
         assets = intent.assets ?? []
         interval = intent.interval
+        layout = intent.layout
         self.quoteCurrencyCode = quoteCurrencyCode
         self.updated = updated
         style = .maxInfo
@@ -90,6 +97,7 @@ extension Configuration {
         showUpdatedTime = intent.showUpdatedTime?.boolValue ?? false
         showSeparators = intent.showSeparators?.boolValue ?? true
         chartLocation = intent.chartLocation
+        chartStyle = intent.chartStyle
         chartUpColor = intent.chartUpColor
         chartDownColor = intent.chartDownColor
     }
