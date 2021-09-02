@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <TextView
                         android:id="@+id/labelTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_gravity="center_vertical"/>
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Staking.selectBakerTitle"
@@ -221,14 +221,14 @@
                         android:layout_gravity="center_vertical"
                         android:orientation="vertical">
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/selected_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mobile_font_bold"
                             android:textColor="@color/white" />
 
-                        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                        <TextView
                             android:id="@+id/selected_fee_pct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -252,14 +252,14 @@
                             android:layout_width="fill_parent"
                             android:orientation="vertical">
 
-                            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                            <TextView
                                 android:id="@+id/selected_roi_pct"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/mobile_font_bold"
                                 android:textColor="@color/white"/>
 
-                            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                            <TextView
                                 android:id="@+id/selected_est_roi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

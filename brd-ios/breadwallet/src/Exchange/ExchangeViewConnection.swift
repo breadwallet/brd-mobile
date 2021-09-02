@@ -452,6 +452,19 @@ private extension ExchangeViewConnection {
         case is ExchangeModel.ErrorStateTypeUnknownError:
             return S.Exchange.ErrorState.unknown
         case is ExchangeModel.ErrorStateTypeTransactionError:
+            let error = errorState as? ExchangeModel.ErrorStateTypeTransactionError
+            let reason = error?.sendFailedReason
+            if let uwReason =  reason as? ExchangeEvent.SendFailedReasonInsufficientNativeWalletBalance {
+                return String(
+                    format: S.Exchange.ErrorState.insufficientNativeWalletBalance,
+                    uwReason.currencyCode,
+                    uwReason.requiredAmount
+                )
+            } else if reason as? ExchangeEvent.SendFailedReasonCreateTransferFailed != nil{
+                return S.Exchange.ErrorState.createTransferFailed
+            } else if reason as? ExchangeEvent.SendFailedReasonFeeEstimateFailed  != nil {
+                return S.Exchange.ErrorState.feeEstimateFailed
+            }
             return S.Exchange.ErrorState.transaction
         case is ExchangeModel.ErrorStateTypeUnsupportedRegionError:
             return S.Exchange.ErrorState.unsupportedRegionError

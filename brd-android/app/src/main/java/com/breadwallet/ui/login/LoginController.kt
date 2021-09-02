@@ -10,6 +10,7 @@ package com.breadwallet.ui.login
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -135,7 +136,7 @@ class LoginController(args: Bundle? = null) :
         super.onCreateView(view)
         with(binding) {
             brkeyboard.setShowDecimal(false)
-            brkeyboard.setDeleteButtonBackgroundColor(resources!!.getColor(android.R.color.transparent))
+            brkeyboard.setDeleteButtonBackgroundColor(Color.TRANSPARENT)
             brkeyboard.setDeleteImage(R.drawable.ic_delete_dark)
 
             val pinDigitButtonColors = resources!!.getIntArray(R.array.pin_digit_button_colors)

@@ -41,9 +41,9 @@ object InputPin {
         }
 
         enum class Mode {
-            VERIFY,  // Verify the old pin
-            NEW,     // Chose a new pin
-            CONFIRM  // Confirm the new pin
+            VERIFY, // Verify the old pin
+            NEW, // Chose a new pin
+            CONFIRM // Confirm the new pin
         }
     }
 

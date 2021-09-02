@@ -16,7 +16,6 @@ import com.brd.api.models.ExchangeCurrency
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.ExchangeAssetListItemBinding
-import com.breadwallet.databinding.ExchangeCurrencyListItemBinding
 import com.breadwallet.tools.util.TokenUtil
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem
@@ -42,12 +41,12 @@ class AssetListItem(
         override fun bindView(item: AssetListItem, payloads: List<Any>) = with(binding) {
             val currentModel = item.currentModel()
             imageItemValue.isVisible = item.isSelected
-            val color = binding.root.resources.getColor(R.color.hydra_quaternary_background, itemView.context.theme)
+            val color = root.resources.getColor(R.color.hydra_quaternary_background, itemView.context.theme)
             card.setCardBackgroundColor(if (item.isSelected) ColorStateList.valueOf(color) else null)
             labelCurrencyName.text = item.model.name
             labelCurrencyCode.text = item.model.code.toUpperCase(Locale.ROOT)
 
-            if (currentModel.mode == ExchangeModel.Mode.TRADE) {
+            if (currentModel.mode.isTrade) {
                 val balance = currentModel.formattedCryptoBalances[item.model.code]
                 labelCurrencyRate.text = balance?.takeIf { !it.startsWith("0 ") }
                 labelCurrencyBalance.isVisible = false
@@ -60,7 +59,7 @@ class AssetListItem(
                 labelCurrencyBalance.apply {
                     val balance = currentModel.formattedCryptoBalances[item.model.code]
                     isGone = balance.isNullOrBlank() || balance.startsWith("0 ")
-                    text = "Balance $balance"
+                    text = String.format("Balance %s", balance)
                 }
             }
 

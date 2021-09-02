@@ -39,7 +39,6 @@ import kotlinx.serialization.json.*
  *   timestamp = "2021-02-24T05:45:13.975170Z"
  * )
  */
-@Suppress("UNCHECKED_CAST")
 @OptIn(ExperimentalSerializationApi::class)
 internal open class ArrayPackedObjectTransformer<T>(
     serializer: KSerializer<T>
@@ -67,13 +66,7 @@ internal open class ArrayPackedObjectTransformer<T>(
             check(child is JsonArray) { "Expected element '$child' to be a JsonArray." }
             buildJsonObject {
                 elementNames.forEachIndexed { index, name ->
-                    // TODO: Temporary workaround for bad rate data
-                    val elementValue = child[index]
-                    if (elementValue is JsonPrimitive && elementValue.contentOrNull == "None") {
-                        put(name, JsonPrimitive(0.0))
-                    } else {
-                        put(name, elementValue)
-                    }
+                    put(name, child[index])
                 }
             }
         }.let(::JsonArray)

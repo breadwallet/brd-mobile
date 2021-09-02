@@ -15,12 +15,12 @@ import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.model.PriceChange
 import com.breadwallet.model.PriceDataPoint
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.wallet.Interval
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.platform.util.getDoubleOrNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -329,10 +329,9 @@ class RatesFetcher(
             }
         }
     }
-
 }
 
-sealed class MarketDataResult  {
+sealed class MarketDataResult {
     data class Success(
         val marketCap: BigDecimal?,
         val totalVolume: BigDecimal?,
@@ -346,4 +345,3 @@ sealed class MarketDataResult  {
         object UnsupportedCurrency : Failure()
     }
 }
-

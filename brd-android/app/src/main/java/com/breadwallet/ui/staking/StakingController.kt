@@ -37,8 +37,7 @@ import com.breadwallet.ui.staking.Staking.E
 import com.breadwallet.ui.staking.Staking.F
 import com.breadwallet.ui.staking.Staking.M
 import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.*
-import com.breadwallet.ui.web.WebController
-import com.platform.HTTPServer
+import com.breadwallet.ui.support.SupportController
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -121,9 +120,7 @@ class StakingController(
                 router.pushController(RouterTransaction.with(controller))
             }
             is F.Help -> {
-                val supportBaseUrl = HTTPServer.getPlatformUrl(HTTPServer.URL_SUPPORT)
-                val url = "$supportBaseUrl/article?slug=staking"
-                router.pushController(RouterTransaction.with(WebController(url)))
+                router.pushController(RouterTransaction.with(SupportController(slug = "staking")))
             }
             is F.Close -> router.popCurrentController()
         }
@@ -168,7 +165,6 @@ class StakingController(
             ifChanged(M.SetValidator::isLoadingBakers) {
                 loadingBakersView.root.isVisible = isLoadingBakers
             }
-
 
             ifChanged(M.SetValidator::selectedBaker, M.SetValidator::isCancellable) {
                 bakerLayout.isVisible = selectedBaker != null
@@ -231,7 +227,6 @@ class StakingController(
         val theme = checkNotNull(activity).theme
         with(binding) {
 
-
             ifChanged(M.ViewValidator::isLoadingBakers) {
                 loadingBakersView.root.isVisible = isLoadingBakers
             }
@@ -248,7 +243,6 @@ class StakingController(
                     formatter.minimumFractionDigits = 3
                     stakedBaker.roiPct.text = formatter.format(baker.estimatedRoi)
                     Picasso.get().load(baker.logo).into(stakedBaker.bakerTokenIcon)
-
                 }
             }
 

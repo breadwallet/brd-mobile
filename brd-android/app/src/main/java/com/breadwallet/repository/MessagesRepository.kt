@@ -30,7 +30,7 @@ object MessagesRepository {
         val readMessages = BRSharedPrefs.getReadInAppNotificationIds()
         // Filter any notification that we already shown
         val inAppMessages = InAppMessagesClient.fetchMessages(context, InAppMessage.Type.IN_APP_NOTIFICATION)
-                .filterNot{ readMessages.contains(it.messageId) }
+            .filterNot { readMessages.contains(it.messageId) }
 
         if (inAppMessages.isEmpty()) {
             Log.d(TAG, "getInAppNotification: There are no new notifications")
@@ -41,8 +41,10 @@ object MessagesRepository {
         // for notifications.
         val inAppMessage = inAppMessages[0]
         Log.d(TAG, "getInAppNotification: ${inAppMessage.title}")
-        EventUtils.pushEvent(EventUtils.EVENT_IN_APP_NOTIFICATION_RECEIVED,
-                mapOf(EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_ID to inAppMessage.id))
+        EventUtils.pushEvent(
+            EventUtils.EVENT_IN_APP_NOTIFICATION_RECEIVED,
+            mapOf(EventUtils.EVENT_ATTRIBUTE_NOTIFICATION_ID to inAppMessage.id)
+        )
         return inAppMessage
     }
 

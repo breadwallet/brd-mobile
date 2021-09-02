@@ -23,7 +23,7 @@ class NetworkCallbacksConnectivityStateProvider(
 
     private val _state = MutableStateFlow(getConnectivityState())
 
-     init {
+    init {
         connectivityManager.registerDefaultNetworkCallback(this)
     }
 

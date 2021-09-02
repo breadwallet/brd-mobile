@@ -21,15 +21,15 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/toolbar_back_arrow" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/add_wallets_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/mobile_font_bold"
                 android:text="@string/MenuButton.addWallet"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:fontFamily="@font/mobile_font_bold" />
+                android:textSize="20sp" />
 
 
         </RelativeLayout>

@@ -58,12 +58,23 @@ class MetaDataManager(
         private const val PAIRING_META_DATA_KEY_PREFIX = "pwd-"
         private val ORDERED_KEYS =
             listOf(KEY_WALLET_INFO, KEY_ASSET_INDEX, KEY_TOKEN_LIST_META_DATA)
+
+        fun getDefaultWalletModes() = when {
+            BuildConfig.BITCOIN_TESTNET -> mapOf(
+                "bitcoin-testnet:__native__" to WalletManagerMode.API_ONLY,
+                "bitcoincash-testnet:__native__" to WalletManagerMode.API_ONLY
+            )
+            else -> mapOf(
+                "bitcoin-mainnet:__native__" to WalletManagerMode.API_ONLY,
+                "bitcoincash-mainnet:__native__" to WalletManagerMode.API_ONLY,
+            )
+        }
     }
 
     override fun create(accountCreationDate: Date) {
         val walletInfoJson = WalletInfoData(
             creationDate = accountCreationDate.time,
-            connectionModes = BreadApp.getDefaultWalletModes()
+            connectionModes = getDefaultWalletModes()
         ).toJSON()
 
         storeProvider.put(KEY_WALLET_INFO, walletInfoJson)
@@ -99,8 +110,7 @@ class MetaDataManager(
                 emit(
                     getOrSync(
                         KEY_WALLET_INFO
-                    )
-                    { WalletInfoData().toJSON() }
+                    ) { WalletInfoData().toJSON() }
                     !!.run { WalletInfoData.fromJsonObject(this) }
                 )
             }
@@ -259,8 +269,8 @@ class MetaDataManager(
             is TxMetaDataEmpty -> {
                 needsUpdate =
                     !newTxMetaData.comment.isNullOrBlank() ||
-                        newTxMetaData.exchangeRate != 0.0 ||
-                        !newTxMetaData.gift?.keyData.isNullOrBlank()
+                    newTxMetaData.exchangeRate != 0.0 ||
+                    !newTxMetaData.gift?.keyData.isNullOrBlank()
                 txMetaData = newTxMetaData
             }
             is TxMetaDataValue -> {
@@ -275,8 +285,10 @@ class MetaDataManager(
                         needsUpdate = true
                     } else if (
                         oldGift?.keyData != null &&
-                        (oldGift.claimed != newGift.claimed ||
-                            oldGift.reclaimed != newGift.reclaimed)
+                        (
+                            oldGift.claimed != newGift.claimed ||
+                                oldGift.reclaimed != newGift.reclaimed
+                            )
                     ) {
                         txMetaData = txMetaData.copy(
                             gift = oldGift.copy(
@@ -371,8 +383,7 @@ class MetaDataManager(
         key: String,
         defaultProducer: (() -> JSONObject)? = null
     ): JSONObject? {
-        val value = storeProvider.get(key) ?: storeProvider.sync(key)
-        return when (value) {
+        return when (val value = storeProvider.get(key) ?: storeProvider.sync(key)) {
             null -> {
                 defaultProducer
                     ?.invoke()

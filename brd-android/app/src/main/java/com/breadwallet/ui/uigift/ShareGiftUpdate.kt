@@ -8,9 +8,9 @@
  */
 package com.breadwallet.ui.uigift
 
-import com.breadwallet.ui.uigift.ShareGift.M
 import com.breadwallet.ui.uigift.ShareGift.E
 import com.breadwallet.ui.uigift.ShareGift.F
+import com.breadwallet.ui.uigift.ShareGift.M
 import com.spotify.mobius.Next
 import com.spotify.mobius.Update
 

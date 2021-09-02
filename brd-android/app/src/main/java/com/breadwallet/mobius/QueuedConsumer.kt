@@ -11,7 +11,6 @@ package com.breadwallet.mobius
 import com.spotify.mobius.functions.Consumer
 import kt.mobius.functions.Consumer as KtConsumer
 
-
 /**
  * Collects events and passes them in order to a new consumer via [dequeueAll].
  */

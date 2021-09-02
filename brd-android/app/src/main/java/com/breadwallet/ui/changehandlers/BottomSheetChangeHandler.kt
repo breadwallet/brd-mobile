@@ -32,4 +32,3 @@ class BottomSheetChangeHandler : VerticalChangeHandler(ANIMATION_DURATION, false
         isPush
     )
 }
-

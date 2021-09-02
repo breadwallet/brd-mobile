@@ -16,8 +16,11 @@ import com.spotify.mobius.Init
 
 object StakingInit : Init<M, F> {
     override fun init(model: M): First<M, F> =
-        first(model, setOf(
-            F.LoadAccount,
-            F.LoadAuthenticationSettings
-        ))
+        first(
+            model,
+            setOf(
+                F.LoadAccount,
+                F.LoadAuthenticationSettings
+            )
+        )
 }

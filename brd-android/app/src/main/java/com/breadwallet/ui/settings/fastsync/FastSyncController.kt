@@ -84,9 +84,16 @@ class FastSyncController(
                                 MetaDataEffect.LoadWalletModes
                         }
                     }
-                    .transform(Connectable<MetaDataEffect, MetaDataEvent> { consumer ->
-                        MetaDataEffectHandler(consumer, direct.instance(), direct.instance())
-                    })
+                    .transform(
+                        Connectable<MetaDataEffect, MetaDataEvent> { consumer ->
+                            MetaDataEffectHandler(
+                                output = consumer,
+                                metaDataProvider = direct.instance(),
+                                breadBox = direct.instance(),
+                                scope = direct.instance()
+                            )
+                        }
+                    )
                     .mapNotNull { event ->
                         when (event) {
                             is MetaDataEvent.OnWalletModesUpdated ->
@@ -101,7 +108,6 @@ class FastSyncController(
                         }
                     }
             }
-
         }
 
     override fun bindView(modelFlow: Flow<M>): Flow<E> {

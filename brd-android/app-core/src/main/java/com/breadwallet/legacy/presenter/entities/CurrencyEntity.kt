@@ -22,6 +22,6 @@ data class CurrencyEntity(
 
     companion object {
         const val serialVersionUID = 7526472295622776147L
-        val TAG = CurrencyEntity::class.java.name
+        val TAG: String = CurrencyEntity::class.java.name
     }
 }

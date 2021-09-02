@@ -12,7 +12,6 @@ import com.breadwallet.ui.send.SendSheet
 import com.breadwallet.ui.send.SendSheetUpdate
 import org.junit.Test
 import java.math.BigDecimal
-import java.math.RoundingMode
 import kotlin.test.assertEquals
 
 class SendSheetUpdateTests {

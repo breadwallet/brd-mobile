@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequestWrapper
 
 /** Caches the result of [getInputStream] and returns the cached data on subsequent calls. */
 class CachedInputHttpServletRequest(
-        request: HttpServletRequest
+    request: HttpServletRequest
 ) : HttpServletRequestWrapper(request) {
 
     private var cached = false
@@ -33,9 +33,9 @@ class CachedInputHttpServletRequest(
             val inputStream = cachedData.inputStream()
 
             override fun read(): Int =
-                    inputStream.read().also {
-                        finished = it == -1
-                    }
+                inputStream.read().also {
+                    finished = it == -1
+                }
 
             override fun isFinished() = finished
             override fun isReady() = true

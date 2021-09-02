@@ -52,6 +52,7 @@ enum class SettingsOption {
     COPY_PAPER_KEY,
     METADATA_VIEWER,
     NATIVE_EXCHANGE_UI,
+    ENABLE_FLIPPER_CLIENT,
 
     // BTC
     REDEEM_PRIVATE_KEY,
@@ -66,4 +67,3 @@ enum class SettingsOption {
     REFRESH_TOKENS,
     DETAILED_LOGGING,
 }
-

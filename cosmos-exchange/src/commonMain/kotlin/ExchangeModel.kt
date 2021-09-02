@@ -128,7 +128,9 @@ data class ExchangeModel(
             object NetworkError : Type()
             object OrderError : Type()
             object UnknownError : Type()
-            object TransactionError : Type()
+            data class TransactionError(
+                val sendFailedReason: ExchangeEvent.SendFailedReason? = null
+            ) : Type()
             object UnsupportedRegionError : Type()
             data class InsufficientNativeBalanceError(
                 val currencyCode: String,
@@ -196,8 +198,14 @@ data class ExchangeModel(
             val fiatCode = selectedFiatCurrency.code
             val rate = pairs
                 .find { it.fromCode == fiatCode && it.toCode == sourceCurrencyCode }
-                ?.rate ?: 0.0
-            Formatters.fiat(fiatCode).format(sourceAmount * rate)
+                ?.rate
+            // If fiat Currency pair not found, return null, until we
+            // can integrate market data interface with CoinGecko
+            rate?.let {
+                Formatters.fiat(fiatCode).format(sourceAmount * it).run {
+                    if (mode.isTrade) "≈ $this" else this
+                }
+            }
         }
 
     /**
@@ -211,11 +219,16 @@ data class ExchangeModel(
             if (currency?.isFiat() == true) {
                 Formatters.fiat(quoteCurrencyCode).format(quoteAmount)
             } else {
-                val amountString = quoteAmountInput ?:
-                    (selectedOffer as? OfferDetails.ValidOffer)?.formattedQuoteTotal
+                val amountString = quoteAmountInput
+                    ?: (selectedOffer as? OfferDetails.ValidOffer)?.formattedQuoteTotal
                     ?: Formatters.crypto(quoteCurrencyCode).format(quoteAmount)
 
-                amountString.let { output -> "${if (quoteAmount > 0) "≈" else ""} $output" }
+                when (mode) {
+                    Mode.TRADE -> amountString.split(' ').firstOrNull()
+                    Mode.BUY, Mode.SELL -> amountString.let { output ->
+                        "${if (quoteAmount > 0) "≈" else ""} $output"
+                    }
+                }
             }
         }
 
@@ -334,6 +347,9 @@ data class ExchangeModel(
                 TRADE, BUY -> currency.isCrypto()
                 SELL -> currency.isFiat()
             }
+
+        val isTrade: Boolean
+            get() = this == TRADE
     }
 
     enum class OfferState {

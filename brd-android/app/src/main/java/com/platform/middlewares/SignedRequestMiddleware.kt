@@ -67,11 +67,11 @@ abstract class SignedRequestMiddleware : Middleware {
         }
 
         val signature = BrdNativeJs.sign(
-                request.method,
-                contentDigest,
-                contentType,
-                requestDateString,
-                requestUrlAndQuery
+            request.method,
+            contentDigest,
+            contentType,
+            requestDateString,
+            requestUrlAndQuery
         )
 
         if (requestSignature != signature) {

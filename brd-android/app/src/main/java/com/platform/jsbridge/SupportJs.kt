@@ -20,7 +20,7 @@ private const val SUPPORT_TEXT = "[Please add any further information about your
 
 class SupportJs(
     private val promise: NativePromiseFactory,
-    private  val supportManager: SupportManager
+    private val supportManager: SupportManager
 ) : JsApi {
 
     @JavascriptInterface
@@ -39,7 +39,7 @@ class SupportJs(
         }
         supportManager.submitEmailRequest(
             subject = SUPPORT_SUBJECT,
-            body =  SUPPORT_TEXT,
+            body = SUPPORT_TEXT,
             diagnostics = listOf(DebugInfo.CUSTOM),
             customData = debugMap,
             attachLogs = false

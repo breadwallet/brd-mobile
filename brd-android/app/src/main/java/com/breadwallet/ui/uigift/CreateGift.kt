@@ -8,10 +8,10 @@
  */
 package com.breadwallet.ui.uigift
 
+import com.breadwallet.R
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.crypto.TransferFeeBasis
 import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.R
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget
@@ -34,7 +34,7 @@ object CreateGift {
         INSUFFICIENT_BALANCE_FOR_AMOUNT_ERROR(false),
         INPUT_AMOUNT_ERROR(false),
         INPUT_RECIPIENT_NAME_ERROR(false),
-        TRANSACTION_ERROR( false)
+        TRANSACTION_ERROR(false)
     }
 
     enum class PaperWalletError {
@@ -111,12 +111,12 @@ object CreateGift {
         data class OnFeeUpdated(val feeEstimate: TransferFeeBasis) : E()
         data class OnFeeFailed(val error: FeeEstimateError) : E()
 
-        data class OnTransactionSent(val txHash: String): E()
+        data class OnTransactionSent(val txHash: String) : E()
         object OnTransferFailed : E()
 
-        object OnGiftBackupDeleted: E()
+        object OnGiftBackupDeleted : E()
 
-        object OnGiftSaved: E()
+        object OnGiftSaved : E()
 
         object OnCloseClicked : E()
         object OnCreateClicked : E()
@@ -126,13 +126,13 @@ object CreateGift {
 
     sealed class F {
         object CreatePaperWallet : F()
-        object Close: F(), ViewEffect
+        object Close : F(), ViewEffect
 
         data class BackupGift(
             @Redacted val address: String,
             @Redacted val privateKey: String
-        ): F()
-        data class DeleteGiftBackup(@Redacted val address: String): F()
+        ) : F()
+        data class DeleteGiftBackup(@Redacted val address: String) : F()
 
         data class EstimateMax(
             @Redacted val address: String,
@@ -193,7 +193,7 @@ object CreateGift {
         data class ShowError(val error: Error) : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.AlertDialog(
                 error.name,
-                messageResId = when(error) {
+                messageResId = when (error) {
                     Error.PAPER_WALLET_ERROR -> R.string.CreateGift_unexpectedError
                     Error.SERVER_ERROR -> R.string.CreateGift_serverError
                     Error.INSUFFICIENT_BALANCE_ERROR -> R.string.CreateGift_insufficientBalanceError

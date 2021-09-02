@@ -10,6 +10,7 @@ package com.platform.jsbridge
 
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
+import kotlinx.coroutines.CoroutineScope
 
 interface JsApi
 
@@ -29,8 +30,11 @@ class NativeApisJs(
             "\"${it::class.java.simpleName}_Native\""
         }
 
-    fun attachToWebView(webView: WebView) {
-        webView.addJavascriptInterface(PromiseJs(webView, getApiNamesJson()), PromiseJs.JS_NAME)
+    fun attachToWebView(webView: WebView, scope: CoroutineScope) {
+        webView.addJavascriptInterface(
+            PromiseJs(webView, getApiNamesJson(), scope),
+            PromiseJs.JS_NAME
+        )
         apis.forEach { api ->
             val name = "${api::class.java.simpleName}_Native"
             webView.addJavascriptInterface(api, name)

@@ -145,9 +145,11 @@ private fun handleLoadAccount(
                 .firstOrNull { transfer ->
                     transfer.attributes.any {
                         it.key.equals(DELEGATION_OP, true) ||
-                                it.key.equals(DELEGATE, true) ||
-                                (it.key.equals(UNSTAKE_KEY, true) &&
-                                        it.value.or("").equals(UNSTAKE_VALUE, true))
+                            it.key.equals(DELEGATE, true) ||
+                            (
+                                it.key.equals(UNSTAKE_KEY, true) &&
+                                    it.value.or("").equals(UNSTAKE_VALUE, true)
+                                )
                     } && (transfer.confirmation.orNull()?.success ?: true)
                 }
             val balance = wallet.balance.toBigDecimal()

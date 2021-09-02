@@ -26,7 +26,7 @@
                 android:layout_centerVertical="true"
                 android:background="?attr/toolbar_back_arrow" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,15 +41,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/mobile_font_book"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/Segwit.ConfirmationInstructionsInstructions"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,15 +121,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/baseTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/mobile_font_book"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Segwit.ConfirmChoiceLayout"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -205,30 +201,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/confirmation_instructions1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/mobile_font_book"
             android:gravity="center"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Segwit.ConfirmationConfirmationTitle"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Segwit.ConfirmationInstructionsDescription"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"

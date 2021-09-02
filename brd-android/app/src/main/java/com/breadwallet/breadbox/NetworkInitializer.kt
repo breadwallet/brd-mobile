@@ -27,4 +27,3 @@ sealed class NetworkState {
         val message: String? = null
     ) : NetworkState()
 }
-
