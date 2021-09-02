@@ -45,7 +45,7 @@ class CameraController(
     override fun onDetach(view: View) {
         binding.buttonShutter.setOnClickListener(null)
         cameraProviderFuture.addListener(
-            Runnable {
+            {
                 cameraProviderFuture.get().unbindAll()
             },
             executor

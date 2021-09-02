@@ -1149,6 +1149,8 @@
 /* Rewards menu item */
 "Settings.rewards" = "Rewards";
 
+"Settings.orderHistory" = "Order History"
+
 /* Share anonymous data label */
 "Settings.shareData" = "Share Anonymous Data";
 
@@ -2214,9 +2216,9 @@ users in a future update. ";
 /* Exchange trade title */
 "Exchange.trade" = "Trade"
 /* Trade cancel alert title */
-"Exchange.tradeCancelAlertTitle" = "Are you sure?"
+"Exchange.tradeCancelAlertTitle" = "Exit Checkout?"
 /* Trade cancel alert body */
-"Exchange.tradeCancelAlertBody" = "All your progress will be lost."
+"Exchange.tradeCancelAlertBody" = "View order details in Menu -> Order History"
 /* Trade cancel alert no button */
 "Exchange.tradeCancelAlertNo" = "No"
 /* Trade cancel alert yes button */
@@ -2231,6 +2233,12 @@ users in a future update. ";
 "Exchange.ErrorState.unknown" = "Unknown error"
 /* Transaction error alert body */
 "Exchange.ErrorState.transaction" = "Transaction error"
+/* Transaction error alert body */
+"Exchange.ErrorState.insufficientNativeWalletBalance" = "Insufficient %1$@ native wallet balance, you will need at least %1$@ to proceed."
+/* Transaction error alert body */
+"Exchange.ErrorState.CreateTransferFailed" = "Create transfer failed"
+/* Transaction error alert body */
+"Exchange.ErrorState.feeEstimateFailed" = "Fee Estimate Failed"
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region"
 /* Insufficient chain error alert title */
@@ -2240,4 +2248,5 @@ users in a future update. ";
 /* Insufficient chain error alert ok action */
 "Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Buy ETH"
 
-
+"Exchange.Browser.orderHistoryTitle" = "Order History"
+"Exchange.Browser.rewardsTitle" = "Rewards"

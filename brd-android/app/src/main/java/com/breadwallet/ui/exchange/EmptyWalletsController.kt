@@ -12,11 +12,11 @@ import android.os.Bundle
 import android.view.View
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
-import com.breadwallet.databinding.ControllerExchnageEmptyWalletsBinding
+import com.breadwallet.databinding.ControllerExchangeEmptyWalletsBinding
 
 class EmptyWalletsController(args: Bundle? = null) : ExchangeController.ChildController(args) {
 
-    private val binding by viewBinding(ControllerExchnageEmptyWalletsBinding::inflate)
+    private val binding by viewBinding(ControllerExchangeEmptyWalletsBinding::inflate)
 
     override fun ExchangeModel.render() = Unit
 
