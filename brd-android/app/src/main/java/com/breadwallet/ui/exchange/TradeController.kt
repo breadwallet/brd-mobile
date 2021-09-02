@@ -52,7 +52,7 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
             pinpad.setBRButtonBackgroundResId(R.drawable.keyboard_blue_pill_button, true)
 
             toAsset.labelAlt.isVisible = false
-            fromAsset.labelInput.setOnClickListener { togglePinPad() }
+            fromAsset.layoutBackground.setOnClickListener { togglePinPad() }
 
             tradeTouchInterceptor.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN && isPinPadVisible) {
