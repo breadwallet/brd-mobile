@@ -35,7 +35,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val TAG = "BRActivity"
 

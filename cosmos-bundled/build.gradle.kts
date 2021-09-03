@@ -11,10 +11,10 @@ plugins {
 hasAndroidSdK()
 
 android {
-    compileSdkVersion(brd.BrdRelease.ANDROID_COMPILE_SDK)
-    buildToolsVersion(brd.BrdRelease.ANDROID_BUILD_TOOLS)
+    compileSdk = brd.BrdRelease.ANDROID_COMPILE_SDK
+    buildToolsVersion = brd.BrdRelease.ANDROID_BUILD_TOOLS
     defaultConfig {
-        minSdkVersion(brd.BrdRelease.ANDROID_MINIMUM_SDK)
+        minSdk = brd.BrdRelease.ANDROID_MINIMUM_SDK
     }
 
     compileOptions {

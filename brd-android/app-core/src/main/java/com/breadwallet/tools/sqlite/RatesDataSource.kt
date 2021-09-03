@@ -18,13 +18,14 @@ import com.breadwallet.legacy.presenter.entities.CurrencyEntity
 import com.breadwallet.tools.manager.BRReportsManager
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.Utils
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 import java.util.ArrayList
 import java.util.Locale
 
-class RatesDataSource private constructor(context: Context) : BRDataSourceInterface, KodeinAware {
+class RatesDataSource private constructor(context: Context) : BRDataSourceInterface, DIAware {
 
     // Database fields
     private var database: SQLiteDatabase? = null
@@ -36,7 +37,7 @@ class RatesDataSource private constructor(context: Context) : BRDataSourceInterf
         BRSQLiteHelper.CURRENCY_ISO
     )
 
-    override val kodein by closestKodein { context }
+    override val di: DI by closestDI { context }
     private val breadBox by instance<BreadBox>()
 
     fun putCurrencies(currencyEntities: Collection<CurrencyEntity>): Boolean {

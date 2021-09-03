@@ -78,20 +78,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 import java.util.Locale
 
 @Suppress("TooManyFunctions")
 class RouterNavigator(
     private val routerProvider: () -> Router
-) : Navigator, NavigationTargetHandlerSpec, KodeinAware {
+) : Navigator, NavigationTargetHandlerSpec, DIAware {
 
     private val router get() = routerProvider()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-    override val kodein by closestKodein {
+    override val di by closestDI {
         checkNotNull(router.activity?.applicationContext)
     }
 

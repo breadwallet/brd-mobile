@@ -40,7 +40,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.json.JSONObject
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import android.widget.LinearLayout.LayoutParams as LinearLayoutParams
 import android.widget.LinearLayout.LayoutParams.MATCH_PARENT as LL_MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT as LL_WRAP_CONTENT

@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val EXTRA_URL = "PENDING_URL"
 private const val EXTRA_SHOW_HOME = "SHOW_HOME"

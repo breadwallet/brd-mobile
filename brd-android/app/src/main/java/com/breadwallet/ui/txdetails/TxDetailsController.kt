@@ -38,7 +38,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.Date
@@ -87,9 +87,9 @@ class TxDetailsController(
 
     override val flowEffectHandler: FlowTransformer<F, E>
         get() = createTxDetailsHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            direct.instance()
+            context = checkNotNull(applicationContext),
+            breadBox = direct.instance(),
+            metaDataProvider = direct.instance()
         )
 
     private val binding by viewBinding(TransactionDetailsBinding::inflate)
