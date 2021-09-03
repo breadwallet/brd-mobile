@@ -10,7 +10,6 @@ package com.breadwallet.tools.manager
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.text.format.DateUtils
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.edit
 import com.brd.api.BrdApiHost
@@ -32,9 +31,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import org.kodein.di.android.closestKodein
+import org.kodein.di.android.closestDI
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Currency
 import java.util.Locale
 import java.util.UUID
@@ -103,8 +102,8 @@ object BRSharedPrefs {
     private const val APP_RATE_PROMPT_SHOULD_PROMPT = "app-rate-prompt-should-prompt"
     private const val APP_RATE_PROMPT_SHOULD_PROMPT_DEBUG = "app-rate-prompt-should-prompt-debug"
     private const val FLIPPER_ENABLED_DEBUG = "flipper-enabled-debug"
+    private const val APP_RATE_PROMPT_HAS_RATED = "appReviewPromptHasRated"
     const val APP_FOREGROUNDED_COUNT = "appForegroundedCount"
-    const val APP_RATE_PROMPT_HAS_RATED = "appReviewPromptHasRated"
 
     private val secureTimeFlow = MutableSharedFlow<Long>(replay = 1)
 
@@ -113,7 +112,7 @@ object BRSharedPrefs {
      * This removes the need for a context parameter.
      */
     fun initialize(context: Context, applicationScope: CoroutineScope) {
-        val kodein by closestKodein(context)
+        val kodein by closestDI(context)
         brdPreferences = kodein.direct.instance()
         brdPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         applicationScope.launch {

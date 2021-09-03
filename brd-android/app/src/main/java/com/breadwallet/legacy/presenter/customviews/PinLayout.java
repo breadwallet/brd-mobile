@@ -1,5 +1,7 @@
 package com.breadwallet.legacy.presenter.customviews;
 
+import static org.kodein.type.TypeTokensJVMKt.erased;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
@@ -21,8 +23,6 @@ import com.breadwallet.tools.util.EventUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.kodein.di.TypesKt.TT;
 
 /**
  * BreadWallet
@@ -46,7 +46,7 @@ public class PinLayout extends LinearLayout implements BRKeyboard.OnInsertListen
     private PinLayoutListener mOnPinInsertedListener;
     private boolean mIsPinUpdating;
     private int mPinDotBackground;
-    private final BrdUserManager mUserManager = BreadApp.getKodeinInstance().Instance(TT(BrdUserManager.class), null);
+    private BrdUserManager mUserManager = BreadApp.getKodeinInstance().Instance(erased(BrdUserManager.class), null);
 
     public PinLayout(Context context) {
         super(context);

@@ -50,8 +50,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DI
+import org.kodein.di.instance
 import java.util.concurrent.atomic.AtomicBoolean
 
 private const val MAX_QUEUED_VIEW_EFFECTS = 100
@@ -62,8 +62,8 @@ abstract class BaseMobiusController<M, E, F>(
 ) : BaseController(args),
     EventSource<E> {
 
-    override val kodein by Kodein.lazy {
-        extend(super.kodein)
+    override val di by DI.lazy {
+        extend(super.di)
     }
 
     protected val uiBindScope = CoroutineScope(

@@ -41,7 +41,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transformLatest
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.concurrent.Executors
 
 private const val CAMERA_UI_UPDATE_MS = 100L

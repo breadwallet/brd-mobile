@@ -52,7 +52,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Locale
 
 class TradeTransactionController(args: Bundle? = null) :
@@ -186,7 +186,7 @@ class TradeTransactionController(args: Bundle? = null) :
                     blockHeight = transfer.wallet.walletManager.network.height.toLong(),
                     fee = fee,
                     txSize = size,
-                    creationTime = creationTime,
+                    creationTime = creationTime
                 )
                 metaDataManager.putTxMetaData(transfer, metaData)
 

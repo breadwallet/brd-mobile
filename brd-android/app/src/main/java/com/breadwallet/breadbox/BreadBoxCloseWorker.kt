@@ -13,19 +13,20 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.breadwallet.app.BreadApp
 import com.breadwallet.logger.logDebug
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
+import org.kodein.di.DI
+import org.kodein.di.DIAware
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.concurrent.TimeUnit
 
 /** Immediately closes BreadBox.  */
 class BreadBoxCloseWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams),
-    KodeinAware {
+    DIAware {
 
-    override val kodein by kodein(applicationContext)
+    override val di by DI.lazy { (applicationContext as BreadApp).di }
 
     override fun doWork() =
         with(direct.instance<BreadBox>()) {

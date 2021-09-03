@@ -25,14 +25,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 
 /**
  * Screen used to display an in-app notification.
  */
-class InAppNotificationActivity : BRActivity(), KodeinAware {
+class InAppNotificationActivity : BRActivity(), DIAware {
 
     companion object {
         private const val EXT_NOTIFICATION = "com.breadwallet.ui.notification.EXT_NOTIFICATION"
@@ -45,7 +45,7 @@ class InAppNotificationActivity : BRActivity(), KodeinAware {
         }
     }
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
 
     private val breadBox by instance<BreadBox>()
     private val uriParser by instance<CryptoUriParser>()

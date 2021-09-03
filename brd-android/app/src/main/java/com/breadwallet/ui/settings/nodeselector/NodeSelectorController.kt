@@ -37,7 +37,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val DIALOG_TITLE_PADDING = 16
 private const val DIALOG_TITLE_TEXT_SIZE = 18f

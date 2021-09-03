@@ -41,7 +41,7 @@ import kt.mobius.disposables.Disposable
 import kt.mobius.extras.CompositeEffectHandler
 import kt.mobius.functions.Consumer
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.*
 
 private const val KEY_MODE = "ExchangeController.KEY_MODE"

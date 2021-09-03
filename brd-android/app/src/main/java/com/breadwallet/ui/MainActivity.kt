@@ -67,12 +67,12 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.android.retainedSubKodein
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.singleton
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.android.retainedSubDI
+import org.kodein.di.bind
+import org.kodein.di.instance
+import org.kodein.di.singleton
 
 // String extra containing a recovery phrase to bootstrap the recovery process. (debug only)
 private const val EXTRA_RECOVER_PHRASE = "RECOVER_PHRASE"
@@ -84,7 +84,7 @@ private const val EXTRA_RECOVER_PHRASE = "RECOVER_PHRASE"
  * platform events into Mobius events.
  */
 @Suppress("TooManyFunctions")
-class MainActivity : AppCompatActivity(), KodeinAware {
+class MainActivity : AppCompatActivity(), DIAware {
 
     companion object {
         const val EXTRA_DATA = "com.breadwallet.ui.MainActivity.EXTRA_DATA"
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             "com.breadwallet.ui.MainActivity.EXTRA_PUSH_CAMPAIGN_ID"
     }
 
-    override val kodein by retainedSubKodein(closestKodein()) {
+    override val di by retainedSubDI(closestDI()) {
         val router = router
         bind<Navigator>() with singleton {
             RouterNavigator { router }

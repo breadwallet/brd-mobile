@@ -36,7 +36,7 @@ private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
 private const val GRID_LAYOUT_VERSION = "1.0.0"
 private const val FASTADAPTER_VERSION = "5.3.4"
 private const val CONDUCTOR_VERSION = "3.0.1"
-private const val KODEIN_VERSION = "6.5.1"
+private const val KODEIN_VERSION = "7.6.0"
 private const val MOBIUS_VERSION = "1.5.3"
 private const val MOBIUS_COROUTINES_VERSION = "0.1.2"
 private const val ESPRESSO_VERSION = "3.3.0-rc01"
@@ -151,7 +151,7 @@ object Libs {
     }
 
     object Kodein {
-        const val CoreErasedJvm = "org.kodein.di:kodein-di-erased-jvm:$KODEIN_VERSION"
+        const val Core = "org.kodein.di:kodein-di:$KODEIN_VERSION"
         const val FrameworkAndroidX = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
     }
 

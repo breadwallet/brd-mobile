@@ -32,11 +32,11 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
-import org.kodein.di.Kodein
+import org.kodein.di.DI
 import org.kodein.di.direct
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.singleton
+import org.kodein.di.bind
+import org.kodein.di.instance
+import org.kodein.di.singleton
 
 private const val PRIVATE_KEY = "ImportController.private_key"
 private const val PASSWORD_PROTECTED = "ImportController.password_protected"
@@ -77,8 +77,8 @@ class ImportController(
         scanned = arg(SCANNED, false)
     )
 
-    override val kodein by Kodein.lazy {
-        extend(super.kodein)
+    override val di by DI.lazy {
+        extend(super.di)
 
         bind<WalletImporter>() with singleton { WalletImporter() }
     }
