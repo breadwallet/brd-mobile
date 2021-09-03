@@ -14,6 +14,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import com.brd.api.models.CurrencyMethod
 import com.brd.exchange.ExchangeEffect
 import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
@@ -38,6 +39,7 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
 
             layoutPinPad.setDeleteButtonTint(white)
             layoutPinPad.setButtonTextColor(IntArray(11) { white })
+            layoutPinPad.setBRButtonBackgroundResId(R.drawable.keyboard_blue_pill_button, true)
             cellSelectedOffer.apply {
                 val titleColors = labelTitle.textColors
                 val valueColors = labelValue.textColors
@@ -96,7 +98,7 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
                     labelError.text = null
                 }
                 is ExchangeModel.InputError.BalanceLow -> {
-                    labelError.text = "Balance too low!"
+                    labelError.text = null
                 }
             }
         }
@@ -234,10 +236,16 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
 
                 cellSelectedOffer.apply {
                     labelValue.setTextColor(getColor(R.color.light_gray))
+                    val methodStringRes = selectedOffer.offer.sourceCurrencyMethod.methodStringRes()
                     labelTitle.text =
-                        "${selectedOffer.offer.provider.name} by ${selectedOffer.offer.sourceCurrencyMethod::class.simpleName}"
-                    labelValue.text =
-                        "Rate: ${selectedOffer.formattedSourceRate} - Total: ${selectedOffer.formattedSourceTotal}"
+                        res.getString(methodStringRes, selectedOffer.offer.provider.name)
+                    labelValue.text = buildString {
+                        append(res.getString(R.string.Exchange_offer_rate))
+                        append(" ${selectedOffer.formattedSourceRate}")
+                        append(" - ")
+                        append(res.getString(R.string.Exchange_offer_total))
+                        append(" ${selectedOffer.formattedSourceTotal}")
+                    }
                     labelTitle.isVisible = true
                 }
 
@@ -245,22 +253,35 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
             }
             is ExchangeModel.OfferDetails.InvalidOffer -> {
                 cellSelectedOffer.apply {
+                    val methodStringRes = selectedOffer.offer.sourceCurrencyMethod.methodStringRes()
                     labelTitle.text =
-                        "${selectedOffer.offer.provider.name} by ${selectedOffer.offer.sourceCurrencyMethod::class.simpleName}"
+                        res.getString(methodStringRes, selectedOffer.offer.provider.name)
                     labelTitle.isVisible = true
                 }
 
                 when {
                     !selectedOffer.formattedMinSourceAmount.isNullOrBlank() -> {
                         buttonContinue.isEnabled = true
-                        buttonContinue.text = res.getText(R.string.Exchange_CTA_setMin, selectedOffer.formattedMinSourceAmount)
-                        cellSelectedOffer.labelValue.text = "Minimum amount ${selectedOffer.formattedMinSourceAmount}"
+                        buttonContinue.text = res.getString(
+                            R.string.Exchange_CTA_setMin,
+                            selectedOffer.formattedMinSourceAmount
+                        )
+                        cellSelectedOffer.labelValue.text = buildString {
+                            append(res.getString(R.string.Exchange_offer_minAmount))
+                            append(" ${selectedOffer.formattedMinSourceAmount}")
+                        }
                         cellSelectedOffer.labelValue.setTextColor(getColor(R.color.ui_error))
                     }
                     !selectedOffer.formattedMaxSourceAmount.isNullOrBlank() -> {
                         buttonContinue.isEnabled = true
-                        buttonContinue.text = res.getText(R.string.Exchange_CTA_setMax, selectedOffer.formattedMaxSourceAmount)
-                        cellSelectedOffer.labelValue.text = "Maximum amount ${selectedOffer.formattedMaxSourceAmount}"
+                        buttonContinue.text = res.getString(
+                            R.string.Exchange_CTA_setMax,
+                            selectedOffer.formattedMaxSourceAmount
+                        )
+                        cellSelectedOffer.labelValue.text = buildString {
+                            append(res.getString(R.string.Exchange_offer_maxAmount))
+                            append(" ${selectedOffer.formattedMaxSourceAmount}")
+                        }
                         cellSelectedOffer.labelValue.setTextColor(getColor(R.color.ui_error))
                     }
                     else -> {
@@ -271,6 +292,15 @@ class BuyController(args: Bundle? = null) : ExchangeController.ChildController(a
 
                 selectedOffer.setProviderIcon(cellSelectedOffer.icon)
             }
+        }
+    }
+
+    private fun CurrencyMethod.methodStringRes(): Int {
+        return when (this) {
+            is CurrencyMethod.Ach -> R.string.Exchange_viaACH
+            is CurrencyMethod.Card -> R.string.Exchange_viaCard
+            is CurrencyMethod.Crypto -> R.string.Exchange_viaCrypto
+            is CurrencyMethod.Sepa -> R.string.Exchange_viaSEPA
         }
     }
 }

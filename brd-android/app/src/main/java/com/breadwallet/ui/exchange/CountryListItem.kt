@@ -16,6 +16,7 @@ import com.breadwallet.R
 import com.breadwallet.databinding.CountryListItemBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem
+import java.util.Locale
 
 class CountryListItem(
     country: ExchangeCountry
@@ -35,6 +36,7 @@ class CountryListItem(
         private val binding = CountryListItemBinding.bind(v)
 
         override fun bindView(item: CountryListItem, payloads: List<Any>) = with(binding) {
+            labelItemFlag.text = countryCodeToFlag(item.model.code)
             labelItemValue.text = item.model.name
             imageItemValue.isVisible = item.isSelected
             val color = binding.root.resources.getColor(R.color.hydra_quaternary_background, itemView.context.theme)
@@ -45,5 +47,19 @@ class CountryListItem(
             labelItemValue.text = null
             imageItemValue.isVisible = false
         }
+    }
+}
+
+fun countryCodeToFlag(countryCode: String): String {
+    val offset = 0x1F1A5
+    return countryCode.toUpperCase(Locale.ROOT).run {
+        String(
+            intArrayOf(
+                codePointAt(0) + offset,
+                codePointAt(1) + offset,
+            ),
+            offset = 0,
+            length = 2
+        )
     }
 }

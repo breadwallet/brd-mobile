@@ -38,7 +38,8 @@ actual class NumberFormatter actual constructor(locale: CommonLocale, currencyFo
                 .find { it.currencyCode.equals(value, true) }
 
             if (selectedCurrency == null) {
-                ref.applyPattern("#,##0.######## ${value.uppercase()}")
+                val escapedCurrencyCode = "'${value.uppercase()}'"
+                ref.applyPattern("#,##0.######## $escapedCurrencyCode")
             } else {
                 ref.currency = selectedCurrency
             }

@@ -387,7 +387,9 @@ private fun List<ExchangeOffer>.asOfferDetailsList(
         val rate = quoteSubtotal / sourceSubtotal
 
         fun String.formatOrNull(formatter: NumberFormatter): String? {
-            return ifBlank { null }?.toDouble()?.run(formatter::format)
+            return takeUnless { isBlank() || all { it == '0' || it == '.' } }
+                ?.toDouble()
+                ?.run(formatter::format)
         }
         ExchangeModel.OfferDetails.ValidOffer(
             offer = exchangeOffer,

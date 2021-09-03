@@ -24,11 +24,9 @@ import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.login.LoginController
-import com.breadwallet.ui.navigation.NavigationTarget
-import com.breadwallet.ui.navigation.asSupportUrl
 import com.breadwallet.ui.recovery.RecoveryKey
 import com.breadwallet.ui.recovery.RecoveryKeyController
-import com.breadwallet.ui.web.WebController
+import com.breadwallet.ui.support.SupportController
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -45,9 +43,8 @@ class DisabledController(args: Bundle? = null) : BaseController(args) {
         super.onCreateView(view)
 
         binding.faqButton.setOnClickListener {
-            val url = NavigationTarget.SupportPage(BRConstants.FAQ_WALLET_DISABLE).asSupportUrl()
             router.pushController(
-                RouterTransaction.with(WebController(url))
+                RouterTransaction.with(SupportController(slug = BRConstants.FAQ_WALLET_DISABLE))
                     .popChangeHandler(BottomSheetChangeHandler())
                     .pushChangeHandler(BottomSheetChangeHandler())
             )

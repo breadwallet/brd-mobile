@@ -25,8 +25,6 @@ import android.view.animation.OvershootInterpolator;
 
 public class UiUtils {
     public static final int CLICK_PERIOD_ALLOWANCE = 300;
-    public static final String ARTICLE_QUERY_STRING = "/article?slug=";
-    public static final String CURRENCY_QUERY_STRING = "&currency=";
     private static final String TAG = UiUtils.class.getName();
     private static long mLastClickTime = 0;
 
