@@ -18,8 +18,6 @@ import com.breadwallet.util.errorHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
 import kt.mobius.*
 import kt.mobius.android.AndroidLogger
 import kt.mobius.android.MobiusAndroid
@@ -74,7 +72,6 @@ abstract class MobiusKtController<M, E, F>(
     }
 
     private val eventConsumerDelegate = ConsumerDelegateKt<E>(QueuedConsumerKt())
-    private val modelChannel = BroadcastChannel<M>(Channel.CONFLATED)
 
     /**
      * An entrypoint for adding platform events into a [MobiusLoop].

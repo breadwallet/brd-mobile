@@ -40,7 +40,7 @@ class OrderPreviewController(args: Bundle? = null) : ExchangeController.ChildCon
             buttonContinue.setOnClickListener {
                 eventConsumer.accept(ExchangeEvent.OnContinueClicked)
             }
-            var expanded = false // TODO: save state in bundle
+            var expanded = false
             buttonExpandFees.setOnClickListener {
                 expanded = !expanded
                 groupNetworkFee.isVisible = expanded && labelNetworkFeeValue.text.isNotBlank()
@@ -61,7 +61,6 @@ class OrderPreviewController(args: Bundle? = null) : ExchangeController.ChildCon
     }
 
     override fun ExchangeModel.render() {
-        val resources = checkNotNull(resources)
         val offerDetails = (selectedOffer as? ExchangeModel.OfferDetails.ValidOffer) ?: return
         with(binding) {
             root.isVisible = true

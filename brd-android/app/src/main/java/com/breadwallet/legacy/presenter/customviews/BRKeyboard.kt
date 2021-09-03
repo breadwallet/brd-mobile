@@ -19,64 +19,68 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isVisible
 import com.breadwallet.R
 import com.breadwallet.databinding.PinPadBinding
-import com.breadwallet.legacy.presenter.customviews.BRKeyboard.OnInsertListener
 import com.breadwallet.tools.util.Utils
 
-class BRKeyboard : LinearLayout, View.OnClickListener {
+class BRKeyboard : ConstraintLayout, View.OnClickListener {
     private var mKeyInsertListener: OnInsertListener? = null
-    private var mDeleteButton: ImageButton? = null
-    private var mPinButtons: List<Button>? = null
 
-    constructor(context: Context?) : super(context) {
+    val binding = PinPadBinding.inflate(LayoutInflater.from(context), this, true)
+    private var mPinButtons: List<Button> = with(binding) {
+        listOf(num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, decimal)
+    }
+
+    constructor(context: Context) : super(context) {
         init(null)
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(attrs)
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(attrs)
-    }
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) :
+        super(context, attrs, defStyleAttr) {
+            init(attrs)
+        }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(
-        context,
-        attrs,
-        defStyleAttr,
-        defStyleRes
-    ) {
+    constructor(
+        context: Context,
+        attrs: AttributeSet,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(context, attrs, defStyleAttr, defStyleRes) {
         init(attrs)
     }
 
     private val vibrator by lazy { context?.getSystemService<Vibrator>() }
 
     private fun init(attrs: AttributeSet?) {
-        val binding = PinPadBinding.inflate(LayoutInflater.from(context), this, true)
         var showAlphabet = false
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.BRKeyboard)
         val attributeCount = attributes.indexCount
         for (i in 0 until attributeCount) {
             when (val attr = attributes.getIndex(i)) {
-                R.styleable.BRKeyboard_showAlphabet -> showAlphabet = attributes.getBoolean(attr, false)
+                R.styleable.BRKeyboard_showAlphabet -> {
+                    showAlphabet = attributes.getBoolean(attr, false)
+                }
             }
         }
         attributes.recycle()
         setWillNotDraw(false)
-        mDeleteButton = binding.delete
         mPinButtons = with(binding) {
             listOf(num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, decimal)
         }
         val bottomPaddingDimen = context.resources.getInteger(R.integer.pin_keyboard_bottom_padding)
         val bottomPaddingPixels = Utils.getPixelsFromDps(context, bottomPaddingDimen)
-        for (i in mPinButtons!!.indices) {
-            val button = mPinButtons!![i]
+        for (i in mPinButtons.indices) {
+            val button = mPinButtons[i]
             button.setOnClickListener(this)
             if (i <= LAST_NUMBER_INDEX) {
                 button.text = getText(i, showAlphabet)
@@ -85,9 +89,9 @@ class BRKeyboard : LinearLayout, View.OnClickListener {
                 button.setPadding(0, 0, 0, bottomPaddingPixels)
             }
         }
-        mDeleteButton!!.setOnClickListener(this)
+        binding.deleteHitBox.setOnClickListener(this)
         if (showAlphabet) {
-            mDeleteButton!!.setPadding(0, 0, 0, bottomPaddingPixels)
+            binding.delete.setPadding(0, 0, 0, bottomPaddingPixels)
         }
         invalidate()
     }
@@ -124,7 +128,7 @@ class BRKeyboard : LinearLayout, View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        mKeyInsertListener?.onKeyInsert(if (v is ImageButton) "" else (v as Button).text.toString())
+        mKeyInsertListener?.onKeyInsert(if (v is Button) v.text.toString() else "")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             vibrator?.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK))
         } else {
@@ -138,19 +142,23 @@ class BRKeyboard : LinearLayout, View.OnClickListener {
     }
 
     fun setBRKeyboardColor(color: Int) {
-        setBackgroundColor(context.getColor(color))
+        setBackgroundColor(ContextCompat.getColor(context, color))
     }
 
-    fun setBRButtonBackgroundResId(resId: Int) {
-        for (button in mPinButtons!!) {
+    fun setBRButtonBackgroundResId(resId: Int, isBuyController: Boolean = false) {
+        for (button in mPinButtons) {
             button.setBackgroundResource(resId)
         }
-        mDeleteButton!!.setBackgroundResource(resId)
+        if (isBuyController) {
+            binding.deleteHitBox.setBackgroundResource(resId)
+        } else {
+            binding.delete.setBackgroundResource(resId)
+        }
         invalidate()
     }
 
     fun setShowDecimal(showDecimal: Boolean) {
-        mPinButtons!![DECIMAL_INDEX].visibility = if (showDecimal) VISIBLE else GONE
+        mPinButtons[DECIMAL_INDEX].isVisible = showDecimal
         invalidate()
     }
 
@@ -160,25 +168,25 @@ class BRKeyboard : LinearLayout, View.OnClickListener {
      * @param color the color to be used
      */
     fun setDeleteButtonBackgroundColor(color: Int) {
-        mDeleteButton!!.setBackgroundColor(color)
+        binding.delete.setBackgroundColor(color)
         invalidate()
     }
 
     fun setDeleteImage(resourceId: Int) {
-        mDeleteButton!!.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, null))
+        binding.delete.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, null))
         invalidate()
     }
 
     fun setButtonTextColor(colors: IntArray?) {
         colors ?: return
-        for (i in mPinButtons!!.indices) {
-            mPinButtons!![i].setTextColor(colors[i])
+        for (i in mPinButtons.indices) {
+            mPinButtons[i].setTextColor(colors[i])
         }
         invalidate()
     }
 
     fun setDeleteButtonTint(color: Int) {
-        DrawableCompat.setTint(mDeleteButton!!.drawable.mutate(), color)
+        DrawableCompat.setTint(binding.delete.drawable.mutate(), color)
     }
 
     companion object {

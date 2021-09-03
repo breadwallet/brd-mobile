@@ -14,10 +14,13 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brd.api.models.ExchangeCurrency
@@ -25,6 +28,7 @@ import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePickerBinding
+import com.breadwallet.tools.recyclerview.MarginItemDecoration
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.tools.util.Utils
 import com.mikepenz.fastadapter.FastAdapter
@@ -51,7 +55,8 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
 
     private val regionAdapter = ModelAdapter(::RegionListItem)
     private val currencyAdapter = ModelAdapter(::CurrencyListItem)
-    private val assetAdapter = ModelAdapter<ExchangeCurrency, AssetListItem> { AssetListItem(it) { currentModel } }
+    private val assetAdapter =
+        ModelAdapter<ExchangeCurrency, AssetListItem> { AssetListItem(it) { currentModel } }
     private val countriesAdapter = ModelAdapter(::CountryListItem)
     private val offersAdapter = ModelAdapter(::OfferListItem)
     private val fastAdapter = FastAdapter.with(
@@ -93,10 +98,20 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
             toolbar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             layoutSearch.isVisible = selectionType != SelectionType.OFFER
             val displayAssetToggle =
-                selectionType == SelectionType.ASSET && currentModel.mode == ExchangeModel.Mode.TRADE
+                selectionType == SelectionType.ASSET && currentModel.mode.isTrade
             title.isVisible = !displayAssetToggle
             tradeToggleGroup.isVisible = displayAssetToggle
+            tradeToggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                eventConsumer.accept(
+                    ExchangeEvent.OnSelectPairClicked(checkedId == R.id.buttonFrom)
+                )
+            }
+
             recycler.itemAnimator = DefaultItemAnimator()
+            if (selectionType != SelectionType.OFFER) {
+                recycler.setDivider(R.drawable.recycler_view_divider)
+            }
+            recycler.addItemDecoration(MarginItemDecoration(12, root.context))
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = fastAdapter.apply {
                 addEventHook(object : ClickEventHook<OfferListItem>() {
@@ -148,6 +163,15 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 isSelectable = true
                 multiSelect = false
             }
+        }
+    }
+
+    private fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
+        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        val drawable = ContextCompat.getDrawable(context, drawableRes)
+        drawable?.let {
+            divider.setDrawable(it)
+            addItemDecoration(divider)
         }
     }
 
@@ -210,7 +234,7 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 }
 
                 val activeColor = getColor(R.color.white)
-                val inactiveColor = getColor(R.color.hydra_quaternary_background)
+                val inactiveColor = getColor(R.color.hydra_primary_background)
                 if (state.source) {
                     buttonFrom.backgroundTintList = ColorStateList.valueOf(activeColor)
                     buttonTo.backgroundTintList = ColorStateList.valueOf(inactiveColor)

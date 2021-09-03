@@ -303,7 +303,7 @@ class SettingsScreenHandler(
                 add(
                     3,
                     SettingsItem(
-                        title = "Order History",
+                        title = context.getString(R.string.Settings_orderHistory),
                         option = SettingsOption.ORDER_HISTORY,
                         iconResId = R.drawable.ic_order_history
                     )

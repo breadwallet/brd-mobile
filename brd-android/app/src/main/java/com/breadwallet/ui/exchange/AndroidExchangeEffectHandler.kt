@@ -24,7 +24,11 @@ class AndroidExchangeEffectHandler(
     override fun accept(value: ExchangeEffect) {
         when (value) {
             is ExchangeEffect.TrackEvent -> EventUtils.pushEvent(value.name, value.props)
-            ExchangeEffect.ExitFlow -> scope.launch(Main) { router.popCurrentController() }
+            ExchangeEffect.ExitFlow -> scope.launch(Main) {
+                if (router.backstack.lastOrNull()?.controller is ExchangeController) {
+                    router.popCurrentController()
+                }
+            }
             else -> Unit
         }
     }

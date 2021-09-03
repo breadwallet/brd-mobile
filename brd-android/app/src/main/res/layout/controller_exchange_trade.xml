@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".85"/>
+
             <TextView
                 android:id="@+id/labelFrom"
                 android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/fromAsset"
                 android:textColor="@color/white_transparent_60"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
 
@@ -132,6 +133,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/fromAsset"/>
+
             <include
                 android:id="@+id/toAsset"
                 layout="@layout/layout_trade_asset"
@@ -192,6 +194,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <View
+        android:id="@+id/trade_touch_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/pinpadContainer"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pinpadContainer"
         android:layout_width="match_parent"
@@ -202,7 +211,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="1"
         android:visibility="gone"
-        tools:visibility="gone"
+        tools:visibility="visible"
         android:background="@color/interactive_surface">
 
         <com.google.android.material.button.MaterialButton
@@ -230,6 +239,19 @@
             app:layout_constraintHorizontal_bias="0"
             android:layout_margin="4dp"
             android:text="Max"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/ui_accent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="20dp"
+            android:text="Done"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
         <com.breadwallet.legacy.presenter.customviews.BRKeyboard

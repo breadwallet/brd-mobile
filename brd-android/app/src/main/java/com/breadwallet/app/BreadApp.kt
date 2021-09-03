@@ -508,7 +508,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             brdPreferences.hydraActivated = true
             userManager.removeToken()
             brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
-            brdApi.getMe() // NOTE: refresh token immediately
+            brdApi.setMe(breadBox.wallet(eth).first().target.toString())
         }
     }
 
