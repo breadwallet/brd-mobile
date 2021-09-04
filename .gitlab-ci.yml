@@ -6,7 +6,7 @@ stages:
 #  - template: Managed-Cluster-Applications.gitlab-ci.yml
 
 default:
-#  image: alvrme/alpine-android:android-29-jdk11
+  #  image: alvrme/alpine-android:android-29-jdk11
   tags:
     - macos
   before_script:
@@ -144,6 +144,7 @@ deploy-firebase:
     - ./gradlew :brd-android:app:uploadCrashlyticsSymbolFileBrdDebug
     - ./gradlew :brd-android:app:appDistributionUploadBrdTestnetDebug
     - ./gradlew :brd-android:app:uploadCrashlyticsSymbolFileBrdTestnetDebug
+    - ./gradlew postToSlack
   rules:
     - if: '$CI_COMMIT_TAG != null && $CI_COMMIT_TAG =~ /^android/'
   artifacts:

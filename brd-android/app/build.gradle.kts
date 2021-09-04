@@ -37,6 +37,8 @@ detekt {
     ignoreFailures = true
 }
 
+project.tasks.register<brd.PostToSlack>("postToSlack")
+
 android {
     compileSdk = BrdRelease.ANDROID_COMPILE_SDK
     buildToolsVersion = BrdRelease.ANDROID_BUILD_TOOLS
