@@ -482,9 +482,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         initializeWalletId(applicationScope, breadBox)
 
         applicationScope.launch {
-            if (!brdPreferences.hydraActivated) {
-                preflight()
-            }
+            preflight()
 
             BRDFirebaseMessagingService.initialize(context)
             if (!brdPreferences.hydraActivated) {
@@ -503,12 +501,16 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     }
 
     private suspend fun preflight() {
-        val preflight = brdApi.preflight()
-        if (preflight?.activate == true) {
-            brdPreferences.hydraActivated = true
-            userManager.removeToken()
-            brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
-            brdApi.setMe(breadBox.wallet(eth).first().target.toString())
+        if (!brdPreferences.hydraActivated) {
+            val preflight = brdApi.preflight()
+            if (preflight?.activate == true) {
+                brdPreferences.hydraActivated = true
+                userManager.removeToken()
+                brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
+            }
+        }
+        if (brdPreferences.hydraActivated && !brdPreferences.isRewardsAddressSet) {
+            brdPreferences.isRewardsAddressSet = brdApi.setMe(breadBox.wallet(eth).first().target.toString())
         }
     }
 
