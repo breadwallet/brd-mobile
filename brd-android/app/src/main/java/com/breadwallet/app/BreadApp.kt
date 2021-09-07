@@ -404,6 +404,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             }
         }
 
+        CoreBreadBox.setWords()
         applicationScope.launch {
             ServerBundlesHelper.extractBundlesIfNeeded(mInstance)
             TokenUtil.initialize(mInstance, false, !BuildConfig.BITCOIN_TESTNET)
