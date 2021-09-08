@@ -77,11 +77,13 @@ internal class CoreBreadBox(
 ) : BreadBox,
     SystemListener {
 
-    init {
-        // Set default words list
-        val context = BreadApp.getBreadContext()
-        val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
-        Key.setDefaultWordList(words)
+    companion object {
+        fun setWords() {
+            // Set default words list
+            val context = BreadApp.getBreadContext()
+            val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
+            Key.setDefaultWordList(words)
+        }
     }
 
     @Volatile
