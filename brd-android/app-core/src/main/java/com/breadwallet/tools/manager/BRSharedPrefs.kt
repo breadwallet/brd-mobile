@@ -10,7 +10,6 @@ package com.breadwallet.tools.manager
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.text.format.DateUtils
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.edit
 import com.brd.api.BrdApiHost
