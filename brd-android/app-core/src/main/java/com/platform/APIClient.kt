@@ -51,7 +51,6 @@ import java.lang.StringBuffer
 import java.lang.System
 import java.text.*
 import java.util.*
-import java.util.concurrent.*
 import java.util.concurrent.atomic.*
 
 private const val UNAUTHED_HTTP_STATUS = 401
@@ -505,7 +504,7 @@ class APIClient(
 
         // convenience getter for the API endpoint
         private val BASE_URL
-            get() = HTTPS_SCHEME + host
+            get() = if(!host.startsWith(HTTPS_SCHEME)) HTTPS_SCHEME + host else host
 
         //Fee per kb url
         private const val FEE_PER_KB_URL = "/v1/fee-per-kb"

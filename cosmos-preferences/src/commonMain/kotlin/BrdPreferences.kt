@@ -31,6 +31,7 @@ class BrdPreferences(
 
         private const val KEY_DEBUG_API_HOST = "cosmos_debug_api_host"
         private const val KEY_HYDRA_ACTIVATED = "cosmos_hydra_activated"
+        private const val KEY_IS_REWARDS_SET = "cosmos_is_rewards_set"
         private const val KEY_NATIVE_EXCHANGE_UI = "cosmos_native_exchange_ui"
     }
 
@@ -58,6 +59,12 @@ class BrdPreferences(
         get() = preferences.getBoolean(KEY_HYDRA_ACTIVATED, false)
         set(value) {
             preferences.putBoolean(KEY_HYDRA_ACTIVATED, value)
+        }
+
+    var isRewardsAddressSet: Boolean
+        get() = preferences.getBoolean(KEY_IS_REWARDS_SET, false)
+        set(value) {
+            preferences.putBoolean(KEY_IS_REWARDS_SET, value)
         }
 
     var fiatCurrencyCode: String
