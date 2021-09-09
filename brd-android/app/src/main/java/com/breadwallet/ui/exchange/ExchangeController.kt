@@ -444,6 +444,7 @@ fun ExchangeCurrency.selectedFiatCurrencyName(): String {
 fun OfferDetails.setProviderIcon(icon: ImageView) {
     when (offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> icon.setImageResource(R.drawable.ic_provider_moonpay)
+        "simplex" -> icon.setImageResource(R.drawable.ic_provider_simplex)
         "wyre" -> icon.setImageResource(R.drawable.ic_provider_wyre)
         "changelly" -> icon.setImageResource(R.drawable.ic_proivider_changelly)
         else -> {
