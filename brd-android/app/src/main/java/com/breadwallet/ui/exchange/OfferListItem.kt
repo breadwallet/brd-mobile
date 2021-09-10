@@ -88,6 +88,7 @@ fun OfferListItemBinding.bindToModel(model: ExchangeModel.OfferDetails) {
 
     when (model.offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_moonpay)
+        "simplex" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_simplex)
         "wyre" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_wyre)
         else -> {
             if (model.offer.provider.logoUrl.isNullOrBlank()) {
