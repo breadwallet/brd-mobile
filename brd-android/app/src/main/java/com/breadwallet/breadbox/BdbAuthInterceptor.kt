@@ -56,7 +56,8 @@ class BdbAuthInterceptor(
     scope: CoroutineScope
 ) : Interceptor {
 
-    private val mutex = Mutex()
+    private val mutex =
+        Mutex()
 
     private val jwtHeader = JSONObject()
         .put("alg", "ES256")
