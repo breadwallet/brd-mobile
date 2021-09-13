@@ -1235,19 +1235,6 @@
 		9FB0CA1925D5AD190057DD11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBF66BC25D5F1AB007F172D /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
 		9FC529D32604FAA300855473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/BreadwalletWidget.intentdefinition; sourceTree = "<group>"; };
-		9FC529DC2604FAAA00855473 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
-		9FC529E42604FAAF00855473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
-		9FC529F22604FAB300855473 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC529FA2604FAB400855473 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A022604FAB700855473 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A102604FAB800855473 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A182604FABA00855473 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A202604FABC00855473 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A2E2604FABE00855473 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A362604FAC100855473 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A442604FAC300855473 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A4C2604FACB00855473 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
-		9FC52A542604FACD00855473 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
 		9FDDE55025D5B79D00E42BE3 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9FDDE55225D5B79D00E42BE3 /* CGTypes+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGTypes+Extensions.swift"; sourceTree = "<group>"; };
 		9FDDE55325D5B79D00E42BE3 /* Numeric+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
@@ -1497,6 +1484,19 @@
 		D123D6472694A2AE00A7F030 /* SupportArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportArticleViewController.swift; sourceTree = "<group>"; };
 		D123D6492694A2D200A7F030 /* SupportSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSectionViewController.swift; sourceTree = "<group>"; };
 		D1423EF52602AB9C00709CCA /* WalletKitSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WalletKitSwift; path = ../external/walletkit/WalletKitSwift; sourceTree = "<group>"; };
+		D142EF8326EFBA4200A5A4B0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
+		D142EF8526EFBA4500A5A4B0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/BreadwalletWidget.strings"; sourceTree = "<group>"; };
+		D142EF8726EFBA4700A5A4B0 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF8926EFBA4900A5A4B0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF8B26EFBA4B00A5A4B0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF8D26EFBA4D00A5A4B0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF8F26EFBA5000A5A4B0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9126EFBA5200A5A4B0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9326EFBA5400A5A4B0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9526EFBA5600A5A4B0 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9726EFBA5800A5A4B0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9926EFBA5B00A5A4B0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
+		D142EF9B26EFBA5D00A5A4B0 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BreadwalletWidget.strings; sourceTree = "<group>"; };
 		D15BAC0326CB1129007DE23A /* BlockClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockService.swift; sourceTree = "<group>"; };
 		D15BAC1326CBFF43007DE23A /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
 		D15BAC1526CC0023007DE23A /* BlockClockWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockWidget.swift; sourceTree = "<group>"; };
@@ -4224,19 +4224,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				9FC529D32604FAA300855473 /* en */,
-				9FC529DC2604FAAA00855473 /* zh-Hans */,
-				9FC529E42604FAAF00855473 /* zh-Hant */,
-				9FC529F22604FAB300855473 /* da */,
-				9FC529FA2604FAB400855473 /* nl */,
-				9FC52A022604FAB700855473 /* fr */,
-				9FC52A102604FAB800855473 /* de */,
-				9FC52A182604FABA00855473 /* it */,
-				9FC52A202604FABC00855473 /* ja */,
-				9FC52A2E2604FABE00855473 /* ko */,
-				9FC52A362604FAC100855473 /* pt */,
-				9FC52A442604FAC300855473 /* ru */,
-				9FC52A4C2604FACB00855473 /* es */,
-				9FC52A542604FACD00855473 /* sv */,
+				D142EF8326EFBA4200A5A4B0 /* zh-Hans */,
+				D142EF8526EFBA4500A5A4B0 /* zh-Hant */,
+				D142EF8726EFBA4700A5A4B0 /* da */,
+				D142EF8926EFBA4900A5A4B0 /* nl */,
+				D142EF8B26EFBA4B00A5A4B0 /* fr */,
+				D142EF8D26EFBA4D00A5A4B0 /* de */,
+				D142EF8F26EFBA5000A5A4B0 /* it */,
+				D142EF9126EFBA5200A5A4B0 /* ja */,
+				D142EF9326EFBA5400A5A4B0 /* ko */,
+				D142EF9526EFBA5600A5A4B0 /* pt */,
+				D142EF9726EFBA5800A5A4B0 /* ru */,
+				D142EF9926EFBA5B00A5A4B0 /* es */,
+				D142EF9B26EFBA5D00A5A4B0 /* sv */,
 			);
 			name = BreadwalletWidget.intentdefinition;
 			sourceTree = "<group>";

@@ -1,4 +1,4 @@
-"17fahO" = "Bitcoin block clock";
+"0ly2uE" = "Minimal";
 
 "1BT6DH" = "daily";
 
@@ -6,17 +6,47 @@
 
 "1J9VT8" = "Falling price chart color";
 
-"2VQNwM-IVQPjt" = "There are ${count} options matching ‘Minimalist’.";
+"1fHZul-7U91OO" = "There are ${count} options matching ‘15 min’.";
 
-"2VQNwM-Ka6r47" = "There are ${count} options matching ‘Max Info’.";
+"1fHZul-Gg6zni" = "There are ${count} options matching ‘20 min’.";
+
+"1fHZul-kJWdPY" = "There are ${count} options matching ‘60 min’.";
+
+"1fHZul-tMktXP" = "There are ${count} options matching ‘30 min’.";
+
+"1fd8rz-8DOkpd" = "Just to confirm, you wanted ‘line’?";
+
+"1fd8rz-mWfR3n" = "Just to confirm, you wanted ‘candle’?";
 
 "2aZ6E9" = "Text Color";
+
+"2zWVhY-7U91OO" = "Just to confirm, you wanted ‘15 min’?";
+
+"2zWVhY-Gg6zni" = "Just to confirm, you wanted ‘20 min’?";
+
+"2zWVhY-kJWdPY" = "Just to confirm, you wanted ‘60 min’?";
+
+"2zWVhY-tMktXP" = "Just to confirm, you wanted ‘30 min’?";
+
+"38SCrn-8DOkpd" = "There are ${count} options matching ‘line’.";
+
+"38SCrn-mWfR3n" = "There are ${count} options matching ‘candle’.";
+
+"3ZcOqE" = "Refresh Every";
 
 "3sM9Sg" = "Logo Style";
 
 "4bA1J9" = "true";
 
 "4u4KJa" = "Color Option";
+
+"5DTpC6-8DOkpd" = "There are ${count} options matching ‘line’.";
+
+"5DTpC6-mWfR3n" = "There are ${count} options matching ‘candle’.";
+
+"6XSjph-IVQPjt" = "Just to confirm, you wanted ‘Minimalist’?";
+
+"6XSjph-Ka6r47" = "Just to confirm, you wanted ‘Max Info’?";
 
 "6exxyA-1BT6DH" = "Just to confirm, you wanted ‘daily’?";
 
@@ -26,8 +56,6 @@
 
 "6rfFPo" = "Logo Style";
 
-"72qHdb" = "Minimal";
-
 "7Ghefw-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
 
 "7Ghefw-FIlJ2n" = "Just to confirm, you wanted ‘Text Ticker’?";
@@ -36,11 +64,25 @@
 
 "7Ghefw-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
 
+"7U91OO" = "15 min";
+
+"7vzz9i-WahA9G" = "There are ${count} options matching ‘compact’.";
+
+"7vzz9i-rL7gaF" = "There are ${count} options matching ‘standard’.";
+
 "7wvcZG" = "Falling price chart color";
+
+"82xjye-8DOkpd" = "Just to confirm, you wanted ‘line’?";
+
+"82xjye-mWfR3n" = "Just to confirm, you wanted ‘candle’?";
+
+"8DOkpd" = "line";
 
 "8MLW1q" = "Text Ticker and Name";
 
 "8WI3pc" = "Background Color";
+
+"9ZuXQp" = "Layout";
 
 "AiUDFj-8MLW1q" = "There are ${count} options matching ‘Text Ticker and Name’.";
 
@@ -52,13 +94,23 @@
 
 "B5QJf1" = "Asset List";
 
+"CMGOnR-8DOkpd" = "Just to confirm, you wanted ‘line’?";
+
+"CMGOnR-mWfR3n" = "Just to confirm, you wanted ‘candle’?";
+
 "D8DTCl" = "Style";
 
 "Dk8KDo-1BT6DH" = "Just to confirm, you wanted ‘daily’?";
 
 "Dk8KDo-Nubh8Q" = "Just to confirm, you wanted ‘minute’?";
 
+"EvZNJw-8DOkpd" = "There are ${count} options matching ‘line’.";
+
+"EvZNJw-mWfR3n" = "There are ${count} options matching ‘candle’.";
+
 "FIlJ2n" = "Text Ticker";
+
+"Gg6zni" = "20 min";
 
 "H1mfaZ-8MLW1q" = "Just to confirm, you wanted ‘Text Ticker and Name’?";
 
@@ -68,13 +120,23 @@
 
 "H1mfaZ-i8t9EV" = "Just to confirm, you wanted ‘Icon no Background’?";
 
+"I0TGLb-7U91OO" = "Just to confirm, you wanted ‘15 min’?";
+
+"I0TGLb-Gg6zni" = "Just to confirm, you wanted ‘20 min’?";
+
+"I0TGLb-kJWdPY" = "Just to confirm, you wanted ‘60 min’?";
+
+"I0TGLb-tMktXP" = "Just to confirm, you wanted ‘30 min’?";
+
 "IVQPjt" = "Minimalist";
 
-"JUbZzA-IVQPjt" = "Just to confirm, you wanted ‘Minimalist’?";
-
-"JUbZzA-Ka6r47" = "Just to confirm, you wanted ‘Max Info’?";
+"KFhV3x" = "Chart Style";
 
 "Ka6r47" = "Max Info";
+
+"LY9htv-IVQPjt" = "There are ${count} options matching ‘Minimalist’.";
+
+"LY9htv-Ka6r47" = "There are ${count} options matching ‘Max Info’.";
 
 "Ld1fdS" = "Show Separator Lines";
 
@@ -90,6 +152,14 @@
 
 "Nubh8Q" = "minute";
 
+"OGDwBX-7U91OO" = "There are ${count} options matching ‘15 min’.";
+
+"OGDwBX-Gg6zni" = "There are ${count} options matching ‘20 min’.";
+
+"OGDwBX-kJWdPY" = "There are ${count} options matching ‘60 min’.";
+
+"OGDwBX-tMktXP" = "There are ${count} options matching ‘30 min’.";
+
 "OGe0So" = "Logo Style";
 
 "P7pFMw" = "Stay up to date with your favorite crypto assets";
@@ -104,6 +174,8 @@
 
 "QWBdbb" = "Chart Location";
 
+"RjzdAb" = "Block Clock Style";
+
 "S9SJa4" = "false";
 
 "SG2b9e" = "Interval Option";
@@ -117,6 +189,14 @@
 "TCnDye" = "Icon with Background";
 
 "TX4dE9" = "Background Color";
+
+"Tj0UaX" = "Refresh Every";
+
+"WL6tNp" = "Chart Style";
+
+"WN8xyM" = "false";
+
+"WahA9G" = "compact";
 
 "WrkrYV-1BT6DH" = "There are ${count} options matching ‘daily’.";
 
@@ -134,11 +214,17 @@
 
 "YFwvZl-i8t9EV" = "There are ${count} options matching ‘Icon no Background’.";
 
+"Zaz1dJ" = "Layout";
+
+"Znyc09" = "true";
+
 "af9EDB" = "trailing";
 
 "akpAzt" = "Interval";
 
 "bS8Cze" = "true";
+
+"bapP95" = "Show last updated time";
 
 "bi3FKn-1BT6DH" = "There are ${count} options matching ‘daily’.";
 
@@ -147,6 +233,8 @@
 "c2DmD8" = "true";
 
 "c7Jrle" = "Show Updated Time";
+
+"cAA2GK" = "Refresh Every";
 
 "cik6w8" = "Interval";
 
@@ -158,11 +246,21 @@
 
 "eQ7KOH" = "Assets";
 
+"eRfUbG-7U91OO" = "Just to confirm, you wanted ‘15 min’?";
+
+"eRfUbG-Gg6zni" = "Just to confirm, you wanted ‘20 min’?";
+
+"eRfUbG-kJWdPY" = "Just to confirm, you wanted ‘60 min’?";
+
+"eRfUbG-tMktXP" = "Just to confirm, you wanted ‘30 min’?";
+
 "eylMMN-af9EDB" = "There are ${count} options matching ‘trailing’.";
 
 "eylMMN-e3XSIN" = "There are ${count} options matching ‘middle’.";
 
 "eylMMN-siy8Gj" = "There are ${count} options matching ‘none’.";
+
+"fXjIHq" = "Chart Style";
 
 "gBsLoa-af9EDB" = "There are ${count} options matching ‘trailing’.";
 
@@ -178,31 +276,37 @@
 
 "gynpqo" = "false";
 
-"hFEYdE" = "Falling price chart color";
+"hE76DN" = "Default";
 
-"he5h6K" = "Default";
+"hFEYdE" = "Falling price chart color";
 
 "hew4na" = "Interval";
 
 "hth234" = "Text Color";
 
-"i14M10" = "false";
-
 "i8t9EV" = "Icon no Background";
 
 "iUdqod" = "Rising price chart color";
 
-"kj6dyv" = "Block Clock";
+"jxFklL" = "Style";
+
+"kJWdPY" = "60 min";
 
 "lWct3E" = "true";
 
-"mpveDb" = "false";
+"mU6ODq-WahA9G" = "There are ${count} options matching ‘compact’.";
 
-"n7MRgF" = "Show last updated time";
+"mU6ODq-rL7gaF" = "There are ${count} options matching ‘standard’.";
+
+"mWfR3n" = "candle";
+
+"mpveDb" = "false";
 
 "nY3Viw" = "Logo Style";
 
 "nlqkWz" = "Show Separators";
+
+"oEAA6e" = "Bitcoin block clock";
 
 "phdmY1-af9EDB" = "Just to confirm, you wanted ‘trailing’?";
 
@@ -210,7 +314,9 @@
 
 "phdmY1-siy8Gj" = "Just to confirm, you wanted ‘none’?";
 
-"q1MC5a" = "true";
+"ptBLUT-WahA9G" = "Just to confirm, you wanted ‘compact’?";
+
+"ptBLUT-rL7gaF" = "Just to confirm, you wanted ‘standard’?";
 
 "qhi5M1" = "Chart Location";
 
@@ -220,13 +326,15 @@
 
 "rDgGMR-siy8Gj" = "Just to confirm, you wanted ‘none’?";
 
-"rKBnee" = "Style";
+"rL7gaF" = "standard";
 
 "rfa0Mf" = "Background Color";
 
 "rlUXg6" = "Chart Location";
 
 "siy8Gj" = "none";
+
+"tMktXP" = "30 min";
 
 "tPX7Gc-8MLW1q" = "There are ${count} options matching ‘Text Ticker and Name’.";
 
@@ -238,11 +346,23 @@
 
 "tVvJ9c" = "Stay up to date with your favorite crypto asset";
 
-"teojXC" = "Style";
+"tfe9KO-7U91OO" = "There are ${count} options matching ‘15 min’.";
+
+"tfe9KO-Gg6zni" = "There are ${count} options matching ‘20 min’.";
+
+"tfe9KO-kJWdPY" = "There are ${count} options matching ‘60 min’.";
+
+"tfe9KO-tMktXP" = "There are ${count} options matching ‘30 min’.";
 
 "uTB17L" = "Portfolio";
 
+"uY80ws-WahA9G" = "Just to confirm, you wanted ‘compact’?";
+
+"uY80ws-rL7gaF" = "Just to confirm, you wanted ‘standard’?";
+
 "v1uaJ9" = "Show Updated Time";
+
+"wH9NtI" = "Refresh Interval";
 
 "xXePIL" = "Asset Option";
 
@@ -251,4 +371,10 @@
 "zDdiVu" = "Show last updated time";
 
 "zGKgaA" = "Stay up to date with your portfolio";
+
+"zNIPPM" = "Layout";
+
+"zkBUuT" = "Chart Style";
+
+"zzC7vr" = "Bitcoin Clock";
 
