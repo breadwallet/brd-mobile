@@ -62,11 +62,11 @@ class MotionGradientLayer: CAGradientLayer {
         add(CABasicAnimation.motionAnimation(colors: gradientColors.reversed()), forKey: "MotionShift")
 
         motion.startAccelerometerUpdates(to: queue, withHandler: { [weak self] (data, _) in
-            guard let data = data else { return }
-            var x = data.acceleration.x + 0.5
-            x = max(min(x, 1), 0)
-            DispatchQueue.main.async {
-                self?.timeOffset = x
+            guard let x = data?.acceleration.x, !x.isNaN else {
+                return
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.timeOffset = max(min(x + 0.5, 1), 0)
             }
         })
         self.motion = motion
