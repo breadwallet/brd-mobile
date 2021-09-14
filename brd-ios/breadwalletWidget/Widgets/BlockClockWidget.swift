@@ -26,16 +26,16 @@ struct BlockClockProvider: IntentTimelineProvider {
 
     func getSnapshot(for configuration: BlockClockIntent, in context: Context, completion: @escaping (BlockClockEntry) -> Void) {
         service.fetchBlockInfo { result in
+            let entry: Entry
             switch result {
             case let .success(blockInfo):
-                DispatchQueue.main.async {
-                    completion(
-                        BlockClockEntry(blockInfo: blockInfo, intent: configuration)
-                    )
-                }
+                entry = BlockClockEntry(blockInfo: blockInfo,intent: configuration)
             case let .failure(error):
                 print(error)
-                completion(placeholder(in: context))
+                entry = placeholder(in: context)
+            }
+            DispatchQueue.main.async {
+                completion(entry)
             }
         }
     }
