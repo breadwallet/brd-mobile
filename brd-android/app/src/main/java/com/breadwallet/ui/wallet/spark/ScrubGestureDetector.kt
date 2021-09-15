@@ -18,9 +18,9 @@ import android.view.View
  * Adapted from Robinhood's SparkView: https://github.com/robinhood/spark
  */
 internal class ScrubGestureDetector(
-        private val scrubListener: ScrubListener,
-        private val handler: Handler,
-        private val touchSlop: Float
+    private val scrubListener: ScrubListener,
+    private val handler: Handler,
+    private val touchSlop: Float
 ) : View.OnTouchListener {
 
     private var enabled: Boolean = false

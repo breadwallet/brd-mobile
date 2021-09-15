@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     private val userManager by instance<BrdUserManager>()
+    private val appScope by instance<CoroutineScope>()
 
     lateinit var router: Router
     private var trackingListener: ControllerTrackingListener? = null
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         trackingListener = ControllerTrackingListener(this).also(router::addChangeListener)
 
-        BreadApp.applicationScope.launch(Main) {
+        appScope.launch(Main) {
             try {
                 userManager.checkAccountInvalidated()
             } catch (e: UserNotAuthenticatedException) {
@@ -225,7 +226,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         super.onNewIntent(intent)
         intent ?: return
 
-        val data = processIntentData(intent) ?: ""
+        val data = processIntentData(intent).orEmpty()
         if (data.isNotBlank() && userManager.isInitialized()) {
             val hasRoot = router.hasRootController()
             val isTopLogin = router.backstack.lastOrNull()?.controller is LoginController
@@ -254,25 +255,34 @@ class MainActivity : AppCompatActivity(), KodeinAware {
                     closeDrawer(drawerDirection)
                 }
             }
-            addView(root, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.MATCH_PARENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ))
-            addView(NavigationView(context).apply {
-                addView(ChangeHandlerFrameLayout(context).apply {
-                    id = R.id.drawer_layout_id
-                    Conductor.attachRouter(this@MainActivity, this, bundle)
-                        .setRoot(RouterTransaction.with(controller))
-                }, FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                ))
-            }, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.WRAP_CONTENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ).apply {
-                gravity = drawerDirection
-            })
+            addView(
+                root,
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.MATCH_PARENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            addView(
+                NavigationView(context).apply {
+                    addView(
+                        ChangeHandlerFrameLayout(context).apply {
+                            id = R.id.drawer_layout_id
+                            Conductor.attachRouter(this@MainActivity, this, bundle)
+                                .setRoot(RouterTransaction.with(controller))
+                        },
+                        FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.WRAP_CONTENT,
+                            FrameLayout.LayoutParams.MATCH_PARENT
+                        )
+                    )
+                },
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.WRAP_CONTENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                ).apply {
+                    gravity = drawerDirection
+                }
+            )
         }
     }
 

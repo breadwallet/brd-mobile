@@ -13,7 +13,6 @@ import com.breadwallet.ui.send.SendSheet.M
 import com.spotify.mobius.First
 import com.spotify.mobius.Init
 
-
 object SendSheetInit : Init<M, F> {
     override fun init(model: M): First<M, F> {
         val effects = mutableSetOf<F>()
@@ -21,9 +20,10 @@ object SendSheetInit : Init<M, F> {
         if (model.targetAddress.isNotBlank()) {
             effects.add(
                 F.ValidateAddress(
-                model.currencyCode,
-                model.targetAddress
-            ))
+                    model.currencyCode,
+                    model.targetAddress
+                )
+            )
         }
 
         var isPaymentProtocolRequest = false

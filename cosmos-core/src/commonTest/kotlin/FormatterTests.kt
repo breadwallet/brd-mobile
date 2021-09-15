@@ -117,6 +117,12 @@ class FormatterTests {
             fiat("pln").format(AMOUNT)
         )
     }
+
+    @Test
+    fun testFormatWithNumber() {
+        val subject = Formatters.crypto("123")
+        assertEquals("1 123", subject.format(1.0))
+    }
 }
 
 expect fun hasLocale(id: String): Boolean

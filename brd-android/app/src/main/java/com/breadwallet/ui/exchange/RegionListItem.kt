@@ -11,7 +11,6 @@ package com.breadwallet.ui.exchange
 import android.content.res.ColorStateList
 import android.view.View
 import androidx.core.view.isVisible
-import com.brd.api.models.ExchangeCountry
 import com.brd.api.models.ExchangeRegion
 import com.breadwallet.R
 import com.breadwallet.databinding.CountryListItemBinding

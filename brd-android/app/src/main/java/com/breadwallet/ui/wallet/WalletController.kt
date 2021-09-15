@@ -32,7 +32,6 @@ import com.breadwallet.breadbox.WalletState
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerWalletBinding
 import com.breadwallet.effecthandler.metadata.MetaDataEffectHandler
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.logger.logDebug
 import com.breadwallet.model.PriceDataPoint
 import com.breadwallet.tools.animation.UiUtils
@@ -42,9 +41,9 @@ import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.BaseMobiusController
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.flowbind.clicks
+import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.home.MAX_CRYPTO_DIGITS
-import com.breadwallet.ui.navigation.NavigationTarget
-import com.breadwallet.ui.navigation.asSupportUrl
+import com.breadwallet.ui.support.SupportController
 import com.breadwallet.ui.wallet.WalletScreen.DIALOG_CREATE_ACCOUNT
 import com.breadwallet.ui.wallet.WalletScreen.E
 import com.breadwallet.ui.wallet.WalletScreen.F
@@ -52,7 +51,6 @@ import com.breadwallet.ui.wallet.WalletScreen.M
 import com.breadwallet.ui.wallet.spark.SparkAdapter
 import com.breadwallet.ui.wallet.spark.SparkView
 import com.breadwallet.ui.wallet.spark.animation.LineSparkAnimator
-import com.breadwallet.ui.web.WebController
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isTezos
 import com.google.android.material.appbar.AppBarLayout
@@ -83,7 +81,8 @@ private const val MARKET_CHART_ANIMATION_ACCELERATION = 1.2f
 /**
  * TODO: Remaining work: Make review prompt a controller.
  */
-open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
+open class WalletController(args: Bundle) :
+    BaseMobiusController<M, E, F>(args),
     AlertDialogController.Listener,
     AppBarLayout.OnOffsetChangedListener {
 
@@ -98,13 +97,18 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
     override val update = WalletUpdate
     override val flowEffectHandler
         get() = WalletScreenHandler.createEffectHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            { output ->
-                MetaDataEffectHandler(output, direct.instance(), direct.instance())
+            context = checkNotNull(applicationContext),
+            breadBox = direct.instance(),
+            metadataEffectHandler = { output ->
+                MetaDataEffectHandler(
+                    output = output,
+                    metaDataProvider = direct.instance(),
+                    breadBox = direct.instance(),
+                    scope = direct.instance()
+                )
             },
-            direct.instance(),
-            direct.instance()
+            ratesFetcher = direct.instance(),
+            connectivityStateProvider = direct.instance()
         )
 
     protected val binding by viewBinding(ControllerWalletBinding::inflate)
@@ -132,10 +136,9 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
             updateUi()
             setPriceTags(BRSharedPrefs.isCryptoPreferred(), false)
             delistedTokenLayout.moreInfoButton.setOnClickListener {
-                val url = NavigationTarget.SupportPage(BRConstants.FAQ_UNSUPPORTED_TOKEN).asSupportUrl()
                 router.pushController(
                     RouterTransaction.with(
-                        WebController(url)
+                        SupportController(slug = BRConstants.FAQ_UNSUPPORTED_TOKEN)
                     )
                 )
             }
@@ -164,11 +167,14 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                 override fun onLayoutCompleted(state: RecyclerView.State?) {
                     super.onLayoutCompleted(state)
                     val adapter = checkNotNull(txAdapter)
-                    updateVisibleTransactions(adapter, this, viewCreatedScope.actor {
-                        for (event in channel) {
-                            eventConsumer.accept(event)
+                    updateVisibleTransactions(
+                        adapter, this,
+                        viewCreatedScope.actor {
+                            for (event in channel) {
+                                eventConsumer.accept(event)
+                            }
                         }
-                    })
+                    )
                 }
             }
 
@@ -562,7 +568,7 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
             }
 
             if (endColor != null) {
-                //it's a gradient
+                // it's a gradient
                 val gd = GradientDrawable(
                     GradientDrawable.Orientation.LEFT_RIGHT,
                     intArrayOf(Color.parseColor(startColor), Color.parseColor(endColor))
@@ -571,7 +577,7 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                 mainContainer.background = gd
                 appbar.background = gd
             } else {
-                //it's a solid color
+                // it's a solid color
                 mainContainer.setBackgroundColor(Color.parseColor(startColor))
                 appbar.setBackgroundColor(Color.parseColor(startColor))
             }
@@ -620,7 +626,8 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                     if (cryptoPreferred)
                         R.color.white
                     else
-                        R.color.currency_subheading_color, null
+                        R.color.currency_subheading_color,
+                    null
                 )
             )
             balancePrimary.setTextColor(
@@ -628,7 +635,8 @@ open class WalletController(args: Bundle) : BaseMobiusController<M, E, F>(args),
                     if (cryptoPreferred)
                         R.color.currency_subheading_color
                     else
-                        R.color.white, null
+                        R.color.white,
+                    null
                 )
             )
         }

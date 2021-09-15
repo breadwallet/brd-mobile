@@ -44,9 +44,12 @@ class CameraController(
 
     override fun onDetach(view: View) {
         binding.buttonShutter.setOnClickListener(null)
-        cameraProviderFuture.addListener(Runnable {
-            cameraProviderFuture.get().unbindAll()
-        }, executor)
+        cameraProviderFuture.addListener(
+            {
+                cameraProviderFuture.get().unbindAll()
+            },
+            executor
+        )
         super.onDetach(view)
     }
 
@@ -62,19 +65,22 @@ class CameraController(
             buttonShutter.isClickable = false
             val file = File.createTempFile(UUID.randomUUID().toString(), ".jpg")
             val options = ImageCapture.OutputFileOptions.Builder(file).build()
-            cameraView.takePicture(options, executor, object : ImageCapture.OnImageSavedCallback {
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    if (!isAttached) return
-                    findListener<Listener>()?.onCameraSuccess(file)
-                    router.popController(this@CameraController)
-                }
+            cameraView.takePicture(
+                options, executor,
+                object : ImageCapture.OnImageSavedCallback {
+                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        if (!isAttached) return
+                        findListener<Listener>()?.onCameraSuccess(file)
+                        router.popController(this@CameraController)
+                    }
 
-                override fun onError(exception: ImageCaptureException) {
-                    if (!isAttached) return
-                    findListener<Listener>()?.onCameraClosed()
-                    router.popController(this@CameraController)
+                    override fun onError(exception: ImageCaptureException) {
+                        if (!isAttached) return
+                        findListener<Listener>()?.onCameraClosed()
+                        router.popController(this@CameraController)
+                    }
                 }
-            })
+            )
         }
     }
 }

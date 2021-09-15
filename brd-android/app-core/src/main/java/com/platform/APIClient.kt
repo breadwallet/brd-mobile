@@ -51,7 +51,6 @@ import java.lang.StringBuffer
 import java.lang.System
 import java.text.*
 import java.util.*
-import java.util.concurrent.*
 import java.util.concurrent.atomic.*
 
 private const val UNAUTHED_HTTP_STATUS = 401
@@ -60,6 +59,7 @@ class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
     private val brdPreferences: BrdPreferences,
+    private val okHttpClient: OkHttpClient,
     headers: Map<String, String>
 ) {
 
@@ -82,15 +82,6 @@ class APIClient(
         }
 
     private var mIsFetchingToken: Boolean = false
-
-    private val mHTTPClient: OkHttpClient by lazy {
-        OkHttpClient.Builder()
-            .followRedirects(false)
-            .connectTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
-            .readTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
-            .build()
-    }
 
     private var mIsPlatformUpdating = false
     private val mItemsLeftToUpdate = AtomicInteger(0)
@@ -193,7 +184,7 @@ class APIClient(
 
         val rawResponse: Response
         try {
-            rawResponse = mHTTPClient.newCall(request).execute()
+            rawResponse = okHttpClient.newCall(request).execute()
         } catch (e: IOException) {
             logError("sendRequest: ", e)
             val message = e.message ?: ""
@@ -513,7 +504,7 @@ class APIClient(
 
         // convenience getter for the API endpoint
         private val BASE_URL
-            get() = HTTPS_SCHEME + host
+            get() = if(!host.startsWith(HTTPS_SCHEME)) HTTPS_SCHEME + host else host
 
         //Fee per kb url
         private const val FEE_PER_KB_URL = "/v1/fee-per-kb"

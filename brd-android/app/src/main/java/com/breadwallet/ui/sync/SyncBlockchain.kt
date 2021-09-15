@@ -30,7 +30,6 @@ object SyncBlockchain {
             val currencyCode: CurrencyCode
         ) : F()
 
-
         sealed class Nav(
             override val navigationTarget: NavigationTarget
         ) : F(), NavigationEffect {

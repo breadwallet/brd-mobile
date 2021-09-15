@@ -54,7 +54,8 @@ class NodeSelectorController : BaseMobiusController<M, E, F>() {
     override val effectHandler = CompositeEffectHandler.from<F, E>(
         Connectable { output ->
             NodeSelectorHandler(output, direct.instance())
-        })
+        }
+    )
 
     private val binding by viewBinding(ControllerNodeSelectorBinding::inflate)
 

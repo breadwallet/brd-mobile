@@ -44,7 +44,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -52,7 +52,7 @@
             android:textColor="@color/almost_black"
             android:textSize="18sp" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -74,7 +74,7 @@
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_check_mark_grey" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/address_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             app:backgroundColor="@color/button_primary_normal"
             app:withStroke="false">
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/copied_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

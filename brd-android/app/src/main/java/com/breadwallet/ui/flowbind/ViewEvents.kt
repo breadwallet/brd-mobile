@@ -36,4 +36,3 @@ fun View.touchEvents(consumed: Boolean = true): Flow<MotionEvent> =
         }
         awaitClose { setOnTouchListener(null) }
     }.flowOn(Dispatchers.Main)
-

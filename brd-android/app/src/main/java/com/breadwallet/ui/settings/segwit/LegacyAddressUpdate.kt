@@ -16,7 +16,8 @@ import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Update
 
-object LegacyAddressUpdate : Update<M, E, F>,
+object LegacyAddressUpdate :
+    Update<M, E, F>,
     LegacyAddressUpdateSpec {
 
     override fun update(

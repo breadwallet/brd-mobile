@@ -34,4 +34,3 @@ fun createInputPinHandler(
         EventUtils.pushEvent(event)
     }
 }
-

@@ -81,7 +81,8 @@ class ReceiveController(args: Bundle) : BaseMobiusController<M, E, F>(args) {
         )
     override val init = Init<M, F> { model ->
         first(
-            model, setOf(
+            model,
+            setOf(
                 F.LoadWalletInfo(model.currencyCode),
                 F.LoadExchangeRate(model.currencyCode)
             )

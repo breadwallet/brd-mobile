@@ -25,8 +25,9 @@ class NotificationSettingsViewModel : ViewModel() {
         val resource = MutableLiveData<Resource<Void>>().apply { value = Resource.loading() }
 
         // Check if we need to update the settings.
-        if ((state == NotificationsState.APP_ENABLED && !enable)
-                || (state == NotificationsState.APP_DISABLED && enable)) {
+        if ((state == NotificationsState.APP_ENABLED && !enable) ||
+            (state == NotificationsState.APP_DISABLED && enable)
+        ) {
 
             BRExecutor.getInstance().forLightWeightBackgroundTasks().execute {
                 val updated = PushNotificationsSettingsRepositoryImpl.togglePushNotifications(enable)
@@ -37,7 +38,6 @@ class NotificationSettingsViewModel : ViewModel() {
                 }
                 notificationsEnable.postValue(PushNotificationsSettingsRepositoryImpl.getNotificationsState())
             }
-
         } else {
             resource.value = Resource.success()
         }
@@ -52,5 +52,4 @@ class NotificationSettingsViewModel : ViewModel() {
     fun refreshState() {
         notificationsEnable.value = PushNotificationsSettingsRepositoryImpl.getNotificationsState()
     }
-
 }

@@ -28,20 +28,19 @@
             android:layout_gravity="center_vertical"
             android:orientation="vertical">
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/almost_black"
-                android:fontFamily="@font/mobile_font_book"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/fee_pct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/settings_chevron_right"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -53,21 +52,20 @@
             android:layout_marginEnd="16dp"
             android:orientation="vertical">
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/roi_pct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/almost_black"
-                android:fontFamily="@font/mobile_font_book"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/est_roi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/Staking.roiHeader"
                 android:textColor="@color/settings_chevron_right"
-                android:textSize="12sp"
-                android:text="@string/Staking.roiHeader"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 

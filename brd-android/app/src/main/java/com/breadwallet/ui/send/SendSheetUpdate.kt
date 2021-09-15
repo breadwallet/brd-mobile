@@ -479,7 +479,7 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                         AddressType.Resolvable.UnstoppableDomain.ENS -> EventUtils.EVENT_SERVICE_ENS
                         AddressType.Resolvable.Fio -> EventUtils.EVENT_SERVICE_FIO
                         AddressType.Resolvable.PayId -> EventUtils.EVENT_SERVICE_PAY
-                        //AddressType.Resolvable.Yat -> EventUtils.EVENT_SERVICE_YAT
+                        // AddressType.Resolvable.Yat -> EventUtils.EVENT_SERVICE_YAT
                     }
                     next(
                         model.copy(
@@ -489,7 +489,7 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                             transferFields = transferFields
                         ),
                         setOf(
-                            F.ResolveAddress(model.currencyCode,event.targetString, event.type),
+                            F.ResolveAddress(model.currencyCode, event.targetString, event.type),
                             F.TrackEvent(
                                 EventUtils.EVENT_NAME_RESOLVED,
                                 mapOf(EventUtils.EVENT_ATTRIBUTE_SERVICE to service)
@@ -532,7 +532,6 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
                     )
                 )
             }
-
         }
     }
 
@@ -907,7 +906,8 @@ object SendSheetUpdate : Update<M, E, F>, SendSheetUpdateSpec {
         return when (event) {
             is E.TransferFieldUpdate.Value ->
                 next(
-                    nextModel, effects(
+                    nextModel,
+                    effects(
                         F.ValidateTransferFields(
                             model.currencyCode,
                             model.targetAddress,

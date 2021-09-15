@@ -18,15 +18,12 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.net.toUri
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
-import com.breadwallet.R
 import com.breadwallet.databinding.ControllerIntroBinding
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.navigation.NavigationTarget
-import com.breadwallet.ui.navigation.asSupportUrl
-import com.breadwallet.ui.web.WebController
+import com.breadwallet.ui.support.SupportController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
@@ -69,8 +66,7 @@ class IntroController : BaseController() {
                 )
             }
             faqButton.setOnClickListener {
-                val url = NavigationTarget.SupportPage(BRConstants.FAQ_START_VIEW).asSupportUrl()
-                router.pushController(RouterTransaction.with(WebController(url)))
+                router.pushController(RouterTransaction.with(SupportController(slug = BRConstants.FAQ_START_VIEW)))
             }
         }
     }

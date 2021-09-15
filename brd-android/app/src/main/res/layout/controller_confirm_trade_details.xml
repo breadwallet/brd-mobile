@@ -84,15 +84,13 @@
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/processing_time_label"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/network_fee_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/mobile_font_book"
-            android:lineSpacingMultiplier="1.3"
             android:textAlignment="textEnd"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
@@ -101,16 +99,13 @@
             app:layout_constraintStart_toEndOf="@+id/guideline"
             tools:text="200.00" />
 
-
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/network_fee_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/mobile_font_book"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Confirmation.feeLabel"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
@@ -120,7 +115,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hedera_memo_value" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,22 +128,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/send_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Confirmation.send"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/separator6"/>
+            app:layout_constraintTop_toBottomOf="@+id/separator6" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/send_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -156,33 +149,32 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
-            android:lineSpacingMultiplier="1.3"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/send_label"
             tools:text="0.00105106 BTC ($10.00)"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/to_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
-            android:lineSpacingMultiplier="1.3"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
+            android:lines="1"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/to_label"
             tools:text="1DrKYA2DTrVzfmXoriKwKFF8Chq1FKRYVm"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/processing_time_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -190,8 +182,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/mobile_font_book"
-            android:lineSpacingMultiplier="1.3"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/paragraph"
             app:layout_constraintEnd_toEndOf="parent"
@@ -200,18 +190,16 @@
             app:layout_constraintBottom_toTopOf="@+id/cancel_btn"
             tools:text="Processing time: This transaction is predicted to complete in 10-30 minutes"/>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/to_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:lineSpacingMultiplier="1.3"
             android:text="@string/Confirmation.to"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/send_value"/>
 
@@ -223,7 +211,6 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             android:text="@string/Confirmation.destinationTag"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/to_address"/>
@@ -237,7 +224,6 @@
             tools:text="30297740"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/destination_tag_label"/>
 
@@ -249,7 +235,6 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             android:text="@string/Confirmation.hederaMemo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/destination_tag_value"/>
@@ -263,7 +248,6 @@
             tools:text="Hedera memo text is displayed here."
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/paragraph"
-            android:fontFamily="@font/mobile_font_book"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hedera_memo_label"/>
 

@@ -10,13 +10,13 @@ package com.breadwallet.ui.wallet
 
 import com.breadwallet.breadbox.WalletState
 import com.breadwallet.ext.replaceAt
+import com.breadwallet.platform.entities.TxMetaDataEmpty
+import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.tools.manager.MarketDataResult
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.wallet.WalletScreen.E
 import com.breadwallet.ui.wallet.WalletScreen.F
 import com.breadwallet.ui.wallet.WalletScreen.M
-import com.breadwallet.platform.entities.TxMetaDataEmpty
-import com.breadwallet.platform.entities.TxMetaDataValue
 import com.spotify.mobius.Effects.effects
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch

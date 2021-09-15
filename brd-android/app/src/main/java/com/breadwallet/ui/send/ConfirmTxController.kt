@@ -17,10 +17,10 @@ import com.breadwallet.R
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerConfirmTxDetailsBinding
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.tools.util.eth
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
+import com.breadwallet.ui.formatFiatForUi
 import java.math.BigDecimal
 
 private const val KEY_CURRENCY_CODE = "currency_code"
@@ -124,7 +124,7 @@ class ConfirmTxController(
     private fun ConfirmTxModel.render() {
         val res = checkNotNull(resources)
         val fiatAmountString = fiatAmount.formatFiatForUi(fiatCode)
-        with (binding) {
+        with(binding) {
             sendValue.text = "%s (%s)".format(amount.formatCryptoForUi(currencyCode), fiatAmountString)
             toAddress.text = targetAddress
             amountValue.text = fiatAmountString

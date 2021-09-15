@@ -32,7 +32,6 @@ import com.breadwallet.crypto.events.wallet.WalletTransferSubmittedEvent
 import com.breadwallet.crypto.events.walletmanager.WalletManagerChangedEvent
 import com.breadwallet.crypto.events.walletmanager.WalletManagerCreatedEvent
 import com.breadwallet.crypto.events.walletmanager.WalletManagerEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerSyncProgressEvent
 import com.breadwallet.crypto.events.walletmanager.WalletManagerSyncRecommendedEvent
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.logger.logDebug
@@ -86,11 +85,13 @@ internal class CoreBreadBox(
 ) : BreadBox,
     SystemListener {
 
-    init {
-        // Set default words list
-        val context = BreadApp.getBreadContext()
-        val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
-        Key.setDefaultWordList(words)
+    companion object {
+        fun setWords() {
+            // Set default words list
+            val context = BreadApp.getBreadContext()
+            val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
+            Key.setDefaultWordList(words)
+        }
     }
 
     @Volatile
@@ -308,7 +309,7 @@ internal class CoreBreadBox(
     override fun walletTransfer(currencyCode: String, transfer: Transfer): Flow<Transfer> {
         val targetWallet = { wallet: Wallet -> wallet.currency.code.equals(currencyCode, true) }
         val targetTransfer = { updatedTransfer: Transfer ->
-                (transfer == updatedTransfer || (transfer.hash.isPresent && transfer.hash == updatedTransfer.hash))
+            (transfer == updatedTransfer || (transfer.hash.isPresent && transfer.hash == updatedTransfer.hash))
         }
         return transferUpdatedChannelMap
             .asFlow()

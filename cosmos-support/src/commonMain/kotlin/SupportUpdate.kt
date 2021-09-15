@@ -20,14 +20,15 @@ import com.brd.support.SupportEffect as F
 import com.brd.support.SupportEvent as E
 import com.brd.support.SupportModel as M
 
+private const val ERC20_LABEL = "curr:erc20"
 
 object SupportUpdate : Update<M, E, F> {
 
     override fun update(model: M, event: E): Next<M, F> {
         return when (event) {
             is OnArticlesLoaded -> onArticlesLoaded(model, event)
-            is OnBackClicked -> onBackClicked(model, event)
-            is OnCloseClicked -> onCloseClicked(model, event)
+            is OnBackClicked -> onBackClicked(model)
+            is OnCloseClicked -> onCloseClicked()
             is OnSectionClicked -> onSectionClicked(model, event)
             is OnArticleClicked -> onArticleClicked(model, event)
             is OnSearch -> onSearch(model, event)
@@ -54,6 +55,11 @@ private fun onArticlesLoaded(model: M, event: OnArticlesLoaded): Next<M, F> {
                 val currencyLabel = "curr:${model.currencyCode.lowercase()}"
                 currArticles = slugArticles.filter {
                     it.labelNames.contains(currencyLabel)
+                }
+                if (currArticles.isEmpty()) {
+                    currArticles = slugArticles.filter {
+                        it.labelNames.contains(ERC20_LABEL)
+                    }
                 }
             }
             if (slugArticles.isNotEmpty()) {
@@ -84,23 +90,27 @@ private fun onArticlesLoaded(model: M, event: OnArticlesLoaded): Next<M, F> {
     }
 }
 
-private fun onBackClicked(model: M, event: OnBackClicked): Next<M, F> {
+private fun onBackClicked(model: M): Next<M, F> {
     return when (model.state) {
         is State.Article -> {
-            val nextState: M.State = model.selectedSection?.run(State::Section) ?: State.Index
-            next(
-                model.copy(
-                    state = nextState,
-                    selectedArticle = null
+            if (model.deepLinked) {
+                dispatch(F.ExitFlow)
+            } else {
+                val nextState = model.selectedSection?.let(model::createSectionState) ?: State.Index
+                next(
+                    model.copy(
+                        state = nextState,
+                        selectedArticle = null
+                    )
                 )
-            )
+            }
         }
         is State.Section -> {
             next(model.copy(state = State.Index, selectedSection = null))
         }
         is State.Search -> {
             val nextState = model.selectedArticle?.run(State::Article)
-                ?: model.selectedSection?.run(State::Section)
+                ?: model.selectedSection?.let(model::createSectionState)
                 ?: State.Index
             next(model.copy(state = nextState))
         }
@@ -108,14 +118,14 @@ private fun onBackClicked(model: M, event: OnBackClicked): Next<M, F> {
     }
 }
 
-private fun onCloseClicked(model: M, event: E): Next<M, F> {
+private fun onCloseClicked(): Next<M, F> {
     return dispatch(F.ExitFlow)
 }
 
 private fun onSectionClicked(model: M, event: OnSectionClicked): Next<M, F> {
     return next(
         model.copy(
-            state = State.Section(event.section),
+            state = model.createSectionState(event.section),
             selectedSection = event.section,
             selectedArticle = null,
         )
@@ -140,4 +150,13 @@ private fun onSearch(model: M, event: OnSearch): Next<M, F> {
 
 private fun onSearchResult(model: M, event: OnSearchResults): Next<M, F> {
     return next(model.copy(state = State.Search(event.articles)))
+}
+
+private fun M.createSectionState(section: M.Section): State.Section {
+    return State.Section(
+        section = section,
+        articles = (articles + secondaryArticles).filter { article ->
+            article.sectionId == section.id
+        },
+    )
 }

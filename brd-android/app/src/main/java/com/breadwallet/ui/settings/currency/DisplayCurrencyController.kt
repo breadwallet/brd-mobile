@@ -10,7 +10,6 @@ package com.breadwallet.ui.settings.currency
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.breadwallet.R
 import com.breadwallet.databinding.ControllerDisplayCurrencyBinding
 import com.breadwallet.ui.BaseMobiusController
 import com.breadwallet.ui.flowbind.clicks
