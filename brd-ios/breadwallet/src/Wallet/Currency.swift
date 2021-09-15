@@ -128,6 +128,9 @@ class Currency: CurrencyWithIcon {
         if isDoge {
             return ["dogecoin"]
         }
+        if isLitecoin {
+            return ["litecoin"]
+        }
         return nil
     }
     
@@ -173,6 +176,9 @@ class Currency: CurrencyWithIcon {
         }
         if isDoge {
             return "DUP4XYb33EGHezJs7RYsuEqcHNhMWum2Te"
+        }
+        if isLitecoin {
+            return "ltc1quku6k0dn4can94ysaas9grrpyah3eh4702q592"
         }
         return nil
     }
