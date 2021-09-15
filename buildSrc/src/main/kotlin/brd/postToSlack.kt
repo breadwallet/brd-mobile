@@ -51,23 +51,21 @@ open class PostToSlack : DefaultTask() {
 
     @TaskAction
     fun run() {
-        println("running post to slack")
-
-        println(getChangelog())
         runBlocking {
+            println("running post to slack")
             postToSlack()
         }
     }
 
-    /** Download contents of [URL], remove un-needed data, writes [toFiles] */
+    /** Posts Message to Slack containing Release Build Info */
     private suspend fun postToSlack() {
         try {
             val token = System.getenv("SLACK_TOKEN_RELEASE")
             val version = BrdRelease.internalVersionName
             val url = "https://slack.com/api/files.upload"
 
-            val channels = "#test-android-ci-slack-post"
-            val comment = ":brd: :android: - Version `$version`\n\nRelease Notes\n${getChangelog()}"
+            val channels = "#app-releases"
+            val comment = ":brd: :android: \nVersion `$version`\n"
             val brdAPkPattern = "brd[A-Za-z]*-(debug|release)-$version.apk$".toRegex()
 
             val files = File("${project.buildDir.absolutePath}/outputs/apk")
@@ -103,6 +101,11 @@ open class PostToSlack : DefaultTask() {
                 contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
                 body = buildJsonObject {
                     put("channel", channels)
+                    putJsonArray("attachments") {
+                        addJsonObject {
+                            put("text", "Release Notes - $version\n\n${getChangelog()}")
+                        }
+                    }
                     put("text", "$comment \n${files.joinToString("\n")}")
                 }
             }

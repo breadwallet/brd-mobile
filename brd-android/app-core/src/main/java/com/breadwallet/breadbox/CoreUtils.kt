@@ -22,7 +22,9 @@ import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isBitcoinCash
+import com.breadwallet.util.isDoge
 import com.breadwallet.util.isEthereum
+import com.breadwallet.util.isLitecoin
 import com.breadwallet.util.isRipple
 import com.google.common.primitives.UnsignedInteger
 import kotlinx.coroutines.flow.Flow
@@ -148,6 +150,8 @@ val Wallet.urlScheme: String?
         currency.code.isEthereum() || currency.isErc20() -> "ethereum"
         currency.code.isRipple() -> "xrp"
         currency.code.isBitcoin() -> "bitcoin"
+        currency.code.isDoge() -> "dogecoin"
+        currency.code.isLitecoin() -> "litecoin"
         currency.code.isBitcoinCash() -> when {
             walletManager.network.isMainnet -> "bitcoincash"
             else -> "bchtest"

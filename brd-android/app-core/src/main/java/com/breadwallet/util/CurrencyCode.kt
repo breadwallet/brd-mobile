@@ -10,8 +10,10 @@ package com.breadwallet.util
 
 import com.breadwallet.tools.util.bch
 import com.breadwallet.tools.util.btc
+import com.breadwallet.tools.util.doge
 import com.breadwallet.tools.util.eth
 import com.breadwallet.tools.util.hbar
+import com.breadwallet.tools.util.ltc
 import com.breadwallet.tools.util.xtz
 
 typealias CurrencyCode = String
@@ -24,7 +26,10 @@ fun CurrencyCode.isBrd(): Boolean = equals("brd", true)
 fun CurrencyCode.isRipple(): Boolean = equals("xrp", true)
 fun CurrencyCode.isHedera(): Boolean = equals(hbar, true)
 fun CurrencyCode.isTezos(): Boolean = equals(xtz, true)
+fun CurrencyCode.isDoge(): Boolean = equals(doge, true)
+fun CurrencyCode.isLitecoin(): Boolean = equals(ltc, true)
+
 fun CurrencyCode.isErc20(): Boolean {
-    return !isBitcoin() && !isBitcoinCash() && !isEthereum() && !isRipple() && !isHedera() && !isTezos()
+    return !isBitcoin() && !isBitcoinCash() && !isEthereum() && !isRipple() && !isHedera() && !isTezos() && !isDoge() && !isLitecoin()
 }
 
