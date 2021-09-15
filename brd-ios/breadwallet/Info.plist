@@ -112,6 +112,26 @@
 				<string>bitid</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>dogecoin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>dogecoin</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>litecoin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>litecoin</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>6</string>
