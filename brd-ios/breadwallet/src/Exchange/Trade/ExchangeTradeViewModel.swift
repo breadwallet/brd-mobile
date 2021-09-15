@@ -105,10 +105,10 @@ extension ExchangeTradeViewModel {
             .first
 
         if let fiatValue = model.formattedSourceAmountFiatValue, isQuote {
-            detail = "≈ \(fiatValue)"
+            detail = "\(fiatValue)"
         } else if let rate = dollarRate?.rate, isQuote {
             let fiatValue = rate * ((try? model.sourceAmountInput.double()) ?? 0.0)
-            detail = "≈ \(CommonFormatter.price.string(from: fiatValue) ?? "")"
+            detail = "\(CommonFormatter.price.string(from: fiatValue) ?? "")"
         }
 
         func wrap(_ event: ExchangeEvent.OnAmountChange, quote: Bool) -> ExchangeEvent {
