@@ -20,9 +20,14 @@ class PriceChangeView: UIView, Subscriber {
     var currency: Currency? = nil {
         didSet {
             //These cells get recycled, so we need to cancel any previous subscriptions
-            Store.unsubscribe(self)
-            setInitialData()
-            subscribeToPriceChange()
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                Store.unsubscribe(self)
+                self.setInitialData()
+                self.subscribeToPriceChange()
+            }
         }
     }
     
