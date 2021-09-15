@@ -10,7 +10,9 @@ package com.breadwallet.model
 
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isBitcoinCash
+import com.breadwallet.util.isDoge
 import com.breadwallet.util.isEthereum
+import com.breadwallet.util.isLitecoin
 import com.breadwallet.util.isRipple
 
 data class TokenItem(
@@ -28,10 +30,12 @@ data class TokenItem(
 
     val isNative: Boolean = type.isBlank()
 
-    fun urlScheme(testnet: Boolean): String? = when {
+    private fun urlScheme(testnet: Boolean): String? = when {
         symbol.isEthereum() || type == "erc20" -> "ethereum"
         symbol.isRipple() -> "xrp"
         symbol.isBitcoin() -> "bitcoin"
+        symbol.isDoge() -> "dogecoin"
+        symbol.isLitecoin() -> "litecoin"
         symbol.isBitcoinCash() -> when {
             testnet -> "bchtest"
             else -> "bitcoincash"
