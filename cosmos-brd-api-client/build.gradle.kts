@@ -1,16 +1,25 @@
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     kotlin("plugin.serialization")
 }
 
-kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
+android {
+    compileSdk = brd.BrdRelease.ANDROID_COMPILE_SDK
+    buildToolsVersion = brd.BrdRelease.ANDROID_BUILD_TOOLS
+    defaultConfig {
+        minSdk = brd.BrdRelease.ANDROID_MINIMUM_SDK
+        buildConfigField("int", "VERSION_CODE", "${brd.BrdRelease.versionCode}")
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+kotlin {
+    android()
     ios()
 
     sourceSets {
@@ -41,13 +50,13 @@ kotlin {
             }
         }
 
-        named("jvmMain") {
+        named("androidMain") {
             dependencies {
                 implementation(brd.Libs.Ktor.Client.OkHttpClientEngine)
             }
         }
 
-        named("jvmTest") {
+        named("androidTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
