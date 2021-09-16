@@ -21,8 +21,11 @@ import com.brd.support.SupportEffectHandler
 import com.brd.support.SupportInit
 import com.brd.support.SupportUpdate
 import com.breadwallet.databinding.ControllerSupportBinding
+import com.breadwallet.tools.recyclerview.DividerItemDecorator
+import com.breadwallet.tools.recyclerview.MarginItemDecoration
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.Utils
+import com.breadwallet.tools.util.getPixelsFromDps
 import com.breadwallet.ui.MobiusKtController
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
@@ -53,7 +56,15 @@ class SupportController(args: Bundle? = null) : MobiusKtController<M, E, F>(args
     private val sectionAdapter by resetOnViewDestroy { ModelAdapter(::SupportSectionItem) }
     private val bodyAdapter by resetOnViewDestroy { ModelAdapter(::SupportArticleBodyItem) }
     private val fastAdapter by resetOnViewDestroy {
-        FastAdapter.with(listOf(mainTitleAdapter, articleAdapter, groupTitleAdapter, sectionAdapter, bodyAdapter))
+        FastAdapter.with(
+            listOf(
+                mainTitleAdapter,
+                articleAdapter,
+                groupTitleAdapter,
+                sectionAdapter,
+                bodyAdapter
+            )
+        )
     }
 
     override val defaultModel = M.create(
@@ -99,12 +110,17 @@ class SupportController(args: Bundle? = null) : MobiusKtController<M, E, F>(args
             layoutManager = LinearLayoutManager(activity)
             adapter = fastAdapter
             itemAnimator = DefaultItemAnimator()
+            addItemDecoration(MarginItemDecoration(view.context.getPixelsFromDps(20)))
+            addItemDecoration(DividerItemDecorator(view.context.getPixelsFromDps(20)))
         }
     }
 
     override fun bindView(output: Consumer<E>): Disposable {
         binding.buttonClose.setOnClickListener {
             output.accept(E.OnCloseClicked)
+        }
+        binding.buttonBack.setOnClickListener {
+            eventConsumer.accept(E.OnBackClicked)
         }
         binding.inputSearch.doOnTextChanged { text, _, _, _ ->
             output.accept(E.OnSearch(text?.toString().orEmpty()))
@@ -118,7 +134,7 @@ class SupportController(args: Bundle? = null) : MobiusKtController<M, E, F>(args
                 else -> false
             }
         }
-        fastAdapter.onClickListener = { view, _, item, pos ->
+        fastAdapter.onClickListener = { _, _, item, _ ->
             when (item) {
                 is SupportArticleItem -> {
                     output.accept(E.OnArticleClicked(item.model))

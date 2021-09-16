@@ -1,14 +1,18 @@
+/*
+ * BreadWallet
+ *
+ * Created by Amit Goel <amit.goel@breadwallet.com> on 08/24/2021
+ * Copyright (c) 2021 Breadwinner AG
+ *
+ * SPDX-License-Identifier: BUSL-1.1
+ */
 package com.breadwallet.tools.recyclerview
 
-import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.breadwallet.tools.util.Utils
 
-class MarginItemDecoration(spaceSize: Int, context: Context) : RecyclerView.ItemDecoration() {
-
-    private val convertedSpace = Utils.getPixelsFromDps(context, spaceSize)
+class MarginItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -17,8 +21,8 @@ class MarginItemDecoration(spaceSize: Int, context: Context) : RecyclerView.Item
         state: RecyclerView.State
     ) {
         with(outRect) {
-            left = convertedSpace
-            right = convertedSpace
+            left = spaceSize
+            right = spaceSize
         }
     }
 }
