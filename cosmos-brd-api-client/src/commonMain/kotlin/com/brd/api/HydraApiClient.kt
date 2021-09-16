@@ -74,6 +74,13 @@ internal class HydraApiClient(
             install(BrdAuthentication) {
                 brdAuthProvider(brdAuthProvider)
             }
+            defaultRequest {
+                header(BrdAuthentication.HEADER_PLATFORM, PlatformInfo.getPlatform())
+                val code = PlatformInfo.getCode()
+                if (code != 0) {
+                    header(BrdAuthentication.HEADER_VERSION, code)
+                }
+            }
         }
         this.apiHost = AtomicReference(apiHost)
         freeze()
@@ -144,11 +151,12 @@ internal class HydraApiClient(
     override suspend fun createOfferRequest(configuration: ExchangeOfferBody): ExchangeOfferRequestResult {
         return withContext(dispatcher) {
             try {
-                val offerRequest = http.post<ExchangeOfferRequest>(urlFor("exchange", "offer-requests")) {
-                    contentType(ContentType.Application.Json.withCharset(UTF_8))
-                    authenticated()
-                    body = configuration
-                }
+                val offerRequest =
+                    http.post<ExchangeOfferRequest>(urlFor("exchange", "offer-requests")) {
+                        contentType(ContentType.Application.Json.withCharset(UTF_8))
+                        authenticated()
+                        body = configuration
+                    }
                 ExchangeOfferRequestResult.Success(offerRequest)
             } catch (e: Throwable) {
                 val response = (e as? ResponseException)?.response
@@ -224,7 +232,10 @@ internal class HydraApiClient(
         }
     }
 
-    override suspend fun submitCryptoAddress(action: ExchangeOrder.Action, address: String): Boolean {
+    override suspend fun submitCryptoAddress(
+        action: ExchangeOrder.Action,
+        address: String
+    ): Boolean {
         check(action.type == CRYPTO_RECEIVE_ADDRESS || action.type == CRYPTO_REFUND_ADDRESS)
         return withContext(dispatcher) {
             try {
@@ -331,4 +342,9 @@ internal class HydraApiClient(
         val path = pathComponents.joinToString("/").trimStart('/')
         return "$host/$path"
     }
+}
+
+expect object PlatformInfo {
+    fun getCode(): Int
+    fun getPlatform(): String
 }

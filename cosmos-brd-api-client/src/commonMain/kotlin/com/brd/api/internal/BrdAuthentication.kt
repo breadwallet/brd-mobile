@@ -43,6 +43,8 @@ internal class BrdAuthentication {
         private val AuthenticationPhase = PipelinePhase("Authentication")
 
         const val ENABLE_AUTH_HEADER = "__brd_auth__"
+        const val HEADER_PLATFORM = "X-App-Platform"
+        const val HEADER_VERSION = "X-App-Version"
 
         override val key: AttributeKey<BrdAuthentication> = AttributeKey("BRDAuthentication")
 
@@ -93,8 +95,8 @@ internal class BrdAuthentication {
 
                     val (signature, date) = brdAuthProvider.sign(
                         method = context.method.value,
-                        body = content?.text ?: "",
-                        contentType = content?.contentType?.withCharset(UTF_8)?.toString() ?: "",
+                        body = content?.text.orEmpty(),
+                        contentType = content?.contentType?.withCharset(UTF_8)?.toString().orEmpty(),
                         url = context.url.buildString().substringAfter(context.url.host)
                     )
 
