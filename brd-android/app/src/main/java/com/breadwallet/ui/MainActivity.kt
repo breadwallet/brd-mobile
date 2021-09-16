@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity(), DIAware {
         }
 
         if (BuildConfig.DEBUG) {
-            Utils.printPhoneSpecs(this@MainActivity)
+            Utils.printPhoneSpecs()
         }
     }
 

@@ -73,7 +73,7 @@ public class Utils {
     }
 
     @SuppressWarnings("deprecation")
-    public static void printPhoneSpecs(Context context) {
+    public static void printPhoneSpecs() {
         String specsTag = "PHONE SPECS";
         Log.e(specsTag, "");
         Log.e(specsTag, "***************************PHONE SPECS***************************");
@@ -85,48 +85,12 @@ public class Utils {
         Log.e(specsTag, "");
     }
 
-    public static String getFormattedDateFromLong(Context app, long time) {
-
-        SimpleDateFormat formatter = new SimpleDateFormat("M/d@ha", Locale.getDefault());
-        boolean is24HoursFormat = false;
-        if (app != null) {
-            is24HoursFormat = android.text.format.DateFormat.is24HourFormat(app.getApplicationContext());
-            if (is24HoursFormat) {
-                formatter = new SimpleDateFormat("M/d H", Locale.getDefault());
-            }
-        }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(time);
-        String result = formatter.format(calendar.getTime()).toLowerCase().replace("am", "a").replace("pm", "p");
-        if (is24HoursFormat) result += "h";
-        return result;
-    }
-
-    public static String formatTimeStamp(long time, String pattern) {
-//        SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(time);
-        return android.text.format.DateFormat.format(pattern, time).toString();
-    }
-
     public static boolean isNullOrEmpty(String str) {
         return str == null || str.isEmpty();
     }
 
-    public static boolean isNumber(String str) {
-        return !Utils.isNullOrEmpty(str) && str.matches(NUMBER_PATTERN);
-    }
-
-    public static boolean isNullOrZero(BigDecimal amount) {
-        return amount == null || amount.compareTo(BigDecimal.ZERO) == 0;
-    }
-
     public static boolean isNullOrEmpty(byte[] arr) {
         return arr == null || arr.length == 0;
-    }
-
-    public static boolean isNullOrEmpty(Collection collection) {
-        return collection == null || collection.size() == 0;
     }
 
     public static int getPixelsFromDps(Context context, int dps) {

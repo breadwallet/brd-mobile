@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.breadwallet.R;
 import com.breadwallet.tools.animation.UiUtils;
 import com.breadwallet.tools.manager.BRReportsManager;
+import com.breadwallet.tools.util.AndroidExtensionsKt;
 import com.breadwallet.tools.util.Utils;
 
 public class BRDialogView extends DialogFragment {
@@ -115,15 +116,12 @@ public class BRDialogView extends DialogFragment {
             positiveButton.setColor(Color.parseColor(POSITIVE_BUTTON_COLOR));
             positiveButton.setHasShadow(false);
             positiveButton.setText(mPositiveButtonText);
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!UiUtils.isClickAllowed()) {
-                        return;
-                    }
-                    if (mPositiveListener != null) {
-                        mPositiveListener.onClick(BRDialogView.this);
-                    }
+            positiveButton.setOnClickListener(v -> {
+                if (!UiUtils.isClickAllowed()) {
+                    return;
+                }
+                if (mPositiveListener != null) {
+                    mPositiveListener.onClick(BRDialogView.this);
                 }
             });
 
@@ -160,17 +158,14 @@ public class BRDialogView extends DialogFragment {
         if (mShowHelpIcon) {
             mHelpButton.setVisibility(View.VISIBLE);
 
-            messageText.setPadding(0, 0, 0, Utils.getPixelsFromDps(getContext(), MESSAGE_PADDING_END));
+            messageText.setPadding(0, 0, 0, AndroidExtensionsKt.getPixelsFromDps(getContext(), MESSAGE_PADDING_END));
 
-            mHelpButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!UiUtils.isClickAllowed()) {
-                        return;
-                    }
-                    if (mHelpListener != null) {
-                        mHelpListener.onClick(BRDialogView.this);
-                    }
+            mHelpButton.setOnClickListener(view1 -> {
+                if (!UiUtils.isClickAllowed()) {
+                    return;
+                }
+                if (mHelpListener != null) {
+                    mHelpListener.onClick(BRDialogView.this);
                 }
             });
 

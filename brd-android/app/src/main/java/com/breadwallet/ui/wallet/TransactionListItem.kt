@@ -9,9 +9,9 @@ import androidx.core.view.isVisible
 import com.breadwallet.R
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.TxItemBinding
+import com.breadwallet.tools.util.getPixelsFromDps
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.util.BRDateUtil
-import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.util.isBitcoinLike
 import com.mikepenz.fastadapter.FastAdapter
@@ -208,7 +208,7 @@ class TransactionListItem(
                     } else {
                         imageTransferDirection.progress = progress
                     }
-                    txDescriptionValue.maxWidth = Utils.getPixelsFromDps(context, DP_120)
+                    txDescriptionValue.maxWidth = context.getPixelsFromDps(DP_120)
                 } else {
                     imageTransferDirection.progressDrawable = null
                     imageTransferDirection.progress = 0

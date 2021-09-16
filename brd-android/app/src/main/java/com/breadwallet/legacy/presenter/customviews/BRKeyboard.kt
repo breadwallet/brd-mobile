@@ -27,7 +27,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import com.breadwallet.R
 import com.breadwallet.databinding.PinPadBinding
-import com.breadwallet.tools.util.Utils
+import com.breadwallet.tools.util.getPixelsFromDps
 
 class BRKeyboard : ConstraintLayout, View.OnClickListener {
     private var mKeyInsertListener: OnInsertListener? = null
@@ -78,7 +78,7 @@ class BRKeyboard : ConstraintLayout, View.OnClickListener {
             listOf(num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, decimal)
         }
         val bottomPaddingDimen = context.resources.getInteger(R.integer.pin_keyboard_bottom_padding)
-        val bottomPaddingPixels = Utils.getPixelsFromDps(context, bottomPaddingDimen)
+        val bottomPaddingPixels = context.getPixelsFromDps(bottomPaddingDimen)
         for (i in mPinButtons.indices) {
             val button = mPinButtons[i]
             button.setOnClickListener(this)
