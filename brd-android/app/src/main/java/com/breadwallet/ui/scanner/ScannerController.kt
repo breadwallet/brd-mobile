@@ -92,7 +92,7 @@ class ScannerController(
     override fun onDetach(view: View) {
         cameraProviderFuture?.apply {
             addListener(
-                Runnable {
+                {
                     get().unbindAll()
                 },
                 mainExecutor
@@ -121,7 +121,7 @@ class ScannerController(
             if (!(get().hasCamera(cameraSelector))) throw NoCameraException()
 
             addListener(
-                Runnable {
+                {
                     val imageAnalysis = bindImageAnalyzer(get())
 
                     imageAnalysis.decodedTextFlow()
@@ -156,7 +156,7 @@ class ScannerController(
     }
 
     private fun bindImageAnalyzer(cameraProvider: ProcessCameraProvider): QRCodeImageAnalysis {
-        var preview = Preview.Builder().build().apply {
+        val preview = Preview.Builder().build().apply {
             setSurfaceProvider(binding.previewView.surfaceProvider)
         }
 
