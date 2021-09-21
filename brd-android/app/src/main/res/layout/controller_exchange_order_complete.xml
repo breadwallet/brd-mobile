@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintVertical_bias="0">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,19 +39,179 @@
             android:textSize="26sp"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/confetti"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confetti_container_layer_one"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="320dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0"
+        android:translationZ="2dp"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:contentDescription="@null"
-        android:src="@drawable/confetti"/>
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/confetti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_confetti_layer_one" />
+
+        <ImageView
+            android:id="@+id/much_wow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".72"
+            android:rotation="45"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_much_wow" />
+
+        <ImageView
+            android:id="@+id/wow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".2"
+            android:rotation="-45"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_wow" />
+
+        <ImageView
+            android:id="@+id/such_cool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".16"
+            app:layout_constraintHorizontal_bias=".65"
+            android:rotation="15"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_such_cool" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/doge_word_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:constraint_referenced_ids="much_wow,wow,such_cool" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".20" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confetti_container_layer_two"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:translationZ="2dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/confetti_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_confetti_layer_two" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Doge puppies Container-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/doge_container"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:translationZ="2dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/doge_one"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="12dp"
+            app:layout_constraintStart_toStartOf="@id/guideline_20"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".4"
+            android:rotation="-45"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_doge" />
+
+        <ImageView
+            android:id="@+id/doge_two"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".23"
+            android:rotation="60"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_doge" />
+
+        <ImageView
+            android:id="@+id/doge_three"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".55"
+            android:rotation="28"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_doge" />
+
+        <ImageView
+            android:id="@+id/doge_four"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintHorizontal_bias=".58"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:rotation="-30"
+            android:translationZ="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_doge" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView"

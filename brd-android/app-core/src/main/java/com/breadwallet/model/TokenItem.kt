@@ -20,6 +20,7 @@ data class TokenItem(
     val symbol: String,
     val name: String,
     var image: String?,
+    var backgroundImage: String?,
     val isSupported: Boolean,
     val currencyId: String,
     val type: String = "",

@@ -51,6 +51,7 @@ object TokenUtil {
     private const val FIELD_COINGECK_ID = "coingecko"
     private const val ICON_DIRECTORY_NAME_WHITE_NO_BACKGROUND = "white-no-bg"
     private const val ICON_DIRECTORY_NAME_WHITE_SQUARE_BACKGROUND = "white-square-bg"
+    private const val ICON_DIRECTORY_NAME_BACKGROUND_OVERLAY_IMAGE = "bg-overlay-image"
     private const val ICON_FILE_NAME_FORMAT = "%s.png"
     private const val START_COLOR_INDEX = 0
     private const val END_COLOR_INDEX = 1
@@ -228,6 +229,20 @@ object TokenUtil {
         return if (iconFile.exists()) iconFile.absolutePath else null
     }
 
+    fun getTokenBackgroundPath(currencyCode: String): String? {
+        val bundleResource = ServerBundlesHelper
+            .getExtractedPath(
+                context,
+                ServerBundlesHelper.getBundle(ServerBundlesHelper.Type.TOKEN),
+                null
+            )
+        val iconFileName = ICON_FILE_NAME_FORMAT.format(currencyCode.lowercase())
+        val iconDirectoryName = ICON_DIRECTORY_NAME_BACKGROUND_OVERLAY_IMAGE
+        val iconDir = File(bundleResource, iconDirectoryName)
+        val iconFile = File(iconDir, iconFileName)
+        return if (iconFile.exists()) iconFile.absolutePath else null
+    }
+
     fun getTokenStartColor(currencyCode: String): String? {
         val tokenItem = tokenMap[currencyCode.lowercase()]
         return if (tokenItem != null && !tokenItem.startColor.isNullOrBlank()) {
@@ -270,6 +285,7 @@ object TokenUtil {
             symbol = getString(FIELD_CODE),
             name = name,
             image = null,
+            backgroundImage = null,
             isSupported = getBooleanOrDefault(FIELD_IS_SUPPORTED, true),
             currencyId = getString(FIELD_CURRENCY_ID),
             type = getString(FIELD_TYPE),
