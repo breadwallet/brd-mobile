@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.breadwallet.R
 import com.breadwallet.breadbox.formatCryptoForUi
@@ -16,6 +17,7 @@ import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.util.isBrd
+import com.breadwallet.util.isDoge
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.drag.IDraggable
 import com.mikepenz.fastadapter.items.ModelAbstractItem
@@ -67,13 +69,8 @@ class WalletListItem(
             val cryptoBalance = wallet.balance.formatCryptoForUi(currencyCode, MAX_CRYPTO_DIGITS)
 
             with(WalletListItemBinding.bind(itemView)) {
-                if (wallet.fiatPricePerUnit == BigDecimal.ZERO) {
-                    walletBalanceFiat.visibility = View.INVISIBLE
-                    walletTradePrice.visibility = View.INVISIBLE
-                } else {
-                    walletBalanceFiat.visibility = View.VISIBLE
-                    walletTradePrice.visibility = View.VISIBLE
-                }
+                walletBalanceFiat.isInvisible = wallet.fiatPricePerUnit == BigDecimal.ZERO
+                walletTradePrice.isInvisible = wallet.fiatPricePerUnit == BigDecimal.ZERO
 
                 val isSyncing = wallet.isSyncing
                 val isLoading = wallet.state == Wallet.State.LOADING
@@ -94,7 +91,7 @@ class WalletListItem(
                 syncProgress.isVisible = isSyncing || isLoading
                 syncingLabel.isVisible = isSyncing || isLoading
                 if (isSyncing) {
-                    syncingLabel.text = context.getString(R.string.SyncingView_syncing)
+                    syncingLabel.setText(R.string.SyncingView_syncing)
                 } else if (isLoading) {
                     syncingLabel.setText(R.string.Account_loadingMessage)
                 }
@@ -145,7 +142,32 @@ class WalletListItem(
             }
         }
 
-        private fun setBackground(binding: WalletListItemBinding, wallet: Wallet, context: Context) {
+        private fun loadTokenBackgroundImage(binding: WalletListItemBinding, currencyCode: String) {
+            boundScope.launch {
+                // Get background image for currency
+                val tokenIconPath = Default {
+                    TokenUtil.getTokenBackgroundPath(currencyCode)
+                }
+                ensureActive()
+
+                with(binding) {
+                    if (tokenIconPath.isNullOrBlank()) {
+                        walletItemImageOverlay.background = null
+                        walletItemImageOverlay.visibility = View.GONE
+                    } else {
+                        val iconFile = File(tokenIconPath)
+                        Picasso.get().load(iconFile).into(walletItemImageOverlay)
+                        walletItemImageOverlay.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
+        private fun setBackground(
+            binding: WalletListItemBinding,
+            wallet: Wallet,
+            context: Context
+        ) {
             val drawable = ContextCompat
                 .getDrawable(context, R.drawable.crypto_card_shape)!!
                 .mutate()
@@ -166,6 +188,13 @@ class WalletListItem(
                 )
                 binding.walletCard.background = drawable
                 setWalletItemColors(binding, R.dimen.token_background_with_alpha)
+            }
+
+            // Doge Easter egg fetch only available if currency is doge and balance > 1000
+            if (wallet.currencyCode.isDoge() && wallet.balance.toInt() >= 1000) {
+                loadTokenBackgroundImage(binding, wallet.currencyCode)
+            } else {
+                binding.walletItemImageOverlay.background = null
             }
         }
 
