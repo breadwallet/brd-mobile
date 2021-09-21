@@ -110,9 +110,9 @@ android {
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
                     strippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/stripped_native_libs/release/out").absolutePath
                     unstrippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/cmake/release/obj").absolutePath
                 }
             }
         }
@@ -135,9 +135,9 @@ android {
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
                     strippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/debug/out").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/stripped_native_libs/debug/out").absolutePath
                     unstrippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/debug/obj").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/cmake/debug/obj").absolutePath
                 }
             }
         }
