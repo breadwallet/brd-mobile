@@ -27,6 +27,9 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+import android.media.MediaPlayer
+import com.breadwallet.R
+
 private const val CONFETTI_DURATION = 4_800L
 
 class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildController(args) {
@@ -80,6 +83,7 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
                 val isDoge = state.order.outputs.first().currency.code.isDoge()
                 hasPlayedConfetti = true
                 viewAttachScope.launch(Main) {
+                    delay(200L) // slight delay to start animation
                     confettiContainerLayerOne.translationY =
                         -confetti.drawable.intrinsicHeight.toFloat()
                     confettiContainerLayerTwo.translationY =
@@ -110,6 +114,12 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
                                 confettiContainerLayerTwo.isVisible = false
                             }
                         }
+
+                    delay(700L)
+                    if (isDoge) {
+                        val ring: MediaPlayer = MediaPlayer.create(requireContext(), R.raw.bark)
+                        ring.start()
+                    }
                 }
             }
         }
@@ -129,7 +139,7 @@ class OrderCompleteController(args: Bundle? = null) : ExchangeController.ChildCo
                 }
             }
 
-        ObjectAnimator.ofFloat(dogeOne, "rotation", 240f).apply {
+        ObjectAnimator.ofFloat(dogeOne, "rotation", -45f).apply {
             duration = 3000
             start()
         }
