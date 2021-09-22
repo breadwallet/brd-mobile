@@ -8,7 +8,6 @@
  */
 package com.brd.api.models
 
-import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlin.math.absoluteValue
@@ -18,7 +17,6 @@ data class ExchangePair(
     val fromCode: String,
     val toCode: String,
     val rate: Double,
-    @Serializable(with = InstantSerializer::class)
     val timestamp: Instant,
 ) {
     fun estimatedOutput(sourceAmount: Double): Double? {
