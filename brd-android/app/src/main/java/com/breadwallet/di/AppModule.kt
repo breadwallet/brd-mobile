@@ -106,7 +106,9 @@ fun getAppModule(application: BreadApp): DI.Module {
 
         bind<KVStoreProvider> { singleton { KVStoreManager(application) } }
 
-        val metaDataManager by lazy { MetaDataManager(application.direct.instance()) }
+        val metaDataManager by lazy {
+            MetaDataManager(application.direct.instance())
+        }
 
         bind<WalletProvider> { singleton { metaDataManager } }
 

@@ -29,7 +29,7 @@ data class TokenItem(
     val coingeckoId: String? = null
 ) {
 
-    val isNative: Boolean = type.isBlank()
+    val isNative: Boolean = type.isBlank() || type == "native"
 
     private fun urlScheme(testnet: Boolean): String? = when {
         symbol.isEthereum() || type == "erc20" -> "ethereum"
