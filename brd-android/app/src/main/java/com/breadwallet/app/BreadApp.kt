@@ -343,7 +343,8 @@ class BreadApp : Application(), DIAware, CameraXConfig.Provider {
             }
         }
         if (brdPreferences.hydraActivated && !brdPreferences.isRewardsAddressSet) {
-            brdPreferences.isRewardsAddressSet = brdApi.setMe(breadBox.wallet(eth).first().target.toString())
+            brdPreferences.isRewardsAddressSet =
+                brdApi.setMe(breadBox.wallet(eth).first().target.toString())
         }
     }
 

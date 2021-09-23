@@ -197,7 +197,8 @@ class MetaDataManager(
                 false
             }
             else -> {
-                val rawPubKey = CryptoHelper.hexDecode(pairingData.publicKeyHex) ?: pairingData.publicKeyHex.toByteArray(Charsets.UTF_8)
+                val rawPubKey = CryptoHelper.hexDecode(pairingData.publicKeyHex)
+                    ?: pairingData.publicKeyHex.toByteArray(Charsets.UTF_8)
                 storeProvider.put(pairingKey(rawPubKey), pairingData.toJSON())
             }
         }
@@ -261,7 +262,11 @@ class MetaDataManager(
         putTxMetaData(key, transaction.wallet.currency.isErc20(), newTxMetaData)
     }
 
-    override suspend fun putTxMetaData(key: String, isErc20: Boolean, newTxMetaData: TxMetaDataValue) {
+    override suspend fun putTxMetaData(
+        key: String,
+        isErc20: Boolean,
+        newTxMetaData: TxMetaDataValue
+    ) {
         var txMetaData = txMetaData(key, isErc20 = isErc20).first()
 
         var needsUpdate = false

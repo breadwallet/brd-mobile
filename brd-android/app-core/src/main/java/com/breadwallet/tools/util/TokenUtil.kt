@@ -9,7 +9,6 @@
 package com.breadwallet.tools.util
 
 import android.content.Context
-import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.logger.logError
 import com.breadwallet.model.TokenItem
 import com.breadwallet.theme.R
@@ -31,7 +30,6 @@ import java.io.File
 import java.io.IOException
 import java.util.ArrayList
 import java.util.HashMap
-import java.util.Locale
 import kotlin.properties.Delegates
 
 object TokenUtil {
