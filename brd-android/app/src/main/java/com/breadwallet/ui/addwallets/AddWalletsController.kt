@@ -36,9 +36,8 @@ class AddWalletsController : BaseMobiusController<M, E, F>() {
     override val update = AddWalletsUpdate
     override val flowEffectHandler
         get() = createAddWalletsHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            direct.instance()
+            breadBox = direct.instance(),
+            acctMetaDataProvider = direct.instance()
         )
 
     override fun onDetach(view: View) {
