@@ -10,6 +10,7 @@
 
 import Foundation
 import WebKit
+import WalletKit
 import Cosmos
 
 class Backend {
@@ -57,6 +58,10 @@ class Backend {
     
     static func updateExchangeRates() {
         shared.exchangeUpdater?.refresh()
+    }
+    
+    static func updateExchangeRates(for currencies: [Currency]) {
+        shared.exchangeUpdater?.refresh(currencies: currencies)
     }
     
     static func sendLaunchEvent() {
