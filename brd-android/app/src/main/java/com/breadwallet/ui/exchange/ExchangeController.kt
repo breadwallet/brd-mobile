@@ -382,7 +382,9 @@ class ExchangeController(args: Bundle) :
         }
 
         fun dispatchRender() {
-            currentModel.render()
+            if (isAttached) {
+                currentModel.render()
+            }
             previousModel = currentModel
         }
 
