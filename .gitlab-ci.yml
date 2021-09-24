@@ -59,6 +59,7 @@ build-android:
       - merge_requests
     changes:
       - buildSrc/**/Libs.kt
+      - buildSrc/**/BrdRelease.kt
       - brd-android/**/*
       - cosmos-*/**/*
       - .gitlab-ci.yml
