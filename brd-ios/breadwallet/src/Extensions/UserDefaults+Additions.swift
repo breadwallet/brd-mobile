@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import Cosmos
 
 private let defaults = UserDefaults.standard
 private let isBiometricsEnabledKey = "istouchidenabled"
@@ -45,6 +46,7 @@ private let shouldHideBRDRewardsAnimationKey = "shouldHideBRDRewardsAnimationKey
 private let shouldHideBRDCellHighlightKey = "shouldHideBRDCellHighlightKey"
 private let debugBackendHostKey = "debugBackendHostKey"
 private let debugWebBundleNameKey = "debugWebBundleNameKey"
+private let debugNativeExchangeEnabledKey = "debugNativeExchangeEnabledKey"
 private let platformDebugURLKey = "platformDebugURLKey"
 private let appLaunchCountKey = "appLaunchCountKey"
 private let appLaunchCountAtLastRatingPromptKey = "appLaunchCountAtLastRatingPromptKey"
@@ -139,13 +141,34 @@ extension UserDefaults {
         defaults.set(nil, forKey: isBiometricsEnabledKey)
     }
 
+    static var legacyDefaultCurrencyCode: String? {
+        get { defaults.string(forKey: defaultCurrencyCodeKey) }
+        set { defaults.setValue(newValue, forKey: defaultCurrencyCodeKey) }
+    }
+
     static var defaultCurrencyCode: String {
         get {
-            let code = defaults.string(forKey: defaultCurrencyCodeKey) ?? "USD"
-            guard FiatCurrency.isCodeAvailable(code) else { return "USD" }
+            if let legacyDefaultCurrencyCode = legacyDefaultCurrencyCode {
+                self.legacyDefaultCurrencyCode = nil
+                cosmos.fiatCurrencyCode = legacyDefaultCurrencyCode
+                guard FiatCurrency.isCodeAvailable(legacyDefaultCurrencyCode) else {
+                    return "usd"
+                }
+            
+                return legacyDefaultCurrencyCode
+            }
+            
+            let code = cosmos.fiatCurrencyCode
+            
+            guard FiatCurrency.isCodeAvailable(code) else {
+                return "usd"
+            }
+            
             return code
         }
-        set { defaults.set(newValue, forKey: defaultCurrencyCodeKey) }
+        set {
+            cosmos.fiatCurrencyCode = newValue
+        }
     }
 
     static var hasAquiredShareDataPermission: Bool {
@@ -566,4 +589,15 @@ extension UserDefaults {
             defaults.set(newValue.rawValue, forKey: debugConnectionModeOverrideKey)
         }
     }
+
+    static var debugNativeExchangeEnabled: Bool {
+        get { return cosmos.hydraActivated }
+        set { cosmos.hydraActivated = newValue }
+    }
+
+    static var cosmos: BrdPreferences = {
+        return BrdPreferences(
+            preferences: IosPreferences(prefs: UserDefaults.standard)
+        )
+    }()
 }

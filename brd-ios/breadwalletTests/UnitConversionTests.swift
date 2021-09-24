@@ -13,6 +13,11 @@ import XCTest
 
 class UnitConversionTests : XCTestCase {
     
+    override func setUp() {
+        super.setUp()
+        UserDefaults.defaultCurrencyCode = "usd"
+    }
+    
     func testAmountStringConversion() {
         let highP = "1.123456789987654321"
         let rate = Rate(code: "USD", name: "USD", rate: 1000.0, reciprocalCode: "BTC")

@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class ResolvedAddressLabel: UIView {
     
@@ -19,7 +20,7 @@ class ResolvedAddressLabel: UIView {
     private let addressLabel = UILabel(font: .customBody(size: 12.0), color: .lightText)
     private var widthConstraint: NSLayoutConstraint?
     
-    var type: ResolvableType? {
+    var type: AddressType? {
         didSet {
             guard let iconName = type?.iconName else { image.image = nil; return }
             image.image = UIImage(named: iconName)

@@ -83,6 +83,7 @@ import java.util.UUID
 
 private const val ARG_URL = "WebController.URL"
 private const val ARG_JSON_REQUEST = "WebController.JSON_REQUEST"
+private const val ARG_CONFIRM_CLOSE = "WebController.CONFIRM_CLOSE"
 private const val CLOSE_URL = "_close"
 private const val FILE_SUFFIX = ".jpg"
 
@@ -92,10 +93,15 @@ class WebController(
 ) : BaseController(args),
     CameraController.Listener {
 
-    constructor(url: String, jsonRequest: String? = null) : this(
+    constructor(
+        url: String,
+        jsonRequest: String? = null,
+        confirmClose: Boolean = false,
+    ) : this(
         bundleOf(
             ARG_URL to url,
-            ARG_JSON_REQUEST to jsonRequest
+            ARG_JSON_REQUEST to jsonRequest,
+            ARG_CONFIRM_CLOSE to confirmClose,
         )
     )
 
@@ -117,6 +123,7 @@ class WebController(
 
     private val binding by viewBinding(FragmentSupportBinding::inflate)
 
+    private var closeConfirmed: Boolean = false
     private var mOnCloseUrl: String? = null
     private lateinit var nativePromiseFactory: NativePromiseFactory
 
@@ -297,14 +304,23 @@ class WebController(
         }
     }
 
-    override fun handleBack() = when {
-        binding.webView.canGoBack() -> {
-            binding.webView.goBack()
-            true
-        }
-        else -> {
-            LinkPlugin.hasBrowser = false
-            super.handleBack()
+    override fun handleBack(): Boolean {
+        return when {
+            arg<Boolean>(ARG_CONFIRM_CLOSE) -> if (closeConfirmed) {
+                super.handleBack()
+            } else {
+                // TODO: Confirmation dialog
+                closeConfirmed = true
+                true
+            }
+            binding.webView.canGoBack() -> {
+                binding.webView.goBack()
+                true
+            }
+            else -> {
+                LinkPlugin.hasBrowser = false
+                super.handleBack()
+            }
         }
     }
 

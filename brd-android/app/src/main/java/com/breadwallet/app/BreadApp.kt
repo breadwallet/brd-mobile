@@ -8,107 +8,59 @@
  */
 package com.breadwallet.app
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.os.Build
-import androidx.annotation.VisibleForTesting
-import androidx.camera.camera2.Camera2Config
-import androidx.camera.core.CameraXConfig
-import androidx.core.content.edit
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
-import com.bdb.api.AndroidBdbAuthProvider
-import com.brd.api.AndroidBRDAuthProvider
-import com.brd.api.BRDApiClient
-import com.brd.bakerapi.BakersApiClient
-import com.brd.prefs.AndroidPreferences
-import com.brd.prefs.Preferences
+import android.annotation.*
+import android.app.*
+import android.content.*
+import android.net.*
+import android.os.*
+import androidx.annotation.*
+import androidx.camera.camera2.*
+import androidx.camera.core.*
+import androidx.core.content.*
+import androidx.lifecycle.*
+import androidx.security.crypto.*
+import com.brd.addressresolver.*
+import com.brd.api.*
+import com.brd.bakerapi.*
+import com.brd.exchange.*
+import com.brd.prefs.*
+import com.breadwallet.*
 import com.breadwallet.BuildConfig
-import com.breadwallet.breadbox.BdbAuthInterceptor
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.BreadBoxCloseWorker
-import com.breadwallet.breadbox.CoreBreadBox
-import com.breadwallet.corecrypto.CryptoApiProvider
+import com.breadwallet.breadbox.*
+import com.breadwallet.corecrypto.*
 import com.breadwallet.crypto.CryptoApi
 import com.breadwallet.crypto.WalletManagerMode
-import com.breadwallet.crypto.blockchaindb.BlockchainDb
-import com.breadwallet.installHooks
-import com.breadwallet.logger.logDebug
-import com.breadwallet.logger.logError
-import com.breadwallet.repository.ExperimentsRepository
-import com.breadwallet.repository.ExperimentsRepositoryImpl
-import com.breadwallet.repository.RatesRepository
-import com.breadwallet.tools.crypto.Base32
-import com.breadwallet.tools.crypto.CryptoHelper
-import com.breadwallet.tools.manager.BRClipboardManager
-import com.breadwallet.tools.manager.BRReportsManager
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.tools.manager.ConnectivityStateProvider
-import com.breadwallet.tools.manager.InternetManager
-import com.breadwallet.tools.manager.NetworkCallbacksConnectivityStateProvider
-import com.breadwallet.tools.manager.RatesFetcher
-import com.breadwallet.tools.security.BRKeyStore
-import com.breadwallet.tools.security.BrdUserManager
-import com.breadwallet.tools.security.BrdUserState
-import com.breadwallet.tools.security.CryptoUserManager
-import com.breadwallet.tools.services.BRDFirebaseMessagingService
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.EventUtils
-import com.breadwallet.tools.util.ServerBundlesHelper
-import com.breadwallet.tools.util.SupportManager
-import com.breadwallet.tools.util.TokenUtil
-import com.breadwallet.ui.uigift.GiftBackup
-import com.breadwallet.ui.uigift.SharedPrefsGiftBackup
-import com.breadwallet.util.usermetrics.UserMetricsUtil
-import com.platform.APIClient
-import com.platform.HTTPServer
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import com.breadwallet.crypto.blockchaindb.*
+import com.breadwallet.logger.*
+import com.breadwallet.platform.interfaces.*
+import com.breadwallet.repository.*
+import com.breadwallet.tools.crypto.*
+import com.breadwallet.tools.manager.*
+import com.breadwallet.tools.security.*
+import com.breadwallet.tools.services.*
+import com.breadwallet.tools.util.*
+import com.breadwallet.ui.uigift.*
 import com.breadwallet.util.*
-import com.platform.interfaces.KVStoreProvider
-import com.platform.interfaces.MetaDataManager
+import com.breadwallet.util.usermetrics.*
+import com.platform.*
+import com.platform.interfaces.*
 import com.platform.interfaces.WalletProvider
-import com.platform.sqlite.PlatformSqliteHelper
-import com.platform.tools.KVStoreManager
-import com.platform.tools.TokenHolder
-import drewcarlson.blockset.BdbService
+import com.platform.sqlite.*
+import com.platform.tools.*
+import drewcarlson.blockset.*
 import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import org.kodein.di.DKodein
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.androidXModule
-import org.kodein.di.direct
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.singleton
-import java.io.File
-import java.io.UnsupportedEncodingException
-import java.util.Locale
-import java.util.regex.Pattern
+import io.ktor.client.engine.okhttp.OkHttp
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import okhttp3.*
+import org.kodein.di.*
+import org.kodein.di.android.x.*
+import org.kodein.di.erased.*
+import java.io.*
+import java.lang.IllegalAccessException
+import java.lang.System
+import java.util.*
+import java.util.regex.*
 
 private const val LOCK_TIMEOUT = 180_000L // 3 minutes in milliseconds
 private const val ENCRYPTED_PREFS_FILE = "crypto_shared_prefs"
@@ -272,7 +224,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<APIClient>() with singleton {
-            APIClient(this@BreadApp, direct.instance(), createHttpHeaders())
+            APIClient(this@BreadApp, direct.instance(), direct.instance(), createHttpHeaders())
         }
 
         bind<BrdUserManager>() with singleton {
@@ -310,14 +262,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        bind<PayIdService>() with singleton {
-            PayIdService(instance())
-        }
-
-        bind<FioService>() with singleton {
-            FioService(instance())
-        }
-
         bind<HttpClient>() with singleton {
             HttpClient(OkHttp) {
                 engine {
@@ -328,21 +272,12 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             }
         }
 
-        bind<UnstoppableDomainService>() with singleton {
-            UnstoppableDomainService(
-                BdbService.create(
-                    instance(),
-                    authProvider = AndroidBdbAuthProvider(instance())
-                )
-            )
+        bind<BdbService>() with singleton {
+            BdbService.create(AndroidBdbAuthProvider(instance()))
         }
 
-        bind<AddressResolverServiceLocator>() with singleton {
-            AddressResolverServiceLocator(
-                instance(),
-                instance(),
-                instance()
-            )
+        bind<AddressResolver>() with singleton {
+            AddressResolver(instance(), !BuildConfig.BITCOIN_TESTNET)
         }
 
         bind<BreadBox>() with singleton {
@@ -382,7 +317,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 NetworkCallbacksConnectivityStateProvider(connectivityManager)
             } else {
-                InternetManager(connectivityManager,this@BreadApp)
+                InternetManager(connectivityManager, this@BreadApp)
             }
         }
 
@@ -394,8 +329,11 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        bind<BRDApiClient>() with singleton {
-            BRDApiClient.create(AndroidBRDAuthProvider(instance()))
+        bind<BrdApiClient>() with singleton {
+            val brdPreferences = instance<BrdPreferences>()
+            val customHost = brdPreferences.debugApiHost?.run(BrdApiHost::Custom)
+            val host = customHost ?: BrdApiHost.hostFor(BuildConfig.DEBUG, brdPreferences.hydraActivated)
+            BrdApiClient.create(host, AndroidBrdAuthProvider(instance()), instance())
         }
 
         bind<Preferences>() with singleton {
@@ -403,13 +341,23 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             AndroidPreferences(prefs)
         }
 
+        bind<BrdPreferences>() with singleton {
+            BrdPreferences(instance())
+        }
+
         bind<BakersApiClient>() with singleton {
             BakersApiClient.create(instance())
+        }
+
+        bind<ExchangeDataLoader>() with singleton {
+            val exchangePrefs = applicationContext.getSharedPreferences("ExchangeDataLoader", MODE_PRIVATE)
+            ExchangeDataLoader(instance(), AndroidPreferences(exchangePrefs))
         }
     }
 
     private var accountLockJob: Job? = null
 
+    private val brdApi by instance<BrdApiClient>()
     private val apiClient by instance<APIClient>()
     private val giftTracker by instance<GiftTracker>()
     private val userManager by instance<BrdUserManager>()
@@ -417,6 +365,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private val accountMetaData by instance<AccountMetaDataProvider>()
     private val conversionTracker by instance<ConversionTracker>()
     private val connectivityStateProvider by instance<ConnectivityStateProvider>()
+    private val brdPreferences by instance<BrdPreferences>()
 
     override fun onCreate() {
         super.onCreate()
@@ -444,9 +393,13 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             TokenUtil.initialize(mInstance, false, !BuildConfig.BITCOIN_TESTNET)
         }
 
-        // Start our local server as soon as the application instance is created, since we need to
-        // display support WebViews during onboarding.
-        HTTPServer.getInstance().startServer(this)
+        if (brdPreferences.hydraActivated) {
+            direct.instance<ExchangeDataLoader>().fetchData()
+        } else {
+            // Start our local server as soon as the application instance is created, since we need to
+            // display support WebViews during onboarding.
+            HTTPServer.getInstance().startServer(this)
+        }
     }
 
     /**
@@ -480,7 +433,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 EventUtils.saveEvents(this@BreadApp)
                 EventUtils.pushToServer(this@BreadApp)
             }
-
         }
         logDebug("Shutting down HTTPServer.")
         HTTPServer.getInstance().stopServer()
@@ -512,21 +464,36 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         initializeWalletId()
-        BRDFirebaseMessagingService.initialize(context)
-        HTTPServer.getInstance().startServer(this)
-        apiClient.updatePlatform(applicationScope)
-        applicationScope.launch {
-            UserMetricsUtil.makeUserMetricsRequest(context)
-        }
 
-        startedScope.launch {
-            accountMetaData.recoverAll(migrate)
-            giftTracker.checkUnclaimedGifts()
+        applicationScope.launch {
+            if (!brdPreferences.hydraActivated) {
+                preflight()
+            }
+
+            BRDFirebaseMessagingService.initialize(context)
+            if (!brdPreferences.hydraActivated) {
+                HTTPServer.getInstance().startServer(this@BreadApp)
+                apiClient.updatePlatform(this)
+            }
+            launch { UserMetricsUtil.makeUserMetricsRequest(context) }
+            startedScope.launch {
+                accountMetaData.recoverAll(migrate)
+                giftTracker.checkUnclaimedGifts()
+            }
+            conversionTracker.start(startedScope)
         }
 
         ratesFetcher.start(startedScope)
-        
-        conversionTracker.start(startedScope)
+    }
+
+    private suspend fun preflight() {
+        val preflight = brdApi.preflight()
+        if (preflight?.activate == true) {
+            brdPreferences.hydraActivated = true
+            userManager.removeToken()
+            brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
+            brdApi.getMe() // NOTE: refresh token immediately
+        }
     }
 
     private fun incrementAppForegroundedCounter() {
@@ -600,7 +567,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                 .firstOrNull()
 
         // The BRD server expects the following user agent: appName/appVersion engine/engineVersion plaform/plaformVersion
-        val brdUserAgent = "${APIClient.UA_APP_NAME}${BuildConfig.VERSION_CODE} $deviceUserAgent ${APIClient.UA_PLATFORM}${Build.VERSION.RELEASE}"
+        val brdUserAgent =
+            "${APIClient.UA_APP_NAME}${BuildConfig.VERSION_CODE} $deviceUserAgent ${APIClient.UA_PLATFORM}${Build.VERSION.RELEASE}"
 
         return mapOf(
             APIClient.HEADER_IS_INTERNAL to if (BuildConfig.IS_INTERNAL_BUILD) BRConstants.TRUE else BRConstants.FALSE,

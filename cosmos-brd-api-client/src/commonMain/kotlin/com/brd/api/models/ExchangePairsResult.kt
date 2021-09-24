@@ -15,8 +15,8 @@ import kotlinx.serialization.Serializable
 sealed class ExchangePairsResult {
     @Serializable
     data class Success(
-        @SerialName("pair_count")
-        val pairCount: Int,
+        //@SerialName("pair_count")
+        //val pairCount: Int,
         @SerialName("supported_pairs")
         @Serializable(with = SupportedPairsTransformer::class)
         val supportedPairs: List<ExchangePair>,

@@ -13,11 +13,12 @@ import com.brd.api.models.ExchangeCountriesResult
 import com.brd.api.models.ExchangePairsResult
 import kotlin.test.*
 
+@Ignore
 class HydraApiClientTests {
 
-    private lateinit var apiClient: BRDApiClient
+    private lateinit var apiClient: BrdApiClient
 
-    private val authProvider: BRDAuthProvider = object : BRDAuthProvider {
+    private val authProvider: BrdAuthProvider = object : BrdAuthProvider.Base() {
         override var token: String?
             get() = fail()
             set(value) {}
@@ -29,11 +30,14 @@ class HydraApiClientTests {
             body: String,
             contentType: String,
             url: String
-        ): BRDAuthProvider.Signature = fail()
+        ): BrdAuthProvider.Signature = fail()
+
+        override fun signUrl(apiHost: BrdApiHost, path: String): String = ""
+        override fun walletId(): String? = null
     }
     @BeforeTest
     fun before() {
-        apiClient = BRDApiClient.create(authProvider)
+        apiClient = BrdApiClient.create(BrdApiHost.STAGING, authProvider)
     }
 
     @Test
@@ -78,7 +82,6 @@ class HydraApiClientTests {
 
         assertTrue(response is ExchangePairsResult.Success)
         assertTrue(response.supportedPairs.isNotEmpty())
-        assertEquals(response.supportedPairs.size, response.pairCount)
 
         assertNotNull(response.supportedPairs.find { (fromCode, toCode) ->
             fromCode == "usd" && toCode == "btc"

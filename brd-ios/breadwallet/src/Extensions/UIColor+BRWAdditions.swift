@@ -55,6 +55,18 @@ extension UIColor {
     static var greenCheck: UIColor {
         return UIColor.fromHex("06C441")
     }
+
+    static var brdRed: UIColor {
+        return UIColor.fromHex("EA5454")
+    }
+
+    static var brdYellow: UIColor {
+        return UIColor.systemYellow
+    }
+
+    static var brdGreen: UIColor {
+        return UIColor.fromHex("41BB85")
+    }
     
     static var disabledBackground: UIColor {
         return UIColor.fromHex("3E3C61")
@@ -333,5 +345,40 @@ extension UIColor {
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format: "#%06x", rgb)
+    }
+}
+
+// MARK: - Contrast
+
+extension UIColor {
+
+    static func contrastRatio(colorA: UIColor, colorB: UIColor) -> CGFloat {
+        let luminanceA = colorA.luminance()
+        let luminanceB = colorB.luminance()
+
+        let luminanceDarker = min(luminanceA, luminanceB)
+        let luminanceLighter = max(luminanceA, luminanceB)
+
+        return (luminanceLighter + 0.05) / (luminanceDarker + 0.05)
+    }
+
+    func contrastRatio(with color: UIColor) -> CGFloat {
+        return UIColor.contrastRatio(colorA: self, colorB: color)
+    }
+
+    func luminance() -> CGFloat {
+        let ciColor = CIColor(color: self)
+
+        func adjust(colorComponent: CGFloat) -> CGFloat {
+            if colorComponent < 0.04045 {
+               return (colorComponent / 12.92)
+            } else {
+                return pow((colorComponent + 0.055) / 1.055, 2.4)
+            }
+        }
+
+        return 0.2126 * adjust(colorComponent: ciColor.red) +
+            0.7152 * adjust(colorComponent: ciColor.green) +
+            0.0722 * adjust(colorComponent: ciColor.blue)
     }
 }

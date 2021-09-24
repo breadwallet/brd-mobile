@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#211F3F"
+    app:cardCornerRadius="6dp"
+    app:cornerFamily="rounded">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/iconColor"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:contentDescription="@null"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:src="@drawable/asset_icon_background_transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/labelTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            tools:visibility="visible"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/iconColor"
+            app:layout_constraintEnd_toEndOf="@+id/iconColor"
+            app:layout_constraintTop_toTopOf="@+id/iconColor"
+            app:layout_constraintBottom_toBottomOf="@+id/iconColor"/>
+
+        <TextView
+            android:id="@+id/iconLetter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mobile_font_bold"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@+id/iconColor"
+            app:layout_constraintBottom_toBottomOf="@+id/iconColor"
+            app:layout_constraintStart_toStartOf="@+id/iconColor"
+            app:layout_constraintEnd_toEndOf="@+id/iconColor"
+            tools:text="B"/>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:contentDescription="@null"
+            android:src="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintStart_toStartOf="@+id/iconColor"
+            app:layout_constraintEnd_toEndOf="@+id/iconColor"
+            app:layout_constraintTop_toTopOf="@+id/iconColor"
+            app:layout_constraintBottom_toBottomOf="@+id/iconColor"/>
+
+        <TextView
+            android:id="@+id/labelTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_gray"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/labelValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconColor"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Display Currency"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <TextView
+            android:id="@+id/labelValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="USD ($) - US Dollar"
+            app:layout_constraintTop_toBottomOf="@+id/labelTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <ImageView
+            android:id="@+id/imageBackIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_down_carrot"
+            android:scaleType="centerInside"
+            app:tint="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

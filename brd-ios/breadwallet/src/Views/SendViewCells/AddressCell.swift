@@ -9,11 +9,13 @@
 //
 
 import UIKit
+import Cosmos
 
 class AddressCell: UIView {
 
-    init(currency: Currency) {
+    init(currency: Currency, nativeCurrencyCode: String) {
         self.currency = currency
+        self.nativeCurrencyCode = nativeCurrencyCode
         super.init(frame: .zero)
         setupViews()
     }
@@ -25,7 +27,7 @@ class AddressCell: UIView {
     var textDidChange: ((String?) -> Void)?
     var didBeginEditing: (() -> Void)?
     var didReceivePaymentRequest: ((PaymentRequest) -> Void)?
-    var didReceiveResolvedAddress: ((Result<(String, String?), ResolvableError>, ResolvableType) -> Void)?
+    var didReceiveResolvedAddress: ((AddressResult?, AddressType) -> Void)?
     
     func setContent(_ content: String?) {
         contentLabel.text = content
@@ -64,7 +66,7 @@ class AddressCell: UIView {
     private let resolvedAddressLabel = ResolvedAddressLabel()
     private let activityIndicator = UIActivityIndicatorView(style: .gray)
     
-    func showResolveableState(type: ResolvableType, address: String) {
+    func showResolveableState(type: AddressType, address: String) {
         textField.resignFirstResponder()
         label.isHidden = true
         resolvedAddressLabel.isHidden = false
@@ -93,6 +95,7 @@ class AddressCell: UIView {
     }
     
     fileprivate let currency: Currency
+    fileprivate let nativeCurrencyCode: String
 
     private func setupViews() {
         addSubviews()
@@ -206,11 +209,15 @@ extension AddressCell: UITextFieldDelegate {
         tapView.isUserInteractionEnabled = true
         contentLabel.text = textField.text
         
-        if let text = textField.text, let resolver = ResolvableFactory.resolver(text) {
+        if let text = textField.text,
+           let addressType = Backend.addressResolver.getAddressType(address: text) {
             showResolvingSpinner()
-            resolver.fetchAddress(forCurrency: currency) { result in
-                DispatchQueue.main.async {
-                    self.didReceiveResolvedAddress?(result, resolver.type)
+            DispatchQueue.main.async {
+                Backend.addressResolver.resolveAddress(addressType: addressType,
+                                                       target: text,
+                                                       currencyCode: self.currency.code,
+                                                       nativeCurrencyCode: self.nativeCurrencyCode) { (result, _) in
+                    self.didReceiveResolvedAddress?(result, addressType)
                 }
             }
         }

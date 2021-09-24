@@ -11,11 +11,10 @@
 import UIKit
 import WalletKit
 import UserNotifications
+import Cosmos
 #if canImport(WidgetKit)
 import WidgetKit
 #endif
-
-
 
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
@@ -168,35 +167,102 @@ class ApplicationController: Subscriber, Trackable {
     /// Core sync must not begin until KVStore sync completes
     private func setupSystem(with account: Account) {
         // Authenticate with BRDAPI backend
-        Backend.connect(authenticator: keyStore as WalletAuthenticator)
-        Backend.sendLaunchEvent()
-        Backend.apiClient.analytics?.onWalletReady()
-        // Begin KVStore key sync
-        DispatchQueue.global(qos: .userInitiated).async {
-            Backend.kvStore?.syncAllKeys { [weak self] error in
-                print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
-                Store.trigger(name: .didSyncKVStore)
-                guard let weakSelf = self else { return }
-                weakSelf.setWalletInfo(account: account)
-                weakSelf.authenticateWithBackend { jwt in
-                    // Begin Core stand-up
-                    weakSelf.coreSystem.create(account: account,
-                                           authToken: jwt,
-                                           btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
-                        weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
-                                                             system: weakSelf.coreSystem,
-                                                             window: weakSelf.window,
-                                                             alertPresenter: weakSelf.alertPresenter)
-                        weakSelf.coreSystem.connect()
+        let hydraActivated = UserDefaults.cosmos.hydraActivated
+        Backend.connect(authenticator: self.keyStore as WalletAuthenticator)
+        preflightCheck {
+            Backend.sendLaunchEvent()
+            Backend.apiClient.analytics?.onWalletReady()
+            // Begin KVStore key sync
+            DispatchQueue.global(qos: .userInitiated).async {
+                Backend.kvStore?.syncAllKeys { [weak self] error in
+                    print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
+                    Store.trigger(name: .didSyncKVStore)
+                    guard let weakSelf = self else {
+                        return
+                    }
+                    weakSelf.setWalletInfo(account: account)
+                    weakSelf.authenticateWithBackend { jwt in
+                        // Begin Core stand-up
+                        weakSelf.coreSystem.create(
+                            account: account,
+                            authToken: jwt,
+                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL
+                        ) {
+                            weakSelf.modalPresenter = ModalPresenter(
+                                keyStore: weakSelf.keyStore,
+                                system: weakSelf.coreSystem,
+                                window: weakSelf.window,
+                                alertPresenter: weakSelf.alertPresenter
+                            )
+                            weakSelf.coreSystem.connect()
+                            weakSelf.updateETHAddress(
+                                initial: hydraActivated,
+                                current: UserDefaults.cosmos.hydraActivated
+                            )
+                        }
                     }
                 }
-                
+            }
+            Backend.apiClient.updateExperiments()
+            Backend.apiClient.fetchAnnouncements()
+        }
+    }
+
+    private func preflightCheck(_ handler: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+
+            let authProvider = IosBrdAuthProvider(
+                walletAuthenticator: self.keyStore
+            )
+
+            guard !UserDefaults.cosmos.hydraActivated, authProvider.hasKey() else {
+                handler?()
+                return
+            }
+
+            Backend.brdApi.preflight() { preflight, _ in
+                if preflight?.activate ?? false {
+                    UserDefaults.cosmos.hydraActivated = true
+                    authProvider.token = nil
+                    Backend.brdApi.host = BrdApiHost.Companion().hostFor(
+                        isDebug: (E.isDebug || E.isTestFlight),
+                        isHydraActivated: true
+                    )
+                    Backend.brdApi.getMe { _, _ in
+                        handler?()
+                    }
+                } else {
+                    handler?()
+                }
             }
         }
-        Backend.apiClient.updateExperiments()
-        Backend.apiClient.fetchAnnouncements()
     }
-    
+
+    private func updateETHAddress(initial: Bool, current: Bool, retry: Int = 3) {
+        guard current && !initial else {
+            return
+        }
+
+        let wallets = coreSystem.wallets
+
+        guard let pair = wallets.first(where: { $0.1.currency.isEthereum }) else {
+            // NOTE: There is not easy way of knowing when exactly eth wallet
+            // is loaded in core. Hence we retry couple of times
+            if retry == 0 {
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                self.updateETHAddress(initial: initial, current: current, retry: retry - 1)
+            }
+            return
+        }
+
+        Backend.brdApi.setMe(
+            ethereumAddress: pair.1.receiveAddress,
+            completionHandler: { _, _ in  }
+        )
+    }
+
     private func handleDeferedLaunchURL() {
         // deep link handling
         self.urlController = URLController(walletAuthenticator: self.keyStore)
@@ -361,9 +427,6 @@ class ApplicationController: Subscriber, Trackable {
                 for (n, e) in errors {
                     print("Bundle \(n) ran update. err: \(String(describing: e))")
                 }
-                DispatchQueue.main.async {
-                    self.modalPresenter?.preloadSupportCenter()
-                }
             }
         }
     }
@@ -405,11 +468,19 @@ class ApplicationController: Subscriber, Trackable {
         }
         
         homeScreen.didTapBuy = {
-            Store.perform(action: RootModalActions.Present(modal: .buy(currency: nil)))
+            if UserDefaults.debugNativeExchangeEnabled {
+                Store.perform(action: RootModalActions.Present(modal: .buy(currency: nil)))
+            } else {
+                Store.perform(action: RootModalActions.Present(modal: .buyLegacy(currency: nil)))
+            }
         }
         
         homeScreen.didTapTrade = {
-            Store.perform(action: RootModalActions.Present(modal: .trade))
+            if UserDefaults.debugNativeExchangeEnabled {
+                Store.perform(action: RootModalActions.Present(modal: .trade))
+            } else {
+                Store.perform(action: RootModalActions.Present(modal: .tradeLegacy))
+            }
         }
         
         homeScreen.didTapMenu = { [unowned self] in
@@ -465,15 +536,16 @@ class ApplicationController: Subscriber, Trackable {
         while let newTopViewController = topViewController?.presentedViewController {
             topViewController = newTopViewController
         }
+
         topViewController?.present(activity, animated: true, completion: nil)
-        
+        WebViewController.cleanAllCookies()
         let success = keyStore.wipeWallet()
         guard success else { // unexpected error writing to keychain
             activity.dismiss(animated: true)
             topViewController?.showAlert(title: S.WipeWallet.failedTitle, message: S.WipeWallet.failedMessage)
             return
         }
-        
+
         self.coreSystem.shutdown {
             DispatchQueue.main.async {
                 Backend.disconnectWallet()

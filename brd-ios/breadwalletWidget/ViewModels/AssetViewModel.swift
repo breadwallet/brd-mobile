@@ -148,8 +148,9 @@ extension AssetViewModel {
         guard let price = price else {
             return "-"
         }
-        let symbol = WidgetFormatter.currencySymbolByCode(config.quoteCurrencyCode)
+        let symbol = Locale.currencySymbolByCode(config.quoteCurrencyCode)
         WidgetFormatter.price.currencySymbol = symbol
+        WidgetFormatter.price.minimumFractionDigits = price > 99 ? 0 : 2
         WidgetFormatter.price.maximumFractionDigits = price > 999 ? 0 : 2
         return WidgetFormatter.price.string(from: NSNumber(value: price)) ?? "-"
     }

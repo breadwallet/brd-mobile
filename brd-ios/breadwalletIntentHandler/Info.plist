@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.11.2</string>
+	<string>4.12.3</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>2</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -32,6 +32,7 @@
 			<array>
 				<string>AssetIntent</string>
 				<string>AssetListIntent</string>
+				<string>BlockClockIntent</string>
 				<string>PortfolioIntent</string>
 			</array>
 		</dict>

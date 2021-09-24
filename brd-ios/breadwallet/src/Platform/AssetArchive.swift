@@ -67,6 +67,14 @@ open class AssetArchive {
             // we do not have the archive, download a fresh copy
             return downloadCompleteArchive(completionHandler: completionHandler)
         }
+        
+        do {
+            let extractedContents = try fileManager.contentsOfDirectory(atPath: extractedPath)
+            if extractedContents.isEmpty {
+                try self.extractArchive()
+            }
+        } catch _ {
+        }
         apiClient.getAssetVersions(name) { (versions, err) in
             DispatchQueue.global(qos: .utility).async {
                 if let err = err {

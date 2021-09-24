@@ -160,6 +160,9 @@ dependencies {
     implementation(project(":brd-android:app-core"))
     implementation(Libs.WalletKit.CoreAndroid)
 
+    implementation(Libs.Mobiuskt.Coroutines)
+    implementation(Libs.Mobiuskt.Android)
+
     // AndroidX
     implementation(Libs.Androidx.Biometric)
     implementation(Libs.Androidx.LifecycleExtensions)
@@ -213,7 +216,9 @@ dependencies {
 
     // Kotlin libraries
     implementation(Libs.Kotlin.StdLibJdk8)
-    implementation(Libs.Coroutines.Core)
+    implementation(Libs.Coroutines.Core) {
+        version { strictly(brd.COROUTINES_VERSION) }
+    }
     implementation(Libs.Coroutines.Android)
     testImplementation(Libs.Coroutines.Test)
     testImplementation(Libs.Kotlin.Test)

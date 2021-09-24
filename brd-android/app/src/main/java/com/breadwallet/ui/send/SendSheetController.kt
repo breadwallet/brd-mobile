@@ -19,6 +19,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
+import com.brd.addressresolver.AddressType
 import com.breadwallet.R
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
@@ -121,7 +122,7 @@ class SendSheetController(args: Bundle? = null) :
             metaDataEffectHandler = {
                 MetaDataEffectHandler(it, direct.instance(), direct.instance())
             },
-            addressServiceLocator = direct.instance()
+            addressResolver = direct.instance()
         )
 
     private val binding by viewBinding(ControllerSendSheetBinding::inflate)

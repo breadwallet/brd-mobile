@@ -28,19 +28,19 @@
 "Account.exchangeRate" = "%1$@ per %2$@";
 /* Loading Wallet Message */
 "Account.loadingMessage" = "Caricamento Portafoglio";
-/* Confirm Account Creation mesage body */
+/* Prompt text for confirmation dialog for Hedera account creation */
 "AccountCreation.body" = "Crea un account Hedera solo se intendi conservare HBAR nel tuo portafoglio.";
-/* Create Account button label */
+/* Label for create Hedera account button */
 "AccountCreation.create" = "Crea account";
 /* Creating Account progress Label */
 "AccountCreation.creating" = "Creazione dell'account";
-/* Creating Account progress Label */
+/* Error message for Hedera account creation failure */
 "AccountCreation.error" = "Si è verificato un errore durante la creazione dell'account. Per favore riprova più tardi.";
-/* Not Now button label. */
+/* Label for cancel button on confirmation dialog for Hedera account creation */
 "AccountCreation.notNow" = "Non ora";
 /* Creating Account progress Label */
 "AccountCreation.timeout" = "La richiesta è scaduta. Per favore riprova più tardi.";
-/* Confirm Account Creation Title */
+/* Title for confirmation dialog for Hedera account creation */
 "AccountCreation.title" = "Conferma creazione account";
 /* Default wallet name */
 "AccountHeader.defaultWalletName" = "Il Mio BRD";
@@ -215,7 +215,7 @@
 "Confirmation.amountLabel" = "Somma da inviare:";
 "Confirmation.destinationTag" = "Tag di destinazione";
 "Confirmation.destinationTag_EmptyHint" = "(vuoto)";
-/* Network Fee: ($1.00) */
+/* Network Fee: */
 "Confirmation.feeLabel" = "Commissione per la rete:";
 /* Network Fee: (ETH) */
 "Confirmation.feeLabelETH" = "Commissione della rete (ETH):";
@@ -288,6 +288,181 @@
 "ErrorMessages.messagingUnavailableTitle" = "Messaggistica Non Disponibile";
 /* Fingerprint was not recognized by the scanner, please try scanning again */
 "ErrorMessages.touchIdFailed.android" = "Impronta non riconosciuta. Per favore, prova di nuovo.";
+/* Exchange available balance label */
+"Exchange.available" = "Available: %@";
+/* Exchange buy title */
+"Exchange.buy" = "Buy";
+/* CTA button title exchange screen */
+"Exchange.CTA.loading" = "Loading ...";
+/* CTA button title exchange screen */
+"Exchange.CTA.next" = "Next";
+/* CTA button title exchange screen */
+"Exchange.CTA.preview" = "Preview";
+/* CTA button processing state */
+"Exchange.CTA.processing" = "Processing ...";
+/* CTA button title exchange screen */
+"Exchange.CTA.retry" = "Retry";
+/* CTA action exchange to set to max trade amount */
+"Exchange.CTA.setMax" = "Set amount to max %@";
+/* CTA action exchange to set to min trade amount
+CTA action exchange to set to min trade amount */
+"Exchange.CTA.setMin" = "Set amount to min %@";
+/* Initialization error alert body */
+"Exchange.ErrorState.initialization" = "Initialization error";
+/* Insufficient chain error alert body */
+"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some";
+/* Network error alert body */
+"Exchange.ErrorState.network" = "Network error";
+/* Order error alert body */
+"Exchange.ErrorState.order" = "Order error";
+/* Transaction error alert body */
+"Exchange.ErrorState.transaction" = "Transaction error";
+/* Unknown error alert body */
+"Exchange.ErrorState.unknown" = "Unknown error";
+/* Region error alert body */
+"Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region";
+/* Exchange label from */
+"Exchange.from" = "From";
+/* purchase limit */
+"Exchange.limit" = "limit";
+/* Loading available crypto assets */
+"Exchange.loadingAssets" = "Loading Assets";
+/* Exchange fee title */
+"Exchange.offer.fees" = "Fee";
+/* Loading offers subtitle */
+"Exchange.offer.gatheringSubtitle" = "Fetching partner rates";
+/* Loading offers title */
+"Exchange.offer.gatheringTitle" = "One moment...";
+/* Initializing offers title */
+"Exchange.offer.initTitle" = "Offers will appear here";
+/* Offer subtitle limit max */
+"Exchange.offer.limitMax" = "Limit max";
+/* Offer subtitle limit min */
+"Exchange.offer.limitMin" = "Limit min";
+/* Offer subtitle set max amount */
+"Exchange.offer.maxAmount" = "Maximum amount";
+/* Offer subtitle set min amount */
+"Exchange.offer.minAmount" = "Minimum amount";
+/* Network fee label */
+"Exchange.offer.networkFee" = "Network Fee";
+/* No offers subtitle */
+"Exchange.offer.noneSubtitle" = "Try another amount";
+/* No offers title */
+"Exchange.offer.noneTitle" = "No offers available";
+/* Offers navigation title */
+"Exchange.offer.offers" = "Offers";
+/* Processing fee label */
+"Exchange.offer.processingFee" = "Processing Fee";
+/* Provider fee label */
+"Exchange.offer.providerFee" = "Provider Fee";
+/* Exchange rate */
+"Exchange.offer.rate" = "Rate";
+/* Offers section title */
+"Exchange.offer.sectionTitle" = "All values displayed are estimates and susceptible to market price fluctuations.";
+/* Offer total */
+"Exchange.offer.total" = "Total";
+/* Receipt item label bought */
+"Exchange.Order.bought" = "Bought";
+/* "CTA button label */
+"Exchange.Order.CTA.great" = "Great!";
+/* "View receipt */
+"Exchange.Order.CTA.receipt" = "View Receipt";
+/* Receipt item label delivery */
+"Exchange.Order.delivery" = "Delivery";
+/* Receipt item label fees */
+"Exchange.Order.fees" = "Fees";
+/* Order footer info explaining exchange rate estimate */
+"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
+/* Receipt item label for */
+"Exchange.Order.for" = "For";
+/* Receipt item label method */
+"Exchange.Order.method" = "Method";
+/* Status creating order */
+"Exchange.Order.status.creating" = "Creating order";
+/* Status failed order */
+"Exchange.Order.status.failed" = "Order failed";
+/* Status processing order */
+"Exchange.Order.status.processing" = "Processing";
+/* Status sent order */
+"Exchange.Order.status.sent" = "Order sent!";
+/* Status successful order */
+"Exchange.Order.status.successful" = "Order Successful!";
+/* Over the min limit */
+"Exchange.over" = "Over";
+/* Rewards status active */
+"Exchange.Preview.active" = "Active";
+/* Trade preview CTA */
+"Exchange.Preview.CTA" = "Trade Now";
+/* Trade preview footer */
+"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
+/* Trade preview info item label */
+"Exchange.Preview.fulfilledBy" = "Fulfilled by";
+/* Rewards status inactive */
+"Exchange.Preview.inactive" = "Inactive";
+/* Rewards info */
+"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
+/* Trade preview info item label */
+"Exchange.Preview.networkFee" = "Network Fee";
+/* Trade preview info item label */
+"Exchange.Preview.partnerFee" = "Partner Fee";
+/* Trade preview info item label */
+"Exchange.Preview.rate" = "Rate";
+/* Preview items rewards label */
+"Exchange.Preview.rewards" = "BRD Rewards";
+/* Trade preview navigation title */
+"Exchange.Preview.title" = "Trade preview";
+/* Exchange select asset button label */
+"Exchange.selectAsset" = "Select Asset";
+/* Exchange sell title */
+"Exchange.sell" = "Sell";
+/* CTA button title for region settings */
+"Exchange.Settings.applyRegion" = "Apply region";
+/* County label */
+"Exchange.Settings.country" = "Country";
+/* Currency label */
+"Exchange.Settings.currency" = "Display Currency";
+/* Region label */
+"Exchange.Settings.region" = "State";
+/* Region settings screen title */
+"Exchange.Settings.title" = "Set Region";
+/* Exchange label to */
+"Exchange.to" = "To";
+/* Exchange trade title */
+"Exchange.trade" = "Trade";
+/* Trade cancel alert body */
+"Exchange.tradeCancelAlertBody" = "All your progress will be lost.";
+/* Trade cancel alert no button */
+"Exchange.tradeCancelAlertNo" = "No";
+/* Trade cancel alert title */
+"Exchange.tradeCancelAlertTitle" = "Are you sure?";
+/* Trade cancel alert yes button */
+"Exchange.tradeCancelAlertYes" = "Yes";
+/* Crypto transfer error description */
+"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
+/* Crypto transfer error description */
+"Exchange.TransferError.loadInput" = "Failed to load input";
+/* Crypto transfer error description */
+"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
+/* Crypto transfer error description */
+"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
+/* Crypto transfer error description */
+"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
+/* Under the min limit */
+"Exchange.under" = "Under";
+/* Offer purchase method ACH */
+"Exchange.viaACH" = "%@ via ACH";
+/* Offer purchase method card */
+"Exchange.viaCard" = "%@ via Card";
+/* Offer purchase method crypto */
+"Exchange.viaCrypto" = "%@ via Crypto";
+/* Offer purchase method SEPA */
+"Exchange.viaSEPA" = "%@ via SEPA";
+/* Exchange label with */
+"Exchange.with" = "With";
 "ExportConfirmation.cancel" = "Annulla";
 "ExportConfirmation.continue" = "Continua";
 "ExportConfirmation.message" = "Questo genererà un file CSV che includerà tutte le transazioni completate da tutti i portafogli abilitati.";
@@ -357,17 +532,17 @@
 "FingerprintSettings.unlockApp" = "Utilizzare l'impronta digitale per sbloccare BRD";
 /* This is the section that allows administration of the user's wallet */
 "HomeScreen.admin" = "Amministratore";
-/* Home screen menu button to buy some bitcoin */
+/* "home screen toolbar button */
 "HomeScreen.buy" = "Acquistare";
 /* home screen toolbar 'Buy & Sell' button */
 "HomeScreen.buyAndSell" = "Comprare & Vendere";
-/* Menu button on the home screen toolbar */
+/* "home screen toolbar button */
 "HomeScreen.menu" = "Menu";
 /* This section lists the users wallets */
 "HomeScreen.portfolio" = "Portafoglio";
 /* Label for the total balance of all the user's assets (style is all lower case if your language permits) */
 "HomeScreen.totalAssets" = "tutti gli asset";
-/* (Tap here to) trade (your assets for other assets) */
+/* "home screen toolbar button */
 "HomeScreen.trade" = "Scambio";
 /* Checking private key balance progress view text */
 "Import.checking" = "Verifica del saldo della chiave privata...";
@@ -457,9 +632,9 @@
 "MenuButton.addWallet" = "Aggiungi portafoglio";
 /* Menu button title */
 "MenuButton.lock" = "Blocca Portafoglio";
-/* (Click here to) manage (your list of) wallets */
+/* "Menu button title */
 "MenuButton.manageWallets" = "Gestisci i Portafogli";
-/* (press here to) scan (a) QR code */
+/* "Menu button title */
 "MenuButton.scan" = "Scansione codice QR";
 /* Menu button title */
 "MenuButton.security" = "Centro Sicurezza";
@@ -609,7 +784,7 @@
 "Prompts.UpgradePin.body" = "BRD è stato aggiornato per l'utilizzo di un PIN a 6 cifre. Tocca qui per aggiornare.";
 /* Upgrade PIN prompt title. */
 "Prompts.UpgradePin.title" = "Aggiorna il PIN";
-/* Body text for the push notifications prompt. */
+/* Body text for push notifications opt-in prompt. */
 "PushNotifications.body" = "Attiva le notifiche push e sii il primo a conoscere le nuove funzionalità e le offerte speciali.";
 /* Push notifications are disabled alert title" */
 "PushNotifications.disabled" = "Notifiche Disabilitate";
@@ -625,7 +800,7 @@
 "PushNotifications.off" = "Spento";
 /* Push notifications are on label */
 "PushNotifications.on" = "Acceso";
-/* Push notifications settings view title label */
+/* Title for push notifications opt-in prompt. */
 "PushNotifications.title" = "Rimani nel circuito";
 /* Push notifications settings failed to update settings on the back end */
 "PushNotifications.updateFailed" = "Impossibile aggiornare le impostazioni delle notifiche push";
@@ -673,7 +848,7 @@
 "RecoverWallet.subheader" = "Inserisci la frase di ripristino per il portafoglio che desideri recuperare.";
 /* Reset PIN with paper key: sub-header */
 "RecoverWallet.subheader_reset_pin" = "Per reimpostare il PIN, inserisci le parole della frase di recupero nelle caselle seguenti.";
-/* Instructs the user to enter words from the set of recovery key words. */
+/* Instructs the user to enter words from the set of recovery phrase words. */
 "RecoveryKeyFlow.confirmRecoveryInputError" = "La parola che hai inserito è sbagliata. Prova di nuovo per favore.";
 /* Instructs the user to enter words from the set of recovery phrase words. */
 "RecoveryKeyFlow.confirmRecoveryKeySubtitle" = "Quasi fatto! Inserisci le seguenti parole dalla tua frase di recupero.";
@@ -685,25 +860,25 @@
 "RecoveryKeyFlow.enterRecoveryKeySubtitle" = "Inserisci la tua frase di recupero per scollegare questo portafoglio dal tuo dispositivo.";
 /* Body text for an alert dialog asking the user whether to set up the recovery phrase later */
 "RecoveryKeyFlow.exitRecoveryKeyPromptBody" = "Sei sicuro di voler impostare la tua frase di recupero più tardi?";
-/* Title for an alert dialog asking the user whether to set up the recovery key later */
+/* Title for an alert dialog asking the user whether to set up the recovery phrase later */
 "RecoveryKeyFlow.exitRecoveryKeyPromptTitle" = "Imposta più tardi";
 /* Button text for the 'Generate Recovery Phrase' button */
 "RecoveryKeyFlow.generateKeyButton" = "Genera frase di ripristino";
-/* Subtext for the recovery key landing page. */
+/* Subtext for the recovery phrase landing page. */
 "RecoveryKeyFlow.generateKeyExplanation" = "La chiave è necessaria per recuperare il tuo denaro nel caso cambiassi o perdessi il telefono.";
 /* Default title for the recovery phrase landing page */
 "RecoveryKeyFlow.generateKeyTitle" = "Genera la tua frase di recupero privata";
-/* Title for a button that takes the user to the wallet after setting up the recovery key. */
+/* Title for a button that takes the user to the wallet after setting up the recovery phrase. */
 "RecoveryKeyFlow.goToWalletButtonTitle" = "Vai al portafoglio";
-/* Hint text for recovery key intro page, e.g., Step 2 */
+/* Hint text for recovery phrase intro page, e.g., Step 2 */
 "RecoveryKeyFlow.howItWorksStep" = "Come funziona - Passo %1$@";
 /* Error text displayed when the user enters an incorrect recovery phrase */
 "RecoveryKeyFlow.invalidPhrase" = "Alcune delle parole che hai inserito non corrispondono alla tua frase di recupero. Per favore riprova.";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.keepSecure" = "Tienila al sicuro";
 /* Informs the user that the recovery is only required for recovering a wallet. */
 "RecoveryKeyFlow.keyUseHint" = "La tua chiave è necessaria solo per il recupero, non per l'accesso giornaliero al tuo portafoglio.";
-/* Reminds the user not to take screenshots or email the recovery key words */
+/* Reminds the user not to take screenshots or email the recovery phrase words */
 "RecoveryKeyFlow.noScreenshotsOrEmailWarning" = "Per ragioni di sicurezza non catturare lo schermo o non mandare via email queste parole.";
 /* Recommends that the user avoids capturing the paper key with a screenshot */
 "RecoveryKeyFlow.noScreenshotsRecommendation" = "Annota la tua chiave su un foglio di carta e controllane la correttezza. Catturare un'immagine dello schermo non è consigliato per ragioni di sicurezza.";
@@ -711,19 +886,19 @@
 "RecoveryKeyFlow.recoveryYourWallet" = "Recupera il tuo portafoglio.";
 /* Subtitle displayed when the user starts the process of recovering a wallet */
 "RecoveryKeyFlow.recoveryYourWalletSubtitle" = "Inserisci la frase di recupero del portafoglio che vuoi recuperare.";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.relaxBuyTrade" = "Rilassati, compra e fai affari";
-/* Reminds the user to write down the recovery key words. */
+/* Reminds the user to write down the recovery phrase words. */
 "RecoveryKeyFlow.rememberToWriteDownReminder" = "Ricorda di annotare queste parole. Torna indietro se ti sei dimenticato.";
 /* Instruction displayed when the user is resetting the PIN, which requires the recovery phrase to be entered */
 "RecoveryKeyFlow.resetPINInstruction" = "Inserisci la frase di recupero per reimpostare il PIN.";
 /* Assures the user that BRD will keep the user's funds secure. */
 "RecoveryKeyFlow.securityAssurance" = "Compra e fai affari sapendo che i tuoi fondi sono protetti dalla migliore sicurezza e privacy sul mercato.";
-/* Recommends that the user stores the recovery key in a secure location */
+/* Recommends that the user stores the recovery phrase in a secure location */
 "RecoveryKeyFlow.storeSecurelyRecommendation" = "Conserva la tua chiave in un luogo sicuro. Questa è l'unica maniera per recuperare il tuo portafoglio. BRD non ne mantiene una copia.";
 /* Title for the success page after the recovery phrase has been set up */
 "RecoveryKeyFlow.successHeading" = "Congratulazioni! Hai completato la configurazione della frase di recupero.";
-/* Subtitle for the success page after the recovery key has been set up */
+/* Subtitle for the success page after the recovery phrase has been set up */
 "RecoveryKeyFlow.successSubheading" = "Sei pronto per depositare, commerciare e comprare criptovaluta dal tua portafoglio BRD.";
 /* Title displayed to the user on the intro screen when unlinking a wallet */
 "RecoveryKeyFlow.unlinkWallet" = "Scollega il tuo portafoglio da questo dispositivo.";
@@ -735,11 +910,11 @@
 "RecoveryKeyFlow.wipeWallet" = "Scollega il tuo portafoglio da questo dispositivo.";
 /* Subtitle displayed to the user on the intro screen when wiping a wallet. */
 "RecoveryKeyFlow.wipeWalletSubtext" = "Iniziate un nuovo portafoglio cancellando il portafoglio attuale dal vostro dispositivo.";
-/* Title for recovery key intro page */
+/* Title for recovery phrase intro page */
 "RecoveryKeyFlow.writeItDown" = "Annota la tua chiave";
 /* Title for the recovery phrase landing page if the key has already been generated. */
 "RecoveryKeyFlow.writeKeyAgain" = "Annota di nuovo la frase di recupero";
-/* Subtitle for the write recovery key screen */
+/* Subtitle for the write recovery phrase screen */
 "RecoveryKeyFlow.writeKeyScreenSubtitle" = "Annota le seguenti parole in ordine.";
 /* Title for the write recovery phrase screen */
 "RecoveryKeyFlow.writeKeyScreenTitle" = "La tua frase di recupero";
@@ -779,6 +954,8 @@
 "RewardsView.normalTitle" = "Benefici";
 /* Scan bitcoin address camera flash toggle */
 "Scanner.flashButtonLabel" = "Flash della Fotocamera";
+/* Device without camera error */
+"Scanner.noCamera" = "No camera found";
 /* (alert dialog message) Would you like to send a [Bitcoin / Bitcoin Cash / Ethereum] payment to this address?") */
 "Scanner.paymentPromptMessage" = "Desideri inviare un pagamento di %1$@ a questo indirizzo?";
 /* alert dialog title */
@@ -879,7 +1056,7 @@
 "Send.legacyAddressWarning" = "Attenzione: questo è un indirizzo bitcoin di tipo legacy. Sei sicuro di voler inviare dei Bitcoin Cash a questo indirizzo?";
 /* We are loading the request (now) */
 "Send.loadingRequest" = "Caricamento della richiesta";
-/* Hedera Memo Tag Label */
+/* Placeholder text for Hedera Memo field on send screen */
 "Send.memoTag_optional" = "Hedera Memo (opzionale)";
 /* Transaction fee could not be be caluculated error. */
 "Send.nilFeeError" = "Fondi insufficienti per coprire le tariffe di transazione.";
@@ -915,6 +1092,9 @@
 "Send.title" = "Invia";
 /* Send money to label */
 "Send.toLabel" = "A";
+"Send.udomains_invalid" = "Invalid address.";
+"Send.udomains_noAddress" = "There is no %1$@ address associated with this address.";
+"Send.udomains_retrievalError" = "There was an error retrieving this address. Please try again later.";
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Gli indirizzi Bitcoin dovrebbero essere utilizzati una sola volta.";
 /* Adress already used alert message - second part */
@@ -963,6 +1143,8 @@
 "Settings.review" = "Scrivi una Recensione";
 /* Rewards menu item */
 "Settings.rewards" = "Compensi";
+/* Share logs sheet label */
+"Settings.share" = "Share";
 /* Share anonymous data label */
 "Settings.shareData" = "Condividi Dati Anonimi";
 /* "Enables sharing balance to widget" */
@@ -1003,9 +1185,12 @@
 /* Baker cell: Free Space field header */
 "Staking.cellFreeSpaceHeader" = "Spazio libero";
 "Staking.changeValidator" = "Modificare";
+/* Body copy for staking modal */
 "Staking.descriptionTezos" = "Delega il tuo account Tezos a un validatore per guadagnare una ricompensa mantenendo la piena sicurezza e il controllo delle tue monete.";
 /* Baker cell: Fee field header */
 "Staking.feeHeader" = "Commissione:";
+/* Error loading bakers message */
+"Staking.loadingBakerError" = "An error occurred while loading baker information. Please try again later.";
 /* Status label: current staking transaction is pending */
 "Staking.pendingTransaction" = "Transazione in sospeso ...";
 /* Button label: remove selected baker */
@@ -1014,6 +1199,7 @@
 "Staking.roiHeader" = "Est. ROI";
 /* Modal title: Select Baker modal */
 "Staking.selectBakerTitle" = "Seleziona XTZ Delegate";
+/* Button label: Stake the selected baker */
 "Staking.stake" = "Palo";
 /* UI flag showing state of Tezos staking */
 "Staking.stakingActiveFlag" = "ATTIVO";
@@ -1021,11 +1207,12 @@
 "Staking.stakingInactiveFlag" = "NON ATTIVO";
 /* UI flag showing state of Tezos staking */
 "Staking.stakingPendingFlag" = "IN ATTESA DI";
-/* Staking banner title */
+/* Modal title: Staking modal */
 "Staking.stakingTitle" = "Picchettamento";
 "Staking.stakingTo" = "puntando a %1$s";
 "Staking.statusPending" = "In attesa";
 "Staking.statusStaked" = "Staked!";
+/* Headline for staking modal */
 "Staking.subTitle" = "Guadagna denaro mentre tieni";
 /* Tezos XTZ baker asset type */
 "Staking.tezosDune" = "Tezos e Dune";
@@ -1034,6 +1221,7 @@
 /* Tezos XTZ baker asset type */
 "Staking.tezosOnly" = "Solo Tezos";
 "Staking.title" = "Puntata %1$s";
+/* Button label: Unstake the selected baker */
 "Staking.unstake" = "Non prendere";
 "Staking.validatorHint" = "Immettere l'indirizzo del validatore";
 /* button label */
@@ -1060,7 +1248,7 @@
 "SyncingView.activity" = "Attività";
 /* Syncing view connectiong state header text */
 "SyncingView.connecting" = "Connessione in corso";
-/* The sync has failed (to complete) */
+/* "Sync failed label */
 "SyncingView.failed" = "Sincronizzazione fallita";
 /* Syncing view header text */
 "SyncingView.header" = "Sincronizzazione";
@@ -1178,7 +1366,7 @@
 "TransactionDetails.addressViaHeader" = "Tramite";
 /* Amount section header */
 "TransactionDetails.amountHeader" = "Importo";
-/* "(it was worth) $100 when sent, (and it is worth) $200 now" */
+/* "(it was worth) $100 when received, (and it is worth) $200 now" */
 "TransactionDetails.amountWhenReceived" = "%1$@ al momento della ricezione, %2$@ ora";
 /* "(it was worth) $100 when sent, (and it is worth) $200 now" */
 "TransactionDetails.amountWhenSent" = "%1$@ al momento dell'invio, %2$@ ora";
@@ -1190,7 +1378,7 @@
 "TransactionDetails.commentsPlaceholder" = "Aggiungi promemoria...";
 /* Timestamp section header for complete tx */
 "TransactionDetails.completeTimestampHeader" = "Completata";
-/* Block height and confirmations label
+/* Confirmations label
 eg. 182930 (45061 confirmations) */
 "TransactionDetails.confirmationsLabel" = "Conferme";
 "TransactionDetails.destinationTag" = "Tag di destinazione";

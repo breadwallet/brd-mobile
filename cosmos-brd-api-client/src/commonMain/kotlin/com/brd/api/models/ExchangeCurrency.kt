@@ -21,6 +21,7 @@ data class ExchangeCurrency(
     val type: Type
 ) {
     fun isCrypto(): Boolean = type == Type.CRYPTO
+    fun isFiat(): Boolean = type == Type.FIAT
 
     @Serializable
     enum class Type {

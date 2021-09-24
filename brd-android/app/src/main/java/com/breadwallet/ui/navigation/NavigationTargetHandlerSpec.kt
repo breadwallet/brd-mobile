@@ -57,7 +57,13 @@ interface NavigationTargetHandlerSpec {
         is NavigationTarget.CreateGift -> createGift(effect)
         is NavigationTarget.ShareGift -> shareGift(effect)
         is NavigationTarget.SelectBakerScreen -> selectBaker(effect)
+        NavigationTarget.RegionPreferences -> regionPreferences()
+        is NavigationTarget.OrderHistory -> orderHistory(effect)
     }
+
+    fun orderHistory(effect: NavigationTarget.OrderHistory)
+
+    fun regionPreferences()
 
     fun metadataViewer()
 

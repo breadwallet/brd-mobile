@@ -36,13 +36,15 @@ fun Project.tryToDetectAndroidSdkPath(): File? {
 private var _tryAndroidSdkDirs: List<File>? = null
 val tryAndroidSdkDirs: List<File> get() {
     if (_tryAndroidSdkDirs == null) {
+        val userHome = System.getProperty("user.home")
         _tryAndroidSdkDirs = listOfNotNull(
-            File(System.getenv("ANDROID_HOME")),
-            File(System.getProperty("user.home"), "/Library/Android/sdk"), // MacOS
-            File(System.getProperty("user.home"), "/AppData/Local/Android/Sdk") // Windows
+            System.getenv("ANDROID_HOME")?.run(::File),
+            System.getenv("ANDROID_SDK_ROOT")?.run(::File),
+            userHome?.let { File(it , "/Library/Android/sdk") }, // MacOS
+            userHome?.let { File(it, "/AppData/Local/Android/Sdk") } // Windows
         )
     }
-    return _tryAndroidSdkDirs!!
+    return _tryAndroidSdkDirs ?: emptyList()
 }
 
 fun readSDKFromLocalProperties(
@@ -51,9 +53,7 @@ fun readSDKFromLocalProperties(
     val localPropertiesFile = File(outputFolder, "local.properties")
     if (localPropertiesFile.exists()) {
         val props = Properties().apply { load(localPropertiesFile.readText().reader()) }
-        if (props.getProperty("sdk.dir") != null) {
-            return props.getProperty("sdk.dir")!!
-        }
+        props.getProperty("sdk.dir")?.let { return it }
     }
     return null
 }

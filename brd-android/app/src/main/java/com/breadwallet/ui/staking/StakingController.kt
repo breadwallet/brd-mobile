@@ -8,6 +8,7 @@
  */
 package com.breadwallet.ui.uistaking
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
@@ -35,9 +36,7 @@ import com.breadwallet.ui.staking.*
 import com.breadwallet.ui.staking.Staking.E
 import com.breadwallet.ui.staking.Staking.F
 import com.breadwallet.ui.staking.Staking.M
-import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.PENDING_STAKE
-import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.PENDING_UNSTAKE
-import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.STAKED
+import com.breadwallet.ui.staking.Staking.M.ViewValidator.State.*
 import com.breadwallet.ui.web.WebController
 import com.platform.HTTPServer
 import com.squareup.picasso.Picasso
@@ -49,7 +48,7 @@ import org.kodein.di.erased.instance
 import java.io.File
 import java.math.BigDecimal
 import java.text.NumberFormat
-import java.util.Locale
+import java.util.*
 
 interface ConfirmationListener {
     fun onConfirmed()
@@ -170,22 +169,21 @@ class StakingController(
                 loadingBakersView.root.isVisible = isLoadingBakers
             }
 
-            ifChanged(M.SetValidator::selectedBaker, M.SetValidator::isCancellable) { ->
+
+            ifChanged(M.SetValidator::selectedBaker, M.SetValidator::isCancellable) {
                 bakerLayout.isVisible = selectedBaker != null
                 selectBakerLayout.isVisible = selectedBaker == null
                 buttonStake.isVisible = !isCancellable
                 layoutConfirmChange.isVisible = isCancellable
-
+                @SuppressLint("SetTextI18n")
                 if (selectedBaker != null) {
                     val formatter = NumberFormat.getPercentInstance()
-                    selectedFeePct.text = res.getString(
-                        R.string.Staking_feePct,
-                        "${formatter.format(selectedBaker.fee)}"
-                    )
+                    selectedFeePct.text =
+                        res.getString(R.string.Staking_feeHeader) + formatter.format(selectedBaker.fee)
                     selectedName.text = selectedBaker.name
                     formatter.maximumFractionDigits = 3
                     formatter.minimumFractionDigits = 3
-                    selectedRoiPct.text = "${formatter.format(selectedBaker.estimatedRoi)}"
+                    selectedRoiPct.text = formatter.format(selectedBaker.estimatedRoi)
                     Picasso.get().load(selectedBaker.logo).into(selectedBakerTokenIcon)
                 }
             }
@@ -209,7 +207,7 @@ class StakingController(
                 if (isWalletEmpty) {
                     labelStatus.setText(R.string.Send_insufficientFunds)
                 } else {
-                    val text =  when (transactionError) {
+                    val text = when (transactionError) {
                         is M.TransactionError.Unknown,
                         M.TransactionError.TransferFailed -> R.string.Transaction_failed
                         M.TransactionError.FeeEstimateFailed -> R.string.Send_noFeesError
@@ -241,16 +239,14 @@ class StakingController(
                 loadingView.isVisible = baker == null
                 stakedBaker.root.isVisible = baker != null
 
+                @SuppressLint("SetTextI18n")
                 if (baker != null) {
                     val formatter = NumberFormat.getPercentInstance()
                     stakedBaker.name.text = baker.name
-                    stakedBaker.feePct.text = res.getString(
-                        R.string.Staking_feePct,
-                        "${formatter.format(baker.fee)}"
-                    )
+                    stakedBaker.feePct.text = res.getString(R.string.Staking_feeHeader) + formatter.format(baker.fee)
                     formatter.maximumFractionDigits = 3
                     formatter.minimumFractionDigits = 3
-                    stakedBaker.roiPct.text = "${formatter.format(baker.estimatedRoi)}"
+                    stakedBaker.roiPct.text = formatter.format(baker.estimatedRoi)
                     Picasso.get().load(baker.logo).into(stakedBaker.bakerTokenIcon)
 
                 }

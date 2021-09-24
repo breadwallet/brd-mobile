@@ -178,6 +178,7 @@ public final class EventUtils {
     public static final String EVENT_SERVICE_ENS = "ens";
     public static final String EVENT_SERVICE_FIO = "fio";
     public static final String EVENT_SERVICE_PAY = "paystring";
+    public static final String EVENT_SERVICE_YAT = "yat";
 
     private static final String EVENTS_FOLDER_NAME = "events";
 

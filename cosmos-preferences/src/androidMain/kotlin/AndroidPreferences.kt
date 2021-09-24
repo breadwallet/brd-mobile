@@ -77,8 +77,8 @@ class AndroidPreferences(
         return Double.fromBits(prefs.getLong(key, defaultValue.toRawBits()))
     }
 
-    override fun getDoubleOrNull(name: String): Double? {
-        return if (contains(name)) getDouble(name, 0.0) else null
+    override fun getDoubleOrNull(key: String): Double? {
+        return if (contains(key)) getDouble(key, 0.0) else null
     }
 
     override fun putBoolean(key: String, value: Boolean) {

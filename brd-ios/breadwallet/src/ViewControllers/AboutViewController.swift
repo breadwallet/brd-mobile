@@ -22,7 +22,20 @@ class AboutViewController: UIViewController {
     private let reddit = AboutCell(text: S.About.reddit)
     private let privacy = UIButton(type: .system)
     private let footer = UILabel.wrapping(font: .customBody(size: 13.0), color: Theme.primaryText)
-    
+
+    private lazy var scrollView = UIScrollView()
+    private lazy var logoContainer = UIView()
+    private lazy var stack = VStackView([
+        titleLabel, logoContainer, walletID, blog, twitter, reddit, privacy, footer
+    ])
+
+    private weak var keyStore: KeyStore?
+
+    init(keyStore: KeyStore?) {
+        super.init(nibName: nil, bundle: nil)
+        self.keyStore = keyStore
+    }
+
     override func viewDidLoad() {
         addSubviews()
         addConstraints()
@@ -30,54 +43,35 @@ class AboutViewController: UIViewController {
         setActions()
     }
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError("Not supported")
+    }
+
     private func addSubviews() {
-        view.addSubview(titleLabel)
-        view.addSubview(logoBackground)
+        view.addSubview(scrollView)
+        scrollView.addSubview(stack)
+        logoContainer.addSubview(logoBackground)
         logoBackground.addSubview(logo)
-        view.addSubview(walletID)
-        view.addSubview(blog)
-        view.addSubview(twitter)
-        view.addSubview(reddit)
-        view.addSubview(privacy)
-        view.addSubview(footer)
     }
 
     private func addConstraints() {
-        titleLabel.constrain([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[2]),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: C.padding[2]) ])
-        logoBackground.constrain([
-            logoBackground.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoBackground.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: C.padding[3]),
-            logoBackground.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            logoBackground.heightAnchor.constraint(equalTo: logoBackground.widthAnchor, multiplier: logo.image!.size.height/logo.image!.size.width) ])
+        let spacing = C.padding[(E.isIPhone6OrSmaller) ? 1 : 2]
+        let insets = UIEdgeInsets(forConstrains: spacing)
+        scrollView.constrain(toSuperviewEdges: nil)
+        stack.constrain(toSuperviewEdges: insets)
+        stack.constrain([
+            stack.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -spacing * 2)
+        ])
+        stack.spacing = spacing
         logo.constrain(toSuperviewEdges: nil)
-        
-        let verticalMargin = (E.isIPhone6OrSmaller) ? C.padding[1] : C.padding[2]
-        
-        walletID.constrain([
-            walletID.topAnchor.constraint(equalTo: logoBackground.bottomAnchor, constant: verticalMargin),
-            walletID.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            walletID.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
-        blog.constrain([
-            blog.topAnchor.constraint(equalTo: walletID.bottomAnchor, constant: verticalMargin),
-            blog.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blog.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
-        twitter.constrain([
-            twitter.topAnchor.constraint(equalTo: blog.bottomAnchor, constant: verticalMargin),
-            twitter.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            twitter.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
-        reddit.constrain([
-            reddit.topAnchor.constraint(equalTo: twitter.bottomAnchor, constant: verticalMargin),
-            reddit.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            reddit.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
-        privacy.constrain([
-            privacy.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            privacy.topAnchor.constraint(equalTo: reddit.bottomAnchor, constant: verticalMargin)])
-        footer.constrain([
-            footer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[3]),
-            footer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[3]),
-            footer.topAnchor.constraint(equalTo: privacy.bottomAnchor)])
+        logoBackground.constrain([
+            logoBackground.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor),
+            logoBackground.topAnchor.constraint(equalTo: logoContainer.topAnchor),
+            logoBackground.bottomAnchor.constraint(equalTo: logoContainer.bottomAnchor),
+            logoBackground.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            logoBackground.heightAnchor.constraint(equalTo: logoBackground.widthAnchor, multiplier: logo.image!.size.height/logo.image!.size.width)
+        ])
     }
 
     private func setData() {
@@ -89,7 +83,20 @@ class AboutViewController: UIViewController {
         privacy.tintColor = .primaryButton
         footer.textAlignment = .center
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-            footer.text = String(format: S.About.footer, version, build)
+            let hydra = UserDefaults.cosmos.hydraActivated ? "\nHydra" : ""
+            var text = String(format: S.About.footer, version, build) + hydra
+
+            if let keyStore = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
+                let authProvider = IosBrdAuthProvider(walletAuthenticator: keyStore)
+                let pubKey = "\n\nPublic key:\n" + authProvider.publicKey()
+                let token = "\n\nToken:\n" + (authProvider.token ?? "")
+                let deviceId = "\n\nDevice Id:\n" + authProvider.deviceId()
+                let walletId = "\n\nWallet Id:\n" + (authProvider.walletId() ?? "")
+                let pushToken = "\n\nPush token:\n" + "\(UserDefaults.pushToken)"
+                text += pubKey + token + deviceId + walletId + pushToken
+            }
+
+            footer.text =  text
         }
     }
 
@@ -106,6 +113,17 @@ class AboutViewController: UIViewController {
         privacy.tap = strongify(self) { myself in
             myself.presentURL(string: "https://brd.com/privacy")
         }
+
+        if let keyStore = keyStore, E.isDebug || E.isTestFlight || E.isTestnet {
+            footer.isUserInteractionEnabled = true
+            footer.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(footerAction(_:)))
+            )
+        }
+    }
+
+    @objc private func footerAction(_ sender: Any?) {
+        UIPasteboard.general.string = footer.text
     }
 
     private func presentURL(string: String) {

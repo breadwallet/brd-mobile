@@ -16,72 +16,50 @@
 
 package com.platform
 
-import android.accounts.AuthenticatorException
-import android.annotation.TargetApi
-import android.content.Context
-import android.net.Uri
-import android.os.Build
-import android.os.NetworkOnMainThreadException
-import androidx.annotation.VisibleForTesting
-
+import android.accounts.*
+import android.annotation.*
+import android.content.*
+import android.net.*
+import android.os.*
+import androidx.annotation.*
+import com.brd.prefs.*
 import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.crypto.Key
-import com.breadwallet.logger.logDebug
-import com.breadwallet.logger.logError
-import com.breadwallet.logger.logInfo
-import com.breadwallet.logger.logWarning
-import com.breadwallet.repository.ExperimentsRepositoryImpl
-import com.breadwallet.tools.animation.UiUtils
-import com.breadwallet.tools.crypto.CryptoHelper
-import com.breadwallet.tools.manager.BRReportsManager
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.tools.security.BrdUserManager
-import com.breadwallet.tools.util.BRCompressor
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.ServerBundlesHelper
-import com.platform.tools.TokenHolder
-
-import org.json.JSONException
-import org.json.JSONObject
-
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.HashMap
-import java.util.Locale
-import java.util.TimeZone
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicInteger
-
-import okhttp3.OkHttpClient
-import okhttp3.Protocol
-import okhttp3.Request
-import okhttp3.Response
-import okio.Buffer
-
+import com.breadwallet.logger.*
+import com.breadwallet.repository.*
+import com.breadwallet.tools.animation.*
+import com.breadwallet.tools.crypto.*
+import com.breadwallet.tools.manager.*
+import com.breadwallet.tools.security.*
+import com.breadwallet.tools.util.*
 import com.breadwallet.tools.util.BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8
 import com.breadwallet.tools.util.BRConstants.DATE
 import com.breadwallet.tools.util.BRConstants.HEADER_ACCEPT
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.platform.tools.*
+import kotlinx.coroutines.*
+import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.kodein.di.android.closestKodein
-import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import okio.*
+import org.json.*
+import org.kodein.di.*
+import org.kodein.di.android.*
+import org.kodein.di.erased.*
+import java.io.IOException
+import java.lang.StringBuffer
+import java.lang.System
+import java.text.*
+import java.util.*
+import java.util.concurrent.*
+import java.util.concurrent.atomic.*
 
 private const val UNAUTHED_HTTP_STATUS = 401
-
-// The server(s) on which the API is hosted
-private val HOST = when {
-    BuildConfig.DEBUG -> "stage2.breadwallet.com"
-    else -> "api.breadwallet.com"
-}
 
 class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
+    private val brdPreferences: BrdPreferences,
     headers: Map<String, String>
 ) {
 
@@ -119,7 +97,7 @@ class APIClient(
 
     val token: String?
         @Synchronized get() {
-            if (mIsFetchingToken) {
+            if (mIsFetchingToken || brdPreferences.hydraActivated) {
                 return null
             }
             mIsFetchingToken = true
@@ -134,7 +112,8 @@ class APIClient(
                 if (authKey != null) {
                     val requestBody = JSONObject().run {
                         val encodedPublicKey = authKey.encodeAsPublic().toString(Charsets.UTF_8)
-                        val pubkey = CryptoHelper.hexDecode(encodedPublicKey) ?: encodedPublicKey.toByteArray(Charsets.UTF_8)
+                        val pubkey =
+                            CryptoHelper.hexDecode(encodedPublicKey) ?: encodedPublicKey.toByteArray(Charsets.UTF_8)
                         put(PUBKEY, CryptoHelper.base58Encode(pubkey))
                         put(DEVICE_ID, BRSharedPrefs.getDeviceId())
                         toString().toRequestBody(CONTENT_TYPE_JSON_CHARSET_UTF8.toMediaType())
@@ -283,7 +262,7 @@ class APIClient(
                     return createBrResponse(response)
                 } else if (!BuildConfig.DEBUG &&
                     (!newUri.host!!.equals(host, true) ||
-                            !newUri.scheme!!.equals(PROTO, true))
+                        !newUri.scheme!!.equals(PROTO, true))
                 ) {
                     logError("WARNING: redirect is NOT safe: $newLocation")
                     return createBrResponse(
@@ -327,7 +306,7 @@ class APIClient(
                 val code = res.code
                 val headers = HashMap<String, String>()
                 for (name in res.headers.names()) {
-                    headers[name.toLowerCase()] = res.header(name)!!
+                    headers[name.lowercase()] = res.header(name)!!
                     if (name.equals(DATE, true)) {
                         val dateValue = res.header(name)!!
                         DATE_FORMAT.parse(dateValue)
@@ -533,7 +512,8 @@ class APIClient(
         private const val DEVICE_ID = "deviceID"
 
         // convenience getter for the API endpoint
-        private val BASE_URL = HTTPS_SCHEME + host
+        private val BASE_URL
+            get() = HTTPS_SCHEME + host
 
         //Fee per kb url
         private const val FEE_PER_KB_URL = "/v1/fee-per-kb"
@@ -578,7 +558,7 @@ class APIClient(
                         return host
                     }
                 }
-                return HOST
+                return BRSharedPrefs.getApiHost()
             }
 
         @JvmStatic
