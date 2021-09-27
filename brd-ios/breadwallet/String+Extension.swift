@@ -70,6 +70,7 @@ extension String {
         }
         var remainder = Array(needle)
         for char in self {
+            // swiftlint:disable:next for_where
             if char == remainder[remainder.startIndex] {
                 remainder.removeFirst()
                 if remainder.isEmpty { return true }

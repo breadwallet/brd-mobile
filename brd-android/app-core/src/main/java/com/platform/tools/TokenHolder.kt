@@ -16,11 +16,11 @@ import com.breadwallet.logger.logError
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.BrdUserState
 import com.platform.APIClient
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 
-object TokenHolder : KodeinAware {
+object TokenHolder : DIAware {
     private val TAG = TokenHolder::class.java.simpleName
     private var mApiToken: String? = null
     private var mOldApiToken: String? = null
@@ -30,7 +30,7 @@ object TokenHolder : KodeinAware {
         this.context = context
     }
 
-    override val kodein by closestKodein { context }
+    override val di by closestDI { context }
     private val userManager by instance<BrdUserManager>()
     private val apiClient: APIClient by instance()
 

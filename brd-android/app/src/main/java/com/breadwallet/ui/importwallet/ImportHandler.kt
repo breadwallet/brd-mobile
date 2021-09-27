@@ -14,9 +14,9 @@ import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.isBitcoin
 import com.breadwallet.breadbox.isBitcoinCash
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManagerState
+import com.blockset.walletkit.Key
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.tools.util.EventUtils
 import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.flow.asFlow

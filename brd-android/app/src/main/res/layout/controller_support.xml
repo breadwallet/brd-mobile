@@ -34,6 +34,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_left_white"
+            android:stateListAnimator="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/title"/>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
@@ -108,7 +120,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:itemCount="4"
-            tools:listitem="@layout/list_item_support_article"/>
+            tools:paddingStart="20dp"
+            tools:paddingEnd="20dp"
+            tools:listitem="@layout/list_item_support_article" />
+
         <ProgressBar
             android:id="@+id/loadingView"
             android:layout_width="wrap_content"
@@ -119,7 +134,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

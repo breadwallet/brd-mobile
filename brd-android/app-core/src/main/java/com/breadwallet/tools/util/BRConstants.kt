@@ -15,6 +15,8 @@ const val eth = "eth"
 const val bch = "bch"
 const val hbar = "hbar"
 const val xtz = "xtz"
+const val doge = "doge"
+const val ltc = "ltc"
 
 object BRConstants {
     /**

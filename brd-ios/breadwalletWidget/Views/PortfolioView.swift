@@ -21,7 +21,6 @@ struct PortfolioView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     var body: some View {
-        let textColor = viewModel.assetList.anyAsset.textColor(in: colorScheme)
         if viewModel.assetList.assets.count <= 1 {
             AssetView(viewModel: viewModel.assetList.anyAsset)
         } else {

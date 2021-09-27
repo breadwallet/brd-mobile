@@ -10,13 +10,16 @@
         android:id="@+id/labelTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="How can I send cryptocurrency from the BRD app?"
-        android:layout_margin="16dp"
         app:layout_constraintHorizontal_bias="0"
         android:textSize="24sp"
+        app:lineHeight="32dp"
         android:textColor="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

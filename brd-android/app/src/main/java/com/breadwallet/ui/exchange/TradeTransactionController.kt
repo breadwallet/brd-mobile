@@ -12,6 +12,11 @@ import android.os.Bundle
 import android.security.keystore.UserNotAuthenticatedException
 import android.text.format.DateUtils
 import androidx.core.view.isVisible
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.TransferAttribute
+import com.blockset.walletkit.TransferFeeBasis
+import com.blockset.walletkit.TransferState
+import com.blockset.walletkit.errors.FeeEstimationError
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.brd.api.models.ExchangeInput
@@ -29,11 +34,6 @@ import com.breadwallet.breadbox.feeForSpeed
 import com.breadwallet.breadbox.getSize
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.TransferAttribute
-import com.breadwallet.crypto.TransferFeeBasis
-import com.breadwallet.crypto.TransferState
-import com.breadwallet.crypto.errors.FeeEstimationError
 import com.breadwallet.databinding.ControllerTradeTransactionBinding
 import com.breadwallet.logger.logError
 import com.breadwallet.platform.entities.TxMetaDataValue
@@ -52,7 +52,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Locale
 
 class TradeTransactionController(args: Bundle? = null) :
@@ -186,7 +186,7 @@ class TradeTransactionController(args: Bundle? = null) :
                     blockHeight = transfer.wallet.walletManager.network.height.toLong(),
                     fee = fee,
                     txSize = size,
-                    creationTime = creationTime,
+                    creationTime = creationTime
                 )
                 metaDataManager.putTxMetaData(transfer, metaData)
 

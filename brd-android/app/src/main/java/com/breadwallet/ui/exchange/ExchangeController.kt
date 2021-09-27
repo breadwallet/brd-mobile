@@ -41,7 +41,7 @@ import kt.mobius.disposables.Disposable
 import kt.mobius.extras.CompositeEffectHandler
 import kt.mobius.functions.Consumer
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.*
 
 private const val KEY_MODE = "ExchangeController.KEY_MODE"
@@ -446,8 +446,9 @@ fun ExchangeCurrency.selectedFiatCurrencyName(): String {
 fun OfferDetails.setProviderIcon(icon: ImageView) {
     when (offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> icon.setImageResource(R.drawable.ic_provider_moonpay)
+        "simplex" -> icon.setImageResource(R.drawable.ic_provider_simplex)
         "wyre" -> icon.setImageResource(R.drawable.ic_provider_wyre)
-        "changelly" -> icon.setImageResource(R.drawable.ic_proivider_changelly)
+        "changelly" -> icon.setImageResource(R.drawable.ic_provider_changelly)
         else -> {
             if (offer.provider.logoUrl.isNullOrBlank()) {
                 icon.setImageDrawable(null)

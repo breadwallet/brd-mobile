@@ -10,7 +10,7 @@ package com.breadwallet.breadbox
 
 import android.util.Base64
 import com.breadwallet.BuildConfig
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.crypto.CryptoHelper
@@ -56,7 +56,8 @@ class BdbAuthInterceptor(
     scope: CoroutineScope
 ) : Interceptor {
 
-    private val mutex = Mutex()
+    private val mutex =
+        Mutex()
 
     private val jwtHeader = JSONObject()
         .put("alg", "ES256")

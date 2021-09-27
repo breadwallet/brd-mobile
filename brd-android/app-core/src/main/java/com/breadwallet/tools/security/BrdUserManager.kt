@@ -8,7 +8,7 @@
  */
 package com.breadwallet.tools.security
 
-import com.breadwallet.crypto.Account
+import com.blockset.walletkit.Account
 import kotlinx.coroutines.flow.Flow
 
 /** Manages creation, recovery, and access to an [Account]. */

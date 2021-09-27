@@ -21,6 +21,7 @@ struct BreadWalletWidgetBundle: WidgetBundle {
         AssetWidget()
         AssetListWidget()
         PortfolioWidget()
+        BlockClockWidget()
     }
 }
 

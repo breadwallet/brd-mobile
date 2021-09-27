@@ -18,11 +18,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerNodeSelectorBinding
+import com.breadwallet.tools.util.getPixelsFromDps
 import com.breadwallet.mobius.CompositeEffectHandler
 import com.breadwallet.tools.util.TrustedNode
-import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.BaseMobiusController
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.flowbind.clicks
@@ -37,7 +38,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val DIALOG_TITLE_PADDING = 16
 private const val DIALOG_TITLE_TEXT_SIZE = 18f
@@ -107,7 +108,7 @@ class NodeSelectorController : BaseMobiusController<M, E, F>() {
 
         customTitle.gravity = Gravity.CENTER
         customTitle.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        val pad16 = Utils.getPixelsFromDps(activity, DIALOG_TITLE_PADDING)
+        val pad16 = activity?.getPixelsFromDps(DIALOG_TITLE_PADDING) ?: 0
         customTitle.setPadding(pad16, pad16, pad16, pad16)
         customTitle.text = res.getString(R.string.NodeSelector_enterTitle)
         customTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, DIALOG_TITLE_TEXT_SIZE)
@@ -120,7 +121,7 @@ class NodeSelectorController : BaseMobiusController<M, E, F>() {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
         )
-        val padding = Utils.getPixelsFromDps(activity, DIALOG_INPUT_PADDING)
+        val padding = activity?.getPixelsFromDps(DIALOG_INPUT_PADDING) ?: 0
 
         input.setPadding(padding, 0, padding, padding)
         input.layoutParams = lp
@@ -145,10 +146,14 @@ class NodeSelectorController : BaseMobiusController<M, E, F>() {
             } else {
                 viewAttachScope.launch(Dispatchers.Main) {
                     customTitle.setText(R.string.NodeSelector_invalid)
-                    customTitle.setTextColor(res.getColor(R.color.warning_color))
+                    customTitle.setTextColor(
+                        ContextCompat.getColor(requireContext(), R.color.warning_color)
+                    )
                     delay(RESTORE_DIALOG_TITLE_DELAY)
                     customTitle.setText(R.string.NodeSelector_enterTitle)
-                    customTitle.setTextColor(res.getColor(R.color.almost_black))
+                    customTitle.setTextColor(
+                        ContextCompat.getColor(requireContext(), R.color.almost_black)
+                    )
                 }
             }
         }

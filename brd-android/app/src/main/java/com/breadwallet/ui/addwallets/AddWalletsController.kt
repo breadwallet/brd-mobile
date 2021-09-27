@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 class AddWalletsController : BaseMobiusController<M, E, F>() {
 
@@ -36,9 +36,8 @@ class AddWalletsController : BaseMobiusController<M, E, F>() {
     override val update = AddWalletsUpdate
     override val flowEffectHandler
         get() = createAddWalletsHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            direct.instance()
+            breadBox = direct.instance(),
+            acctMetaDataProvider = direct.instance()
         )
 
     override fun onDetach(view: View) {

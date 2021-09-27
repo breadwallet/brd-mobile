@@ -22,8 +22,8 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.Lifecycle
 import com.breadwallet.app.ApplicationLifecycleObserver
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logInfo
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.crypto.CryptoHelper.hexDecode

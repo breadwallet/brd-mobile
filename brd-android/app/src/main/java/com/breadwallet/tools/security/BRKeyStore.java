@@ -8,6 +8,8 @@
  */
 package com.breadwallet.tools.security;
 
+import static org.kodein.type.TypeTokensJVMKt.erased;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -43,7 +45,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static org.kodein.di.TypesKt.TT;
 
 /**
  * This class is responsible for storing sensitive data into the KeyStore.
@@ -492,7 +493,7 @@ public final class BRKeyStore {
 
         if (Utils.isNullOrEmpty(result)) {
             AccountMetaDataProvider metadataProvider =
-                    BreadApp.getKodeinInstance().Instance(TT(AccountMetaDataProvider.class), null);
+                    BreadApp.getKodeinInstance().Instance(erased(AccountMetaDataProvider.class), null);
             WalletInfoData info = metadataProvider.getWalletInfoUnsafe();
             if (info != null) {
                 long creationDate = info.getCreationDate();

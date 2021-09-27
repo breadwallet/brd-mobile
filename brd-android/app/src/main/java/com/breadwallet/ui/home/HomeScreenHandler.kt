@@ -39,13 +39,12 @@ import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.math.BigDecimal
 import java.util.Locale
 import kotlin.coroutines.resume
-import com.breadwallet.crypto.Wallet as CryptoWallet
+import com.blockset.walletkit.Wallet as CryptoWallet
 
 private const val PROMPT_DISMISSED_FINGERPRINT = "fingerprint"
 

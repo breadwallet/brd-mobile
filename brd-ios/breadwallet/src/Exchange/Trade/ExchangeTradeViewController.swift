@@ -125,6 +125,7 @@ extension ExchangeTradeViewController: ExchangeView {
         swapButton.tap = viewModel.swapAction
         navigationItem.rightBarButtonItem?.tap = viewModel.closeAction
         ctaButton.tap = viewModel.nextAction
+        ctaButton.isEnabled = true
     }
 
     func errorSignalAction() {
@@ -233,6 +234,7 @@ private extension ExchangeTradeViewController {
         emptyWallet.isHidden = true
         emptyWallet.ctaAction = { [weak self] in
             self?.consumer?.accept(.OnContinueClicked())
+            self?.ctaButton.isEnabled = false
         }
 
         update(with: loopController?.model as? ExchangeModel, consumer: nil)

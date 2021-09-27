@@ -53,11 +53,15 @@ class ExchangeConfirmationViewController: UIViewController {
             headerView.setState(.creating)
             tableView.reloadData()
             buttonsContainer.isHidden = true
-        case let .processing(order):
+        case .processing:
             headerView.setState(.processing)
             tableView.reloadData()
             buttonsContainer.isHidden = true
         case let .complete(order):
+            if order.baseCode?.lowercased() == "doge" {
+                headerView.successfulColorOverride = order.baseColor
+                headerView.confettyStyle = .doge
+            }
             headerView.setState(.successful)
             tableView.reloadData()
             buttonsContainer.isHidden = false

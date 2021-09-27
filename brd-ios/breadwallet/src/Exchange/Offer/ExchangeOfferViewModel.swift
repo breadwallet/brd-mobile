@@ -20,7 +20,7 @@ struct ExchangeOfferViewModel: Equatable {
     let minMaxAction: ((Int) -> Void)?
     let closeAction: (() -> Void)?
     
-    static func ==(
+    static func == (
         lhs: ExchangeOfferViewModel,
         rhs: ExchangeOfferViewModel
     ) -> Bool {
@@ -144,7 +144,7 @@ extension ExchangeOfferViewModel {
 private extension ExchangeOfferViewModel {
 
     static func title(for offer: ExchangeModel.OfferDetails) -> String {
-        return String(format: offer.formattedViaMethod(), offer.offer.provider.name ?? "")
+        return String(format: offer.formattedViaMethod(), offer.offer.provider.name)
     }
 
     static func subtitle(offer: ExchangeModel.OfferDetails) -> String {

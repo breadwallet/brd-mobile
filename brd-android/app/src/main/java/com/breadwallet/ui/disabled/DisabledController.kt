@@ -31,7 +31,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Locale
 
 class DisabledController(args: Bundle? = null) : BaseController(args) {

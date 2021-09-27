@@ -138,4 +138,11 @@ extension UIImage {
 
         return image
     }
+
+    convenience init?(optionalData data: Data?) {
+        guard let data = data else {
+            return nil
+        }
+        self.init(data: data)
+    }
 }

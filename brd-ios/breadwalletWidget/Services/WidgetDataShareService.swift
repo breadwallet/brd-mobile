@@ -12,7 +12,7 @@
 
 import Foundation
 
-protocol WidgetDataShareService: class {
+protocol WidgetDataShareService: AnyObject {
 
     var sharingEnabled: Bool {get set}
     var quoteCurrencyCode: String? {get set}

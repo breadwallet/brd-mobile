@@ -452,6 +452,8 @@ class ModalPresenter: Subscriber, Trackable {
     }
     
     // MARK: Settings
+    
+    // swiftlint:disable:next function_body_length
     func presentMenu() {
         let menuNav = UINavigationController()
         menuNav.setDarkStyle()
@@ -1032,7 +1034,11 @@ class ModalPresenter: Subscriber, Trackable {
         vc.transparentBg = true
         vc.nativeDestinationAction = { [weak vc, weak self] destination in
             let active = UserDefaults.cosmos.hydraActivated
-            let rootModal: RootModal = active ? .trade : .tradeLegacy
+            let rootModal: RootModal
+            switch destination {
+            case .trade:
+                rootModal = active ? .trade : .tradeLegacy
+            }
             vc?.dismiss {
                 self?.topViewController?.dismiss {
                     Store.perform(action: RootModalActions.Present(modal: rootModal))

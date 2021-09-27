@@ -12,15 +12,15 @@ import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.createSweeper
 import com.breadwallet.breadbox.estimateFee
 import com.breadwallet.breadbox.feeForSpeed
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferFeeBasis
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletSweeper
-import com.breadwallet.crypto.errors.WalletSweeperError
-import com.breadwallet.crypto.errors.WalletSweeperInsufficientFundsError
-import com.breadwallet.crypto.errors.WalletSweeperNoTransfersFoundError
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.Key
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferFeeBasis
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletSweeper
+import com.blockset.walletkit.errors.WalletSweeperError
+import com.blockset.walletkit.errors.WalletSweeperInsufficientFundsError
+import com.blockset.walletkit.errors.WalletSweeperNoTransfersFoundError
 import com.breadwallet.logger.logError
 import com.breadwallet.util.CurrencyCode
 

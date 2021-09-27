@@ -10,19 +10,21 @@
 
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.Currency
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.NetworkPeer
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferDirection
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletManagerState
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.Currency
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.NetworkPeer
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferDirection
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletManager
+import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.util.isBitcoin
 import com.breadwallet.util.isBitcoinCash
+import com.breadwallet.util.isDoge
 import com.breadwallet.util.isEthereum
+import com.breadwallet.util.isLitecoin
 import com.breadwallet.util.isRipple
 import com.google.common.primitives.UnsignedInteger
 import kotlinx.coroutines.flow.Flow
@@ -148,6 +150,8 @@ val Wallet.urlScheme: String?
         currency.code.isEthereum() || currency.isErc20() -> "ethereum"
         currency.code.isRipple() -> "xrp"
         currency.code.isBitcoin() -> "bitcoin"
+        currency.code.isDoge() -> "dogecoin"
+        currency.code.isLitecoin() -> "litecoin"
         currency.code.isBitcoinCash() -> when {
             walletManager.network.isMainnet -> "bitcoincash"
             else -> "bchtest"

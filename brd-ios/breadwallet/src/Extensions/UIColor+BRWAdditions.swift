@@ -328,8 +328,8 @@ extension UIColor {
             sanitized.remove(at: sanitized.startIndex)
         }
         guard sanitized.count == 6 else { return .lightGray }
-        var rgbValue: UInt32 = 0
-        Scanner(string: sanitized).scanHexInt32(&rgbValue)
+        var rgbValue: UInt64 = 0
+        Scanner(string: sanitized).scanHexInt64(&rgbValue)
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
@@ -380,5 +380,30 @@ extension UIColor {
         return 0.2126 * adjust(colorComponent: ciColor.red) +
             0.7152 * adjust(colorComponent: ciColor.green) +
             0.0722 * adjust(colorComponent: ciColor.blue)
+    }
+}
+
+// MARK: - Lighter / Darker
+
+extension UIColor {
+
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjust(by: abs(percentage) )
+    }
+
+    func darker(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjust(by: -1 * abs(percentage) )
+    }
+
+    func adjust(by percentage: CGFloat = 30.0) -> UIColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            return UIColor(red: min(red + percentage/100, 1.0),
+                           green: min(green + percentage/100, 1.0),
+                           blue: min(blue + percentage/100, 1.0),
+                           alpha: alpha)
+        } else {
+            return self
+        }
     }
 }

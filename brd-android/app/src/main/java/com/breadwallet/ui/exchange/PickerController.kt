@@ -14,13 +14,10 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brd.api.models.ExchangeCurrency
@@ -28,9 +25,11 @@ import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePickerBinding
+import com.breadwallet.tools.recyclerview.DividerItemDecorator
 import com.breadwallet.tools.recyclerview.MarginItemDecoration
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.tools.util.Utils
+import com.breadwallet.tools.util.getPixelsFromDps
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
@@ -108,10 +107,12 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
             }
 
             recycler.itemAnimator = DefaultItemAnimator()
+
+            recycler.addItemDecoration(MarginItemDecoration(root.context.getPixelsFromDps(12)))
             if (selectionType != SelectionType.OFFER) {
-                recycler.setDivider(R.drawable.recycler_view_divider)
+                recycler.addItemDecoration(DividerItemDecorator(root.context.getPixelsFromDps(24)))
             }
-            recycler.addItemDecoration(MarginItemDecoration(12, root.context))
+
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = fastAdapter.apply {
                 addEventHook(object : ClickEventHook<OfferListItem>() {
@@ -163,15 +164,6 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 isSelectable = true
                 multiSelect = false
             }
-        }
-    }
-
-    private fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
-        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        val drawable = ContextCompat.getDrawable(context, drawableRes)
-        drawable?.let {
-            divider.setDrawable(it)
-            addItemDecoration(divider)
         }
     }
 

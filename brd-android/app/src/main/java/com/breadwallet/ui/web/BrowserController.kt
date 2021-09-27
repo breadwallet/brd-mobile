@@ -47,6 +47,7 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
     override fun onCreateView(view: View) {
         super.onCreateView(view)
         with(binding) {
+            browserControls.visibility = View.GONE
             WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
             webview.settings.apply {
                 @SuppressLint("SetJavaScriptEnabled")

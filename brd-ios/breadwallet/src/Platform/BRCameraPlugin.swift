@@ -234,7 +234,7 @@ enum ImageError: Error {
     case couldntRead
 }
 
-protocol CameraOverlayDelegate: class {
+protocol CameraOverlayDelegate: AnyObject {
     func takePhoto()
     func cancelPhoto()
 }

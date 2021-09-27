@@ -210,6 +210,7 @@ class DefaultWidgetService: WidgetService {
 private extension DefaultWidgetService {
 
     typealias MarketChartResult = Result<MarketChart, CoinGeckoError>
+    typealias CandleListResult = Result<CandleList, CoinGeckoError>
     typealias PriceListResult = Result<PriceList, CoinGeckoError>
 
     func fetchPriceListAndChart(for currencies: [Currency],
@@ -219,7 +220,8 @@ private extension DefaultWidgetService {
         let group = DispatchGroup()
         let rInterval = interval.resources
         var priceList: PriceList = []
-        var charts: [CurrencyId: MarketChart] = [:]
+        var candleLineInfo: [CurrencyId: MarketChart] = [:]
+        var candleBarInfo: [CurrencyId: CandleList] = [:]
         var error: Error?
         let codes = currencies.compactMap { $0.coinGeckoId }
 
@@ -246,10 +248,22 @@ private extension DefaultWidgetService {
                 continue
             }
             group.enter()
+            group.enter()
+
             chart(code: code, quote: quote, interval: rInterval) { result in
                 switch result {
-                case let .success(chartData):
-                    charts[currency.uid] = chartData
+                case let .success(candleList):
+                    candleLineInfo[currency.uid] = candleList
+                case let .failure(error):
+                    print(error)
+                }
+                group.leave()
+            }
+
+            candles(code: code, quote: quote, interval: rInterval) { result in
+                switch result {
+                case let .success(candleList):
+                    candleBarInfo[currency.uid] = candleList
                 case let .failure(error):
                     print(error)
                 }
@@ -262,12 +276,22 @@ private extension DefaultWidgetService {
                 handler(.failure(error))
                 return
             }
-            if charts.isEmpty {
-                charts = self.cachedCharts(codes: codes, quote: quote, interval: rInterval)
+            if candleLineInfo.isEmpty {
+                candleLineInfo = self.cachedLineCandles(codes: codes, quote: quote, interval: rInterval)
             } else {
-                self.cache(charts: charts, codes: codes, quote: quote, interval: rInterval)
+                self.cacheLine(candles: candleLineInfo, codes: codes, quote: quote, interval: rInterval)
             }
-            let info = self.marketInfo(currencies, priceList: priceList, charts: charts)
+            if candleBarInfo.isEmpty {
+                candleBarInfo = self.cachedBarCandles(codes: codes, quote: quote, interval: rInterval)
+            } else {
+                self.cacheBar(candles: candleBarInfo, codes: codes, quote: quote, interval: rInterval)
+            }
+            let info = self.marketInfo(
+                currencies,
+                priceList: priceList,
+                candlesLine: candleLineInfo,
+                candlesBar: candleBarInfo
+            )
             handler(.success((currencies, info)))
         }
     }
@@ -292,9 +316,22 @@ private extension DefaultWidgetService {
         coinGeckoClient.load(chart)
     }
 
+    func candles(code: String,
+                 quote: String,
+                 interval: Resources.Interval,
+                 handler: @escaping (CandleListResult) -> Void) {
+
+        let candles = Resources.candles(base: code,
+                                        quote: quote,
+                                        interval: interval,
+                                        callback: handler)        
+        coinGeckoClient.load(candles)
+    }
+
     func marketInfo(_ currencies: [Currency],
                     priceList: PriceList,
-                    charts: [CurrencyId: MarketChart]) -> [CurrencyId: MarketInfo] {
+                    candlesLine: [CurrencyId: MarketChart],
+                    candlesBar: [CurrencyId: CandleList]) -> [CurrencyId: MarketInfo] {
 
         var result = [CurrencyId: MarketInfo]()
         
@@ -307,7 +344,8 @@ private extension DefaultWidgetService {
                 result[currency.uid] = MarketInfo(id: currency.uid,
                                                   amount: amount,
                                                   simplePrice: price,
-                                                  chart: charts[currency.uid])
+                                                  lineCandles: candlesLine[currency.uid],
+                                                  barCandles: candlesBar[currency.uid])
             }
         }
         return result
@@ -329,35 +367,62 @@ private extension DefaultWidgetService {
         return priceList
     }
 
-    func cache(
-        charts: [CurrencyId: MarketChart],
+    func cacheLine(
+        candles: [CurrencyId: MarketChart],
         codes: [String],
         quote: String,
         interval: Resources.Interval
     ) {
-        let key = cacheKey(codes: codes, quote: quote, interval: interval)
-        cacheService?.cache(value: charts, key: key)
+        let key = lineCandleKey(codes: codes, quote: quote, interval: interval)
+        cacheService?.cache(value: candles, key: key)
     }
 
-    func cachedCharts(
+    func cacheBar(
+        candles: [CurrencyId: CandleList],
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval
+    ) {
+        let key = barCandleKey(codes: codes, quote: quote, interval: interval)
+        cacheService?.cache(value: candles, key: key)
+    }
+
+    func cachedLineCandles(
         codes: [String],
         quote: String,
         interval: Resources.Interval) -> [CurrencyId: MarketChart] {
-        let key = cacheKey(codes: codes, quote: quote, interval: interval)
-        let charts: [CurrencyId: MarketChart] = cacheService?.cached(key: key) ?? [:]
-        return charts
+        let key = lineCandleKey(codes: codes, quote: quote, interval: interval)
+        let candles: [CurrencyId: MarketChart] = cacheService?.cached(key: key) ?? [:]
+        return candles
+    }
+
+    func cachedBarCandles(
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval) -> [CurrencyId: CandleList] {
+        let key = barCandleKey(codes: codes, quote: quote, interval: interval)
+        let candles: [CurrencyId: CandleList] = cacheService?.cached(key: key) ?? [:]
+        return candles
     }
 
     func cacheKey(codes: [String], quote: String) -> String {
         "\(Constant.cachePriceListKey)-\(codes.reduce("", +))-\(quote)"
     }
 
-    func cacheKey(
+    func lineCandleKey(
         codes: [String],
         quote: String,
         interval: Resources.Interval
     ) -> String {
-        "\(Constant.cacheChartKey)-\(codes.reduce("", +))-\(quote)-\(interval)"
+        "\(Constant.cacheLineKey)-\(codes.reduce("", +))-\(quote)-\(interval)"
+    }
+
+    func barCandleKey(
+        codes: [String],
+        quote: String,
+        interval: Resources.Interval
+    ) -> String {
+        "\(Constant.cacheBarKey)-\(codes.reduce("", +))-\(quote)-\(interval)"
     }
 }
 
@@ -367,7 +432,8 @@ private extension DefaultWidgetService {
 
     enum Constant {
         static let cachePriceListKey = "cachePriceList"
-        static let cacheChartKey = "cacheChart"
+        static let cacheLineKey = "cacheCandleLine"
+        static let cacheBarKey = "cacheCandleBar"
         static let refreshedKey = "refreshed"
         static let defaultCurrencyCodes = ["BTC", "ETH", "BRD"]
         static let currenciesURL = Bundle.main.url(forResource: "currencies",

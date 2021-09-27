@@ -10,8 +10,8 @@ package com.breadwallet.app
 
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferState
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferState
 import java.util.Date
 
 private const val PREFIX_DELIMITER = "-"

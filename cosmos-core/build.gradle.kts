@@ -10,9 +10,7 @@ android {
         minSdkVersion(brd.BrdRelease.ANDROID_MINIMUM_SDK)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    sourceSets {
-        val main by getting { setRoot("src/androidMain") }
-    }
+    sourceSets["main"].setRoot("src/androidMain")
 }
 
 kotlin {
@@ -40,10 +38,6 @@ kotlin {
         val jvmCommonTest by creating {
             dependsOn(jvmCommonMain)
             dependsOn(commonTest)
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(kotlin("test-junit"))
-            }
         }
 
         val jvmMain by getting {
@@ -52,6 +46,10 @@ kotlin {
 
         val jvmTest by getting {
             dependsOn(jvmCommonTest)
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+            }
         }
 
         val androidMain by getting {
@@ -62,6 +60,8 @@ kotlin {
             dependsOn(jvmCommonTest)
             dependencies {
                 implementation(brd.Libs.AndroidxTest.Runner)
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
             }
         }
     }

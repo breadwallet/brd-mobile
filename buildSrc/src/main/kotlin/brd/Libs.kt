@@ -8,12 +8,12 @@
  */
 package brd
 
-const val KOTLIN_VERSION = "1.5.20"
-private const val KTOR_VERSION = "1.6.1"
-private const val KOTLINX_ATOMICFU_VERSION = "0.16.2"
+const val KOTLIN_VERSION = "1.5.31"
+private const val KTOR_VERSION = "1.6.3"
+private const val KOTLINX_ATOMICFU_VERSION = "0.16.3"
 private const val KOTLINX_DATETIME_VERSION = "0.2.1"
-private const val KOTLINX_SERIALIZATION_VERSION = "1.2.2"
-const val COROUTINES_VERSION = "1.5.1-native-mt"
+private const val KOTLINX_SERIALIZATION_VERSION = "1.3.0-RC"
+const val COROUTINES_VERSION = "1.5.2-native-mt"
 private const val WALLETKIT_VERSION = "6.3.5"
 private const val FIREBASE_APPDIST_VERSION = "2.1.1"
 private const val FIREBASE_MESSAGING_VERSION = "21.0.1"
@@ -36,7 +36,7 @@ private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
 private const val GRID_LAYOUT_VERSION = "1.0.0"
 private const val FASTADAPTER_VERSION = "5.3.4"
 private const val CONDUCTOR_VERSION = "3.0.1"
-private const val KODEIN_VERSION = "6.5.1"
+private const val KODEIN_VERSION = "7.6.0"
 private const val MOBIUS_VERSION = "1.5.3"
 private const val MOBIUS_COROUTINES_VERSION = "0.1.2"
 private const val ESPRESSO_VERSION = "3.3.0-rc01"
@@ -60,9 +60,8 @@ const val REDACTED_VERSION = "0.8.0"
 private const val DETEKT_VERSION = "1.0.1"
 private const val COMMONS_COMPRESS_VERSION = "1.20"
 private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
-private const val AGP_VERSION = "4.1.3"
+private const val AGP_VERSION = "7.0.2"
 private const val SERVICES_PLUGIN_VERSION = "4.3.4"
-private const val AUTODESK_VERSION = "0.7.0"
 const val COMPOSE_VERSION = "1.0.0-beta02"
 private const val ACCOMPANIST_VERSION = "0.6.2"
 private const val MOBIUSKT_VERSION = "0.1.9"
@@ -76,7 +75,7 @@ object Libs {
     const val Blockset = "org.drewcarlson:blockset:$BLOCKSET_VERSION"
 
     object WalletKit {
-        const val CoreAndroid = "com.breadwallet.core:corecrypto-android"
+        const val CoreAndroid = "com.blockset.walletkit:WalletKitBRD-Android"
     }
 
     object Android {
@@ -151,7 +150,7 @@ object Libs {
     }
 
     object Kodein {
-        const val CoreErasedJvm = "org.kodein.di:kodein-di-erased-jvm:$KODEIN_VERSION"
+        const val Core = "org.kodein.di:kodein-di:$KODEIN_VERSION"
         const val FrameworkAndroidX = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
     }
 

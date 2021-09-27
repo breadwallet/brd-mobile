@@ -23,6 +23,7 @@ apply(from = rootProject.file("gradle/copy-font-files.gradle"))
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     verbose.set(true)
     outputToConsole.set(true)
+    disabledRules.addAll("import-ordering", "no-wildcard-imports")
 }
 
 val BDB_CLIENT_TOKEN: String by project
@@ -36,20 +37,22 @@ detekt {
     ignoreFailures = true
 }
 
+project.tasks.register<brd.PostToSlack>("postToSlack")
+
 android {
-    compileSdkVersion(BrdRelease.ANDROID_COMPILE_SDK)
-    buildToolsVersion(BrdRelease.ANDROID_BUILD_TOOLS)
+    compileSdk = BrdRelease.ANDROID_COMPILE_SDK
+    buildToolsVersion = BrdRelease.ANDROID_BUILD_TOOLS
     defaultConfig {
         versionCode = BrdRelease.versionCode
         versionName = BrdRelease.versionName
         applicationId = "com.breadwallet"
-        minSdkVersion(BrdRelease.ANDROID_MINIMUM_SDK)
-        targetSdkVersion(BrdRelease.ANDROID_TARGET_SDK)
+        minSdk = BrdRelease.ANDROID_MINIMUM_SDK
+        targetSdk = BrdRelease.ANDROID_TARGET_SDK
         buildConfigField("int", "BUILD_VERSION", "${BrdRelease.buildVersion}")
         buildConfigField("String", "BDB_CLIENT_TOKEN", BDB_CLIENT_TOKEN)
         buildConfigField("Boolean", "USE_REMOTE_CONFIG", useGoogleServices.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArgument("clearPackageData", "true")
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
     signingConfigs {
         create("FakeSigningConfig") {
@@ -68,7 +71,7 @@ android {
         exclude("META-INF/*.kotlin_module")
     }
     // Specifies two flavor dimensions.
-    flavorDimensions("mode")
+    flavorDimensions.add("mode")
     productFlavors {
         create("brd") {
             applicationId = "com.breadwallet"
@@ -83,7 +86,7 @@ android {
             buildConfigField("boolean", "BITCOIN_TESTNET", "true")
         }
     }
-    lintOptions {
+    lint {
         lintConfig = file("lint.xml")
         isQuiet = true
         isExplainIssues = true
@@ -95,7 +98,7 @@ android {
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher"))
+            manifestPlaceholders.putAll(mapOf("applicationIcon" to "@mipmap/ic_launcher"))
             isDebuggable = false
             isMinifyEnabled = false
             buildConfigField("boolean", "IS_INTERNAL_BUILD", "false")
@@ -107,16 +110,16 @@ android {
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
                     strippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/release/out").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/stripped_native_libs/release/out").absolutePath
                     unstrippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/release/obj").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/cmake/release/obj").absolutePath
                 }
             }
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
             applicationIdSuffix = ".debug"
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher_grayscale"))
+            manifestPlaceholders.putAll(mapOf("applicationIcon" to "@mipmap/ic_launcher_grayscale"))
             isDebuggable = true
             isJniDebuggable = true
             isMinifyEnabled = false
@@ -132,9 +135,9 @@ android {
                 (extensionOf(this, "firebaseCrashlytics") as CrashlyticsExtension).apply {
                     nativeSymbolUploadEnabled = true
                     strippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/stripped_native_libs/debug/out").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/stripped_native_libs/debug/out").absolutePath
                     unstrippedNativeLibsDir =
-                        rootProject.file("external/walletkit/WalletKitJava/corenative-android/build/intermediates/cmake/debug/obj").absolutePath
+                        rootProject.file("external/walletkit/WalletKitJava/WalletKitNative-Android/build/intermediates/cmake/debug/obj").absolutePath
                 }
             }
         }
@@ -251,7 +254,7 @@ dependencies {
     implementation(Libs.Conductor.ViewPager)
 
     // Kodein DI
-    implementation(Libs.Kodein.CoreErasedJvm)
+    implementation(Libs.Kodein.Core)
     implementation(Libs.Kodein.FrameworkAndroidX)
 
     // Debugging/Monitoring

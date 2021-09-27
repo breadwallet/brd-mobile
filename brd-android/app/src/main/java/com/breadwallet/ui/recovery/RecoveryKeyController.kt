@@ -41,7 +41,7 @@ import com.spotify.mobius.disposables.Disposable
 import com.spotify.mobius.functions.Consumer
 import drewcarlson.mobius.flow.FlowTransformer
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 class RecoveryKeyController(
     args: Bundle? = null

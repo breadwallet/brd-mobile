@@ -139,6 +139,28 @@ struct AssetListItemView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     var body: some View {
+        if viewModel.compact {
+            CompactAssetListItemView(viewModel: viewModel)
+        } else {
+            StandardAssetListItemView(
+                viewModel: viewModel,
+                showAssetDescription: showAssetDescription
+            )
+        }
+    }
+}
+
+// MARK: - StandardAssetListItemView
+
+struct StandardAssetListItemView: View {
+
+    @State var viewModel: AssetViewModel
+    @State var showAssetDescription: Bool = false
+    
+    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
+    var body: some View {
         Link(destination: viewModel.urlScheme) {
             HStack {
                 // Icon / Title
@@ -187,6 +209,47 @@ struct AssetListItemView: View {
                     ChartView(viewModel: viewModel.chartViewModel)
                 }
             }
+        }
+    }
+}
+
+// MARK: - CompactAssetListItemView
+
+struct CompactAssetListItemView: View {
+
+    @State var viewModel: AssetViewModel
+    @State var showAssetDescription: Bool = false
+    
+    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(viewModel.price)
+                    .font(.footnote)
+                    .scaledToFit()
+                    .minimumScaleFactor(0.78)
+                    .foregroundColor(viewModel.textColor(in: colorScheme))
+                HStack {
+                    Text(viewModel.ticker)
+                        .font(.caption2)
+                        .minimumScaleFactor(0.5)
+                        .frame(maxWidth: 25)
+                        .scaledToFit()
+                        .foregroundColor(viewModel.textColor(in: colorScheme))
+                        .opacity(0.65)
+                    Text(viewModel.pctChange)
+                        .font(.caption2)
+                        .minimumScaleFactor(0.6)
+                        .frame(maxWidth: 35)
+                        .scaledToFit()
+                        .foregroundColor(viewModel.chartViewModel.chartColor)
+                }
+            }
+            .frame(width: 52)
+            
+            ChartView(viewModel: viewModel.chartViewModel)
         }
     }
 }

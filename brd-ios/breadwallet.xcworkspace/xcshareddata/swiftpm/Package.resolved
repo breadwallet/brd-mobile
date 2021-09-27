@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "CoinGecko",
-        "repositoryURL": "https://github.com/breadwallet/coingecko",
+        "repositoryURL": "https://github.com/breadwallet/CoinGecko.git",
         "state": {
           "branch": null,
-          "revision": "c46a8fd0ea9752e465006d477553bf0c5a78c931",
-          "version": "1.0.2"
+          "revision": "39c4f77def7f617674f9b915b414ec7b71fb2fa7",
+          "version": "1.0.3"
         }
       }
     ]

@@ -13,7 +13,7 @@ import UIKit
 class SupportSectionViewController: UITableViewController {
 
     private var viewModel: SupportViewModel?
-    private var articles: Array<SupportViewModel.Article> = []
+    private var articles: [SupportViewModel.Article] = []
 
     func update(with viewModel: SupportViewModel) {
         self.viewModel = viewModel

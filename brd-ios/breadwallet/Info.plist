@@ -58,7 +58,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.12.2</string>
+	<string>4.13.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -112,9 +112,29 @@
 				<string>bitid</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>dogecoin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>dogecoin</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>litecoin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>litecoin</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>9</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -138,6 +158,7 @@
 	<array>
 		<string>AssetIntent</string>
 		<string>AssetListIntent</string>
+		<string>BlockClockIntent</string>
 		<string>PortfolioIntent</string>
 	</array>
 	<key>UIAppFonts</key>

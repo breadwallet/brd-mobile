@@ -105,10 +105,10 @@ extension ExchangeTradeViewModel {
             .first
 
         if let fiatValue = model.formattedSourceAmountFiatValue, isQuote {
-            detail = "≈ \(fiatValue)"
+            detail = "\(fiatValue)"
         } else if let rate = dollarRate?.rate, isQuote {
             let fiatValue = rate * ((try? model.sourceAmountInput.double()) ?? 0.0)
-            detail = "≈ \(CommonFormatter.price.string(from: fiatValue) ?? "")"
+            detail = "\(CommonFormatter.price.string(from: fiatValue) ?? "")"
         }
 
         func wrap(_ event: ExchangeEvent.OnAmountChange, quote: Bool) -> ExchangeEvent {
@@ -200,7 +200,7 @@ extension ExchangeTradeViewModel.CTAState {
             return .processing
         }
 
-        guard let offer = model.selectedOffer else {
+        if model.selectedOffer == nil {
             return .nextDisabled
         }
 
@@ -263,7 +263,7 @@ extension  ExchangeTradeViewModel {
             responder: Responder
     ) -> (String?, UIColor) {
 
-        if let inputError = model.inputError {
+        if model.inputError != nil {
             return inputErrorFromInfo(for: model, responder: responder)
         }
 

@@ -25,7 +25,7 @@ import com.breadwallet.tools.util.EmailTarget
 import com.breadwallet.tools.util.SupportManager
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.home.HomeController
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Locale
 
 private const val VERSION_CLICK_COUNT_FOR_BACKDOOR = 5

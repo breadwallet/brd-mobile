@@ -75,17 +75,40 @@ extension ColorOption {
     static let white = ColorOption(identifier: ".white", display: S.Widget.Color.white)
     static let black = ColorOption(identifier: ".black", display: S.Widget.Color.black)
     static let gray = ColorOption(identifier: ".gray", display: S.Widget.Color.gray)
+    static let grayDark = ColorOption(identifier: ".grayDark", display: S.Widget.Color.grayDark)
+    static let grayLight = ColorOption(identifier: ".grayLight", display: S.Widget.Color.grayLight)
     static let red = ColorOption(identifier: ".red", display: S.Widget.Color.red)
+    static let redAlt = ColorOption(identifier: ".redAlt", display: S.Widget.Color.redAlt)
+    static let redDark = ColorOption(identifier: ".redDark", display: S.Widget.Color.redDark)
+    static let redLight = ColorOption(identifier: ".redLight", display: S.Widget.Color.redLight)
     static let green = ColorOption(identifier: ".green", display: S.Widget.Color.green)
+    static let greenAlt = ColorOption(identifier: ".greenAlt", display: S.Widget.Color.greenAlt)
+    static let greenDark = ColorOption(identifier: ".greenDark", display: S.Widget.Color.greenDark)
+    static let greenLight = ColorOption(identifier: ".greenLight", display: S.Widget.Color.greenLight)
     static let blue = ColorOption(identifier: ".blue", display: S.Widget.Color.blue)
+    static let blueDark = ColorOption(identifier: ".blueDark", display: S.Widget.Color.blueDark)
+    static let blueLight = ColorOption(identifier: ".blueLight", display: S.Widget.Color.blueLight)
     static let orange = ColorOption(identifier: ".orange", display: S.Widget.Color.orange)
+    static let orangeDark = ColorOption(identifier: ".orangeDark", display: S.Widget.Color.orangeDark)
+    static let orangeLight = ColorOption(identifier: ".orangeLight", display: S.Widget.Color.orangeLight)
     static let yellow = ColorOption(identifier: ".yellow", display: S.Widget.Color.yellow)
+    static let yellowDark = ColorOption(identifier: ".yellowDark", display: S.Widget.Color.yellowDark)
+    static let yellowLight = ColorOption(identifier: ".yellowLight", display: S.Widget.Color.yellowLight)
     static let pink = ColorOption(identifier: ".pink", display: S.Widget.Color.pink)
+    static let pinkDark = ColorOption(identifier: ".pinkDark", display: S.Widget.Color.pinkDark)
+    static let pinkLight = ColorOption(identifier: ".pinkLight", display: S.Widget.Color.pinkLight)
     static let purple = ColorOption(identifier: ".purple", display: S.Widget.Color.purple)
+    static let purpleDark = ColorOption(identifier: ".purpleDark", display: S.Widget.Color.purpleDark)
+    static let purpleLight = ColorOption(identifier: ".purpleLight", display: S.Widget.Color.purpleLight)
 
     static func basicColors() -> [ColorOption] {
-        return [ .white, .black, .gray, .red, .green, .blue, .orange, .yellow,
-                 .pink, .purple]
+        return [
+            .white, .black, .gray, .grayDark, .grayLight, .red, .redAlt, .redDark,
+            .redLight, .green, .greenAlt, .greenDark, .greenLight, .blue, .blueDark,
+            .blueLight, .orange, .orangeDark, .orangeLight, .yellow, .yellowDark,
+            .yellowLight, .pink, .pinkDark, .pinkLight, .purple, .purpleDark,
+            .purpleLight
+        ]
     }
 }
 
@@ -148,20 +171,56 @@ extension ColorOption {
             return .black
         case .gray:
             return .gray
+        case .grayDark:
+            return Color(UIColor.gray.darker())
+        case .grayLight:
+            return Color(UIColor.gray.lighter())
         case .red:
             return .red
+        case .redAlt:
+            return Color(UIColor.fromHex("#EF5350"))
+        case .redDark:
+            return Color(UIColor.red.darker())
+        case .redLight:
+            return Color(UIColor.red.lighter())
         case .green:
             return .green
+        case .greenAlt:
+            return Color(UIColor.fromHex("#25A69A"))
+        case .greenDark:
+            return Color(UIColor.green.darker())
+        case .greenLight:
+            return Color(UIColor.green.lighter())
         case .blue:
             return .blue
+        case .blueDark:
+            return Color(UIColor.blue.darker())
+        case .blueLight:
+            return Color(UIColor.blue.lighter())
         case .orange:
             return .orange
+        case .orangeDark:
+            return Color(UIColor.orange.darker())
+        case .orangeLight:
+            return Color(UIColor.orange.lighter())
         case .yellow:
             return .yellow
+        case .yellowDark:
+            return Color(UIColor.yellow.darker())
+        case .yellowLight:
+            return Color(UIColor.yellow.lighter())
         case .pink:
             return .pink
+        case .pinkDark:
+            return Color(UIColor.pink.darker())
+        case .pinkLight:
+            return Color(UIColor.pink.lighter())
         case .purple:
             return .purple
+        case .purpleDark:
+            return Color(UIColor.purple.darker())
+        case .purpleLight:
+            return Color(UIColor.purple.lighter())
         case .primaryBackground:
             return Color(Theme.primaryBackground)
         case .secondaryBackground:

@@ -81,7 +81,7 @@ class IosBrdAuthProvider: BrdAuthProviderBase {
         urlComponents.path = path
         urlComponents.queryItems = [
             URLQueryItem(name: "Authorization", value: authorization(signature: signature.signature)),
-            URLQueryItem(name: "Date", value: signature.timestamp),
+            URLQueryItem(name: "Date", value: signature.timestamp)
         ]
         return urlComponents.url
     }

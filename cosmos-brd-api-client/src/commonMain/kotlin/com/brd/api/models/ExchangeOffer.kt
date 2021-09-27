@@ -8,7 +8,6 @@
  */
 package com.brd.api.models
 
-import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,10 +17,8 @@ data class ExchangeOffer(
     @SerialName("offer_id")
     val offerId: String,
     @SerialName("created_at")
-    @Serializable(with = InstantSerializer::class)
     val createdAt: Instant,
     @SerialName("expires_at")
-    @Serializable(with = InstantSerializer::class)
     val expiresAt: Instant,
     @SerialName("quote_currency_method")
     val quoteCurrencyMethod: CurrencyMethod,
@@ -72,10 +69,8 @@ data class ExchangeOffer(
         val amount: String,
         val consumed: String? = null,
         @SerialName("window_start")
-        @Serializable(with = InstantSerializer::class)
         val windowStart: Instant?,
         @SerialName("window_end")
-        @Serializable(with = InstantSerializer::class)
         val end: Instant?,
     )
 }

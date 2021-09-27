@@ -22,8 +22,8 @@ include("cosmos-address-resolver")
 
 includeBuild("external/walletkit/WalletKitJava") {
     dependencySubstitution {
-        substitute(module("com.breadwallet.core:corecrypto-android"))
-            .with(project(":corecrypto-android"))
+        substitute(module("com.blockset.walletkit:WalletKitBRD-Android"))
+            .with(project(":WalletKitBRD-Android"))
     }
 }
 

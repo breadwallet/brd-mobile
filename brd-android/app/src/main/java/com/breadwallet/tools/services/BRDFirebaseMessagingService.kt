@@ -34,9 +34,9 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import org.kodein.di.android.closestKodein
+import org.kodein.di.android.closestDI
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 /**
  * This class is responsible for updating the Firebase registration token each time a new one is available,
@@ -103,10 +103,10 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
         // Save token in shared preferences.
         Log.d(TAG, "onNewToken: token value: $token")
         BRSharedPrefs.putFCMRegistrationToken(token)
-        val kodein by closestKodein(applicationContext)
-        val scope = kodein.direct.instance<CoroutineScope>()
+        val di by closestDI(applicationContext)
+        val scope = di.direct.instance<CoroutineScope>()
         scope.launch {
-            val userManager = kodein.direct.instance<BrdUserManager>()
+            val userManager = di.direct.instance<BrdUserManager>()
             userManager.stateChanges()
                 .filter { it !is BrdUserState.Uninitialized }
                 .first()

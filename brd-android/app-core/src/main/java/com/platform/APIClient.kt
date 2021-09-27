@@ -23,8 +23,8 @@ import android.net.*
 import android.os.*
 import androidx.annotation.*
 import com.brd.prefs.*
+import com.blockset.walletkit.Key
 import com.breadwallet.appcore.BuildConfig
-import com.breadwallet.crypto.Key
 import com.breadwallet.logger.*
 import com.breadwallet.repository.*
 import com.breadwallet.tools.animation.*
@@ -43,9 +43,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.*
 import org.json.*
-import org.kodein.di.*
-import org.kodein.di.android.*
-import org.kodein.di.erased.*
+import org.kodein.di.android.closestDI
+import org.kodein.di.direct
+import org.kodein.di.instance
 import java.io.IOException
 import java.lang.StringBuffer
 import java.lang.System
@@ -537,7 +537,7 @@ class APIClient(
         @Synchronized
         @Deprecated("Retrieve from the Application Kodein instance.")
         fun getInstance(context: Context): APIClient {
-            val kodein by closestKodein(context)
+            val kodein by closestDI(context)
             return kodein.direct.instance()
         }
 
