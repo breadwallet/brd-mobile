@@ -104,6 +104,7 @@ The following modules are available, click on the name to learn more.
 2. (Optional, for BRD employees) checkout production resources: `git submodule update --checkout`
 3. Open the `Cosmos` folder using Intellij IDEA or Android Studio
 4. (iOS Development) Open the `brd-ios/breadwallet.xcworkspace` file in xcode
+5. For those who has `Mac` with `M1 chip (arm64)`: `Go to Project` -> `Build Phases` -> `Build Cosmos` and uncomment this line `cd brd-ios && ./scripts/cosmos_to_m1_simulator.sh`
 
 ## Advanced Setup
 
