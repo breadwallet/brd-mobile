@@ -179,7 +179,9 @@ class PartnerBrowserController(args: Bundle? = null) :
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    return if (request?.url?.encodedPath.orEmpty().endsWith("/return")) {
+                    return if (request?.url?.encodedPath.orEmpty().endsWith("/return") &&
+                        !currentModel.mode.isSell
+                    ) {
                         (currentModel.state as? ExchangeModel.State.ProcessingOrder)?.userAction?.also { action ->
                             eventConsumer.accept(
                                 ExchangeEvent.OnBrowserActionCompleted(action.action, false)
@@ -189,6 +191,16 @@ class PartnerBrowserController(args: Bundle? = null) :
                         true
                     } else {
                         super.shouldOverrideUrlLoading(view, request)
+                    }
+                }
+
+                override fun onPageFinished(view: WebView, url: String) {
+                    if (currentModel.mode.isSell && url.contains("/return")) {
+                        (currentModel.state as? ExchangeModel.State.ProcessingOrder)?.userAction?.also { action ->
+                            eventConsumer.accept(
+                                ExchangeEvent.OnBrowserActionCompleted(action.action, false)
+                            )
+                        }
                     }
                 }
             }

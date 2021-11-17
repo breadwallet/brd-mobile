@@ -24,6 +24,7 @@ class WebViewController: UIViewController {
     var closeAction: Action?
     var flowEndUrlComponents: [String] = []
     var flowEndedAction: ((_ url: URL?) -> Void)?
+    var flowEndOnDidFinishNavigation: Bool = false
     var transparentBg: Bool = false
 
     private var back: UIBarButtonItem?
@@ -171,20 +172,26 @@ extension WebViewController: WKNavigationDelegate {
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
         let url = navigationAction.request.url
-
         if isClose(url) {
-            decisionHandler(.cancel)
-            flowEndedAction?(url)
+            let flowEndedAction = self.flowEndedAction
+
+            if !flowEndOnDidFinishNavigation {
+                self.flowEndedAction = nil
+            }
+
+            decisionHandler(.allow)
+
+            if !flowEndOnDidFinishNavigation {
+                flowEndedAction?(url)
+            }
             return
         }
 
         if isMail(url) {
             decisionHandler(.cancel)
-            let address = url?.absoluteString.replacingOccurrences(
-                of: (url?.scheme ?? "") + ":",
-                with: ""
-            )
-            presentMailCompose(emailAddress: address ?? "support@brd.com")
+            if let url = url {
+                UIApplication.shared.open(url, options: [:], completionHandler: {_ in ()})
+            }
             return
         }
 

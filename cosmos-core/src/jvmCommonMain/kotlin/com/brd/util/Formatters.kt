@@ -37,11 +37,17 @@ actual class NumberFormatter actual constructor(locale: CommonLocale, currencyFo
             val selectedCurrency = Currency.getAvailableCurrencies()
                 .find { it.currencyCode.equals(value, true) }
 
-            if (selectedCurrency == null) {
-                val escapedCurrencyCode = "'${value.uppercase()}'"
-                ref.applyPattern("#,##0.######## $escapedCurrencyCode")
-            } else {
-                ref.currency = selectedCurrency
+            when {
+                value.isEmpty() -> {
+                    ref.applyPattern("#,##0.########")
+                }
+                selectedCurrency == null -> {
+                    val escapedCurrencyCode = "'${value.uppercase()}'"
+                    ref.applyPattern("#,##0.######## $escapedCurrencyCode")
+                }
+                else -> {
+                    ref.currency = selectedCurrency
+                }
             }
         }
 

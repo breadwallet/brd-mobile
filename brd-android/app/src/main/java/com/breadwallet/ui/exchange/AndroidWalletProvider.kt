@@ -73,6 +73,30 @@ class AndroidWalletProvider(
         }
     }
 
+    override fun currencyCode(currencyId: String): String? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId }
+        return wallet?.currency?.code
+    }
+
+    override fun networkCurrencyCode(currencyId: String): String? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId }
+        return wallet?.walletManager?.network?.currency?.code
+    }
+
+    override fun estimateFee(currencyId: String, targetAddress: String): Double? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId } ?: return null
+        val target = Address.create(targetAddress, wallet.walletManager.network).get()
+        val fee = wallet.feeForSpeed(TransferSpeed.Priority(wallet.currency.code))
+        return runBlocking {
+            try {
+                wallet.estimateFee(target, wallet.balance).fee.doubleAmount(wallet.unit).orNull()
+            } catch (e: LimitEstimationError) {
+                logError("Failed to estimate fee", e)
+                null
+            }
+        }
+    }
+
     private fun String.adjustId(): String = if (BuildConfig.BITCOIN_TESTNET) {
         replace("ethereum-mainnet", "ethereum-ropsten")
             .replace("mainnet", "testnet")

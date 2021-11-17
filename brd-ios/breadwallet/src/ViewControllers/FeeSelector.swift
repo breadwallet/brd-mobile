@@ -110,7 +110,7 @@ class FeeSelector: UIView {
                 assertionFailure("Undefined fee selection index")
             }
         }
-
+        
         control.selectedSegmentIndex = 1
         control.tintColor = .primaryButton
         clipsToBounds = true
@@ -118,5 +118,9 @@ class FeeSelector: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func disableEconomyFee() {
+        control.setEnabled(false, forSegmentAt: 0)
     }
 }

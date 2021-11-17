@@ -14,7 +14,6 @@ import com.brd.addressresolver.AddressResolver
 import com.brd.addressresolver.AddressResult
 import com.brd.addressresolver.AddressType
 import com.breadwallet.R
-import com.breadwallet.breadbox.*
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.addressFor
 import com.breadwallet.breadbox.defaultUnit

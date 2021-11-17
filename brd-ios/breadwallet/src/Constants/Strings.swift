@@ -1136,6 +1136,23 @@ enum S {
             static let insufficientNativeBalanceErrorConfirm = NSLocalizedString("Exchange.ErrorState.insufficientNativeBalanceErrorConfirm", value: "Buy ETH", comment: "Insufficient chain error alert ok action")
         }
 
+        enum FullScreenErrorState {
+            static let emptyWalletTitle = NSLocalizedString("Exchange.FullScreenErrorState.emptyWalletTitle", value: "Your wallet is empty", comment: "Empty wallet message title")
+            static let emptyWalletBody = NSLocalizedString("Exchange.FullScreenErrorState.emptyWalletBody", value: "It looks like you don’t have any coins in your wallet to swap.", comment: "Empty wallet message body")
+            static let emptyWalletCTA = NSLocalizedString("Exchange.FullScreenErrorState.emptyWalletCTA", value: "Buy Some", comment: "CTA title for empty wallet trade screen")
+            static let sellingUnavailableTitle = NSLocalizedString("Exchange.FullScreenErrorState.sellingUnavailableTitle", value: "Selling Unavailable", comment: "Selling unavailable message title")
+            static let sellingUnavailableBody = NSLocalizedString("Exchange.FullScreenErrorState.sellingUnavailableBody", value: "We don’t have a partner that supports selling to %@ in %@ yet.", comment: "Selling unavailable message")
+            static let sellingUnavailableCTA = NSLocalizedString("Exchange.FullScreenErrorState.sellingUnavailableCTA", value: "Change region / currency", comment: "Selling unavailable CTA")
+        }
+
+        enum FeaturePromotion {
+            static let buyTitle = NSLocalizedString("Exchange.FeaturePromotion.buyTitle", value: "Buy & Sell is easier than ever!", comment: "Buy promotion title")
+            static let buyBody = NSLocalizedString("Exchange.FeaturePromotion.buyBody", value: "There's no better time to invest than today with our streamlined new interface.", comment: "Buy promotion body")
+            static let tradeTitle = NSLocalizedString("Exchange.FeaturePromotion.tradeTitle", value: "Trading assets is now even easier!", comment: "Trade promotion title")
+            static let tradeBody = NSLocalizedString("Exchange.FeaturePromotion.tradeBody", value: "Trade your assets into another with just a few taps. Walk and trade baby!", comment: "Trade promotion body")
+            static let CTA = NSLocalizedString("Exchange.FeaturePromotion.CTA", value: "Let's see it!", comment: "Promotion CTA")
+        }
+
         static let buy = NSLocalizedString("Exchange.buy", value: "Buy", comment: "Exchange buy title")
         static let sell = NSLocalizedString("Exchange.sell", value: "Sell", comment: "Exchange sell title")
         static let viaSEPA = NSLocalizedString("Exchange.viaSEPA", value: " via SEPA", comment: "Offer purchase method SEPA")
@@ -1157,8 +1174,5 @@ enum S {
         static let partnerWebViewAlertBody = NSLocalizedString("Exchange.partnerWebViewAlertBody", value: "View order details in Menu -> Order History", comment: "Exit partner webview flow alter title")
         static let partnerWebViewAlertCancel = NSLocalizedString("Exchange.partnerWebViewAlertCancel", value: "Cancel", comment: "Exit partner webview flow alter cancel action")
         static let partnerWebViewAlertOkay = NSLocalizedString("Exchange.partnerWebViewAlertOkay", value: "Okay", comment: "Exit partner webview flow alter Okay action")
-        static let emptyWalletTitle = NSLocalizedString("Exchange.emptyWalletTitle", value: "Your wallet is empty", comment: "Empty wallet message title")
-        static let emptyWalletBody = NSLocalizedString("Exchange.emptyWalletBody", value: "It looks like you don’t have any coins in your wallet to swap.", comment: "Empty wallet message body")
-        static let emptyWalletCTA = NSLocalizedString("Exchange.emptyWalletCTA", value: "Buy Some", comment: "CTA title for empty wallet trade screen")
     }
 }

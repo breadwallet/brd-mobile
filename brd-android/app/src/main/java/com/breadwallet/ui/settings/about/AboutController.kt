@@ -43,7 +43,6 @@ class AboutController(args: Bundle? = null) : BaseController(args) {
         val res = checkNotNull(resources)
 
         with(binding) {
-            labelHydraActivated.isVisible = brdPreferences.hydraActivated
             backButton.setOnClickListener {
                 router.popCurrentController()
             }
@@ -87,6 +86,11 @@ class AboutController(args: Bundle? = null) : BaseController(args) {
     override fun onAttach(view: View) {
         super.onAttach(view)
         versionClickedCount = 0
+
+        with(binding) {
+            labelHydraActivated.isVisible = brdPreferences.hydraActivated
+            brdRewardsId.text = BRSharedPrefs.getWalletRewardId()
+        }
     }
 
     override fun handleBack(): Boolean {

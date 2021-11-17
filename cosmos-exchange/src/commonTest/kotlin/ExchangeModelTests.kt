@@ -72,10 +72,10 @@ class ExchangeModelTests {
     @Test
     fun test_DefaultModel_AmountInputsAreEmpty() {
         assertOnModels {
-            assertEquals("0", sourceAmountInput)
+            assertEquals("", sourceAmountInput)
             assertEquals(0.0, sourceAmount)
             assertNull(formattedSourceAmount)
-            assertNull(quoteAmount)
+            assertEquals(0.0, quoteAmount)
             assertNull(formattedQuoteAmount)
         }
     }

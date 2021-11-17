@@ -56,7 +56,6 @@ private const val MOCKITO_VERSION = "2.25.0"
 private const val KASPRESSO_VERSION = "1.1.0"
 private const val KAKAO_VERSION = "2.3.2"
 private const val MATERIAL_VERSION = "1.3.0"
-const val REDACTED_VERSION = "0.8.0"
 private const val DETEKT_VERSION = "1.0.1"
 private const val COMMONS_COMPRESS_VERSION = "1.20"
 private const val BIOMETRIC_VERSION = "1.2.0-alpha02"
@@ -68,7 +67,8 @@ private const val MOBIUSKT_VERSION = "0.1.9"
 private const val BLOCKSET_VERSION = "0.1.3.1"
 private const val FLIPPER_VERSION = "0.100.0"
 private const val FLIPPER_SO_VERSION = "0.10.1"
-const val KTLINT_VERSION = "10.0.0"
+private const val DESUGAR_JDK_VERSION = "1.1.5"
+const val KTLINT_VERSION = "10.2.0"
 
 object Libs {
 
@@ -76,6 +76,7 @@ object Libs {
 
     object WalletKit {
         const val CoreAndroid = "com.blockset.walletkit:WalletKitBRD-Android"
+        const val CoreJRE = "com.blockset.walletkit:WalletKitBRD-JRE"
     }
 
     object Android {
@@ -83,6 +84,7 @@ object Libs {
     }
 
     object Androidx {
+        const val DesugarJdkLibs = "com.android.tools:desugar_jdk_libs:$DESUGAR_JDK_VERSION"
         const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_EXT_VERSION"
         const val LifecycleScopeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$LIFECYCLE_EXT_VERSION"
         const val WorkManagerKtx = "androidx.work:work-runtime-ktx:$WORK_MANAGER_VERSION"

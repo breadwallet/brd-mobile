@@ -26,7 +26,6 @@ import com.blockset.walletkit.Wallet
 import com.blockset.walletkit.WalletManagerMode
 import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.ext.throttleLatest
-import com.breadwallet.initializeFlipper
 import com.breadwallet.logger.Logger
 import com.breadwallet.logger.logDebug
 import com.breadwallet.model.Experiments
@@ -219,11 +218,6 @@ class SettingsScreenHandler(
                 brdPreferences.hydraActivated = true
                 brdClient.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
             }
-            F.ToggleFlipperClientEnabled -> {
-                BRSharedPrefs.flipperEnabledDebug =
-                    !BRSharedPrefs.flipperEnabledDebug
-                initializeFlipper(context)
-            }
         }
     }
 
@@ -408,7 +402,6 @@ class SettingsScreenHandler(
             ""
         }
         val toggleRateAppPromptAddOn = BRSharedPrefs.appRatePromptShouldPromptDebug
-        val toggleFlipperDebugAddOn = BRSharedPrefs.flipperEnabledDebug
         return listOf(
             SettingsItem(
                 "Copy Paper Key",
@@ -471,11 +464,6 @@ class SettingsScreenHandler(
             SettingsItem(
                 "Activate Hydra (Native Exchange UI)",
                 SettingsOption.NATIVE_EXCHANGE_UI,
-            ),
-            SettingsItem(
-                "Toggle Flipper Debug Client",
-                SettingsOption.ENABLE_FLIPPER_CLIENT,
-                addOn = "enabled=$toggleFlipperDebugAddOn"
             )
         ) + getHiddenOptions()
     }

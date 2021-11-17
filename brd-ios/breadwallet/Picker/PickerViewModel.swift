@@ -99,9 +99,14 @@ extension PickerViewModel {
         let allCurrencies = assetCollection?.allAssets ?? [:]
         let currencies = state.assets
         let pair = model.selectedPair
-        let selectedFromCode = state.source ? pair?.fromCode : pair?.toCode
+
+        let buyFromCode = state.source ? pair?.fromCode : pair?.toCode
+        let sellFromCode = state.source ? pair?.toCode : pair?.fromCode
+        let selectedFromCode = model.mode == .sell ? sellFromCode : buyFromCode
+
         self.init(
-            withTitle: state.source ? "Pay With" : "Assets",
+            // TODO: Localize titles
+            withTitle: model.mode == .sell ? "Sell" : state.source ? "Pay With" : "Assets",
             prefersLargerCells: true,
             selectedIndexes: [currencies
                 .firstIndex(where: { $0.code == selectedFromCode ?? "" })]

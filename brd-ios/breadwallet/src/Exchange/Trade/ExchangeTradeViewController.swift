@@ -28,7 +28,7 @@ final class ExchangeTradeViewController: CosmosViewController {
     private lazy var spacers = [UIView(), UIView(), UIView(), UIView()]
     private lazy var swapButton = UIButton.image(UIImage(named: "ArrowDownSwap"))
     private lazy var offerLabel = UILabel(text: S.Exchange.fulfilledBy)
-    private lazy var emptyWallet = ExchangeTradeEmptyWalletView()
+    private lazy var fullScreenErrorView = ExchangeFullScreenErrorView()
     private lazy var ctaButton = BRDButton(title: S.Exchange.CTA.preview)
     private lazy var limitLabel = UILabel()
     private lazy var scrollView = UIScrollView()
@@ -108,9 +108,10 @@ extension ExchangeTradeViewController: ExchangeView {
         )
 
         self.viewModel = viewModel
-        setEmptyWalletsHidden(!viewModel.emptyWallets)
+        fullScreenErrorView.update(with: viewModel)
+        setSellFullScreenErrorHidden(fullScreenErrorView.isHidden)
 
-        if viewModel.emptyWallets {
+        if viewModel.fullScreenErrorStyle == .emptyWallets {
             return
         }
 
@@ -136,7 +137,9 @@ extension ExchangeTradeViewController: ExchangeView {
 
     func popToRoot() {
         navigationController?.popToRootViewController(animated: true)
-        if let visible = navigationController?.visibleViewController, visible != self {
+        if let visible = navigationController?.visibleViewController,
+           visible != self,
+           visible.isBeingDismissed == false {
             dismiss(animated: true)
         }
     }
@@ -164,7 +167,7 @@ extension ExchangeTradeViewController: ExchangeView {
 private extension ExchangeTradeViewController {
 
     func addSubviews() {
-        (contentViews() + [scrollView, contentStack, ctaStack, emptyWallet])
+        (contentViews() + [scrollView, contentStack, ctaStack, fullScreenErrorView])
             .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
 
         let contentStackViews = [
@@ -174,7 +177,7 @@ private extension ExchangeTradeViewController {
             baseInputView,
             HStackView([spacers[3], offerLabel]),
             offerView,
-            emptyWallet
+            fullScreenErrorView
         ]
 
         contentStack.addArrangedSubviews(contentStackViews)
@@ -231,8 +234,8 @@ private extension ExchangeTradeViewController {
         swapButton.setTitleColor(UIColor.blue, for: .normal)
         offerView.backgroundColor = Theme.quaternaryBackground
         ctaButton.cornerRadius = Padding.half
-        emptyWallet.isHidden = true
-        emptyWallet.ctaAction = { [weak self] in
+        fullScreenErrorView.isHidden = true
+        fullScreenErrorView.ctaAction = { [weak self] in
             self?.consumer?.accept(.OnContinueClicked())
             self?.ctaButton.isEnabled = false
         }
@@ -287,9 +290,9 @@ private extension ExchangeTradeViewController {
         return .none
     }
 
-    func setEmptyWalletsHidden(_ hidden: Bool) {
+    func setSellFullScreenErrorHidden(_ hidden: Bool) {
         contentViews().forEach { $0.isHidden = !hidden }
-        emptyWallet.isHidden = hidden
+        fullScreenErrorView.isHidden = hidden
     }
 
     private func exitAndNavigateToBuyFlow() {

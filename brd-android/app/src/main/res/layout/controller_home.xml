@@ -95,7 +95,7 @@
             android:layout_marginTop="8dp"
             tools:listitem="@layout/wallet_list_item"
             app:layout_constraintBottom_toTopOf="@+id/menu_table"
-            app:layout_constraintTop_toBottomOf="@+id/prompt_container"/>
+            app:layout_constraintTop_toBottomOf="@+id/prompt_container" />
 
         <TableLayout
             android:id="@+id/menu_table"
@@ -147,6 +147,18 @@
                         app:layout_constraintBottom_toTopOf="@+id/buy_text_view"
                         app:layout_constraintStart_toStartOf="@+id/imageView4" />
 
+                    <ImageView
+                        android:id="@+id/buy_promo_indicator"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:src="@drawable/page_indicator_active"
+                        app:layout_constraintTop_toTopOf="@+id/buy_text_view"
+                        app:layout_constraintBottom_toBottomOf="@+id/buy_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/buy_text_view" />
+
                     <TextView
                         android:id="@+id/buy_text_view"
                         android:layout_width="wrap_content"
@@ -163,7 +175,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/trade_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -178,16 +190,40 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_menu_trade"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/trade_text_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/trade_promo_indicator"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:src="@drawable/page_indicator_active"
+                        app:layout_constraintTop_toTopOf="@+id/trade_text_view"
+                        app:layout_constraintBottom_toBottomOf="@+id/trade_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/trade_text_view" />
 
                     <TextView
+                        android:id="@+id/trade_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.trade"
-                        android:textColor="@color/white" />
-                </LinearLayout>
+                        android:textColor="@color/white"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/menu_layout"

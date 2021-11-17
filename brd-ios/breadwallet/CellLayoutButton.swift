@@ -101,6 +101,7 @@ class CellLayoutButton: UIButton {
         cellLayoutView.isUserInteractionEnabled = false
         cellLayoutView.titleStyle = titleStyle
         cellLayoutView.accessoryStyle = accessoryStyle
+        cellLayoutView.subtitleLabel.textColor = Theme.tertiaryText
 
         let viewModel = CellLayoutView.ViewModel(
             title: title,

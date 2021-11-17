@@ -22,8 +22,10 @@ include("cosmos-address-resolver")
 
 includeBuild("external/walletkit/WalletKitJava") {
     dependencySubstitution {
+        substitute(module("com.blockset.walletkit:WalletKitBRD-JRE"))
+            .using(project(":WalletKitBRD-JRE"))
         substitute(module("com.blockset.walletkit:WalletKitBRD-Android"))
-            .with(project(":WalletKitBRD-Android"))
+            .using(project(":WalletKitBRD-Android"))
     }
 }
 
@@ -35,3 +37,4 @@ includeBuild("external/redacted-compiler-plugin") {
             .with(project(":redacted-compiler-plugin-annotations"))
     }
 }
+include(":cosmos-feature-promotion")

@@ -151,7 +151,8 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
         }
 
         ifChanged(ExchangeModel::formattedQuoteAmount) {
-            toAsset.labelInput.text = formattedQuoteAmount
+            toAsset.labelInput.text =
+                formattedQuoteAmount?.replace("≈ ", "")?.split(" ")?.firstOrNull()
         }
 
         ifChanged(ExchangeModel::selectedOffer, ExchangeModel::offerState) {
@@ -195,7 +196,8 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
                         selectedOffer.setProviderIcon(offer.imageProviderLogo)
                         offer.labelProviderName.text = selectedOffer.offer.provider.name
                         offer.labelRateValue.text = selectedOffer.formattedSourceRatePerQuote
-                        offer.labelFeeValue.text = selectedOffer.run { formattedQuoteFees ?: formattedSourceFees }
+                        offer.labelFeeValue.text =
+                            selectedOffer.run { formattedQuoteFees ?: formattedSourceFees }
                         offer.groupOfferDetails.isVisible = true
                         offer.layoutOfferInfo.isVisible = true
                         buttonPreview.isEnabled = true
@@ -335,13 +337,15 @@ class TradeController(args: Bundle? = null) : ExchangeController.ChildController
             fromColor != 0 -> {
                 binding.toAsset.layoutBackground.foreground = foreground
                 binding.fromAsset.layoutBackground.foreground = null
-                binding.fromAsset.card.strokeWidth = res.getDimensionPixelSize(R.dimen.active_token_card_stroke_width)
+                binding.fromAsset.card.strokeWidth =
+                    res.getDimensionPixelSize(R.dimen.active_token_card_stroke_width)
                 binding.toAsset.card.strokeWidth = 0
             }
             toColor != 0 -> {
                 binding.fromAsset.layoutBackground.foreground = foreground
                 binding.toAsset.layoutBackground.foreground = null
-                binding.toAsset.card.strokeWidth = res.getDimensionPixelSize(R.dimen.active_token_card_stroke_width)
+                binding.toAsset.card.strokeWidth =
+                    res.getDimensionPixelSize(R.dimen.active_token_card_stroke_width)
                 binding.fromAsset.card.strokeWidth = 0
             }
             else -> {

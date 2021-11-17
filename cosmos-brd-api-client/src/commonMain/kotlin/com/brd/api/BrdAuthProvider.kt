@@ -32,12 +32,7 @@ interface BrdAuthProvider {
         override fun clientToken(): String? = null
 
         override fun authorization(signature: String): String {
-            val clientToken = clientToken()
-            return if (clientToken == null) {
-                "bread $token:$signature"
-            } else {
-                "bread2 $clientToken:$token:$signature"
-            }
+            return "bread $token:$signature"
         }
 
         override fun signUrl(apiHost: BrdApiHost, path: String): String {

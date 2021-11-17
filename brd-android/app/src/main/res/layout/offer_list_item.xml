@@ -191,6 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            tools:visibility="visible"
             app:constraint_referenced_ids="viewFooterDivider,viewFeeDivider,labelTotal,labelOutputAmount,labelOutputAmountAlt,labelRateText,labelRateValue,labelFee,labelFeeValue" />
 
         <com.google.android.material.button.MaterialButton

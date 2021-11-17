@@ -84,10 +84,10 @@
 "Alerts.sendSuccessSubheader" = "돈을 보냈어요!";
 /* Fingerprint was recognized by the scanner */
 "Alerts.touchIdSucceeded.android" = "지문 인식됨";
-/* Tell the user where they can enable permissions to access device storage. */
-"Android.allowFileSystemAccess" = "단말의 \"설정\" > \"앱\" > \"BRD\" > \"권한\"에서 저장소 접근을 허용해 주세요.";
 /* The "home" screen is the name of the top level menu for the app. */
 "Android.BCH.welcome.message" = "홈 화면을 통해 월렛에 있는 모든 BCH에 액세스할 수 있습니다.";
+/* Tell the user where they can enable permissions to access device storage. */
+"Android.allowFileSystemAccess" = "단말의 \"설정\" > \"앱\" > \"BRD\" > \"권한\"에서 저장소 접근을 허용해 주세요.";
 /* Warning about using apps that can alter the screen */
 "Android.screenAlteringMessage" = "BRD는 (Twilight과 같은) 화면 변경 앱을 비활성화하지 않으면 제대로 동작하지 않습니다.";
 /* An app that alters the screen ("screen-altering app") has been detected. */
@@ -132,6 +132,8 @@
 "BitID.success" = "성공적으로 인증됨";
 /* BitID Authentication Request alert view title */
 "BitID.title" = "BitID 인증 요청";
+/* Button to return to the "home" screen (the home screen is the top menu). */
+"Button.Home" = "홈";
 /* As in "(tap here to) buy (bitcoin)" */
 "Button.buy" = "구매하기";
 /* Cancel button label */
@@ -146,8 +148,6 @@
 "Button.dismiss" = "해제";
 /* Done button title */
 "Button.done" = "완료";
-/* Button to return to the "home" screen (the home screen is the top menu). */
-"Button.Home" = "홈";
 /* Ignore button label */
 "Button.ignore" = "무시";
 /* Maybe Later button label */
@@ -211,6 +211,14 @@
 "CloudBackup.step4" = "iCloud 키 체인이 켜져 있는지 확인";
 "CloudBackup.understandText" = "iCloud 키 체인이 활성화되지 않으면이 기능이 작동하지 않음을 이해합니다.";
 "CloudBackup.warningBody" = "잘못된 PIN 시도를 %1$@ 더 시도하면 iCloud 백업이 삭제됩니다.";
+"ConfirmGift.paperWalletAmount" = "종이 지갑 금액";
+"ConfirmGift.processingTime" = "네트워크에서이 종이 지갑을 확인하는 데 최대 60 분이 걸릴 수 있습니다.";
+/* Confirm paper phrase error message */
+"ConfirmPaperPhrase.error" = "입력 한 단어가 복구 문구와 일치하지 않습니다. 다시 시도하십시오.";
+/* Confirm paper phrase view label. */
+"ConfirmPaperPhrase.label" = "모든 것이 올바르게 기록되었는지 확인하려면 복구 문구에서 다음 단어를 입력하십시오.";
+/* Word label eg. Word #1, Word #2 */
+"ConfirmPaperPhrase.word" = "단어 #%1$@";
 /* Amount to Send: ($1.00) */
 "Confirmation.amountLabel" = "보낼 금액:";
 "Confirmation.destinationTag" = "목적지 태그";
@@ -231,14 +239,6 @@
 "Confirmation.to" = "수취인";
 /* Total Cost: ($5.00) */
 "Confirmation.totalLabel" = "총 금액:";
-"ConfirmGift.paperWalletAmount" = "종이 지갑 금액";
-"ConfirmGift.processingTime" = "네트워크에서이 종이 지갑을 확인하는 데 최대 60 분이 걸릴 수 있습니다.";
-/* Confirm paper phrase error message */
-"ConfirmPaperPhrase.error" = "입력 한 단어가 복구 문구와 일치하지 않습니다. 다시 시도하십시오.";
-/* Confirm paper phrase view label. */
-"ConfirmPaperPhrase.label" = "모든 것이 올바르게 기록되었는지 확인하려면 복구 문구에서 다음 단어를 입력하십시오.";
-/* Word label eg. Word #1, Word #2 */
-"ConfirmPaperPhrase.word" = "단어 #%1$@";
 "CreateGift.amountLabel" = "금액 선택 ($ USD)";
 "CreateGift.create" = "창조하다";
 "CreateGift.customAmountHint" = "맞춤 금액 (최대 $ 500)";
@@ -268,14 +268,14 @@
 "DefaultCurrency.rateLabel" = "환율";
 /* The wallet is disabled. */
 "Disabled.title" = "월렛이 비활성화됨";
-/* Share address by e-mail subject */
-"Email.address_subject" = "%1$s 주소";
 /* Service capabilities description */
 "EME.permissions.accountRequest" = "%1$@ 계정 정보를 요청합니다";
 /* Service capabilities description */
 "EME.permissions.callRequest" = "%1$@ 스마트계약 콜을 요청합니다";
 /* Service capabilities description */
 "EME.permissions.paymentRequest" = "%1$@ 계정 정보를 요청합니다";
+/* Share address by e-mail subject */
+"Email.address_subject" = "%1$s 주소";
 /* Email unavailable alert title */
 "ErrorMessages.emailUnavailableMessage" = "이 장치는 iOS 메일 앱으로 이메일을 전송하도록 설정되지 않았습니다.";
 /* Email unavailable alert title */
@@ -288,10 +288,8 @@
 "ErrorMessages.messagingUnavailableTitle" = "메시지 사용불가";
 /* Fingerprint was not recognized by the scanner, please try scanning again */
 "ErrorMessages.touchIdFailed.android" = "지문 인식되지 않음. 다시 시도해 주세요.";
-/* Exchange available balance label */
-"Exchange.available" = "Available: %@";
-/* Exchange buy title */
-"Exchange.buy" = "Buy";
+"Exchange.Browser.orderHistoryTitle" = "Order History";
+"Exchange.Browser.rewardsTitle" = "Rewards";
 /* CTA button title exchange screen */
 "Exchange.CTA.loading" = "Loading ...";
 /* CTA button title exchange screen */
@@ -307,10 +305,21 @@
 /* CTA action exchange to set to min trade amount
 CTA action exchange to set to min trade amount */
 "Exchange.CTA.setMin" = "Set amount to min %@";
+/* Transaction error alert body */
+"Exchange.ErrorState.CreateTransferFailed" = "Create transfer failed";
+/* Transaction error alert body */
+"Exchange.ErrorState.feeEstimateFailed" = "Fee Estimate Failed";
 /* Initialization error alert body */
 "Exchange.ErrorState.initialization" = "Initialization error";
 /* Insufficient chain error alert body */
-"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some";
+"Exchange.ErrorState.insufficientNativeBalanceError" = "%1$@ uses the %2$@ network which requires %3$@ to pay transaction fees.";
+/* Insufficient chain error alert ok action */
+"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Top up %1$@ balance";
+"Exchange.ErrorState.insufficientNativeBalanceErrorSecondary" = "Network fee of %1$@ %2$@ required.";
+/* Insufficient chain error alert title */
+"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "%1$@ Balance Low";
+/* Transaction error alert body */
+"Exchange.ErrorState.insufficientNativeWalletBalance" = "Insufficient %1$@ native wallet balance, you will need at least %1$@ to proceed.";
 /* Network error alert body */
 "Exchange.ErrorState.network" = "Network error";
 /* Order error alert body */
@@ -321,6 +330,112 @@ CTA action exchange to set to min trade amount */
 "Exchange.ErrorState.unknown" = "Unknown error";
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region";
+/* Promotion CTA */
+"Exchange.FeaturePromotion.CTA" = "Let's see it!";
+/* Buy promotion body */
+"Exchange.FeaturePromotion.buyBody" = "There's no better time to invest than today with our streamlined new interface.";
+/* Buy promotion title */
+"Exchange.FeaturePromotion.buyTitle" = "Buy & sell is now easier than ever!";
+/* Trade promotion body */
+"Exchange.FeaturePromotion.tradeBody" = "Trade your assets into another with just a few taps. Walk and trade baby!";
+/* Trade promotion title */
+"Exchange.FeaturePromotion.tradeTitle" = "Trading assets is now even easier!";
+/* Empty wallet message body */
+"Exchange.FullScreenErrorState.emptyWalletBody" = "It looks like you don’t have any assets in your wallet to sell yet.";
+/* CTA title for empty wallet trade screen */
+"Exchange.FullScreenErrorState.emptyWalletCTA" = "Buy Now";
+/* Empty wallet message title */
+"Exchange.FullScreenErrorState.emptyWalletTitle" = "Your wallet is empty";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingNoAssetsBody" = "Looks like you’re not holding assets that can be sold yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingNoAssetsCTA" = "Buy now";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingNoAssetsTitle" = "No assets to sell";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingUnavailableBody" = "We don’t have a partner that supports selling to %1$@ in %2$@ yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingUnavailableCTA" = "Change location / currency";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingUnavailableTitle" = "Selling Unavailable";
+/* InputError BalanceLow text */
+"Exchange.InputError.BalanceLow" = "Insufficient balance";
+/* "CTA button label */
+"Exchange.Order.CTA.great" = "Great!";
+/* "View receipt */
+"Exchange.Order.CTA.receipt" = "View Receipt";
+/* Receipt item label bought */
+"Exchange.Order.bought" = "Bought";
+/* Receipt item label delivery */
+"Exchange.Order.delivery" = "Delivery";
+/* Receipt item label fees */
+"Exchange.Order.fees" = "Fees";
+/* Order footer info explaining exchange rate estimate */
+"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
+/* Receipt item label for */
+"Exchange.Order.for" = "For";
+/* Receipt item label method */
+"Exchange.Order.method" = "Method";
+/* Status creating order */
+"Exchange.Order.status.creating" = "Creating order";
+/* Status failed order */
+"Exchange.Order.status.failed" = "Order failed";
+/* Status processing order */
+"Exchange.Order.status.processing" = "Processing";
+/* Status sent order */
+"Exchange.Order.status.sent" = "Order sent!";
+/* Status successful order */
+"Exchange.Order.status.successful" = "Order Successful!";
+/* Trade preview CTA */
+"Exchange.Preview.CTA" = "Trade Now";
+/* Rewards status active */
+"Exchange.Preview.active" = "Active";
+/* Trade preview footer */
+"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
+/* Trade preview info item label */
+"Exchange.Preview.fulfilledBy" = "Fulfilled by";
+/* Rewards status inactive */
+"Exchange.Preview.inactive" = "Inactive";
+/* Rewards info */
+"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
+/* Trade preview info item label */
+"Exchange.Preview.networkFee" = "Network Fee";
+/* Trade preview info item label */
+"Exchange.Preview.partnerFee" = "Partner Fee";
+/* Trade preview info item label */
+"Exchange.Preview.rate" = "Rate";
+/* Preview items rewards label */
+"Exchange.Preview.rewards" = "BRD Rewards";
+/* Trade preview navigation title */
+"Exchange.Preview.title" = "Trade preview";
+/* CTA button title for region settings */
+"Exchange.Settings.applyRegion" = "Apply region";
+/* County label */
+"Exchange.Settings.country" = "Country";
+/* Currency label */
+"Exchange.Settings.currency" = "Display Currency";
+/* Region label */
+"Exchange.Settings.region" = "State";
+/* Region settings screen title */
+"Exchange.Settings.title" = "Set Region";
+/* Crypto transfer error description */
+"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
+/* Crypto transfer error description */
+"Exchange.TransferError.loadInput" = "Failed to load input";
+/* Crypto transfer error description */
+"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
+/* Crypto transfer error description */
+"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
+/* Crypto transfer error description */
+"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
+/* Exchange available balance label */
+"Exchange.available" = "Available: %@";
+/* Exchange buy title */
+"Exchange.buy" = "Buy";
 /* Exchange label from */
 "Exchange.from" = "From";
 /* purchase limit */
@@ -361,96 +476,24 @@ CTA action exchange to set to min trade amount */
 "Exchange.offer.sectionTitle" = "All values displayed are estimates and susceptible to market price fluctuations.";
 /* Offer total */
 "Exchange.offer.total" = "Total";
-/* Receipt item label bought */
-"Exchange.Order.bought" = "Bought";
-/* "CTA button label */
-"Exchange.Order.CTA.great" = "Great!";
-/* "View receipt */
-"Exchange.Order.CTA.receipt" = "View Receipt";
-/* Receipt item label delivery */
-"Exchange.Order.delivery" = "Delivery";
-/* Receipt item label fees */
-"Exchange.Order.fees" = "Fees";
-/* Order footer info explaining exchange rate estimate */
-"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
-/* Receipt item label for */
-"Exchange.Order.for" = "For";
-/* Receipt item label method */
-"Exchange.Order.method" = "Method";
-/* Status creating order */
-"Exchange.Order.status.creating" = "Creating order";
-/* Status failed order */
-"Exchange.Order.status.failed" = "Order failed";
-/* Status processing order */
-"Exchange.Order.status.processing" = "Processing";
-/* Status sent order */
-"Exchange.Order.status.sent" = "Order sent!";
-/* Status successful order */
-"Exchange.Order.status.successful" = "Order Successful!";
 /* Over the min limit */
 "Exchange.over" = "Over";
-/* Rewards status active */
-"Exchange.Preview.active" = "Active";
-/* Trade preview CTA */
-"Exchange.Preview.CTA" = "Trade Now";
-/* Trade preview footer */
-"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
-/* Trade preview info item label */
-"Exchange.Preview.fulfilledBy" = "Fulfilled by";
-/* Rewards status inactive */
-"Exchange.Preview.inactive" = "Inactive";
-/* Rewards info */
-"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
-/* Trade preview info item label */
-"Exchange.Preview.networkFee" = "Network Fee";
-/* Trade preview info item label */
-"Exchange.Preview.partnerFee" = "Partner Fee";
-/* Trade preview info item label */
-"Exchange.Preview.rate" = "Rate";
-/* Preview items rewards label */
-"Exchange.Preview.rewards" = "BRD Rewards";
-/* Trade preview navigation title */
-"Exchange.Preview.title" = "Trade preview";
 /* Exchange select asset button label */
 "Exchange.selectAsset" = "Select Asset";
 /* Exchange sell title */
 "Exchange.sell" = "Sell";
-/* CTA button title for region settings */
-"Exchange.Settings.applyRegion" = "Apply region";
-/* County label */
-"Exchange.Settings.country" = "Country";
-/* Currency label */
-"Exchange.Settings.currency" = "Display Currency";
-/* Region label */
-"Exchange.Settings.region" = "State";
-/* Region settings screen title */
-"Exchange.Settings.title" = "Set Region";
 /* Exchange label to */
 "Exchange.to" = "To";
 /* Exchange trade title */
 "Exchange.trade" = "Trade";
 /* Trade cancel alert body */
-"Exchange.tradeCancelAlertBody" = "All your progress will be lost.";
+"Exchange.tradeCancelAlertBody" = "View order details in Menu -> Order History";
 /* Trade cancel alert no button */
 "Exchange.tradeCancelAlertNo" = "No";
 /* Trade cancel alert title */
-"Exchange.tradeCancelAlertTitle" = "Are you sure?";
+"Exchange.tradeCancelAlertTitle" = "Exit Checkout?";
 /* Trade cancel alert yes button */
 "Exchange.tradeCancelAlertYes" = "Yes";
-/* Crypto transfer error description */
-"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
-/* Crypto transfer error description */
-"Exchange.TransferError.loadInput" = "Failed to load input";
-/* Crypto transfer error description */
-"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
-/* Crypto transfer error description */
-"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
-/* Crypto transfer error description */
-"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
-/* Crypto transfer error description */
-"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
-/* Crypto transfer error description */
-"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
 /* Under the min limit */
 "Exchange.under" = "Under";
 /* Offer purchase method ACH */
@@ -544,10 +587,6 @@ CTA action exchange to set to min trade amount */
 "HomeScreen.totalAssets" = "총 자산";
 /* "home screen toolbar button */
 "HomeScreen.trade" = "교환";
-/* Checking private key balance progress view text */
-"Import.checking" = "개인 열쇠 잔고 확인 중...";
-/* Sweep private key confirmation message */
-"Import.confirm" = "이 개인 열쇠로부터 귀하의 지갑으로 %1$@ 를 보낼까요? 비트코인 네트워크가 %2$@의 수수료를 받게 됩니다.";
 /* Duplicate key error message */
 "Import.Error.duplicate" = "이 개인 열쇠가 이미 귀하의 지갑에 있습니다.";
 /* empty private key error message */
@@ -558,6 +597,12 @@ CTA action exchange to set to min trade amount */
 "Import.Error.notValid" = "유효하지 않은 개인 열쇠입니다";
 /* Import signing error message */
 "Import.Error.signing" = "서명 거래 오류";
+/* Successfully imported wallet message body */
+"Import.SuccessBody" = "개인 키가 성공적으로 교환되었습니다.";
+/* Checking private key balance progress view text */
+"Import.checking" = "개인 열쇠 잔고 확인 중...";
+/* Sweep private key confirmation message */
+"Import.confirm" = "이 개인 열쇠로부터 귀하의 지갑으로 %1$@ 를 보낼까요? 비트코인 네트워크가 %2$@의 수수료를 받게 됩니다.";
 /* [Redeem] the funds stored on this private key. */
 "Import.importButton" = "교환";
 /* Importing wallet progress view label */
@@ -576,8 +621,6 @@ CTA action exchange to set to min trade amount */
 "Import.scan" = "개인 열쇠 스캔";
 /* Import wallet success alert title */
 "Import.success" = "성공";
-/* Successfully imported wallet message body */
-"Import.SuccessBody" = "개인 키가 성공적으로 교환되었습니다.";
 /* Import Wallet screen title */
 "Import.title" = "개인 키 교환";
 /* Unlocking Private key activity view message. */
@@ -751,10 +794,10 @@ CTA action exchange to set to min trade amount */
 "Prompts.NoScreenLock.body.android" = "귀하의 지갑을 보호하시려면 장치 화면 잠금이 필요합니다. 계속하시려면 \"설정\" > \"보안\" > \"화면 잠금\"가셔서 켜 주세요.";
 /* Device encryption prompt title */
 "Prompts.NoScreenLock.title.android" = "화면 잠금 꺼짐";
-/* Warning about recovery phrase (formerly paper key). */
-"Prompts.PaperKey.body" = "휴대 전화를 분실하거나 변경하는 경우 복구 문구를 저장해야합니다.";
 /* Warning about paper key (Android-version) */
 "Prompts.PaperKey.Body.Android" = "전화기를 분실하거나 교체 할 경우를 대비하여 복구 문구를 설정하십시오. 휴대 전화의 보안 설정을 변경하는 경우에도 키가 필요합니다.";
+/* Warning about recovery phrase (formerly paper key). */
+"Prompts.PaperKey.body" = "휴대 전화를 분실하거나 변경하는 경우 복구 문구를 저장해야합니다.";
 /* An action is required (You must do this action). */
 "Prompts.PaperKey.title" = "조치 필요함";
 "Prompts.RateApp.dontShow" = "다시 묻지마";
@@ -790,10 +833,10 @@ CTA action exchange to set to min trade amount */
 "PushNotifications.disabled" = "알림 비활성";
 /* Body text when push notifications are disabled. */
 "PushNotifications.disabledBody" = "알림을 켜서 BRD로터 특가 판매와 업데이트를 받으십시오.";
-/* Body text when push notifications are enabled. */
-"PushNotifications.enabledBody" = "귀하는 BRD로부터 특가 판매 및 업데이트를 받고 있습니다.";
 /* Instructions to enable push notifications for BRD in the phone's system settings. */
 "PushNotifications.enableInstructions" = "알림이 꺼진 것 같습니다. 설정으로 가서 BRD 알림 받기를 활성화하십시오.";
+/* Body text when push notifications are enabled. */
+"PushNotifications.enabledBody" = "귀하는 BRD로부터 특가 판매 및 업데이트를 받고 있습니다.";
 /* Push notifications toggle switch label */
 "PushNotifications.label" = "푸시 알림 받기";
 /* Push notifications are off label */
@@ -812,6 +855,28 @@ CTA action exchange to set to min trade amount */
 "RateAppPrompt.Button.RateApp.Android" = "BRD 평가하기";
 /* Google play review prompt title */
 "RateAppPrompt.Title.Android" = "BRD 평가하기";
+/* Alert action button label */
+"ReScan.alertAction" = "동기화";
+/* Alert message body */
+"ReScan.alertMessage" = "동기화 중에는 송금할 수 없습니다.";
+/* Alert message title */
+"ReScan.alertTitle" = "블록체인과 동기화하겠습니까?";
+/* extimated time */
+"ReScan.body1" = "20-45분";
+/* Syncing explanation */
+"ReScan.body2" = "거래가 비트코인 네트워크에는 완료된 것으로 표시되지만, 브레드에는 표시되지 않는 경우.";
+/* Syncing explanation */
+"ReScan.body3" = "거래가 거절되었음을 알리는 오류 메시지가 반복적으로 나타납니다.";
+/* Start Sync button label */
+"ReScan.buttonTitle" = "동기화 시작";
+/* Sync blockchain view footer */
+"ReScan.footer" = "블록체인과 동기화하는 동안에는 송금할 수 없습니다.";
+/* Sync Blockchain view header */
+"ReScan.header" = "블록체인 동기화";
+/* Subheader label */
+"ReScan.subheader1" = "예상 시간";
+/* Subheader label */
+"ReScan.subheader2" = "동기화는 언제 해야 합니까?";
 /* Address copied message. */
 "Receive.copied" = "클립보드에 복사되었습니다.";
 /* Share via email button label */
@@ -924,28 +989,6 @@ CTA action exchange to set to min trade amount */
 "RequestAnAmount.noAmount" = "먼저 금액을 입력해 주세요.";
 /* Request a specific amount of bitcoin */
 "RequestAnAmount.title" = "금액 요청";
-/* Alert action button label */
-"ReScan.alertAction" = "동기화";
-/* Alert message body */
-"ReScan.alertMessage" = "동기화 중에는 송금할 수 없습니다.";
-/* Alert message title */
-"ReScan.alertTitle" = "블록체인과 동기화하겠습니까?";
-/* extimated time */
-"ReScan.body1" = "20-45분";
-/* Syncing explanation */
-"ReScan.body2" = "거래가 비트코인 네트워크에는 완료된 것으로 표시되지만, 브레드에는 표시되지 않는 경우.";
-/* Syncing explanation */
-"ReScan.body3" = "거래가 거절되었음을 알리는 오류 메시지가 반복적으로 나타납니다.";
-/* Start Sync button label */
-"ReScan.buttonTitle" = "동기화 시작";
-/* Sync blockchain view footer */
-"ReScan.footer" = "블록체인과 동기화하는 동안에는 송금할 수 없습니다.";
-/* Sync Blockchain view header */
-"ReScan.header" = "블록체인 동기화";
-/* Subheader label */
-"ReScan.subheader1" = "예상 시간";
-/* Subheader label */
-"ReScan.subheader2" = "동기화는 언제 해야 합니까?";
 /* Rewards view expanded body. */
 "RewardsView.expandedBody" = "거래 수수료를 절약하고 미래의 보상을 얻을 수 있는 방법을 배우십시오.";
 /* Rewards view expanded title. */
@@ -989,19 +1032,24 @@ CTA action exchange to set to min trade amount */
 "SecurityCenter.touchIdTitle" = "터치 ID";
 /* Security center fingerprint authentication button */
 "SecurityCenter.touchIdTitle.android" = "지문 본인확인";
+/* Segwit extra confirmation title. */
+"Segwit.ConfirmChoiceLayout" = "SegWit을 활성화는 취소할 수 없는 기능입니다. 계속하시겠습니까?";
 /* Segwit enabled confirmation title */
 "Segwit.ConfirmationConfirmationTitle" = "SegWit을 활성화했습니다!";
 /* Segwit enabled confirmation description */
 "Segwit.ConfirmationInstructionsDescription" = "Bitcoin 발전에 일조해 주셔서 감사합니다.";
 /* Segwit instructions */
 "Segwit.ConfirmationInstructionsInstructions" = "SegWit 지원은 아직 베타 기능입니다.\nSegWit이 활성화되면 비활성화할 수\n없습니다. 유산 주소는 아래 설정에서 찾을 수 있습니다.\nSegWit를 활성화하면 암호화 거래 등 일부 제3자 서비스를 이용할 수 없을 수도 있습니다. 비상 시에는 선호도 > Bitcoin 설정에서 유산 주소를 생성할 수 있습니다.\nSegWit는 향후 업데이트 시 모든 사용자에게 \n자동으로 활성화됩니다.";
-/* Segwit extra confirmation title. */
-"Segwit.ConfirmChoiceLayout" = "SegWit을 활성화는 취소할 수 없는 기능입니다. 계속하시겠습니까?";
 /* Segwit enableButton */
 "Segwit.Enable" = "활성화";
 /* Segwit button label that takes the user back to the home screen once SegWit is enabled. */
 "Segwit.HomeButton" = "투 더 문";
-"Send_fio_toLabel" = "FIO";
+/* Adress already used alert message - first part */
+"Send.UsedAddress.firstLine" = "비트코인 주소는 일회용입니다.";
+/* Adress already used alert message - second part */
+"Send.UsedAddress.secondLIne" = "주소를 재사용할 경우 귀하와 받는 사람 모두의 개인 정보 보호가 약해지며, 받는 사람이 직접 주소를 관리하지 않을 경우 분실을 초래할 수 있습니다.";
+/* Adress already used alert title */
+"Send.UsedAddress.title" = "이미 사용중인 주소입니다";
 /* Send money amount label */
 "Send.amountLabel" = "금액";
 /* Balance: $4.00 */
@@ -1012,10 +1060,10 @@ CTA action exchange to set to min trade amount */
 "Send.cameraUnavailabeMessage.android" = "\"설정\" > \"앱\" > \"BRD\" > \"허용\"에서 카메라 접속을 허용해 주세요";
 /* Permission required to access camera */
 "Send.cameraUnavailabeTitle.android" = "BRD의 카메라 접속이 허용되지 않았습니다";
-/* Camera not allowed message */
-"Send.cameraunavailableMessage" = "설정에서 카메라 액세스를 허가해 주세요.";
 /* Camera not allowed alert title */
 "Send.cameraUnavailableTitle" = "브레드는 카메라 액세스를 허용하지 않습니다.";
+/* Camera not allowed message */
+"Send.cameraunavailableMessage" = "설정에서 카메라 액세스를 허가해 주세요.";
 /* Warning when sending to self. */
 "Send.containsAddress" = "여러분의 주소를 입력해 주세요. 본인에게 전송할 수 없습니다.";
 /* Could not create transaction alert title */
@@ -1082,12 +1130,12 @@ CTA action exchange to set to min trade amount */
 "Send.remoteRequestError" = "결제 요청을 불러올 수 없었습니다";
 /* Scan button label */
 "Send.scanLabel" = "스캔";
-/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
-"Send.sendingMax" = "최대 보내기 :";
 /* Send button label (the action, "press here to send") */
 "Send.sendLabel" = "보내기";
 /* Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) */
 "Send.sendMaximum" = "최고 한도 금액을 보내겠습니까?";
+/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
+"Send.sendingMax" = "최대 보내기 :";
 /* Send screen title (as in "this is the screen for sending money") */
 "Send.title" = "보내기";
 /* Send money to label */
@@ -1095,12 +1143,15 @@ CTA action exchange to set to min trade amount */
 "Send.udomains_invalid" = "Invalid address.";
 "Send.udomains_noAddress" = "There is no %1$@ address associated with this address.";
 "Send.udomains_retrievalError" = "There was an error retrieving this address. Please try again later.";
-/* Adress already used alert message - first part */
-"Send.UsedAddress.firstLine" = "비트코인 주소는 일회용입니다.";
-/* Adress already used alert message - second part */
-"Send.UsedAddress.secondLIne" = "주소를 재사용할 경우 귀하와 받는 사람 모두의 개인 정보 보호가 약해지며, 받는 사람이 직접 주소를 관리하지 않을 경우 분실을 초래할 수 있습니다.";
-/* Adress already used alert title */
-"Send.UsedAddress.title" = "이미 사용중인 주소입니다";
+"Send_fio_toLabel" = "FIO";
+/* Enable segwit. */
+"Settings.EnableSegwit" = "Segwit 활성화";
+/* View legacy address (old format). */
+"Settings.ViewLegacyAddress" = "유산 수령 주소 보기";
+/* Receive Bitcoin instructions */
+"Settings.ViewLegacyAddressReceiveDescription" = "이 주소에는 Bitcoin(BTC)만 보낼 수 있습니다. 이 주소로 다른 자산을 보낼 경우 모두 영구 소실됩니다.";
+/* Receive Bitcoin */
+"Settings.ViewLegacyAddressReceiveTitle" = "Bitcoin 수령";
 /* About label */
 "Settings.about" = "관련 사항";
 /* Advanced settings header */
@@ -1119,8 +1170,6 @@ CTA action exchange to set to min trade amount */
 "Settings.currencySettings" = "통화 설정";
 /* Join Early access label */
 "Settings.earlyAccess" = "초기 버전을 사용해 보세요";
-/* Enable segwit. */
-"Settings.EnableSegwit" = "Segwit 활성화";
 /* Are you enjoying bread alert message body */
 "Settings.enjoying" = "브레드를 사용하고 있으신가요?";
 /* Export transaction history menu item */
@@ -1133,6 +1182,7 @@ CTA action exchange to set to min trade amount */
 "Settings.manage" = "관리";
 /* Notifications label */
 "Settings.notifications" = "알림";
+"Settings.orderHistory" = "Order History";
 /* Section header for "other settings". */
 "Settings.other" = "기타";
 /* Preferences settings section header */
@@ -1157,12 +1207,6 @@ CTA action exchange to set to min trade amount */
 "Settings.touchIdLimit" = "Touch ID 지출 한도";
 /* The fingerprint spending limit */
 "Settings.touchIdLimit.android" = "지문 본인확인 사용 한계";
-/* View legacy address (old format). */
-"Settings.ViewLegacyAddress" = "유산 수령 주소 보기";
-/* Receive Bitcoin instructions */
-"Settings.ViewLegacyAddressReceiveDescription" = "이 주소에는 Bitcoin(BTC)만 보낼 수 있습니다. 이 주소로 다른 자산을 보낼 경우 모두 영구 소실됩니다.";
-/* Receive Bitcoin */
-"Settings.ViewLegacyAddressReceiveTitle" = "Bitcoin 수령";
 /* Wallet Settings section header */
 "Settings.wallet" = "지갑";
 /* Unlink/delete your wallet from the current device. */
@@ -1224,12 +1268,12 @@ CTA action exchange to set to min trade amount */
 /* Button label: Unstake the selected baker */
 "Staking.unstake" = "언 스테이크";
 "Staking.validatorHint" = "검증 인 주소 입력";
+/* Paper key explanation text (Android-version) */
+"StartPaperPhrase.Body.Android" = "복구 문구는 휴대 전화가 분실, 도난, 파손 또는 업그레이드 된 경우 BRD를 복원하는 유일한 방법입니다. \n\n장치의 보안 설정을 변경하는 경우에도 복구 문구가 필요합니다. \n\n종이에 적어 안전하게 보관할 단어 목록을 보여드립니다.";
 /* button label */
 "StartPaperPhrase.againButtonTitle" = "복구 문구를 다시 기록";
 /* Paper key explanation text. */
 "StartPaperPhrase.body" = "복구 문구는 휴대 전화가 분실, 도난, 파손 또는 업그레이드 된 경우 BRD를 복원하는 유일한 방법입니다. \n\n종이에 적어 안전하게 보관할 단어 목록을 보여드립니다.";
-/* Paper key explanation text (Android-version) */
-"StartPaperPhrase.Body.Android" = "복구 문구는 휴대 전화가 분실, 도난, 파손 또는 업그레이드 된 경우 BRD를 복원하는 유일한 방법입니다. \n\n장치의 보안 설정을 변경하는 경우에도 복구 문구가 필요합니다. \n\n종이에 적어 안전하게 보관할 단어 목록을 보여드립니다.";
 /* button label */
 "StartPaperPhrase.buttonTitle" = "복구 문구 기록";
 /* Argument is date; date should be on a new line */
@@ -1351,9 +1395,9 @@ CTA action exchange to set to min trade amount */
 "Transaction.stakingTo" = "%1$s 스테이 킹";
 /* eg. Starting balance: $50.00 */
 "Transaction.starting" = "기초 잔액: %1$@";
+"Transaction.toRecipient" = "%1$s";
 /* e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) */
 "Transaction.tokenTransfer" = "토큰 송금 수수료: %1$@";
-"Transaction.toRecipient" = "%1$s";
 /* Waiting to be confirmed string */
 "Transaction.waiting" = "확인 대기 중. 일부 판매자는 트랜잭션을 완료하기 위해 확인을 요구합니다. 예상 소요 시간: 1~2시간.";
 /* e.g. I received money from an account. */
@@ -1461,6 +1505,14 @@ eg. 182930 (45061 confirmations) */
 "TransactionDirection.address" = "이 주소에서 받음";
 /* (this transaction was) Sent to this address: */
 "TransactionDirection.to" = "이 주소로 보냄";
+/* Authorize to copy wallet address PIN view prompt. */
+"URLHandling.addressList" = "월렛 주소를 클립 보드에 복사할 수 있는 권한을 부여";
+/* Authorize to copy wallet address alert title */
+"URLHandling.addressListAlertTitle" = "월렛 주소 복사하기";
+/* Authorize to copy wallet addresses alert message */
+"URLHandling.addressaddressListAlertMessage" = "월렛 주소를 클립 보드에 복사할까요?";
+/* Copy wallet addresses alert button label */
+"URLHandling.copy" = "복사";
 /* Disabled until date */
 "UnlockScreen.disabled" = "다음 기간까지 비활성화됨: %1$@";
 /* Unlock with FaceID accessibility label */
@@ -1501,14 +1553,6 @@ eg. 182930 (45061 confirmations) */
 "UpdatePin.setPinErrorTitle" = "PIN 코드 업데이트 오류";
 /* Update PIN title */
 "UpdatePin.updateTitle" = "PIN 코드 업데이트";
-/* Authorize to copy wallet addresses alert message */
-"URLHandling.addressaddressListAlertMessage" = "월렛 주소를 클립 보드에 복사할까요?";
-/* Authorize to copy wallet address PIN view prompt. */
-"URLHandling.addressList" = "월렛 주소를 클립 보드에 복사할 수 있는 권한을 부여";
-/* Authorize to copy wallet address alert title */
-"URLHandling.addressListAlertTitle" = "월렛 주소 복사하기";
-/* Copy wallet addresses alert button label */
-"URLHandling.copy" = "복사";
 /* Verify PIN for transaction view body */
 "VerifyPin.authorize" = "PIN을 입력하여 이 거래를 승인하십시오.";
 /* Verify PIN view body */
@@ -1553,14 +1597,6 @@ Wallet connection settings menu item title. */
 "Welcome.body" = "Breadwallet이 이름을 BRD로 바꾸고 새롭게 단장하였으며 새로운 기능도 갖췄습니다.\n\n도움이 필요하시면 대부분 화면에서 우측 상단에 있는 (?)을(를) 클릭하십시오.";
 /* Top title of welcome screen */
 "Welcome.title" = "BRD에 환영합니다!";
-/* Single asset widget description */
-"Widget.assetDescription" = "좋아하는 암호화 자산으로 최신 상태 유지";
-/* Asset list widget description */
-"Widget.assetListDescription" = "좋아하는 암호화 자산으로 최신 상태 유지";
-/* Asset list widget title */
-"Widget.assetListTitle" = "자산 목록";
-/* Single asset widget title */
-"Widget.assetTitle" = "유산";
 /* Name of color based on os theme light/dark */
 "Widget.Color.autoLightDark" = "시스템 자동 밝음 / 어두움";
 /* Name of color - Black */
@@ -1595,6 +1631,14 @@ Wallet connection settings menu item title. */
 "Widget.Color.white" = "하얀";
 /* Name of color - Yellow */
 "Widget.Color.yellow" = "노랑";
+/* Single asset widget description */
+"Widget.assetDescription" = "좋아하는 암호화 자산으로 최신 상태 유지";
+/* Asset list widget description */
+"Widget.assetListDescription" = "좋아하는 암호화 자산으로 최신 상태 유지";
+/* Asset list widget title */
+"Widget.assetListTitle" = "자산 목록";
+/* Single asset widget title */
+"Widget.assetTitle" = "유산";
 /* Title of color grouping in widget color picker */
 "Widget.colorSectionBackground" = "테마 배경색";
 /* Title of color grouping in widget color picker */

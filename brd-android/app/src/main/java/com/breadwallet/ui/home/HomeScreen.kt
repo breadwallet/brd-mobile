@@ -25,6 +25,8 @@ object HomeScreen {
         val promptId: PromptItem? = null,
         val hasInternet: Boolean = true,
         val isBuyBellNeeded: Boolean = false,
+        val isBuyPromoDotNeeded: Boolean = false,
+        val isTradePromoDotNeeded: Boolean = false,
         val showBuyAndSell: Boolean = false,
         val rateAppPromptDontShowMeAgain: Boolean = false
     ) {
@@ -49,6 +51,10 @@ object HomeScreen {
         data class OnWalletDisplayOrderUpdated(@Redacted val displayOrder: List<String>) : E()
 
         data class OnBuyBellNeededLoaded(val isBuyBellNeeded: Boolean) : E()
+
+        data class OnBuyPromoDotNeededLoaded(val isBuyPromoDotNeeded: Boolean) : E()
+
+        data class OnTradePromoDotNeededLoaded(val isTradePromoDotNeeded: Boolean) : E()
 
         data class OnConnectionUpdated(val isConnected: Boolean) : E()
 
@@ -87,6 +93,8 @@ object HomeScreen {
         object LoadWallets : F()
         object LoadEnabledWallets : F()
         object LoadIsBuyBellNeeded : F()
+        object LoadIsBuyPromoDotNeeded : F()
+        object LoadIsTradePromoDotNeeded : F()
         object LoadPrompt : F()
         object LoadConnectivityState : F()
         object CheckInAppNotification : F()

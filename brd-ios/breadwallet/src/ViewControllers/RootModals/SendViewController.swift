@@ -642,6 +642,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
                     })
                 }
             })
+            amountView.disableEconomyFee()
         }
     }
     

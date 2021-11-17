@@ -57,14 +57,6 @@ public class UiUtils {
         return allow;
     }
 
-    private static void setStatusBarColor(Activity app, int color) {
-        if (app == null) return;
-        Window window = app.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(app.getColor(color));
-    }
-
     public static boolean isMainThread() {
         boolean isMain = Looper.myLooper() == Looper.getMainLooper();
         if (isMain) {

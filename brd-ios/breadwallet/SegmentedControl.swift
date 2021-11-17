@@ -23,6 +23,18 @@ class SegmentedControl: UIView {
         didSet { updateColors() }
     }
 
+    var preferredItemWidth: CGFloat? {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    var preferredItemHeight: CGFloat? {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    var font: UIFont = Theme.captionMedium {
+        didSet { updateFont() }
+    }
+
     weak var delegate: SegmentedControlDelegate?
 
     private(set) var selectedIdx = 0
@@ -79,6 +91,17 @@ class SegmentedControl: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        if let width = preferredItemWidth, !items.isEmpty {
+            size.width = width * CGFloat(items.count)
+        }
+        if let height = preferredItemHeight, !items.isEmpty {
+            size.height = height
+        }
+        return size
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -120,11 +143,19 @@ extension SegmentedControl {
                 .label?.textColor = selectedTextColor
     }
 
+    func updateFont() {
+        container.arrangedSubviews.forEach {
+            ($0 as? Button)?.label?.font = font
+        }
+    }
+
     func makeButton(_ item: Item, idx: Int) -> Button {
-        Button(
+       let button = Button(
             item: item,
             tap: { [weak self] in self?.tappedItem(item, at: idx) }
         )
+        button.label?.font = font
+        return button
     }
 }
 
@@ -138,7 +169,7 @@ extension SegmentedControl {
         var iconView: UIImageView?
 
         convenience init(item: Item, tap: (() -> Void)? = nil) {
-            let label = UILabel(text: item.title, font: Theme.captionMedium)
+            let label = UILabel(text: item.title)
             let iconView = UIImageView(image: item.image)
             self.init(type: .custom)
             self.label = label

@@ -102,9 +102,7 @@ open class PostToSlack : DefaultTask() {
                 body = buildJsonObject {
                     put("channel", channels)
                     putJsonArray("attachments") {
-                        addJsonObject {
-                            put("text", "Release Notes - $version\n\n${getChangelog()}")
-                        }
+                        addJsonObject { put("text", "\n\n${getChangelog()}") }
                     }
                     put("text", "$comment \n${files.joinToString("\n")}")
                 }

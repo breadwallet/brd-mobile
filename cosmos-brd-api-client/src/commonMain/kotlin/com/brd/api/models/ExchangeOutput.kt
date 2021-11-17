@@ -47,10 +47,23 @@ sealed class ExchangeOutput {
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
         override val expiresAt: Instant? = null,
-        @SerialName("ach_transfer_status")
+        @SerialName("payment_status")
         val status: FiatStatus,
     ) : ExchangeOutput()
 
+    @SerialName("sepa")
+    @Serializable
+    data class Sepa(
+        override val media: ExchangeInput.Media,
+        override val amount: String,
+        override val actions: List<ExchangeOrder.Action>,
+        override val currency: ExchangeCurrency,
+        @SerialName("expires_at")
+        override val expiresAt: Instant? = null,
+        @SerialName("payment_status")
+        val status: FiatStatus,
+    ) : ExchangeOutput()
+    
     @Serializable
     enum class CryptoStatus {
         @SerialName("waiting_for_address")
@@ -83,6 +96,9 @@ sealed class ExchangeOutput {
 
         @SerialName("processing")
         PROCESSING,
+
+        @SerialName("ordering")
+        ORDERING,
 
         @SerialName("complete")
         COMPLETE,

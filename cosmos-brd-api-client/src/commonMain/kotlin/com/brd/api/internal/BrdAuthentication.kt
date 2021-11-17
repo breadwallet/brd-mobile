@@ -10,28 +10,30 @@ package com.brd.api.internal
 
 import com.brd.api.BrdAuthProvider
 import com.brd.logger.Logger
-import io.ktor.client.HttpClient
-import io.ktor.client.features.HttpClientFeature
+import io.ktor.client.*
+import io.ktor.client.features.*
 import io.ktor.client.request.*
-import io.ktor.content.TextContent
+import io.ktor.content.*
 import io.ktor.http.*
-import io.ktor.util.AttributeKey
+import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import io.ktor.utils.io.charsets.Charsets.UTF_8
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.put
+
+typealias FetchToken = suspend (HttpClient, String, String?, String, String) -> String?
 
 internal class BrdAuthentication {
 
     private lateinit var brdAuthProvider: BrdAuthProvider
+    private lateinit var fetchToken: FetchToken
 
     fun brdAuthProvider(brdAuthProvider: BrdAuthProvider) {
         this.brdAuthProvider = brdAuthProvider
+    }
+
+    fun fetchToken(fetchToken: FetchToken) {
+        this.fetchToken = fetchToken
     }
 
     companion object : HttpClientFeature<BrdAuthentication, BrdAuthentication> {
@@ -51,32 +53,6 @@ internal class BrdAuthentication {
         override fun prepare(block: BrdAuthentication.() -> Unit): BrdAuthentication =
             BrdAuthentication().apply(block)
 
-        private suspend fun fetchToken(url: URLBuilder, scope: HttpClient, brdAuthProvider: BrdAuthProvider): String? {
-            return brdAuthProvider.token ?: authMutex.withLock {
-                val latestToken = brdAuthProvider.token
-                if (latestToken != null) return latestToken
-
-                val requestUrl = url.path("token").build()
-
-                val token = try {
-                    logger.debug("Fetching API token")
-                    val response = scope.post<JsonObject>(requestUrl) {
-                        contentType(ContentType.Application.Json.withCharset(UTF_8))
-                        body = buildJsonObject {
-                            put("pubKey", brdAuthProvider.publicKey())
-                            put("deviceID", brdAuthProvider.deviceId())
-                        }
-                    }
-                    response["token"]?.jsonPrimitive?.contentOrNull
-                } catch (e: Throwable) {
-                    logger.error("Failed to fetch API token", e)
-                    throw e
-                }
-                brdAuthProvider.token = token
-                token
-            }
-        }
-
         override fun install(feature: BrdAuthentication, scope: HttpClient) {
             val brdAuthProvider = feature.brdAuthProvider
             scope.requestPipeline.insertPhaseBefore(HttpRequestPipeline.Render, AuthenticationPhase)
@@ -84,10 +60,24 @@ internal class BrdAuthentication {
                 if (!context.headers.contains(ENABLE_AUTH_HEADER)) return@intercept
                 val path = context.url.encodedPath
                 logger.debug("Applying authentication for: '$path'")
-                val token = fetchToken(context.url.clone(), scope, brdAuthProvider)
+
+                val token = brdAuthProvider.token ?: authMutex.withLock {
+                    val latestToken = brdAuthProvider.token
+                    if (latestToken != null) return@withLock latestToken
+                    feature.fetchToken(
+                        scope,
+                        context.url.clone().path("token").buildString(),
+                        brdAuthProvider.clientToken(),
+                        brdAuthProvider.deviceId(),
+                        brdAuthProvider.publicKey()
+                    )
+                }
+
                 if (token == null) {
                     logger.error("Failed to restore or fetch token for: '$path'")
                     return@intercept
+                } else {
+                    brdAuthProvider.token = token
                 }
                 if (brdAuthProvider.hasKey()) {
                     val content = body as? TextContent

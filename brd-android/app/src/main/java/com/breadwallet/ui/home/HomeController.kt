@@ -8,6 +8,10 @@
  */
 package com.breadwallet.ui.home
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -66,20 +70,23 @@ class HomeController(
     override val init = HomeScreenInit
     override val flowEffectHandler
         get() = createHomeScreenHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            RatesRepository.getInstance(applicationContext!!),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance()
+            context = checkNotNull(applicationContext),
+            breadBox = direct.instance(),
+            ratesRepo = RatesRepository.getInstance(applicationContext!!),
+            brdUser = direct.instance(),
+            walletProvider = direct.instance(),
+            featurePromotionService = direct.instance(),
+            accountMetaDataProvider = direct.instance(),
+            connectivityStateProvider = direct.instance(),
+            supportManager = direct.instance()
         )
 
     private val binding by viewBinding(ControllerHomeBinding::inflate)
     private var fastAdapter: GenericFastAdapter? = null
     private var walletAdapter: ModelAdapter<Wallet, WalletListItem>? = null
     private var addWalletAdapter: ItemAdapter<AddWalletItem>? = null
+    private var buyDotAnimator: ObjectAnimator? = null
+    private var tradeDotAnimator: ObjectAnimator? = null
 
     override fun bindView(output: Consumer<E>): Disposable {
         return with(binding) {
@@ -135,6 +142,8 @@ class HomeController(
         walletAdapter = null
         addWalletAdapter = null
         fastAdapter = null
+        binding.buyPromoIndicator.removePromoAnimator(buyDotAnimator)
+        binding.tradePromoIndicator.removePromoAnimator(tradeDotAnimator)
         super.onDestroyView(view)
     }
 
@@ -149,7 +158,8 @@ class HomeController(
     override fun M.render() {
         with(binding) {
             ifChanged(M::aggregatedFiatBalance) {
-                totalAssetsUsd.text = aggregatedFiatBalance.formatFiatForUi(BRSharedPrefs.getPreferredFiatIso())
+                totalAssetsUsd.text =
+                    aggregatedFiatBalance.formatFiatForUi(BRSharedPrefs.getPreferredFiatIso())
             }
 
             ifChanged(M::showPrompt) {
@@ -181,6 +191,14 @@ class HomeController(
 
             ifChanged(M::isBuyBellNeeded) {
                 buyBell.isVisible = isBuyBellNeeded
+            }
+
+            ifChanged(M::isBuyPromoDotNeeded) {
+                if (isBuyPromoDotNeeded) buyPromoIndicator.animateIndicatorAnimation(true)
+            }
+
+            ifChanged(M::isTradePromoDotNeeded) {
+                if (isTradePromoDotNeeded) tradePromoIndicator.animateIndicatorAnimation(false)
             }
         }
     }
@@ -333,4 +351,32 @@ class HomeController(
     ) {
         eventConsumer.accept(E.OnSupportFormSubmitted(result.inputText))
     }
+
+    private fun ImageView.animateIndicatorAnimation(isBuyTextField: Boolean) {
+        isVisible = true
+        if (isBuyTextField) {
+            buyDotAnimator = getDotAnimator(drawable)
+            buyDotAnimator?.start()
+        } else {
+            tradeDotAnimator = getDotAnimator(drawable)
+            tradeDotAnimator?.start()
+        }
+    }
+
+    private fun ImageView.removePromoAnimator(animator: ObjectAnimator?) {
+        isVisible = false
+        animator?.removeAllUpdateListeners()
+        animator?.cancel()
+    }
+
+    private fun getDotAnimator(drawable: Drawable?) =
+        ObjectAnimator.ofPropertyValuesHolder(
+            drawable,
+            PropertyValuesHolder.ofInt("alpha", 0, 255)
+        ).apply {
+            duration = 2000L
+            target = drawable
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+        }
 }

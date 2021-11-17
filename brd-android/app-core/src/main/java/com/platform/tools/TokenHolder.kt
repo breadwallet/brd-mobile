@@ -8,18 +8,21 @@
  */
 package com.platform.tools
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import android.util.Log
+import com.brd.api.BrdApiClient
 import com.breadwallet.logger.logError
 
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.BrdUserState
-import com.platform.APIClient
+import kotlinx.coroutines.runBlocking
 import org.kodein.di.DIAware
 import org.kodein.di.android.closestDI
 import org.kodein.di.instance
 
+@SuppressLint("StaticFieldLeak")
 object TokenHolder : DIAware {
     private val TAG = TokenHolder::class.java.simpleName
     private var mApiToken: String? = null
@@ -32,7 +35,7 @@ object TokenHolder : DIAware {
 
     override val di by closestDI { context }
     private val userManager by instance<BrdUserManager>()
-    private val apiClient: APIClient by instance()
+    private val brdApiClient: BrdApiClient by instance()
 
     @Synchronized
     fun retrieveToken(): String? {
@@ -66,7 +69,14 @@ object TokenHolder : DIAware {
 
     @Synchronized
     fun fetchNewToken() {
-        mApiToken = apiClient.token
+        mApiToken = runBlocking {
+            try {
+                brdApiClient.getToken()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                null
+            }
+        }
         logError("fetchNewToken: $mApiToken")
         if (!mApiToken.isNullOrEmpty()) {
             userManager.putToken(mApiToken!!)

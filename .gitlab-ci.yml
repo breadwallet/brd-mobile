@@ -48,6 +48,25 @@ build-cosmos:
     paths:
       - ./**/build/reports/tests
 
+build-ios:
+  stage: build
+  only:
+    refs:
+      - main
+      - develop
+      - merge_requests
+    changes:
+      - buildSrc/**/Libs.kt
+      - brd-ios/**/*
+      - cosmos-*/**/*
+      - .gitlab-ci.yml
+  script:
+    - ./gradlew :cosmos-bundled:createXCFramework
+    - xcodebuild clean -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet | xcpretty
+    # - xcodebuild test -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 13 mini,OS=15.0' | xcpretty -s
+  tags:
+    - macos
+
 build-android:
   stage: build
   script:
@@ -73,25 +92,6 @@ build-android:
       - ./**/build/reports/**/*
     reports:
       junit: ./brd-android/**/build/test-results/**/TEST-*.xml
-
-build-ios:
-  stage: build
-  only:
-    refs:
-      - main
-      - develop
-      - merge_requests
-    changes:
-      - buildSrc/**/Libs.kt
-      - brd-ios/**/*
-      - cosmos-*/**/*
-      - .gitlab-ci.yml
-  script:
-    - ./gradlew :cosmos-bundled:createXCFramework
-    - xcodebuild clean -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet | xcpretty
-    - xcodebuild test -workspace brd-ios/breadwallet.xcworkspace -scheme breadwallet -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' | xcpretty -s
-  tags:
-    - macos
 
 deploy-appetize:
   stage: deploy

@@ -252,6 +252,14 @@ class SendSheetController(args: Bundle? = null) :
         val res = checkNotNull(resources)
 
         with(binding) {
+            ifChanged(M::paymentProtocolRequest) {
+                buttonEconomy.isEnabled = paymentProtocolRequest == null
+                if (paymentProtocolRequest != null) {
+                    buttonEconomy.setTextColor(res.getColor(R.color.separator_gray))
+                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_gray_fill)
+                }
+            }
+
             ifChanged(M::addressType, M::isResolvingAddress) {
                 addressProgressBar.isVisible = isResolvingAddress
                 if (addressType is AddressType.Resolvable) {
@@ -408,7 +416,7 @@ class SendSheetController(args: Bundle? = null) :
                 M::transferSpeed
             ) {
                 layoutFeeOption.isVisible = showFeeSelect
-                setFeeOption(transferSpeed)
+                setFeeOption(transferSpeed, paymentProtocolRequest != null)
             }
 
             ifChanged(M::showFeeSelect) {
@@ -550,7 +558,7 @@ class SendSheetController(args: Bundle? = null) :
             .accept(E.ConfirmTx.OnCancelClicked)
     }
 
-    private fun setFeeOption(feeOption: TransferSpeed) {
+    private fun setFeeOption(feeOption: TransferSpeed, economyFeeDisabled: Boolean) {
         val context = applicationContext!!
         // TODO: Redo using a toggle button and a selector
         with(binding) {
@@ -558,8 +566,10 @@ class SendSheetController(args: Bundle? = null) :
                 is TransferSpeed.Regular -> {
                     buttonRegular.setTextColor(context.getColor(R.color.white))
                     buttonRegular.setBackgroundResource(R.drawable.b_blue_square)
-                    buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
-                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    if (!economyFeeDisabled) {
+                        buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
+                        buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    }
                     buttonPriority.setTextColor(context.getColor(R.color.dark_blue))
                     buttonPriority.setBackgroundResource(R.drawable.b_half_right_blue_stroke)
                     labelFeeDescription.text = when {
@@ -590,8 +600,10 @@ class SendSheetController(args: Bundle? = null) :
                 is TransferSpeed.Priority -> {
                     buttonRegular.setTextColor(context.getColor(R.color.dark_blue))
                     buttonRegular.setBackgroundResource(R.drawable.b_blue_square_stroke)
-                    buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
-                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    if (!economyFeeDisabled) {
+                        buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
+                        buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    }
                     buttonPriority.setTextColor(context.getColor(R.color.white))
                     buttonPriority.setBackgroundResource(R.drawable.b_half_right_blue)
                     labelFeeDescription.text = when {
