@@ -195,5 +195,7 @@
     <color name="ui_accent_transparent">#295B6DEE</color>
     <color name="ui_error">#EA5A5A</color>
     <color name="ui_error_transparent">#29EA5A5A</color>
+    <color name="marketing_pink">#FE5094</color>
 
+    <color name="brdRed">#EA5454</color>
 </resources>

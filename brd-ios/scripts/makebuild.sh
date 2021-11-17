@@ -10,6 +10,7 @@ commit_changes() {
 	tag="ios-${version}"
 
 	git add .
+	git add ../
 	git status
 	read -n 1 -p "Tag, commit and push changes for build ${version}? [Y/n]" response
   	if [[ $response == "y" || $response == "Y" || $response == "" ]]; then

@@ -16,9 +16,10 @@ import com.breadwallet.tools.security.BrdUserManager
 import com.platform.APIClient
 import java.io.IOException
 import java.util.Date
-import java.util.TimeZone
 
 private const val GMT = "GMT"
+private const val BRD_TOKEN_KEY = "BDB_TOKEN"
+private const val BRD_TOKEN_STAGING_KEY = "BRD_TOKEN_STAGING"
 
 class AndroidBrdAuthProvider(
     private val userManager: BrdUserManager,
@@ -47,7 +48,8 @@ class AndroidBrdAuthProvider(
 
     override fun publicKey(): String {
         val encodedPublicKey = checkNotNull(authKey).encodeAsPublic().toString(Charsets.UTF_8)
-        val hexDecodedKey = CryptoHelper.hexDecode(encodedPublicKey) ?: encodedPublicKey.toByteArray(Charsets.UTF_8)
+        val hexDecodedKey =
+            CryptoHelper.hexDecode(encodedPublicKey) ?: encodedPublicKey.toByteArray(Charsets.UTF_8)
         return CryptoHelper.base58Encode(hexDecodedKey)
     }
 
@@ -55,7 +57,12 @@ class AndroidBrdAuthProvider(
         return BRSharedPrefs.getDeviceId()
     }
 
-    override fun sign(method: String, body: String, contentType: String, url: String): BrdAuthProvider.Signature {
+    override fun sign(
+        method: String,
+        body: String,
+        contentType: String,
+        url: String
+    ): BrdAuthProvider.Signature {
         val base58Body = try {
             if (body.isNotBlank()) {
                 CryptoHelper.base58ofSha256(body.toByteArray(Charsets.UTF_8))
@@ -65,9 +72,9 @@ class AndroidBrdAuthProvider(
             ""
         }
 
-        APIClient.DATE_FORMAT.timeZone = TimeZone.getTimeZone(GMT)
-        val httpDate = APIClient.DATE_FORMAT.format(Date())
-            .run { substring(0, indexOf(GMT) + GMT.length) }
+        val httpDate = APIClient.formatGmtDate(Date())
+            ?.run { substring(0, indexOf(GMT) + GMT.length) }
+            .orEmpty()
 
         val requestString = """
             $method
@@ -81,6 +88,10 @@ class AndroidBrdAuthProvider(
             signature = checkNotNull(APIClient.signRequest(requestString, checkNotNull(authKey))),
             timestamp = httpDate
         )
+    }
+
+    override fun clientToken(): String? {
+        return null
     }
 
     override fun walletId(): String? {

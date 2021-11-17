@@ -120,14 +120,7 @@ open class WalletController(args: Bundle) :
     private var mPriceDataAdapter = SparkAdapter()
     private val mIntervalButtons: List<TextView>
         get() = with(binding.chartContainer) {
-            listOf<TextView>(
-                oneDay,
-                oneWeek,
-                oneMonth,
-                threeMonths,
-                oneYear,
-                threeYears
-            )
+            listOf(oneDay, oneWeek, oneMonth, threeMonths, oneYear, threeYears)
         }
 
     override fun onCreateView(view: View) {
@@ -158,7 +151,7 @@ open class WalletController(args: Bundle) :
 
             // TODO: When we get another staking currency, should re-assess how to perform this check
             if (currencyCode.isTezos()) {
-                stakingAdapter!!.setNewList(listOf(StakingItem(currencyCode)))
+                stakingAdapter?.setNewList(listOf(StakingItem(currencyCode)))
             }
 
             txList.adapter = fastAdapter

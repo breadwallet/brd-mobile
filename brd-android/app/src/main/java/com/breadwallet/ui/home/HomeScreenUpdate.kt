@@ -31,6 +31,8 @@ val HomeScreenUpdate = Update<M, E, F> { model, event ->
             setOf(F.UpdateWalletOrder(event.displayOrder))
         )
         is E.OnBuyBellNeededLoaded -> next(model.copy(isBuyBellNeeded = event.isBuyBellNeeded))
+        is E.OnBuyPromoDotNeededLoaded -> next(model.copy(isBuyPromoDotNeeded = event.isBuyPromoDotNeeded))
+        is E.OnTradePromoDotNeededLoaded -> next(model.copy(isTradePromoDotNeeded = event.isTradePromoDotNeeded))
         is E.OnEnabledWalletsUpdated -> {
             next(
                 model.copy(
@@ -52,7 +54,7 @@ val HomeScreenUpdate = Update<M, E, F> { model, event ->
             val wallets = model.wallets.toMutableMap()
             event.wallets.forEach { wallet ->
                 wallets[wallet.currencyCode] = wallet.copy(
-                    isSyncing = wallet.isSyncing,
+                    isSyncing = wallet.isSyncing
                 )
             }
             next(model.copy(wallets = wallets))

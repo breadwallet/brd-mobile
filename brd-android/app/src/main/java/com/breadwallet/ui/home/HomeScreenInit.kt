@@ -20,6 +20,8 @@ val HomeScreenInit = Init<M, F> { model ->
         effects(
             F.LoadEnabledWallets,
             F.LoadIsBuyBellNeeded,
+            F.LoadIsBuyPromoDotNeeded,
+            F.LoadIsTradePromoDotNeeded,
             F.LoadPrompt,
             F.CheckIfShowBuyAndSell,
             F.LoadConnectivityState

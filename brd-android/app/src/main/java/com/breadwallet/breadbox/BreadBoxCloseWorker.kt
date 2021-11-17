@@ -13,10 +13,9 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.breadwallet.app.BreadApp
 import com.breadwallet.logger.logDebug
-import org.kodein.di.DI
 import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
 import org.kodein.di.direct
 import org.kodein.di.instance
 import java.util.concurrent.TimeUnit
@@ -26,7 +25,7 @@ class BreadBoxCloseWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams),
     DIAware {
 
-    override val di by DI.lazy { (applicationContext as BreadApp).di }
+    override val di by closestDI { context.applicationContext }
 
     override fun doWork() =
         with(direct.instance<BreadBox>()) {

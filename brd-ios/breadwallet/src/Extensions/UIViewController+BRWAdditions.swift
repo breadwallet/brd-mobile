@@ -56,6 +56,6 @@ extension UIViewController {
     }
     
     func dismiss(_ animated: Bool = true, completion: (() -> Void)? = nil) {
-        self.dismiss(animated: true, completion: completion)
+        self.dismiss(animated: animated, completion: completion)
     }
 }

@@ -24,6 +24,7 @@ import com.breadwallet.app.ApplicationLifecycleObserver
 import com.breadwallet.app.BreadApp
 import com.blockset.walletkit.Account
 import com.blockset.walletkit.Key
+import com.breadwallet.BuildConfig
 import com.breadwallet.logger.logInfo
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.crypto.CryptoHelper.hexDecode
@@ -168,7 +169,7 @@ class CryptoUserManager(
         try {
             val creationDate = Date(BRKeyStore.getWalletCreationTime())
             val account =
-                Account.createFromPhrase(phrase, creationDate, BRSharedPrefs.getDeviceId()).get()
+                Account.createFromPhrase(phrase, creationDate, BRSharedPrefs.getDeviceId(), !BuildConfig.BITCOIN_TESTNET).get()
             val apiKey = Key.createForBIP32ApiAuth(
                 phrase,
                 Key.getDefaultWordList()
@@ -215,7 +216,8 @@ class CryptoUserManager(
         val account = Account.createFromPhrase(
             phrase,
             Date(getWalletCreationTime()),
-            deviceId
+            deviceId,
+            !BuildConfig.BITCOIN_TESTNET
         ).orNull()
 
         if (account == null) {
@@ -416,7 +418,8 @@ class CryptoUserManager(
                 val account = Account.createFromPhrase(
                     storedPhrase,
                     creationDate,
-                    BRSharedPrefs.getDeviceId()
+                    BRSharedPrefs.getDeviceId(),
+                    !BuildConfig.BITCOIN_TESTNET
                 ).get() ?: return@withLock SetupResult.FailedToCreateAccount
 
                 val apiAuthKey = apiKey ?: Key.createForBIP32ApiAuth(

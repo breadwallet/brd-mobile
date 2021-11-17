@@ -84,10 +84,10 @@
 "Alerts.sendSuccessSubheader" = "Pengarna sändade!";
 /* Fingerprint was recognized by the scanner */
 "Alerts.touchIdSucceeded.android" = "Fingeravtryck bekräftat";
-/* Tell the user where they can enable permissions to access device storage. */
-"Android.allowFileSystemAccess" = "Vi ber dig att medge lagringstillåtelse i dina enhetsinställningar: \"Inställningar\" > \"Appar\" > \"BRD\" > \"Tillåtelser\".";
 /* The "home" screen is the name of the top level menu for the app. */
 "Android.BCH.welcome.message" = "Valfri BCH i din plånbok kan nås via hemskärmen.";
+/* Tell the user where they can enable permissions to access device storage. */
+"Android.allowFileSystemAccess" = "Vi ber dig att medge lagringstillåtelse i dina enhetsinställningar: \"Inställningar\" > \"Appar\" > \"BRD\" > \"Tillåtelser\".";
 /* Warning about using apps that can alter the screen */
 "Android.screenAlteringMessage" = "BRD fungerar inte korrekt om inte skärmskiftande appar (såsom Twilight) är inaktiverade.";
 /* An app that alters the screen ("screen-altering app") has been detected. */
@@ -132,6 +132,8 @@
 "BitID.success" = "Autentiseringen lyckades";
 /* BitID Authentication Request alert view title */
 "BitID.title" = "BitId autentiseringsförfrågan";
+/* Button to return to the "home" screen (the home screen is the top menu). */
+"Button.Home" = "Hem";
 /* As in "(tap here to) buy (bitcoin)" */
 "Button.buy" = "Köp";
 /* Cancel button label */
@@ -146,8 +148,6 @@
 "Button.dismiss" = "Avvisa";
 /* Done button title */
 "Button.done" = "Klar";
-/* Button to return to the "home" screen (the home screen is the top menu). */
-"Button.Home" = "Hem";
 /* Ignore button label */
 "Button.ignore" = "Ignorera";
 /* Maybe Later button label */
@@ -211,6 +211,14 @@
 "CloudBackup.step4" = "Kontrollera att iCloud-nyckelring är PÅ";
 "CloudBackup.understandText" = "Jag förstår att den här funktionen inte fungerar om inte iCloud Keychain är aktiverat.";
 "CloudBackup.warningBody" = "Din iCloud-säkerhetskopia raderas efter %1$@ fler felaktiga PIN-försök.";
+"ConfirmGift.paperWalletAmount" = "Pappersbelopp";
+"ConfirmGift.processingTime" = "Valideringen av denna pappersplånbok i nätverket kan ta upp till 60 minuter";
+/* Confirm paper phrase error message */
+"ConfirmPaperPhrase.error" = "De angivna orden matchar inte din återställningsfras. Var god försök igen.";
+/* Confirm paper phrase view label. */
+"ConfirmPaperPhrase.label" = "För att säkerställa att allt har skrivits ner korrekt, skriv följande ord från din återställningsfras.";
+/* Word label eg. Word #1, Word #2 */
+"ConfirmPaperPhrase.word" = "Ord #%1$@";
 /* Amount to Send: ($1.00) */
 "Confirmation.amountLabel" = "Belopp att sänd:";
 "Confirmation.destinationTag" = "Mål tag";
@@ -231,14 +239,6 @@
 "Confirmation.to" = "Till";
 /* Total Cost: ($5.00) */
 "Confirmation.totalLabel" = "Total kostnad:";
-"ConfirmGift.paperWalletAmount" = "Pappersbelopp";
-"ConfirmGift.processingTime" = "Valideringen av denna pappersplånbok i nätverket kan ta upp till 60 minuter";
-/* Confirm paper phrase error message */
-"ConfirmPaperPhrase.error" = "De angivna orden matchar inte din återställningsfras. Var god försök igen.";
-/* Confirm paper phrase view label. */
-"ConfirmPaperPhrase.label" = "För att säkerställa att allt har skrivits ner korrekt, skriv följande ord från din återställningsfras.";
-/* Word label eg. Word #1, Word #2 */
-"ConfirmPaperPhrase.word" = "Ord #%1$@";
 "CreateGift.amountLabel" = "Välj belopp ($ USD)";
 "CreateGift.create" = "Skapa";
 "CreateGift.customAmountHint" = "Anpassat belopp (max $ 500)";
@@ -268,14 +268,14 @@
 "DefaultCurrency.rateLabel" = "Växelkurs";
 /* The wallet is disabled. */
 "Disabled.title" = "Plånbok inaktiverad";
-/* Share address by e-mail subject */
-"Email.address_subject" = "%1$s Adress";
 /* Service capabilities description */
 "EME.permissions.accountRequest" = "Begär %1$@ betalning";
 /* Service capabilities description */
 "EME.permissions.callRequest" = "Begär %1$@ smart kontraktsamtal";
 /* Service capabilities description */
 "EME.permissions.paymentRequest" = "Begär %1$@ kontoinformation";
+/* Share address by e-mail subject */
+"Email.address_subject" = "%1$s Adress";
 /* Email unavailable alert title */
 "ErrorMessages.emailUnavailableMessage" = "Enheten är inte konfigurerad för att sänd e-post med post-appen i iOS.";
 /* Email unavailable alert title */
@@ -288,10 +288,8 @@
 "ErrorMessages.messagingUnavailableTitle" = "Meddelandehantering inte tillgänglig";
 /* Fingerprint was not recognized by the scanner, please try scanning again */
 "ErrorMessages.touchIdFailed.android" = "Fingeravtryck ej bekräftat. Försök igen.";
-/* Exchange available balance label */
-"Exchange.available" = "Available: %@";
-/* Exchange buy title */
-"Exchange.buy" = "Buy";
+"Exchange.Browser.orderHistoryTitle" = "Order History";
+"Exchange.Browser.rewardsTitle" = "Rewards";
 /* CTA button title exchange screen */
 "Exchange.CTA.loading" = "Loading ...";
 /* CTA button title exchange screen */
@@ -307,10 +305,21 @@
 /* CTA action exchange to set to min trade amount
 CTA action exchange to set to min trade amount */
 "Exchange.CTA.setMin" = "Set amount to min %@";
+/* Transaction error alert body */
+"Exchange.ErrorState.CreateTransferFailed" = "Create transfer failed";
+/* Transaction error alert body */
+"Exchange.ErrorState.feeEstimateFailed" = "Fee Estimate Failed";
 /* Initialization error alert body */
 "Exchange.ErrorState.initialization" = "Initialization error";
 /* Insufficient chain error alert body */
-"Exchange.ErrorState.insufficientNativeBalanceError" = "Insufficient chain currency, please buy some";
+"Exchange.ErrorState.insufficientNativeBalanceError" = "%1$@ uses the %2$@ network which requires %3$@ to pay transaction fees.";
+/* Insufficient chain error alert ok action */
+"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Top up %1$@ balance";
+"Exchange.ErrorState.insufficientNativeBalanceErrorSecondary" = "Network fee of %1$@ %2$@ required.";
+/* Insufficient chain error alert title */
+"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "%1$@ Balance Low";
+/* Transaction error alert body */
+"Exchange.ErrorState.insufficientNativeWalletBalance" = "Insufficient %1$@ native wallet balance, you will need at least %1$@ to proceed.";
 /* Network error alert body */
 "Exchange.ErrorState.network" = "Network error";
 /* Order error alert body */
@@ -321,6 +330,112 @@ CTA action exchange to set to min trade amount */
 "Exchange.ErrorState.unknown" = "Unknown error";
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region";
+/* Promotion CTA */
+"Exchange.FeaturePromotion.CTA" = "Let's see it!";
+/* Buy promotion body */
+"Exchange.FeaturePromotion.buyBody" = "There's no better time to invest than today with our streamlined new interface.";
+/* Buy promotion title */
+"Exchange.FeaturePromotion.buyTitle" = "Buy & sell is now easier than ever!";
+/* Trade promotion body */
+"Exchange.FeaturePromotion.tradeBody" = "Trade your assets into another with just a few taps. Walk and trade baby!";
+/* Trade promotion title */
+"Exchange.FeaturePromotion.tradeTitle" = "Trading assets is now even easier!";
+/* Empty wallet message body */
+"Exchange.FullScreenErrorState.emptyWalletBody" = "It looks like you don’t have any assets in your wallet to sell yet.";
+/* CTA title for empty wallet trade screen */
+"Exchange.FullScreenErrorState.emptyWalletCTA" = "Buy Now";
+/* Empty wallet message title */
+"Exchange.FullScreenErrorState.emptyWalletTitle" = "Your wallet is empty";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingNoAssetsBody" = "Looks like you’re not holding assets that can be sold yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingNoAssetsCTA" = "Buy now";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingNoAssetsTitle" = "No assets to sell";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingUnavailableBody" = "We don’t have a partner that supports selling to %1$@ in %2$@ yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingUnavailableCTA" = "Change location / currency";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingUnavailableTitle" = "Selling Unavailable";
+/* InputError BalanceLow text */
+"Exchange.InputError.BalanceLow" = "Insufficient balance";
+/* "CTA button label */
+"Exchange.Order.CTA.great" = "Great!";
+/* "View receipt */
+"Exchange.Order.CTA.receipt" = "View Receipt";
+/* Receipt item label bought */
+"Exchange.Order.bought" = "Bought";
+/* Receipt item label delivery */
+"Exchange.Order.delivery" = "Delivery";
+/* Receipt item label fees */
+"Exchange.Order.fees" = "Fees";
+/* Order footer info explaining exchange rate estimate */
+"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
+/* Receipt item label for */
+"Exchange.Order.for" = "For";
+/* Receipt item label method */
+"Exchange.Order.method" = "Method";
+/* Status creating order */
+"Exchange.Order.status.creating" = "Creating order";
+/* Status failed order */
+"Exchange.Order.status.failed" = "Order failed";
+/* Status processing order */
+"Exchange.Order.status.processing" = "Processing";
+/* Status sent order */
+"Exchange.Order.status.sent" = "Order sent!";
+/* Status successful order */
+"Exchange.Order.status.successful" = "Order Successful!";
+/* Trade preview CTA */
+"Exchange.Preview.CTA" = "Trade Now";
+/* Rewards status active */
+"Exchange.Preview.active" = "Active";
+/* Trade preview footer */
+"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
+/* Trade preview info item label */
+"Exchange.Preview.fulfilledBy" = "Fulfilled by";
+/* Rewards status inactive */
+"Exchange.Preview.inactive" = "Inactive";
+/* Rewards info */
+"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
+/* Trade preview info item label */
+"Exchange.Preview.networkFee" = "Network Fee";
+/* Trade preview info item label */
+"Exchange.Preview.partnerFee" = "Partner Fee";
+/* Trade preview info item label */
+"Exchange.Preview.rate" = "Rate";
+/* Preview items rewards label */
+"Exchange.Preview.rewards" = "BRD Rewards";
+/* Trade preview navigation title */
+"Exchange.Preview.title" = "Trade preview";
+/* CTA button title for region settings */
+"Exchange.Settings.applyRegion" = "Apply region";
+/* County label */
+"Exchange.Settings.country" = "Country";
+/* Currency label */
+"Exchange.Settings.currency" = "Display Currency";
+/* Region label */
+"Exchange.Settings.region" = "State";
+/* Region settings screen title */
+"Exchange.Settings.title" = "Set Region";
+/* Crypto transfer error description */
+"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
+/* Crypto transfer error description */
+"Exchange.TransferError.loadInput" = "Failed to load input";
+/* Crypto transfer error description */
+"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
+/* Crypto transfer error description */
+"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
+/* Crypto transfer error description */
+"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
+/* Crypto transfer error description */
+"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
+/* Exchange available balance label */
+"Exchange.available" = "Available: %@";
+/* Exchange buy title */
+"Exchange.buy" = "Buy";
 /* Exchange label from */
 "Exchange.from" = "From";
 /* purchase limit */
@@ -361,96 +476,24 @@ CTA action exchange to set to min trade amount */
 "Exchange.offer.sectionTitle" = "All values displayed are estimates and susceptible to market price fluctuations.";
 /* Offer total */
 "Exchange.offer.total" = "Total";
-/* Receipt item label bought */
-"Exchange.Order.bought" = "Bought";
-/* "CTA button label */
-"Exchange.Order.CTA.great" = "Great!";
-/* "View receipt */
-"Exchange.Order.CTA.receipt" = "View Receipt";
-/* Receipt item label delivery */
-"Exchange.Order.delivery" = "Delivery";
-/* Receipt item label fees */
-"Exchange.Order.fees" = "Fees";
-/* Order footer info explaining exchange rate estimate */
-"Exchange.Order.footer" = "This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.";
-/* Receipt item label for */
-"Exchange.Order.for" = "For";
-/* Receipt item label method */
-"Exchange.Order.method" = "Method";
-/* Status creating order */
-"Exchange.Order.status.creating" = "Creating order";
-/* Status failed order */
-"Exchange.Order.status.failed" = "Order failed";
-/* Status processing order */
-"Exchange.Order.status.processing" = "Processing";
-/* Status sent order */
-"Exchange.Order.status.sent" = "Order sent!";
-/* Status successful order */
-"Exchange.Order.status.successful" = "Order Successful!";
 /* Over the min limit */
 "Exchange.over" = "Over";
-/* Rewards status active */
-"Exchange.Preview.active" = "Active";
-/* Trade preview CTA */
-"Exchange.Preview.CTA" = "Trade Now";
-/* Trade preview footer */
-"Exchange.Preview.footer" = "This is an estimate. The amount you will receive will depend on the market conditions.";
-/* Trade preview info item label */
-"Exchange.Preview.fulfilledBy" = "Fulfilled by";
-/* Rewards status inactive */
-"Exchange.Preview.inactive" = "Inactive";
-/* Rewards info */
-"Exchange.Preview.info" = "Hold 1000 BRD and receive 25% off trading fees ";
-/* Trade preview info item label */
-"Exchange.Preview.networkFee" = "Network Fee";
-/* Trade preview info item label */
-"Exchange.Preview.partnerFee" = "Partner Fee";
-/* Trade preview info item label */
-"Exchange.Preview.rate" = "Rate";
-/* Preview items rewards label */
-"Exchange.Preview.rewards" = "BRD Rewards";
-/* Trade preview navigation title */
-"Exchange.Preview.title" = "Trade preview";
 /* Exchange select asset button label */
 "Exchange.selectAsset" = "Select Asset";
 /* Exchange sell title */
 "Exchange.sell" = "Sell";
-/* CTA button title for region settings */
-"Exchange.Settings.applyRegion" = "Apply region";
-/* County label */
-"Exchange.Settings.country" = "Country";
-/* Currency label */
-"Exchange.Settings.currency" = "Display Currency";
-/* Region label */
-"Exchange.Settings.region" = "State";
-/* Region settings screen title */
-"Exchange.Settings.title" = "Set Region";
 /* Exchange label to */
 "Exchange.to" = "To";
 /* Exchange trade title */
 "Exchange.trade" = "Trade";
 /* Trade cancel alert body */
-"Exchange.tradeCancelAlertBody" = "All your progress will be lost.";
+"Exchange.tradeCancelAlertBody" = "View order details in Menu -> Order History";
 /* Trade cancel alert no button */
 "Exchange.tradeCancelAlertNo" = "No";
 /* Trade cancel alert title */
-"Exchange.tradeCancelAlertTitle" = "Are you sure?";
+"Exchange.tradeCancelAlertTitle" = "Exit Checkout?";
 /* Trade cancel alert yes button */
 "Exchange.tradeCancelAlertYes" = "Yes";
-/* Crypto transfer error description */
-"Exchange.TransferError.confirmation" = "Failed to confirm transaction";
-/* Crypto transfer error description */
-"Exchange.TransferError.loadInput" = "Failed to load input";
-/* Crypto transfer error description */
-"Exchange.TransferError.noFeeBasis" = "Failed with no fee bases error";
-/* Crypto transfer error description */
-"Exchange.TransferError.pinVerifier" = "Failed to verify pin";
-/* Crypto transfer error description */
-"Exchange.TransferError.sendResult" = "Failed send transaction with error %@";
-/* Crypto transfer error description */
-"Exchange.TransferError.transactionValidation" = "Failed transaction validation with %@";
-/* Crypto transfer error description */
-"Exchange.TransferError.validateCurrencyOrAddress" = "Failed to validate currency or address";
 /* Under the min limit */
 "Exchange.under" = "Under";
 /* Offer purchase method ACH */
@@ -544,10 +587,6 @@ CTA action exchange to set to min trade amount */
 "HomeScreen.totalAssets" = "totala tillgångar";
 /* "home screen toolbar button */
 "HomeScreen.trade" = "Handla";
-/* Checking private key balance progress view text */
-"Import.checking" = "Kontrollerar privat nyckelsaldo...";
-/* Sweep private key confirmation message */
-"Import.confirm" = "Sänd %1$@ från denna privata nyckel till din plånbok? Bitcoins nätverk tar en avgift på %2$@.";
 /* Duplicate key error message */
 "Import.Error.duplicate" = "Denna privata nyckel finns redan i din plånbok.";
 /* empty private key error message */
@@ -558,6 +597,12 @@ CTA action exchange to set to min trade amount */
 "Import.Error.notValid" = "Inte någon privat nyckel";
 /* Import signing error message */
 "Import.Error.signing" = "Fel vid signering av transaktion";
+/* Successfully imported wallet message body */
+"Import.SuccessBody" = "Inlösning av privat nyckel lyckades.";
+/* Checking private key balance progress view text */
+"Import.checking" = "Kontrollerar privat nyckelsaldo...";
+/* Sweep private key confirmation message */
+"Import.confirm" = "Sänd %1$@ från denna privata nyckel till din plånbok? Bitcoins nätverk tar en avgift på %2$@.";
 /* [Redeem] the funds stored on this private key. */
 "Import.importButton" = "Lös In";
 /* Importing wallet progress view label */
@@ -576,8 +621,6 @@ CTA action exchange to set to min trade amount */
 "Import.scan" = "Läs av privat nyckel";
 /* Import wallet success alert title */
 "Import.success" = "Lyckades";
-/* Successfully imported wallet message body */
-"Import.SuccessBody" = "Inlösning av privat nyckel lyckades.";
 /* Import Wallet screen title */
 "Import.title" = "Lös In Privat Nyckel";
 /* Unlocking Private key activity view message. */
@@ -751,10 +794,10 @@ CTA action exchange to set to min trade amount */
 "Prompts.NoScreenLock.body.android" = "Ett skärmlås krävs på enheten för att skydda din plånbok. Gå till Inställningar > Säkerhet > Skärmlås och aktivera för att fortsätta.";
 /* Device encryption prompt title */
 "Prompts.NoScreenLock.title.android" = "Skärmlås inaktiverat";
-/* Warning about recovery phrase (formerly paper key). */
-"Prompts.PaperKey.body" = "Din återställningsfras måste sparas om du tappar eller byter telefon.";
 /* Warning about paper key (Android-version) */
 "Prompts.PaperKey.Body.Android" = "Ställ in din återställningsfras om du någonsin tappar eller byter ut telefonen. Din nyckel krävs också om du ändrar telefonens säkerhetsinställningar.";
+/* Warning about recovery phrase (formerly paper key). */
+"Prompts.PaperKey.body" = "Din återställningsfras måste sparas om du tappar eller byter telefon.";
 /* An action is required (You must do this action). */
 "Prompts.PaperKey.title" = "Åtgärd krävs";
 "Prompts.RateApp.dontShow" = "Fråga inte igen";
@@ -790,10 +833,10 @@ CTA action exchange to set to min trade amount */
 "PushNotifications.disabled" = "Meddelanden avaktiverade";
 /* Body text when push notifications are disabled. */
 "PushNotifications.disabledBody" = "Slå på meddelanden för att få specialerbjudanden och uppdateringar från BRD.";
-/* Body text when push notifications are enabled. */
-"PushNotifications.enabledBody" = "Du får specialerbjudanden och uppdateringar från BRD.";
 /* Instructions to enable push notifications for BRD in the phone's system settings. */
 "PushNotifications.enableInstructions" = "Det verkar som att meddelanden är avstängda. Gå till Inställningar för att aktivera meddelanden från BRD.";
+/* Body text when push notifications are enabled. */
+"PushNotifications.enabledBody" = "Du får specialerbjudanden och uppdateringar från BRD.";
 /* Push notifications toggle switch label */
 "PushNotifications.label" = "Ta emot push-meddelanden";
 /* Push notifications are off label */
@@ -812,6 +855,28 @@ CTA action exchange to set to min trade amount */
 "RateAppPrompt.Button.RateApp.Android" = "Betygsätt BRD";
 /* Google play review prompt title */
 "RateAppPrompt.Title.Android" = "Betygsätt BRD";
+/* Alert action button label */
+"ReScan.alertAction" = "Synka";
+/* Alert message body */
+"ReScan.alertMessage" = "Du kan inte sänd pengar under synkning.";
+/* Alert message title */
+"ReScan.alertTitle" = "Synka med blockkedja?";
+/* extimated time */
+"ReScan.body1" = "20-45 minuter";
+/* Syncing explanation */
+"ReScan.body2" = "Om en transaktion visar sig som klar i bitcoins nätverk men inte i BRD.";
+/* Syncing explanation */
+"ReScan.body3" = "Du får gång på gång ett meddelande som säger att din transaktion avvisades.";
+/* Start Sync button label */
+"ReScan.buttonTitle" = "Starta synkning";
+/* Sync blockchain view footer */
+"ReScan.footer" = "Du kan inte sänd pengar under synkningen med blockkedjan.";
+/* Sync Blockchain view header */
+"ReScan.header" = "Synka blockkedja";
+/* Subheader label */
+"ReScan.subheader1" = "Uppskattad tid";
+/* Subheader label */
+"ReScan.subheader2" = "När ska man synka?";
 /* Address copied message. */
 "Receive.copied" = "Kopierad till urklipp.";
 /* Share via email button label */
@@ -924,28 +989,6 @@ CTA action exchange to set to min trade amount */
 "RequestAnAmount.noAmount" = "Var god ange ett belopp först.";
 /* Request a specific amount of bitcoin */
 "RequestAnAmount.title" = "Begär ett belopp";
-/* Alert action button label */
-"ReScan.alertAction" = "Synka";
-/* Alert message body */
-"ReScan.alertMessage" = "Du kan inte sänd pengar under synkning.";
-/* Alert message title */
-"ReScan.alertTitle" = "Synka med blockkedja?";
-/* extimated time */
-"ReScan.body1" = "20-45 minuter";
-/* Syncing explanation */
-"ReScan.body2" = "Om en transaktion visar sig som klar i bitcoins nätverk men inte i BRD.";
-/* Syncing explanation */
-"ReScan.body3" = "Du får gång på gång ett meddelande som säger att din transaktion avvisades.";
-/* Start Sync button label */
-"ReScan.buttonTitle" = "Starta synkning";
-/* Sync blockchain view footer */
-"ReScan.footer" = "Du kan inte sänd pengar under synkningen med blockkedjan.";
-/* Sync Blockchain view header */
-"ReScan.header" = "Synka blockkedja";
-/* Subheader label */
-"ReScan.subheader1" = "Uppskattad tid";
-/* Subheader label */
-"ReScan.subheader2" = "När ska man synka?";
 /* Rewards view expanded body. */
 "RewardsView.expandedBody" = "Se hur du kan spara in på handelsavgifter och frigöra framtida belöningar.";
 /* Rewards view expanded title. */
@@ -989,19 +1032,24 @@ CTA action exchange to set to min trade amount */
 "SecurityCenter.touchIdTitle" = "Touch ID";
 /* Security center fingerprint authentication button */
 "SecurityCenter.touchIdTitle.android" = "Fingeravtrycksautentisering";
+/* Segwit extra confirmation title. */
+"Segwit.ConfirmChoiceLayout" = "En aktivering av Segwit är oåterkallelig. Är du säker på att du vill fortsätta?";
 /* Segwit enabled confirmation title */
 "Segwit.ConfirmationConfirmationTitle" = "Du aktiverade Segwit!";
 /* Segwit enabled confirmation description */
 "Segwit.ConfirmationInstructionsDescription" = "Tack för att du hjälper bitcoin framåt. ";
 /* Segwit instructions */
 "Segwit.ConfirmationInstructionsInstructions" = "Segwit-support är fortfarande på betastadiet. \nNär Segwit väl har aktiverats är det inte möjligt att avaktivera det. Du kan hitta den gamla adressen under Inställningar. \nVissa tredjepartstjänster, inklusive kryptohandel, kanske inte är tillgängliga för användare som har aktiverat Segwit. I nödfall har du möjlighet att skapa en gammal adress i Preferenser > Bitcoininställningar. \nSegwit kommer automatiskt att vara aktiverat för alla användare i en framtida uppdatering.";
-/* Segwit extra confirmation title. */
-"Segwit.ConfirmChoiceLayout" = "En aktivering av Segwit är oåterkallelig. Är du säker på att du vill fortsätta?";
 /* Segwit enableButton */
 "Segwit.Enable" = "Aktivera";
 /* Segwit button label that takes the user back to the home screen once SegWit is enabled. */
 "Segwit.HomeButton" = "Till månen";
-"Send_fio_toLabel" = "FIO";
+/* Adress already used alert message - first part */
+"Send.UsedAddress.firstLine" = "Bitcoin-adresser är avsedda för engångsanvändning.";
+/* Adress already used alert message - second part */
+"Send.UsedAddress.secondLIne" = "Återanvändning minskar sekretessen både för dig och mottagaren och kan sluta i förlust om mottagaren inte direkt kontrollerar adressen.";
+/* Adress already used alert title */
+"Send.UsedAddress.title" = "Adressen är redan använd";
 /* Send money amount label */
 "Send.amountLabel" = "Belopp";
 /* Balance: $4.00 */
@@ -1012,10 +1060,10 @@ CTA action exchange to set to min trade amount */
 "Send.cameraUnavailabeMessage.android" = "Tillåt kameraåtkomst under Inställningar > Appar > BRD > Behörigheter";
 /* Permission required to access camera */
 "Send.cameraUnavailabeTitle.android" = "BRD har inte åtkomst till kameran";
-/* Camera not allowed message */
-"Send.cameraunavailableMessage" = "Gå till Inställningar för att ge tillgång till kameran.";
 /* Camera not allowed alert title */
 "Send.cameraUnavailableTitle" = "BRD har inte tillgång till kameran";
+/* Camera not allowed message */
+"Send.cameraunavailableMessage" = "Gå till Inställningar för att ge tillgång till kameran.";
 /* Warning when sending to self. */
 "Send.containsAddress" = "Destinationen är din egen adress. Du kan inte sänd till dig själv.";
 /* Could not create transaction alert title */
@@ -1082,12 +1130,12 @@ CTA action exchange to set to min trade amount */
 "Send.remoteRequestError" = "Kunde inte ladda betalningsförfrågan";
 /* Scan button label */
 "Send.scanLabel" = "Läs av";
-/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
-"Send.sendingMax" = "Sänd Max: ";
 /* Send button label (the action, "press here to send") */
 "Send.sendLabel" = "Sänd";
 /* Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) */
 "Send.sendMaximum" = "Sänd maxbeloppet?";
+/* Sending Max: $4.00 for iOS, the balance can't have a parameter */
+"Send.sendingMax" = "Sänd Max: ";
 /* Send screen title (as in "this is the screen for sending money") */
 "Send.title" = "Sänd";
 /* Send money to label */
@@ -1095,12 +1143,15 @@ CTA action exchange to set to min trade amount */
 "Send.udomains_invalid" = "Invalid address.";
 "Send.udomains_noAddress" = "There is no %1$@ address associated with this address.";
 "Send.udomains_retrievalError" = "There was an error retrieving this address. Please try again later.";
-/* Adress already used alert message - first part */
-"Send.UsedAddress.firstLine" = "Bitcoin-adresser är avsedda för engångsanvändning.";
-/* Adress already used alert message - second part */
-"Send.UsedAddress.secondLIne" = "Återanvändning minskar sekretessen både för dig och mottagaren och kan sluta i förlust om mottagaren inte direkt kontrollerar adressen.";
-/* Adress already used alert title */
-"Send.UsedAddress.title" = "Adressen är redan använd";
+"Send_fio_toLabel" = "FIO";
+/* Enable segwit. */
+"Settings.EnableSegwit" = "Aktivera Segwit";
+/* View legacy address (old format). */
+"Settings.ViewLegacyAddress" = "Visa mottagaradress i gamla formatet";
+/* Receive Bitcoin instructions */
+"Settings.ViewLegacyAddressReceiveDescription" = "Sänd endast bitcoin (BTC) till denna adress. Alla andra tillgångar som sänd till denna adress går förlorade permanent.";
+/* Receive Bitcoin */
+"Settings.ViewLegacyAddressReceiveTitle" = "Erhåll bitcoin";
 /* About label */
 "Settings.about" = "Om";
 /* Advanced settings header */
@@ -1119,8 +1170,6 @@ CTA action exchange to set to min trade amount */
 "Settings.currencySettings" = "Valutainställningar";
 /* Join Early access label */
 "Settings.earlyAccess" = "Använd Snabb tillgång";
-/* Enable segwit. */
-"Settings.EnableSegwit" = "Aktivera Segwit";
 /* Are you enjoying bread alert message body */
 "Settings.enjoying" = "Gillar du BRD?";
 /* Export transaction history menu item */
@@ -1133,6 +1182,7 @@ CTA action exchange to set to min trade amount */
 "Settings.manage" = "Hantera";
 /* Notifications label */
 "Settings.notifications" = "Meddelanden";
+"Settings.orderHistory" = "Order History";
 /* Section header for "other settings". */
 "Settings.other" = "Andra";
 /* Preferences settings section header */
@@ -1157,12 +1207,6 @@ CTA action exchange to set to min trade amount */
 "Settings.touchIdLimit" = "Touch ID utnyttjandegräns";
 /* The fingerprint spending limit */
 "Settings.touchIdLimit.android" = "Maxbelopp med fingeravtrycksautentisering";
-/* View legacy address (old format). */
-"Settings.ViewLegacyAddress" = "Visa mottagaradress i gamla formatet";
-/* Receive Bitcoin instructions */
-"Settings.ViewLegacyAddressReceiveDescription" = "Sänd endast bitcoin (BTC) till denna adress. Alla andra tillgångar som sänd till denna adress går förlorade permanent.";
-/* Receive Bitcoin */
-"Settings.ViewLegacyAddressReceiveTitle" = "Erhåll bitcoin";
 /* Wallet Settings section header */
 "Settings.wallet" = "Plånbok";
 /* Unlink/delete your wallet from the current device. */
@@ -1224,12 +1268,12 @@ CTA action exchange to set to min trade amount */
 /* Button label: Unstake the selected baker */
 "Staking.unstake" = "Ta av";
 "Staking.validatorHint" = "Ange valideringsadress";
+/* Paper key explanation text (Android-version) */
+"StartPaperPhrase.Body.Android" = "Din återställningsfras är det enda sättet att återställa din BRD om din telefon går förlorad, stulen, trasig eller uppgraderas. \n\nDin återställningsfras krävs också om du ändrar säkerhetsinställningarna på din enhet. \n\nVi visar dig en lista med ord att skriva ner på ett papper och hålla dig säker.";
 /* button label */
 "StartPaperPhrase.againButtonTitle" = "Skriv ner återhämtningsfrasen igen";
 /* Paper key explanation text. */
 "StartPaperPhrase.body" = "Din återställningsfras är det enda sättet att återställa din BRD om din telefon går förlorad, stulen, trasig eller uppgraderas. \n\nVi visar dig en lista med ord att skriva ner på ett papper och hålla dig säker.";
-/* Paper key explanation text (Android-version) */
-"StartPaperPhrase.Body.Android" = "Din återställningsfras är det enda sättet att återställa din BRD om din telefon går förlorad, stulen, trasig eller uppgraderas. \n\nDin återställningsfras krävs också om du ändrar säkerhetsinställningarna på din enhet. \n\nVi visar dig en lista med ord att skriva ner på ett papper och hålla dig säker.";
 /* button label */
 "StartPaperPhrase.buttonTitle" = "Skriv ner återhämtningsfras";
 /* Argument is date; date should be on a new line */
@@ -1351,9 +1395,9 @@ CTA action exchange to set to min trade amount */
 "Transaction.stakingTo" = "satsar till %1$s";
 /* eg. Starting balance: $50.00 */
 "Transaction.starting" = "Ingående saldo: %1$@";
+"Transaction.toRecipient" = "till %1$s";
 /* e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) */
 "Transaction.tokenTransfer" = "Avgift för token-överföring: %1$@";
-"Transaction.toRecipient" = "till %1$s";
 /* Waiting to be confirmed string */
 "Transaction.waiting" = "Väntar på bekräftelse. Vissa handlare kräver bekräftelse för att slutföra en transaktion. Uppskattad tid: 1-2 timmar.";
 /* e.g. I received money from an account. */
@@ -1461,6 +1505,14 @@ eg. 182930 (45061 confirmations) */
 "TransactionDirection.address" = "Togs emot på den här adressen";
 /* (this transaction was) Sent to this address: */
 "TransactionDirection.to" = "Sänd till den här adressen";
+/* Authorize to copy wallet address PIN view prompt. */
+"URLHandling.addressList" = "Godkänn att kopiera plånbokens adress till urklipp";
+/* Authorize to copy wallet address alert title */
+"URLHandling.addressListAlertTitle" = "Kopiera plånboksadresser";
+/* Authorize to copy wallet addresses alert message */
+"URLHandling.addressaddressListAlertMessage" = "Kopiera plånboksadresser till urklipp?";
+/* Copy wallet addresses alert button label */
+"URLHandling.copy" = "Kopiera";
 /* Disabled until date */
 "UnlockScreen.disabled" = "Inaktiverad till: %1$@";
 /* Unlock with FaceID accessibility label */
@@ -1501,14 +1553,6 @@ eg. 182930 (45061 confirmations) */
 "UpdatePin.setPinErrorTitle" = "Fel vid uppdatering av PIN-kod";
 /* Update PIN title */
 "UpdatePin.updateTitle" = "Uppdatera PIN-kod";
-/* Authorize to copy wallet addresses alert message */
-"URLHandling.addressaddressListAlertMessage" = "Kopiera plånboksadresser till urklipp?";
-/* Authorize to copy wallet address PIN view prompt. */
-"URLHandling.addressList" = "Godkänn att kopiera plånbokens adress till urklipp";
-/* Authorize to copy wallet address alert title */
-"URLHandling.addressListAlertTitle" = "Kopiera plånboksadresser";
-/* Copy wallet addresses alert button label */
-"URLHandling.copy" = "Kopiera";
 /* Verify PIN for transaction view body */
 "VerifyPin.authorize" = "Var god ange din pinkod för att godkänna denna transaktion.";
 /* Verify PIN view body */
@@ -1553,14 +1597,6 @@ Wallet connection settings menu item title. */
 "Welcome.body" = "BRDplånboken har bytt namn till BRD, med ett splitter nytt utseende och några nya funktioner.\n\nOm du behöver hjälp, leta efter (?)-tecknet i det övre högra hörnet på de flesta skärmar.";
 /* Top title of welcome screen */
 "Welcome.title" = "Välkommen till BRD!";
-/* Single asset widget description */
-"Widget.assetDescription" = "Håll dig uppdaterad med din favorit kryptotillgång";
-/* Asset list widget description */
-"Widget.assetListDescription" = "Håll dig uppdaterad med dina favorit kryptotillgångar";
-/* Asset list widget title */
-"Widget.assetListTitle" = "Tillgångslista";
-/* Single asset widget title */
-"Widget.assetTitle" = "Tillgång";
 /* Name of color based on os theme light/dark */
 "Widget.Color.autoLightDark" = "System Auto Ljus / Mörk";
 /* Name of color - Black */
@@ -1595,6 +1631,14 @@ Wallet connection settings menu item title. */
 "Widget.Color.white" = "Vit";
 /* Name of color - Yellow */
 "Widget.Color.yellow" = "Gul";
+/* Single asset widget description */
+"Widget.assetDescription" = "Håll dig uppdaterad med din favorit kryptotillgång";
+/* Asset list widget description */
+"Widget.assetListDescription" = "Håll dig uppdaterad med dina favorit kryptotillgångar";
+/* Asset list widget title */
+"Widget.assetListTitle" = "Tillgångslista";
+/* Single asset widget title */
+"Widget.assetTitle" = "Tillgång";
 /* Title of color grouping in widget color picker */
 "Widget.colorSectionBackground" = "Tema bakgrundsfärger";
 /* Title of color grouping in widget color picker */

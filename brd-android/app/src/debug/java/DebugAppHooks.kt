@@ -10,7 +10,6 @@ package com.breadwallet
 
 import android.content.Context
 import com.breadwallet.app.BreadApp
-import com.breadwallet.tools.manager.BRSharedPrefs
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
@@ -25,22 +24,21 @@ import okhttp3.Interceptor
 
 internal fun BreadApp.installHooks() {
     ANRWatchDog().start()
+    initializeFlipper(this)
 }
 
-fun initializeFlipper(context: Context) {
-    if (BRSharedPrefs.flipperEnabledDebug) {
-        // Flipper init
-        SoLoader.init(context, false)
-        AndroidFlipperClient.getInstance(context).apply {
-            addPlugin(
-                InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
-            )
-            addPlugin(networkFlipperPlugin)
-            addPlugin(SharedPreferencesFlipperPlugin(context))
-            addPlugin(NavigationFlipperPlugin.getInstance())
-            addPlugin(DatabasesFlipperPlugin(context))
-        }.also { it.start() }
-    }
+private fun initializeFlipper(context: Context) {
+    // Flipper init
+    SoLoader.init(context, false)
+    AndroidFlipperClient.getInstance(context).apply {
+        addPlugin(
+            InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
+        )
+        addPlugin(networkFlipperPlugin)
+        addPlugin(SharedPreferencesFlipperPlugin(context))
+        addPlugin(NavigationFlipperPlugin.getInstance())
+        addPlugin(DatabasesFlipperPlugin(context))
+    }.also { it.start() }
 }
 
 private val networkFlipperPlugin = NetworkFlipperPlugin()

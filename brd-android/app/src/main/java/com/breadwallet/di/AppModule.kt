@@ -24,6 +24,7 @@ import com.brd.api.BrdApiClient
 import com.brd.api.BrdApiHost
 import com.brd.bakerapi.BakersApiClient
 import com.brd.exchange.ExchangeDataLoader
+import com.brd.featurepromotion.FeaturePromotionService
 import com.brd.prefs.AndroidPreferences
 import com.brd.prefs.BrdPreferences
 import com.brd.prefs.Preferences
@@ -77,12 +78,12 @@ fun getAppModule(application: BreadApp): DI.Module {
     return DI.Module("AppModule") {
         bind { singleton { CryptoUriParser(instance()) } }
 
-        bind<APIClient> {
+        bind {
             singleton {
                 APIClient(
                     context = application,
                     userManager = instance(),
-                    brdPreferences = instance(),
+                    brdApiClient = instance(),
                     okHttpClient = instance(),
                     headers = application.createHttpHeaders()
                 )
@@ -213,6 +214,8 @@ fun getAppModule(application: BreadApp): DI.Module {
         bind { singleton { BrdPreferences(instance()) } }
 
         bind { singleton { BakersApiClient.create(instance()) } }
+
+        bind { singleton { FeaturePromotionService(instance()) } }
 
         bind<ExchangeDataLoader>() with singleton {
             val exchangePrefs =

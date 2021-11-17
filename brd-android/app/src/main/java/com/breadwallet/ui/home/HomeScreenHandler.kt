@@ -9,6 +9,7 @@
 package com.breadwallet.ui.home
 
 import android.content.Context
+import com.brd.featurepromotion.FeaturePromotionService
 import com.breadwallet.breadbox.*
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.model.Experiments
@@ -39,6 +40,7 @@ import drewcarlson.mobius.flow.subtypeEffectHandler
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.math.BigDecimal
@@ -56,6 +58,7 @@ fun createHomeScreenHandler(
     ratesRepo: RatesRepository,
     brdUser: BrdUserManager,
     walletProvider: WalletProvider,
+    featurePromotionService: FeaturePromotionService,
     accountMetaDataProvider: AccountMetaDataProvider,
     connectivityStateProvider: ConnectivityStateProvider,
     supportManager: SupportManager
@@ -80,8 +83,8 @@ fun createHomeScreenHandler(
         BRSharedPrefs.promptChanges().mapLatest {
             val promptId = when {
                 BRSharedPrefs.appRatePromptShouldPromptDebug -> PromptItem.RATE_APP
-                !BRSharedPrefs.getEmailOptIn()
-                    && !BRSharedPrefs.getEmailOptInDismissed() -> {
+                !BRSharedPrefs.getEmailOptIn() &&
+                    !BRSharedPrefs.getEmailOptInDismissed() -> {
                     PromptItem.EMAIL_COLLECTION
                 }
                 brdUser.pinCodeNeedsUpgrade() -> PromptItem.UPGRADE_PIN
@@ -139,6 +142,16 @@ fun createHomeScreenHandler(
             ExperimentsRepositoryImpl.isExperimentActive(Experiments.BUY_NOTIFICATION) &&
                 CurrencyUtils.isBuyNotificationNeeded()
         E.OnBuyBellNeededLoaded(isBuyBellNeeded)
+    }
+    addTransformer<F.LoadIsBuyPromoDotNeeded> {
+        featurePromotionService.buyPromotion.map { show ->
+            E.OnBuyPromoDotNeededLoaded(show)
+        }
+    }
+    addTransformer<F.LoadIsTradePromoDotNeeded> {
+        featurePromotionService.tradePromotion.map { show ->
+            E.OnTradePromoDotNeededLoaded(show)
+        }
     }
 
     addTransformer<F.LoadEnabledWallets> {

@@ -25,7 +25,7 @@ final class CellLayoutView: UIView {
         [rightTitleLabel, rightSubtitleLabel]
     )
     private(set) lazy var contentStack = HStackView(
-        [iconStack, titleVStack, rightTitleVStack, accessoryLabel, rightIconImageView]
+        [iconStack, titleVStack, UIView(),rightTitleVStack, accessoryLabel, rightIconImageView]
     )
 
     private lazy var iconStack = HStackView([iconImageView, iconLabel])
@@ -70,6 +70,7 @@ final class CellLayoutView: UIView {
     func update(with viewModel: CellLayoutView.ViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        subtitleLabel.textColor = viewModel.subtitleColor ?? Theme.tertiaryText
         rightTitleLabel.text = viewModel.rightTitle
         rightSubtitleLabel.text = viewModel.rightSubtitle
         accessoryLabel.text = viewModel.detail
@@ -150,6 +151,7 @@ extension  CellLayoutView {
         let rightTitle: String?
         let rightSubtitle: String?
         let detail: String?
+        let subtitleColor: UIColor?
         let iconImage: UIImage?
         let iconText: String?
         let iconURL: URL?
@@ -161,6 +163,7 @@ extension  CellLayoutView {
             rightTitle: String? = nil,
             rightSubtitle: String? = nil,
             detail: String? = nil,
+            subtitleColor: UIColor? = nil,
             iconImage: UIImage? = nil,
             iconText: String? = nil,
             iconURL: URL? = nil,
@@ -171,6 +174,7 @@ extension  CellLayoutView {
             self.rightTitle = rightTitle
             self.rightSubtitle = rightSubtitle
             self.detail = detail
+            self.subtitleColor = subtitleColor
             self.iconImage = iconImage
             self.iconText = iconText
             self.iconURL = iconURL

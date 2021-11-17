@@ -98,6 +98,9 @@ sealed class ExchangeInput {
 
     @Serializable
     enum class CryptoStatus {
+        @SerialName("ready")
+        READY,
+
         @SerialName("waiting_for_payment")
         WAITING_FOR_PAYMENT,
 

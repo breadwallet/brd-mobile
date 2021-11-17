@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.OfferListItemBinding
+import com.breadwallet.util.methodStringRes
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem
 import com.squareup.picasso.Picasso
@@ -84,7 +85,9 @@ fun OfferListItemBinding.bindToModel(model: ExchangeModel.OfferDetails) {
             }
         }
     }
-    labelProviderName.text = model.offer.provider.name
+    val methodStringRes = model.offer.sourceCurrencyMethod.methodStringRes
+    labelProviderName.text =
+        root.context.getString(methodStringRes, model.offer.provider.name)
 
     when (model.offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_moonpay)

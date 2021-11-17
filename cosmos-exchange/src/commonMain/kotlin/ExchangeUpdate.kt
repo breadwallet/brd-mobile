@@ -38,6 +38,7 @@ object ExchangeUpdate : Update<M, E, F> {
 
     override fun update(model: M, event: E): Next<M, F> {
         return when (event) {
+            is OnFeaturePromotionsLoaded -> onFeaturePromotionsLoaded(model, event)
             is OnCountriesLoaded -> onCountriesLoaded(model, event)
             is OnPairsLoaded -> onPairsLoaded(model, event)
             is OnAmountChange -> onAmountChanged(model, event)
@@ -45,6 +46,7 @@ object ExchangeUpdate : Update<M, E, F> {
             is OnCountryClicked -> onCountryClicked(model, event)
             is OnRegionClicked -> onRegionClicked(model, event)
             is OnCurrencyClicked -> onCurrencyClicked(model, event)
+            is OnLoadedNativeNetworkInfo -> onLoadedNativeNetworkInfo(model, event)
             is OnOfferRequestUpdated -> onOfferRequestUpdated(model, event)
             is OnOfferRequestError -> onOfferRequestError(model, event)
             is OnUserPreferencesLoaded -> onUserPreferencesLoaded(model, event)
@@ -76,8 +78,19 @@ object ExchangeUpdate : Update<M, E, F> {
             OnCryptoSendHashUpdateFailed -> onCryptoSendHashUpdateFailed(model)
             OnCryptoSendHashUpdateSuccess -> onCryptoSendHashUpdateSuccess(model)
             is OnOfferAmountOverridden -> onOfferAmountOverridden(model, event)
+            is OnChangeModeClicked -> onChangeModeClicked(model, event)
+            is OnSelectInputPresets -> onSelectInputPresets(model, event)
         }
     }
+}
+
+private fun onFeaturePromotionsLoaded(model: M, event: OnFeaturePromotionsLoaded): Next<M, F> {
+    val showPromo = (model.mode != Mode.TRADE && event.showBuyPromotion)
+        || (model.mode == Mode.TRADE && event.showTradePromotion)
+    return next(
+        model.copy(state = if (showPromo && !model.settingsOnly) State.FeaturePromotion else State.Initializing),
+        setOfNotNull(if (showPromo && !model.settingsOnly) null else F.LoadCountries)
+    )
 }
 
 private fun onCryptoSendHashUpdateSuccess(model: M): Next<M, F> {
@@ -124,19 +137,14 @@ private fun onPairsLoaded(model: M, event: OnPairsLoaded): Next<M, F> {
     return when (model.state) {
         is State.Initializing,
         is State.ConfigureSettings,
+        is State.EmptyWallets,
         is State.OrderSetup -> {
-            if (model.mode == Mode.BUY && !model.settingsOnly && !event.pairs.containsBuyPairs(model)) {
-                return next(
-                    model.copy(
-                        errorState = ErrorState(
-                            debugMessage = "No pairs for ${model.selectedCountry?.name} ${model.selectedRegion?.name}",
-                            type = ErrorState.Type.UnsupportedRegionError,
-                            isRecoverable = true,
-                        )
-                    )
-                )
+            val sellPairs = event.pairs.filter { model.selectedFiatCurrency?.code == it.toCode }
+            val buyErrorState = buyErrorState(model, model.mode, event.pairs)
+            val sellErrorState = sellErrorState(model, model.mode, sellPairs)
+            if (buyErrorState != null) {
+                return next(model.copy(errorState = buyErrorState))
             }
-
             val currencies = if (model.test) {
                 event.currencies.mapValues { (_, currency) ->
                     val currencyId = currency.currencyId
@@ -151,9 +159,14 @@ private fun onPairsLoaded(model: M, event: OnPairsLoaded): Next<M, F> {
                 state = if (model.state is State.Initializing) State.OrderSetup() else model.state,
                 currencies = currencies,
                 pairs = event.pairs,
+                availableSellPairs = sellPairs,
                 formattedFiatRates = event.formattedFiatRates,
             )
-            val (source, quote) = if (model.sourceCurrencyCode == null || model.quoteCurrencyCode == null) {
+            val (source, quote) = if (
+                model.sourceCurrencyCode == null ||
+                newModel.quoteCurrencyCode == null ||
+                newModel.sourcePairs.none { it.toCode == newModel.quoteCurrencyCode }
+            ) {
                 newModel.getDefaultCurrencyCodes()
             } else {
                 model.sourceCurrencyCode to model.quoteCurrencyCode
@@ -161,9 +174,12 @@ private fun onPairsLoaded(model: M, event: OnPairsLoaded): Next<M, F> {
             val nextModel = newModel.copy(
                 sourceCurrencyCode = source,
                 quoteCurrencyCode = quote,
+                inputPresets = inputPresets(newModel, newModel.selectedFiatCurrency?.code, source)
             )
             next(
-                nextModel,
+                if (sellErrorState is State.EmptyWallets) {
+                    return next(model.copy(state = sellErrorState))
+                } else nextModel,
                 setOfNotNull(
                     F.RequestOffers(nextModel.offerBodyOrNull(), model.mode),
                     nextModel.selectedFiatCurrency?.code?.let { fiatCode ->
@@ -193,12 +209,17 @@ private fun onPairsError(model: M, event: OnPairsError): Next<M, F> {
     }
 }
 
-private fun onAmountChanged(model: M, event: OnAmountChange, quoteInput: Boolean = false): Next<M, F> {
+private fun onAmountChanged(
+    model: M,
+    event: OnAmountChange,
+    quoteInput: Boolean = false
+): Next<M, F> {
     return when (model.state) {
         is State.OrderSetup -> {
             val rawAmountInput = if (quoteInput) {
-                model.quoteAmountInput ?: model.quoteAmount?.toString() ?: "0"
-            } else model.sourceAmountInput
+                model.quoteAmountInput ?: model.quoteAmount.toString()
+            } else model.sourceAmountInput.replace(" ", "")
+            val mode = model.mode
             val baseCurrency = checkNotNull(model.currencies[model.sourceCurrencyCode])
             val hasDecimal = rawAmountInput.contains(".")
             val nextAmount = when (event) {
@@ -206,10 +227,12 @@ private fun onAmountChanged(model: M, event: OnAmountChange, quoteInput: Boolean
                     if (hasDecimal || baseCurrency.decimals == 0) {
                         rawAmountInput // no change
                     } else {
-                        "$rawAmountInput."
+                        if (rawAmountInput == "") "0." else "$rawAmountInput."
                     }
                 }
-                OnAmountChange.Delete -> rawAmountInput.dropLast(1).ifEmpty { "0" }
+                OnAmountChange.Delete -> if (rawAmountInput.isNotEmpty()) {
+                    rawAmountInput.dropLast(1).ifEmpty { "" }
+                } else ""
                 OnAmountChange.Clear -> "0"
                 is OnAmountChange.Digit -> {
                     val baseLength = rawAmountInput.substringBefore('.').length
@@ -231,17 +254,26 @@ private fun onAmountChanged(model: M, event: OnAmountChange, quoteInput: Boolean
                     }
                 }
             }
-            val isErrorInput = rawAmountInput.length == nextAmount.length
-                    || nextAmount.toDoubleOrNull() == null
+            var isErrorInput = rawAmountInput.length == nextAmount.length
+                || nextAmount.toDoubleOrNull() == null
             val inputError = when (model.mode) {
                 Mode.BUY -> null
                 Mode.SELL, Mode.TRADE -> if (quoteInput) {
                     null
                 } else {
                     val walletBalance = model.cryptoBalances[model.sourceCurrencyCode] ?: 0.0
-                    if (nextAmount.toDouble() > walletBalance) {
-                        InputError.BalanceLow(walletBalance)
-                    } else null
+                    when {
+                        (nextAmount.toDoubleOrNull() ?: 0.0) > walletBalance -> {
+                            isErrorInput = nextAmount.length >= rawAmountInput.length
+                            InputError.BalanceLow(walletBalance)
+                        }
+                        model.nativeNetworkInfo != null -> insufficientNativeBalanceInputError(
+                            model.nativeNetworkInfo,
+                            model.cryptoBalances[model.sourceCurrencyCode],
+                            model.sourceCurrencyCode,
+                        )
+                        else -> null
+                    }
                 }
             }
             val newSourceAmount = if (quoteInput) {
@@ -256,6 +288,7 @@ private fun onAmountChanged(model: M, event: OnAmountChange, quoteInput: Boolean
                 inputError = inputError,
                 selectedOffer = null,
                 lastOfferSelection = null,
+                selectedInputPreset = null,
             )
             next(
                 newModel,
@@ -294,9 +327,7 @@ private fun onCountriesLoaded(model: M, event: OnCountriesLoaded): Next<M, F> {
             )
             next(
                 newModel,
-                setOfNotNull(
-                    F.LoadUserPreferences,
-                )
+                setOfNotNull(F.LoadUserPreferences)
             )
         }
         else -> noChange()
@@ -333,7 +364,12 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                     quoteCurrencyCode = when (model.mode) {
                         Mode.SELL -> event.currency.code
                         else -> model.quoteCurrencyCode
-                    }
+                    },
+                    inputPresets = inputPresets(
+                        model,
+                        event.currency.code.orEmpty(),
+                        if (model.mode == Mode.BUY) event.currency.code else model.sourceCurrencyCode
+                    )
                 ),
                 if (model.settingsOnly) {
                     setOfNotNull(
@@ -347,9 +383,17 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                             event.currency.code,
                             model.pairs,
                         ),
+                        if (model.mode != Mode.SELL) null else {
+                            F.LoadNativeNetworkInfo(event.currency.currencyId)
+                        },
                         if (model.mode == Mode.TRADE) null else {
                             val country = checkNotNull(model.selectedCountry)
-                            F.LoadPairs(country.code, model.selectedRegion?.code, event.currency.code)
+                            F.LoadPairs(
+                                countryCode = country.code,
+                                regionCode = model.selectedRegion?.code,
+                                selectedFiatCurrencyCode = event.currency.code,
+                                test = model.test
+                            )
                         }
                     )
                 }
@@ -362,8 +406,7 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                     val source = model.currencies.getValue(pair.fromCode)
                     val quote = model.currencies.getValue(pair.toCode)
                     pair.fromCode == event.currency.code &&
-                            model.mode.isCompatibleSource(source) &&
-                            model.mode.isCompatibleQuote(quote)
+                        model.mode.isCompatibleSource(source) && model.mode.isCompatibleQuote(quote)
                 }
                 val newQuoteCurrencyCode = model.quoteCurrencyCode?.run {
                     sourcePairs.find { it.toCode == model.quoteCurrencyCode }?.toCode
@@ -383,12 +426,18 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                     offerDetails = emptyList(),
                     selectedOffer = null,
                     state = newState,
+                    inputPresets = inputPresets(
+                        model,
+                        model.selectedFiatCurrency?.code.orEmpty(),
+                        event.currency.code
+                    )
                 )
                 next(
                     newModel,
                     setOfNotNull(
                         F.RequestOffers(newModel.offerBodyOrNull(), model.mode),
                         trackingEffect,
+                        if (model.mode.isSell) F.UpdateLastSellCurrency(event.currency.code) else null
                     )
                 )
             } else {
@@ -404,7 +453,7 @@ private fun onCurrencyClicked(model: M, event: OnCurrencyClicked): Next<M, F> {
                     setOfNotNull(
                         F.RequestOffers(newModel.offerBodyOrNull(), model.mode),
                         trackingEffect,
-                        if (model.mode == Mode.BUY) F.UpdateLastOrderCurrency(event.currency.code) else null
+                        if (model.mode.isBuy) F.UpdateLastOrderCurrency(event.currency.code) else null,
                     )
                 )
             }
@@ -431,9 +480,10 @@ private fun onRegionClicked(model: M, event: OnRegionClicked): Next<M, F> {
                         null
                     } else {
                         F.LoadPairs(
-                            model.selectedCountry.code,
-                            event.region.code,
-                            model.selectedFiatCurrency?.code
+                            countryCode = model.selectedCountry.code,
+                            regionCode = event.region.code,
+                            selectedFiatCurrencyCode = model.selectedFiatCurrency?.code,
+                            test = model.test
                         )
                     }
                 )
@@ -468,7 +518,7 @@ private fun onCountryClicked(model: M, event: OnCountryClicked): Next<M, F> {
                     if (model.settingsOnly || country.regions.isNotEmpty()) {
                         null
                     } else {
-                        F.LoadPairs(country.code, null, selectedFiatCurrency.code)
+                        F.LoadPairs(country.code, null, selectedFiatCurrency.code, model.test)
                     }
                 )
             )
@@ -513,27 +563,42 @@ private fun onUserPreferencesLoaded(model: M, event: OnUserPreferencesLoaded): N
                 ),
                 setOfNotNull(
                     model.selectedCountry?.let {
-                        F.LoadPairs(it.code, model.selectedRegion?.code, model.selectedFiatCurrency?.code)
+                        F.LoadPairs(
+                            countryCode = it.code,
+                            regionCode = model.selectedRegion?.code,
+                            selectedFiatCurrencyCode = model.selectedFiatCurrency?.code,
+                            test = model.test
+                        )
                     }
                 )
             )
         } else {
             val newModel = model.copy(
                 apiHost = event.apiHost,
-                sourceAmountInput = (if (model.mode == Mode.TRADE) null else event.lastOrderAmount) ?: "0",
+                sourceAmountInput = (if (model.mode == Mode.TRADE) null else event.lastOrderAmount)
+                    ?: "",
                 selectedFiatCurrency = selectedFiatCurrency,
                 selectedCountry = selectedCountry,
                 selectedRegion = selectedRegion,
-                lastPurchaseCurrencyCode = event.lastPurchaseCurrencyCode ?: model.lastPurchaseCurrencyCode,
+                lastPurchaseCurrencyCode = event.lastPurchaseCurrencyCode
+                    ?: model.lastPurchaseCurrencyCode,
+                lastSellCurrencyCode = event.lastSellCurrencyCode
+                    ?: model.lastSellCurrencyCode,
                 lastTradeSourceCurrencyCode = event.lastTradeSourceCurrencyCode
                     ?: model.lastTradeSourceCurrencyCode,
-                lastTradeQuoteCurrencyCode = event.lastTradeQuoteCurrencyCode ?: model.lastTradeQuoteCurrencyCode,
+                lastTradeQuoteCurrencyCode = event.lastTradeQuoteCurrencyCode
+                    ?: model.lastTradeQuoteCurrencyCode,
             )
             next(
                 newModel,
                 setOfNotNull(
                     selectedCountry?.let {
-                        F.LoadPairs(selectedCountry.code, selectedRegion?.code, selectedFiatCurrency?.code)
+                        F.LoadPairs(
+                            countryCode = selectedCountry.code,
+                            regionCode = selectedRegion?.code,
+                            selectedFiatCurrencyCode = selectedFiatCurrency?.code,
+                            test = model.test
+                        )
                     },
                     F.RequestOffers(model.offerBodyOrNull(), model.mode),
                 )
@@ -548,14 +613,17 @@ private fun onSelectPairClicked(model: M, event: OnSelectPairClicked): Next<M, F
         is State.OrderSetup,
         is State.SelectAsset -> {
             val currenciesSlice = if (event.selectSource) {
-                model.pairs
-                    .distinctBy(ExchangePair::fromCode)
-                    .map(ExchangePair::fromCode)
-                    .run {
-                        if (model.mode == Mode.TRADE) {
-                            filter { (model.cryptoBalances[it] ?: 0.0) > 0 }
-                        } else this
-                    }
+                if (model.mode.isSell) {
+                    model.availableSellPairs.map(ExchangePair::fromCode)
+                } else {
+                    model.pairs
+                        .distinctBy(ExchangePair::fromCode)
+                        .map(ExchangePair::fromCode)
+                }.run {
+                    if (model.mode != Mode.BUY) {
+                        filter { (model.cryptoBalances[it] ?: 0.0) > 0 }
+                    } else this
+                }
             } else {
                 model.sourcePairs.map(ExchangePair::toCode)
             }.mapNotNull { code ->
@@ -605,10 +673,11 @@ private fun onOfferRequestUpdated(model: M, event: OnOfferRequestUpdated): Next<
                     val lastOffer = model.lastOfferSelection.offer
                     event.offerDetails.find { details ->
                         details.offer.provider.slug == lastOffer.provider.slug &&
-                                details.offer.sourceCurrencyMethod::class == lastOffer.sourceCurrencyMethod::class
+                            details.offer.sourceCurrencyMethod::class == lastOffer.sourceCurrencyMethod::class
                     }
                 }
-                val orderedOfferDetails = selectedOffer?.let { listOf(it) + (event.offerDetails - it) }
+                val orderedOfferDetails =
+                    selectedOffer?.let { listOf(it) + (event.offerDetails - it) }
                 val isGatheringOffers = event.exchangeOfferRequest.status == Status.GATHERING
                 next(
                     model.copy(
@@ -654,7 +723,7 @@ private fun onSwapCurrenciesClicked(model: M): Next<M, F> {
         is State.OrderSetup -> {
             val hasOppositePair = model.pairs.any {
                 it.toCode == model.sourceCurrencyCode &&
-                        it.fromCode == model.quoteCurrencyCode
+                    it.fromCode == model.quoteCurrencyCode
             }
             if (hasOppositePair) {
                 val newModel = model.copy(
@@ -689,20 +758,24 @@ private fun onWalletBalancesLoaded(model: M, event: OnWalletBalancesLoaded): Nex
         .toMap()
     val greatestBalance = sortedBalances.values.firstOrNull() ?: 0.0
     val inConfig = model.state is State.ConfigureSettings
-    val nextModel = model.copy(
-        state = if (model.mode == Mode.BUY || greatestBalance > 0 || inConfig) model.state else State.EmptyWallets,
+    var nextModel = model.copy(
+        state =  if (model.mode == Mode.BUY || greatestBalance > 0 || inConfig) model.state else State.EmptyWallets(),
         cryptoBalances = sortedBalances,
         formattedCryptoBalances = event.formattedCryptoBalances,
+        didLoadCryptoBalances = true,
     )
-    return if (nextModel.quoteAmount == null) {
+    if (nextModel.quoteCurrencyCode == null) {
         val (source, quote) = nextModel.getDefaultCurrencyCodes()
-        next(
-            nextModel.copy(
-                sourceCurrencyCode = source,
-                quoteCurrencyCode = quote,
-            )
+        nextModel = nextModel.copy(
+            sourceCurrencyCode = source,
+            quoteCurrencyCode = quote,
         )
-    } else next(nextModel)
+    }
+    return next(
+        nextModel.copy(
+            state = sellErrorState(nextModel, nextModel.mode, nextModel.availableSellPairs)
+        )
+    )
 }
 
 private fun onMaxAmountClicked(model: M): Next<M, F> {
@@ -745,6 +818,15 @@ private fun onMinAmountClicked(model: M): Next<M, F> {
 
 private fun onContinueClicked(model: M): Next<M, F> {
     return when (model.state) {
+        is State.FeaturePromotion -> {
+            next(
+                model.copy(state = State.Initializing),
+                setOfNotNull(
+                    F.UpdateFeaturePromotionShown(model.mode),
+                    F.LoadCountries
+                )
+            )
+        }
         is State.ConfigureSettings -> when (model.state.target) {
             ConfigTarget.MENU -> when {
                 model.settingsOnly -> dispatch(F.ExitFlow)
@@ -759,7 +841,7 @@ private fun onContinueClicked(model: M): Next<M, F> {
                         setOf(
                             F.UpdateCurrencyPreference(currencyCode),
                             F.UpdateRegionPreferences(countryCode, regionCode),
-                            F.LoadPairs(countryCode, regionCode, currencyCode)
+                            F.LoadPairs(countryCode, regionCode, currencyCode, model.test)
                         )
                     )
                 }
@@ -780,7 +862,12 @@ private fun onContinueClicked(model: M): Next<M, F> {
                     ),
                     setOfNotNull(
                         model.selectedCountry.run {
-                            F.LoadPairs(code, model.selectedRegion?.code, model.selectedFiatCurrency?.code)
+                            F.LoadPairs(
+                                countryCode = code,
+                                regionCode = model.selectedRegion?.code,
+                                selectedFiatCurrencyCode = model.selectedFiatCurrency?.code,
+                                test = model.test
+                            )
                         },
                         model.selectedCountry.run {
                             F.UpdateRegionPreferences(code, model.selectedRegion?.code)
@@ -799,7 +886,11 @@ private fun onContinueClicked(model: M): Next<M, F> {
                     ),
                     setOfNotNull(
                         model.selectedCountry?.run {
-                            F.LoadPairs(code, model.selectedRegion.code, model.selectedFiatCurrency?.code)
+                            F.LoadPairs(
+                                countryCode = code,
+                                regionCode = model.selectedRegion.code,
+                                selectedFiatCurrencyCode = model.selectedFiatCurrency?.code
+                            )
                         },
                         model.selectedCountry?.run {
                             F.UpdateRegionPreferences(code, model.selectedRegion.code)
@@ -823,7 +914,7 @@ private fun onContinueClicked(model: M): Next<M, F> {
                                 ?: model.getDefaultCurrencyCodes().second
                         ),
                         setOfNotNull(
-                            F.UpdateCurrencyPreference(fiatCurrencyCode),
+                            F.UpdateCurrencyPreference(fiatCurrencyCode)
                         )
                     )
                 }
@@ -840,7 +931,24 @@ private fun onContinueClicked(model: M): Next<M, F> {
         }
         is State.OrderSetup -> when {
             model.selectedOffer == null -> noChange()
-            model.inputError != null -> noChange()
+            model.inputError != null -> {
+                when (model.inputError) {
+                    is InputError.InsufficientNativeCurrencyBalance -> {
+                        if (model.nativeNetworkInfo != null) {
+                            next(
+                                model.copy(
+                                    errorState = insufficientNativeBalanceErrorState(
+                                        model.nativeNetworkInfo,
+                                        model.cryptoBalances[model.sourceCurrencyCode],
+                                        model.sourceCurrencyCode
+                                    )
+                                )
+                            )
+                        } else noChange()
+                    }
+                    else -> noChange()
+                }
+            }
             model.selectedOffer is OfferDetails.InvalidOffer -> {
                 val replacementAmount = model.selectedOffer.rawReplacementAmount
                 if (replacementAmount == null) {
@@ -861,7 +969,7 @@ private fun onContinueClicked(model: M): Next<M, F> {
                 }
             }
             else -> {
-                val requiresPreview = model.mode == Mode.TRADE
+                val requiresPreview = model.mode.isTrade
                 next(
                     model.copy(
                         state = State.CreatingOrder(previewing = requiresPreview)
@@ -898,7 +1006,8 @@ private fun onContinueClicked(model: M): Next<M, F> {
                     F.LoadPairs(
                         countryCode = checkNotNull(model.selectedCountry).code,
                         regionCode = model.selectedRegion?.code,
-                        selectedFiatCurrencyCode = model.selectedFiatCurrency?.code
+                        selectedFiatCurrencyCode = model.selectedFiatCurrency?.code,
+                        test = model.test
                     )
                 )
             }
@@ -934,6 +1043,10 @@ private fun onOrderUpdated(model: M, event: OnOrderUpdated): Next<M, F> {
                 ExchangeOrder.Status.INITIALIZING,
                 ExchangeOrder.Status.INITIALIZED -> {
                     val outputUserActions = event.order.outputs
+                        .filter { output ->
+                            (output as? ExchangeOutput.Ach)?.status == ExchangeOutput.FiatStatus.READY ||
+                            (output as? ExchangeOutput.Sepa)?.status == ExchangeOutput.FiatStatus.READY
+                        }
                         .flatMap { output -> output.actions }
                         .filter { it.type == BROWSER }
                     val inputUserActions = event.order.inputs
@@ -1041,8 +1154,8 @@ private fun onCloseSettingsClicked(model: M): Next<M, F> {
 }
 
 private fun onConfigureSettingsClicked(model: M): Next<M, F> {
-    return when (model.state) {
-        is State.OrderSetup -> next(
+    return when {
+        model.state is State.OrderSetup || (model.state is State.EmptyWallets && model.state.sellingUnavailable) -> next(
             model.copy(
                 state = State.ConfigureSettings(
                     target = ConfigTarget.MENU,
@@ -1069,9 +1182,10 @@ private fun onConfigureOptionClicked(model: M, target: ConfigTarget): Next<M, F>
 private fun onOfferClicked(model: M, event: OnOfferClicked): Next<M, F> {
     return when (model.state) {
         is State.OrderSetup -> if (model.state.selectingOffer) {
-            val adjustedAmount = if (event.adjustToLimit && event.offerDetails is OfferDetails.InvalidOffer) {
-                event.offerDetails.rawReplacementAmount
-            } else null
+            val adjustedAmount =
+                if (event.adjustToLimit && event.offerDetails is OfferDetails.InvalidOffer) {
+                    event.offerDetails.rawReplacementAmount
+                } else null
             val isAdjusted = { _: Any? -> adjustedAmount != null }
             val newModel = model.copy(
                 state = State.OrderSetup(selectingOffer = false),
@@ -1080,7 +1194,9 @@ private fun onOfferClicked(model: M, event: OnOfferClicked): Next<M, F> {
                 offerDetails = model.offerDetails.takeUnless(isAdjusted).orEmpty(),
                 sourceAmountInput = adjustedAmount ?: model.sourceAmountInput,
                 quoteAmountInput = null,
-                lastOfferSelection = (event.offerDetails as? OfferDetails.InvalidOffer).takeIf(isAdjusted),
+                lastOfferSelection = (event.offerDetails as? OfferDetails.InvalidOffer).takeIf(
+                    isAdjusted
+                ),
             )
             val requestOffers = adjustedAmount?.run {
                 F.RequestOffers(newModel.offerBodyOrNull(), model.mode)
@@ -1109,6 +1225,7 @@ private fun onBackClicked(model: M): Next<M, F> {
     if (model.confirmingClose) return next(model.copy(confirmingClose = false))
 
     return when (model.state) {
+        is State.FeaturePromotion -> noChange()
         is State.SelectAsset -> next(model.copy(state = State.OrderSetup()))
         is State.CreatingOrder -> if (model.state.previewing) {
             next(model.copy(state = State.OrderSetup()))
@@ -1172,6 +1289,10 @@ private fun onCloseClicked(model: M, event: OnCloseClicked): Next<M, F> {
         }
     }
     return when (model.state) {
+        is State.FeaturePromotion -> next(
+            model.copy(state = State.Initializing),
+            setOfNotNull(F.LoadCountries)
+        )
         is State.CreatingOrder -> if (model.state.previewing) {
             dispatch(F.ExitFlow)
         } else {
@@ -1211,23 +1332,31 @@ private fun onCloseClicked(model: M, event: OnCloseClicked): Next<M, F> {
 private fun onBrowserActionCompleted(model: M, event: OnBrowserActionCompleted): Next<M, F> {
     return when (model.state) {
         is State.ProcessingOrder -> {
-            val newModel = model.copy(
-                state = State.OrderSetup()
-            )
-            next(
-                newModel,
-                setOfNotNull(
-                    if (model.state.userAction?.action == event.action) {
-                        F.UpdateLastOrderAmount(model.sourceAmountInput)
-                    } else null,
-                    F.RequestOffers(newModel.offerBodyOrNull(), newModel.mode),
+            if (model.mode.isSell) {
+                next(
+                    model,
+                    setOfNotNull(
+                        F.ProcessBackgroundActions(model.state.order)
+                    )
                 )
-            )
+            } else {
+                val newModel = model.copy(
+                    state = State.OrderSetup()
+                )
+                next(
+                    newModel,
+                    setOfNotNull(
+                        if (model.state.userAction?.action == event.action) {
+                            F.UpdateLastOrderAmount(model.sourceAmountInput)
+                        } else null,
+                        F.RequestOffers(newModel.offerBodyOrNull(), newModel.mode),
+                    )
+                )
+            }
         }
         else -> noChange()
     }
 }
-
 
 private fun onCryptoSendActionCompleted(model: M, event: OnCryptoSendActionCompleted): Next<M, F> {
     return when (model.state) {
@@ -1369,6 +1498,7 @@ private fun onDialogConfirmClicked(model: M): Next<M, F> {
                                 countryCode = checkNotNull(model.selectedCountry).code,
                                 regionCode = model.selectedRegion?.code,
                                 selectedFiatCurrencyCode = model.selectedFiatCurrency?.code,
+                                test = model.test,
                             ),
                         )
                     }
@@ -1424,7 +1554,6 @@ private fun onDialogConfirmClicked(model: M): Next<M, F> {
     }
 }
 
-
 private fun onDialogCancelClicked(model: M): Next<M, F> {
     return when {
         model.confirmingClose -> next(model.copy(confirmingClose = false))
@@ -1433,12 +1562,27 @@ private fun onDialogCancelClicked(model: M): Next<M, F> {
     }
 }
 
-
 // Returns the default Pair(baseCurrencyCode?, quoteCurrencyCode?) give the mode.
 private fun M.getDefaultCurrencyCodes(): Pair<String?, String?> {
     return when (mode) {
-        Mode.BUY -> selectedFiatCurrency?.code to lastPurchaseCurrencyCode
-        Mode.SELL -> lastPurchaseCurrencyCode to selectedFiatCurrency?.code
+        Mode.BUY -> {
+            val pairKeys = sourcePairs.map(ExchangePair::toCode)
+            val quoteCode = if(pairKeys.contains(lastPurchaseCurrencyCode)) {
+                lastPurchaseCurrencyCode
+            } else pairKeys.firstOrNull()
+            selectedFiatCurrency?.code to quoteCode
+        }
+        Mode.SELL -> {
+            val pairKeys = availableSellPairs.map(ExchangePair::fromCode)
+            val sellCurrencyCode = if (lastSellCurrencyCode != null) {
+                lastSellCurrencyCode
+            } else {
+                val balances = cryptoBalances.filter { pairKeys.contains(it.key) }
+                balances.maxByOrNull { (_, balance) -> balance }?.key
+                    ?: balances.keys.firstOrNull()
+            }
+            sellCurrencyCode to selectedFiatCurrency?.code
+        }
         Mode.TRADE -> {
             // Largest wallet balance or first active wallet
             val source = lastTradeSourceCurrencyCode
@@ -1492,4 +1636,163 @@ private fun List<OfferDetails>.getDefaultOffer(mode: Mode): OfferDetails? {
 
 private fun List<ExchangePair>.containsBuyPairs(model: M): Boolean {
     return any { pair -> model.selectedFiatCurrency?.code == pair.fromCode }
+}
+
+private fun onChangeModeClicked(model: M, event: OnChangeModeClicked): Next<M, F> {
+    return if (event.mode == model.mode) {
+        noChange()
+    } else {
+        var nextModel = model.copy(mode = event.mode)
+        val (source, quote) = nextModel.getDefaultCurrencyCodes()
+        nextModel = nextModel.copy(
+            sourceAmountInput = "",
+            quoteAmountInput = null,
+            sourceCurrencyCode = source,
+            quoteCurrencyCode = quote,
+            inputPresets = inputPresets(nextModel, nextModel.selectedFiatCurrency?.code, source),
+            selectedInputPreset = null,
+            inputError = null
+        )
+        nextModel = nextModel.copy(
+            state = sellErrorState(nextModel, event.mode, nextModel.availableSellPairs),
+            errorState = buyErrorState(nextModel, event.mode, nextModel.pairs)
+        )
+        next(
+            nextModel,
+            F.RequestOffers(nextModel.offerBodyOrNull(), model.mode)
+        )
+    }
+}
+
+private fun buyErrorState(model: M, mode: M.Mode, pairs: List<ExchangePair>): ErrorState? {
+    return when (model.state) {
+        is State.Initializing,
+        is State.ConfigureSettings,
+        is State.OrderSetup -> {
+            if (mode.isBuy && !model.settingsOnly && !pairs.containsBuyPairs(model)) {
+                return ErrorState(
+                    debugMessage = "No pairs for ${model.selectedCountry?.name} ${model.selectedRegion?.name}",
+                    type = ErrorState.Type.UnsupportedRegionError,
+                    isRecoverable = true,
+                )
+            }
+            return null
+        }
+        else -> null
+    }
+}
+
+private fun sellErrorState(model: M, mode: M.Mode, sellPairs: List<ExchangePair>): State {
+    if (mode.isBuy && model.state is State.EmptyWallets) {
+        return State.OrderSetup()
+    }
+    if (model.settingsOnly || mode != Mode.SELL || model.state !is State.OrderSetup) {
+        return model.state
+    }
+    val sourceMap = sellPairs.map(ExchangePair::fromCode)
+    val didLoadCryptoBalances = model.didLoadCryptoBalances
+    return when {
+        sellPairs.isEmpty() -> {
+            return State.EmptyWallets(sellingUnavailable = true)
+        }
+        didLoadCryptoBalances && !model.hasWalletBalances && didLoadCryptoBalances -> {
+            return State.EmptyWallets()
+        }
+        didLoadCryptoBalances && !model.cryptoBalances.any { sourceMap.contains(it.key) && it.value > 0 } -> {
+            return State.EmptyWallets(invalidSellPairs = true)
+        }
+        else -> model.state
+    }
+}
+
+private fun inputPresets(model: M, fiatCode: String?, sourceCode: String?): List<InputPreset> {
+    return when (model.mode) {
+        Mode.BUY -> InputPreset.defaultPresets(
+            fiatCode.orEmpty()
+        )
+        Mode.SELL -> InputPreset.defaultPctPresets(
+            model.cryptoBalances[sourceCode] ?: 0.0,
+            sourceCode.orEmpty()
+        )
+        else -> listOf()
+    }
+}
+
+private fun onSelectInputPresets(model: M, event: OnSelectInputPresets): Next<M, F> {
+    val nextModel = model.copy(
+        sourceAmountInput = model.inputPresets[event.index].amountString,
+        selectedInputPreset = event.index,
+        offerRequest = null,
+        offerDetails = emptyList(),
+        selectedOffer = null,
+        lastOfferSelection = null,
+    )
+    return next(
+        nextModel,
+        setOfNotNull(
+            F.RequestOffers(nextModel.offerBodyOrNull(), model.mode),
+        )
+    )
+}
+
+private fun onLoadedNativeNetworkInfo(model: M, event: OnLoadedNativeNetworkInfo): Next<M, F> {
+    val nativeNetworkBalance = model.cryptoBalances[event.networkCurrencyCode]
+    val nativeNetworkInfo = NativeNetworkInfo(
+        event.currencyCode,
+        event.currencyId,
+        event.networkCurrencyCode,
+        event.fee
+    )
+
+    return next(
+        model.copy(
+            nativeNetworkInfo = nativeNetworkInfo,
+            inputError = model.inputError ?: insufficientNativeBalanceInputError(
+                nativeNetworkInfo,
+                nativeNetworkBalance,
+                model.sourceCurrencyCode
+            )
+        ),
+    )
+}
+
+private fun insufficientNativeBalanceInputError(
+    nativeNetworkInfo: NativeNetworkInfo,
+    nativeNetworkBalance: Double?,
+    sourceCurrencyCode: String?,
+): InputError? {
+    if (sourceCurrencyCode != nativeNetworkInfo.currencyCode ||
+        nativeNetworkBalance == null ||
+        nativeNetworkBalance >= nativeNetworkInfo.feeAmount
+    ) {
+        return null
+    }
+    return InputError.InsufficientNativeCurrencyBalance(
+        nativeNetworkInfo.networkCurrencyCode,
+        nativeNetworkInfo.feeAmount,
+    )
+}
+
+private fun insufficientNativeBalanceErrorState(
+    nativeNetworkInfo: NativeNetworkInfo,
+    nativeNetworkBalance: Double?,
+    sourceCurrencyCode: String?,
+): ErrorState? {
+    if (sourceCurrencyCode != nativeNetworkInfo.currencyCode ||
+        nativeNetworkBalance == null ||
+        nativeNetworkBalance >= nativeNetworkInfo.feeAmount
+    ) {
+        return null
+    }
+    // TODO: Localise
+    return ErrorState(
+        "${nativeNetworkInfo.networkCurrencyCode} Balance Low",
+        "${nativeNetworkInfo.currencyCode} uses the ${nativeNetworkInfo.networkCurrencyCode} network which requires ${nativeNetworkInfo.networkCurrencyCode} to pay transaction fees.",
+        "InsufficientNativeBalanceError ${nativeNetworkInfo.networkCurrencyCode} $nativeNetworkBalance",
+        ErrorState.Type.InsufficientNativeBalanceError(
+            nativeNetworkInfo.networkCurrencyCode,
+            nativeNetworkInfo.feeAmount
+        ),
+        isRecoverable = true
+    )
 }

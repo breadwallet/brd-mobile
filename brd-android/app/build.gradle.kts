@@ -152,6 +152,7 @@ android {
         viewBinding = true
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -168,9 +169,15 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(Libs.Androidx.DesugarJdkLibs)
     implementation(project(":cosmos-bundled"))
     implementation(project(":brd-android:app-core"))
-    implementation(Libs.WalletKit.CoreAndroid)
+    val overrideIdeCheck = gradle.startParameter.taskNames.any { it.contains("brd-android") }
+    if (System.getProperty("idea.active") == "true" && !overrideIdeCheck) {
+        implementation(Libs.WalletKit.CoreJRE)
+    } else {
+        implementation(Libs.WalletKit.CoreAndroid)
+    }
 
     implementation(Libs.Mobiuskt.Coroutines)
     implementation(Libs.Mobiuskt.Android)

@@ -43,7 +43,12 @@ dependencies {
     implementation(Libs.Coroutines.Core) {
         version { strictly(brd.COROUTINES_VERSION) }
     }
-    api(Libs.WalletKit.CoreAndroid)
+    val overrideIdeCheck = gradle.startParameter.taskNames.any { it.contains("brd-android") }
+    if (System.getProperty("idea.active") == "true" && !overrideIdeCheck) {
+        implementation(Libs.WalletKit.CoreJRE)
+    } else {
+        implementation(Libs.WalletKit.CoreAndroid)
+    }
 
     implementation(Libs.Androidx.LifecycleExtensions)
     implementation(Libs.Androidx.AppCompat)

@@ -21,7 +21,7 @@ object ExchangeInit : Init<M, F> {
                 First.first(
                     model,
                     setOfNotNull(
-                        F.LoadCountries,
+                        F.LoadFeaturePromotions,
                         F.TrackEvent(model.event("appeared")),
                     )
                 )

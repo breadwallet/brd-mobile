@@ -2242,11 +2242,42 @@ users in a future update. ";
 /* Region error alert body */
 "Exchange.ErrorState.unsupportedRegionError" = "Region you selected is not supported, please select different region"
 /* Insufficient chain error alert title */
-"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "More ETH required"
+"Exchange.ErrorState.insufficientNativeBalanceErrorTitle" = "[%1$s] Balance Low"
 /* Insufficient chain error alert body */
-"Exchange.ErrorState.insufficientNativeBalanceError" = "You don't have enough ETH to cover network fees to send"
+"Exchange.ErrorState.insufficientNativeBalanceError" = "[%1$s] uses the [%2$s] network which requires [%3$s] to pay transaction fees."
 /* Insufficient chain error alert ok action */
-"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Buy ETH"
-
+"Exchange.ErrorState.insufficientNativeBalanceErrorConfirm" = "Top up [%1$s] balance"
+* Insufficient Secondary Error To place in Cell quote container */
+"Exchange.ErrorState.insufficientNativeBalanceErrorSecondary" = "Network fee of [%1$s] [%2$s] required."
 "Exchange.Browser.orderHistoryTitle" = "Order History"
 "Exchange.Browser.rewardsTitle" = "Rewards"
+/* Empty wallet message title */
+"Exchange.FullScreenErrorState.emptyWalletTitle" = "Your wallet is empty";
+/* Empty wallet message body */
+"Exchange.FullScreenErrorState.emptyWalletBody" = "It looks like you don’t have any assets in your wallet to sell yet.";
+/* CTA title for empty wallet trade screen */
+"Exchange.FullScreenErrorState.emptyWalletCTA" = "Buy Now";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingUnavailableTitle" = "Selling Unavailable";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingUnavailableBody" = "We don’t have a partner that supports selling to [%1$s] in [%2$s] yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingUnavailableCTA" = "Change location / currency";
+/* Selling unavailable message title */
+"Exchange.FullScreenErrorState.sellingNoAssetsTitle" = "No assets to sell";
+/* Selling unavailable message */
+"Exchange.FullScreenErrorState.sellingNoAssetsBody" = "Looks like you’re not holding assets that can be sold yet.";
+/* Selling unavailable CTA */
+"Exchange.FullScreenErrorState.sellingNoAssetsCTA" = "Buy now";
+/* Buy promotion title */
+"Exchange.FeaturePromotion.buyTitle" = "Buy & sell is now easier than ever!";
+/* Buy promotion body */
+"Exchange.FeaturePromotion.buyBody" = "There's no better time to invest than today with our streamlined new interface.";
+/* Trade promotion title */
+"Exchange.FeaturePromotion.tradeTitle" = "Trading assets is now even easier!";
+/* Trade promotion body */
+"Exchange.FeaturePromotion.tradeBody" = "Trade your assets into another with just a few taps. Walk and trade baby!";
+/* Promotion CTA */
+"Exchange.FeaturePromotion.CTA" = "Let's see it!";
+/* InputError BalanceLow text */
+"Exchange.InputError.BalanceLow" = "Insufficient balance";

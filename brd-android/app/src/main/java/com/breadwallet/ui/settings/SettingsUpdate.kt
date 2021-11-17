@@ -150,7 +150,6 @@ object SettingsUpdate : Update<M, E, F>, SettingsScreenUpdateSpec {
                     SettingsOption.NATIVE_EXCHANGE_UI -> F.EnableNativeExchangeUI
                     SettingsOption.ORDER_HISTORY -> F.GoToOrderHistory
                     SettingsOption.REGION_PREFERENCES -> F.GoToRegionPreferences
-                    SettingsOption.ENABLE_FLIPPER_CLIENT -> F.ToggleFlipperClientEnabled
                 }
             )
         )

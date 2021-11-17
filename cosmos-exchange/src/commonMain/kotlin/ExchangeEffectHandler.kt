@@ -13,11 +13,11 @@ import com.brd.api.models.*
 import com.brd.api.models.ExchangeInvoiceEstimate.FeeType.*
 import com.brd.api.models.ExchangeOffer.LimitType
 import com.brd.api.models.ExchangeOfferRequest.Status
-import com.brd.api.models.ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS
-import com.brd.api.models.ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS
+import com.brd.api.models.ExchangeOrder.Action.Type.*
 import com.brd.exchange.ExchangeEffect.*
 import com.brd.exchange.ExchangeEvent.*
 import com.brd.prefs.BrdPreferences
+import com.brd.featurepromotion.*
 import com.brd.util.Formatters
 import com.brd.util.NumberFormatter
 import kotlinx.coroutines.*
@@ -25,6 +25,7 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import kt.mobius.Connection
 import kt.mobius.functions.Consumer
 import kotlin.native.concurrent.SharedImmutable
@@ -45,15 +46,20 @@ interface WalletProvider {
     fun enableWallet(currencyId: String)
     fun receiveAddressFor(currencyId: String): String?
     fun estimateLimitMaximum(currencyId: String, targetAddress: String): Double?
+    fun currencyCode(currencyId: String): String?
+    fun networkCurrencyCode(currencyId: String): String?
+    fun estimateFee(currencyId: String, targetAddress: String): Double?
+
 }
 
-@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class, ExperimentalSerializationApi::class)
 class ExchangeEffectHandler(
     private val output: Consumer<ExchangeEvent>,
     private val brdApi: BrdApiClient,
     private val brdPrefs: BrdPreferences,
     private val walletProvider: WalletProvider,
     private val exchangeDataLoader: ExchangeDataLoader,
+    private val featurePromotionService: FeaturePromotionService,
     dispatcher: CoroutineDispatcher,
 ) : Connection<ExchangeEffect> {
 
@@ -63,7 +69,8 @@ class ExchangeEffectHandler(
         brdPrefs: BrdPreferences,
         walletProvider: WalletProvider,
         exchangeDataLoader: ExchangeDataLoader,
-    ) : this(output, brdApi, brdPrefs, walletProvider, exchangeDataLoader, Main)
+        featurePromotionService: FeaturePromotionService
+    ) : this(output, brdApi, brdPrefs, walletProvider, exchangeDataLoader, featurePromotionService, Main)
 
     private val scope = CoroutineScope(dispatcher + SupervisorJob())
     private val offerSessionFlow = MutableSharedFlow<RequestOffers>(
@@ -88,6 +95,12 @@ class ExchangeEffectHandler(
 
     override fun accept(value: ExchangeEffect) {
         when (value) {
+            LoadFeaturePromotions -> scope.launch {
+                output.accept(loadFeaturePromotions(featurePromotionService))
+            }
+            is UpdateFeaturePromotionShown -> scope.launch {
+                updateFeaturePromotionsShown(value, featurePromotionService)
+            }
             LoadUserPreferences -> scope.launch { output.accept(loadUserPreferences(brdApi, brdPrefs)) }
             LoadCountries -> scope.launch { output.accept(loadCountries(brdApi, exchangeDataLoader)) }
             is LoadPairs -> scope.launch { output.accept(loadPairs(value, brdApi)) }
@@ -101,8 +114,10 @@ class ExchangeEffectHandler(
                     .onEach { output.accept(it) }
                     .launchIn(scope)
             is UpdateLastOrderCurrency -> scope.launch { updateLastPurchaseCurrency(value, brdPrefs) }
+            is UpdateLastSellCurrency -> scope.launch { updateLastSellCurrency(value, brdPrefs) }
             is UpdateLastOrderAmount -> scope.launch { updateLastOrderAmount(value, brdPrefs) }
             is LoadWalletBalances -> scope.launch { output.accept(loadWalletBalances(value, walletProvider)) }
+            is LoadNativeNetworkInfo -> scope.launch { output.accept(estimateNetworkFee(value, walletProvider)) }
             is UpdateLastTradeCurrencyPair -> scope.launch { updateLastTradeCurrencyPair(value, brdPrefs) }
             is SubmitCryptoTransferHash -> scope.launch { output.accept(submitCryptoTransferHash(value, brdApi)) }
             is TrackEvent -> Unit // native
@@ -125,6 +140,21 @@ private suspend fun submitCryptoTransferHash(
     if (success) OnCryptoSendHashUpdateSuccess else OnCryptoSendHashUpdateFailed
 }
 
+private fun loadFeaturePromotions(service: FeaturePromotionService): OnFeaturePromotionsLoaded {
+    return OnFeaturePromotionsLoaded(
+        service.shouldShowHydraBuy(),
+        service.shouldShowHydraTrade()
+    )
+}
+
+private fun updateFeaturePromotionsShown(
+    effect: UpdateFeaturePromotionShown,
+    service: FeaturePromotionService
+) {
+    if (!effect.mode.isTrade) service.markHydraBuyShown()
+    if (effect.mode.isTrade) service.markHydraTradeShown()
+}
+
 private suspend fun loadUserPreferences(
     brdApi: BrdApiClient,
     brdPrefs: BrdPreferences,
@@ -135,9 +165,25 @@ private suspend fun loadUserPreferences(
         selectedRegionCode = brdPrefs.regionCode?.lowercase(),
         fiatCurrencyCode = brdPrefs.fiatCurrencyCode.lowercase(),
         lastPurchaseCurrencyCode = brdPrefs.lastPurchaseCurrency?.lowercase(),
+        lastSellCurrencyCode = brdPrefs.lastSellCurrency?.lowercase(),
         lastTradeSourceCurrencyCode = brdPrefs.lastTradeSourceCurrency?.lowercase(),
         lastTradeQuoteCurrencyCode = brdPrefs.lastTradeQuoteCurrency?.lowercase(),
         lastOrderAmount = brdPrefs.lastOrderAmount,
+    )
+}
+
+private suspend fun estimateNetworkFee(
+    effect: LoadNativeNetworkInfo,
+    walletProvider: WalletProvider,
+): ExchangeEvent = Default {
+     OnLoadedNativeNetworkInfo(
+        walletProvider.currencyCode(effect.currencyId) ?: "",
+        effect.currencyId,
+        walletProvider.networkCurrencyCode(effect.currencyId) ?: "",
+        walletProvider.estimateFee(
+            effect.currencyId,
+            estimateTransferTargets.getValue(effect.currencyId.split(":").first())
+        ) ?: 0.0,
     )
 }
 
@@ -161,6 +207,13 @@ private suspend fun updateLastPurchaseCurrency(
     brdPrefs: BrdPreferences,
 ): Unit = Default {
     brdPrefs.lastPurchaseCurrency = effect.currencyCode
+}
+
+private suspend fun updateLastSellCurrency(
+    effect: UpdateLastSellCurrency,
+    brdPrefs: BrdPreferences,
+): Unit = Default {
+    brdPrefs.lastSellCurrency = effect.currencyCode
 }
 
 private suspend fun updateLastTradeCurrencyPair(
@@ -221,7 +274,7 @@ private suspend fun loadPairs(
     brdApi: BrdApiClient,
 ): ExchangeEvent = Default {
     val (countryCode, regionCode) = effect
-    when (val result = brdApi.getExchangePairs(countryCode, regionCode)) {
+    when (val result = brdApi.getExchangePairs(countryCode, regionCode, test = effect.test)) {
         is ExchangePairsResult.Success -> {
             val rates = result.supportedPairs.formatFiatRates(effect.selectedFiatCurrencyCode)
             OnPairsLoaded(result.supportedPairs, result.currencies, rates)
@@ -236,7 +289,7 @@ private fun fetchExchangeOffers(
     mode: ExchangeModel.Mode,
     walletProvider: WalletProvider,
 ): Flow<ExchangeEvent> = flow {
-    val body = if (mode == ExchangeModel.Mode.BUY) {
+    val body = if (mode.isBuy) {
         originalBody
     } else {
         val currencyId = originalBody.currencyId
@@ -327,9 +380,16 @@ private fun processBackgroundActions(
         }
         .flatMap(ExchangeInput::actions)
         .filter { it.type == CRYPTO_REFUND_ADDRESS || it.type == CRYPTO_RECEIVE_ADDRESS }
+    val sellSendToActions = effect.order.inputs
+        .filter { input ->
+            val cryptoTransfer = input as? ExchangeInput.CryptoTransfer
+            cryptoTransfer?.sendToAddress?.isEmpty() ?: false
+        }
+        .flatMap(ExchangeInput::actions)
+        .filter { it.type == CRYPTO_SEND }
 
     val pendingActions = (outputActions + inputActions)
-    if (pendingActions.isEmpty()) {
+    if (pendingActions.isEmpty() && sellSendToActions.isEmpty()) {
         emit(OnOrderUpdated(effect.order))
         return@flow
     }
@@ -337,7 +397,11 @@ private fun processBackgroundActions(
     pendingActions.forEach { action ->
         fun getAddress(): String? = when (action.type) {
             CRYPTO_RECEIVE_ADDRESS -> {
-                val currencyId = effect.order.outputs.first().currency.currencyId
+                val fiatOutput = effect.order.inputs.first().currency.isCrypto()
+                val cryptoInput = effect.order.outputs.first().currency.isFiat()
+                val currencyId = if (fiatOutput && cryptoInput) {
+                    effect.order.inputs.first().currency.currencyId
+                } else effect.order.outputs.first().currency.currencyId
                 walletProvider.receiveAddressFor(currencyId)
             }
             CRYPTO_REFUND_ADDRESS -> {

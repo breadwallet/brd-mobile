@@ -22,7 +22,7 @@ import android.content.*
 import android.net.*
 import android.os.*
 import androidx.annotation.*
-import com.brd.prefs.*
+import com.brd.api.BrdApiClient
 import com.blockset.walletkit.Key
 import com.breadwallet.appcore.BuildConfig
 import com.breadwallet.logger.*
@@ -32,24 +32,21 @@ import com.breadwallet.tools.crypto.*
 import com.breadwallet.tools.manager.*
 import com.breadwallet.tools.security.*
 import com.breadwallet.tools.util.*
-import com.breadwallet.tools.util.BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8
 import com.breadwallet.tools.util.BRConstants.DATE
-import com.breadwallet.tools.util.BRConstants.HEADER_ACCEPT
 import com.platform.tools.*
 import kotlinx.coroutines.*
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.*
-import org.json.*
 import org.kodein.di.android.closestDI
 import org.kodein.di.direct
 import org.kodein.di.instance
 import java.io.IOException
+import java.lang.NumberFormatException
 import java.lang.StringBuffer
 import java.lang.System
 import java.text.*
+import java.text.ParseException
 import java.util.*
 import java.util.concurrent.atomic.*
 
@@ -58,7 +55,7 @@ private const val UNAUTHED_HTTP_STATUS = 401
 class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
-    private val brdPreferences: BrdPreferences,
+    private val brdApiClient: BrdApiClient,
     private val okHttpClient: OkHttpClient,
     headers: Map<String, String>
 ) {
@@ -85,51 +82,6 @@ class APIClient(
 
     private var mIsPlatformUpdating = false
     private val mItemsLeftToUpdate = AtomicInteger(0)
-
-    val token: String?
-        @Synchronized get() {
-            if (mIsFetchingToken || brdPreferences.hydraActivated) {
-                return null
-            }
-            mIsFetchingToken = true
-
-            if (UiUtils.isMainThread()) {
-                throw NetworkOnMainThreadException()
-            }
-            try {
-                val strUtl = getBaseURL() + TOKEN_PATH
-
-                val authKey = authKey
-                if (authKey != null) {
-                    val requestBody = JSONObject().run {
-                        val encodedPublicKey = authKey.encodeAsPublic().toString(Charsets.UTF_8)
-                        val pubkey =
-                            CryptoHelper.hexDecode(encodedPublicKey) ?: encodedPublicKey.toByteArray(Charsets.UTF_8)
-                        put(PUBKEY, CryptoHelper.base58Encode(pubkey))
-                        put(DEVICE_ID, BRSharedPrefs.getDeviceId())
-                        toString().toRequestBody(CONTENT_TYPE_JSON_CHARSET_UTF8.toMediaType())
-                    }
-                    val request = Request.Builder()
-                        .url(strUtl)
-                        .header(HEADER_CONTENT_TYPE, CONTENT_TYPE_JSON_CHARSET_UTF8)
-                        .header(HEADER_ACCEPT, CONTENT_TYPE_JSON_CHARSET_UTF8)
-                        .post(requestBody).build()
-                    val response = sendRequest(request, false)
-                    if (response.bodyText.isBlank()) {
-                        logError("getToken: retrieving token failed")
-                        return null
-                    }
-                    val obj = JSONObject(response.bodyText)
-
-                    return obj.getString(TOKEN)
-                }
-            } catch (e: JSONException) {
-                logError("getToken: ", e)
-            } finally {
-                mIsFetchingToken = false
-            }
-            return null
-        }
 
     /**
      * Return the current language code i.e. "en_US" for US English.
@@ -299,8 +251,8 @@ class APIClient(
                 for (name in res.headers.names()) {
                     headers[name.lowercase()] = res.header(name)!!
                     if (name.equals(DATE, true)) {
-                        val dateValue = res.header(name)!!
-                        DATE_FORMAT.parse(dateValue)
+                        res.header(name)
+                            ?.run(::parseGmtDate)
                             ?.time
                             ?.run(BRSharedPrefs::putSecureTime)
                     }
@@ -352,11 +304,11 @@ class APIClient(
             ""
         }
 
-        DATE_FORMAT.timeZone = TimeZone.getTimeZone(GMT)
-        val httpDate = DATE_FORMAT.format(Date())
-            .run { substring(0, indexOf(GMT) + GMT.length) }
-
-        modifiedRequest.header(BRConstants.DATE, httpDate)
+        val httpDate = formatGmtDate(Date())
+            ?.run { substring(0, indexOf(GMT) + GMT.length) }
+            ?.also { httpDate ->
+                modifiedRequest.header(DATE, httpDate)
+            }
 
         val queryString = request.url.encodedQuery
         val url = request.url.encodedPath + if (queryString.isNullOrBlank()) "" else "?$queryString"
@@ -370,7 +322,12 @@ class APIClient(
         """.trimIndent()
 
         val signedRequest = signRequest(requestString, authKey ?: return null) ?: return null
-        val authValue = "$BREAD $token:$signedRequest"
+        val clientToken = brdApiClient.brdAuthProvider.clientToken()
+        val authValue = if (clientToken == null) {
+            "$BREAD $token:$signedRequest"
+        } else {
+            "$BREAD2 $clientToken:$token:$signedRequest"
+        }
         return modifiedRequest
             .header(BRConstants.AUTHORIZATION, authValue)
             .build()
@@ -378,7 +335,7 @@ class APIClient(
 
     private fun isBreadChallenge(resp: Response): Boolean {
         val challenge = resp.header(BRConstants.HEADER_WWW_AUTHENTICATE)
-        return challenge != null && challenge.startsWith(BREAD)
+        return (challenge != null && challenge.startsWith(BREAD)) || resp.code == 403
     }
 
     fun buildUrl(path: String): String {
@@ -496,6 +453,7 @@ class APIClient(
 
         @VisibleForTesting
         const val BREAD = "bread"
+        const val BREAD2 = "bread2"
         private const val NETWORK_ERROR_CODE = 599
         private const val SYNC_ITEMS_COUNT = 4
         private const val FEATURE_FLAG_PATH = "/me/features"
@@ -530,8 +488,24 @@ class APIClient(
         const val UA_APP_NAME = "breadwallet/"
         const val UA_PLATFORM = "android/"
 
-        val DATE_FORMAT = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+        private val DATE_FORMAT = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+            .apply { timeZone = TimeZone.getTimeZone(GMT) }
         private const val CONNECTION_TIMEOUT_SECONDS = 30
+
+        fun parseGmtDate(dateString: String): Date? {
+            return try {
+                DATE_FORMAT.parse(dateString)
+            } catch (e: ParseException) {
+                null
+            } catch (e: NumberFormatException) {
+                // occurs occasionally on some devices running Android 10
+                null
+            }
+        }
+
+        fun formatGmtDate(date: Date): String? {
+            return DATE_FORMAT.format(date)
+        }
 
         @JvmStatic
         @Synchronized
@@ -549,7 +523,7 @@ class APIClient(
                         return host
                     }
                 }
-                return BRSharedPrefs.getApiHost()
+                return BRSharedPrefs.getApiHostString()
             }
 
         @JvmStatic

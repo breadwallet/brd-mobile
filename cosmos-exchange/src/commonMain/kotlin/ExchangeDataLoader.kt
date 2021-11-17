@@ -17,6 +17,7 @@ import com.brd.logger.Logger
 import com.brd.prefs.Preferences
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -25,6 +26,7 @@ private const val CURRENCIES = "exchange-currencies"
 private const val COUNTRIES = "exchange-countries"
 private const val DETECTED_COUNTRY = "exchange-detected-country"
 
+@OptIn(ExperimentalSerializationApi::class)
 class ExchangeDataLoader(
     private val brdApiClient: BrdApiClient,
     private val preferences: Preferences,

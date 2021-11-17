@@ -15,6 +15,10 @@ import com.brd.api.models.ExchangePair
 
 sealed class ExchangeEffect {
 
+    object LoadFeaturePromotions : ExchangeEffect()
+
+    data class UpdateFeaturePromotionShown(val mode: ExchangeModel.Mode) : ExchangeEffect()
+
     object LoadUserPreferences : ExchangeEffect()
 
     object LoadCountries : ExchangeEffect()
@@ -35,6 +39,7 @@ sealed class ExchangeEffect {
         val countryCode: String,
         val regionCode: String?,
         val selectedFiatCurrencyCode: String?,
+        val test: Boolean = false,
     ) : ExchangeEffect()
 
     data class RequestOffers(
@@ -80,6 +85,10 @@ sealed class ExchangeEffect {
         val currencyCode: String,
     ) : ExchangeEffect()
 
+    data class UpdateLastSellCurrency(
+        val currencyCode: String,
+    ) : ExchangeEffect()
+
     data class UpdateLastTradeCurrencyPair(
         val sourceCode: String?,
         val quoteCode: String?,
@@ -87,6 +96,10 @@ sealed class ExchangeEffect {
 
     data class UpdateLastOrderAmount(
         val amount: String,
+    ) : ExchangeEffect()
+
+    data class LoadNativeNetworkInfo(
+        val currencyId: String,
     ) : ExchangeEffect()
 
     object ExitFlow : ExchangeEffect()

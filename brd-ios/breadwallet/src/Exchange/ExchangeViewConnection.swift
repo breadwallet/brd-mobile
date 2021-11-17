@@ -28,7 +28,10 @@ class ExchangeConnectable: NSObject, Connectable {
             brdApi: Backend.brdApi,
             brdPrefs: UserDefaults.cosmos,
             walletProvider: IosWalletProvider(system: system),
-            exchangeDataLoader: Backend.exchangeDataLoader
+            exchangeDataLoader: Backend.exchangeDataLoader,
+            featurePromotionService: FeaturePromotionService(
+                    preferences: UserDefaults.cosmos
+            )
         )
     }
 }
@@ -99,9 +102,10 @@ class ExchangeViewConnection: NSObject, Connection {
         }
 
         switch model.state {
+        case is ExchangeModel.StateFeaturePromotion:
+            handleStateFeaturePromotion(model)
         case is ExchangeModel.StateInitializing:
-            // loading
-            break
+            handleStateInitializing(model)
         case is ExchangeModel.StateConfigureSettings:
             handleStateConfigureSettings(model)
         case is ExchangeModel.StateEmptyWallets:
@@ -130,12 +134,29 @@ class ExchangeViewConnection: NSObject, Connection {
 
 private extension ExchangeViewConnection {
 
-    func handleStateInitializing(model: ExchangeModel) {
-        if model.state as? ExchangeModel.StateInitializing == nil {
+    func handleStateFeaturePromotion(_ model: ExchangeModel) {
+        guard view.presentedViewController == nil else {
             return
         }
 
-        view.update(with: model, consumer: consumer)
+        let action = { self.consumer.accept(.OnContinueClicked()) }
+        let vc = FeaturePromotionViewController(
+            with: model.mode == .buy ? .hydraBuy(action) : .hydraTrade(action)
+        )
+
+        view.present(vc, animated: true)
+    }
+
+    func handleStateInitializing(_ model: ExchangeModel) {
+        if (view.presentedViewController as? FeaturePromotionViewController) != nil {
+            view.popToRoot()
+        }
+//
+//        if model.state as? ExchangeModel.StateInitializing == nil {
+//            return
+//        }
+//
+//        view.update(with: model, consumer: consumer)
     }
 
     func handleStateConfigureSettings(_ model: ExchangeModel) {
@@ -320,6 +341,16 @@ private extension ExchangeViewConnection {
     func handleStateProcessingOrder(_ model: ExchangeModel) {
         view.update(with: model, consumer: consumer)
         let topVc = view.navigationController?.topViewController
+        let webVc = (view.presentedViewController as? UINavigationController)?
+            .topViewController as? WebViewController
+        
+        if let _ = webVc, view.presentedViewController?.isBeingDismissed == false {
+            let state = model.state as? ExchangeModel.StateProcessingOrder
+            let action = state?.userAction as? ExchangeOrder.Action
+            if action?.type != .browser {
+                view.popToRoot()
+            }
+        }
 
         guard let previewVc = topVc as? ExchangeTradePreviewViewController else {
             return
@@ -391,6 +422,33 @@ private extension ExchangeViewConnection {
 
     func handleErrorState(model: ExchangeModel) {
         guard let errorState = model.errorState else {
+            return
+        }
+
+        if let errorType = errorState.type as? ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError {
+            let alert = BreadAlertViewController(
+                viewModel: .init(
+                    imageName: "alertErrorLarge",
+                    title: errorState.title ?? "",
+                    body: errorState.message ?? "",
+                    buttons: [
+                        BreadAlertViewController.ViewModel.Button(
+                            title: String(
+                                format: S.Exchange.ErrorState.insufficientNativeBalanceErrorConfirm,
+                                errorType.currencyCode
+                            ),
+                            style: .default,
+                            action: { [weak self] in self?.consumer.accept(.OnDialogConfirmClicked()) }
+                        ),
+                        BreadAlertViewController.ViewModel.Button(
+                            title: S.Button.cancel,
+                            style: .cancel,
+                            action: { [weak self] in self?.consumer.accept(.OnDialogCancelClicked()) }
+                        )
+                    ]
+                )
+            )
+            view.present(alert, animated: true)
             return
         }
 

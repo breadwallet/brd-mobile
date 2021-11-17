@@ -10,6 +10,7 @@ package com.breadwallet.ui.web
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebResourceRequest
@@ -56,14 +57,17 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
                 mediaPlaybackRequiresUserGesture = false
             }
             webview.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest
+                ): Boolean {
                     return when {
                         request.url.path == TRADE_PATH -> {
                             goToTrade()
                             true
                         }
                         request.url.toString().startsWith("mailto:") -> {
-                            createEmail(request.url.toString().substringAfter(':'))
+                            createEmail(request.url.toString())
                             true
                         }
                         else -> super.shouldOverrideUrlLoading(view, request)
@@ -102,10 +106,9 @@ class BrowserController(args: Bundle? = null) : BaseController(args) {
         )
     }
 
-    private fun createEmail(email: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-        intent.type = "message/rfc822"
+    private fun createEmail(mailToString: String) {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse(mailToString)
         activity?.startActivity(intent)
     }
 }

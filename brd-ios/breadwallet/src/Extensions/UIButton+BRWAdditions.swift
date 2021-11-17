@@ -12,7 +12,7 @@ import UIKit
 
 extension UIButton {
     static func vertical(title: String, image: UIImage) -> UIButton {
-        let button = UIButton(type: .system)
+        let button = IndicatorButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setImage(image, for: .normal)
         button.titleLabel?.font = Theme.caption

@@ -109,6 +109,7 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
         }
 
         updateTotalAssets()
+        updatePromotionIndicators()
     }
     
     // MARK: Setup
@@ -226,13 +227,19 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     }
     
     private func setupToolbar() {
-        let buttons = [(buyButtonTitle, #imageLiteral(resourceName: "buy"), #selector(buy)),
-                       (S.HomeScreen.trade, #imageLiteral(resourceName: "trade"), #selector(trade)),
-                       (S.HomeScreen.menu, #imageLiteral(resourceName: "menu"), #selector(menu))].map { (title, image, selector) -> UIBarButtonItem in
-                        let button = UIButton.vertical(title: title, image: image)
-                        button.tintColor = .navigationTint
-                        button.addTarget(self, action: selector, for: .touchUpInside)
-                        return UIBarButtonItem(customView: button)
+        guard toolbarButtons.isEmpty else {
+            return
+        }
+
+        let buttons = [
+            (buyButtonTitle, #imageLiteral(resourceName: "buy"), #selector(buy)),
+            (S.HomeScreen.trade, #imageLiteral(resourceName: "trade"), #selector(trade)),
+            (S.HomeScreen.menu, #imageLiteral(resourceName: "menu"), #selector(menu))
+        ].map { (title, image, selector) -> UIBarButtonItem in
+            let button = UIButton.vertical(title: title, image: image)
+            button.tintColor = .navigationTint
+            button.addTarget(self, action: selector, for: .touchUpInside)
+            return UIBarButtonItem(customView: button)
         }
                 
         let paddingWidth = C.padding[2]
@@ -263,8 +270,15 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
 
         toolbar.isTranslucent = false
         toolbar.barTintColor = Theme.secondaryBackground
+        updatePromotionIndicators()
     }
-    
+
+    private func updatePromotionIndicators() {
+        let service = FeaturePromotionService(preferences: UserDefaults.cosmos)
+        (buyButton as? IndicatorButton)?.indicator.isHidden = !service.shouldShowHydraBuy()
+        (tradeButton as? IndicatorButton)?.indicator.isHidden = !service.shouldShowHydraTrade()
+    }
+
     private func setupSubscriptions() {
         Store.unsubscribe(self)
         
@@ -343,11 +357,13 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     @objc private func buy() {
         saveEvent("currency.didTapBuyBitcoin", attributes: [ "buyAndSell": shouldShowBuyAndSell ? "true" : "false" ])
         didTapBuy?()
+        (buyButton as? IndicatorButton)?.indicator.isHidden = true
     }
     
     @objc private func trade() {
         saveEvent("currency.didTapTrade", attributes: [:])
         didTapTrade?()
+        (tradeButton as? IndicatorButton)?.indicator.isHidden = true
     }
     
     @objc private func menu() { didTapMenu?() }
