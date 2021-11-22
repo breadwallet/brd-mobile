@@ -195,7 +195,7 @@ class PartnerBrowserController(args: Bundle? = null) :
                 }
 
                 override fun onPageFinished(view: WebView, url: String) {
-                    if (currentModel.mode.isSell && url.contains("/return")) {
+                    if (isAttached && currentModel.mode.isSell && url.contains("/return")) {
                         (currentModel.state as? ExchangeModel.State.ProcessingOrder)?.userAction?.also { action ->
                             eventConsumer.accept(
                                 ExchangeEvent.OnBrowserActionCompleted(action.action, false)
