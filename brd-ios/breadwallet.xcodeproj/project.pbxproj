@@ -3187,7 +3187,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# This script adds the version number to the icon of internal releases.\n\n# Confirm homebrew root for M1 machines\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH=/opt/local/bin/:/opt/local/sbin:$PATH:/usr/local/bin:\nif [ \"${CONFIGURATION}\" == \"Release\" ]; then\nexit 0;\nfi\n\nsh scripts/icon_versioning.sh\n";
+			shellScript = "#!/bin/sh\n\n# This script adds the version number to the icon of internal releases.\n\n# Confirm homebrew root for M1 machines\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH=/opt/local/bin/:/opt/local/sbin:$PATH:/usr/local/bin:\nif [ \"${CONFIGURATION}\" == \"Release\" ]; then\nexit 0;\nfi\n\n# sh scripts/icon_versioning.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
