@@ -69,10 +69,6 @@ import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-import okhttp3.OkHttpClient
-import okhttp3.Protocol
-import okhttp3.Request
-import okhttp3.Response
 import okio.Buffer
 
 import com.breadwallet.tools.util.BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8
@@ -80,6 +76,7 @@ import com.breadwallet.tools.util.BRConstants.DATE
 import com.breadwallet.tools.util.BRConstants.HEADER_ACCEPT
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -98,6 +95,7 @@ private val HOST = when {
 class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
+    private val interceptor: Interceptor,
     headers: Map<String, String>
 ) {
 
@@ -127,6 +125,7 @@ class APIClient(
             .connectTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .readTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .writeTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
             .build()
     }
 
