@@ -11,7 +11,7 @@ import XCTest
 @testable import breadwallet
 @testable import WalletKit
 
-let testWalletSecAttrService = "com.brd.testnetQA.tests"
+let testWalletSecAttrService = "com.fabriik.one.testnetQA.tests"
 
 typealias CoreCurrency = WalletKit.Currency
 typealias AppCurrency = breadwallet.Currency

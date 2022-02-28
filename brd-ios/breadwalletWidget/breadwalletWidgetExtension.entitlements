@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.$(APP_GROUPS_ID)</string>
+		<string>group.com.fabriik.one</string>
 	</array>
 </dict>
 </plist>

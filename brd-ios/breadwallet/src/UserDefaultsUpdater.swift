@@ -10,11 +10,11 @@ import Foundation
 
 private enum AppGroup {
     #if TESTNET
-    static let id = "group.com.brd.testnetQA"
+    static let id = "group.com.fabriik.one.testnetQA"
     #elseif INTERNAL
-    static let id = "group.com.brd.internalQA"
+    static let id = "group.com.fabriik.one.internalQA"
     #else
-    static let id = "group.org.voisine.breadwallet"
+    static let id = "group.com.fabriik.one"
     #endif
     static let requestDataKey = "kBRSharedContainerDataWalletRequestDataKey"
     static let receiveAddressKey = "kBRSharedContainerDataWalletReceiveAddressKey"
