@@ -116,14 +116,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         private const val WALLET_ID_SEPARATOR = " "
         private const val NUMBER_OF_BYTES_FOR_SHA256_NEEDED = 10
 
-        private val HOST_FABRIIK_API = when {
-            BuildConfig.DEBUG -> "https://one-dev.moneybutton.io/blocksatoshi/"
-            else -> "https://one-dev.moneybutton.io/blocksatoshi/" //todo: change endpoint to production
-        }
-
-        private val FABRIIK_WALLET_API = HOST_FABRIIK_API + "wallet"
-        private val FABRIIK_BLOCKSATOSHI_API = HOST_FABRIIK_API + "blocksatoshi"
-
         @SuppressLint("StaticFieldLeak")
         private lateinit var mInstance: BreadApp
 
@@ -311,8 +303,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
                     .addInterceptor(authInterceptor)
                     .addInterceptor(fabriikAuthInterceptor)
                     .build(),
-                FABRIIK_BLOCKSATOSHI_API,
-                FABRIIK_WALLET_API
+                FabriikApiConstants.HOST_BLOCKSATOSHI_API,
+                FabriikApiConstants.HOST_WALLET_API
             )
         }
 

@@ -11,8 +11,8 @@ object FabriikApiConstants {
 
     private val BASE_URL = "https://${HOST}"
 
-    private val HOST_WALLET_API = "$BASE_URL/wallet"
-    private val HOST_BLOCKSATOSHI_API = "$BASE_URL/blocksatoshi"
+    val HOST_WALLET_API = "$BASE_URL/wallet"
+    val HOST_BLOCKSATOSHI_API = "$BASE_URL/blocksatoshi"
 
     val ENDPOINT_CURRENCIES = "${HOST_WALLET_API}/currencies"
 }
