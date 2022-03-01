@@ -41,6 +41,7 @@ import android.os.NetworkOnMainThreadException
 import androidx.annotation.VisibleForTesting
 
 import com.breadwallet.appcore.BuildConfig
+import com.breadwallet.breadbox.FabriikApiConstants
 import com.breadwallet.crypto.Key
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
@@ -85,12 +86,6 @@ import org.kodein.di.direct
 import org.kodein.di.erased.instance
 
 private const val UNAUTHED_HTTP_STATUS = 401
-
-// The server(s) on which the API is hosted
-private val HOST = when {
-    BuildConfig.DEBUG -> "stage2.breadwallet.com"
-    else -> "api.breadwallet.com"
-}
 
 class APIClient(
     private var context: Context,
@@ -593,7 +588,7 @@ class APIClient(
                         return host
                     }
                 }
-                return HOST
+                return FabriikApiConstants.HOST
             }
 
         @JvmStatic
