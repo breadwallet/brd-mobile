@@ -31,6 +31,8 @@ detekt {
 }
 
 android {
+    ndkPath = "/Users/david/Library/Android/sdk/ndk/21.1.6352462"
+    ndkVersion = "21.1.6352462"
     compileSdkVersion(BrdRelease.ANDROID_COMPILE_SDK)
     buildToolsVersion(BrdRelease.ANDROID_BUILD_TOOLS)
     defaultConfig {
@@ -78,6 +80,7 @@ android {
             buildConfigField("boolean", "BITCOIN_TESTNET", "true")
         }
     }
+
     lintOptions {
         lintConfig = file("lint.xml")
         isQuiet = true

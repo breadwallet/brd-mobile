@@ -32,36 +32,38 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+
+        ndkVersion = "21.1.6352462"
     }
-}
 
-dependencies {
-    implementation(project(":brd-android:theme"))
-    implementation(project(":cosmos-preferences"))
-    implementation(project(":cosmos-brd-api-client"))
-    implementation(Libs.Kotlin.StdLibJdk8)
-    implementation(Libs.Coroutines.Core) {
-        version { strictly(brd.COROUTINES_VERSION) }
+    dependencies {
+        implementation(project(":brd-android:theme"))
+        implementation(project(":cosmos-preferences"))
+        implementation(project(":cosmos-brd-api-client"))
+        implementation(Libs.Kotlin.StdLibJdk8)
+        implementation(Libs.Coroutines.Core) {
+            version { strictly(brd.COROUTINES_VERSION) }
+        }
+        api(Libs.WalletKit.CoreAndroid)
+
+        implementation(Libs.Androidx.LifecycleExtensions)
+        implementation(Libs.Androidx.AppCompat)
+        implementation(Libs.Androidx.CardView)
+        implementation(Libs.Androidx.CoreKtx)
+        api(Libs.Androidx.ConstraintLayout)
+        implementation(Libs.Androidx.GridLayout)
+        implementation(Libs.Zxing.Core)
+
+        implementation(Libs.ApacheCommons.IO)
+        implementation(Libs.ApacheCommons.Compress)
+        compileOnly(Libs.Redacted.Annotation)
+
+        implementation(Libs.Firebase.Crashlytics)
+
+        // Kodein DI
+        implementation(Libs.Kodein.CoreErasedJvm)
+        implementation(Libs.Kodein.FrameworkAndroidX)
+
+        implementation(Libs.Jbsdiff.Core)
     }
-    api(Libs.WalletKit.CoreAndroid)
-
-    implementation(Libs.Androidx.LifecycleExtensions)
-    implementation(Libs.Androidx.AppCompat)
-    implementation(Libs.Androidx.CardView)
-    implementation(Libs.Androidx.CoreKtx)
-    api(Libs.Androidx.ConstraintLayout)
-    implementation(Libs.Androidx.GridLayout)
-    implementation(Libs.Zxing.Core)
-
-    implementation(Libs.ApacheCommons.IO)
-    implementation(Libs.ApacheCommons.Compress)
-    compileOnly(Libs.Redacted.Annotation)
-
-    implementation(Libs.Firebase.Crashlytics)
-
-    // Kodein DI
-    implementation(Libs.Kodein.CoreErasedJvm)
-    implementation(Libs.Kodein.FrameworkAndroidX)
-
-    implementation(Libs.Jbsdiff.Core)
 }
