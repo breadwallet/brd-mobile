@@ -30,7 +30,7 @@ struct KeychainKey {
     public static let pinFailCount = "pinfailcount"
     public static let pinFailTime = "pinfailheight"
     public static let apiAuthKey = "authprivkey"
-    public static let apiUserAccount = "https://api.breadwallet.com"
+    public static let apiUserAccount = "https://one-dev.moneybutton.io/blocksatoshi/wallet"
     public static let bdbClientToken = "bdbClientToken3"
     public static let bdbAuthUser = "bdbAuthUser3"
     public static let bdbAuthToken = "bdbAuthToken3"

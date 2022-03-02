@@ -91,7 +91,7 @@ struct C {
         if let debugBackendHost = UserDefaults.debugBackendHost {
             return debugBackendHost
         } else {
-            return (E.isDebug || E.isTestFlight) ? "stage2.breadwallet.com" : "api.breadwallet.com"
+            return (E.isDebug || E.isTestFlight) ? "stage2.breadwallet.com" : "one-dev.moneybutton.io/blocksatoshi/wallet"
         }
     }
 
@@ -105,7 +105,7 @@ struct C {
     }
 
     static var bdbHost: String {
-        return "api.blockset.com"
+        return "one-dev.moneybutton.io/blocksatoshi/blocksatoshi"
     }
 
     static let bdbClientTokenRecordId = "BlockchainDBClientID"
