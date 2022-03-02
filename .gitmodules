@@ -1,6 +1,7 @@
 [submodule "external/walletkit"]
 	path = external/walletkit
 	url = https://github.com/blockset-corp/walletkit.git
+	branch = core-9.0.0
 	fetchRecurseSubmodules = true
 [submodule "external/mobile-font"]
 	path = external/mobile-font
