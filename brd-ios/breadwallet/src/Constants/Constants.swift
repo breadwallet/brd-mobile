@@ -46,11 +46,11 @@ struct C {
     static let secondsInMinute: TimeInterval = 60
     static let maxMoney: UInt64 = 21000000*100000000
     static let satoshis: UInt64 = 100000000
-    static let walletQueue = "com.breadwallet.walletqueue"
+    static let walletQueue = "com.fabriik.one.walletqueue"
     static let null = "(null)"
     static let maxMemoLength = 250
-    static let feedbackEmail = "feedback@breadapp.com"
-    static let iosEmail = "ios@breadapp.com"
+    static let feedbackEmail = "feedback@fabriik.com"
+    static let iosEmail = "ios@fabriik.com"
     static let reviewLink = "https://itunes.apple.com/app/breadwallet-bitcoin-wallet/id885251393?action=write-review"
     static var standardPort: Int {
         return E.isTestnet ? 18333 : 8333
@@ -91,7 +91,7 @@ struct C {
         if let debugBackendHost = UserDefaults.debugBackendHost {
             return debugBackendHost
         } else {
-            return (E.isDebug || E.isTestFlight) ? "stage2.breadwallet.com" : "one-dev.moneybutton.io/blocksatoshi/wallet"
+            return (E.isDebug || E.isTestFlight) ? "one-dev.moneybutton.io/blocksatoshi/wallet" : "one-dev.moneybutton.io/blocksatoshi/wallet"
         }
     }
 

@@ -20,7 +20,7 @@ class Reachability {
     private static let shared = Reachability()
     private var didChangeCallbacks = [((Bool) -> Void)]()
     private var networkReachability: SCNetworkReachability?
-    private let reachabilitySerialQueue = DispatchQueue(label: "com.breadwallet.reachabilityQueue")
+    private let reachabilitySerialQueue = DispatchQueue(label: "com.fabriik.one.reachabilityQueue")
 
     private init() {
         networkReachability = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "google.com")

@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "Erreur";
 /* Keystore error */
-"Alert.keystore.generic.android" = "Un problème est survenu avec votre keystore Android OS, veuillez contacter support@breadwallet.com";
+"Alert.keystore.generic.android" = "Un problème est survenu avec votre keystore Android OS, veuillez contacter support@fabriik.com";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "Vos données cryptées de BRD ont été récemment invalidées, car le verrouillage de l'écran de votre appareil Android a été désactivé.";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */

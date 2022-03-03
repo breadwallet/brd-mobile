@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "Fel";
 /* Keystore error */
-"Alert.keystore.generic.android" = "Det har uppstått ett problem med KeyStore till Android OS. Kontakta support@breadwallet.com";
+"Alert.keystore.generic.android" = "Det har uppstått ett problem med KeyStore till Android OS. Kontakta support@fabriik.com";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "Dina krypterade BRD-uppgifter har nyligen ogiltigförklarats på grund av att Androids skärmlås inaktiverades.";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */
