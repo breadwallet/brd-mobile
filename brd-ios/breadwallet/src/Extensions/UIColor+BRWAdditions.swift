@@ -13,7 +13,31 @@ extension UIColor {
     static var newGradientStart: UIColor {
         return UIColor.fromHex("FB5491")
     }
+    
+    static var almostBlack: UIColor {
+        return UIColor.fromHex("#282828")
+    }
 
+    static var vibrantYellow: UIColor {
+        return UIColor.fromHex("#F8BA37")
+    }
+    
+    static var kycLightGray: UIColor {
+        return UIColor.fromHex("#F5F5F5")
+    }
+    
+    static var kycGray1: UIColor {
+        return UIColor.fromHex("#696969")
+    }
+    
+    static var kycGray2: UIColor {
+        return UIColor.fromHex("#A0A0A0")
+    }
+    
+    static var kycGray3: UIColor {
+        return UIColor.fromHex("#C9C9C9")
+    }
+    
     static var newGradientEnd: UIColor {
         return UIColor.fromHex("FAA03F")
     }
