@@ -407,7 +407,7 @@ extension CurrencyMetaData: Codable {
         if E.isTestnet {
             uid = uid.replacingOccurrences(of: "mainnet", with: "testnet")
             uid = uid.replacingOccurrences(of: "0x558ec3152e2eb2174905cd19aea4e34a23de9ad6", with: "0x7108ca7c4718efa810457f228305c9c71390931a") // BRD token
-            uid = uid.replacingOccurrences(of: "ethereum-testnet", with: "ethereum-ropsten")
+            uid = uid.replacingOccurrences(of: "ethereum-testnet", with: "ethereum-goerli")
         }
         self.uid = CurrencyId(rawValue: uid) //try container.decode(CurrencyId.self, forKey: .uid)
         code = try container.decode(String.self, forKey: .code)
@@ -504,7 +504,7 @@ enum Currencies: String, CaseIterable {
         case .bch:
             uids = "bitcoincash-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         case .eth:
-            uids = "ethereum-\(E.isTestnet ? "ropsten" : "mainnet"):__native__"
+            uids = "ethereum-\(E.isTestnet ? "goerli" : "mainnet"):__native__"
         case .brd:
             uids = "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
         case .tusd:

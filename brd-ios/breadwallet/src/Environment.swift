@@ -14,11 +14,12 @@ import UIKit
 struct E {
 
     static let isTestnet: Bool = {
-        #if TESTNET
+//        TODO: do we need this?
+//        #if TESTNET
             return true
-        #else
-            return false
-        #endif
+//        #else
+//            return false
+//        #endif
     }()
     
     static let isTestFlight: Bool = {

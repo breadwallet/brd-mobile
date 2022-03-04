@@ -12,13 +12,14 @@ import Foundation
 
 var WalletSecAttrService: String {
     if E.isRunningTests { return "com.fabriik.one.testnetQA.tests" }
-    #if TESTNET
+//    TODO: do we need this?
+//    #if TESTNET
     return "com.fabriik.one.testnetQA"
-    #elseif INTERNAL
-    return "com.fabriik.one.internalQA"
-    #else
-    return "com.fabriik.one"
-    #endif
+//    #elseif INTERNAL
+//    return "com.fabriik.one.internalQA"
+//    #else
+//    return "com.fabriik.one"
+//    #endif
 }
 
 struct KeychainKey {
