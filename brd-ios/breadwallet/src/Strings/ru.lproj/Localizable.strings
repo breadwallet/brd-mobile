@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "Ошибка";
 /* Keystore error */
-"Alert.keystore.generic.android" = "Имеется проблема с хранилищем ключей в вашей ОС Android, обратитесь по адресу: support@breadwallet.com";
+"Alert.keystore.generic.android" = "Имеется проблема с хранилищем ключей в вашей ОС Android, обратитесь по адресу: support@fabriik.com";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "Ваши зашифрованные данные приложения BRD были недавно аннулированы, так как была отключена блокировка экрана вашего устройства Android.";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */

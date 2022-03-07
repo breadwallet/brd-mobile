@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "エラー";
 /* Keystore error */
-"Alert.keystore.generic.android" = "Android OSのKeystoreに問題があります。support@breadwallet.com にお問い合わせください。";
+"Alert.keystore.generic.android" = "Android OSのKeystoreに問題があります。support@fabriik.com にお問い合わせください。";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "お使いのAndroidロック画面が無効にされたため、暗号化されたブレッドのデータはつい最近無効になりました。";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */

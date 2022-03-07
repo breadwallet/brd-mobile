@@ -428,6 +428,13 @@ class ModalPresenter: Subscriber, Trackable {
         }
     }
     
+    public func presentRegistrationAndKYC() {
+        let vc = KYCTutorialViewController()
+        let navController = KYCNavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        topViewController?.present(navController, animated: true, completion: nil)
+    }
+    
     // MARK: Settings
     func presentMenu() {
         let menuNav = UINavigationController()
@@ -613,6 +620,11 @@ class ModalPresenter: Subscriber, Trackable {
             // Scan QR Code
             MenuItem(title: S.MenuButton.scan, icon: MenuItem.Icon.scan) { [weak self] in
                 self?.presentLoginScan()
+            },
+            
+            // Registration and KYC
+            MenuItem(title: S.MenuButton.registrationAndKyc, icon: MenuItem.Icon.registrationAndKyc) { [weak self] in
+                self?.presentRegistrationAndKYC()
             },
             
             // Manage Wallets

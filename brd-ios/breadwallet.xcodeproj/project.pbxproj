@@ -144,6 +144,81 @@
 		75A2A79B1DA5934300A983D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79A1DA5934300A983D8 /* Assets.xcassets */; };
 		75A2A79E1DA5934300A983D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */; };
 		75A2A7B41DA5934300A983D8 /* breadwalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7B31DA5934300A983D8 /* breadwalletUITests.swift */; };
+		7B626F8027D1411D0077BAE3 /* KYCAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7227D1411D0077BAE3 /* KYCAPI.swift */; };
+		7B626F8127D1411D0077BAE3 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7327D1411D0077BAE3 /* NetworkingError.swift */; };
+		7B626F8227D1411D0077BAE3 /* APIURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7427D1411D0077BAE3 /* APIURLHandler.swift */; };
+		7B626F8327D1411D0077BAE3 /* Decodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7527D1411D0077BAE3 /* Decodable+Extensions.swift */; };
+		7B626F8427D1411D0077BAE3 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7627D1411D0077BAE3 /* HttpRequest.swift */; };
+		7B626F8527D1411D0077BAE3 /* RequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7827D1411D0077BAE3 /* RequestModels.swift */; };
+		7B626F8627D1411D0077BAE3 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7927D1411D0077BAE3 /* Generic.swift */; };
+		7B626F8727D1411D0077BAE3 /* HTTPRequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7A27D1411D0077BAE3 /* HTTPRequestHelpers.swift */; };
+		7B626F8827D1411D0077BAE3 /* BasePlainResponseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7C27D1411D0077BAE3 /* BasePlainResponseWorker.swift */; };
+		7B626F8927D1411D0077BAE3 /* APICallWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7D27D1411D0077BAE3 /* APICallWorker.swift */; };
+		7B626F8A27D1411D0077BAE3 /* BaseResponseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7E27D1411D0077BAE3 /* BaseResponseWorker.swift */; };
+		7B626F8B27D1411D0077BAE3 /* HttpRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7F27D1411D0077BAE3 /* HttpRequestManager.swift */; };
+		7B626F9C27D1413F0077BAE3 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F8C27D1413C0077BAE3 /* UITableView+Extensions.swift */; };
+		7B626F9D27D1413F0077BAE3 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F8D27D1413C0077BAE3 /* PickerViewViewController.swift */; };
+		7B626F9E27D1413F0077BAE3 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F8E27D1413C0077BAE3 /* RoundedView.swift */; };
+		7B626F9F27D1413F0077BAE3 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F8F27D1413C0077BAE3 /* BaseButton.swift */; };
+		7B626FA027D1413F0077BAE3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9027D1413D0077BAE3 /* LoadingView.swift */; };
+		7B626FA127D1413F0077BAE3 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9127D1413D0077BAE3 /* SpinnerView.swift */; };
+		7B626FA227D1413F0077BAE3 /* GenericSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9227D1413D0077BAE3 /* GenericSettable.swift */; };
+		7B626FA327D1413F0077BAE3 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9327D1413D0077BAE3 /* AlertHelper.swift */; };
+		7B626FA427D1413F0077BAE3 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9427D1413D0077BAE3 /* PaddedTextField.swift */; };
+		7B626FA527D1413F0077BAE3 /* KYCNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9527D1413D0077BAE3 /* KYCNavigationController.swift */; };
+		7B626FA627D1413F0077BAE3 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9627D1413E0077BAE3 /* BaseView.swift */; };
+		7B626FA727D1413F0077BAE3 /* KYCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9727D1413E0077BAE3 /* KYCButton.swift */; };
+		7B626FA827D1413F0077BAE3 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9827D1413E0077BAE3 /* DatePickerViewController.swift */; };
+		7B626FA927D1413F0077BAE3 /* SimpleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9927D1413E0077BAE3 /* SimpleTextField.swift */; };
+		7B626FAA27D1413F0077BAE3 /* KYCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9A27D1413E0077BAE3 /* KYCConstants.swift */; };
+		7B626FAB27D1413F0077BAE3 /* KYCCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F9B27D1413F0077BAE3 /* KYCCameraView.swift */; };
+		7B626FB327D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FAE27D141AB0077BAE3 /* KYCTutorial2CollectionViewCell.xib */; };
+		7B626FB427D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FAF27D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.swift */; };
+		7B626FB527D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FB027D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift */; };
+		7B626FB627D141AC0077BAE3 /* KYCTutorialBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FB127D141AC0077BAE3 /* KYCTutorialBaseCell.swift */; };
+		7B626FB727D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FB227D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.xib */; };
+		7B626FBD27D141E80077BAE3 /* KYCTutorialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FB827D141E70077BAE3 /* KYCTutorialPresenter.swift */; };
+		7B626FBE27D141E80077BAE3 /* KYCTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FB927D141E70077BAE3 /* KYCTutorialViewController.swift */; };
+		7B626FBF27D141E80077BAE3 /* KYCTutorialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FBA27D141E70077BAE3 /* KYCTutorialRouter.swift */; };
+		7B626FC027D141E80077BAE3 /* KYCTutorialModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FBB27D141E70077BAE3 /* KYCTutorialModels.swift */; };
+		7B626FC127D141E80077BAE3 /* KYCTutorialInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FBC27D141E80077BAE3 /* KYCTutorialInteractor.swift */; };
+		7B626FC627D142540077BAE3 /* KYCPostPersonalInformationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FC527D142540077BAE3 /* KYCPostPersonalInformationWorker.swift */; };
+		7B626FCB27D1426E0077BAE3 /* KYCAddressFieldsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FC727D1426D0077BAE3 /* KYCAddressFieldsCell.xib */; };
+		7B626FCC27D1426E0077BAE3 /* KYCProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FC827D1426D0077BAE3 /* KYCProgressCell.xib */; };
+		7B626FCD27D1426E0077BAE3 /* KYCAddressFieldsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FC927D1426D0077BAE3 /* KYCAddressFieldsCell.swift */; };
+		7B626FCE27D1426E0077BAE3 /* KYCProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FCA27D1426E0077BAE3 /* KYCProgressCell.swift */; };
+		7B626FD427D142810077BAE3 /* KYCAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FCF27D142800077BAE3 /* KYCAddressViewController.swift */; };
+		7B626FD527D142810077BAE3 /* KYCAddressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FD027D142800077BAE3 /* KYCAddressPresenter.swift */; };
+		7B626FD627D142810077BAE3 /* KYCAddressModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FD127D142810077BAE3 /* KYCAddressModels.swift */; };
+		7B626FD727D142810077BAE3 /* KYCAddressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FD227D142810077BAE3 /* KYCAddressInteractor.swift */; };
+		7B626FD827D142810077BAE3 /* KYCAddressRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FD327D142810077BAE3 /* KYCAddressRouter.swift */; };
+		7B626FDD27D143A70077BAE3 /* KYCPersonalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FDB27D143A70077BAE3 /* KYCPersonalInfoCell.swift */; };
+		7B626FDE27D143A70077BAE3 /* KYCPersonalInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FDC27D143A70077BAE3 /* KYCPersonalInfoCell.xib */; };
+		7B626FE427D143B60077BAE3 /* KYCPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FDF27D143B50077BAE3 /* KYCPersonalInfoViewController.swift */; };
+		7B626FE527D143B60077BAE3 /* KYCPersonalInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FE027D143B50077BAE3 /* KYCPersonalInfoInteractor.swift */; };
+		7B626FE627D143B60077BAE3 /* KYCPersonalInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FE127D143B50077BAE3 /* KYCPersonalInfoPresenter.swift */; };
+		7B626FE727D143B60077BAE3 /* KYCPersonalInfoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FE227D143B60077BAE3 /* KYCPersonalInfoModels.swift */; };
+		7B626FE827D143B60077BAE3 /* KYCPersonalInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FE327D143B60077BAE3 /* KYCPersonalInfoRouter.swift */; };
+		7B626FED27D143ED0077BAE3 /* KYCUploadFrontBackWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FEB27D143EC0077BAE3 /* KYCUploadFrontBackWorker.swift */; };
+		7B626FEE27D143ED0077BAE3 /* KYCUploadSelfieWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FEC27D143ED0077BAE3 /* KYCUploadSelfieWorker.swift */; };
+		7B626FF427D144050077BAE3 /* KYCCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FF027D144050077BAE3 /* KYCCameraCell.xib */; };
+		7B626FF527D144050077BAE3 /* KYCCenteredTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FF127D144050077BAE3 /* KYCCenteredTextCell.swift */; };
+		7B626FF627D144050077BAE3 /* KYCCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FF227D144050077BAE3 /* KYCCameraCell.swift */; };
+		7B626FF727D144050077BAE3 /* KYCCenteredTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B626FF327D144050077BAE3 /* KYCCenteredTextCell.xib */; };
+		7B626FFD27D144160077BAE3 /* KYCUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FF827D144150077BAE3 /* KYCUploadViewController.swift */; };
+		7B626FFE27D144160077BAE3 /* KYCUploadRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FF927D144150077BAE3 /* KYCUploadRouter.swift */; };
+		7B626FFF27D144160077BAE3 /* KYCUploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FFA27D144150077BAE3 /* KYCUploadModels.swift */; };
+		7B62700027D144160077BAE3 /* KYCUploadInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FFB27D144150077BAE3 /* KYCUploadInteractor.swift */; };
+		7B62700127D144160077BAE3 /* KYCUploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626FFC27D144150077BAE3 /* KYCUploadPresenter.swift */; };
+		7B62700827D1446C0077BAE3 /* KYCCompleteButtons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B62700427D1446B0077BAE3 /* KYCCompleteButtons.xib */; };
+		7B62700927D1446C0077BAE3 /* KYCTextAndImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700527D1446B0077BAE3 /* KYCTextAndImageCell.swift */; };
+		7B62700A27D1446C0077BAE3 /* KYCTextAndImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B62700627D1446B0077BAE3 /* KYCTextAndImageCell.xib */; };
+		7B62700B27D1446C0077BAE3 /* KYCCompleteButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700727D1446C0077BAE3 /* KYCCompleteButtons.swift */; };
+		7B62701127D1447D0077BAE3 /* KYCCompleteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700C27D1447C0077BAE3 /* KYCCompleteInteractor.swift */; };
+		7B62701227D1447D0077BAE3 /* KYCCompleteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700D27D1447C0077BAE3 /* KYCCompleteRouter.swift */; };
+		7B62701327D1447D0077BAE3 /* KYCCompletePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700E27D1447C0077BAE3 /* KYCCompletePresenter.swift */; };
+		7B62701427D1447D0077BAE3 /* KYCCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62700F27D1447D0077BAE3 /* KYCCompleteViewController.swift */; };
+		7B62701527D1447D0077BAE3 /* KYCCompleteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62701027D1447D0077BAE3 /* KYCCompleteModels.swift */; };
 		7C0A3ACE210A0E1D006C2783 /* NotificationAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0A3ACD210A0E1D006C2783 /* NotificationAuthorizer.swift */; };
 		7C0F3DC42124A81100531E54 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F3DC32124A81100531E54 /* Backend.swift */; };
 		7C1931CD2327371A0061DE20 /* CoreDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1931CC2327371A0061DE20 /* CoreDatabase.swift */; };
@@ -869,6 +944,81 @@
 		75A2A8091DA5936F00A983D8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		75A2A87C1DA59E4E00A983D8 /* breadwallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = breadwallet.entitlements; sourceTree = "<group>"; };
 		75FEFD1B1DAED56E00203D3A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7B626F7227D1411D0077BAE3 /* KYCAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAPI.swift; sourceTree = "<group>"; };
+		7B626F7327D1411D0077BAE3 /* NetworkingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		7B626F7427D1411D0077BAE3 /* APIURLHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLHandler.swift; sourceTree = "<group>"; };
+		7B626F7527D1411D0077BAE3 /* Decodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Extensions.swift"; sourceTree = "<group>"; };
+		7B626F7627D1411D0077BAE3 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		7B626F7827D1411D0077BAE3 /* RequestModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModels.swift; sourceTree = "<group>"; };
+		7B626F7927D1411D0077BAE3 /* Generic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
+		7B626F7A27D1411D0077BAE3 /* HTTPRequestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestHelpers.swift; sourceTree = "<group>"; };
+		7B626F7C27D1411D0077BAE3 /* BasePlainResponseWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePlainResponseWorker.swift; sourceTree = "<group>"; };
+		7B626F7D27D1411D0077BAE3 /* APICallWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICallWorker.swift; sourceTree = "<group>"; };
+		7B626F7E27D1411D0077BAE3 /* BaseResponseWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponseWorker.swift; sourceTree = "<group>"; };
+		7B626F7F27D1411D0077BAE3 /* HttpRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequestManager.swift; sourceTree = "<group>"; };
+		7B626F8C27D1413C0077BAE3 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		7B626F8D27D1413C0077BAE3 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
+		7B626F8E27D1413C0077BAE3 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		7B626F8F27D1413C0077BAE3 /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		7B626F9027D1413D0077BAE3 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7B626F9127D1413D0077BAE3 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		7B626F9227D1413D0077BAE3 /* GenericSettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericSettable.swift; sourceTree = "<group>"; };
+		7B626F9327D1413D0077BAE3 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		7B626F9427D1413D0077BAE3 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		7B626F9527D1413D0077BAE3 /* KYCNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCNavigationController.swift; sourceTree = "<group>"; };
+		7B626F9627D1413E0077BAE3 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		7B626F9727D1413E0077BAE3 /* KYCButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCButton.swift; sourceTree = "<group>"; };
+		7B626F9827D1413E0077BAE3 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		7B626F9927D1413E0077BAE3 /* SimpleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextField.swift; sourceTree = "<group>"; };
+		7B626F9A27D1413E0077BAE3 /* KYCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConstants.swift; sourceTree = "<group>"; };
+		7B626F9B27D1413F0077BAE3 /* KYCCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCameraView.swift; sourceTree = "<group>"; };
+		7B626FAE27D141AB0077BAE3 /* KYCTutorial2CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCTutorial2CollectionViewCell.xib; sourceTree = "<group>"; };
+		7B626FAF27D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorial1CollectionViewCell.swift; sourceTree = "<group>"; };
+		7B626FB027D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorial2CollectionViewCell.swift; sourceTree = "<group>"; };
+		7B626FB127D141AC0077BAE3 /* KYCTutorialBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialBaseCell.swift; sourceTree = "<group>"; };
+		7B626FB227D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCTutorial1CollectionViewCell.xib; sourceTree = "<group>"; };
+		7B626FB827D141E70077BAE3 /* KYCTutorialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialPresenter.swift; sourceTree = "<group>"; };
+		7B626FB927D141E70077BAE3 /* KYCTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialViewController.swift; sourceTree = "<group>"; };
+		7B626FBA27D141E70077BAE3 /* KYCTutorialRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialRouter.swift; sourceTree = "<group>"; };
+		7B626FBB27D141E70077BAE3 /* KYCTutorialModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialModels.swift; sourceTree = "<group>"; };
+		7B626FBC27D141E80077BAE3 /* KYCTutorialInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTutorialInteractor.swift; sourceTree = "<group>"; };
+		7B626FC527D142540077BAE3 /* KYCPostPersonalInformationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPostPersonalInformationWorker.swift; sourceTree = "<group>"; };
+		7B626FC727D1426D0077BAE3 /* KYCAddressFieldsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCAddressFieldsCell.xib; sourceTree = "<group>"; };
+		7B626FC827D1426D0077BAE3 /* KYCProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCProgressCell.xib; sourceTree = "<group>"; };
+		7B626FC927D1426D0077BAE3 /* KYCAddressFieldsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressFieldsCell.swift; sourceTree = "<group>"; };
+		7B626FCA27D1426E0077BAE3 /* KYCProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCProgressCell.swift; sourceTree = "<group>"; };
+		7B626FCF27D142800077BAE3 /* KYCAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressViewController.swift; sourceTree = "<group>"; };
+		7B626FD027D142800077BAE3 /* KYCAddressPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressPresenter.swift; sourceTree = "<group>"; };
+		7B626FD127D142810077BAE3 /* KYCAddressModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressModels.swift; sourceTree = "<group>"; };
+		7B626FD227D142810077BAE3 /* KYCAddressInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressInteractor.swift; sourceTree = "<group>"; };
+		7B626FD327D142810077BAE3 /* KYCAddressRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCAddressRouter.swift; sourceTree = "<group>"; };
+		7B626FDB27D143A70077BAE3 /* KYCPersonalInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoCell.swift; sourceTree = "<group>"; };
+		7B626FDC27D143A70077BAE3 /* KYCPersonalInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCPersonalInfoCell.xib; sourceTree = "<group>"; };
+		7B626FDF27D143B50077BAE3 /* KYCPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		7B626FE027D143B50077BAE3 /* KYCPersonalInfoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoInteractor.swift; sourceTree = "<group>"; };
+		7B626FE127D143B50077BAE3 /* KYCPersonalInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoPresenter.swift; sourceTree = "<group>"; };
+		7B626FE227D143B60077BAE3 /* KYCPersonalInfoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoModels.swift; sourceTree = "<group>"; };
+		7B626FE327D143B60077BAE3 /* KYCPersonalInfoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPersonalInfoRouter.swift; sourceTree = "<group>"; };
+		7B626FEB27D143EC0077BAE3 /* KYCUploadFrontBackWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadFrontBackWorker.swift; sourceTree = "<group>"; };
+		7B626FEC27D143ED0077BAE3 /* KYCUploadSelfieWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadSelfieWorker.swift; sourceTree = "<group>"; };
+		7B626FF027D144050077BAE3 /* KYCCameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCCameraCell.xib; sourceTree = "<group>"; };
+		7B626FF127D144050077BAE3 /* KYCCenteredTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCenteredTextCell.swift; sourceTree = "<group>"; };
+		7B626FF227D144050077BAE3 /* KYCCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCameraCell.swift; sourceTree = "<group>"; };
+		7B626FF327D144050077BAE3 /* KYCCenteredTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCCenteredTextCell.xib; sourceTree = "<group>"; };
+		7B626FF827D144150077BAE3 /* KYCUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadViewController.swift; sourceTree = "<group>"; };
+		7B626FF927D144150077BAE3 /* KYCUploadRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadRouter.swift; sourceTree = "<group>"; };
+		7B626FFA27D144150077BAE3 /* KYCUploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadModels.swift; sourceTree = "<group>"; };
+		7B626FFB27D144150077BAE3 /* KYCUploadInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadInteractor.swift; sourceTree = "<group>"; };
+		7B626FFC27D144150077BAE3 /* KYCUploadPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCUploadPresenter.swift; sourceTree = "<group>"; };
+		7B62700427D1446B0077BAE3 /* KYCCompleteButtons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCCompleteButtons.xib; sourceTree = "<group>"; };
+		7B62700527D1446B0077BAE3 /* KYCTextAndImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCTextAndImageCell.swift; sourceTree = "<group>"; };
+		7B62700627D1446B0077BAE3 /* KYCTextAndImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KYCTextAndImageCell.xib; sourceTree = "<group>"; };
+		7B62700727D1446C0077BAE3 /* KYCCompleteButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompleteButtons.swift; sourceTree = "<group>"; };
+		7B62700C27D1447C0077BAE3 /* KYCCompleteInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompleteInteractor.swift; sourceTree = "<group>"; };
+		7B62700D27D1447C0077BAE3 /* KYCCompleteRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompleteRouter.swift; sourceTree = "<group>"; };
+		7B62700E27D1447C0077BAE3 /* KYCCompletePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompletePresenter.swift; sourceTree = "<group>"; };
+		7B62700F27D1447D0077BAE3 /* KYCCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompleteViewController.swift; sourceTree = "<group>"; };
+		7B62701027D1447D0077BAE3 /* KYCCompleteModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCompleteModels.swift; sourceTree = "<group>"; };
 		7C0A3ACD210A0E1D006C2783 /* NotificationAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationAuthorizer.swift; path = src/NotificationAuthorizer.swift; sourceTree = "<group>"; };
 		7C0F3DC32124A81100531E54 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Backend.swift; path = src/Backend.swift; sourceTree = "<group>"; };
 		7C1931CC2327371A0061DE20 /* CoreDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDatabase.swift; sourceTree = "<group>"; };
@@ -1853,6 +2003,216 @@
 			path = Modules/sqlite3;
 			sourceTree = "<group>";
 		};
+		7B626F6F27D140FF0077BAE3 /* KYC */ = {
+			isa = PBXGroup;
+			children = (
+				7B626F7027D1410B0077BAE3 /* Helpers */,
+				7B626FAC27D141840077BAE3 /* KYCTutorial */,
+				7B626FC227D142270077BAE3 /* KYCAddress */,
+				7B626FD927D143610077BAE3 /* KYCPersonalInfo */,
+				7B626FE927D143D30077BAE3 /* KYCUpload */,
+				7B62700227D144400077BAE3 /* KYCComplete */,
+			);
+			name = KYC;
+			sourceTree = "<group>";
+		};
+		7B626F7027D1410B0077BAE3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7B626F7127D1411D0077BAE3 /* EQNetworking */,
+				7B626F9327D1413D0077BAE3 /* AlertHelper.swift */,
+				7B626F8F27D1413C0077BAE3 /* BaseButton.swift */,
+				7B626F9627D1413E0077BAE3 /* BaseView.swift */,
+				7B626F9827D1413E0077BAE3 /* DatePickerViewController.swift */,
+				7B626F9227D1413D0077BAE3 /* GenericSettable.swift */,
+				7B626F9727D1413E0077BAE3 /* KYCButton.swift */,
+				7B626F9B27D1413F0077BAE3 /* KYCCameraView.swift */,
+				7B626F9A27D1413E0077BAE3 /* KYCConstants.swift */,
+				7B626F9527D1413D0077BAE3 /* KYCNavigationController.swift */,
+				7B626F9027D1413D0077BAE3 /* LoadingView.swift */,
+				7B626F9427D1413D0077BAE3 /* PaddedTextField.swift */,
+				7B626F8D27D1413C0077BAE3 /* PickerViewViewController.swift */,
+				7B626F8E27D1413C0077BAE3 /* RoundedView.swift */,
+				7B626F9927D1413E0077BAE3 /* SimpleTextField.swift */,
+				7B626F9127D1413D0077BAE3 /* SpinnerView.swift */,
+				7B626F8C27D1413C0077BAE3 /* UITableView+Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		7B626F7127D1411D0077BAE3 /* EQNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				7B626F7227D1411D0077BAE3 /* KYCAPI.swift */,
+				7B626F7327D1411D0077BAE3 /* NetworkingError.swift */,
+				7B626F7427D1411D0077BAE3 /* APIURLHandler.swift */,
+				7B626F7527D1411D0077BAE3 /* Decodable+Extensions.swift */,
+				7B626F7627D1411D0077BAE3 /* HttpRequest.swift */,
+				7B626F7727D1411D0077BAE3 /* Models */,
+				7B626F7A27D1411D0077BAE3 /* HTTPRequestHelpers.swift */,
+				7B626F7B27D1411D0077BAE3 /* Worker */,
+				7B626F7F27D1411D0077BAE3 /* HttpRequestManager.swift */,
+			);
+			path = EQNetworking;
+			sourceTree = "<group>";
+		};
+		7B626F7727D1411D0077BAE3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B626F7827D1411D0077BAE3 /* RequestModels.swift */,
+				7B626F7927D1411D0077BAE3 /* Generic.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7B626F7B27D1411D0077BAE3 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				7B626F7C27D1411D0077BAE3 /* BasePlainResponseWorker.swift */,
+				7B626F7D27D1411D0077BAE3 /* APICallWorker.swift */,
+				7B626F7E27D1411D0077BAE3 /* BaseResponseWorker.swift */,
+			);
+			path = Worker;
+			sourceTree = "<group>";
+		};
+		7B626FAC27D141840077BAE3 /* KYCTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FAD27D1419F0077BAE3 /* Cells */,
+				7B626FB827D141E70077BAE3 /* KYCTutorialPresenter.swift */,
+				7B626FBA27D141E70077BAE3 /* KYCTutorialRouter.swift */,
+				7B626FBB27D141E70077BAE3 /* KYCTutorialModels.swift */,
+				7B626FB927D141E70077BAE3 /* KYCTutorialViewController.swift */,
+				7B626FBC27D141E80077BAE3 /* KYCTutorialInteractor.swift */,
+			);
+			name = KYCTutorial;
+			sourceTree = "<group>";
+		};
+		7B626FAD27D1419F0077BAE3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FAF27D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.swift */,
+				7B626FB227D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.xib */,
+				7B626FB027D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift */,
+				7B626FAE27D141AB0077BAE3 /* KYCTutorial2CollectionViewCell.xib */,
+				7B626FB127D141AC0077BAE3 /* KYCTutorialBaseCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		7B626FC227D142270077BAE3 /* KYCAddress */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FC327D1423F0077BAE3 /* Workers */,
+				7B626FC427D142440077BAE3 /* Cells */,
+				7B626FD027D142800077BAE3 /* KYCAddressPresenter.swift */,
+				7B626FD327D142810077BAE3 /* KYCAddressRouter.swift */,
+				7B626FD127D142810077BAE3 /* KYCAddressModels.swift */,
+				7B626FCF27D142800077BAE3 /* KYCAddressViewController.swift */,
+				7B626FD227D142810077BAE3 /* KYCAddressInteractor.swift */,
+			);
+			name = KYCAddress;
+			sourceTree = "<group>";
+		};
+		7B626FC327D1423F0077BAE3 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FC527D142540077BAE3 /* KYCPostPersonalInformationWorker.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
+		7B626FC427D142440077BAE3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FC927D1426D0077BAE3 /* KYCAddressFieldsCell.swift */,
+				7B626FC727D1426D0077BAE3 /* KYCAddressFieldsCell.xib */,
+				7B626FCA27D1426E0077BAE3 /* KYCProgressCell.swift */,
+				7B626FC827D1426D0077BAE3 /* KYCProgressCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		7B626FD927D143610077BAE3 /* KYCPersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FDA27D143980077BAE3 /* Cells */,
+				7B626FE127D143B50077BAE3 /* KYCPersonalInfoPresenter.swift */,
+				7B626FE327D143B60077BAE3 /* KYCPersonalInfoRouter.swift */,
+				7B626FE227D143B60077BAE3 /* KYCPersonalInfoModels.swift */,
+				7B626FDF27D143B50077BAE3 /* KYCPersonalInfoViewController.swift */,
+				7B626FE027D143B50077BAE3 /* KYCPersonalInfoInteractor.swift */,
+			);
+			name = KYCPersonalInfo;
+			sourceTree = "<group>";
+		};
+		7B626FDA27D143980077BAE3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FDB27D143A70077BAE3 /* KYCPersonalInfoCell.swift */,
+				7B626FDC27D143A70077BAE3 /* KYCPersonalInfoCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		7B626FE927D143D30077BAE3 /* KYCUpload */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FEA27D143E10077BAE3 /* Workers */,
+				7B626FEF27D143F80077BAE3 /* Cells */,
+				7B626FFC27D144150077BAE3 /* KYCUploadPresenter.swift */,
+				7B626FF927D144150077BAE3 /* KYCUploadRouter.swift */,
+				7B626FFA27D144150077BAE3 /* KYCUploadModels.swift */,
+				7B626FF827D144150077BAE3 /* KYCUploadViewController.swift */,
+				7B626FFB27D144150077BAE3 /* KYCUploadInteractor.swift */,
+			);
+			name = KYCUpload;
+			sourceTree = "<group>";
+		};
+		7B626FEA27D143E10077BAE3 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FEB27D143EC0077BAE3 /* KYCUploadFrontBackWorker.swift */,
+				7B626FEC27D143ED0077BAE3 /* KYCUploadSelfieWorker.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
+		7B626FEF27D143F80077BAE3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B626FF227D144050077BAE3 /* KYCCameraCell.swift */,
+				7B626FF027D144050077BAE3 /* KYCCameraCell.xib */,
+				7B626FF127D144050077BAE3 /* KYCCenteredTextCell.swift */,
+				7B626FF327D144050077BAE3 /* KYCCenteredTextCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		7B62700227D144400077BAE3 /* KYCComplete */ = {
+			isa = PBXGroup;
+			children = (
+				7B62700327D144640077BAE3 /* Cells */,
+				7B62700E27D1447C0077BAE3 /* KYCCompletePresenter.swift */,
+				7B62700D27D1447C0077BAE3 /* KYCCompleteRouter.swift */,
+				7B62701027D1447D0077BAE3 /* KYCCompleteModels.swift */,
+				7B62700F27D1447D0077BAE3 /* KYCCompleteViewController.swift */,
+				7B62700C27D1447C0077BAE3 /* KYCCompleteInteractor.swift */,
+			);
+			name = KYCComplete;
+			sourceTree = "<group>";
+		};
+		7B62700327D144640077BAE3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B62700727D1446C0077BAE3 /* KYCCompleteButtons.swift */,
+				7B62700427D1446B0077BAE3 /* KYCCompleteButtons.xib */,
+				7B62700527D1446B0077BAE3 /* KYCTextAndImageCell.swift */,
+				7B62700627D1446B0077BAE3 /* KYCTextAndImageCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		7C377EBC20F64C1200E8CF1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -2160,6 +2520,7 @@
 		CE20C8EF1DBAF6D300C8397A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B626F6F27D140FF0077BAE3 /* KYC */,
 				713CD88822401946004657D4 /* RecoverKey */,
 				CE1E5F241EF081F300BD0F72 /* Import */,
 				E843C10F2188CBDA00F46672 /* Onboarding */,
@@ -2914,15 +3275,18 @@
 				9AE800D021FFF81F00D5058C /* rewardsIcon-17.gif in Resources */,
 				9A926F7322034B3800CC2263 /* CellHighlight-81.png in Resources */,
 				9AE800DD21FFF81F00D5058C /* rewardsIcon-24.gif in Resources */,
+				7B626FB327D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.xib in Resources */,
 				9AE800E921FFF81F00D5058C /* rewardsIcon-33.gif in Resources */,
 				9A926F7122034B3800CC2263 /* CellHighlight-46.png in Resources */,
 				9AE800EE21FFF81F00D5058C /* rewardsIcon-46.gif in Resources */,
 				9A926F5122034B3800CC2263 /* CellHighlight-83.png in Resources */,
+				7B626FF427D144050077BAE3 /* KYCCameraCell.xib in Resources */,
 				9A926F7B22034B3800CC2263 /* CellHighlight-79.png in Resources */,
 				9AE8010621FFF81F00D5058C /* rewardsIcon-67.gif in Resources */,
 				9AE800F221FFF81F00D5058C /* rewardsIcon-61.gif in Resources */,
 				9A926F6322034B3800CC2263 /* CellHighlight-76.png in Resources */,
 				9A926F7822034B3800CC2263 /* CellHighlight-42.png in Resources */,
+				7B62700827D1446C0077BAE3 /* KYCCompleteButtons.xib in Resources */,
 				9A926F5322034B3800CC2263 /* CellHighlight-2.png in Resources */,
 				CE4C1CD01ED8BCC70063E184 /* BIP39Words.plist in Resources */,
 				9A926F6E22034B3800CC2263 /* CellHighlight-17.png in Resources */,
@@ -2969,12 +3333,16 @@
 				9A926F6022034B3800CC2263 /* CellHighlight-8.png in Resources */,
 				222319B21F279B3C00008F20 /* POSTBouncer.html in Resources */,
 				9AE800FE21FFF81F00D5058C /* rewardsIcon-40.gif in Resources */,
+				7B626FB727D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.xib in Resources */,
 				9AE800D921FFF81F00D5058C /* rewardsIcon-11.gif in Resources */,
 				9AE800FC21FFF81F00D5058C /* rewardsIcon-7.gif in Resources */,
 				9A926F7F22034B3800CC2263 /* CellHighlight-43.png in Resources */,
 				9A926F8722034B3800CC2263 /* CellHighlight-52.png in Resources */,
+				7B626FCC27D1426E0077BAE3 /* KYCProgressCell.xib in Resources */,
+				7B626FF727D144050077BAE3 /* KYCCenteredTextCell.xib in Resources */,
 				9AE800F521FFF81F00D5058C /* rewardsIcon-45.gif in Resources */,
 				9AE8010C21FFF81F00D5058C /* rewardsIcon-70.gif in Resources */,
+				7B626FDE27D143A70077BAE3 /* KYCPersonalInfoCell.xib in Resources */,
 				9AE800DA21FFF81F00D5058C /* rewardsIcon-29.gif in Resources */,
 				9AE800E221FFF81F00D5058C /* rewardsIcon-38.gif in Resources */,
 				9A926F9322034B3800CC2263 /* CellHighlight-35.png in Resources */,
@@ -3006,6 +3374,7 @@
 				9A926F4422034B3700CC2263 /* CellHighlight-29.png in Resources */,
 				9AE8010A21FFF81F00D5058C /* rewardsIcon-49.gif in Resources */,
 				9A926F8522034B3800CC2263 /* CellHighlight-23.png in Resources */,
+				7B626FCB27D1426E0077BAE3 /* KYCAddressFieldsCell.xib in Resources */,
 				CE29901A1EFD6DE50093A0F2 /* Localizable.strings in Resources */,
 				9AE800D121FFF81F00D5058C /* rewardsIcon-28.gif in Resources */,
 				2218BD791E8F6CBA0091D5E8 /* AssetBundles.plist in Resources */,
@@ -3045,6 +3414,7 @@
 				9AE800DE21FFF81F00D5058C /* rewardsIcon-12.gif in Resources */,
 				9A926F7D22034B3800CC2263 /* CellHighlight-57.png in Resources */,
 				9AE8010721FFF81F00D5058C /* rewardsIcon-16.gif in Resources */,
+				7B62700A27D1446C0077BAE3 /* KYCTextAndImageCell.xib in Resources */,
 				9A926F4D22034B3800CC2263 /* CellHighlight-68.png in Resources */,
 				9AE8010B21FFF81F00D5058C /* rewardsIcon-56.gif in Resources */,
 				9A926F6B22034B3800CC2263 /* CellHighlight-39.png in Resources */,
@@ -3214,16 +3584,24 @@
 				22A9A94A1DF61945000F0016 /* BRCameraPlugin.swift in Sources */,
 				3A529E4C253B957200BD0A17 /* StakingCell.swift in Sources */,
 				3A5C9B2B22A5676F00C907C1 /* PriceChange.swift in Sources */,
+				7B626FEE27D143ED0077BAE3 /* KYCUploadSelfieWorker.swift in Sources */,
+				7B626FD627D142810077BAE3 /* KYCAddressModels.swift in Sources */,
 				CEA9178620C07FBB00F29B31 /* SyncingHeaderView.swift in Sources */,
+				7B626FFF27D144160077BAE3 /* KYCUploadModels.swift in Sources */,
+				7B626FAB27D1413F0077BAE3 /* KYCCameraView.swift in Sources */,
 				CEC6AA3B1DEE4EB000EE5AFD /* CGRect+Additions.swift in Sources */,
 				4F3AB12A25D58AB400B378DC /* SelectBakerViewController.swift in Sources */,
 				E843C1172188D19000F46672 /* OnboardingViewController.swift in Sources */,
 				3A36328D225301D60043EBA4 /* PriceChangeView.swift in Sources */,
 				7C5AC8A6203B93D3001B221E /* TxListCell.swift in Sources */,
 				71A3171222A6E5F10088F97C /* BRAPIClient+Messages.swift in Sources */,
+				7B62701127D1447D0077BAE3 /* KYCCompleteInteractor.swift in Sources */,
+				7B626FA927D1413F0077BAE3 /* SimpleTextField.swift in Sources */,
 				CE45C1FB1E74F89C002C3847 /* WalletInfo.swift in Sources */,
 				3ACFD96D25CDBE0600AA931F /* CsvExporter.swift in Sources */,
 				CEE659E71F65A936001FF29D /* RetryTimer.swift in Sources */,
+				7B626F8127D1411D0077BAE3 /* NetworkingError.swift in Sources */,
+				7B626FA027D1413F0077BAE3 /* LoadingView.swift in Sources */,
 				CE90571A1DFF18B2006BA848 /* ScanViewController.swift in Sources */,
 				7CBC6B302177D72600899AFB /* DelistedTokenView.swift in Sources */,
 				7C6ACCB61FEB345E0028ABFA /* TxStatusCell.swift in Sources */,
@@ -3237,17 +3615,24 @@
 				71904FB92225AB3900A6D027 /* AnnouncementPromptView.swift in Sources */,
 				71999FDD22147CD90024271F /* Events.swift in Sources */,
 				CE0822641FCD1BD100EF371D /* HomeScreenViewController.swift in Sources */,
+				7B626FE627D143B60077BAE3 /* KYCPersonalInfoPresenter.swift in Sources */,
+				7B626FA727D1413F0077BAE3 /* KYCButton.swift in Sources */,
 				223DB2191DF691260076A151 /* BRSocketHelpers.c in Sources */,
 				3A1D4180250965730089FE63 /* MarketDataPublisher.swift in Sources */,
 				3A88E1D1251533070097C3C2 /* LinkStatusCircle.swift in Sources */,
+				7B626F8527D1411D0077BAE3 /* RequestModels.swift in Sources */,
 				CEF3E82D1DE528BF007C0A9E /* AlertView.swift in Sources */,
 				CEF3E82B1DE51612007C0A9E /* GradientCircle.swift in Sources */,
 				7CCD9F6C1FEC1FA300175E64 /* TxAmountCell.swift in Sources */,
 				3A6CA703244239FD001833CA /* WalletInitializer.swift in Sources */,
 				CE124CFE1E68F57700DFA146 /* Async.swift in Sources */,
 				2218BD771E8F55430091D5E8 /* BRAPIClient+Assets.swift in Sources */,
+				7B626FE827D143B60077BAE3 /* KYCPersonalInfoRouter.swift in Sources */,
 				3AEA2C9C24D122EA00DA4C3A /* CloudBackupView.swift in Sources */,
+				7B626FA127D1413F0077BAE3 /* SpinnerView.swift in Sources */,
 				22A9A94D1DF61945000F0016 /* BRHTTPFileMiddleware.swift in Sources */,
+				7B626F8827D1411D0077BAE3 /* BasePlainResponseWorker.swift in Sources */,
+				7B626FC027D141E80077BAE3 /* KYCTutorialModels.swift in Sources */,
 				3A188FEC257FF1A300957819 /* GiftCurrencyCell.swift in Sources */,
 				CE8644251F2C160200033129 /* ConfirmationViewController.swift in Sources */,
 				7CBA74E820227D1300FBBFA9 /* MenuCell.swift in Sources */,
@@ -3263,6 +3648,7 @@
 				CE1D84B61EAEB2F4002A5D7B /* UIBarButtonItem+Additions.swift in Sources */,
 				CE5E6C961EB8CCF500A476DB /* SupportCenterContainer.swift in Sources */,
 				CE4B6C1A1E219CA600CF935B /* RescanCoordinator.swift in Sources */,
+				7B626F9E27D1413F0077BAE3 /* RoundedView.swift in Sources */,
 				9F0EA16C25E2904400D4225E /* WidgetDataShareService.swift in Sources */,
 				9FC529D02604FAA300855473 /* BreadwalletWidget.intentdefinition in Sources */,
 				CE6D0E5C1E14BFA700137DF1 /* KeyboardNotificationInfo.swift in Sources */,
@@ -3276,9 +3662,11 @@
 				CEDB0B0722D445DB00331FFC /* ChartView.swift in Sources */,
 				CEBF32F61DDCEAF900348FC6 /* TransactionsTableViewController.swift in Sources */,
 				CEE20C381EA5B4680086F724 /* Strings.swift in Sources */,
+				7B626F9D27D1413F0077BAE3 /* PickerViewViewController.swift in Sources */,
 				3ADE270C248F35B80023B770 /* ResolvedAddressLabel.swift in Sources */,
 				CE25BF8D1DF3B8A500BC67B6 /* InViewAlert.swift in Sources */,
 				22A9A9511DF61945000F0016 /* TxMetaData.swift in Sources */,
+				7B626FC127D141E80077BAE3 /* KYCTutorialInteractor.swift in Sources */,
 				7C6ACCB11FEB21580028ABFA /* TxDetailDataSource.swift in Sources */,
 				CE8CD8E11E31976800785E02 /* LoginViewController.swift in Sources */,
 				CEC6AA391DEE10BA00EE5AFD /* UINavigationController+BRAdditions.swift in Sources */,
@@ -3295,6 +3683,7 @@
 				CE6314831E08E5BB00D4AFE0 /* UIView+InitAdditions.swift in Sources */,
 				CEC6AA401DEFC87300EE5AFD /* SendViewController.swift in Sources */,
 				7C72D13622662BB40091B185 /* Wallet.swift in Sources */,
+				7B62700127D144160077BAE3 /* KYCUploadPresenter.swift in Sources */,
 				CEC6F8451E886723000795B8 /* PaymentRequest.swift in Sources */,
 				CE274A611FD7C902000A4E62 /* RootNavigationController.swift in Sources */,
 				3A6C1406257D594A00EA0689 /* ShareGiftViewController.swift in Sources */,
@@ -3302,13 +3691,20 @@
 				CE20C9171DBE6F2A00C8397A /* UIButton+BRWAdditions.swift in Sources */,
 				CE3CDB9720D443CE007059F6 /* CutoutLabel.swift in Sources */,
 				3A611A0C2322139D004B8E36 /* Dot.swift in Sources */,
+				7B626FC627D142540077BAE3 /* KYCPostPersonalInformationWorker.swift in Sources */,
+				7B626FB627D141AC0077BAE3 /* KYCTutorialBaseCell.swift in Sources */,
 				CE92F9F41DED59E80046B516 /* UIView+AnimationAdditions.swift in Sources */,
 				CEDB0B0522D4354C00331FFC /* LineLoadingView.swift in Sources */,
 				CEEC70941E96A24F00EF788E /* DefaultCurrencyViewController.swift in Sources */,
+				7B626F8927D1411D0077BAE3 /* APICallWorker.swift in Sources */,
 				7CAF4EDF22CE80D100326168 /* AssetCollection.swift in Sources */,
 				CEE6282A1EA98B6D001035AA /* DispatchQueue+Additions.swift in Sources */,
 				CEC6AA3D1DEE687000EE5AFD /* RadialGradientView.swift in Sources */,
+				7B626FB427D141AC0077BAE3 /* KYCTutorial1CollectionViewCell.swift in Sources */,
+				7B62701227D1447D0077BAE3 /* KYCCompleteRouter.swift in Sources */,
+				7B62701427D1447D0077BAE3 /* KYCCompleteViewController.swift in Sources */,
 				CEEC70921E95DA4400EF788E /* GradientSwitch.swift in Sources */,
+				7B626FE727D143B60077BAE3 /* KYCPersonalInfoModels.swift in Sources */,
 				CE0CD1591DBFBCF5004023DA /* ModalPresenter.swift in Sources */,
 				7CEA35D5232A9D1200FB58C4 /* Identifier.swift in Sources */,
 				CEE20C2F1EA3E5820086F724 /* BlinkingView.swift in Sources */,
@@ -3320,12 +3716,15 @@
 				CE92F9F01DED0C790046B516 /* PresentModalAnimator.swift in Sources */,
 				CEA2480023DE819D00B18BC6 /* AttributeCell.swift in Sources */,
 				7CBD578F2107EB560042C388 /* PairedWalletData.swift in Sources */,
+				7B626F8227D1411D0077BAE3 /* APIURLHandler.swift in Sources */,
+				7B626F8B27D1411D0077BAE3 /* HttpRequestManager.swift in Sources */,
 				CEAA9E951DC1659F0066731D /* UILabel+BRWAdditions.swift in Sources */,
 				7C6FD3F4213F205400EFF35F /* InboxMetaData.swift in Sources */,
 				CEBF292E1EF99E55005C330A /* LightWeightAlert.swift in Sources */,
 				CEBF32EE1DDBC30000348FC6 /* BRDButton.swift in Sources */,
 				7CBF4B6B2008899100E003AA /* TxAddressCell.swift in Sources */,
 				7C35E717200ADF450064808F /* Transaction.swift in Sources */,
+				7B626F9C27D1413F0077BAE3 /* UITableView+Extensions.swift in Sources */,
 				CEB909F71E5FE654001804DC /* EnterPhraseCollectionViewController.swift in Sources */,
 				CEF3D2DD1E8CBA790070178E /* LAContext+Extensions.swift in Sources */,
 				CECCE5AE1E04AD6300D99448 /* AddressCell.swift in Sources */,
@@ -3333,13 +3732,16 @@
 				7C377EC220F6C29E00E8CF1C /* UIAlertController+Additions.swift in Sources */,
 				22A9A9521DF61945000F0016 /* BRKVStorePlugin.swift in Sources */,
 				CEAFC8611E5D5B0500E4FD06 /* SegmentedButton.swift in Sources */,
+				7B626FD827D142810077BAE3 /* KYCAddressRouter.swift in Sources */,
 				3A6FD42D24E456B800068ECE /* KeyStoreUtils.swift in Sources */,
 				22A9A9581DF61945000F0016 /* BRWebViewController.swift in Sources */,
 				3A6FD42F24E4570900068ECE /* KeyStore+CloudBackup.swift in Sources */,
 				CEC4CF091F0C84AB00E5C82E /* UIViewController+Alerts.swift in Sources */,
+				7B626F8427D1411D0077BAE3 /* HttpRequest.swift in Sources */,
 				CE12289D20D3695400EC6F81 /* MotionGradientView.swift in Sources */,
 				7141BB5D2249543600F7ECF2 /* InfoView.swift in Sources */,
 				CE1E69312423D34000DF8177 /* CreateAccountFooterView.swift in Sources */,
+				7B626FA627D1413F0077BAE3 /* BaseView.swift in Sources */,
 				7C787AE421ED8BB40017EA7E /* SimpleRedux.swift in Sources */,
 				CE27F9591E2C8EA300F7F7F2 /* Amount.swift in Sources */,
 				CE1280F61EEA855C00D27649 /* Date+Additions.swift in Sources */,
@@ -3360,6 +3762,7 @@
 				4F3AB11A25D53F4300B378DC /* ExternalAPIClient.swift in Sources */,
 				CECCE5A91E0378FB00D99448 /* PinPadViewController.swift in Sources */,
 				CEF3D2DB1E8B55C80070178E /* UISlider+Gradient.swift in Sources */,
+				7B62701327D1447D0077BAE3 /* KYCCompletePresenter.swift in Sources */,
 				CE65C66A207D41BB000C99C4 /* AssetIndex.swift in Sources */,
 				CE4CA7BC1EE3649100373F11 /* BRActivityView.swift in Sources */,
 				E89C0613216D79550012CE0D /* BRAPIClient+EmailSubscription.swift in Sources */,
@@ -3376,6 +3779,7 @@
 				CEE65DF01E39056F0002994D /* Rate.swift in Sources */,
 				CEDB09331FEAA21C001AF56A /* TxDetailViewModel.swift in Sources */,
 				7CB593E122F8C8FE005A230A /* AuthenticationClient.swift in Sources */,
+				7B626FA427D1413F0077BAE3 /* PaddedTextField.swift in Sources */,
 				4F3AB12425D53F5D00B378DC /* Baker.swift in Sources */,
 				71988B0821EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */,
 				CEE20C361EA5B4620086F724 /* Constants.swift in Sources */,
@@ -3393,6 +3797,7 @@
 				22A9A94E1DF61945000F0016 /* BRHTTPIndexMiddleware.swift in Sources */,
 				71173059220CCC91001931B3 /* PromptView.swift in Sources */,
 				CE8CD8DD1E2D9EF200785E02 /* Sender.swift in Sources */,
+				7B62700927D1446C0077BAE3 /* KYCTextAndImageCell.swift in Sources */,
 				3AFAD94825698A74005853E8 /* Gift.swift in Sources */,
 				CE4DFB2C1E9BE5880014009E /* ReScanViewController.swift in Sources */,
 				7C9724661FF07B9A004248C4 /* StatusPip.swift in Sources */,
@@ -3409,27 +3814,41 @@
 				CE4C1CC61ED65D830063E184 /* DrawableCircle.swift in Sources */,
 				7CBD57912107FAFA0042C388 /* PairedWalletIndex.swift in Sources */,
 				CEEC708C1E95461A00EF788E /* AboutViewController.swift in Sources */,
+				7B626FD727D142810077BAE3 /* KYCAddressInteractor.swift in Sources */,
 				CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */,
+				7B626FF627D144050077BAE3 /* KYCCameraCell.swift in Sources */,
+				7B626FFD27D144160077BAE3 /* KYCUploadViewController.swift in Sources */,
+				7B626FF527D144050077BAE3 /* KYCCenteredTextCell.swift in Sources */,
 				CE3645481E7B424D0079D0CF /* WhiteNumberPad.swift in Sources */,
+				7B626FCE27D1426E0077BAE3 /* KYCProgressCell.swift in Sources */,
 				CE3840E81FD590BD00437C31 /* AssetListTableView.swift in Sources */,
 				71A3171022A6D55A0088F97C /* InAppNotificationViewController.swift in Sources */,
 				7CF5319D231EE01300E61F12 /* Base32.swift in Sources */,
+				7B62700B27D1446C0077BAE3 /* KYCCompleteButtons.swift in Sources */,
+				7B626F8027D1411D0077BAE3 /* KYCAPI.swift in Sources */,
 				22A9A9591DF61945000F0016 /* Extensions.swift in Sources */,
 				22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */,
+				7B626F9F27D1413F0077BAE3 /* BaseButton.swift in Sources */,
+				7B626FED27D143ED0077BAE3 /* KYCUploadFrontBackWorker.swift in Sources */,
 				CEAA9EA61DC3246F0066731D /* StartNavigationDelegate.swift in Sources */,
 				7CBF4B6420081BCE00E003AA /* KeyedDecodingContainer+Additions.swift in Sources */,
 				3A188FF82582835600957819 /* Sharing.swift in Sources */,
 				22A9A94B1DF61945000F0016 /* BRCoding.swift in Sources */,
+				7B626FDD27D143A70077BAE3 /* KYCPersonalInfoCell.swift in Sources */,
 				22A9A9561DF61945000F0016 /* BRWalletPlugin.swift in Sources */,
 				CE6B829A1FE3A7B6007A41B9 /* UIScrollView+Additions.swift in Sources */,
 				3AEA2CAB24D3219200DA4C3A /* SelectBackupView.swift in Sources */,
+				7B626F8A27D1411D0077BAE3 /* BaseResponseWorker.swift in Sources */,
 				CEF3E8361DE60222007C0A9E /* ModalNavigationController.swift in Sources */,
 				CEB909FA1E5FF242001804DC /* RecoverWalletIntroViewController.swift in Sources */,
 				CE25BF911DF9ADE700BC67B6 /* UIImage+Utils.swift in Sources */,
+				7B626FA327D1413F0077BAE3 /* AlertHelper.swift in Sources */,
 				7C7F18ED1FED9A3B0030230E /* TxStatusIndicator.swift in Sources */,
+				7B626F8727D1411D0077BAE3 /* HTTPRequestHelpers.swift in Sources */,
 				7C787AE221ED89510017EA7E /* KeyStore.swift in Sources */,
 				CEAA9E911DC0FDFE0066731D /* UIViewPropertyAnimator+BRWAdditions.swift in Sources */,
 				7C1931CD2327371A0061DE20 /* CoreDatabase.swift in Sources */,
+				7B626FA227D1413F0077BAE3 /* GenericSettable.swift in Sources */,
 				22E773041EE7813000397E0E /* Bonjour.swift in Sources */,
 				3AFAD9302567EE15005853E8 /* GiftViewController.swift in Sources */,
 				7CE940E61FEB8A5F005A2B53 /* TxDetailRowCell.swift in Sources */,
@@ -3438,12 +3857,14 @@
 				CEAA9EA01DC2F9F50066731D /* UIFont+BRWAdditions.swift in Sources */,
 				CEF61B121ECF52C700C7EA6A /* AmountViewController.swift in Sources */,
 				CEBF32F21DDCE10D00348FC6 /* AccountHeaderView.swift in Sources */,
+				7B626FD527D142810077BAE3 /* KYCAddressPresenter.swift in Sources */,
 				CECCE5B21E04B00D00D99448 /* SendCell.swift in Sources */,
 				CE6DCC301E6666470044257B /* NonScrollingCollectionView.swift in Sources */,
 				71C44E90225D135E00EF4459 /* ConfirmRecoveryKeyViewController.swift in Sources */,
 				7CF913BE1FFC7DC30085CB70 /* TxMemoCell.swift in Sources */,
 				3A0063BE2509D36500C74A97 /* ExtendedTouchArea.swift in Sources */,
 				3A3D63DE22F10B58000DE920 /* ManageWalletsViewController.swift in Sources */,
+				7B626FAA27D1413F0077BAE3 /* KYCConstants.swift in Sources */,
 				22A9A9471DF61945000F0016 /* BRAPIProxy.swift in Sources */,
 				CE20C9011DBBFFF800C8397A /* Actions.swift in Sources */,
 				CE20C9191DBE7B8200C8397A /* State.swift in Sources */,
@@ -3455,12 +3876,16 @@
 				CEEC70861E94397D00EF788E /* UserDefaults+Additions.swift in Sources */,
 				22A9A9501DF61945000F0016 /* BRHTTPServer.swift in Sources */,
 				CE1E7A9A20938DFD00C86BB7 /* MenuButton.swift in Sources */,
+				7B626FA827D1413F0077BAE3 /* DatePickerViewController.swift in Sources */,
+				7B626FD427D142810077BAE3 /* KYCAddressViewController.swift in Sources */,
 				22A9A9531DF61945000F0016 /* BRLinkPlugin.swift in Sources */,
 				7C0A3ACE210A0E1D006C2783 /* NotificationAuthorizer.swift in Sources */,
 				7CA3BC302006864C00517BF7 /* Currency.swift in Sources */,
+				7B626FB527D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift in Sources */,
 				7C72D134226625130091B185 /* CoreSystem.swift in Sources */,
 				CE3D4C571EF5D5740016B1C8 /* ReachabilityMonitor.swift in Sources */,
 				7CBA74E62022784D00FBBFA9 /* HomeScreenAssetViewModel.swift in Sources */,
+				7B626F8327D1411D0077BAE3 /* Decodable+Extensions.swift in Sources */,
 				7CA1C47420EC25B9002E9E68 /* QRCode.swift in Sources */,
 				CE41327622CACA05002391E6 /* BalanceCell.swift in Sources */,
 				22A9A9571DF61945000F0016 /* BRWebSocket.swift in Sources */,
@@ -3468,10 +3893,13 @@
 				CE1E5F261EF083A600BD0F72 /* ImportKeyViewController.swift in Sources */,
 				CE25BF931DFDA7A600BC67B6 /* MessageUIPresenter.swift in Sources */,
 				3A6785FB257019220065F835 /* RedeemTransitioningDelegate.swift in Sources */,
+				7B626FE427D143B60077BAE3 /* KYCPersonalInfoViewController.swift in Sources */,
 				CE20C90C1DBC59E600C8397A /* StartFlowPresenter.swift in Sources */,
 				CE20C8FC1DBB0F3A00C8397A /* UIColor+BRWAdditions.swift in Sources */,
 				3A6785F1256F2F1A0065F835 /* RedeemGiftViewController.swift in Sources */,
 				9AE8FFF821FE64E200D5058C /* RewardsView.swift in Sources */,
+				7B626FE527D143B60077BAE3 /* KYCPersonalInfoInteractor.swift in Sources */,
+				7B626FCD27D1426E0077BAE3 /* KYCAddressFieldsCell.swift in Sources */,
 				CEA3626A1E01150D0061FC0E /* CGContext+Additions.swift in Sources */,
 				7C6ACCB41FEB34470028ABFA /* TxLabelCell.swift in Sources */,
 				7C40DE2D20E09207000E289D /* ToggleButton.swift in Sources */,
@@ -3480,6 +3908,8 @@
 				CE6B6B4A1E54C0CB00B31405 /* SecurityCenterCell.swift in Sources */,
 				3A1D416E250957A00089FE63 /* MarketDataView.swift in Sources */,
 				3A858B2C250A7A9300812B36 /* TxStatusIcon.swift in Sources */,
+				7B626FA527D1413F0077BAE3 /* KYCNavigationController.swift in Sources */,
+				7B62700027D144160077BAE3 /* KYCUploadInteractor.swift in Sources */,
 				CE36454C1E7B42850079D0CF /* WhiteDecimalPad.swift in Sources */,
 				CE5F21D91E4A922700C47B8E /* DismissLoginAnimator.swift in Sources */,
 				7C45481A2187E65B0002E884 /* AnyCodable.swift in Sources */,
@@ -3492,17 +3922,23 @@
 				22A9A9481DF61945000F0016 /* BRBitID.swift in Sources */,
 				CE0BC980215ACBE100E68B2B /* TokenImageNoBackground.swift in Sources */,
 				7C0F3DC42124A81100531E54 /* Backend.swift in Sources */,
+				7B626F8627D1411D0077BAE3 /* Generic.swift in Sources */,
 				CEBF32F41DDCE12900348FC6 /* AccountFooterView.swift in Sources */,
 				710B036421F8C208007E8A2A /* AppRatingManager.swift in Sources */,
 				CE9057181DFF0FA8006BA848 /* String+Additions.swift in Sources */,
+				7B626FBE27D141E80077BAE3 /* KYCTutorialViewController.swift in Sources */,
 				713CD8872240117A004657D4 /* RecoveryKeyFlowController.swift in Sources */,
 				CED341331EF5A5C00014912A /* InAppAlert.swift in Sources */,
+				7B62701527D1447D0077BAE3 /* KYCCompleteModels.swift in Sources */,
+				7B626FBF27D141E80077BAE3 /* KYCTutorialRouter.swift in Sources */,
 				CE47A8E01F7DA54000FF35BA /* UIScreen+Additions.swift in Sources */,
+				7B626FBD27D141E80077BAE3 /* KYCTutorialPresenter.swift in Sources */,
 				7C9BC58D231764030011732F /* WalletConnectionSettingsViewController.swift in Sources */,
 				CEB909F51E5FE63D001804DC /* EnterPhraseViewController.swift in Sources */,
 				713CD88A2240198A004657D4 /* RecoveryKeyIntroViewController.swift in Sources */,
 				CE6D0F971DE8B73A00BD4BCF /* ModalTransitionDelegate.swift in Sources */,
 				1B1AFFA01FB7EF7C00E61908 /* BiometricsSettingsViewController.swift in Sources */,
+				7B626FFE27D144160077BAE3 /* KYCUploadRouter.swift in Sources */,
 				4F3AB13425D5E7F900B378DC /* SelectBakerCell.swift in Sources */,
 				3A529E5C253CAD3F00BD0A17 /* StakeViewController.swift in Sources */,
 			);
@@ -3959,7 +4395,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Modules",
@@ -4006,7 +4442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"brd-web-3-staging.tar",
@@ -4220,7 +4656,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Modules",
@@ -4345,7 +4781,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -4437,7 +4873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"brd-web-3.tar",
@@ -4565,7 +5001,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -4658,7 +5094,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"brd-web-3.tar",
@@ -4786,7 +5222,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5334,7 +5770,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5358,7 +5794,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5382,7 +5818,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5478,7 +5914,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Modules",
@@ -5593,7 +6029,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5690,7 +6126,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Modules",
@@ -5815,7 +6251,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(BRCORE_CONFIGURATION)-$(PLATFORM_NAME)",
 					"$(SRCROOT)/Modules",
@@ -5907,7 +6343,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				CURRENT_PROJECT_VERSION = 318;
+				CURRENT_PROJECT_VERSION = 319;
 				DEVELOPMENT_TEAM = 4MTMK4ZYK4;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"brd-web-3.tar",
