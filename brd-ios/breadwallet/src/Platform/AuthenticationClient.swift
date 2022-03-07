@@ -238,7 +238,7 @@ enum HTTPMethod: String {
 
 extension URLRequest {
     mutating func authorize(withToken token: String) {
-        setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        setValue(token, forHTTPHeaderField: "Authorization")
     }
 }
 
