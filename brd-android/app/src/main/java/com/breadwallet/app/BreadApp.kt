@@ -137,7 +137,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         fun getDefaultEnabledWallets() = when {
             BuildConfig.BITCOIN_TESTNET -> listOf(
                 "bitcoin-testnet:__native__",
-                "ethereum-ropsten:__native__",
+                "ethereum-goerli:__native__",
                 "ethereum-ropsten:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
             )
             else -> listOf(
