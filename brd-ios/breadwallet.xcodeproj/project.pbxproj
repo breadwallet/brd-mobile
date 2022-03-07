@@ -516,6 +516,12 @@
 		A243978083345DAFD36DA7A4 /* MarketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24399A172C828ECD708E17D /* MarketInfo.swift */; };
 		A2439D019C08106D6E14D70A /* MarketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24399A172C828ECD708E17D /* MarketInfo.swift */; };
 		A2439D7BB746E6CFC3F9B64A /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2439F5D8263945E73EFF4A3 /* CacheService.swift */; };
+		C4C9047427D5EEE2000963B0 /* ChooseRegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9046E27D5EEE2000963B0 /* ChooseRegistrationPresenter.swift */; };
+		C4C9047527D5EEE2000963B0 /* ChooseRegistrationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9046F27D5EEE2000963B0 /* ChooseRegistrationWorker.swift */; };
+		C4C9047627D5EEE2000963B0 /* ChooseRegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9047027D5EEE2000963B0 /* ChooseRegistrationRouter.swift */; };
+		C4C9047727D5EEE2000963B0 /* ChooseRegistrationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9047127D5EEE2000963B0 /* ChooseRegistrationModels.swift */; };
+		C4C9047827D5EEE2000963B0 /* ChooseRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9047227D5EEE2000963B0 /* ChooseRegistrationViewController.swift */; };
+		C4C9047927D5EEE2000963B0 /* ChooseRegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9047327D5EEE2000963B0 /* ChooseRegistrationInteractor.swift */; };
 		CE0822641FCD1BD100EF371D /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0822631FCD1BD100EF371D /* HomeScreenViewController.swift */; };
 		CE0822661FCE059A00EF371D /* HomeScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0822651FCE059A00EF371D /* HomeScreenCell.swift */; };
 		CE0BC980215ACBE100E68B2B /* TokenImageNoBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BC97F215ACBE100E68B2B /* TokenImageNoBackground.swift */; };
@@ -1294,6 +1300,12 @@
 		A243988A5DA12A405BFEB9F6 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		A24399A172C828ECD708E17D /* MarketInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketInfo.swift; sourceTree = "<group>"; };
 		A2439F5D8263945E73EFF4A3 /* CacheService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		C4C9046E27D5EEE2000963B0 /* ChooseRegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationPresenter.swift; sourceTree = "<group>"; };
+		C4C9046F27D5EEE2000963B0 /* ChooseRegistrationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationWorker.swift; sourceTree = "<group>"; };
+		C4C9047027D5EEE2000963B0 /* ChooseRegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationRouter.swift; sourceTree = "<group>"; };
+		C4C9047127D5EEE2000963B0 /* ChooseRegistrationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationModels.swift; sourceTree = "<group>"; };
+		C4C9047227D5EEE2000963B0 /* ChooseRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationViewController.swift; sourceTree = "<group>"; };
+		C4C9047327D5EEE2000963B0 /* ChooseRegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegistrationInteractor.swift; sourceTree = "<group>"; };
 		CE0822631FCD1BD100EF371D /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeScreenViewController.swift; path = src/ViewControllers/HomeScreenViewController.swift; sourceTree = "<group>"; };
 		CE0822651FCE059A00EF371D /* HomeScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeScreenCell.swift; path = src/Views/HomeScreenCell.swift; sourceTree = "<group>"; };
 		CE0BC97F215ACBE100E68B2B /* TokenImageNoBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TokenImageNoBackground.swift; path = src/Views/TokenImageNoBackground.swift; sourceTree = "<group>"; };
@@ -2007,6 +2019,7 @@
 		7B626F6F27D140FF0077BAE3 /* KYC */ = {
 			isa = PBXGroup;
 			children = (
+				C4C9046D27D5EEB0000963B0 /* ChooseRegistration */,
 				7B626F7027D1410B0077BAE3 /* Helpers */,
 				7B626FAC27D141840077BAE3 /* KYCTutorial */,
 				7B626FC227D142270077BAE3 /* KYCAddress */,
@@ -2508,6 +2521,19 @@
 				9FDDE55625D5B79D00E42BE3 /* ChartViewModel.swift */,
 			);
 			path = ChartView;
+			sourceTree = "<group>";
+		};
+		C4C9046D27D5EEB0000963B0 /* ChooseRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				C4C9046E27D5EEE2000963B0 /* ChooseRegistrationPresenter.swift */,
+				C4C9046F27D5EEE2000963B0 /* ChooseRegistrationWorker.swift */,
+				C4C9047027D5EEE2000963B0 /* ChooseRegistrationRouter.swift */,
+				C4C9047127D5EEE2000963B0 /* ChooseRegistrationModels.swift */,
+				C4C9047227D5EEE2000963B0 /* ChooseRegistrationViewController.swift */,
+				C4C9047327D5EEE2000963B0 /* ChooseRegistrationInteractor.swift */,
+			);
+			name = ChooseRegistration;
 			sourceTree = "<group>";
 		};
 		CE1E5F241EF081F300BD0F72 /* Import */ = {
@@ -3493,7 +3519,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd .. && ./gradlew cosmos-bundled:createXCFramework\n";
+			shellScript = "
+";
 		};
 		3ADA3F8924C8D2FE00E1CBCF /* Copy Fonts */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3575,6 +3602,7 @@
 			files = (
 				3A0915CA24D8B31200CDC6A4 /* EnableKeychainView.swift in Sources */,
 				CEBF29301EF9D76F005C330A /* Environment.swift in Sources */,
+				C4C9047827D5EEE2000963B0 /* ChooseRegistrationViewController.swift in Sources */,
 				7C67B6362056FB13006487BE /* BRAPIClient+Currencies.swift in Sources */,
 				3A4972C52602E0ED0002C3EC /* IosBRDAuthProvider.swift in Sources */,
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
@@ -3667,6 +3695,7 @@
 				3ADE270C248F35B80023B770 /* ResolvedAddressLabel.swift in Sources */,
 				CE25BF8D1DF3B8A500BC67B6 /* InViewAlert.swift in Sources */,
 				22A9A9511DF61945000F0016 /* TxMetaData.swift in Sources */,
+				C4C9047627D5EEE2000963B0 /* ChooseRegistrationRouter.swift in Sources */,
 				7B626FC127D141E80077BAE3 /* KYCTutorialInteractor.swift in Sources */,
 				7C6ACCB11FEB21580028ABFA /* TxDetailDataSource.swift in Sources */,
 				CE8CD8E11E31976800785E02 /* LoginViewController.swift in Sources */,
@@ -3816,6 +3845,7 @@
 				CE4C1CC61ED65D830063E184 /* DrawableCircle.swift in Sources */,
 				7CBD57912107FAFA0042C388 /* PairedWalletIndex.swift in Sources */,
 				CEEC708C1E95461A00EF788E /* AboutViewController.swift in Sources */,
+				C4C9047527D5EEE2000963B0 /* ChooseRegistrationWorker.swift in Sources */,
 				7B626FD727D142810077BAE3 /* KYCAddressInteractor.swift in Sources */,
 				CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */,
 				7B626FF627D144050077BAE3 /* KYCCameraCell.swift in Sources */,
@@ -3886,6 +3916,7 @@
 				7B626FB527D141AC0077BAE3 /* KYCTutorial2CollectionViewCell.swift in Sources */,
 				7C72D134226625130091B185 /* CoreSystem.swift in Sources */,
 				CE3D4C571EF5D5740016B1C8 /* ReachabilityMonitor.swift in Sources */,
+				C4C9047927D5EEE2000963B0 /* ChooseRegistrationInteractor.swift in Sources */,
 				7CBA74E62022784D00FBBFA9 /* HomeScreenAssetViewModel.swift in Sources */,
 				7B626F8327D1411D0077BAE3 /* Decodable+Extensions.swift in Sources */,
 				7CA1C47420EC25B9002E9E68 /* QRCode.swift in Sources */,
@@ -3914,7 +3945,9 @@
 				7B62700027D144160077BAE3 /* KYCUploadInteractor.swift in Sources */,
 				CE36454C1E7B42850079D0CF /* WhiteDecimalPad.swift in Sources */,
 				CE5F21D91E4A922700C47B8E /* DismissLoginAnimator.swift in Sources */,
+				C4C9047727D5EEE2000963B0 /* ChooseRegistrationModels.swift in Sources */,
 				7C45481A2187E65B0002E884 /* AnyCodable.swift in Sources */,
+				C4C9047427D5EEE2000963B0 /* ChooseRegistrationPresenter.swift in Sources */,
 				4F3AB12325D53F5D00B378DC /* BakingBadRequest.swift in Sources */,
 				CECCE5A51E02408300D99448 /* UIView+FrameChangeBlocking.swift in Sources */,
 				3A3D63DC22F10B4F000DE920 /* AddWalletsViewController.swift in Sources */,

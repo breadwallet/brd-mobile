@@ -7,11 +7,14 @@ import UIKit
 class KYCButton: RoundedView {
     enum ButtonStyle {
         case normal
+        case almostBlack
         
         var backgroundColor: UIColor {
             switch self {
             case .normal:
                 return .vibrantYellow
+            case .almostBlack:
+                return .almostBlack
             }
         }
         
@@ -19,6 +22,8 @@ class KYCButton: RoundedView {
             switch self {
             case .normal:
                 return .almostBlack
+            case .almostBlack:
+                return .vibrantYellow
             }
         }
     }
@@ -57,12 +62,14 @@ class KYCButton: RoundedView {
     private func style() {
         button.backgroundColor = buttonStyle.backgroundColor
         button.setTitleColor(buttonStyle.titleColor, for: .normal)
+        button.layer.borderColor = UIColor.vibrantYellow.cgColor
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 13
 //        button.isEnabled = buttonStyle != .inactive
     }
     
     private func setupElements() {
         backgroundColor = .clear
-        cornerRadius = 13
         
         addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
