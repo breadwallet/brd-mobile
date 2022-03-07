@@ -116,4 +116,10 @@ struct E {
         let os = ProcessInfo().operatingSystemVersion
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
     }()
+    
+    static let apiToken: String = {
+        // TODO: diff tokens for diff envs?
+        return "ncs9v286v1063f28jcgvgle860k3i1hn2gem85v"
+    }()
+    
 }

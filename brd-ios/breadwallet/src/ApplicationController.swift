@@ -13,8 +13,6 @@ import UserNotifications
 import WidgetKit
 #endif
 
-
-
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
 
@@ -169,24 +167,21 @@ class ApplicationController: Subscriber, Trackable {
         Backend.connect(authenticator: keyStore as WalletAuthenticator)
         Backend.sendLaunchEvent()
         Backend.apiClient.analytics?.onWalletReady()
-        // Begin KVStore key sync
+        
         DispatchQueue.global(qos: .userInitiated).async {
             Backend.kvStore?.syncAllKeys { [weak self] error in
                 print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
                 Store.trigger(name: .didSyncKVStore)
                 guard let weakSelf = self else { return }
                 weakSelf.setWalletInfo(account: account)
-                weakSelf.authenticateWithBackend { jwt in
-                    // Begin Core stand-up
-                    weakSelf.coreSystem.create(account: account,
-                                           authToken: jwt,
+                weakSelf.coreSystem.create(account: account,
+                                           authToken: UserDefaults.apiToken,
                                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
-                        weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
+                    weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
                                                              system: weakSelf.coreSystem,
                                                              window: weakSelf.window,
                                                              alertPresenter: weakSelf.alertPresenter)
-                        weakSelf.coreSystem.connect()
-                    }
+                    weakSelf.coreSystem.connect()
                 }
                 
             }
@@ -323,22 +318,6 @@ class ApplicationController: Subscriber, Trackable {
         let walletInfo = WalletInfo(name: S.AccountHeader.defaultWalletName)
         walletInfo.creationDate = account.timestamp
         _ = try? kvStore.set(walletInfo)
-    }
-
-    private func authenticateWithBackend(completion: @escaping (String?) -> Void) {
-        //TODO:CRYPTO optimize for new/recovered wallets by pre-fetching auth token during pin entry
-        let bdbAuthClient = AuthenticationClient(baseURL: URL(string: "https://\(C.bdbHost)")!, urlSession: URLSession.shared)
-        keyStore.authenticateWithBlockchainDB(client: bdbAuthClient) { result in
-            switch result {
-            case .success(let jwt):
-                assert(!jwt.isExpired)
-                completion(jwt.token)
-            case .failure(let error):
-                print("[BDB] authentication failure: \(error)")
-                assertionFailure()
-                completion(nil)
-            }
-        }
     }
     
     /// Fetch updates from backend services.
