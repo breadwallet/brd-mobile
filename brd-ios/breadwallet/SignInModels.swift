@@ -4,5 +4,6 @@
 
 import UIKit
 
-class ChooseRegistrationWorker {
+enum SignIn {
+    // MARK: Model name declarations
 }

@@ -175,7 +175,7 @@ class ApplicationController: Subscriber, Trackable {
                 guard let weakSelf = self else { return }
                 weakSelf.setWalletInfo(account: account)
                 weakSelf.coreSystem.create(account: account,
-                                           authToken: UserDefaults.apiToken,
+                                           authToken: E.apiToken,
                                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
                     weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
                                                              system: weakSelf.coreSystem,

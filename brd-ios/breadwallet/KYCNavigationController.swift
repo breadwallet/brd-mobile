@@ -20,7 +20,7 @@ class KYCNavigationController: UINavigationController, UINavigationControllerDel
             appearance.configureWithOpaqueBackground()
             //appearance.titleTextAttributes[.foregroundColor] = R.color.darkBlue()
             //appearance.titleTextAttributes[.font] = R.font.metaProBold(size: 17)
-            appearance.backgroundColor = .clear
+            appearance.backgroundColor = .almostBlack
             appearance.shadowColor = nil
             
             navigationBar.scrollEdgeAppearance = appearance

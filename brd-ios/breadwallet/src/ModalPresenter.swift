@@ -428,10 +428,11 @@ class ModalPresenter: Subscriber, Trackable {
         }
     }
     
-    public func presentChooseRegistration() {
-        let vc = ChooseRegistrationViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        topViewController?.present(nav, animated: true, completion: nil)
+    public func presentSignIn() {
+        let vc = SignInViewController()
+        let navController = KYCNavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        topViewController?.present(navController, animated: true, completion: nil)
     }
     
     public func presentRegistrationAndKYC() {
@@ -630,7 +631,7 @@ class ModalPresenter: Subscriber, Trackable {
             
             // Registration
             MenuItem(title: S.MenuButton.chooseRegistration, icon: MenuItem.Icon.registrationAndKyc) { [weak self] in
-                self?.presentChooseRegistration()
+                self?.presentSignIn()
             },
             
             // Registration and KYC
