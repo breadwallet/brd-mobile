@@ -458,7 +458,7 @@ open class BRReplicatedKVStore: NSObject {
         // 3. for keys that we do have, sync em
         // 4. for keys that they don't have that we do, upload em
         if syncRunning {
-            DispatchQueue.main.async(execute: { 
+            DispatchQueue.main.async(execute: {
                 completionHandler(.alreadyReplicating)
             })
             return
@@ -635,7 +635,7 @@ open class BRReplicatedKVStore: NSObject {
                     })
                 } else {
                     log("Local key \(key) is newer remoteVer=\(remoteVer), updating remotely...")
-                    // if the remote version is zero it means it doesnt yet exist on the server. set the remote version 
+                    // if the remote version is zero it means it doesnt yet exist on the server. set the remote version
                     // to "1" to create the key on the server
                     let useRemoteVer = remoteVer == 0 || remoteVer < recordedRemoteVersion ? 1 : remoteVer
                     self.remote.put(key, value: localValue, version: useRemoteVer,
