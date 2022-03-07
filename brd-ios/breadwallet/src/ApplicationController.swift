@@ -168,9 +168,6 @@ class ApplicationController: Subscriber, Trackable {
         Backend.sendLaunchEvent()
         Backend.apiClient.analytics?.onWalletReady()
         
-        // TODO: move somewhere else!
-        // swiftlint:disable:next line_length
-        let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZWI2M2UyOC0wMzQ1LTQ4ZjYtOWQxNy1jZTgwY2JkNjE3Y2IiLCJicmQ6Y3QiOiJjbGkiLCJleHAiOjkyMjMzNzIwMzY4NTQ3NzUsImlhdCI6MTU2Njg2MzY0OX0.FvLLDUSk1p7iFLJfg2kA-vwhDWTDulVjdj8YpFgnlE62OBFCYt4b3KeTND_qAhLynLKbGJ1UDpMMihsxtfvA0A"
         DispatchQueue.global(qos: .userInitiated).async {
             Backend.kvStore?.syncAllKeys { [weak self] error in
                 print("[KV] finished syncing. result: \(error == nil ? "ok" : error!.localizedDescription)")
@@ -178,7 +175,7 @@ class ApplicationController: Subscriber, Trackable {
                 guard let weakSelf = self else { return }
                 weakSelf.setWalletInfo(account: account)
                 weakSelf.coreSystem.create(account: account,
-                                           authToken: token,
+                                           authToken: UserDefaults.apiToken,
                                            btcWalletCreationCallback: weakSelf.handleDeferedLaunchURL) {
                     weakSelf.modalPresenter = ModalPresenter(keyStore: weakSelf.keyStore,
                                                              system: weakSelf.coreSystem,
