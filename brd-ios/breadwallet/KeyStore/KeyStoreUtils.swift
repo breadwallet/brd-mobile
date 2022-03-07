@@ -11,13 +11,13 @@
 import Foundation
 
 var WalletSecAttrService: String {
-    if E.isRunningTests { return "com.brd.testnetQA.tests" }
+    if E.isRunningTests { return "com.fabriik.one.testnetQA.tests" }
     #if TESTNET
-    return "com.brd.testnetQA"
+    return "com.fabriik.one.testnetQA"
     #elseif INTERNAL
-    return "com.brd.internalQA"
+    return "com.fabriik.one.internalQA"
     #else
-    return "org.voisine.breadwallet"
+    return "com.fabriik.one"
     #endif
 }
 
@@ -30,7 +30,7 @@ struct KeychainKey {
     public static let pinFailCount = "pinfailcount"
     public static let pinFailTime = "pinfailheight"
     public static let apiAuthKey = "authprivkey"
-    public static let apiUserAccount = "https://api.breadwallet.com"
+    public static let apiUserAccount = "https://one-dev.moneybutton.io/blocksatoshi/wallet"
     public static let bdbClientToken = "bdbClientToken3"
     public static let bdbAuthUser = "bdbAuthUser3"
     public static let bdbAuthToken = "bdbAuthToken3"

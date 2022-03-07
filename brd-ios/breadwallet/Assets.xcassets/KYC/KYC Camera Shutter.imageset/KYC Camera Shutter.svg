@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="76px" height="76px" viewBox="0 0 76 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>KYC Camera Shutter</title>
+    <g id="KYC-Camera-Shutter" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" fill="#282828" fill-rule="nonzero" x="0" y="0" width="76" height="76" rx="38"></rect>
+            <path d="M53.5834,47.9167 C53.5834,48.6681 53.2849,49.3888 52.7535,49.9201 C52.2222,50.4515 51.5015,50.75 50.7501,50.75 L25.2501,50.75 C24.4986,50.75 23.778,50.4515 23.2466,49.9201 C22.7153,49.3888 22.4167,48.6681 22.4167,47.9167 L22.4167,32.3333 C22.4167,31.5819 22.7153,30.8612 23.2466,30.3299 C23.778,29.7985 24.4986,29.5 25.2501,29.5 L30.9167,29.5 L33.7501,25.25 L42.2501,25.25 L45.0834,29.5 L50.7501,29.5 C51.5015,29.5 52.2222,29.7985 52.7535,30.3299 C53.2849,30.8612 53.5834,31.5819 53.5834,32.3333 L53.5834,47.9167 Z" id="Path" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M37.9999,45.0833 C41.1295,45.0833 43.6666,42.5463 43.6666,39.4167 C43.6666,36.2871 41.1295,33.75 37.9999,33.75 C34.8703,33.75 32.3333,36.2871 32.3333,39.4167 C32.3333,42.5463 34.8703,45.0833 37.9999,45.0833 Z" id="Path" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

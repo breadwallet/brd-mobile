@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "오류";
 /* Keystore error */
-"Alert.keystore.generic.android" = "귀하의 안드로이드 OS 키스토어에 문제가 있습니다, support@breadwallet.com로 연락해 주세요";
+"Alert.keystore.generic.android" = "귀하의 안드로이드 OS 키스토어에 문제가 있습니다, support@fabriik.com로 연락해 주세요";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "귀하의 안드로이드 잠금 화면이 꺼져서 귀하의 암호화 된 데이터가 최근 무효화 되었습니다.";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */

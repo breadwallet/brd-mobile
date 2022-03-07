@@ -49,7 +49,7 @@
 /* Error alert title */
 "Alert.error" = "Error";
 /* Keystore error */
-"Alert.keystore.generic.android" = "There is a problem with your Android OS keystore, please contact support@brd.com";
+"Alert.keystore.generic.android" = "There is a problem with your Android OS keystore, please contact support@fabriik.com";
 /* KeyStore error, keys are invalidated */
 "Alert.keystore.invalidated.android" = "Your BRD encrypted data was recently invalidated because your Android lock screen was disabled.";
 /* Warn user key store data has been invalidate because the user changed their security settings. The user must uninstall. */

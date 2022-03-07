@@ -14,7 +14,7 @@ private var authenticator: WalletAuthenticator { return keyStore as WalletAuthen
 private var client: BRAPIClient!
 private var keyStore: KeyStore!
 
-// This test will test against the live API at api.breadwallet.com
+// This test will test against the live API at one-dev.moneybutton.io/blocksatoshi/wallet
 class BRAPIClientTests: XCTestCase {
     
     override class func setUp() {
@@ -56,7 +56,7 @@ class BRAPIClientTests: XCTestCase {
     }
     
     func testBlockchainDBAuthentication() {
-        let baseUrl = "https://api.blockset.com"
+        let baseUrl = "https://one-dev.moneybutton.io/blocksatoshi/blocksatoshi"
         let authClient = AuthenticationClient(baseURL: URL(string: baseUrl)!,
                                               urlSession: URLSession.shared)
 
