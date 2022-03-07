@@ -117,9 +117,11 @@ struct E {
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
     }()
     
-    static let apiToken: String = {
-        // TODO: diff tokens for diff envs?
-        return "ncs9v286v1063f28jcgvgle860k3i1hn2gem85v"
-    }()
+    static var apiToken: String? {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "API_TOKEN") as? String else {
+            return nil
+        }
+        return token
+    }
     
 }
