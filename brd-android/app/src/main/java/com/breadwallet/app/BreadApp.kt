@@ -46,10 +46,7 @@ import com.brd.bakerapi.BakersApiClient
 import com.brd.prefs.AndroidPreferences
 import com.brd.prefs.Preferences
 import com.breadwallet.BuildConfig
-import com.breadwallet.breadbox.BdbAuthInterceptor
-import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.breadbox.BreadBoxCloseWorker
-import com.breadwallet.breadbox.CoreBreadBox
+import com.breadwallet.breadbox.*
 import com.breadwallet.corecrypto.CryptoApiProvider
 import com.breadwallet.crypto.CryptoApi
 import com.breadwallet.crypto.WalletManagerMode
@@ -57,35 +54,25 @@ import com.breadwallet.crypto.blockchaindb.BlockchainDb
 import com.breadwallet.installHooks
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.repository.ExperimentsRepository
 import com.breadwallet.repository.ExperimentsRepositoryImpl
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.crypto.Base32
 import com.breadwallet.tools.crypto.CryptoHelper
-import com.breadwallet.tools.manager.BRClipboardManager
-import com.breadwallet.tools.manager.BRReportsManager
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.tools.manager.ConnectivityStateProvider
-import com.breadwallet.tools.manager.InternetManager
-import com.breadwallet.tools.manager.NetworkCallbacksConnectivityStateProvider
-import com.breadwallet.tools.manager.RatesFetcher
+import com.breadwallet.tools.manager.*
 import com.breadwallet.tools.security.BRKeyStore
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.BrdUserState
 import com.breadwallet.tools.security.CryptoUserManager
 import com.breadwallet.tools.services.BRDFirebaseMessagingService
-import com.breadwallet.tools.util.BRConstants
-import com.breadwallet.tools.util.EventUtils
-import com.breadwallet.tools.util.ServerBundlesHelper
-import com.breadwallet.tools.util.SupportManager
-import com.breadwallet.tools.util.TokenUtil
+import com.breadwallet.tools.util.*
 import com.breadwallet.ui.uigift.GiftBackup
 import com.breadwallet.ui.uigift.SharedPrefsGiftBackup
+import com.breadwallet.util.*
 import com.breadwallet.util.usermetrics.UserMetricsUtil
 import com.platform.APIClient
 import com.platform.HTTPServer
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
-import com.breadwallet.util.*
 import com.platform.interfaces.KVStoreProvider
 import com.platform.interfaces.MetaDataManager
 import com.platform.interfaces.WalletProvider
@@ -95,23 +82,8 @@ import com.platform.tools.TokenHolder
 import drewcarlson.blockset.BdbService
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import okhttp3.OkHttpClient
 import org.kodein.di.DKodein
 import org.kodein.di.Kodein
@@ -123,7 +95,7 @@ import org.kodein.di.erased.instance
 import org.kodein.di.erased.singleton
 import java.io.File
 import java.io.UnsupportedEncodingException
-import java.util.Locale
+import java.util.*
 import java.util.regex.Pattern
 
 private const val LOCK_TIMEOUT = 180_000L // 3 minutes in milliseconds
@@ -165,7 +137,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         fun getDefaultEnabledWallets() = when {
             BuildConfig.BITCOIN_TESTNET -> listOf(
                 "bitcoin-testnet:__native__",
-                "ethereum-ropsten:__native__",
+                "ethereum-goerli:__native__",
                 "ethereum-ropsten:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
             )
             else -> listOf(
@@ -288,7 +260,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         bind<APIClient>() with singleton {
-            APIClient(this@BreadApp, direct.instance(), createHttpHeaders())
+            val interceptor = instance<FabriikAuthInterceptor>()
+            APIClient(this@BreadApp, direct.instance(), interceptor, createHttpHeaders())
         }
 
         bind<BrdUserManager>() with singleton {
@@ -316,13 +289,22 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             BdbAuthInterceptor(httpClient, direct.instance())
         }
 
+        bind<FabriikAuthInterceptor>() with singleton {
+            FabriikAuthInterceptor()
+        }
+
         bind<BlockchainDb>() with singleton {
             val httpClient = instance<OkHttpClient>()
             val authInterceptor = instance<BdbAuthInterceptor>()
+            val fabriikAuthInterceptor = instance<FabriikAuthInterceptor>()
+
             BlockchainDb(
                 httpClient.newBuilder()
                     .addInterceptor(authInterceptor)
-                    .build()
+                    .addInterceptor(fabriikAuthInterceptor)
+                    .build(),
+                FabriikApiConstants.HOST_BLOCKSATOSHI_API,
+                FabriikApiConstants.HOST_WALLET_API
             )
         }
 

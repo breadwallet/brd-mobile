@@ -25,13 +25,12 @@
 package com.breadwallet.tools.util
 
 import android.content.Context
-import com.breadwallet.appcore.BuildConfig
+import com.breadwallet.breadbox.FabriikApiConstants
 import com.breadwallet.logger.logError
 import com.breadwallet.model.TokenItem
 import com.breadwallet.theme.R
 import com.breadwallet.tools.manager.BRReportsManager
 import com.platform.APIClient.BRResponse
-import com.platform.APIClient.Companion.getBaseURL
 import com.platform.APIClient.Companion.getInstance
 import com.platform.util.getBooleanOrDefault
 import com.platform.util.getJSONArrayOrNull
@@ -134,7 +133,7 @@ object TokenUtil {
             .header(BRConstants.HEADER_CONTENT_TYPE, BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8)
             .header(BRConstants.HEADER_ACCEPT, BRConstants.CONTENT_TYPE_JSON)
             .build()
-        return getInstance(context).sendRequest(request, true)
+        return getInstance(context).sendRequest(request, false)
     }
 
     @Synchronized
@@ -174,7 +173,7 @@ object TokenUtil {
 
     private fun fetchTokensFromServer() {
         if (!isMainnet) return
-        val response = fetchTokensFromServer(getBaseURL() + ENDPOINT_CURRENCIES)
+        val response = fetchTokensFromServer(FabriikApiConstants.ENDPOINT_CURRENCIES)
         if (response.isSuccessful && response.bodyText.isNotEmpty()) {
             // Synchronize on the class object since getTokenItems is static and also synchronizes
             // on the class object rather than on an instance of the class.

@@ -604,7 +604,6 @@
 		CE8F0AE31EB91BB500AA7642 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F0AE21EB91BB500AA7642 /* SearchHeaderView.swift */; };
 		CE9057181DFF0FA8006BA848 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9057171DFF0FA8006BA848 /* String+Additions.swift */; };
 		CE90571A1DFF18B2006BA848 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9057191DFF18B2006BA848 /* ScanViewController.swift */; };
-		CE916E331EDA800E00D641D6 /* UserDefaultsUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916E321EDA800E00D641D6 /* UserDefaultsUpdater.swift */; };
 		CE92F9F01DED0C790046B516 /* PresentModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9EF1DED0C790046B516 /* PresentModalAnimator.swift */; };
 		CE92F9F41DED59E80046B516 /* UIView+AnimationAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9F31DED59E80046B516 /* UIView+AnimationAdditions.swift */; };
 		CE92F9F61DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9F51DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift */; };
@@ -1098,7 +1097,7 @@
 		7CF5319C231EE01300E61F12 /* Base32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base32.swift; path = src/Utilities/Base32.swift; sourceTree = "<group>"; };
 		7CF913BD1FFC7DC30085CB70 /* TxMemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TxMemoCell.swift; path = src/Views/TransactionCells/TxMemoCell.swift; sourceTree = "<group>"; };
 		7CF9988C23202C75004AEC17 /* BRAPIClient+Experiments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Experiments.swift"; path = "src/Platform/BRAPIClient+Experiments.swift"; sourceTree = "<group>"; };
-		7E09EA4027D60D2100B0268C /* testnet.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = testnet.xcconfig; sourceTree = "<group>"; };
+		7E09EA4027D60D2100B0268C /* config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		9A39B1222202AA3400E5018B /* HomeScreenCellHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeScreenCellHighlightView.swift; path = src/Views/AnimatedIcons/HomeScreenCellHighlightView.swift; sourceTree = "<group>"; };
 		9A39B1242202AE9E00E5018B /* MultiframeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiframeAnimation.swift; path = src/Views/AnimatedIcons/MultiframeAnimation.swift; sourceTree = "<group>"; };
 		9A926EEE22034B2E00CC2263 /* CellHighlight-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CellHighlight-29.png"; path = "src/Views/AnimatedIcons/Cell Highlight View Frames/CellHighlight-29.png"; sourceTree = "<group>"; };
@@ -1408,7 +1407,6 @@
 		CE8F0AE21EB91BB500AA7642 /* SearchHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchHeaderView.swift; path = src/Views/SearchHeaderView.swift; sourceTree = "<group>"; };
 		CE9057171DFF0FA8006BA848 /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Additions.swift"; path = "src/Extensions/String+Additions.swift"; sourceTree = "<group>"; };
 		CE9057191DFF18B2006BA848 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanViewController.swift; path = src/ViewControllers/ScanViewController.swift; sourceTree = "<group>"; };
-		CE916E321EDA800E00D641D6 /* UserDefaultsUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsUpdater.swift; path = src/UserDefaultsUpdater.swift; sourceTree = "<group>"; };
 		CE92F9EF1DED0C790046B516 /* PresentModalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentModalAnimator.swift; path = src/ViewControllers/ViewControllerTransitions/PresentModalAnimator.swift; sourceTree = "<group>"; };
 		CE92F9F31DED59E80046B516 /* UIView+AnimationAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+AnimationAdditions.swift"; path = "src/Extensions/UIView+AnimationAdditions.swift"; sourceTree = "<group>"; };
 		CE92F9F51DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewControllerContextTransitioning+BRAdditions.swift"; path = "src/Extensions/UIViewControllerContextTransitioning+BRAdditions.swift"; sourceTree = "<group>"; };
@@ -1862,7 +1860,7 @@
 		75A2A7871DA5934300A983D8 = {
 			isa = PBXGroup;
 			children = (
-				7E09EA4027D60D2100B0268C /* testnet.xcconfig */,
+				7E09EA4027D60D2100B0268C /* config.xcconfig */,
 				75A2A7921DA5934300A983D8 /* breadwallet */,
 				75A2A7A71DA5934300A983D8 /* breadwalletTests */,
 				75A2A7B21DA5934300A983D8 /* breadwalletUITests */,
@@ -1908,7 +1906,6 @@
 				CEE659E61F65A936001FF29D /* RetryTimer.swift */,
 				CE8CD8DC1E2D9EF200785E02 /* Sender.swift */,
 				CE4C1CC71ED88B600063E184 /* URLController.swift */,
-				CE916E321EDA800E00D641D6 /* UserDefaultsUpdater.swift */,
 				75A2A79A1DA5934300A983D8 /* Assets.xcassets */,
 				CE5E6C991EB9135000A476DB /* Icon.xcassets */,
 				3A6785EF256F2EF70065F835 /* ReceiveGift */,
@@ -3853,7 +3850,6 @@
 				CEEE92F11EBA7CBA00B7AC9C /* RequestAmountViewController.swift in Sources */,
 				CE8CD8DF1E2E825100785E02 /* VerifyPinViewController.swift in Sources */,
 				71A3170D229C70C00088F97C /* Theme.swift in Sources */,
-				CE916E331EDA800E00D641D6 /* UserDefaultsUpdater.swift in Sources */,
 				7CA238142011A97C00A4A59D /* TxDetailViewController.swift in Sources */,
 				CE20C9111DBE5B6F00C8397A /* Circle.swift in Sources */,
 				CE65C665207B0BEF000C99C4 /* ManageCurrencyCell.swift in Sources */,
@@ -4456,6 +4452,7 @@
 		};
 		75A2A7E41DA5934400A983D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one;
@@ -4502,6 +4499,7 @@
 		};
 		75A2A7E51DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one;
@@ -4715,6 +4713,7 @@
 		};
 		7CF5933621B9B14900A49FED /* Debug-Internal */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one.internalQA;
@@ -4931,6 +4930,7 @@
 		};
 		7CF5934221B9B15D00A49FED /* Release-Internal */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one.internalQA;
@@ -5151,6 +5151,7 @@
 		};
 		7CF5934E21B9C1AD00A49FED /* Release-Testnet */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one.testnetQA;
@@ -6182,7 +6183,7 @@
 		};
 		CEA7E69C1F0AAA84001F8C27 /* Debug-Testnet */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* testnet.xcconfig */;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one.testnetQA;
@@ -6399,6 +6400,7 @@
 		};
 		CEE0EF551EBF8D7F0018DB36 /* Release-Testflight */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E09EA4027D60D2100B0268C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_GROUPS_ID = com.fabriik.one;
