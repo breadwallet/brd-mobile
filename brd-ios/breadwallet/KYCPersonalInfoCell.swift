@@ -15,7 +15,7 @@ class KYCPersonalInfoCell: UITableViewCell, GenericSettable {
     private lazy var dateOfBirthField: SimpleTextField = {
         let dateOfBirthField = SimpleTextField()
         dateOfBirthField.translatesAutoresizingMaskIntoConstraints = false
-        dateOfBirthField.setup(as: .picker, title: "DATE OF BIRTH", customPlaceholder: "DD/MM/YYYY")
+        dateOfBirthField.setup(as: .picker, textFieldType: .none, title: "DATE OF BIRTH", customPlaceholder: "DD/MM/YYYY")
         dateOfBirthField.textField.addTarget(self, action: #selector(showDateOfBirthPicker(_:)),
                                              for: .touchDown)
         
@@ -25,7 +25,7 @@ class KYCPersonalInfoCell: UITableViewCell, GenericSettable {
     private lazy var taxIdNumberField: SimpleTextField = {
         let taxIdNumberField = SimpleTextField()
         taxIdNumberField.translatesAutoresizingMaskIntoConstraints = false
-        taxIdNumberField.setup(as: .numbers, title: "TAX ID NUMBER", customPlaceholder: "000 000 000")
+        taxIdNumberField.setup(as: .numbers, textFieldType: .none, title: "TAX ID NUMBER", customPlaceholder: "000 000 000")
         
         return taxIdNumberField
     }()

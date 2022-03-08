@@ -18,7 +18,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var countryField: SimpleTextField = {
         let countryField = SimpleTextField()
         countryField.translatesAutoresizingMaskIntoConstraints = false
-        countryField.setup(as: .picker, title: "COUNTRY", customPlaceholder: "Country")
+        countryField.setup(as: .picker, textFieldType: .none, title: "COUNTRY", customPlaceholder: "Country")
         countryField.textField.addTarget(self, action: #selector(showCountryPicker(_:)),
                                          for: .touchDown)
         
@@ -28,7 +28,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var zipCodeField: SimpleTextField = {
         let zipCodeField = SimpleTextField()
         zipCodeField.translatesAutoresizingMaskIntoConstraints = false
-        zipCodeField.setup(as: .text, title: "ZIP CODE", customPlaceholder: "000 000")
+        zipCodeField.setup(as: .text, textFieldType: .none, title: "ZIP CODE", customPlaceholder: "000 000")
         
         return zipCodeField
     }()
@@ -36,7 +36,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var addressField: SimpleTextField = {
         let addressField = SimpleTextField()
         addressField.translatesAutoresizingMaskIntoConstraints = false
-        addressField.setup(as: .text, title: "ADDRESS", customPlaceholder: "Street Number and Name")
+        addressField.setup(as: .text, textFieldType: .none, title: "ADDRESS", customPlaceholder: "Street Number and Name")
         
         return addressField
     }()
@@ -44,7 +44,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var apartmentField: SimpleTextField = {
         let apartmentField = SimpleTextField()
         apartmentField.translatesAutoresizingMaskIntoConstraints = false
-        apartmentField.setup(as: .text, title: "", customPlaceholder: "Unit/Apartment")
+        apartmentField.setup(as: .text, textFieldType: .none, title: "", customPlaceholder: "Unit/Apartment")
         
         return apartmentField
     }()
@@ -52,7 +52,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var cityField: SimpleTextField = {
         let cityField = SimpleTextField()
         cityField.translatesAutoresizingMaskIntoConstraints = false
-        cityField.setup(as: .text, title: "CITY", customPlaceholder: "City")
+        cityField.setup(as: .text, textFieldType: .none, title: "CITY", customPlaceholder: "City")
         
         return cityField
     }()
@@ -60,7 +60,7 @@ class KYCAddressFieldsCell: UITableViewCell, GenericSettable {
     private lazy var stateField: SimpleTextField = {
         let stateField = SimpleTextField()
         stateField.translatesAutoresizingMaskIntoConstraints = false
-        stateField.setup(as: .picker, title: "STATE", customPlaceholder: "State")
+        stateField.setup(as: .picker, textFieldType: .none, title: "STATE", customPlaceholder: "State")
         stateField.textField.addTarget(self, action: #selector(showStatesPicker(_:)),
                                        for: .touchDown)
         

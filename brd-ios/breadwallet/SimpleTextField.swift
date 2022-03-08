@@ -9,7 +9,13 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         case text, numbers, picker
     }
     
+    enum TextFieldType {
+        case email, password, none
+    }
+    
     private var fieldType: FieldType = .text
+    private var textFieldType: TextFieldType = .none
+    
     private lazy var rightButton: UIButton = {
         let rightButton = UIButton()
         rightButton.translatesAutoresizingMaskIntoConstraints = false
@@ -51,8 +57,9 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    func setup(as fieldType: FieldType, title: String, customPlaceholder: String? = nil) {
+    func setup(as fieldType: FieldType, textFieldType: TextFieldType, title: String, customPlaceholder: String? = nil) {
         self.fieldType = fieldType
+        self.textFieldType = textFieldType
         
         textField.attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "",
                                                              attributes: [.foregroundColor: UIColor.kycGray1,
@@ -90,6 +97,21 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         }
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard textField.text != nil else { return }
+        
+        switch textFieldType {
+        case .email, .password:
+            textField.layer.borderColor = (isValid ? UIColor.green.cgColor  : UIColor.red.cgColor)
+            rightButton.setImage(UIImage(named: "checkMark"), for: .normal)
+            rightButton.isUserInteractionEnabled = false
+            rightButton.isHidden = !isValid
+            textField.inputView = UIView()
+            rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -10).isActive = true
+        case .none: break
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch fieldType {
         case .numbers:
@@ -103,6 +125,21 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             return true
             
         }
+    }
+    
+    var isValid: Bool {
+        guard let text = textField.text else { return false }
+        var isValid = false
+        
+        switch textFieldType {
+        case .email:
+            isValid = text.isValidEmailAddress
+        case .password:
+            isValid = text.count >= 8
+        case .none:
+            isValid = true
+        }
+        return isValid
     }
     
     private func setupElements() {

@@ -6,14 +6,14 @@ import UIKit
 
 protocol SignInDisplayLogic: class {
     // MARK: Display logic functions
+    
+    func displayLogin(viewModel: SignIn.LoginData.ViewModel)
+    func displayError(viewModel: GenericModels.Error.ViewModel)
 }
 
 class SignInViewController: UIViewController, SignInDisplayLogic {
     var interactor: SignInBusinessLogic?
     var router: (NSObjectProtocol & SignInRoutingLogic)?
-    
-    var didChangeEmailField: ((String?) -> Void)?
-    var didChangePasswordField: ((String?) -> Void)?
     
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -56,7 +56,6 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         
         let backItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(backButtonTapped))
         navigationController?.navigationBar.topItem?.leftBarButtonItem = backItem
-        
         setupUI()
     }
     
@@ -66,7 +65,7 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 15
+        stack.spacing = 18
         return stack
     }()
     
@@ -83,24 +82,15 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
     private lazy var emailField: SimpleTextField = {
         let textField = SimpleTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setup(as: .text, title: "EMAIL", customPlaceholder: "Email")
+        textField.setup(as: .text, textFieldType: .email, title: "EMAIL", customPlaceholder: "Email")
         return textField
     }()
     
     private lazy var passwordField: SimpleTextField = {
         let textField = SimpleTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setup(as: .text, title: "PASSWORD", customPlaceholder: "Password")
+        textField.setup(as: .text, textFieldType: .password, title: "PASSWORD", customPlaceholder: "Password")
         return textField
-    }()
-    
-    private lazy var forgotPasswordButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.setTitleColor(.kycGray2, for: .normal)
-        button.setTitle("Forgot password?", for: .normal)
-        return button
     }()
     
     private lazy var submitButton: KYCButton = {
@@ -146,22 +136,14 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(emailField)
-        stack.addArrangedSubview(forgotPasswordButton)
-        forgotPasswordButton.trailingAnchor.constraint(equalTo: stack.trailingAnchor).isActive = true
-        forgotPasswordButton.topAnchor.constraint(equalTo: forgotPasswordButton.topAnchor, constant: C.Sizes.brdLogoHeight).isActive = true
-        
         stack.addArrangedSubview(passwordField)
         stack.addArrangedSubview(submitButton)
         submitButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         stack.addArrangedSubview(signUpLabel)
         
-        emailField.didChangeText = { [weak self] text in
-            self?.didChangeEmailField?(text)
-        }
-        
-        passwordField.didChangeText = { [weak self] text in
-            self?.didChangePasswordField?(text)
+        submitButton.didTap = { [weak self] in
+            self?.interactor?.login(request: .init(email: self?.emailField.textField.text, password: self?.passwordField.textField.text))
         }
     }
     
@@ -171,5 +153,16 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
     
     @objc fileprivate func backButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    func displayLogin(viewModel: SignIn.LoginData.ViewModel) {
+       // displayLogin
+    }
+    
+    func displayError(viewModel: GenericModels.Error.ViewModel) {
+        LoadingView.hide()
+        let alert = UIAlertController(style: .alert, message: viewModel.error)
+        alert.addAction(title: "OK", style: .cancel)
+        alert.show(on: self)
     }
 }

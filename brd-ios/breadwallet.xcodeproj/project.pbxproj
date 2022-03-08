@@ -2526,14 +2526,22 @@
 		C461962C27D60F10007F6778 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				C488CAF127D76A9800CB6D56 /* Workers */,
 				C461962D27D60F85007F6778 /* SignInPresenter.swift */,
-				C461962E27D60F85007F6778 /* SignInWorker.swift */,
 				C461962F27D60F85007F6778 /* SignInRouter.swift */,
 				C461963027D60F85007F6778 /* SignInModels.swift */,
 				C461963127D60F85007F6778 /* SignInViewController.swift */,
 				C461963227D60F85007F6778 /* SignInInteractor.swift */,
 			);
 			name = SignIn;
+			sourceTree = "<group>";
+		};
+		C488CAF127D76A9800CB6D56 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				C461962E27D60F85007F6778 /* SignInWorker.swift */,
+			);
+			name = Workers;
 			sourceTree = "<group>";
 		};
 		CE1E5F241EF081F300BD0F72 /* Import */ = {
