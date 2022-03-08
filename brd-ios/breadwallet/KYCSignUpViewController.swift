@@ -10,6 +10,7 @@ protocol KYCSignUpDisplayLogic: class {
     func displayGetDataForPickerView(viewModel: KYCSignUp.GetDataForPickerView.ViewModel)
     func displaySetPickerValue(viewModel: KYCSignUp.SetPickerValue.ViewModel)
     func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel)
+    func displayShouldEnableSubmit(viewModel: KYCSignUp.ShouldEnableSubmit.ViewModel)
     func displayError(viewModel: GenericModels.Error.ViewModel)
 }
 
@@ -139,11 +140,20 @@ class KYCSignUpViewController: UIViewController, KYCSignUpDisplayLogic, UITableV
                                email: nil,
                                phonePrefix: viewModel.viewModel.phonePrefix,
                                phoneNumber: nil,
-                               password: nil))
+                               password: nil,
+                               tickBox: nil))
+    }
+    
+    func displayShouldEnableSubmit(viewModel: KYCSignUp.ShouldEnableSubmit.ViewModel) {
+        guard let index = sections.firstIndex(of: .fields) else { return }
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCSignUpCell else { return }
+        
+        let style: KYCButton.ButtonStyle = viewModel.shouldEnable ? .enabled : .disabled
+        cell.changeButtonStyle(with: style)
     }
     
     func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel) {
-//
+        print("amazing stuff")
     }
     
     func displayError(viewModel: GenericModels.Error.ViewModel) {

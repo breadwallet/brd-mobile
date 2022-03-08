@@ -10,6 +10,7 @@ protocol KYCSignUpPresentationLogic {
     func presentGetDataForPickerView(response: KYCSignUp.GetDataForPickerView.Response)
     func presentSetPickerValue(response: KYCSignUp.SetPickerValue.Response)
     func presentSubmitData(response: KYCSignUp.SubmitData.Response)
+    func presentShouldEnableSubmit(response: KYCSignUp.ShouldEnableSubmit.Response)
     func presentError(response: GenericModels.Error.Response)
 }
 
@@ -19,8 +20,8 @@ class KYCSignUpPresenter: KYCSignUpPresentationLogic {
     // MARK: Presenter functions
     
     func presentGetDataForPickerView(response: KYCSignUp.GetDataForPickerView.Response) {
-        let countryTitleValues = Constants.Countries.names
-        let countryCodes = Constants.Countries.codes
+        let countryTitleValues = Constants.CountryCodes.names
+        let countryCodes = Constants.CountryCodes.codes
         
         switch response.type {
         case .phonePrefix:
@@ -40,11 +41,16 @@ class KYCSignUpPresenter: KYCSignUpPresentationLogic {
                                                                                 email: nil,
                                                                                 phonePrefix: response.phonePrefix,
                                                                                 phoneNumber: nil,
-                                                                                password: nil)))
+                                                                                password: nil,
+                                                                                tickBox: nil)))
     }
     
     func presentSubmitData(response: KYCSignUp.SubmitData.Response) {
         viewController?.displaySubmitData(viewModel: .init())
+    }
+    
+    func presentShouldEnableSubmit(response: KYCSignUp.ShouldEnableSubmit.Response) {
+        viewController?.displayShouldEnableSubmit(viewModel: .init(shouldEnable: response.shouldEnable))
     }
     
     func presentError(response: GenericModels.Error.Response) {

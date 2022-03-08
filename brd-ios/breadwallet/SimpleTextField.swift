@@ -77,6 +77,7 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             
         case .email:
             textField.keyboardType = .emailAddress
+            textField.autocorrectionType = .no
             
         case .password:
             textField.isSecureTextEntry = true

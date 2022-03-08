@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import CommonCrypto
 
 protocol KYCSignUpBusinessLogic {
     // MARK: Business logic functions
@@ -22,8 +23,9 @@ protocol KYCSignUpDataStore {
     var email: String? { get set }
     var phonePrefix: String? { get set }
     var phoneNumber: String? { get set }
+    var passwordOriginal: String? { get set }
     var password: String? { get set }
-    var tickBox: Bool { get set }
+    var tickBox: Bool? { get set }
     
     var phonePrefixSelectedIndex: PickerViewViewController.Index? { get set }
     var phonePrefixName: String? { get set }
@@ -41,8 +43,9 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
     var email: String?
     var phonePrefix: String?
     var phoneNumber: String?
+    var passwordOriginal: String?
     var password: String?
-    var tickBox: Bool
+    var tickBox: Bool?
     
     var phonePrefixSelectedIndex: PickerViewViewController.Index?
     var phonePrefixName: String?
@@ -50,26 +53,24 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
     var fieldValidationIsAllowed = [KYCSignUp.FieldType: Bool]()
     
     func executeSubmitData(request: KYCSignUp.SubmitData.Request) {
-//        let worker = KYCPostPersonalInformationWorker()
-//        let workerUrlModelData = KYCPostPersonalInformationWorkerUrlModelData()
-//        let workerRequest = KYCPostPersonalInformationWorkerRequest(street: (address ?? "") + " " + (apartment ?? ""),
-//                                                                    city: city,
-//                                                                    state: state,
-//                                                                    zip: zipCode,
-//                                                                    country: country,
-//                                                                    dateOfBirth: dateOfBirth,
-//                                                                    taxIdNumber: taxIdNumber)
-//        let workerData = KYCPostPersonalInformationWorkerData(workerRequest: workerRequest,
-//                                                              workerUrlModelData: workerUrlModelData)
-//
-//        worker.execute(requestData: workerData) { [weak self] error in
-//            guard error == nil else {
-//                self?.presenter?.presentError(response: .init(error: error))
-//                return
-//            }
-//
-//            self?.presenter?.presentSubmitData(response: .init())
-//        }
+        let worker = KYCSignUpWorker()
+        let workerUrlModelData = KYCSignUpWorkerUrlModelData()
+        let workerRequest = KYCSignUpWorkerRequest(firstName: firstName,
+                                                   lastName: lastName,
+                                                   email: email,
+                                                   phone: (phonePrefix ?? "").replacingOccurrences(of: "+", with: "") + (phoneNumber ?? ""),
+                                                   password: password)
+        let workerData = KYCSignUpWorkerData(workerRequest: workerRequest,
+                                             workerUrlModelData: workerUrlModelData)
+        
+        worker.execute(requestData: workerData) { [weak self] error in
+            guard error == nil else {
+                self?.presenter?.presentError(response: .init(error: error))
+                return
+            }
+            
+            self?.presenter?.presentSubmitData(response: .init())
+        }
     }
     
     func executeGetDataForPickerView(request: KYCSignUp.GetDataForPickerView.Request) {
@@ -87,12 +88,11 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
     func executeCheckFieldPickerIndex(request: KYCSignUp.CheckFieldPickerIndex.Request) {
         let index = request.index
         let fieldValues = request.fieldValues
-        let pickerValues = request.pickerValues
         
         switch request.type {
         case .phonePrefix:
             phonePrefix = index == nil ? nil : fieldValues[index?.row ?? 0]
-            phonePrefixName = index == nil ? nil : pickerValues[index?.row ?? 0]
+            phonePrefixName = index == nil ? nil : fieldValues[index?.row ?? 0]
             phonePrefixSelectedIndex = index
             
         default:
@@ -121,13 +121,29 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
             phoneNumber = request.text
             
         case .password:
-            password = request.text
+            passwordOriginal = request.text
+            password = hashSHA512(data: Data((request.text ?? "").utf8))
             
         default:
             break
         }
         
         checkCredentials()
+    }
+    
+    private func hashSHA512(data: Data) -> String? {
+        var hashData = Data(count: Int(CC_SHA512_DIGEST_LENGTH))
+        
+        _ = hashData.withUnsafeMutableBytes {digestBytes in
+            data.withUnsafeBytes {messageBytes in
+                CC_SHA512(messageBytes, CC_LONG(data.count), digestBytes)
+            }
+        }
+        
+        // For hexadecimal output:
+        return hashData.map { String(format: "%02hhx", $0) }.joined()
+        // For Base64 output use this instead of the above:
+        // return data.base64EncodedString()
     }
     
     func executeCheckTickBox(request: KYCSignUp.CheckTickBox.Request) {
@@ -143,6 +159,53 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
     }
     
     private func checkCredentials() {
-        // TODO: - Implement.....
+        var validationValues = [Bool]()
+        validationValues.append(!firstName.isNilOrEmpty)
+        validationValues.append(!lastName.isNilOrEmpty)
+        validationValues.append(!email.isNilOrEmpty)
+        validationValues.append(!phonePrefix.isNilOrEmpty)
+        validationValues.append(!phoneNumber.isNilOrEmpty)
+        validationValues.append(tickBox == true)
+        validationValues.append(validatePasswordUsingRegex())
+        validationValues.append(validatePhoneNumberUsingRegex())
+        validationValues.append(validateEmailUsingRegex())
+        validationValues.append(contentsOf: fieldValidationIsAllowed.values)
+        
+        let shouldEnable = !validationValues.contains(false)
+        
+        presenter?.presentShouldEnableSubmit(response: .init(shouldEnable: shouldEnable))
+    }
+    
+    private func validatePasswordUsingRegex() -> Bool {
+        guard let passwordOriginal = passwordOriginal else { return false }
+        
+        let numberFormat = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+        let numberPredicate = NSPredicate(format: "SELF MATCHES %@", numberFormat)
+        
+        let isViable = numberPredicate.evaluate(with: passwordOriginal)
+        
+        return isViable
+    }
+    
+    private func validatePhoneNumberUsingRegex() -> Bool {
+        guard let phonePrefix = phonePrefix, let phoneNumber = phoneNumber else { return false }
+        
+        let numberFormat = "^\\+[1-9][0-9]{5,20}$"
+        let numberPredicate = NSPredicate(format: "SELF MATCHES %@", numberFormat)
+        
+        let isViable = numberPredicate.evaluate(with: phonePrefix + phoneNumber)
+        
+        return isViable
+    }
+    
+    private func validateEmailUsingRegex() -> Bool {
+        guard !email.isNilOrEmpty else { return false }
+        
+        let emailFormat = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailFormat)
+        
+        let isViable = emailPredicate.evaluate(with: email)
+        
+        return isViable
     }
 }

@@ -2069,14 +2069,14 @@
 		7B626F7127D1411D0077BAE3 /* EQNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				7B626F7B27D1411D0077BAE3 /* Worker */,
+				7B626F7727D1411D0077BAE3 /* Models */,
 				7B626F7227D1411D0077BAE3 /* KYCAPI.swift */,
 				7B626F7327D1411D0077BAE3 /* NetworkingError.swift */,
 				7B626F7427D1411D0077BAE3 /* APIURLHandler.swift */,
 				7B626F7527D1411D0077BAE3 /* Decodable+Extensions.swift */,
 				7B626F7627D1411D0077BAE3 /* HttpRequest.swift */,
-				7B626F7727D1411D0077BAE3 /* Models */,
 				7B626F7A27D1411D0077BAE3 /* HTTPRequestHelpers.swift */,
-				7B626F7B27D1411D0077BAE3 /* Worker */,
 				7B626F7F27D1411D0077BAE3 /* HttpRequestManager.swift */,
 			);
 			path = EQNetworking;

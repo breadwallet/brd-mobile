@@ -14,7 +14,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         let phonePrefix: String?
         let phoneNumber: String?
         let password: String?
-        let tickBox: String
+        let tickBox: Bool?
     }
     
     private lazy var titleLabel: UILabel = {
@@ -65,7 +65,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
     private lazy var phoneNumberField: SimpleTextField = {
         let phoneNumberField = SimpleTextField()
         phoneNumberField.translatesAutoresizingMaskIntoConstraints = false
-        phoneNumberField.setup(as: .text, title: "", customPlaceholder: "(000)-000-0000")
+        phoneNumberField.setup(as: .numbers, title: "", customPlaceholder: "(000)-000-0000")
         
         return phoneNumberField
     }()
@@ -73,7 +73,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
     private lazy var passwordField: SimpleTextField = {
         let passwordField = SimpleTextField()
         passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.setup(as: .text, title: "PASSWORD", customPlaceholder: "Minimum 8 characters")
+        passwordField.setup(as: .password, title: "PASSWORD", customPlaceholder: "Minimum 8 characters")
         
         return passwordField
     }()
@@ -88,7 +88,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
     private lazy var nextButton: KYCButton = {
         let nextButton = KYCButton()
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.setup(as: .normal, title: "NEXT")
+        nextButton.setup(as: .disabled, title: "NEXT")
         
         return nextButton
     }()
@@ -134,13 +134,13 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         phonePrefixField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: defaultDistance).isActive = true
         phonePrefixField.leadingAnchor.constraint(equalTo: firstNameField.leadingAnchor).isActive = true
         phonePrefixField.heightAnchor.constraint(equalTo: firstNameField.heightAnchor).isActive = true
-        phonePrefixField.widthAnchor.constraint(equalTo: firstNameField.widthAnchor, multiplier: 0.24).isActive = true
+        phonePrefixField.widthAnchor.constraint(equalToConstant: 94).isActive = true
         
         addSubview(phoneNumberField)
         phoneNumberField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: defaultDistance).isActive = true
+        phoneNumberField.leadingAnchor.constraint(equalTo: phonePrefixField.trailingAnchor, constant: 4).isActive = true
         phoneNumberField.trailingAnchor.constraint(equalTo: firstNameField.trailingAnchor).isActive = true
         phoneNumberField.heightAnchor.constraint(equalTo: firstNameField.heightAnchor).isActive = true
-        phoneNumberField.widthAnchor.constraint(equalTo: firstNameField.widthAnchor, multiplier: 0.74).isActive = true
         
         addSubview(passwordField)
         passwordField.topAnchor.constraint(equalTo: phonePrefixField.bottomAnchor, constant: defaultDistance).isActive = true
@@ -181,8 +181,8 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
             self?.didChangePasswordField?(text)
         }
         
-        tickBoxView.didTick = { weak self tickStatus in
-            didTickPrivacyPolicy?(tickStatus)
+        tickBoxView.didTick = { [weak self] tickStatus in
+            self?.didTickPrivacyPolicy?(tickStatus)
         }
         
         nextButton.didTap = { [weak self] in
@@ -222,5 +222,9 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         if let tickBox = model.tickBox {
             tickBoxView.toggle(with: tickBox)
         }
+    }
+    
+    func changeButtonStyle(with style: KYCButton.ButtonStyle) {
+        nextButton.changeStyle(with: style)
     }
 }

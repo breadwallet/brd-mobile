@@ -20,7 +20,7 @@ class KYCTutorial2CollectionViewCell: KYCTutorialBaseCell {
         
         imageView.image = UIImage(named: "Tutorial2")
         
-        nextButton.setup(as: .normal, title: "BEGIN")
+        nextButton.setup(as: .enabled, title: "BEGIN")
         nextButton.didTap = { [weak self] in
             self?.didTapCloseButton?()
         }

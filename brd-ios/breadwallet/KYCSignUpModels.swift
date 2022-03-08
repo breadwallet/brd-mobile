@@ -70,4 +70,13 @@ enum KYCSignUp {
         struct Response {}
         struct ViewModel {}
     }
+    
+    enum ShouldEnableSubmit {
+        struct Response {
+            let shouldEnable: Bool
+        }
+        struct ViewModel {
+            let shouldEnable: Bool
+        }
+    }
 }

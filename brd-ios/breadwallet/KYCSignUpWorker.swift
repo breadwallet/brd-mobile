@@ -11,8 +11,20 @@ struct KYCSignUpWorkerUrlModelData: UrlModelData {
 }
 
 struct KYCSignUpWorkerRequest: RequestModelData {
+    let firstName: String?
+    let lastName: String?
+    let email: String?
+    let phone: String?
+    let password: String?
+    
     func getParameters() -> [String: Any] {
-        return [:]
+        return [
+            "first_name": firstName ?? "",
+            "last_name": lastName ?? "",
+            "email": email ?? "",
+            "phone": phone ?? "",
+            "encryptsha512hex_password": password ?? "",
+        ]
     }
 }
 
@@ -31,9 +43,7 @@ struct KYCSignUpWorkerData: RequestModelData, UrlModelData {
 
 class KYCSignUpWorker: KYCBasePlainResponseWorker {
     override func getUrl() -> String {
-        guard let urlParams = (requestData as? KYCSignUpWorkerData)?.urlParameters() else { return "" }
-        
-        return APIURLHandler.getUrl(KYCAuthEndpoints.register, parameters: urlParams)
+        return APIURLHandler.getUrl(KYCAuthEndpoints.register)
     }
     
     override func getMethod() -> EQHTTPMethod {
