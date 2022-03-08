@@ -6,7 +6,7 @@ import UIKit
 
 class SimpleTextField: UIView, UITextFieldDelegate {
     enum FieldType {
-        case text, numbers, picker
+        case text, numbers, password, email, picker
     }
     
     private var fieldType: FieldType = .text
@@ -74,6 +74,12 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             rightButton.setImage(UIImage(named: "KYC Dropdown Arrow"), for: .normal)
             rightButton.isUserInteractionEnabled = false
             textField.inputView = UIView()
+            
+        case .email:
+            textField.keyboardType = .emailAddress
+            
+        case .password:
+            textField.isSecureTextEntry = true
             
         }
         
