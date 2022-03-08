@@ -2135,7 +2135,7 @@
       "#5e6fa5"
     ],
     "type": "",
-    "currency_id": "ethereum-ropsten:__native__"
+    "currency_id": "ethereum-goerli:__native__"
   },
   {
     "code": "PAX",

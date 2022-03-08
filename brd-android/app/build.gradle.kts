@@ -20,6 +20,7 @@ apply(from = rootProject.file("gradle/google-services.gradle"))
 apply(from = rootProject.file("gradle/copy-font-files.gradle"))
 
 val BDB_CLIENT_TOKEN: String by project
+val FABRIIK_CLIENT_TOKEN: String by project
 val useGoogleServices: Boolean by ext
 
 redacted {
@@ -41,6 +42,7 @@ android {
         targetSdkVersion(BrdRelease.ANDROID_TARGET_SDK)
         buildConfigField("int", "BUILD_VERSION", "${BrdRelease.buildVersion}")
         buildConfigField("String", "BDB_CLIENT_TOKEN", BDB_CLIENT_TOKEN)
+        buildConfigField("String", "FABRIIC_CLIENT_TOKEN", FABRIIK_CLIENT_TOKEN)
         buildConfigField("Boolean", "USE_REMOTE_CONFIG", useGoogleServices.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument("clearPackageData", "true")
