@@ -117,11 +117,18 @@ struct E {
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
     }()
     
-    static var apiToken: String? {
+    static var apiToken: String {
         guard let token = Bundle.main.object(forInfoDictionaryKey: "API_TOKEN") as? String else {
-            return nil
+            fatalError("Env not configured properly")
         }
         return token
+    }
+    
+    static var apiUrl: String {
+        guard let url = Bundle.main.object(forInfoDictionaryKey: "API_URL") as? String else {
+            fatalError("Env not configured properly")
+        }
+        return url
     }
     
 }

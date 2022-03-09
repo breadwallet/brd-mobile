@@ -4,6 +4,8 @@
 <dict>
 	<key>API_TOKEN</key>
 	<string>$(API_TOKEN)</string>
+	<key>API_URL</key>
+	<string>$(API_URL)</string>
 	<key>APP_GROUPS_ID</key>
 	<string>group.${APP_GROUPS_ID}</string>
 	<key>CFBundleDevelopmentRegion</key>
