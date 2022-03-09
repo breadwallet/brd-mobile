@@ -144,6 +144,7 @@
 		75A2A79B1DA5934300A983D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79A1DA5934300A983D8 /* Assets.xcassets */; };
 		75A2A79E1DA5934300A983D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */; };
 		75A2A7B41DA5934300A983D8 /* breadwalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7B31DA5934300A983D8 /* breadwalletUITests.swift */; };
+		7B2C9AFC27D9270B00D5135C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B2C9AFB27D9270B00D5135C /* IQKeyboardManagerSwift */; };
 		7B626F8027D1411D0077BAE3 /* KYCAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7227D1411D0077BAE3 /* KYCAPI.swift */; };
 		7B626F8127D1411D0077BAE3 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7327D1411D0077BAE3 /* NetworkingError.swift */; };
 		7B626F8227D1411D0077BAE3 /* APIURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B626F7427D1411D0077BAE3 /* APIURLHandler.swift */; };
@@ -1557,6 +1558,7 @@
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				9F1143AE261B035300848E7B /* CoinGecko in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
+				7B2C9AFC27D9270B00D5135C /* IQKeyboardManagerSwift in Frameworks */,
 				9F18E567261630EB00698ADB /* Cosmos.xcframework in Frameworks */,
 				22717B062315D3E300F77F4E /* CloudKit.framework in Frameworks */,
 				223DB21B1DF69F0F0076A151 /* libbz2.framework in Frameworks */,
@@ -3118,6 +3120,7 @@
 			packageProductDependencies = (
 				3A0C6087242A5CC900F0FBC2 /* WalletKit */,
 				3A858B29250A781700812B36 /* CoinGecko */,
+				7B2C9AFB27D9270B00D5135C /* IQKeyboardManagerSwift */,
 			);
 			productName = breadwallet;
 			productReference = 75A2A7901DA5934300A983D8 /* breadwallet.app */;
@@ -3311,6 +3314,7 @@
 			mainGroup = 75A2A7871DA5934300A983D8;
 			packageReferences = (
 				3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */,
+				7B2C9AFA27D9270B00D5135C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 75A2A7911DA5934300A983D8 /* Products */;
 			projectDirPath = "";
@@ -6739,6 +6743,14 @@
 				version = 1.0.2;
 			};
 		};
+		7B2C9AFA27D9270B00D5135C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -6750,6 +6762,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A858B28250A781700812B36 /* XCRemoteSwiftPackageReference "coingecko" */;
 			productName = CoinGecko;
+		};
+		7B2C9AFB27D9270B00D5135C /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B2C9AFA27D9270B00D5135C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		9F3C2FA625DA7F1C00C7C398 /* CoinGecko */ = {
 			isa = XCSwiftPackageProductDependency;
