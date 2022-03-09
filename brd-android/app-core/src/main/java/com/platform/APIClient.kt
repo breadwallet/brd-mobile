@@ -41,6 +41,7 @@ import android.os.NetworkOnMainThreadException
 import androidx.annotation.VisibleForTesting
 
 import com.breadwallet.appcore.BuildConfig
+import com.breadwallet.breadbox.FabriikApiConstants
 import com.breadwallet.crypto.Key
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
@@ -69,10 +70,6 @@ import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-import okhttp3.OkHttpClient
-import okhttp3.Protocol
-import okhttp3.Request
-import okhttp3.Response
 import okio.Buffer
 
 import com.breadwallet.tools.util.BRConstants.CONTENT_TYPE_JSON_CHARSET_UTF8
@@ -80,6 +77,7 @@ import com.breadwallet.tools.util.BRConstants.DATE
 import com.breadwallet.tools.util.BRConstants.HEADER_ACCEPT
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -89,15 +87,10 @@ import org.kodein.di.erased.instance
 
 private const val UNAUTHED_HTTP_STATUS = 401
 
-// The server(s) on which the API is hosted
-private val HOST = when {
-    BuildConfig.DEBUG -> "stage2.breadwallet.com"
-    else -> "api.breadwallet.com"
-}
-
 class APIClient(
     private var context: Context,
     private val userManager: BrdUserManager,
+    private val interceptor: Interceptor,
     headers: Map<String, String>
 ) {
 
@@ -127,6 +120,7 @@ class APIClient(
             .connectTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .readTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .writeTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
             .build()
     }
 
@@ -594,7 +588,7 @@ class APIClient(
                         return host
                     }
                 }
-                return HOST
+                return FabriikApiConstants.HOST
             }
 
         @JvmStatic

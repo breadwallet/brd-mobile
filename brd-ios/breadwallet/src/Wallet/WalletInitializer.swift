@@ -1,4 +1,4 @@
-// 
+//
 //  WalletInitializer.swift
 //  breadwallet
 //
@@ -17,10 +17,10 @@ extension CoreSystem {
         system.accountInitialize(system.account, onNetwork: network, createIfDoesNotExist: create) { (res: Result<Data, System.AccountInitializationError>) in
             var serializationData: Data?
             switch res {
-            case .success (let data):
+            case .success(let data):
                 print("[SYS] system : success : \(data)")
                 serializationData = data
-            case .failure (let error):
+            case .failure(let error):
                 switch error {
                 case .alreadyInitialized:
                     print("[SYS] system : Already Initialized")
