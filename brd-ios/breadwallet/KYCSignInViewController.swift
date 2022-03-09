@@ -1,19 +1,21 @@
-// 
+//
 // Created by Equaleyes Solutions Ltd
 //
 
 import UIKit
 
-protocol KYCPersonalInfoDisplayLogic: class {
+protocol KYCSignInDisplayLogic: class {
     // MARK: Display logic functions
     
-    func displayGetDataForPickerView(viewModel: KYCPersonalInfo.GetDataForPickerView.ViewModel)
-    func displaySetPickerValue(viewModel: KYCPersonalInfo.SetPickerValue.ViewModel)
+    func displayShouldEnableSubmit(viewModel: KYCSignIn.ShouldEnableSubmit.ViewModel)
+    func displaySignIn(viewModel: KYCSignIn.SubmitData.ViewModel)
+    func displayValidateField(viewModel: KYCSignIn.ValidateField.ViewModel)
+    func displayError(viewModel: GenericModels.Error.ViewModel)
 }
 
-class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLogic, UITableViewDelegate, UITableViewDataSource {
-    var interactor: KYCPersonalInfoBusinessLogic?
-    var router: (NSObjectProtocol & KYCPersonalInfoRoutingLogic)?
+class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableViewDelegate, UITableViewDataSource {
+    var interactor: KYCSignInBusinessLogic?
+    var router: (NSObjectProtocol & KYCSignInRoutingLogic)?
     
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -29,9 +31,9 @@ class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLog
     // MARK: Setup
     private func setup() {
         let viewController = self
-        let interactor = KYCPersonalInfoInteractor()
-        let presenter = KYCPersonalInfoPresenter()
-        let router = KYCPersonalInfoRouter()
+        let interactor = KYCSignInInteractor()
+        let presenter = KYCSignInPresenter()
+        let router = KYCSignInRouter()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
@@ -52,7 +54,6 @@ class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLog
     
     // MARK: - Properties
     enum Section {
-        case progress
         case fields
     }
     
@@ -76,25 +77,34 @@ class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLog
         return tableView
     }()
     
+    private lazy var footerView: KYCFooterView = {
+        let footerView = KYCFooterView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return footerView
+    }()
+    
     private let sections: [Section] = [
-        .progress,
         .fields
     ]
-    
-    var didSetDateAndTaxId: ((_ date: String, _ taxId: String) -> Void)?
     
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(cell: KYCProgressCell.self)
-        tableView.register(cell: KYCPersonalInfoCell.self)
-
+        tableView.register(cell: KYCSignInCell.self)
+        
         view.addSubview(roundedView)
         roundedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         roundedView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         roundedView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         roundedView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20).isActive = true
+        
+        roundedView.addSubview(footerView)
+        footerView.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor).isActive = true
+        footerView.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor).isActive = true
+        footerView.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -40).isActive = true
+        footerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         roundedView.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: roundedView.topAnchor).isActive = true
@@ -107,26 +117,32 @@ class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLog
     
     // MARK: View controller functions
     
-    func displayGetDataForPickerView(viewModel: KYCPersonalInfo.GetDataForPickerView.ViewModel) {
-        tableView.endEditing(true)
+    func displayShouldEnableSubmit(viewModel: KYCSignIn.ShouldEnableSubmit.ViewModel) {
+        guard let index = sections.firstIndex(of: .fields) else { return }
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCSignInCell else { return }
         
-        DatePickerViewController.show(on: self,
-                                      sourceView: view,
-                                      title: nil,
-                                      date: viewModel.date,
-                                      minimumDate: Date.distantPast,
-                                      maximumDate: Date.distantFuture) { [weak self] date in
-            self?.interactor?.executeCheckFieldPickerIndex(request: .init(selectedDate: date,
-                                                                          type: viewModel.type))
-        }
+        let style: KYCButton.ButtonStyle = viewModel.shouldEnable ? .enabled : .disabled
+        cell.changeButtonStyle(with: style)
     }
     
-    func displaySetPickerValue(viewModel: KYCPersonalInfo.SetPickerValue.ViewModel) {
+    func displaySignIn(viewModel: KYCSignIn.SubmitData.ViewModel) {
+        print("amazing stuff")
+    }
+    
+    func displayValidateField(viewModel: KYCSignIn.ValidateField.ViewModel) {
         guard let index = sections.firstIndex(of: .fields) else { return }
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCPersonalInfoCell else { return }
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCSignInCell else { return }
         
-        cell.setup(with: .init(date: viewModel.viewModel.date,
-                               taxIdNumber: nil))
+        cell.changeFieldStyle(isViable: viewModel.isViable,
+                              for: viewModel.type)
+    }
+    
+    func displayError(viewModel: GenericModels.Error.ViewModel) {
+        LoadingView.hide()
+        
+        let alert = UIAlertController(style: .alert, message: viewModel.error)
+        alert.addAction(title: "OK", style: .cancel)
+        alert.show(on: self)
     }
     
     // MARK: - UITableView
@@ -141,50 +157,31 @@ class KYCPersonalInfoViewController: UIViewController, KYCPersonalInfoDisplayLog
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
-        case .progress:
-            return getKYCProgressCell(indexPath)
-            
         case .fields:
-            return getKYCPersonalInfoCell(indexPath)
+            return getKYCSignInFieldsCell(indexPath)
             
         }
     }
     
-    func getKYCProgressCell(_ indexPath: IndexPath) -> KYCProgressCell {
-        guard let cell = tableView.dequeue(cell: KYCProgressCell.self) else {
-            return KYCProgressCell()
+    func getKYCSignInFieldsCell(_ indexPath: IndexPath) -> KYCSignInCell {
+        guard let cell = tableView.dequeue(cell: KYCSignInCell.self) else {
+            return KYCSignInCell()
         }
         
-        cell.setValues(text: "PERSONAL INFO", progress: .personalInfo)
-        
-        return cell
-    }
-    
-    func getKYCPersonalInfoCell(_ indexPath: IndexPath) -> KYCPersonalInfoCell {
-        guard let cell = tableView.dequeue(cell: KYCPersonalInfoCell.self) else {
-            return KYCPersonalInfoCell()
+        cell.didChangeEmailField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .email))
         }
         
-        cell.didTapDateOfBirthField = { [weak self] in
-            self?.interactor?.executeGetDataForPickerView(request: .init(type: .date))
-        }
-        
-        cell.didChangeTaxIdNumberField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .taxIdNumber))
+        cell.didChangePasswordField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .password))
         }
         
         cell.didTapNextButton = { [weak self] in
-            guard let self = self, let dataStore = self.router?.dataStore else { return }
-            
-            LoadingView.show()
-            
-            (self.navigationController?.children.dropLast().last as? KYCAddressViewController)?.didSubmitData = { [weak self] in
-                LoadingView.hide()
-                
-                self?.router?.showKYCUploadScene()
-            }
-            
-            self.didSetDateAndTaxId?(dataStore.date ?? "", dataStore.taxIdNumber ?? "")
+            self?.interactor?.executeSignIn(request: .init())
+        }
+        
+        cell.didTapSignUpButton = { [weak self] in
+            self?.router?.showKYCSignUpScene()
         }
         
         return cell

@@ -18,9 +18,7 @@ class KYCNavigationController: UINavigationController, UINavigationControllerDel
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            //appearance.titleTextAttributes[.foregroundColor] = R.color.darkBlue()
-            //appearance.titleTextAttributes[.font] = R.font.metaProBold(size: 17)
-            appearance.backgroundColor = .almostBlack
+            appearance.backgroundColor = .clear
             appearance.shadowColor = nil
             
             navigationBar.scrollEdgeAppearance = appearance

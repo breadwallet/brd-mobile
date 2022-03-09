@@ -6,15 +6,10 @@ import UIKit
 
 class SimpleTextField: UIView, UITextFieldDelegate {
     enum FieldType {
-        case text, numbers, picker
-    }
-    
-    enum TextFieldType {
-        case email, password, none
+        case text, numbers, password, email, picker
     }
     
     private var fieldType: FieldType = .text
-    private var textFieldType: TextFieldType = .none
     
     private lazy var rightButton: UIButton = {
         let rightButton = UIButton()
@@ -57,13 +52,13 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    func setup(as fieldType: FieldType, textFieldType: TextFieldType, title: String, customPlaceholder: String? = nil) {
+    func setup(as fieldType: FieldType, title: String, customPlaceholder: String? = nil) {
         self.fieldType = fieldType
-        self.textFieldType = textFieldType
         
         textField.attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "",
                                                              attributes: [.foregroundColor: UIColor.kycGray1,
-                                                                          .font: UIFont(name: "AvenirNext-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16)])
+                                                                          .font: UIFont(name: "AvenirNext-Medium", size: 16)
+                                                                          ?? UIFont.systemFont(ofSize: 16)])
         textField.delegate = self
         
         titleLabel.text = title
@@ -82,6 +77,18 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             rightButton.isUserInteractionEnabled = false
             textField.inputView = UIView()
             
+        case .email:
+            rightButton.isUserInteractionEnabled = false
+            textField.keyboardType = .emailAddress
+            textField.autocapitalizationType = .none
+            textField.autocorrectionType = .no
+            textField.inputView = UIView()
+            
+        case .password:
+            rightButton.isUserInteractionEnabled = false
+//            textField.isSecureTextEntry = true
+            textField.inputView = UIView()
+            
         }
         
         setupElements()
@@ -94,21 +101,6 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             resignFirstResponder()
         default:
             break
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard textField.text != nil else { return }
-        
-        switch textFieldType {
-        case .email, .password:
-            textField.layer.borderColor = (isValid ? UIColor.green.cgColor  : UIColor.red.cgColor)
-            rightButton.setImage(UIImage(named: "checkMark"), for: .normal)
-            rightButton.isUserInteractionEnabled = false
-            rightButton.isHidden = !isValid
-            textField.inputView = UIView()
-            rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -10).isActive = true
-        case .none: break
         }
     }
     
@@ -125,21 +117,6 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             return true
             
         }
-    }
-    
-    var isValid: Bool {
-        guard let text = textField.text else { return false }
-        var isValid = false
-        
-        switch textFieldType {
-        case .email:
-            isValid = text.isValidEmailAddress
-        case .password:
-            isValid = text.count >= 8
-        case .none:
-            isValid = true
-        }
-        return isValid
     }
     
     private func setupElements() {
@@ -169,6 +146,16 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         rightButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
         rightButton.heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+        rightButton.widthAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+    }
+    
+    func setCheckMark(isVisible: Bool) {
+        rightButton.isHidden = !isVisible
+        rightButton.setImage(UIImage(named: "Field Check Mark"), for: .normal)
+    }
+    
+    func roundSpecifiedCorners(maskedCorners: CACornerMask) {
+        textField.layer.maskedCorners = maskedCorners
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {

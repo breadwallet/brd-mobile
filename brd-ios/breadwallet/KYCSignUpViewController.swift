@@ -4,18 +4,19 @@
 
 import UIKit
 
-protocol KYCAddressDisplayLogic: class {
+protocol KYCSignUpDisplayLogic: class {
     // MARK: Display logic functions
     
-    func displayGetDataForPickerView(viewModel: KYCAddress.GetDataForPickerView.ViewModel)
-    func displaySetPickerValue(viewModel: KYCAddress.SetPickerValue.ViewModel)
-    func displaySubmitData(viewModel: KYCAddress.SubmitData.ViewModel)
+    func displayGetDataForPickerView(viewModel: KYCSignUp.GetDataForPickerView.ViewModel)
+    func displaySetPickerValue(viewModel: KYCSignUp.SetPickerValue.ViewModel)
+    func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel)
+    func displayShouldEnableSubmit(viewModel: KYCSignUp.ShouldEnableSubmit.ViewModel)
     func displayError(viewModel: GenericModels.Error.ViewModel)
 }
 
-class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITableViewDelegate, UITableViewDataSource {
-    var interactor: KYCAddressBusinessLogic?
-    var router: (NSObjectProtocol & KYCAddressRoutingLogic)?
+class KYCSignUpViewController: UIViewController, KYCSignUpDisplayLogic, UITableViewDelegate, UITableViewDataSource {
+    var interactor: KYCSignUpBusinessLogic?
+    var router: (NSObjectProtocol & KYCSignUpRoutingLogic)?
     
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -31,9 +32,9 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
     // MARK: Setup
     private func setup() {
         let viewController = self
-        let interactor = KYCAddressInteractor()
-        let presenter = KYCAddressPresenter()
-        let router = KYCAddressRouter()
+        let interactor = KYCSignUpInteractor()
+        let presenter = KYCSignUpPresenter()
+        let router = KYCSignUpRouter()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
@@ -54,7 +55,6 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
     
     // MARK: - Properties
     enum Section {
-        case progress
         case fields
     }
     
@@ -78,25 +78,34 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
         return tableView
     }()
     
+    private lazy var footerView: KYCFooterView = {
+        let footerView = KYCFooterView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return footerView
+    }()
+    
     private let sections: [Section] = [
-        .progress,
         .fields
     ]
-    
-    var didSubmitData: (() -> Void)?
     
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(cell: KYCProgressCell.self)
-        tableView.register(cell: KYCAddressFieldsCell.self)
+        tableView.register(cell: KYCSignUpCell.self)
         
         view.addSubview(roundedView)
         roundedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         roundedView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         roundedView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         roundedView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20).isActive = true
+        
+        roundedView.addSubview(footerView)
+        footerView.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor).isActive = true
+        footerView.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor).isActive = true
+        footerView.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -40).isActive = true
+        footerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         roundedView.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: roundedView.topAnchor).isActive = true
@@ -109,7 +118,7 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
     
     // MARK: View controller functions
     
-    func displayGetDataForPickerView(viewModel: KYCAddress.GetDataForPickerView.ViewModel) {
+    func displayGetDataForPickerView(viewModel: KYCSignUp.GetDataForPickerView.ViewModel) {
         tableView.endEditing(true)
         
         PickerViewViewController.show(on: self,
@@ -122,19 +131,29 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
         }
     }
     
-    func displaySetPickerValue(viewModel: KYCAddress.SetPickerValue.ViewModel) {
+    func displaySetPickerValue(viewModel: KYCSignUp.SetPickerValue.ViewModel) {
         guard let index = sections.firstIndex(of: .fields) else { return }
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCAddressFieldsCell else { return }
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCSignUpCell else { return }
         
-        cell.setup(with: .init(country: viewModel.viewModel.country,
-                               zipCode: nil,
-                               address: nil,
-                               apartment: nil,
-                               state: viewModel.viewModel.state))
+        cell.setup(with: .init(firstName: nil,
+                               lastName: nil,
+                               email: nil,
+                               phonePrefix: viewModel.viewModel.phonePrefix,
+                               phoneNumber: nil,
+                               password: nil,
+                               tickBox: nil))
     }
     
-    func displaySubmitData(viewModel: KYCAddress.SubmitData.ViewModel) {
-        didSubmitData?()
+    func displayShouldEnableSubmit(viewModel: KYCSignUp.ShouldEnableSubmit.ViewModel) {
+        guard let index = sections.firstIndex(of: .fields) else { return }
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCSignUpCell else { return }
+        
+        let style: KYCButton.ButtonStyle = viewModel.shouldEnable ? .enabled : .disabled
+        cell.changeButtonStyle(with: style)
+    }
+    
+    func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel) {
+        print("amazing stuff")
     }
     
     func displayError(viewModel: GenericModels.Error.ViewModel) {
@@ -143,10 +162,6 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
         let alert = UIAlertController(style: .alert, message: viewModel.error)
         alert.addAction(title: "OK", style: .cancel)
         alert.show(on: self)
-    }
-    
-    func submitData() {
-        interactor?.executeSubmitData(request: .init())
     }
     
     // MARK: - UITableView
@@ -161,56 +176,47 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
-        case .progress:
-            return getKYCProgressCell(indexPath)
-            
         case .fields:
-            return getKYCAddressFieldsCell(indexPath)
+            return getKYCSignUpFieldsCell(indexPath)
             
         }
     }
     
-    func getKYCProgressCell(_ indexPath: IndexPath) -> KYCProgressCell {
-        guard let cell = tableView.dequeue(cell: KYCProgressCell.self) else {
-            return KYCProgressCell()
+    func getKYCSignUpFieldsCell(_ indexPath: IndexPath) -> KYCSignUpCell {
+        guard let cell = tableView.dequeue(cell: KYCSignUpCell.self) else {
+            return KYCSignUpCell()
         }
         
-        cell.setValues(text: "ADDRESS", progress: .address)
-        
-        return cell
-    }
-    
-    func getKYCAddressFieldsCell(_ indexPath: IndexPath) -> KYCAddressFieldsCell {
-        guard let cell = tableView.dequeue(cell: KYCAddressFieldsCell.self) else {
-            return KYCAddressFieldsCell()
+        cell.didChangeFirstNameField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .firstName))
         }
         
-        cell.didTapCountryPicker = { [weak self] in
-            self?.interactor?.executeGetDataForPickerView(request: .init(type: .country))
+        cell.didChangeLastNameField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .lastName))
         }
         
-        cell.didChangeZipCodeField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .zipCode))
+        cell.didChangeEmailField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .email))
         }
         
-        cell.didChangeAddressField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .address))
+        cell.didTapPhonePrefixField = { [weak self] in
+            self?.interactor?.executeGetDataForPickerView(request: .init(type: .phonePrefix))
         }
         
-        cell.didChangeApartmentField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .apartment))
+        cell.didChangePhoneNumberField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .phoneNumber))
         }
         
-        cell.didChangeCityField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .city))
+        cell.didChangePasswordField = { [weak self] text in
+            self?.interactor?.executeCheckFieldType(request: .init(text: text, type: .password))
         }
         
-        cell.didTapStatePicker = { [weak self] in
-            self?.interactor?.executeGetDataForPickerView(request: .init(type: .state))
+        cell.didTickPrivacyPolicy = { [weak self] tickStatus in
+            self?.interactor?.executeCheckTickBox(request: .init(tickBox: tickStatus, type: .tickBox))
         }
         
         cell.didTapNextButton = { [weak self] in
-            self?.router?.showKYCPersonalInfoScene()
+            self?.interactor?.executeSubmitData(request: .init())
         }
         
         return cell
