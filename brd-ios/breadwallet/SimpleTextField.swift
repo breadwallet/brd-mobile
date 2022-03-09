@@ -77,6 +77,7 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             
         case .email:
             textField.keyboardType = .emailAddress
+            textField.autocapitalizationType = .none
             textField.autocorrectionType = .no
             
         case .password:
@@ -139,6 +140,10 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         rightButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
         rightButton.heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+    }
+    
+    func roundSpecifiedCorners(maskedCorners: CACornerMask) {
+        textField.layer.maskedCorners = maskedCorners
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {

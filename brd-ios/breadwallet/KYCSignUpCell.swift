@@ -56,6 +56,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         let phonePrefixField = SimpleTextField()
         phonePrefixField.translatesAutoresizingMaskIntoConstraints = false
         phonePrefixField.setup(as: .picker, title: "PHONE", customPlaceholder: "+1")
+        phonePrefixField.roundSpecifiedCorners(maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
         phonePrefixField.textField.addTarget(self, action: #selector(showPhonePrefixPicker(_:)),
                                              for: .touchDown)
         
@@ -66,6 +67,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         let phoneNumberField = SimpleTextField()
         phoneNumberField.translatesAutoresizingMaskIntoConstraints = false
         phoneNumberField.setup(as: .numbers, title: "", customPlaceholder: "(000)-000-0000")
+        phoneNumberField.roundSpecifiedCorners(maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner])
         
         return phoneNumberField
     }()
@@ -138,7 +140,7 @@ class KYCSignUpCell: UITableViewCell, GenericSettable {
         
         addSubview(phoneNumberField)
         phoneNumberField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: defaultDistance).isActive = true
-        phoneNumberField.leadingAnchor.constraint(equalTo: phonePrefixField.trailingAnchor, constant: 4).isActive = true
+        phoneNumberField.leadingAnchor.constraint(equalTo: phonePrefixField.trailingAnchor, constant: -1).isActive = true
         phoneNumberField.trailingAnchor.constraint(equalTo: firstNameField.trailingAnchor).isActive = true
         phoneNumberField.heightAnchor.constraint(equalTo: firstNameField.heightAnchor).isActive = true
         
