@@ -17,7 +17,7 @@ private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
 
 class ApplicationController: Subscriber, Trackable {
-
+    
     fileprivate var application: UIApplication?
 
     static let initialLaunchCount = 0

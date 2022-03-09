@@ -10,6 +10,7 @@ class SimpleTextField: UIView, UITextFieldDelegate {
     }
     
     private var fieldType: FieldType = .text
+    
     private lazy var rightButton: UIButton = {
         let rightButton = UIButton()
         rightButton.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +57,8 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         
         textField.attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "",
                                                              attributes: [.foregroundColor: UIColor.kycGray1,
-                                                                          .font: UIFont(name: "AvenirNext-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16)])
+                                                                          .font: UIFont(name: "AvenirNext-Medium", size: 16)
+                                                                          ?? UIFont.systemFont(ofSize: 16)])
         textField.delegate = self
         
         titleLabel.text = title
@@ -76,12 +78,16 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             textField.inputView = UIView()
             
         case .email:
+            rightButton.isUserInteractionEnabled = false
             textField.keyboardType = .emailAddress
             textField.autocapitalizationType = .none
             textField.autocorrectionType = .no
+            textField.inputView = UIView()
             
         case .password:
-            textField.isSecureTextEntry = true
+            rightButton.isUserInteractionEnabled = false
+//            textField.isSecureTextEntry = true
+            textField.inputView = UIView()
             
         }
         
@@ -140,6 +146,12 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         rightButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
         rightButton.heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+        rightButton.widthAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+    }
+    
+    func setCheckMark(isVisible: Bool) {
+        rightButton.isHidden = !isVisible
+        rightButton.setImage(UIImage(named: "Field Check Mark"), for: .normal)
     }
     
     func roundSpecifiedCorners(maskedCorners: CACornerMask) {

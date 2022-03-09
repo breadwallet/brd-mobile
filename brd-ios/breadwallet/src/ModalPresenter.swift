@@ -428,8 +428,15 @@ class ModalPresenter: Subscriber, Trackable {
         }
     }
     
+    public func presentSignIn() {
+        let vc = KYCSignInViewController()
+        let navController = KYCNavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        topViewController?.present(navController, animated: true, completion: nil)
+    }
+    
     public func presentRegistrationAndKYC() {
-        let vc = KYCSignUpViewController()
+        let vc = KYCTutorialViewController()
         let navController = KYCNavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .overFullScreen
         topViewController?.present(navController, animated: true, completion: nil)
@@ -622,6 +629,11 @@ class ModalPresenter: Subscriber, Trackable {
                 self?.presentLoginScan()
             },
             
+            // Registration
+            MenuItem(title: S.MenuButton.chooseRegistration, icon: MenuItem.Icon.registrationAndKyc) { [weak self] in
+                self?.presentSignIn()
+            },
+            
             // Registration and KYC
             MenuItem(title: S.MenuButton.registrationAndKyc, icon: MenuItem.Icon.registrationAndKyc) { [weak self] in
                 self?.presentRegistrationAndKYC()
@@ -647,11 +659,6 @@ class ModalPresenter: Subscriber, Trackable {
             // Support
             MenuItem(title: S.MenuButton.support, icon: MenuItem.Icon.support) { [weak self] in
                 self?.presentFaq()
-            },
-                        
-            // Rewards
-            MenuItem(title: S.Settings.rewards, icon: MenuItem.Icon.rewards) { [weak self] in
-                self?.presentPlatformWebViewController("/rewards")
             },
             
             // About
