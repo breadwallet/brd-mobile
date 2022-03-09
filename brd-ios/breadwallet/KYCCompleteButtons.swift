@@ -8,7 +8,7 @@ class KYCCompleteButtons: UITableViewCell {
     private lazy var doneButton: KYCButton = {
         let doneButton = KYCButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setup(as: .normal, title: "DONE")
+        doneButton.setup(as: .enabled, title: "DONE")
         
         return doneButton
     }()

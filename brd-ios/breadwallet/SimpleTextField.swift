@@ -6,7 +6,7 @@ import UIKit
 
 class SimpleTextField: UIView, UITextFieldDelegate {
     enum FieldType {
-        case text, numbers, picker
+        case text, numbers, password, email, picker
     }
     
     private var fieldType: FieldType = .text
@@ -75,6 +75,14 @@ class SimpleTextField: UIView, UITextFieldDelegate {
             rightButton.isUserInteractionEnabled = false
             textField.inputView = UIView()
             
+        case .email:
+            textField.keyboardType = .emailAddress
+            textField.autocapitalizationType = .none
+            textField.autocorrectionType = .no
+            
+        case .password:
+            textField.isSecureTextEntry = true
+            
         }
         
         setupElements()
@@ -132,6 +140,10 @@ class SimpleTextField: UIView, UITextFieldDelegate {
         rightButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
         rightButton.heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+    }
+    
+    func roundSpecifiedCorners(maskedCorners: CACornerMask) {
+        textField.layer.maskedCorners = maskedCorners
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {

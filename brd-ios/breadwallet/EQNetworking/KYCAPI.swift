@@ -16,6 +16,16 @@ enum KYCEndpoints: String, URLType {
     }
 }
 
+enum KYCAuthEndpoints: String, URLType {
+    static var baseURL: String = "https://one-dev.moneybutton.io/blocksatoshi/one/auth/%@"
+    
+    case register = "register"
+    
+    var url: String {
+        return String(format: Self.baseURL, rawValue)
+    }
+}
+
 class KYCBaseResponseWorker<T: ModelResponse, U: Model, V: ModelMapper<T, U>>: BaseResponseWorker<T, U, V> {
     
 }

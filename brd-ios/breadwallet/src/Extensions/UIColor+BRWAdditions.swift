@@ -38,6 +38,10 @@ extension UIColor {
         return UIColor.fromHex("#C9C9C9")
     }
     
+    static var kycCompletelyWhite: UIColor {
+        return UIColor.white
+    }
+    
     static var newGradientEnd: UIColor {
         return UIColor.fromHex("FAA03F")
     }

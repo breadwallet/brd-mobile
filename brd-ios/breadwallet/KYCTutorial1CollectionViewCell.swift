@@ -16,7 +16,7 @@ class KYCTutorial1CollectionViewCell: KYCTutorialBaseCell {
         super.awakeFromNib()
         
         topLabel.text = "As a regulated financial services company, we are required to identify the users on our platform."
-        topLabel.textColor = .navigationTint
+        topLabel.textColor = .kycCompletelyWhite
         
         imageView.image = UIImage(named: "Tutorial1")
     }
