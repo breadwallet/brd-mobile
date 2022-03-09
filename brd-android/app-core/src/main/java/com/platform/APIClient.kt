@@ -138,7 +138,7 @@ class APIClient(
                 throw NetworkOnMainThreadException()
             }
             try {
-                val strUtl = FabriikApiConstants.HOST_WALLET_API + TOKEN_PATH
+                val strUtl = getBaseWalletApiURL() + TOKEN_PATH
 
                 val authKey = authKey
                 if (authKey != null) {
