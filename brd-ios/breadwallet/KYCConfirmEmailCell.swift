@@ -5,7 +5,6 @@
 import UIKit
 
 class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
-    
     typealias Model = ViewModel
     
     struct ViewModel: Hashable {
@@ -19,6 +18,7 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
         label.textColor = .almostBlack
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.text = "CONFIRM EMAIL"
+        
         return label
     }()
     
@@ -30,6 +30,7 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
         label.numberOfLines = 0
         label.font = UIFont(name: "AvenirNext-Regular", size: 19)
         label.text = "We’ve sent a confirmation code to your email. Click on it on this device to confirm your email address. \n\nYou can also copy and paste the code here:"
+        
         return label
     }()
     
@@ -37,6 +38,7 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
         let textField = SimpleTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setup(as: .text, title: "CONFIRMATION CODE", customPlaceholder: "Confirmation code")
+        
         return textField
     }()
     
@@ -44,6 +46,7 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
         let button = KYCButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setup(as: .disabled, title: "CONFIRM")
+        
         return button
     }()
     

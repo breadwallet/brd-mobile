@@ -7,9 +7,14 @@ import UIKit
 enum KYCConfirmEmail {
     // MARK: Model name declarations
     
+    enum FieldType: Codable {
+        case code
+    }
+    
     enum CheckFieldText {
         struct Request {
             let text: String?
+            let type: KYCConfirmEmail.FieldType
         }
     }
     

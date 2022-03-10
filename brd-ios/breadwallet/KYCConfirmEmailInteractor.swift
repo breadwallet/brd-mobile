@@ -13,6 +13,8 @@ protocol KYCConfirmEmailBusinessLogic {
 
 protocol KYCConfirmEmailDataStore {
     // MARK: Data store
+    
+    var confirmationCode: String? { get set }
 }
 
 class KYCConfirmEmailInteractor: KYCConfirmEmailBusinessLogic, KYCConfirmEmailDataStore {
@@ -25,6 +27,7 @@ class KYCConfirmEmailInteractor: KYCConfirmEmailBusinessLogic, KYCConfirmEmailDa
     
     func executeCheckFieldType(request: KYCConfirmEmail.CheckFieldText.Request) {
         confirmationCode = request.text
+        
         checkCredentials()
     }
     

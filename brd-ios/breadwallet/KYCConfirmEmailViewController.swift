@@ -12,7 +12,6 @@ protocol KYCConfirmEmailDisplayLogic: class {
 }
 
 class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLogic, UITableViewDelegate, UITableViewDataSource {
-    
     var interactor: KYCConfirmEmailBusinessLogic?
     var router: (NSObjectProtocol & KYCConfirmEmailRoutingLogic)?
     
@@ -62,6 +61,7 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.cornerRadius = 10
         roundedView.backgroundColor = .kycCompletelyWhite
+        
         return roundedView
     }()
     
@@ -72,12 +72,14 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
+        
         return tableView
     }()
     
     private lazy var footerView: KYCFooterView = {
         let footerView = KYCFooterView()
         footerView.translatesAutoresizingMaskIntoConstraints = false
+        
         return footerView
     }()
     
@@ -153,13 +155,16 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         guard let cell = tableView.dequeue(cell: KYCConfirmEmailCell.self) else {
             return KYCConfirmEmailCell()
         }
+        
         cell.didChangeConfirmationCodeField = { [weak self] text in
-            self?.interactor?.executeCheckFieldType(request: .init(text: text))
+            self?.interactor?.executeCheckFieldType(request: .init(text: text,
+                                                                   type: .code))
         }
         
         cell.didTapConfirmButton = { [weak self] in
             self?.interactor?.executeConfirmData(request: .init())
         }
+        
         return cell
     }
 }
