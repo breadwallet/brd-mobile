@@ -249,4 +249,5 @@ dependencies {
     compileOnly(Libs.Redacted.Annotation)
 
     detektPlugins(Libs.Detekt.Formatting)
+    implementation("com.airbnb.android:lottie:4.2.0")
 }
