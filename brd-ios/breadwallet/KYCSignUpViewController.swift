@@ -153,7 +153,7 @@ class KYCSignUpViewController: UIViewController, KYCSignUpDisplayLogic, UITableV
     }
     
     func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel) {
-        print("amazing stuff")
+        router?.showKYCConfirmEmailScene()
     }
     
     func displayError(viewModel: GenericModels.Error.ViewModel) {
