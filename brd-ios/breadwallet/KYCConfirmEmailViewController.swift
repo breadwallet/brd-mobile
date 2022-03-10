@@ -92,11 +92,6 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         super.viewDidLoad()
         
         tableView.register(cell: KYCConfirmEmailCell.self)
-        setupUI()
-    }
-    
-    func setupUI() {
-        view.backgroundColor = .almostBlack
         
         view.addSubview(roundedView)
         roundedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
@@ -115,6 +110,8 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         tableView.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -20).isActive = true
+        
+        view.backgroundColor = .almostBlack
     }
     
     // MARK: View controller functions
