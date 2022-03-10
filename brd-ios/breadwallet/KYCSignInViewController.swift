@@ -113,6 +113,13 @@ class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableV
         tableView.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -20).isActive = true
         
         view.backgroundColor = .almostBlack
+        
+        let dismissFlowButton = UIBarButtonItem(title: "Dismiss", style: .done, target: self, action: #selector(dismissFlow))
+        navigationItem.leftBarButtonItem = dismissFlowButton
+    }
+    
+    @objc private func dismissFlow() {
+        router?.dismissFlow()
     }
     
     // MARK: View controller functions
@@ -126,7 +133,7 @@ class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableV
     }
     
     func displaySignIn(viewModel: KYCSignIn.SubmitData.ViewModel) {
-        print("amazing stuff")
+        router?.showKYCTutorialScene()
     }
     
     func displayValidateField(viewModel: KYCSignIn.ValidateField.ViewModel) {

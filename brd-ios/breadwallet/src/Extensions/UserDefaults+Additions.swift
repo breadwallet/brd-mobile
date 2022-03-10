@@ -51,6 +51,7 @@ private let appLaunchesAtLastNotificationDeferralKey = "appLaunchesAtLastNotific
 private let deviceIdKey = "BR_DEVICE_ID"
 private let savedChartHistoryPeriodKey = "savedHistoryPeriodKey"
 private let balanceKey = "balanceKey"
+private let kycSessionKey = "kycSessionKey"
 
 typealias ResettableBooleanSetting = [String: Bool]
 typealias ResettableObjectSetting = String
@@ -413,6 +414,11 @@ extension UserDefaults {
     static var hasBchConnected: Bool {
         get { return defaults.bool(forKey: hasBchConnectedKey) }
         set { defaults.set(newValue, forKey: hasBchConnectedKey) }
+    }
+    
+    static var kycSessionKeyValue: String {
+        get { return defaults.string(forKey: kycSessionKey) ?? "" }
+        set { defaults.set(newValue, forKey: kycSessionKey) }
     }
 }
 

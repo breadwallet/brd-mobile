@@ -23,7 +23,7 @@ struct KYCSignUpWorkerRequest: RequestModelData {
             "last_name": lastName ?? "",
             "email": email ?? "",
             "phone": phone ?? "",
-            "encryptsha512hex_password": password ?? "",
+            "encryptsha512hex_password": password ?? ""
         ]
     }
 }

@@ -428,15 +428,8 @@ class ModalPresenter: Subscriber, Trackable {
         }
     }
     
-    public func presentSignIn() {
-        let vc = KYCSignInViewController()
-        let navController = KYCNavigationController(rootViewController: vc)
-        navController.modalPresentationStyle = .overFullScreen
-        topViewController?.present(navController, animated: true, completion: nil)
-    }
-    
     public func presentRegistrationAndKYC() {
-        let vc = KYCTutorialViewController()
+        let vc = KYCSignInViewController()
         let navController = KYCNavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .overFullScreen
         topViewController?.present(navController, animated: true, completion: nil)
@@ -627,11 +620,6 @@ class ModalPresenter: Subscriber, Trackable {
             // Scan QR Code
             MenuItem(title: S.MenuButton.scan, icon: MenuItem.Icon.scan) { [weak self] in
                 self?.presentLoginScan()
-            },
-            
-            // Registration
-            MenuItem(title: S.MenuButton.chooseRegistration, icon: MenuItem.Icon.registrationAndKyc) { [weak self] in
-                self?.presentSignIn()
             },
             
             // Registration and KYC

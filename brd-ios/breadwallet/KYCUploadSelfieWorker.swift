@@ -6,9 +6,9 @@ import Foundation
 
 struct KYCUploadSelfieWorkerUrlModelData: UrlModelData {
     func urlParameters() -> [String] {
-        let value = ["&sessionKey=sf5q65a5dotb0tknta5io9j02phlm62ouesp40n5"]
+        let sessionKey: String = "sessionKey=\(UserDefaults.kycSessionKeyValue)"
         
-        return value
+        return [sessionKey]
     }
 }
 
