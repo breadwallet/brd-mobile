@@ -119,8 +119,8 @@
     <color name="add_wallets_border_color">#e5e5e5</color>
 
     // Dark Mode colors
-    <color name="primary_background">#251935</color>
-    <color name="secondary_background">#302442</color>
+    <color name="primary_background">#000000</color>
+    <color name="secondary_background">#0c0c0c</color>
     <color name="tertiary_background">#2E2540</color>
     <color name="prompt_background">#1E1C41</color>
     <color name="prompt_input">#f8f7fc</color>

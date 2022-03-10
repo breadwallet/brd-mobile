@@ -26,13 +26,13 @@
 
     <ImageView
         android:id="@+id/title"
-        android:layout_width="132dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="130dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_horizontal"
-        android:src="@drawable/brd_logo_gradient"
+        android:src="@drawable/ic_flower"
         android:textColor="@color/white"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
