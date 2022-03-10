@@ -12,46 +12,55 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
     }
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = .almostBlack
-        label.font = UIFont(name: "AvenirNext-Bold", size: 20)
-        label.text = "CONFIRM EMAIL"
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .almostBlack
+        titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        titleLabel.text = "CONFIRM EMAIL"
         
-        return label
+        return titleLabel
     }()
     
     private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = .kycGray1
-        label.numberOfLines = 0
-        label.font = UIFont(name: "AvenirNext-Regular", size: 19)
-        label.text = "We’ve sent a confirmation code to your email. Click on it on this device to confirm your email address. \n\nYou can also copy and paste the code here:"
+        let descriptionLabel = UILabel()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.textColor = .kycGray1
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = UIFont(name: "AvenirNext-Regular", size: 19)
+        descriptionLabel.text = "We’ve sent a confirmation code to your email. Click on it on this device to confirm your email address. \n\nYou can also copy and paste the code here:"
         
-        return label
+        return descriptionLabel
     }()
     
     private lazy var confirmationCodeField: SimpleTextField = {
-        let textField = SimpleTextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setup(as: .text, title: "CONFIRMATION CODE", customPlaceholder: "Confirmation code")
+        let confirmationCodeField = SimpleTextField()
+        confirmationCodeField.translatesAutoresizingMaskIntoConstraints = false
+        confirmationCodeField.setup(as: .text, title: "CONFIRMATION CODE", customPlaceholder: "Confirmation code")
         
-        return textField
+        return confirmationCodeField
     }()
     
     private lazy var confirmButton: KYCButton = {
-        let button = KYCButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setup(as: .disabled, title: "CONFIRM")
+        let confirmButton = KYCButton()
+        confirmButton.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.setup(as: .disabled, title: "CONFIRM")
         
-        return button
+        return confirmButton
+    }()
+    
+    private lazy var resendButton: KYCButton = {
+        let resendButton = KYCButton()
+        resendButton.translatesAutoresizingMaskIntoConstraints = false
+        resendButton.setup(as: .enabled, title: "RESEND CODE")
+        
+        return resendButton
     }()
     
     var didChangeConfirmationCodeField: ((String?) -> Void)?
     var didTapConfirmButton: (() -> Void)?
+    var didTapResendButton: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,31 +70,43 @@ class KYCConfirmEmailCell: UITableViewCell, GenericSettable {
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         
+        let defaultDistance: CGFloat = 12
+        
         addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 22).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40).isActive = true
         
         addSubview(confirmationCodeField)
-        confirmationCodeField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24).isActive = true
+        confirmationCodeField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
         confirmationCodeField.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor).isActive = true
         confirmationCodeField.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor).isActive = true
         confirmationCodeField.heightAnchor.constraint(equalToConstant: 68).isActive = true
         
         addSubview(confirmButton)
-        confirmButton.topAnchor.constraint(equalTo: confirmationCodeField.bottomAnchor, constant: 12).isActive = true
-        confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        confirmButton.topAnchor.constraint(equalTo: confirmationCodeField.bottomAnchor, constant: defaultDistance).isActive = true
         confirmButton.leadingAnchor.constraint(equalTo: confirmationCodeField.leadingAnchor).isActive = true
         confirmButton.trailingAnchor.constraint(equalTo: confirmationCodeField.trailingAnchor).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
+        addSubview(resendButton)
+        resendButton.topAnchor.constraint(equalTo: confirmButton.bottomAnchor, constant: defaultDistance * 3).isActive = true
+        resendButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        resendButton.leadingAnchor.constraint(equalTo: confirmationCodeField.leadingAnchor).isActive = true
+        resendButton.trailingAnchor.constraint(equalTo: confirmationCodeField.trailingAnchor).isActive = true
+        resendButton.heightAnchor.constraint(equalTo: confirmButton.heightAnchor).isActive = true
+        
         confirmationCodeField.didChangeText = { [weak self] text in
             self?.didChangeConfirmationCodeField?(text)
         }
-    }
-    
-    @objc private func confirmAction() {
-        didTapConfirmButton?()
+        
+        confirmButton.didTap = { [weak self] in
+            self?.didTapConfirmButton?()
+        }
+        
+        resendButton.didTap = { [weak self] in
+            self?.didTapResendButton?()
+        }
     }
     
     func setup(with model: ViewModel) {

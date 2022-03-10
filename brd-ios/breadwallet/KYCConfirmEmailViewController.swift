@@ -7,8 +7,11 @@ import UIKit
 protocol KYCConfirmEmailDisplayLogic: class {
     // MARK: Display logic functions
     
+    func displaySubmitData(viewModel: KYCConfirmEmail.SubmitData.ViewModel)
+    func displayResendCode(viewModel: KYCConfirmEmail.ResendCode.ViewModel)
     func displayShouldEnableConfirm(viewModel: KYCConfirmEmail.ShouldEnableConfirm.ViewModel)
     func displayValidateField(viewModel: KYCConfirmEmail.ValidateField.ViewModel)
+    func displayError(viewModel: GenericModels.Error.ViewModel)
 }
 
 class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLogic, UITableViewDelegate, UITableViewDataSource {
@@ -116,6 +119,16 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
     
     // MARK: View controller functions
     
+    func displaySubmitData(viewModel: KYCConfirmEmail.SubmitData.ViewModel) {
+        LoadingView.hide()
+        
+        router?.showKYCSignInScene()
+    }
+    
+    func displayResendCode(viewModel: KYCConfirmEmail.ResendCode.ViewModel) {
+        LoadingView.hide()
+    }
+    
     func displayShouldEnableConfirm(viewModel: KYCConfirmEmail.ShouldEnableConfirm.ViewModel) {
         guard let index = sections.firstIndex(of: .fields) else { return }
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCConfirmEmailCell else { return }
@@ -129,6 +142,14 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? KYCConfirmEmailCell else { return }
         
         cell.changeFieldStyle(isViable: viewModel.isViable)
+    }
+    
+    func displayError(viewModel: GenericModels.Error.ViewModel) {
+        LoadingView.hide()
+        
+        let alert = UIAlertController(style: .alert, message: viewModel.error)
+        alert.addAction(title: "OK", style: .cancel)
+        alert.show(on: self)
     }
     
     // MARK: - UITableView
@@ -159,7 +180,15 @@ class KYCConfirmEmailViewController: UIViewController, KYCConfirmEmailDisplayLog
         }
         
         cell.didTapConfirmButton = { [weak self] in
-            self?.interactor?.executeConfirmData(request: .init())
+            LoadingView.show()
+            
+            self?.interactor?.executeSubmitData(request: .init())
+        }
+        
+        cell.didTapResendButton = { [weak self] in
+            LoadingView.show()
+            
+            self?.interactor?.executeResendCode(request: .init())
         }
         
         return cell

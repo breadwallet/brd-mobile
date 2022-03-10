@@ -156,7 +156,7 @@ class KYCCompleteViewController: UIViewController, KYCCompleteDisplayLogic, UITa
         }
         
         cell.didTapDoneButton = { [weak self] in
-            self?.navigationController?.dismiss(animated: true)
+            self?.router?.dismissFlow()
         }
         
         return cell

@@ -20,8 +20,10 @@ enum KYCEndpoints: String, URLType {
 enum KYCAuthEndpoints: String, URLType {
     static var baseURL: String = "https://"  + E.apiUrl + "blocksatoshi/one/auth/%@"
     
-    case register = "register"
-    case login = "login"
+    case register
+    case login
+    case confirm = "register/confirm?%@&confirmation_code=%@"
+    case resend = "register/confirm/resend?%@"
     
     var url: String {
         return String(format: Self.baseURL, rawValue)
