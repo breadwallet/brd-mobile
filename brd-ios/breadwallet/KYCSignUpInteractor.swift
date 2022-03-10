@@ -59,7 +59,7 @@ class KYCSignUpInteractor: KYCSignUpBusinessLogic, KYCSignUpDataStore {
                                                    lastName: lastName,
                                                    email: email,
                                                    phone: (phonePrefix ?? "").replacingOccurrences(of: "+", with: "") + (phoneNumber ?? ""),
-                                                   password: password)
+                                                   password: passwordOriginal)
         let workerData = KYCSignUpWorkerData(workerRequest: workerRequest,
                                              workerUrlModelData: workerUrlModelData)
         

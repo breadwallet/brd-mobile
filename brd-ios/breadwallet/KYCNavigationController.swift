@@ -35,7 +35,7 @@ class KYCNavigationController: UINavigationController, UINavigationControllerDel
     }
     
     private func setupHeader() {
-        let headerImageView = UIImageView(image: UIImage(named: "KYCHeaderLogo"))
+        let headerImageView = UIImageView(image: UIImage(named: "KYC Header Logo"))
         headerImageView.contentMode = .scaleAspectFit
         headerImageView.frame = navigationBar.frame
         navigationBar.addSubview(headerImageView)

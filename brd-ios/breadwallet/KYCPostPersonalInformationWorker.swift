@@ -6,7 +6,7 @@ import Foundation
 
 struct KYCPostPersonalInformationWorkerUrlModelData: UrlModelData {
     func urlParameters() -> [String] {
-        let sessionKey: String = "sessionKey=vtsehdlv3jiopdt4gradofjir3ha9fsn674vjq40"
+        let sessionKey: String = "sessionKey=\(UserDefaults.kycSessionKeyValue)"
         
         return [sessionKey]
     }
@@ -22,16 +22,6 @@ struct KYCPostPersonalInformationWorkerRequest: RequestModelData {
     let taxIdNumber: String?
     
     func getParameters() -> [String: Any] {
-//        DEBUG DATA        //
-//        return [
-//            "street": "ABCDE",
-//            "city": "ABCDE",
-//            "state": "TX",
-//            "zip": "98756",
-//            "country": "US",
-//            "date_of_birth": "1980-06-06",
-//            "tax_id_number": "765456964"
-//        ]
         return [
             "street": street ?? "",
             "city": city ?? "",

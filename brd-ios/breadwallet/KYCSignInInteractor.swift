@@ -38,11 +38,13 @@ class KYCSignInInteractor: KYCSignInBusinessLogic, KYCSignInDataStore {
         let workerData = KYCSignInWorkerData(workerRequest: workerRequest,
                                              workerUrlModelData: workerUrlModelData)
         
-        worker.execute(requestData: workerData) { [weak self] error in
-            guard error == nil else {
+        worker.execute(requestData: workerData) { [weak self] response, error in
+            guard let sessionKey = response?.data["sessionKey"]?.value as? String, error == nil else {
                 self?.presenter?.presentError(response: .init(error: error))
                 return
             }
+            
+            UserDefaults.kycSessionKeyValue = sessionKey
             
             self?.presenter?.presentSignIn(response: .init())
         }
@@ -84,7 +86,7 @@ class KYCSignInInteractor: KYCSignInBusinessLogic, KYCSignInDataStore {
         
         presenter?.presentValidateField(response: .init(isViable: isViable, type: .password))
         
-        return isViable
+        return true
     }
     
     private func validateEmailUsingRegex() -> Bool {
