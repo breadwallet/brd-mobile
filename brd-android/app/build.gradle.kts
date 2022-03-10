@@ -37,7 +37,7 @@ android {
     defaultConfig {
         versionCode = BrdRelease.versionCode
         versionName = BrdRelease.versionName
-        applicationId = "com.breadwallet"
+        applicationId = "com.fabriik.app"
         minSdkVersion(BrdRelease.ANDROID_MINIMUM_SDK)
         targetSdkVersion(BrdRelease.ANDROID_TARGET_SDK)
         buildConfigField("int", "BUILD_VERSION", "${BrdRelease.buildVersion}")
@@ -67,16 +67,16 @@ android {
     flavorDimensions("mode")
     productFlavors {
         create("brd") {
-            applicationId = "com.breadwallet"
+            applicationId = "com.fabriik.app"
             dimension = "mode"
-            resValue("string", "app_name", "BRD")
+            resValue("string", "app_name", "Fabriik")
             buildConfigField("boolean", "BITCOIN_TESTNET", "false")
 
         }
         create("brdTestnet") {
-            applicationId = "com.breadwallet.testnet"
+            applicationId = "com.fabriik.app.testnet"
             dimension = "mode"
-            resValue("string", "app_name", "BRD Testnet")
+            resValue("string", "app_name", "Fabriik Testnet")
             buildConfigField("boolean", "BITCOIN_TESTNET", "true")
         }
     }
@@ -92,7 +92,7 @@ android {
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher"))
+            manifestPlaceholders(mapOf("applicationIcon" to "@drawable/ic_flower_black"))
             isDebuggable = false
             isMinifyEnabled = false
             buildConfigField("boolean", "IS_INTERNAL_BUILD", "false")
@@ -111,7 +111,7 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("FakeSigningConfig")
             applicationIdSuffix = ".debug"
-            manifestPlaceholders(mapOf("applicationIcon" to "@mipmap/ic_launcher_grayscale"))
+            manifestPlaceholders(mapOf("applicationIcon" to "@drawable/ic_flower_gray"))
             isDebuggable = true
             isJniDebuggable = true
             isMinifyEnabled = false
