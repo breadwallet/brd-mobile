@@ -35,7 +35,7 @@ struct KYCSignInWorkerData: RequestModelData, UrlModelData {
     }
 }
 
-class KYCSignInWorker: KYCBasePlainResponseWorker {
+class KYCSignInWorker: KYCBaseResponseWorker<KYCSessionModelResponse, KYCSessionModel, KYCSessionModelMapper> {
     override func getUrl() -> String {
         return APIURLHandler.getUrl(KYCAuthEndpoints.login)
     }

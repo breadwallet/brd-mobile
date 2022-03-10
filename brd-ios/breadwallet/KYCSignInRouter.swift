@@ -8,6 +8,8 @@ protocol KYCSignInRoutingLogic {
     var dataStore: KYCSignInDataStore? { get }
     
     func showKYCSignUpScene()
+    func showKYCTutorialScene()
+    func dismissFlow()
 }
 
 class KYCSignInRouter: NSObject, KYCSignInRoutingLogic {
@@ -17,5 +19,14 @@ class KYCSignInRouter: NSObject, KYCSignInRoutingLogic {
     func showKYCSignUpScene() {
         let kycSignUpViewController = KYCSignUpViewController()
         viewController?.navigationController?.pushViewController(kycSignUpViewController, animated: true)
+    }
+    
+    func showKYCTutorialScene() {
+        let kycTutorialViewController = KYCTutorialViewController()
+        viewController?.navigationController?.pushViewController(kycTutorialViewController, animated: true)
+    }
+    
+    func dismissFlow() {
+        viewController?.navigationController?.dismiss(animated: true)
     }
 }
