@@ -7,7 +7,7 @@ import okhttp3.Response
 class FabriikAuthInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!chain.request().url.host.endsWith("moneybutton.io")) {
+        if (!chain.request().url.toString().startsWith(FabriikApiConstants.HOST_BLOCKSATOSHI_API)) {
             return chain.proceed(chain.request())
         }
 

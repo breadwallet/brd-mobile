@@ -7,7 +7,6 @@ import com.platform.APIClient;
 import com.platform.interfaces.KVStoreAdaptor;
 import com.platform.sqlite.KVItem;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
@@ -68,7 +67,7 @@ public class RemoteKVStore implements KVStoreAdaptor {
     public CompletionObject ver(String key) {
         long v;
         long t;
-        String url = String.format("%s/kv/1/%s", APIClient.getBaseURL(), key);
+        String url = String.format("%s/kv/1/%s", APIClient.getBaseWalletApiURL(), key);
         okhttp3.Request request;
         request = new okhttp3.Request.Builder()
                 .url(url)
@@ -86,7 +85,7 @@ public class RemoteKVStore implements KVStoreAdaptor {
 
     @Override
     public CompletionObject put(String key, byte[] value, long version) {
-        String url = String.format("%s/kv/1/%s", APIClient.getBaseURL(), key);
+        String url = String.format("%s/kv/1/%s", APIClient.getBaseWalletApiURL(), key);
         RequestBody requestBody = RequestBody.create(null, value);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
@@ -112,7 +111,7 @@ public class RemoteKVStore implements KVStoreAdaptor {
 
     @Override
     public CompletionObject del(String key, long version) {
-        String url = String.format("%s/kv/1/%s", APIClient.getBaseURL(), key);
+        String url = String.format("%s/kv/1/%s", APIClient.getBaseWalletApiURL(), key);
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
                 .delete()
@@ -138,7 +137,7 @@ public class RemoteKVStore implements KVStoreAdaptor {
 
     @Override
     public CompletionObject get(String key, long version) {
-        String url = String.format("%s/kv/1/%s", APIClient.getBaseURL(), key);
+        String url = String.format("%s/kv/1/%s", APIClient.getBaseWalletApiURL(), key);
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
                 .get()
@@ -170,7 +169,7 @@ public class RemoteKVStore implements KVStoreAdaptor {
 
     @Override
     public CompletionObject keys() {
-        String url = String.format("%s/kv/_all_keys", APIClient.getBaseURL());
+        String url = String.format("%s/kv/_all_keys", APIClient.getBaseWalletApiURL());
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
                 .get()
