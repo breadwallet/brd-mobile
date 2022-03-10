@@ -133,6 +133,8 @@ class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableV
     }
     
     func displaySignIn(viewModel: KYCSignIn.SubmitData.ViewModel) {
+        LoadingView.hide()
+        
         router?.showKYCTutorialScene()
     }
     
@@ -188,6 +190,8 @@ class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableV
         }
         
         cell.didTapSignUpButton = { [weak self] in
+            LoadingView.show()
+            
             self?.router?.showKYCSignUpScene()
         }
         

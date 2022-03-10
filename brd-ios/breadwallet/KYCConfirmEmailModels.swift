@@ -27,7 +27,13 @@ enum KYCConfirmEmail {
         }
     }
     
-    enum ConfirmData {
+    enum SubmitData {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {}
+    }
+    
+    enum ResendCode {
         struct Request {}
         struct Response {}
         struct ViewModel {}

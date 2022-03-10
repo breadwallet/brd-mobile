@@ -8,7 +8,8 @@ protocol KYCConfirmEmailBusinessLogic {
     // MARK: Business logic functions
     
     func executeCheckFieldType(request: KYCConfirmEmail.CheckFieldText.Request)
-    func executeConfirmData(request: KYCConfirmEmail.ConfirmData.Request)
+    func executeSubmitData(request: KYCConfirmEmail.SubmitData.Request)
+    func executeResendCode(request: KYCConfirmEmail.ResendCode.Request)
 }
 
 protocol KYCConfirmEmailDataStore {
@@ -19,11 +20,44 @@ protocol KYCConfirmEmailDataStore {
 
 class KYCConfirmEmailInteractor: KYCConfirmEmailBusinessLogic, KYCConfirmEmailDataStore {
     var presenter: KYCConfirmEmailPresentationLogic?
-    var worker: KYCConfirmEmailWorker?
-
+    
     // MARK: Interactor functions
     
     var confirmationCode: String?
+    
+    func executeSubmitData(request: KYCConfirmEmail.SubmitData.Request) {
+        let worker = KYCConfirmEmailWorker()
+        let workerUrlModelData = KYCConfirmEmailWorkerUrlModelData(code: confirmationCode ?? "")
+        let workerRequest = KYCConfirmEmailWorkerRequest()
+        let workerData = KYCConfirmEmailWorkerData(workerRequest: workerRequest,
+                                                   workerUrlModelData: workerUrlModelData)
+        
+        worker.execute(requestData: workerData) { [weak self] error in
+            guard error == nil else {
+                self?.presenter?.presentError(response: .init(error: error))
+                return
+            }
+            
+            self?.presenter?.presentSubmitData(response: .init())
+        }
+    }
+    
+    func executeResendCode(request: KYCConfirmEmail.ResendCode.Request) {
+        let worker = KYCResendConfirmEmailWorker()
+        let workerUrlModelData = KYCResendConfirmEmailWorkerUrlModelData()
+        let workerRequest = KYCResendConfirmEmailWorkerRequest()
+        let workerData = KYCResendConfirmEmailWorkerData(workerRequest: workerRequest,
+                                                         workerUrlModelData: workerUrlModelData)
+        
+        worker.execute(requestData: workerData) { [weak self] error in
+            guard error == nil else {
+                self?.presenter?.presentError(response: .init(error: error))
+                return
+            }
+            
+            self?.presenter?.presentResendCode(response: .init())
+        }
+    }
     
     func executeCheckFieldType(request: KYCConfirmEmail.CheckFieldText.Request) {
         confirmationCode = request.text
@@ -39,9 +73,5 @@ class KYCConfirmEmailInteractor: KYCConfirmEmailBusinessLogic, KYCConfirmEmailDa
         
         presenter?.presentShouldEnableConfirm(response: .init(shouldEnable: shouldEnable))
         presenter?.presentValidateField(response: .init(isViable: shouldEnable))
-    }
-    
-    func executeConfirmData(request: KYCConfirmEmail.ConfirmData.Request) {
-        // implement confirm code when BE is ready
     }
 }

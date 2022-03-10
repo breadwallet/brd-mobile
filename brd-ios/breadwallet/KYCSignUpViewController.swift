@@ -153,6 +153,8 @@ class KYCSignUpViewController: UIViewController, KYCSignUpDisplayLogic, UITableV
     }
     
     func displaySubmitData(viewModel: KYCSignUp.SubmitData.ViewModel) {
+        LoadingView.hide()
+        
         router?.showKYCConfirmEmailScene()
     }
     
@@ -216,6 +218,8 @@ class KYCSignUpViewController: UIViewController, KYCSignUpDisplayLogic, UITableV
         }
         
         cell.didTapNextButton = { [weak self] in
+            LoadingView.show()
+            
             self?.interactor?.executeSubmitData(request: .init())
         }
         
