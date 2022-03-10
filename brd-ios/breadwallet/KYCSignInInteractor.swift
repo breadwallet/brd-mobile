@@ -86,6 +86,7 @@ class KYCSignInInteractor: KYCSignInBusinessLogic, KYCSignInDataStore {
         
         presenter?.presentValidateField(response: .init(isViable: isViable, type: .password))
         
+        // TODO: make isViable
         return true
     }
     
