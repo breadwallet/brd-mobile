@@ -190,8 +190,6 @@ class KYCSignInViewController: UIViewController, KYCSignInDisplayLogic, UITableV
         }
         
         cell.didTapSignUpButton = { [weak self] in
-            LoadingView.show()
-            
             self?.router?.showKYCSignUpScene()
         }
         
