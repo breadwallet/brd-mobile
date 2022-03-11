@@ -150,14 +150,14 @@ class IntroController : BaseController() {
                 constraintSet.connect(
                     icon.id,
                     ConstraintSet.TOP,
-                    logoView.id,
+                    animationView.id,
                     ConstraintSet.TOP,
                     16
                 )
                 constraintSet.connect(
                     icon.id,
                     ConstraintSet.BOTTOM,
-                    logoView.id,
+                    animationView.id,
                     ConstraintSet.BOTTOM,
                     16
                 )

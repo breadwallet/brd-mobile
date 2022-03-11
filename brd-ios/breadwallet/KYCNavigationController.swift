@@ -18,8 +18,6 @@ class KYCNavigationController: UINavigationController, UINavigationControllerDel
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            //appearance.titleTextAttributes[.foregroundColor] = R.color.darkBlue()
-            //appearance.titleTextAttributes[.font] = R.font.metaProBold(size: 17)
             appearance.backgroundColor = .clear
             appearance.shadowColor = nil
             
@@ -37,7 +35,7 @@ class KYCNavigationController: UINavigationController, UINavigationControllerDel
     }
     
     private func setupHeader() {
-        let headerImageView = UIImageView(image: UIImage(named: "KYCHeaderLogo"))
+        let headerImageView = UIImageView(image: UIImage(named: "KYC Header Logo"))
         headerImageView.contentMode = .scaleAspectFit
         headerImageView.frame = navigationBar.frame
         navigationBar.addSubview(headerImageView)

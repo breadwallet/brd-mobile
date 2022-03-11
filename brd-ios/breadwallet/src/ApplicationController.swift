@@ -9,6 +9,7 @@
 import UIKit
 import WalletKit
 import UserNotifications
+import IQKeyboardManagerSwift
 #if canImport(WidgetKit)
 import WidgetKit
 #endif
@@ -17,7 +18,7 @@ private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
 
 class ApplicationController: Subscriber, Trackable {
-
+    
     fileprivate var application: UIApplication?
 
     static let initialLaunchCount = 0
@@ -84,6 +85,7 @@ class ApplicationController: Subscriber, Trackable {
         EventMonitor.shared.register(.pushNotifications)
         
         setup()
+        setupKeyboard()
         Reachability.addDidChangeCallback({ isReachable in
             self.isReachable = isReachable
         })
@@ -134,7 +136,12 @@ class ApplicationController: Subscriber, Trackable {
             unlockExistingAccount()
         }
     }
-        
+    
+    private func setupKeyboard() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
+    
     private func enterOnboarding() {
         guardProtected(queue: DispatchQueue.main) {
             guard let startFlowController = self.startFlowController, self.keyStore.noWallet else { return assertionFailure() }

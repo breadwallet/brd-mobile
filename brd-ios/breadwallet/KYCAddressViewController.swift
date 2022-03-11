@@ -62,7 +62,7 @@ class KYCAddressViewController: UIViewController, KYCAddressDisplayLogic, UITabl
         let roundedView = RoundedView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.cornerRadius = 10
-        roundedView.backgroundColor = .navigationTint
+        roundedView.backgroundColor = .kycCompletelyWhite
         
         return roundedView
     }()

@@ -89,9 +89,6 @@ class KYCTutorialViewController: UIViewController, KYCTutorialDisplayLogic, UICo
         collectionView.register(cell: KYCTutorial1CollectionViewCell.self)
         collectionView.register(cell: KYCTutorial2CollectionViewCell.self)
         
-        let backItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = backItem
-        
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -103,11 +100,9 @@ class KYCTutorialViewController: UIViewController, KYCTutorialDisplayLogic, UICo
         pageControl.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
         pageControl.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
         
+        view.backgroundColor = .almostBlack
+        
         interactor?.fetchTutorialPages(request: .init())
-    }
-    
-    @objc fileprivate func backButtonTapped() {
-        dismiss(animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
