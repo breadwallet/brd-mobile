@@ -58,7 +58,7 @@ class KYCCompleteViewController: UIViewController, KYCCompleteDisplayLogic, UITa
         let roundedView = RoundedView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.cornerRadius = 10
-        roundedView.backgroundColor = .navigationTint
+        roundedView.backgroundColor = .kycCompletelyWhite
         
         return roundedView
     }()
@@ -156,7 +156,7 @@ class KYCCompleteViewController: UIViewController, KYCCompleteDisplayLogic, UITa
         }
         
         cell.didTapDoneButton = { [weak self] in
-            self?.navigationController?.dismiss(animated: true)
+            self?.router?.dismissFlow()
         }
         
         return cell

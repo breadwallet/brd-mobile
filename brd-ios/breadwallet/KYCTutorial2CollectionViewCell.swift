@@ -16,11 +16,11 @@ class KYCTutorial2CollectionViewCell: KYCTutorialBaseCell {
         
         // swiftlint:disable line_length
         topLabel.text = "Please have a valid form of government issued ID such as a passport or drivers lisence ready.\nYou will also be asked to take a selfie, so before you start make sure that you are in a well-lit area."
-        topLabel.textColor = .navigationTint
+        topLabel.textColor = .kycCompletelyWhite
         
         imageView.image = UIImage(named: "Tutorial2")
         
-        nextButton.setup(as: .normal, title: "BEGIN")
+        nextButton.setup(as: .enabled, title: "BEGIN")
         nextButton.didTap = { [weak self] in
             self?.didTapCloseButton?()
         }

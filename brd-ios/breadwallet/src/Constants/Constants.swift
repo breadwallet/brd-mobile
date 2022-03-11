@@ -91,7 +91,7 @@ struct C {
         if let debugBackendHost = UserDefaults.debugBackendHost {
             return debugBackendHost
         } else {
-            return (E.isDebug || E.isTestFlight) ? "one-dev.moneybutton.io/blocksatoshi/wallet" : "one-dev.moneybutton.io/blocksatoshi/wallet"
+            return E.apiUrl + "blocksatoshi/wallet"
         }
     }
 
@@ -105,7 +105,7 @@ struct C {
     }
 
     static var bdbHost: String {
-        return "one-dev.moneybutton.io/blocksatoshi/blocksatoshi"
+        return E.apiUrl + "blocksatoshi/blocksatoshi"
     }
 
     static let bdbClientTokenRecordId = "BlockchainDBClientID"

@@ -21,6 +21,6 @@ class KYCTutorialRouter: NSObject, KYCTutorialRoutingLogic {
     }
     
     func dismissFlow() {
-        viewController?.dismiss(animated: true)
+        viewController?.navigationController?.dismiss(animated: true)
     }
 }

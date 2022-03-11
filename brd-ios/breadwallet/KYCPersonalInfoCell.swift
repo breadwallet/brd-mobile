@@ -33,7 +33,7 @@ class KYCPersonalInfoCell: UITableViewCell, GenericSettable {
     private lazy var nextButton: KYCButton = {
         let nextButton = KYCButton()
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.setup(as: .normal, title: "NEXT")
+        nextButton.setup(as: .enabled, title: "NEXT")
         
         return nextButton
     }()
