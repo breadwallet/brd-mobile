@@ -12,6 +12,7 @@ include(
 include(
     "brd-android:app",
     "brd-android:app-core",
+    "brd-android:buy",
     "brd-android:theme"
 )
 
