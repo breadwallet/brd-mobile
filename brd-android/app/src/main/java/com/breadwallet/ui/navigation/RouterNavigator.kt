@@ -83,6 +83,7 @@ import com.breadwallet.ui.uigift.CreateGiftController
 import com.breadwallet.ui.uigift.ShareGiftController
 import com.breadwallet.util.CryptoUriParser
 import com.breadwallet.util.isBrd
+import com.fabriik.buy.ui.BuyWebViewActivity
 import com.platform.HTTPServer
 import com.platform.util.AppReviewPromptManager
 import kotlinx.coroutines.CoroutineScope
@@ -153,28 +154,12 @@ class RouterNavigator(
     }
 
     override fun buy() {
-        val url = String.format(
-            BRConstants.CURRENCY_PARAMETER_STRING_FORMAT,
-            HTTPServer.getPlatformUrl(HTTPServer.URL_BUY),
-            btc.toUpperCase(Locale.ROOT)
-        )
-        val webTransaction =
-            WebController(url).asTransaction(
-                VerticalChangeHandler(),
-                VerticalChangeHandler()
-            )
-
-        when (router.backstack.lastOrNull()?.controller) {
-            is HomeController -> router.pushController(webTransaction)
-            else -> {
-                router.setBackstack(
-                    listOf(
-                        HomeController().asTransaction(),
-                        webTransaction
-                    ),
-                    VerticalChangeHandler()
+        router.activity?.let {
+            it.startActivity(
+                BuyWebViewActivity.getStartIntent(
+                    it
                 )
-            }
+            )
         }
     }
 

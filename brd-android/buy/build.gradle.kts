@@ -35,7 +35,11 @@ android {
 dependencies {
     implementation(Libs.Androidx.AppCompat)
     implementation(Libs.Androidx.CoreKtx)
+    implementation(Libs.Androidx.LifecycleLiveDataKtx)
+    implementation(Libs.Androidx.LifecycleViewModelKtx)
+
     implementation(Libs.Material.Core)
+
     implementation(Libs.Networking.Moshi)
     implementation(Libs.Networking.Retrofit)
 }

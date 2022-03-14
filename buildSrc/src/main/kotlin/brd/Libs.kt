@@ -97,8 +97,10 @@ object Libs {
     }
 
     object Androidx {
-        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_EXT_VERSION"
         const val LifecycleScopeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_EXT_VERSION"
         const val WorkManagerKtx = "androidx.work:work-runtime-ktx:$WORK_MANAGER_VERSION"
         const val WorkManagerTesting = "androidx.work:work-testing:$WORK_MANAGER_VERSION"
         const val CoreKtx = "androidx.core:core-ktx:$CORE_VERSION"

@@ -1,23 +1,41 @@
 package com.fabriik.buy.ui
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.core.widget.ContentLoadingProgressBar
+import androidx.lifecycle.ViewModelProvider
+import com.fabriik.buy.R
+import com.fabriik.buy.data.Status
 
 class BuyWebViewActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<BuyWebViewViewModel>()
+    private lateinit var webView: WebView
+    private lateinit var viewModel: BuyWebViewViewModel
+    private lateinit var loadingIndicator: ContentLoadingProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_buy_web_view)
 
-        binding = ActivityBuyBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        viewModel = ViewModelProvider(this)
+            .get(BuyWebViewViewModel::class.java)
 
-        binding.webView.settings.apply {
+        webView = findViewById(R.id.web_view)
+        loadingIndicator = findViewById(R.id.loading_bar)
+
+        webView.settings.apply {
             domStorageEnabled = true
             javaScriptEnabled = true
         }
 
-        binding.webView.webViewClient = object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
                 request: WebResourceRequest
@@ -37,31 +55,35 @@ class BuyWebViewActivity : AppCompatActivity() {
         viewModel.getPaymentUrl().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    binding.loadingBar.isVisible = false
+                    loadingIndicator.isVisible = false
                     it.data?.let { response ->
-                        binding.webView.loadUrl(
+                        webView.loadUrl(
                             response.url
                         )
                     }
                 }
                 Status.ERROR -> {
-                    binding.loadingBar.isVisible = false
+                    loadingIndicator.isVisible = false
                     Toast.makeText(
                         this, it.message, Toast.LENGTH_LONG
                     ).show()
                 }
                 Status.LOADING -> {
-                    binding.loadingBar.isVisible = true
+                    loadingIndicator.isVisible = true
                 }
             }
         }
     }
 
     override fun onBackPressed() {
-        if (binding.webView.canGoBack()) {
-            binding.webView.goBack()
+        if (webView.canGoBack()) {
+            webView.goBack()
         } else {
             super.onBackPressed()
         }
+    }
+
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context, BuyWebViewActivity::class.java)
     }
 }
