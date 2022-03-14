@@ -6,7 +6,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class WyreApi(private val service: WyreService) {
 
-    private val secretKey = "SK-DH6XP4AX-ZQ3ULQ2G-6CVP3PF9-TFJ4N7VJ"
+    private val secretKey = "SK-DH6XP4AX-ZQ3ULQ2G-6CVP3PF9-TFJ4N7VJ" //todo: move secret key
 
     suspend fun getPaymentUrl() = service.getPaymentUrl(
         auth = "Bearer $secretKey",
@@ -19,7 +19,7 @@ class WyreApi(private val service: WyreService) {
             destCurrency = "ETH",
             redirectUrl = "https://www.sendwyre.com",
             failureRedirectUrl = "https://www.sendwyre.com",
-            referrerAccountId = "AC_T6HMDWDGM8V",
+            referrerAccountId = "AC_T6HMDWDGM8V", // todo: move account id
             dest = "ethereum:0x9E01E0E60dF079136a7a1d4ed97d709D5Fe3e341",
             country = "US"
         )
