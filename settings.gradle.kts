@@ -31,3 +31,7 @@ includeBuild("external/redacted-compiler-plugin") {
             .with(project(":redacted-compiler-plugin-annotations"))
     }
 }
+
+apply {
+    from("flutter_settings.gradle")
+}

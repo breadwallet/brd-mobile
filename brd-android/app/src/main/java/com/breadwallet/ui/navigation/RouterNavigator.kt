@@ -86,6 +86,7 @@ import com.breadwallet.util.isBrd
 import com.fabriik.buy.ui.BuyWebViewActivity
 import com.platform.HTTPServer
 import com.platform.util.AppReviewPromptManager
+import io.flutter.embedding.android.FlutterActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -153,7 +154,13 @@ class RouterNavigator(
     }
 
     override fun openKyc() {
-      Toast.makeText(router.activity?.applicationContext, "OPEN KYC", Toast.LENGTH_SHORT).show()
+        router.activity?.let {
+            val intent = FlutterActivity
+                .withCachedEngine("flutter_kyc")
+                .build(it)
+
+            it.startActivity(intent)
+        }
     }
 
     override fun buy() {

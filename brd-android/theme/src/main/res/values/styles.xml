@@ -186,4 +186,9 @@
     </style>
 
     <attr name="textAppearanceError" format="reference" />
+
+    <style name="AppTheme.FlutterTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
  </resources>

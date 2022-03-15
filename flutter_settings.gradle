@@ -1,0 +1,2 @@
+setBinding(new Binding ([gradle: this]))
+evaluate(new File(settingsDir.parent, 'brd-mobile/brd-android/kyc-flutter/.android/include_flutter.groovy'))

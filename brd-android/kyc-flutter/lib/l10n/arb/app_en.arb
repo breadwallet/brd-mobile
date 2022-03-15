@@ -1,0 +1,329 @@
+{
+    "@@locale": "en",
+    "kycIntro1": "As a regulated financial services company, we are required to identify the users on our platform.",
+    "@kycIntro1": {
+        "description": "Text shown on the KYC intro page 1, explaining why we do KYC."
+    },
+    "kycIntro2": "Please have a valid form of government issued ID such as a passport or driver's license ready.\n\nYou will also be asked to take a selfie, so before you start make sure that you are in a well-lit area.",
+    "@kycIntro2": {
+        "description": "Text shown on the KYC intro page 1, explaining why we do KYC."
+    },
+    "closeButtonText": "CLOSE",
+    "@closeButtonText": {
+        "description": "Text for a CLOSE button"
+    },
+    "beginButtonText": "BEGIN",
+    "@beginButtonText": {
+        "description": "Text for a BEGIN button"
+    },
+    "retryButtonText": "RETRY",
+    "@retryButtonText": {
+        "description": "Text for a RETRY button"
+    },
+    "nextButtonText": "NEXT",
+    "@nextButtonText": {
+        "description": "Text for a NEXT button"
+    },
+    "doneButtonText": "DONE",
+    "@doneButtonText": {
+        "description": "Text for a DONE button"
+    },
+    "kycPiResidenceHeadline": "ADDRESS",
+    "@kycPiResidenceHeadline": {
+        "description": "Page title for the KYC PI page with residence information"
+    },
+    "kycPiOtherHeadline": "PERSONAL INFO",
+    "@kycPiOtherHeadline": {
+        "description": "Page title for the KYC PI page with other information"
+    },
+    "kycCountryLabel": "COUNTRY",
+    "kycCountryHint": "Country",
+    "kycStreetLabel": "STREET",
+    "kycStreetHint": "Street number and name",
+    "kycCityLabel": "CITY",
+    "kycCityHint": "City",
+    "kycStateLabel": "STATE",
+    "kycStateHint": "State",
+    "kycZipCodeLabel": "ZIP CODE",
+    "kycZipCodeHint": "Zip",
+    "kycDateOfBirthLabel": "DATE OF BIRTH",
+    "kycDateOfBirthHint": "Date",
+    "kycTaxIdNumberLabel": "TAX ID NUMBER",
+    "kycTaxIdNumberHint": "SSN, ITIN, or EIN",
+    "kycConsentPart1Fabriik": "Fabriik",
+    "kycConsentPart2TermsOfUse": "terms of use",
+    "kycConsentPart3And": "and",
+    "kycConsentPart4PrivacyPolicy": "privacy policy",
+    "kycConsentTermsUrl": "https://fabriik.com/terms-and-conditions/",
+    "kycConsentPrivacyUrl": "https://fabriik.com/terms-and-conditions/",
+    "kycPrepareScanHeadline": "Verification",
+    "@kycPrepareScanHeadline": {
+        "description": "Page title for the prepare scan page"
+    },
+    "kycPrepareScan": "This process is designed to verify your identity and protect you from identity theft.\n\nPlease have your ID ready.",
+    "@kycPrepareScan": {
+        "description": "Text shown on the KYC page before we scan the ID."
+    },
+    "kycScanFrontHeadline": "ID UPLOAD - FRONT",
+    "@kycScanFrontHeadline": {
+        "description": "Page title for the scan-front page"
+    },
+    "kycScanFront": "Take a photo of the front of your driver's license or government issued ID. Make sure to take a clear and readable photo, to avoid delays or a failed verification.",
+    "@kycScanFront": {
+        "description": "Text shown to scan the front of the driver's license or ID."
+    },
+    "kycScanBackHeadline": "ID UPLOAD - BACK",
+    "@kycScanBackHeadline": {
+        "description": "Page title for the scan-back page"
+    },
+    "kycScanBack": "Take a photo of the back of your driver's license or government issued ID. Make sure to take a clear and readable photo, to avoid delays or a failed verification.",
+    "@kycScanBack": {
+        "description": "Text shown to scan the back of the driver's license or ID."
+    },
+    "kycSelfieHeadline": "ID VERIFICATION",
+    "@kycSelfieHeadline": {
+        "description": "Page title for the selfie page"
+    },
+    "kycSelfie": "Take a quick face photo to confirm you are the person on your ID. Make sure to take a clear and readable photo, to avoid delays or a failed verification.",
+    "@kycSelfie": {
+        "description": "Text shown to take a selfie."
+    },
+    "kycFinishHeadline": "KYC COMPLETE!",
+    "@kycFinishHeadline": {
+        "description": "Page title for the KYC finish page, after the user has successfully finished KYC."
+    },
+    "kycFinish": "Your profile is under review.\nYou will receive an email with the status of your review in 1-2 business days.",
+    "@kycFinish": {
+        "description": "Text shown on the KYC finish page, after the user has successfully finished KYC."
+    },
+
+    "signUpConsent1": "I certify that I am 18 years of age or older, and I agree to the",
+    "signUpConsent2": "User Agreement",
+    "signUpConsent3": "and",
+    "signUpConsent4": "Privacy Policy",
+    "@signUpConsent1": {
+        "description": "Registration screen consent text part 1"
+    },
+    "@signUpConsent2": {
+        "description": "Registration screen consent text part 2"
+    },
+    "@signUpConsent3": {
+        "description": "Registration screen consent text part 3"
+    },
+    "@signUpConsent4": {
+        "description": "Registration screen consent text part 4"
+    },
+
+    "signUp": "SUBMIT",
+    "@signUp": {
+        "description": "Sign Up button text shown on registration screen"
+    },
+    "signInHeadline": "LOG IN",
+    "@signInHeadline": {
+        "description": "Sign in page title"
+    },
+    "signUpText": "SIGN UP",
+    "@signUpText": {
+        "description": "Shown on the splash screen sign up button"
+    },
+    "signInButtonText": "SUBMIT",
+    "@signInButtonText": {
+        "description": "Sign In button text shown on login screen"
+    },
+    "signInSignUpPrompt1": "Don't have an account?",
+    "@signInSignUpPrompt1": {
+        "description": "Shown on the login screen, first part (inactive)"
+    },
+    "signInSignUpPrompt2": "Sign Up",
+    "@signInSignUpPrompt2": {
+        "description": "Shown on the login screen, second part (active)"
+    },
+    "signInWithBiometrics": "Sign In with biometrics",
+    "@signInWithBiometrics": {
+        "description": "Text shown on login screen for using biometrics"
+    },
+    "signUpHeadline": "SIGN UP INFORMATION",
+    "@signUpHeadline": {
+        "description": "Sign up page title"
+    },
+    "signUpButtonText": "SUBMIT",
+    "@signUpButtonText": {
+        "description": "Sign Up button text shown on registration screen"
+    },
+    "registrationSuccessful": "Account registered successfully",
+    "@registrationSuccessful": {
+        "description": "Text shown on snackbar after successful user registration"
+    },
+    "name": "NAME",
+    "@name": {
+        "description": "Name label text shown on profile screen"
+    },
+    "firstName": "FIRST NAME",
+    "@firstName": {
+        "description": "First name label text shown on registration screen"
+    },
+    "firstNameHint": "Enter valid first name",
+    "@firstNameHint": {
+        "description": "hint text shown on registration screen for First Name field"
+    },
+    "lastName": "LAST NAME",
+    "@lastName": {
+        "description": "Last name label text shown on registration screen"
+    },
+    "lastNameHint": "Enter valid last name",
+    "@lastNameHint": {
+        "description": "hint text shown on registration screen for Last Name field"
+    },
+    "email": "EMAIL",
+    "@email": {
+        "description": "Email label text shown on login and registration screen"
+    },
+    "signInEmailHint": "Enter your email",
+    "@signInEmailHint": {
+        "description": "Hint text shown on login screen for the email field"
+    },
+    "emailHint": "Enter valid email",
+    "@emailHint": {
+        "description": "hint text shown on registration screen for Email field"
+    },
+    "phone": "PHONE",
+    "@phone": {
+        "description": "Phone label text shown on registration screen"
+    },
+    "phoneHint": "Enter valid phone number",
+    "@phoneHint": {
+        "description": "hint text shown on registration screen for phone number field"
+    },
+    "password": "PASSWORD",
+    "@password": {
+        "description": "Password label text shown on login and registration screen"
+    },
+    "signInPasswordHint": "Enter your password",
+    "@signInPasswordHint": {
+        "description": "hint text shown on login screen for the password field"
+    },
+    "passwordHint": "Enter a secure password",
+    "@passwordHint": {
+        "description": "hint text shown on the registration screen for password field"
+    },
+    "logout": "Logout",
+    "@logout": {
+        "description": "Text shown on homescreen app bar for logout"
+    },
+    "portfolio": "Portfolio",
+    "@portfolio": {
+        "description": "Text shown on bottom navigator in home screen"
+    },
+    "privateButler": "Contact Private Butler",
+    "@privateButler": {
+        "description": "Text shown on bottom navigator in home page"
+    },
+    "genericApiErrorMessage": "Something went wrong",
+    "@genericApiErrorMessage": {
+        "description": "Generic error message when an API call fails"
+    },
+    "errorAndMessage": "Error: {message}",
+    "@errorAndMessage": {
+        "description": "An error message with an 'Error' label in front",
+        "placeholders": {
+            "message": {
+                "type": "String",
+                "example": "invalid data"
+            }
+        }
+    },
+    "kycPiErrorGeneric": "Some fields have errors. Please correct them and try again.",
+    "@kycPiErrorGeneric": {
+        "description": "Generic error message when the PI form submission fails"
+    },
+    "kycSelectDocTypeHeadline": "Select ID type",
+    "kycSelectDocTypeHelpText": "Use a valid government-issued photo ID.",
+    "kycDocTypePassport": "Passport",
+    "kycDocTypeDriversLicense": "Driver's license",
+    "kycDocTypeIdentityCard": "Identity card",
+    "kycDocTypeResidencePermit": "Residence permit",
+    "biometrics": "Use biometrics on App Start",
+    "@biometrics": {
+        "description": "Text shown on login screen for biometrics preference"
+    },
+    "biometricsSuccessMessage": "Biometrics Activated Successfully",
+    "@biometricsSuccessMessage": {
+        "description": "Text shown on snack bar in profile screen for successuful biometrics activation"
+    },
+    "biometricsFailedMessage": "Biometrics Activation failed",
+    "@biometricsFailedMessage": {
+        "description": "Text shown on snack bar in profile screen for successuful biometrics failure"
+    },
+    "setUpWalletButtonText": "SET UP WALLET",
+    "@setUpWalletButtonText": {
+        "description": "Button text that prompts to do KYC and set up wallet"
+    },
+    "changePasswordSuccess": "Changed password successfully",
+    "@changePasswordSuccess": {
+        "description": "text shown on snackbar on user password change successful in profile screen"
+    },
+    "settingsText": "SETTINGS",
+    "@settingsText": {
+        "description": "text shown on settings screen"
+    },
+    "country": "COUNTRY",
+    "@country": {
+        "description": "text shown on account info screen"
+    },
+    "state": "STATE",
+    "@state": {
+        "description": "text shown on account info screen"
+    },
+    "street": "STREET",
+    "@street": {
+        "description": "text shown on account info screen"
+    },
+    "city": "CITY",
+    "@city": {
+        "description": "text shown on account info screen"
+    },
+    "postalCode": "POSTAL CODE",
+    "@postalCode": {
+        "description": "text shown on account info screen"
+    },
+    "birthday": "BIRTH DAY",
+    "@birthday": {
+        "description": "text shown on account info screen"
+    },
+    "loginInfo": "Login Info",
+    "@loginInfo": {
+        "description": "text shown on account info screen"
+    },
+    "walletInfo": "Wallet Info",
+    "@walletInfo": {
+        "description": "text shown on account info screen"
+    },
+    "accountInfoChangeText": "To change this info please contact your private butler.",
+    "@accountInfoChangeText": {
+        "description": "text shown on account info screen"
+    },
+    "accountText": "Account Info",
+    "@accountText": {
+        "description": "text shown on account info screen"
+    },
+    "currencyText": "Currency",
+    "@currencyText": {
+        "description": "text shown on currency screen"
+    },
+    "securityText": "Security",
+    "@securityText": {
+        "description": "text shown on security screen"
+    },
+    "privacyTnC": "Privacy + Terms of Use",
+    "@privacyTnC": {
+        "description": "text shown on settings screen"
+    },
+    "dashboard": "DASHBOARD",
+    "@dashboard": {
+        "description": "text shown on button in dashboard screen"
+    },
+    "details": "DETAILS",
+    "@details": {
+        "description": "text shown on button in dashboard screen"
+    }
+}

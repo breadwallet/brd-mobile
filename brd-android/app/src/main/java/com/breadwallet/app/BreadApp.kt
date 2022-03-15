@@ -31,6 +31,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
@@ -80,6 +81,10 @@ import com.platform.sqlite.PlatformSqliteHelper
 import com.platform.tools.KVStoreManager
 import com.platform.tools.TokenHolder
 import drewcarlson.blockset.BdbService
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.FlutterEngineCache
+import io.flutter.embedding.engine.dart.DartExecutor
+import io.flutter.plugin.common.MethodChannel
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.*
@@ -415,7 +420,8 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private val accountMetaData by instance<AccountMetaDataProvider>()
     private val conversionTracker by instance<ConversionTracker>()
     private val connectivityStateProvider by instance<ConnectivityStateProvider>()
-
+    private lateinit var flutterEngine: FlutterEngine
+    private val CHANNEL = "kyc-platform-channels"
     override fun onCreate() {
         super.onCreate()
         installHooks()
@@ -445,6 +451,34 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         // Start our local server as soon as the application instance is created, since we need to
         // display support WebViews during onboarding.
         HTTPServer.getInstance().startServer(this)
+
+        flutterEngine = FlutterEngine(this)
+
+        flutterEngine.dartExecutor.executeDartEntrypoint(
+            DartExecutor.DartEntrypoint.createDefault()
+        )
+
+        FlutterEngineCache
+            .getInstance()
+            .put("flutter_kyc", flutterEngine)
+
+        initMethodChannel()
+    }
+
+    private fun initMethodChannel() {
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            CHANNEL
+        ).setMethodCallHandler { call, result ->
+            if (call.method == "getSessionKey") {
+                val pref = getSharedPreferences("default", Context.MODE_PRIVATE)
+                val sessionKey = pref.getString("sessionKey", null)
+                Log.d("BreadApp", "sessionKey from storage is $sessionKey")
+                result.success(sessionKey)
+            } else {
+                result.notImplemented()
+            }
+        }
     }
 
     /**
