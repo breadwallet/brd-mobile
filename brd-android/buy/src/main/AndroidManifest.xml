@@ -4,7 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application>
+    <application
+        android:allowBackup="false"
+        android:usesCleartextTraffic="false">
+
         <activity
             android:name=".ui.BuyWebViewActivity"
             android:exported="true"
