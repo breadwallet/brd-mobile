@@ -585,7 +585,7 @@
     <!-- An action is required (You must do this action). -->
     <string name="Prompts.PaperKey.title">Action Required</string>
     <string name="Prompts.RateApp.dontShow">Don\'t ask again</string>
-    <string name="Prompts.RateApp.enjoyingFabriik">Enjoying Fabriik?</string>
+    <string name="Prompts.RateApp.enjoyingBrd">Enjoying Fabriik?</string>
     <string name="Prompts.RateApp.googlePlayReview">Your review helps grow the Fabriik community.</string>
     <string name="Prompts.RateApp.noThanks">No thanks</string>
     <string name="Prompts.RateApp.rateUs">Review us</string>
