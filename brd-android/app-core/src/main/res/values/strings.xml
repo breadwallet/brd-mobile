@@ -901,7 +901,7 @@
     <string name="Send.payId_retrievalError">There was an error retrieving the address for this PayID. Please try again later.</string>
     <!-- PayID label -->
     <string name="Send.payId_toLabel">PayID</string>
-    <string name="Send.unstoppableDomain_toLabel">Unstoppable Domain</string>
+    <string name="Send.unstoppableDomain_toLabel" translatable="false">Unstoppable Domain</string>
     <!-- Could not publish transaction alert title -->
     <string name="Send.publishTransactionError">Could not publish transaction.</string>
     <!-- Could not load remote request error message -->
@@ -970,7 +970,7 @@
     <string name="Settings.shareData">Share Anonymous Data</string>
     <!-- "Enables sharing balance to widget" -->
     <string name="Settings.shareWithWidget">Share portfolio data with widgets</string>
-    <string name="Settings.share">Share</string>
+    <string name="Settings.share" translatable="false">Share</string>
     <!-- Sync blockchain label -->
     <string name="Settings.sync">Sync Blockchain</string>
     <!-- Settings title -->
@@ -1010,8 +1010,8 @@
     <string name="Staking.descriptionTezos">Delegate your Tezos account to a validator to earn a reward while keeping full security and control of your coins.</string>
     <!-- Baker cell: Fee field header -->
     <string name="Staking.feeHeader">Fee:</string>
-    <string name="Staking.feePct">Fee: %1$s</string>
-    <string name="Staking.loadingBakerError">An error occurred while loading baker information. Please try again later.</string>
+    <string name="Staking.feePct" translatable="false">Fee: %1$s</string>
+    <string name="Staking.loadingBakerError" translatable="false">An error occurred while loading baker information. Please try again later.</string>
     <!-- Status label: current staking transaction is pending -->
     <string name="Staking.pendingTransaction">Transaction pending...</string>
     <!-- Button label: remove selected baker -->
@@ -1460,5 +1460,5 @@
     <!-- 1 of 3 -->
     <string name="WritePaperPhrase.step">%1$d of %2$d</string>
 
-    <string name="Scanner.noCamera">No camera found</string>
+    <string name="Scanner.noCamera" translatable="false">No camera found</string>
 </resources>
