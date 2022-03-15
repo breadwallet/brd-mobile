@@ -27,6 +27,7 @@ package com.breadwallet.ui.onboarding
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import com.bluelinelabs.conductor.Router
@@ -108,12 +109,12 @@ class OnBoardingController(
             }
 
             ifChanged(M::isFirstPage) { isFirstPage ->
-                buttonSkip.isVisible = isFirstPage
-                buttonBack.isVisible = isFirstPage
+                buttonSkip.isInvisible = !isFirstPage
+                buttonBack.isInvisible = !isFirstPage
             }
 
             ifChanged(M::isLoading) { isLoading ->
-                loadingView.root.isVisible = isLoading
+                loadingView.root.isInvisible = !isLoading
                 buttonSkip.isEnabled = !isLoading
             }
         }
@@ -126,13 +127,14 @@ class OnBoardingController(
                     0 -> PageOneController()
                     1 -> PageTwoController()
                     2 -> PageThreeController()
+                    3 -> PageFourController()
                     else -> error("Unknown position")
                 }
                 router.setRoot(RouterTransaction.with(root))
             }
         }
 
-        override fun getCount(): Int = 3
+        override fun getCount(): Int = 4
     }
 
     override fun handleBack() = currentModel.isLoading
@@ -144,6 +146,7 @@ class PageOneController(args: Bundle? = null) : BaseController(args) {
         super.onCreateView(view)
         binding.primaryText.setText(R.string.OnboardingPageTwo_title)
         binding.secondaryText.setText(R.string.OnboardingPageTwo_subtitle)
+        binding.imageView.setImageResource(R.drawable.page1)
     }
 }
 
@@ -153,11 +156,21 @@ class PageTwoController(args: Bundle? = null) : BaseController(args) {
         super.onCreateView(view)
         binding.primaryText.setText(R.string.OnboardingPageThree_title)
         binding.secondaryText.setText(R.string.OnboardingPageThree_subtitle)
-        binding.imageView.setImageResource(R.drawable.ic_currencies)
+        binding.imageView.setImageResource(R.drawable.page2)
     }
 }
 
 class PageThreeController(args: Bundle? = null) : BaseController(args) {
+    private val binding by viewBinding(ControllerOnboardingPageBinding::inflate)
+    override fun onCreateView(view: View) {
+        super.onCreateView(view)
+        binding.primaryText.setText(R.string.OnboardingPageThree_title)
+        binding.secondaryText.setText(R.string.OnboardingPageThree_subtitle)
+        binding.imageView.setImageResource(R.drawable.page3)
+    }
+}
+
+class PageFourController(args: Bundle? = null) : BaseController(args) {
     private val binding by viewBinding(ControllerOnboardingPageBinding::inflate)
 
     override fun onCreateView(view: View) {
