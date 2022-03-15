@@ -41,7 +41,7 @@ object BrdRelease {
     private val engineering = ciTag?.get(2) ?: 0
 
     /** Build version. Increase for each new build. Maximum value: 999 */
-    private val build = ciTag?.lastOrNull() ?: 10
+    private val build = ciTag?.lastOrNull() ?: 11
 
     init {
         check(marketing in 0..99)
@@ -58,7 +58,7 @@ object BrdRelease {
     val internalVersionName = "$marketing.$product.$engineering.$build"
 
     const val ANDROID_TARGET_SDK = 29
-    const val ANDROID_COMPILE_SDK = 30
+    const val ANDROID_COMPILE_SDK = 31
     const val ANDROID_MINIMUM_SDK = 23
     const val ANDROID_BUILD_TOOLS = "30.0.2"
 }
