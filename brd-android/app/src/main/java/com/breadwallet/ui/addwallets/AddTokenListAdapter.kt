@@ -32,6 +32,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
@@ -98,20 +99,14 @@ class AddTokenListAdapter(
         holder.symbol.text = token.currencyCode.toUpperCase(Locale.ROOT)
 
         holder.addRemoveButton.apply {
-            text = context.getString(
-                when {
-                    token.enabled -> R.string.TokenList_remove
-                    else -> R.string.TokenList_add
-                }
-            )
-
+            isChecked = token.enabled
             isEnabled = !token.enabled || token.removable
 
-            setOnClickListener {
-                if (token.enabled) {
-                    sendChannel.offer(AddWallets.E.OnRemoveWalletClicked(token))
-                } else {
+            setOnCheckedChangeListener { _, checked ->
+                if (checked) {
                     sendChannel.offer(AddWallets.E.OnAddWalletClicked(token))
+                } else {
+                    sendChannel.offer(AddWallets.E.OnRemoveWalletClicked(token))
                 }
             }
         }
@@ -139,7 +134,7 @@ class AddTokenListAdapter(
         val logo: ImageView = view.findViewById(R.id.token_icon)
         val symbol: TextView = view.findViewById(R.id.token_symbol)
         val name: TextView = view.findViewById(R.id.token_name)
-        val addRemoveButton: Button = view.findViewById(R.id.add_remove_button)
+        val addRemoveButton: Switch = view.findViewById(R.id.add_remove_button)
         val iconParent: View = view.findViewById(R.id.icon_parent)
         val iconLetter: TextView = view.findViewById(R.id.icon_letter)
     }
