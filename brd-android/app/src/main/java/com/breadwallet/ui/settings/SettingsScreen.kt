@@ -115,6 +115,10 @@ object SettingsScreen {
             override val navigationTarget = NavigationTarget.SupportPage("")
         }
 
+        object GoToKyc : F(), NavigationEffect {
+            override val navigationTarget = NavigationTarget.GoToKYC()
+        }
+
         object GoToQrScan : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.QRScanner
         }

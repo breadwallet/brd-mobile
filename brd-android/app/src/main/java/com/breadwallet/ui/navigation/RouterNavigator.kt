@@ -24,6 +24,8 @@
  */
 package com.breadwallet.ui.navigation
 
+import android.util.Log
+import android.widget.Toast
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.Router
@@ -35,12 +37,10 @@ import com.breadwallet.R
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.legacy.presenter.settings.NotificationSettingsController
 import com.breadwallet.logger.logError
-import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.tools.util.Link
 import com.breadwallet.tools.util.ServerBundlesHelper
 import com.breadwallet.tools.util.asLink
-import com.breadwallet.tools.util.btc
 import com.breadwallet.ui.addwallets.AddWalletsController
 import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
@@ -93,7 +93,6 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.erased.instance
-import java.util.Locale
 
 @Suppress("TooManyFunctions")
 class RouterNavigator(
@@ -153,6 +152,10 @@ class RouterNavigator(
         AppReviewPromptManager.openGooglePlay(checkNotNull(router.activity))
     }
 
+    override fun openKyc() {
+      Toast.makeText(router.activity?.applicationContext, "OPEN KYC", Toast.LENGTH_SHORT).show()
+    }
+
     override fun buy() {
         router.activity?.let {
             it.startActivity(
@@ -191,7 +194,7 @@ class RouterNavigator(
 
     override fun sendSheet(effect: NavigationTarget.SendSheet) {
         val controller = when {
-            effect.cryptoRequestUrl != null -> SendSheetController(effect.cryptoRequestUrl!!)
+            effect.cryptoRequestUrl != null -> SendSheetController(effect.cryptoRequestUrl)
             else -> SendSheetController(effect.currencyId)
         }
         router.pushController(RouterTransaction.with(controller))

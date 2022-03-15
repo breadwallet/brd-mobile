@@ -24,6 +24,8 @@
  */
 package com.breadwallet.ui.navigation
 
+import android.util.Log
+
 interface NavigationTargetHandlerSpec {
     fun patch(effect: NavigationTarget): Unit = when (effect) {
         NavigationTarget.Back -> back()
@@ -73,7 +75,13 @@ interface NavigationTargetHandlerSpec {
         is NavigationTarget.CreateGift -> createGift(effect)
         is NavigationTarget.ShareGift -> shareGift(effect)
         is NavigationTarget.SelectBakerScreen -> selectBaker(effect)
+        is NavigationTarget.GoToKYC -> {
+            Log.i("David","kyc")
+            openKyc()
+        }
     }
+
+    fun openKyc()
 
     fun metadataViewer()
 
