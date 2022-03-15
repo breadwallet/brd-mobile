@@ -13,6 +13,7 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.lifecycle.ViewModelProvider
 import com.fabriik.buy.R
 import com.fabriik.buy.data.Status
+import com.fabriik.buy.data.WyreApi
 
 class BuyWebViewActivity : AppCompatActivity() {
 
@@ -42,11 +43,13 @@ class BuyWebViewActivity : AppCompatActivity() {
             ): Boolean {
                 val trimmedUrl = request.url.toString().trimEnd('/')
 
-                if (trimmedUrl.startsWith("file://")) {
-                    view.loadUrl(trimmedUrl)
-                } else {
-                    // Wyre links
-                    return false
+                when {
+                    trimmedUrl.startsWith("file://") ->
+                        view.loadUrl(trimmedUrl)
+                    trimmedUrl == "${WyreApi.REDIRECT_URL}?" ->
+                        finish()
+                    else ->
+                        return false // Wyre links
                 }
                 return true
             }

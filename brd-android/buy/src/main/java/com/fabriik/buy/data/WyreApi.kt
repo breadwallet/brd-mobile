@@ -17,8 +17,8 @@ class WyreApi(private val service: WyreService) {
             amountIncludeFees = true,
             sourceCurrency = "USD",
             destCurrency = "ETH",
-            redirectUrl = "https://www.sendwyre.com",
-            failureRedirectUrl = "https://www.sendwyre.com",
+            redirectUrl = REDIRECT_URL,
+            failureRedirectUrl = FAILURE_REDIRECT_URL,
             referrerAccountId = "AC_T6HMDWDGM8V", // todo: move account id
             dest = "ethereum:0x9E01E0E60dF079136a7a1d4ed97d709D5Fe3e341",
             country = "US"
@@ -26,6 +26,9 @@ class WyreApi(private val service: WyreService) {
     )
 
     companion object {
+
+        const val REDIRECT_URL = "https://www.sendwyre.com/success"
+        const val FAILURE_REDIRECT_URL = "https://www.sendwyre.com/error"
 
         fun create() = WyreApi(
             Retrofit.Builder()
