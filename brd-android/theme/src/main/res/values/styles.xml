@@ -16,6 +16,7 @@
         <item name="colorControlNormal">@color/light_gray</item>
         <item name="colorControlActivated">@color/prompt_action_button</item>
         <item name="android:fontFamily">@font/mobile_font</item>
+        <item name="switchStyle">@style/switchStyle</item>
     </style>
 
     <!-- ActionBar styles -->
@@ -186,4 +187,10 @@
     </style>
 
     <attr name="textAppearanceError" format="reference" />
- </resources>
+
+    <style name="switchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="trackTint">@color/switch_track_tint</item>
+        <item name="thumbTint">@color/switch_thumb_tint</item>
+    </style>
+
+</resources>

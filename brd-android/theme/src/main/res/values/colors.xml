@@ -178,4 +178,7 @@
     <color name="ui_error">#EA5A5A</color>
     <color name="ui_error_transparent">#29EA5A5A</color>
 
+    <!-- Fabriik colors -->
+    <color name="blue_700">#0861FF</color>
+    <color name="gray_300">#DADCE0</color>
 </resources>

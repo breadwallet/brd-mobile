@@ -47,4 +47,7 @@
 
     <dimen name="wallet_balance_primary_text_size">22sp</dimen>
     <dimen name="wallet_balance_secondary_text_size">14sp</dimen>
+
+    <dimen name="card_view_radius">12dp</dimen>
+    <dimen name="add_wallet_item_margin">16dp</dimen>
 </resources>

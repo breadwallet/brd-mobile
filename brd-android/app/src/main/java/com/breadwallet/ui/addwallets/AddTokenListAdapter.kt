@@ -24,19 +24,17 @@
  */
 package com.breadwallet.ui.addwallets
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.tools.util.TokenUtil
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -134,8 +132,8 @@ class AddTokenListAdapter(
         val logo: ImageView = view.findViewById(R.id.token_icon)
         val symbol: TextView = view.findViewById(R.id.token_symbol)
         val name: TextView = view.findViewById(R.id.token_name)
-        val addRemoveButton: Switch = view.findViewById(R.id.add_remove_button)
         val iconParent: View = view.findViewById(R.id.icon_parent)
         val iconLetter: TextView = view.findViewById(R.id.icon_letter)
+        val addRemoveButton: SwitchMaterial = view.findViewById(R.id.add_remove_button)
     }
 }
