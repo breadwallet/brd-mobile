@@ -76,7 +76,6 @@ interface NavigationTargetHandlerSpec {
         is NavigationTarget.ShareGift -> shareGift(effect)
         is NavigationTarget.SelectBakerScreen -> selectBaker(effect)
         is NavigationTarget.GoToKYC -> {
-            Log.i("David","kyc")
             openKyc()
         }
     }
