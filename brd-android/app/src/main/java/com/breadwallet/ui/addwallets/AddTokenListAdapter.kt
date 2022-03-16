@@ -31,6 +31,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.tools.util.TokenUtil
@@ -72,15 +73,16 @@ class AddTokenListAdapter(
     override fun onBindViewHolder(holder: TokenItemViewHolder, position: Int) {
         val token = tokens[position]
         val currencyCode = token.currencyCode.toLowerCase(Locale.ROOT)
-        val tokenIconPath = TokenUtil.getTokenIconPath(currencyCode, true)
+        val tokenIconPath = TokenUtil.getTokenIconPath(currencyCode, false)
 
+        // set icon color
         val iconDrawable = holder.iconParent.background as GradientDrawable
+        iconDrawable.setColor(Color.parseColor(token.startColor))
 
         when {
             tokenIconPath == null -> {
                 // If no icon is present, then use the capital first letter of the token currency code instead.
                 holder.iconLetter.visibility = View.VISIBLE
-                iconDrawable.setColor(Color.parseColor(token.startColor))
                 holder.iconLetter.text = currencyCode.substring(0, 1).toUpperCase(Locale.ROOT)
                 holder.logo.visibility = View.GONE
             }
@@ -89,7 +91,6 @@ class AddTokenListAdapter(
                 Picasso.get().load(iconFile).into(holder.logo)
                 holder.iconLetter.visibility = View.GONE
                 holder.logo.visibility = View.VISIBLE
-                iconDrawable.setColor(Color.TRANSPARENT)
             }
         }
 
