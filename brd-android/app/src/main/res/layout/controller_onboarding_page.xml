@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_blue_fabriik"
                                                    android:id="@+id/layout_onboarding_page"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
@@ -94,16 +95,16 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="70dp"
         android:clickable="false"
         android:cropToPadding="true"
         android:focusable="false"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_globe"
+        android:scaleType="centerCrop"
+        android:src="@drawable/page1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

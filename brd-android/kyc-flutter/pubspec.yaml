@@ -1,0 +1,100 @@
+name: kyc
+description: A new flutter module project.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+#
+# This version is used _only_ for the Runner app, which is used if you just do
+# a `flutter run` or a `flutter make-host-app-editable`. It has no impact
+# on any other native host app that you embed your Flutter project into.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.0
+  intl: ^0.17.0
+  equatable: ^2.0.0
+  dio: ^4.0.0
+  shared_preferences: ^2.0.5
+  camera: ^0.9.4+14
+  datetime_picker_formfield: ^2.0.0
+  country_picker: ^2.0.4
+  url_launcher: ^6.0.6
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+flutter:
+  uses-material-design: true
+  generate: true
+  fonts:
+    - family: BrandonGrotesque
+      fonts:
+        - asset: fonts/Brandon-Grotesque-Thin.otf
+          weight: 100
+        - asset: fonts/Brandon-Grotesque-Thin-Italic.otf
+          style: italic
+          weight: 100
+        - asset: fonts/Brandon-Grotesque-Light.otf
+          weight: 300
+        - asset: fonts/Brandon-Grotesque-Light-Italic.otf
+          style: italic
+          weight: 300
+        - asset: fonts/Brandon-Grotesque-Regular.otf
+          weight: 400
+        - asset: fonts/Brandon-Grotesque-Regular-Italic.otf
+          style: italic
+          weight: 400
+        - asset: fonts/Brandon-Grotesque-Medium.otf
+          weight: 500
+        - asset: fonts/Brandon-Grotesque-Medium-Italic.otf
+          style: italic
+          weight: 500
+        - asset: fonts/Brandon-Grotesque-Bold.otf
+          weight: 700
+        - asset: fonts/Brandon-Grotesque-Bold-Italic.otf
+          style: italic
+          weight: 700
+        - asset: fonts/Brandon-Grotesque-Black.otf
+          weight: 900
+        - asset: fonts/Brandon-Grotesque-Black-Italic.otf
+          style: italic
+          weight: 900
+
+  assets:
+    - assets/
+
+  module:
+    androidX: true
+    androidPackage: com.example.kyc.kyc
+    iosBundleIdentifier: com.example.kyc.kyc
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/franck_muller.png"
+  remove_alpha_ios: true

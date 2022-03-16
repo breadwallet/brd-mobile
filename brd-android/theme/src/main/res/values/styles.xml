@@ -190,6 +190,11 @@
 
     <attr name="textAppearanceError" format="reference" />
 
+    <style name="AppTheme.FlutterTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="switchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="trackTint">@color/switch_track_tint</item>
         <item name="thumbTint">@color/switch_thumb_tint</item>

@@ -12,6 +12,7 @@ include(
 include(
     "brd-android:app",
     "brd-android:app-core",
+    "brd-android:buy",
     "brd-android:theme"
 )
 
@@ -29,4 +30,8 @@ includeBuild("external/redacted-compiler-plugin") {
         substitute(module("dev.zacsweers.redacted:redacted-compiler-plugin-annotations"))
             .with(project(":redacted-compiler-plugin-annotations"))
     }
+}
+
+apply {
+    from("flutter_settings.gradle")
 }

@@ -82,6 +82,7 @@ private const val AUTODESK_VERSION = "0.6.2"
 const val COMPOSE_VERSION = "1.0.0-beta02"
 private const val ACCOMPANIST_VERSION = "0.6.2"
 private const val BLOCKSET_VERSION = "0.1.3"
+private const val RETROFIT_VERSION = "2.9.0"
 
 object Libs {
 
@@ -96,8 +97,10 @@ object Libs {
     }
 
     object Androidx {
-        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_EXT_VERSION"
         const val LifecycleScopeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_EXT_VERSION"
+        const val LifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_EXT_VERSION"
         const val WorkManagerKtx = "androidx.work:work-runtime-ktx:$WORK_MANAGER_VERSION"
         const val WorkManagerTesting = "androidx.work:work-testing:$WORK_MANAGER_VERSION"
         const val CoreKtx = "androidx.core:core-ktx:$CORE_VERSION"
@@ -178,6 +181,11 @@ object Libs {
         const val Core = "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
         const val LoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
         const val MockWebServer = "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
+    }
+
+    object Networking {
+        const val Moshi = "com.squareup.retrofit2:converter-moshi:$RETROFIT_VERSION"
+        const val Retrofit = "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     }
 
     object Picasso {

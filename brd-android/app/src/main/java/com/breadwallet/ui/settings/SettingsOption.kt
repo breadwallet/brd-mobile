@@ -27,6 +27,7 @@ package com.breadwallet.ui.settings
 enum class SettingsOption {
     // HOME
     SCAN_QR,
+    KYC,
     PREFERENCES,
     SECURITY_SETTINGS,
     SUPPORT,

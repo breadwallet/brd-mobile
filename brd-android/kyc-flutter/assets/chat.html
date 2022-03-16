@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  <style data-emotion="css-global"></style>
+  <style data-emotion="css-global"></style>
+  <style data-emotion="css"></style>
+</head>
+
+<body style="background-color:#282828;">
+  <script type="text/javascript" src="chat_files/60884eefd5ecb727f98daa8f_app_929537"></script>
+  <script>
+    window.sprChatSettings = window.sprChatSettings || {};
+    window.sprChatSettings = {
+      appId: '{{appId}}',
+      user: {
+        id: '{{id}}',
+        firstName: '{{firstName}}',
+        lastName: '{{lastName}}',
+        profileImageUrl: '{{profileImageUrl}}',
+        phoneNo: '{{phoneNumber}}',
+        email: '{{email}}',
+        hash: '{{hash}}'
+      }
+    };
+  </script>
+  <script>
+    (function () { var t = window, e = t.sprChat, a = e && !!e.loaded, n = document, r = function () { r.m(arguments) }; r.q = [], r.m = function (t) { r.q.push(t) }, t.sprChat = a ? e : r; var o = function () { var e = n.createElement("script"); e.type = "text/javascript", e.async = !0, e.src = "https://prod-live-chat.sprinklr.com/api/livechat/handshake/widget/" + t.sprChatSettings.appId, e.onerror = function () { t.sprChat.loaded = !1 }, e.onload = function () { t.sprChat.loaded = !0 }; var a = n.getElementsByTagName("script")[0]; a.parentNode.insertBefore(e, a) }; "function" == typeof e ? a ? e("update", t.sprChatSettings) : o() : "loading" !== n.readyState ? o() : n.addEventListener("DOMContentLoaded", o) })()
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.sprChat('openNewConversation', []);
+    })
+  </script>
+  <style>
+    #spr-live-chat-app .spr-chat__box {
+      position: fixed;
+      height: 100%;
+      width: 100vw;
+      bottom: 0px;
+      right: 0px;
+      max-height: 100vh;
+      max-width: 100vw;
+      min-width: 100vw;
+    }
+
+    .chat-header-small {
+      display: none;
+    }
+
+    #spr-live-chat-app .spr-chat__box iframe {
+      margin-top: -72px;
+      height: calc(100% + 72px);
+    }
+  </style>
+</body>
+
+</html>

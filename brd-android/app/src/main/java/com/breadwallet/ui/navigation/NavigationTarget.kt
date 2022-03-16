@@ -132,6 +132,9 @@ sealed class NavigationTarget : INavigationTarget {
     object BitcoinNodeSelector : NavigationTarget()
     object EnableSegWit : NavigationTarget()
     object LegacyAddress : NavigationTarget()
+
+    class GoToKYC() : NavigationTarget()
+
     data class SyncBlockchain(
         val currencyCode: String
     ) : NavigationTarget()

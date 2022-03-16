@@ -121,6 +121,7 @@ object SettingsUpdate : Update<M, E, F>, SettingsScreenUpdateSpec {
             setOf(
                 when (event.option) {
                     SettingsOption.SCAN_QR -> F.GoToQrScan
+                    SettingsOption.KYC -> F.GoToKyc
                     SettingsOption.PREFERENCES -> F.GoToSection(SettingsSection.PREFERENCES)
                     SettingsOption.SECURITY_SETTINGS -> F.GoToSection(SettingsSection.SECURITY)
                     SettingsOption.SUPPORT -> F.GoToSupport
