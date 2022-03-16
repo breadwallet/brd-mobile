@@ -128,6 +128,8 @@ class WalletListItem(
                 ensureActive()
 
                 with(binding) {
+                    val iconDrawable = iconContainer.background as GradientDrawable
+
                     if (tokenIconPath.isNullOrBlank()) {
                         iconLetter.visibility = View.VISIBLE
                         currencyIconWhite.visibility = View.GONE
@@ -136,6 +138,8 @@ class WalletListItem(
                         val iconFile = File(tokenIconPath)
                         Picasso.get().load(iconFile).into(currencyIconWhite)
                         iconLetter.visibility = View.GONE
+                        iconDrawable.setColor(Color.RED)
+                        //iconDrawable.setColor(Color.parseColor(token.startColor))
                         currencyIconWhite.visibility = View.VISIBLE
                     }
                 }
