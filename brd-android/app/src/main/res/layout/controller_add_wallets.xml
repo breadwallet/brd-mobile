@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/fabriik_background">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,47 +19,52 @@
                 android:id="@+id/back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/toolbar_back_arrow" />
+                android:background="?attr/toolbar_back_arrow_dark"/>
 
             <com.breadwallet.legacy.presenter.customviews.BaseTextView
                 android:id="@+id/add_wallets_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="@string/MenuButton.addWallet"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:fontFamily="@font/mobile_font_bold" />
+                android:fontFamily="@font/mobile_font_bold"
+                android:text="@string/MenuButton.manageAssets"
+                android:textColor="@color/fabriik_black"
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-
     <com.breadwallet.legacy.presenter.customviews.BREdit
         android:id="@+id/search_edit"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_below="@id/toolbar"
-        android:background="?attr/secondary_background"
-        android:drawableStart="@drawable/ic_search_gray_24dp"
-        android:hint="@string/Search.search"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/search_border"
+        android:drawableStart="@drawable/ic_search_gray_18dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/mobile_font_book"
+        android:hint="@string/Search.searchAssets"
         android:inputType="textPersonName"
         android:maxEms="20"
         android:maxLines="1"
-        android:padding="8dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/light_gray"
+        android:paddingLeft="16dp"
+        android:textColor="@color/fabriik_black"
+        android:textColorHint="@color/fabriik_black"
         android:textCursorDrawable="@null"
-        android:fontFamily="@font/mobile_font_medium" />
+        android:textSize="14sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/token_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_edit"
-        android:layout_marginTop="2dp" />
-
+        android:clipToPadding="false"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp" />
 
 </RelativeLayout>

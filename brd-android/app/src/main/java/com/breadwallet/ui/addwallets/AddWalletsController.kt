@@ -98,17 +98,19 @@ class AddWalletsController : BaseMobiusController<M, E, F>() {
             R.dimen.add_wallet_item_margin
         )
 
-        binding.tokenList.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        val itemDecoration = object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
-                outRect: Rect,
-                view: View,
-                parent: RecyclerView,
-                state: RecyclerView.State
+                outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
             ) {
-                outRect.bottom = marginBetweenItems
+                outRect.top = marginBetweenItems
             }
-        })
+        }
 
-        awaitClose { binding.tokenList.adapter = null }
+        binding.tokenList.addItemDecoration(itemDecoration)
+
+        awaitClose {
+            binding.tokenList.adapter = null
+            binding.tokenList.removeItemDecoration(itemDecoration)
+        }
     }
 }

@@ -17,6 +17,7 @@
         <item name="colorControlActivated">@color/prompt_action_button</item>
         <item name="android:fontFamily">@font/mobile_font</item>
         <item name="switchStyle">@style/switchStyle</item>
+        <item name="toolbar_back_arrow_dark">@drawable/ic_arrow_left</item>
     </style>
 
     <!-- ActionBar styles -->
@@ -113,6 +114,7 @@
     <attr name="secondary_text_color" format="reference" />
     <attr name="toolbar_background" format="reference" />
     <attr name="toolbar_back_arrow" format="reference" />
+    <attr name="toolbar_back_arrow_dark" format="reference" />
     <attr name="back_arrow_secondary" format="reference" />
     <attr name="pin_pad_delete_src" format="reference" />
     <attr name="pin_dot_filled_background" format="reference" />
