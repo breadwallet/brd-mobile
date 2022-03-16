@@ -48,6 +48,7 @@ class WalletListItem(
         v: View
     ) : FastAdapter.ViewHolder<WalletListItem>(v) {
 
+        private val defaultTokenColor = R.color.light_gray
         private val boundScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
         override fun bindView(item: WalletListItem, payloads: List<Any>) {
@@ -125,6 +126,12 @@ class WalletListItem(
                 val tokenIconPath = Default {
                     TokenUtil.getTokenIconPath(currencyCode, false)
                 }
+
+                // Get icon color
+                val tokenColor = Default {
+                    TokenUtil.getTokenStartColor(currencyCode)
+                }
+
                 ensureActive()
 
                 with(binding) {
@@ -138,10 +145,17 @@ class WalletListItem(
                         val iconFile = File(tokenIconPath)
                         Picasso.get().load(iconFile).into(currencyIconWhite)
                         iconLetter.visibility = View.GONE
-                        iconDrawable.setColor(Color.RED)
-                        //iconDrawable.setColor(Color.parseColor(token.startColor))
                         currencyIconWhite.visibility = View.VISIBLE
                     }
+
+                    // set icon color
+                    iconDrawable.setColor(
+                        if (tokenColor.isNullOrBlank()) {
+                            ContextCompat.getColor(root.context, defaultTokenColor)
+                        } else {
+                            Color.parseColor(tokenColor)
+                        }
+                    )
                 }
             }
         }
