@@ -82,14 +82,6 @@ class WalletListItem(
                 walletName.text = wallet.currencyName
                 walletTradePrice.text = exchangeRate
                 walletBalanceFiat.text = fiatBalance
-                walletBalanceFiat.setTextColor(
-                    context.getColor(
-                        when {
-                            isSyncing -> R.color.wallet_balance_fiat_syncing
-                            else -> R.color.wallet_balance_fiat
-                        }
-                    )
-                )
                 walletBalanceCurrency.text = cryptoBalance
                 walletBalanceCurrency.isGone = isSyncing || isLoading
                 syncProgress.isVisible = isSyncing || isLoading
@@ -105,6 +97,11 @@ class WalletListItem(
                 divider.visibility = if (priceChange2 != null) View.VISIBLE else View.INVISIBLE
                 if (priceChange2 != null) {
                     priceChange.text = priceChange2.getPercentageChange()
+                    priceChange.setTextColor(
+                        ContextCompat.getColor(
+                            context, priceChange2.getChangeColor()
+                        )
+                    )
                 }
 
                 if (itemView.tag == wallet.currencyCode) {
@@ -112,7 +109,6 @@ class WalletListItem(
                 }
 
                 loadTokenIcon(this, currencyCode)
-                setBackground(this, wallet, context)
 
                 item.tag = wallet.currencyCode
             }
@@ -143,30 +139,6 @@ class WalletListItem(
                         currencyIconWhite.visibility = View.VISIBLE
                     }
                 }
-            }
-        }
-
-        private fun setBackground(binding: WalletListItemBinding, wallet: Wallet, context: Context) {
-            val drawable = ContextCompat
-                .getDrawable(context, R.drawable.crypto_card_shape)!!
-                .mutate()
-            if (wallet.isSupported) {
-                // Create gradient if 2 colors exist.
-                val startColor = Color.parseColor(wallet.startColor ?: return)
-                val endColor = Color.parseColor(wallet.endColor ?: return)
-                (drawable as GradientDrawable).colors = intArrayOf(startColor, endColor)
-                drawable.orientation = GradientDrawable.Orientation.LEFT_RIGHT
-                binding.walletCard.background = drawable
-                setWalletItemColors(binding, R.dimen.token_background_no_alpha)
-            } else {
-                // To ensure that the unsupported wallet card has the same shape as
-                // the supported wallet card, we reuse the drawable.
-                (drawable as GradientDrawable).colors = intArrayOf(
-                    context.getColor(R.color.wallet_delisted_token_background),
-                    context.getColor(R.color.wallet_delisted_token_background)
-                )
-                binding.walletCard.background = drawable
-                setWalletItemColors(binding, R.dimen.token_background_with_alpha)
             }
         }
 

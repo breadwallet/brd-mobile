@@ -5,6 +5,7 @@
     android:id="@+id/layoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fabriik_background"
     android:animateLayoutChanges="true"
     android:clipToPadding="false"
     android:descendantFocusability="beforeDescendants"
@@ -26,7 +27,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="TESTNET"
-            android:textColor="#4DFFFFFF"
+            android:textColor="#4D000000"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,23 +46,22 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="60dp"
-                android:background="@drawable/ic_flower" />
+                android:background="@drawable/ic_flower_blue" />
 
             <com.breadwallet.legacy.presenter.customviews.BaseTextView
                 android:id="@+id/total_assets_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:fontFamily="@font/mobile_font_medium"
                 android:text="@string/HomeScreen.totalAssets"
-                android:textColor="@color/text_total_assets_label"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/mobile_font_medium" />
+                android:textColor="@color/fabriik_black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <com.breadwallet.legacy.presenter.customviews.BaseTextView
                 android:id="@+id/total_assets_usd"
@@ -70,9 +70,11 @@
                 android:layout_below="@id/total_assets_label"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/activity_vertical_margin"
-                android:textColor="@color/white"
-                android:textSize="28sp"
-                android:fontFamily="@font/mobile_font_medium" />
+                android:fontFamily="@font/mobile_font_medium"
+                android:textColor="@color/fabriik_black"
+                android:textSize="32sp"
+                tools:text="$190.30" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -96,14 +98,13 @@
             app:layout_constraintBottom_toTopOf="@+id/menu_table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prompt_container"/>
+            app:layout_constraintTop_toBottomOf="@+id/prompt_container" />
 
         <TableLayout
             android:id="@+id/menu_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="?attr/secondary_background"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -131,11 +132,11 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_menu_buy_sell"
-                        app:tint="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/buy_text_view"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/navigation_menu_item_tint" />
 
                     <ImageView
                         android:id="@+id/buy_bell"
@@ -155,10 +156,10 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/mobile_font_book"
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.buy"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mobile_font_book"
+                        android:textColor="@color/navigation_menu_item_tint"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -180,16 +181,16 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_menu_trade"
-                        app:tint="@color/white" />
+                        app:tint="@color/navigation_menu_item_tint" />
 
                     <com.breadwallet.legacy.presenter.customviews.BaseTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/mobile_font_book"
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.trade"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/mobile_font_book" />
+                        android:textColor="@color/navigation_menu_item_tint" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,7 +209,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="4dp"
                         android:src="@drawable/ic_menu_more"
-                        app:tint="@color/white" />
+                        app:tint="@color/navigation_menu_item_tint" />
 
                     <com.breadwallet.legacy.presenter.customviews.BaseTextView
                         android:layout_width="wrap_content"
@@ -216,7 +217,7 @@
                         android:layout_gravity="center"
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.menu"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/navigation_menu_item_tint" />
                 </LinearLayout>
 
             </TableRow>

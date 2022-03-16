@@ -49,7 +49,7 @@ class AddWalletItem : AbstractItem<AddWalletItem.ViewHolder>(), IDraggable {
             val res = v.resources
             AddWalletsItemBinding.bind(v)
                 .addWallets
-                .text = "+ ${res.getString(R.string.TokenList_addTitle)}"
+                .text = "+ ${res.getString(R.string.MenuButton_manageAssets)}"
         }
 
         override fun bindView(
