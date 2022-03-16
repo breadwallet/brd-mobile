@@ -24,6 +24,8 @@
  */
 package com.breadwallet.model
 
+import androidx.annotation.ColorRes
+import com.breadwallet.appcore.R
 import java.util.Locale
 import kotlin.math.absoluteValue
 
@@ -33,20 +35,27 @@ import kotlin.math.absoluteValue
 data class PriceChange (val changePercentage24Hrs: Double,
                         val change24Hrs: Double) {
 
-    private val arrow : String = when {
-        change24Hrs > 0 -> "\u25B4"
-        change24Hrs < 0 -> "\u25BE"
+    private val prefix : String = when {
+        change24Hrs > 0 -> "+"
+        change24Hrs < 0 -> "-"
         else -> ""
     }
 
     override fun toString(): String {
         val amount = String.format(Locale.getDefault(), "%.2f", change24Hrs.absoluteValue)
         val percentage = String.format(Locale.getDefault(), "%.2f", changePercentage24Hrs.absoluteValue)
-        return "$arrow $percentage% ($amount)"
+        return "$prefix$percentage% ($amount)"
     }
 
     fun getPercentageChange(): String {
         val percentage = String.format(Locale.getDefault(), "%.2f", changePercentage24Hrs.absoluteValue)
-        return "$arrow $percentage%"
+        return "$prefix$percentage%"
+    }
+
+    @ColorRes
+    fun getChangeColor() : Int = when {
+        change24Hrs > 0 -> R.color.fabriik_green
+        change24Hrs < 0 -> R.color.fabriik_red
+        else -> R.color.fabriik_shuttle_grey
     }
 }

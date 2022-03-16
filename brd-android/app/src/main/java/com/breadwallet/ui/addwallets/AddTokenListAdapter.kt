@@ -24,18 +24,18 @@
  */
 package com.breadwallet.ui.addwallets
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.breadwallet.R
 import com.breadwallet.tools.util.TokenUtil
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -73,15 +73,16 @@ class AddTokenListAdapter(
     override fun onBindViewHolder(holder: TokenItemViewHolder, position: Int) {
         val token = tokens[position]
         val currencyCode = token.currencyCode.toLowerCase(Locale.ROOT)
-        val tokenIconPath = TokenUtil.getTokenIconPath(currencyCode, true)
+        val tokenIconPath = TokenUtil.getTokenIconPath(currencyCode, false)
 
+        // set icon color
         val iconDrawable = holder.iconParent.background as GradientDrawable
+        iconDrawable.setColor(Color.parseColor(token.startColor))
 
         when {
             tokenIconPath == null -> {
                 // If no icon is present, then use the capital first letter of the token currency code instead.
                 holder.iconLetter.visibility = View.VISIBLE
-                iconDrawable.setColor(Color.parseColor(token.startColor))
                 holder.iconLetter.text = currencyCode.substring(0, 1).toUpperCase(Locale.ROOT)
                 holder.logo.visibility = View.GONE
             }
@@ -90,7 +91,6 @@ class AddTokenListAdapter(
                 Picasso.get().load(iconFile).into(holder.logo)
                 holder.iconLetter.visibility = View.GONE
                 holder.logo.visibility = View.VISIBLE
-                iconDrawable.setColor(Color.TRANSPARENT)
             }
         }
 
@@ -98,20 +98,14 @@ class AddTokenListAdapter(
         holder.symbol.text = token.currencyCode.toUpperCase(Locale.ROOT)
 
         holder.addRemoveButton.apply {
-            text = context.getString(
-                when {
-                    token.enabled -> R.string.TokenList_remove
-                    else -> R.string.TokenList_add
-                }
-            )
-
+            isChecked = token.enabled
             isEnabled = !token.enabled || token.removable
 
-            setOnClickListener {
-                if (token.enabled) {
-                    sendChannel.offer(AddWallets.E.OnRemoveWalletClicked(token))
-                } else {
+            setOnCheckedChangeListener { _, checked ->
+                if (checked) {
                     sendChannel.offer(AddWallets.E.OnAddWalletClicked(token))
+                } else {
+                    sendChannel.offer(AddWallets.E.OnRemoveWalletClicked(token))
                 }
             }
         }
@@ -139,8 +133,8 @@ class AddTokenListAdapter(
         val logo: ImageView = view.findViewById(R.id.token_icon)
         val symbol: TextView = view.findViewById(R.id.token_symbol)
         val name: TextView = view.findViewById(R.id.token_name)
-        val addRemoveButton: Button = view.findViewById(R.id.add_remove_button)
         val iconParent: View = view.findViewById(R.id.icon_parent)
         val iconLetter: TextView = view.findViewById(R.id.icon_letter)
+        val addRemoveButton: SwitchMaterial = view.findViewById(R.id.add_remove_button)
     }
 }

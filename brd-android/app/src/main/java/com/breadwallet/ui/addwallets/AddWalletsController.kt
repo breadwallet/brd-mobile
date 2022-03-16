@@ -24,8 +24,12 @@
  */
 package com.breadwallet.ui.addwallets
 
+import android.graphics.Rect
 import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.breadwallet.R
 import com.breadwallet.databinding.ControllerAddWalletsBinding
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.BaseMobiusController
@@ -90,6 +94,23 @@ class AddWalletsController : BaseMobiusController<M, E, F>() {
         )
         binding.tokenList.adapter = adapter
 
-        awaitClose { binding.tokenList.adapter = null }
+        val marginBetweenItems = binding.tokenList.context.resources.getDimensionPixelOffset(
+            R.dimen.add_wallet_item_margin
+        )
+
+        val itemDecoration = object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+            ) {
+                outRect.top = marginBetweenItems
+            }
+        }
+
+        binding.tokenList.addItemDecoration(itemDecoration)
+
+        awaitClose {
+            binding.tokenList.adapter = null
+            binding.tokenList.removeItemDecoration(itemDecoration)
+        }
     }
 }

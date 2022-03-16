@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_intro_set_pit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background">
+    android:background="@color/white">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -23,7 +23,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerVertical="true"
-                android:background="?attr/toolbar_back_arrow"
+                android:background="?attr/toolbar_back_arrow_dark"
                 android:visibility="gone" />
 
             <com.breadwallet.legacy.presenter.customviews.BaseTextView
@@ -37,7 +37,7 @@
                 android:layout_marginEnd="@dimen/bread_margin"
                 android:fontFamily="@font/mobile_font_bold"
                 android:text="@string/MenuViewController.modalTitle"
-                android:textColor="@color/white"
+                android:textColor="@color/fabriik_black"
                 android:textSize="20sp" />
 
             <ImageButton
@@ -49,8 +49,8 @@
                 android:layout_marginEnd="16dp"
                 android:background="@null"
                 android:src="@drawable/ic_close_blue_24dp"
-                android:tint="@color/white"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:tint="@color/fabriik_black" />
 
         </RelativeLayout>
 
@@ -71,9 +71,8 @@
         layout="@layout/loading_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible"
         android:elevation="10dp"
-    />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </RelativeLayout>

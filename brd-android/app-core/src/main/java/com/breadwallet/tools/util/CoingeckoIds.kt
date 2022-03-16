@@ -27,6 +27,7 @@ package com.breadwallet.tools.util
 val coingeckoIdMap = mapOf(
     "BTC" to "bitcoin",
     "BCH" to "bitcoin-cash",
+    "BSV" to "bitcoin-cash-sv",
     "ETH" to "ethereum",
     "HBAR" to "hedera-hashgraph",
     "XRP" to "ripple",

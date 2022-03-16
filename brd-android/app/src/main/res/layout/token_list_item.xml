@@ -1,72 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="66dp">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp"
+    app:cardCornerRadius="@dimen/card_view_radius">
 
     <RelativeLayout
-        android:id="@+id/icon_parent"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/token_icon_background_transparent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <RelativeLayout
+            android:id="@+id/icon_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/token_icon_background_transparent"
+            android:orientation="vertical">
+
+            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                android:id="@+id/icon_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/mobile_font_bold"
+                android:text="T"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/token_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
 
         <com.breadwallet.legacy.presenter.customviews.BaseTextView
-            android:id="@+id/icon_letter"
+            android:id="@+id/token_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="T"
-            android:textSize="16sp"
-            android:visibility="gone"
-            android:fontFamily="@font/mobile_font_bold" />
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@id/icon_parent"
+            android:fontFamily="@font/mobile_font_book"
+            android:textColor="#2E3134"
+            android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/token_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_centerVertical="true" />
+        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            android:id="@+id/token_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/token_name"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/icon_parent"
+            android:fontFamily="@font/mobile_font_bold"
+            android:textColor="#5F6368"
+            android:textSize="14sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/add_remove_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp" />
+
     </RelativeLayout>
-
-
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
-        android:id="@+id/token_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="12dp"
-        android:layout_toEndOf="@id/icon_parent"
-        android:textSize="18sp"
-        android:fontFamily="@font/mobile_font_book" />
-
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
-        android:id="@+id/token_symbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/token_name"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="6dp"
-        android:layout_toEndOf="@id/icon_parent"
-        android:textColor="?attr/token_secondary_text_color"
-        android:textSize="14sp"
-        android:fontFamily="@font/mobile_font_bold" />
-
-    <Button
-        android:id="@+id/add_remove_button"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:background="?attr/add_wallet_button_background"
-        android:maxLines="1"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:textColor="?attr/add_wallet_button_text"
-        android:textSize="14sp"
-        android:fontFamily="@font/mobile_font_book"/>
-
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

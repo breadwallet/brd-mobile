@@ -2123,6 +2123,21 @@
     "currency_id": "bitcoin-testnet:__native__"
   },
   {
+    "code": "BSV",
+    "name": "BitcoinSV",
+    "scale": 8,
+    "is_supported": true,
+    "contract_address": "",
+    "sale_address": "",
+    "contract_info": {},
+    "colors": [
+      "#eab300",
+      "#eab300"
+    ],
+    "type": "",
+    "currency_id": "bitcoinsv-testnet:__native__"
+  },
+  {
     "code": "ETH",
     "name": "Ethereum",
     "scale": 18,

@@ -457,6 +457,7 @@
     <string name="MarketData.volume">Trading Volume</string>
     <!-- "Add [a] Wallet [to the home screen]" -->
     <string name="MenuButton.addWallet">Add Wallet</string>
+    <string name="MenuButton.manageAssets">Manage assets</string>
     <!-- Menu button title -->
     <string name="MenuButton.lock">Lock Wallet</string>
     <!-- (Click here to) manage (your list of) wallets -->
@@ -795,6 +796,8 @@
     <string name="Search.search">Search</string>
     <!-- Sent filter label -->
     <string name="Search.sent">sent</string>
+
+    <string name="Search.searchAssets">Search assets</string>
     <!-- Face ID button title -->
     <string name="SecurityCenter.faceIdTitle">Face ID</string>
     <!-- Paper Key button description -->
