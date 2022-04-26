@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/baseTextView2"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toEndOf="@+id/confetti_video_view"
                 app:layout_constraintTop_toTopOf="@+id/confetti_video_view" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -63,7 +63,6 @@
                 android:text="@string/RewardsView.expandedBody"
                 android:textColor="@color/rewards_text"
                 android:textSize="14sp"
-                android:fontFamily="@font/mobile_font_book"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -86,12 +85,11 @@
                 android:layout_margin="8dp"
                 android:src="@drawable/rewards_gradient_icon" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/RewardsView.normalTitle"
-                android:textColor="@color/almost_black"
-                android:fontFamily="@font/mobile_font_book" />
+                android:textColor="@color/almost_black" />
 
             <ImageView
                 android:layout_width="24dp"

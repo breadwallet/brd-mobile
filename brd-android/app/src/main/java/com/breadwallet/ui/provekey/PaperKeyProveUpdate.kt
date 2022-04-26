@@ -18,19 +18,19 @@ import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Update
 
-object PaperKeyProveUpdate : Update<M, E, F>,
+object PaperKeyProveUpdate :
+    Update<M, E, F>,
     PaperKeyProveUpdateSpec {
     override fun update(
         model: M,
         event: E
     ): Next<M, F> = patch(model, event)
 
-    override fun onSubmitClicked(model: M)
-        : Next<M, F> {
+    override fun onSubmitClicked(model: M): Next<M, F> {
         return dispatch(
             setOf(
-                if (model.firstWordState == M.WordState.VALID
-                    && model.secondWordSate == M.WordState.VALID
+                if (model.firstWordState == M.WordState.VALID &&
+                    model.secondWordSate == M.WordState.VALID
                 ) {
                     F.StoreWroteDownPhrase
                 } else {

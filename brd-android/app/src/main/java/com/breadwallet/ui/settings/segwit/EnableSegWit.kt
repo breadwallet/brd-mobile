@@ -28,7 +28,7 @@ object EnableSegWit {
     }
 
     sealed class F {
-        object GoBack : F(),  NavigationEffect {
+        object GoBack : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.Back
         }
         object GoToHome : F(), NavigationEffect {

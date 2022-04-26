@@ -19,6 +19,8 @@ import androidx.camera.core.*
 import androidx.core.content.*
 import androidx.lifecycle.*
 import androidx.security.crypto.*
+import com.blockset.walletkit.Api
+import com.blockset.walletkit.brd.ApiProvider
 import com.brd.addressresolver.*
 import com.brd.api.*
 import com.brd.bakerapi.*
@@ -27,10 +29,7 @@ import com.brd.prefs.*
 import com.breadwallet.*
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.*
-import com.breadwallet.corecrypto.*
-import com.breadwallet.crypto.CryptoApi
-import com.breadwallet.crypto.WalletManagerMode
-import com.breadwallet.crypto.blockchaindb.*
+import com.breadwallet.di.getAppModule
 import com.breadwallet.logger.*
 import com.breadwallet.platform.interfaces.*
 import com.breadwallet.repository.*
@@ -44,35 +43,33 @@ import com.breadwallet.util.*
 import com.breadwallet.util.usermetrics.*
 import com.platform.*
 import com.platform.interfaces.*
-import com.platform.interfaces.WalletProvider
 import com.platform.sqlite.*
 import com.platform.tools.*
 import drewcarlson.blockset.*
 import io.ktor.client.*
-import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import okhttp3.*
-import org.kodein.di.*
-import org.kodein.di.android.x.*
-import org.kodein.di.erased.*
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.DirectDI
+import org.kodein.di.android.x.androidXModule
+import org.kodein.di.direct
+import org.kodein.di.instance
 import java.io.*
-import java.lang.IllegalAccessException
-import java.lang.System
 import java.util.*
 import java.util.regex.*
 
 private const val LOCK_TIMEOUT = 180_000L // 3 minutes in milliseconds
-private const val ENCRYPTED_PREFS_FILE = "crypto_shared_prefs"
-private const val ENCRYPTED_GIFT_BACKUP_FILE = "gift_shared_prefs"
-private const val WALLETKIT_DATA_DIR_NAME = "cryptocore"
+
+const val WALLETKIT_DATA_DIR_NAME = "cryptocore"
 
 @Suppress("TooManyFunctions")
-class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
+class BreadApp : Application(), DIAware, CameraXConfig.Provider {
 
     companion object {
         init {
-            CryptoApi.initialize(CryptoApiProvider.getInstance())
+            Api.initialize(ApiProvider.getInstance())
         }
 
         // The wallet ID is in the form "xxxx xxxx xxxx xxxx" where x is a lowercase letter or a number.
@@ -85,17 +82,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
 
         @SuppressLint("StaticFieldLeak")
         private var mCurrentActivity: Activity? = null
-
-        /** [CoroutineScope] matching the lifetime of the application. */
-        val applicationScope = CoroutineScope(
-            SupervisorJob() + Dispatchers.Default + errorHandler("applicationScope")
-        )
-
-        private val startedScope = CoroutineScope(
-            SupervisorJob() + Dispatchers.Default + errorHandler("startedScope")
-        )
-
-        fun getBreadBox(): BreadBox = mInstance.direct.instance()
 
         // TODO: Find better place/means for this
         fun getDefaultEnabledWallets() = when {
@@ -112,23 +98,12 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             )
         }
 
-        fun getDefaultWalletModes() = when {
-            BuildConfig.BITCOIN_TESTNET -> mapOf(
-                "bitcoin-testnet:__native__" to WalletManagerMode.API_ONLY,
-                "bitcoincash-testnet:__native__" to WalletManagerMode.API_ONLY
-            )
-            else -> mapOf(
-                "bitcoin-mainnet:__native__" to WalletManagerMode.API_ONLY,
-                "bitcoincash-mainnet:__native__" to WalletManagerMode.API_ONLY,
-            )
-        }
-
         /**
          * Initialize the wallet id (rewards id), and save it in the SharedPreferences.
          */
-        private fun initializeWalletId() {
-            applicationScope.launch(Dispatchers.Main) {
-                val walletId = getBreadBox()
+        private fun initializeWalletId(appScope: CoroutineScope, breadBox: BreadBox) {
+            appScope.launch(Dispatchers.Main) {
+                val walletId = breadBox
                     .wallets(false)
                     .mapNotNull { wallets ->
                         wallets.find { it.currency.code.isEthereum() }
@@ -209,153 +184,26 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             mCurrentActivity = app
         }
 
-        /** Provides access to [DKodein]. Meant only for Java compatibility. **/
+        /** Provides access to [DirectDI]. Meant only for Java compatibility. **/
         @JvmStatic
-        fun getKodeinInstance(): DKodein {
+        fun getKodeinInstance(): DirectDI {
             return mInstance.direct
         }
     }
 
-    override val kodein by Kodein.lazy {
+    private val startedScope = CoroutineScope(
+        SupervisorJob() + Dispatchers.Default + errorHandler("startedScope")
+    )
+
+    override val di by DI.lazy {
         importOnce(androidXModule(this@BreadApp))
-
-        bind<CryptoUriParser>() with singleton {
-            CryptoUriParser(instance())
-        }
-
-        bind<APIClient>() with singleton {
-            APIClient(this@BreadApp, direct.instance(), direct.instance(), createHttpHeaders())
-        }
-
-        bind<BrdUserManager>() with singleton {
-            CryptoUserManager(this@BreadApp, ::createCryptoEncryptedPrefs, instance())
-        }
-
-        bind<GiftBackup>() with singleton {
-            SharedPrefsGiftBackup(::createGiftBackupEncryptedPrefs)
-        }
-
-        bind<KVStoreProvider>() with singleton {
-            KVStoreManager(this@BreadApp)
-        }
-
-        val metaDataManager by lazy { MetaDataManager(direct.instance()) }
-
-        bind<WalletProvider>() with singleton { metaDataManager }
-
-        bind<AccountMetaDataProvider>() with singleton { metaDataManager }
-
-        bind<OkHttpClient>() with singleton { OkHttpClient() }
-
-        bind<BdbAuthInterceptor>() with singleton {
-            val httpClient = instance<OkHttpClient>()
-            BdbAuthInterceptor(httpClient, direct.instance())
-        }
-
-        bind<BlockchainDb>() with singleton {
-            val httpClient = instance<OkHttpClient>()
-            val authInterceptor = instance<BdbAuthInterceptor>()
-            BlockchainDb(
-                httpClient.newBuilder()
-                    .addInterceptor(authInterceptor)
-                    .build()
-            )
-        }
-
-        bind<HttpClient>() with singleton {
-            HttpClient(OkHttp) {
-                engine {
-                    config {
-                        retryOnConnectionFailure(true)
-                    }
-                }
-            }
-        }
-
-        bind<BdbService>() with singleton {
-            BdbService.create(AndroidBdbAuthProvider(instance()))
-        }
-
-        bind<AddressResolver>() with singleton {
-            AddressResolver(instance(), !BuildConfig.BITCOIN_TESTNET)
-        }
-
-        bind<BreadBox>() with singleton {
-            CoreBreadBox(
-                File(filesDir, WALLETKIT_DATA_DIR_NAME),
-                !BuildConfig.BITCOIN_TESTNET,
-                instance(),
-                instance(),
-                instance()
-            )
-        }
-
-        bind<ExperimentsRepository>() with singleton { ExperimentsRepositoryImpl }
-
-        bind<RatesRepository>() with singleton { RatesRepository.getInstance(this@BreadApp) }
-
-        bind<RatesFetcher>() with singleton {
-            RatesFetcher(
-                instance(),
-                instance(),
-                this@BreadApp
-            )
-        }
-
-        bind<ConversionTracker>() with singleton {
-            ConversionTracker(instance())
-        }
-
-        bind<GiftTracker>() with singleton {
-            GiftTracker(instance(), instance())
-        }
-
-        bind<ConnectivityStateProvider>() with singleton {
-            val connectivityManager =
-                this@BreadApp.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                NetworkCallbacksConnectivityStateProvider(connectivityManager)
-            } else {
-                InternetManager(connectivityManager, this@BreadApp)
-            }
-        }
-
-        bind<SupportManager>() with singleton {
-            SupportManager(
-                this@BreadApp,
-                instance(),
-                instance()
-            )
-        }
-
-        bind<BrdApiClient>() with singleton {
-            val brdPreferences = instance<BrdPreferences>()
-            val customHost = brdPreferences.debugApiHost?.run(BrdApiHost::Custom)
-            val host = customHost ?: BrdApiHost.hostFor(BuildConfig.DEBUG, brdPreferences.hydraActivated)
-            BrdApiClient.create(host, AndroidBrdAuthProvider(instance()), instance())
-        }
-
-        bind<Preferences>() with singleton {
-            val prefs = getSharedPreferences(BRSharedPrefs.PREFS_NAME, Context.MODE_PRIVATE)
-            AndroidPreferences(prefs)
-        }
-
-        bind<BrdPreferences>() with singleton {
-            BrdPreferences(instance())
-        }
-
-        bind<BakersApiClient>() with singleton {
-            BakersApiClient.create(instance())
-        }
-
-        bind<ExchangeDataLoader>() with singleton {
-            val exchangePrefs = applicationContext.getSharedPreferences("ExchangeDataLoader", MODE_PRIVATE)
-            ExchangeDataLoader(instance(), AndroidPreferences(exchangePrefs))
-        }
+        importOnce(getAppModule(this@BreadApp))
     }
 
     private var accountLockJob: Job? = null
+
+    /** [CoroutineScope] matching the lifetime of the application. */
+    private val applicationScope by instance<CoroutineScope>()
 
     private val brdApi by instance<BrdApiClient>()
     private val apiClient by instance<APIClient>()
@@ -366,6 +214,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private val conversionTracker by instance<ConversionTracker>()
     private val connectivityStateProvider by instance<ConnectivityStateProvider>()
     private val brdPreferences by instance<BrdPreferences>()
+    private val breadBox by instance<BreadBox>()
 
     override fun onCreate() {
         super.onCreate()
@@ -388,6 +237,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             }
         }
 
+        CoreBreadBox.setWords()
         applicationScope.launch {
             ServerBundlesHelper.extractBundlesIfNeeded(mInstance)
             TokenUtil.initialize(mInstance, false, !BuildConfig.BITCOIN_TESTNET)
@@ -409,7 +259,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     private fun handleOnStart() {
         accountLockJob?.cancel()
         BreadBoxCloseWorker.cancelEnqueuedWork()
-        val breadBox = getBreadBox()
         userManager
             .stateChanges()
             .distinctUntilChanged()
@@ -447,7 +296,7 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
         }
 
         connectivityStateProvider.close()
-        getBreadBox().apply { if (isOpen) close() }
+        breadBox.apply { if (isOpen) close() }
         applicationScope.cancel()
     }
 
@@ -463,12 +312,10 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             breadBox.open(account)
         }
 
-        initializeWalletId()
+        initializeWalletId(applicationScope, breadBox)
 
         applicationScope.launch {
-            if (!brdPreferences.hydraActivated) {
-                preflight()
-            }
+            preflight()
 
             BRDFirebaseMessagingService.initialize(context)
             if (!brdPreferences.hydraActivated) {
@@ -487,12 +334,17 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
     }
 
     private suspend fun preflight() {
-        val preflight = brdApi.preflight()
-        if (preflight?.activate == true) {
-            brdPreferences.hydraActivated = true
-            userManager.removeToken()
-            brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
-            brdApi.getMe() // NOTE: refresh token immediately
+        if (!brdPreferences.hydraActivated) {
+            val preflight = brdApi.preflight()
+            if (preflight?.activate == true) {
+                brdPreferences.hydraActivated = true
+                userManager.removeToken()
+                brdApi.host = BrdApiHost.hostFor(BuildConfig.DEBUG, true)
+            }
+        }
+        if (brdPreferences.hydraActivated && !brdPreferences.isRewardsAddressSet) {
+            brdPreferences.isRewardsAddressSet =
+                brdApi.setMe(breadBox.wallet(eth).first().target.toString())
         }
     }
 
@@ -501,33 +353,6 @@ class BreadApp : Application(), KodeinAware, CameraXConfig.Provider {
             BRSharedPrefs.APP_FOREGROUNDED_COUNT,
             BRSharedPrefs.getInt(BRSharedPrefs.APP_FOREGROUNDED_COUNT, 0) + 1
         )
-    }
-
-    private fun createCryptoEncryptedPrefs(): SharedPreferences? = createEncryptedPrefs(ENCRYPTED_PREFS_FILE)
-    private fun createGiftBackupEncryptedPrefs(): SharedPreferences? = createEncryptedPrefs(ENCRYPTED_GIFT_BACKUP_FILE)
-
-    private fun createEncryptedPrefs(fileName: String): SharedPreferences? {
-        val masterKeys = try {
-            MasterKey.Builder(this)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-        } catch (e: Throwable) {
-            BRReportsManager.error("Failed to create Master Keys", e)
-            return null
-        }
-
-        return try {
-            EncryptedSharedPreferences.create(
-                this@BreadApp,
-                fileName,
-                masterKeys,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            )
-        } catch (e: Throwable) {
-            BRReportsManager.error("Failed to create Encrypted Shared Preferences", e)
-            null
-        }
     }
 
     override fun getCameraXConfig(): CameraXConfig {

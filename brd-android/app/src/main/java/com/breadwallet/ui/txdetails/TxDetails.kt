@@ -8,15 +8,15 @@
  */
 package com.breadwallet.ui.txdetails
 
-import com.breadwallet.crypto.Transfer
+import com.blockset.walletkit.Transfer
 import com.breadwallet.platform.entities.GiftMetaData
+import com.breadwallet.platform.entities.TxMetaData
 import com.breadwallet.ui.ViewEffect
 import com.breadwallet.ui.models.TransactionState
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget
 import com.breadwallet.ui.send.TransferField
 import com.breadwallet.util.CurrencyCode
-import com.breadwallet.platform.entities.TxMetaData
 import dev.zacsweers.redacted.annotations.Redacted
 import java.math.BigDecimal
 import java.util.Date

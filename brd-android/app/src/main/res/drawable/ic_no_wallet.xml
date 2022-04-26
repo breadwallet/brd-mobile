@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ BreadWallet
+  ~
+  ~ Created by Amit Goel <amit.goel@breadwallet.com> on 10/08/2021
+  ~ Copyright (c) 2021 Breadwinner AG
+  ~
+  ~ SPDX-License-Identifier: BUSL-1.1
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:gravity="center"
+        android:height="68dp"
+        android:width="68dp">
+        <shape
+            android:shape="oval"
+            android:tint="@color/hydra_secondary_background" />
+    </item>
+</layer-list>

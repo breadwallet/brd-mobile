@@ -25,7 +25,7 @@ final class CellLayoutView: UIView {
         [rightTitleLabel, rightSubtitleLabel]
     )
     private(set) lazy var contentStack = HStackView(
-        [iconStack, titleVStack, rightTitleVStack, accessoryLabel, rightIconImageView]
+        [iconStack, titleVStack, UIView(),rightTitleVStack, accessoryLabel, rightIconImageView]
     )
 
     private lazy var iconStack = HStackView([iconImageView, iconLabel])
@@ -70,6 +70,7 @@ final class CellLayoutView: UIView {
     func update(with viewModel: CellLayoutView.ViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        subtitleLabel.textColor = viewModel.subtitleColor ?? Theme.tertiaryText
         rightTitleLabel.text = viewModel.rightTitle
         rightSubtitleLabel.text = viewModel.rightSubtitle
         accessoryLabel.text = viewModel.detail
@@ -127,12 +128,11 @@ final class CellLayoutView: UIView {
     }
 
     private func updateHiddenBasedOnContent() {
-        titleLabel.isHidden = titleLabel.text == nil || titleLabel.text == ""
-        subtitleLabel.isHidden = subtitleLabel.text == nil || subtitleLabel.text == ""
-        rightTitleLabel.isHidden = rightTitleLabel.text == nil || rightTitleLabel.text == ""
-        rightSubtitleLabel.isHidden = rightSubtitleLabel.text == nil || rightSubtitleLabel.text == ""
-        accessoryLabel.isHidden = (accessoryLabel.text == nil && accessoryLabel.attributedText == nil) ||
-            (accessoryLabel.attributedText?.string == "" && accessoryLabel.text == "")
+        titleLabel.isHidden = titleLabel.text?.isEmpty ?? true
+        subtitleLabel.isHidden = subtitleLabel.text?.isEmpty ?? true
+        rightTitleLabel.isHidden = rightTitleLabel.text?.isEmpty ?? true
+        rightSubtitleLabel.isHidden = rightSubtitleLabel.text?.isEmpty ?? true
+        accessoryLabel.isHidden = accessoryLabel.text?.isEmpty ?? true && accessoryLabel.attributedText?.string.isEmpty ?? true
         iconImageView.isHidden = iconImageView.image == nil
         iconLabel.isHidden = iconLabel.text == nil
         let hideIcon = iconStyle.isDefault && iconImageView.image == nil && iconLabel.text == nil
@@ -151,6 +151,7 @@ extension  CellLayoutView {
         let rightTitle: String?
         let rightSubtitle: String?
         let detail: String?
+        let subtitleColor: UIColor?
         let iconImage: UIImage?
         let iconText: String?
         let iconURL: URL?
@@ -162,6 +163,7 @@ extension  CellLayoutView {
             rightTitle: String? = nil,
             rightSubtitle: String? = nil,
             detail: String? = nil,
+            subtitleColor: UIColor? = nil,
             iconImage: UIImage? = nil,
             iconText: String? = nil,
             iconURL: URL? = nil,
@@ -172,6 +174,7 @@ extension  CellLayoutView {
             self.rightTitle = rightTitle
             self.rightSubtitle = rightSubtitle
             self.detail = detail
+            self.subtitleColor = subtitleColor
             self.iconImage = iconImage
             self.iconText = iconText
             self.iconURL = iconURL

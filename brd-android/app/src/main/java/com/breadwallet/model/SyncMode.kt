@@ -8,7 +8,7 @@
  */
 package com.breadwallet.model
 
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.WalletManagerMode
 
 enum class SyncMode(val walletManagerMode: WalletManagerMode) {
     API_ONLY(WalletManagerMode.API_ONLY),

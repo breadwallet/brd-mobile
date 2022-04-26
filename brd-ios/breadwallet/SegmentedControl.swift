@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol SegmentedControlDelegate: class {
+protocol SegmentedControlDelegate: AnyObject {
     func segmentedControl(_ segmentedControl: SegmentedControl, didSelect index: Int)
 }
 
@@ -21,6 +21,18 @@ class SegmentedControl: UIView {
 
     var highlightColor = Theme.primaryText {
         didSet { updateColors() }
+    }
+
+    var preferredItemWidth: CGFloat? {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    var preferredItemHeight: CGFloat? {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    var font: UIFont = Theme.captionMedium {
+        didSet { updateFont() }
     }
 
     weak var delegate: SegmentedControlDelegate?
@@ -79,6 +91,17 @@ class SegmentedControl: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        if let width = preferredItemWidth, !items.isEmpty {
+            size.width = width * CGFloat(items.count)
+        }
+        if let height = preferredItemHeight, !items.isEmpty {
+            size.height = height
+        }
+        return size
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -89,7 +112,6 @@ class SegmentedControl: UIView {
 extension SegmentedControl {
 
     func setupUI() {
-        let padding = C.padding[1]
         container.translatesAutoresizingMaskIntoConstraints = false
         addSubview(highlightView)
         addSubview(container)
@@ -98,7 +120,7 @@ extension SegmentedControl {
             container.leadingAnchor.constraint(equalTo: leadingAnchor),
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
             container.topAnchor.constraint(equalTo: topAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         container.distribution = .fillEqually
         layer.cornerRadius = C.padding[1]
@@ -121,11 +143,19 @@ extension SegmentedControl {
                 .label?.textColor = selectedTextColor
     }
 
+    func updateFont() {
+        container.arrangedSubviews.forEach {
+            ($0 as? Button)?.label?.font = font
+        }
+    }
+
     func makeButton(_ item: Item, idx: Int) -> Button {
-        Button(
+       let button = Button(
             item: item,
             tap: { [weak self] in self?.tappedItem(item, at: idx) }
         )
+        button.label?.font = font
+        return button
     }
 }
 
@@ -139,7 +169,7 @@ extension SegmentedControl {
         var iconView: UIImageView?
 
         convenience init(item: Item, tap: (() -> Void)? = nil) {
-            let label = UILabel(text: item.title, font: Theme.captionMedium)
+            let label = UILabel(text: item.title)
             let iconView = UIImageView(image: item.image)
             self.init(type: .custom)
             self.label = label
@@ -178,4 +208,3 @@ extension SegmentedControl {
         }
     }
 }
-

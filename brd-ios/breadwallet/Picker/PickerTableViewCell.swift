@@ -94,7 +94,7 @@ final class PickerTableViewCell: UITableViewCell {
             self.layoutIfNeeded()
             self.cellLayoutView.layoutIfNeeded()
         }
-        guard animated else  {
+        guard animated else {
             block()
             return
         }

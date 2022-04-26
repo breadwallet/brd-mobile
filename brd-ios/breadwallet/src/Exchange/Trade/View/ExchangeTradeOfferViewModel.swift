@@ -75,7 +75,6 @@ extension ExchangeTradeOfferViewModel.Offer {
         let invoice = offer.offer.invoiceEstimate
         let url = offer.offer.provider.logoUrl
         let valid = offer as? ExchangeModel.OfferDetailsValidOffer
-        let invalid = offer as? ExchangeModel.OfferDetailsInvalidOffer
         let slug = offer.offer.provider.slug
         let sourceFees = (try? invoice?.sourceCurrency.fees.double()) ?? 0 != 0
 

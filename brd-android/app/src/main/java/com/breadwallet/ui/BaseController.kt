@@ -22,15 +22,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 @Suppress("TooManyFunctions")
 abstract class BaseController(
     args: Bundle? = null
-) : Controller(args), KodeinAware {
+) : Controller(args), DIAware {
 
     protected val controllerScope = CoroutineScope(
         SupervisorJob() + Dispatchers.Default + errorHandler("controllerScope")
@@ -43,7 +43,7 @@ abstract class BaseController(
     )
 
     /** Provides the Activity Kodein instance. */
-    override val kodein by closestKodein {
+    override val di by closestDI {
         checkNotNull(activity) {
             "Controller cannot access Kodein bindings until attached to an Activity."
         }

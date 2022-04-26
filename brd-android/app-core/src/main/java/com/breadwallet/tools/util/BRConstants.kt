@@ -15,6 +15,8 @@ const val eth = "eth"
 const val bch = "bch"
 const val hbar = "hbar"
 const val xtz = "xtz"
+const val doge = "doge"
+const val ltc = "ltc"
 
 object BRConstants {
     /**
@@ -185,7 +187,6 @@ object BRConstants {
     const val TOKEN = "token"
     const val STAGING = "staging"
     const val STAGE = "stage"
-    const val CURRENCY_ERC20 = "erc20"
     const val RATES = "rates"
     const val CURRENCY = "currency"
     const val UTF_8 = "UTF-8"

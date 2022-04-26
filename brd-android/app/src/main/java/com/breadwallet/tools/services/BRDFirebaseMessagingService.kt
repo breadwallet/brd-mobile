@@ -15,14 +15,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import android.util.Log
 import com.breadwallet.R
-import com.breadwallet.app.BreadApp
 import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.tools.security.BrdUserState
 import com.breadwallet.tools.security.BrdUserManager
+import com.breadwallet.tools.security.BrdUserState
 import com.breadwallet.tools.threads.executor.BRExecutor
 import com.breadwallet.tools.util.EventUtils
 import com.breadwallet.ui.MainActivity
@@ -30,13 +29,14 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.platform.network.NotificationsSettingsClientImpl
 import com.platform.util.getStringOrNull
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import org.kodein.di.android.closestKodein
+import org.kodein.di.android.closestDI
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 /**
  * This class is responsible for updating the Firebase registration token each time a new one is available,
@@ -103,9 +103,10 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
         // Save token in shared preferences.
         Log.d(TAG, "onNewToken: token value: $token")
         BRSharedPrefs.putFCMRegistrationToken(token)
-        BreadApp.applicationScope.launch {
-            val kodein by closestKodein(applicationContext)
-            val userManager = kodein.direct.instance<BrdUserManager>()
+        val di by closestDI(applicationContext)
+        val scope = di.direct.instance<CoroutineScope>()
+        scope.launch {
+            val userManager = di.direct.instance<BrdUserManager>()
             userManager.stateChanges()
                 .filter { it !is BrdUserState.Uninitialized }
                 .first()
@@ -122,9 +123,9 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(TAG, "message received")
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
 
-        if (BRSharedPrefs.getShowNotification()
-            && notificationManager != null
-            && notificationManager is NotificationManager
+        if (BRSharedPrefs.getShowNotification() &&
+            notificationManager != null &&
+            notificationManager is NotificationManager
         ) {
             // Setting up notification channels for Android O and above.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -229,7 +230,8 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
                     putExtra(MainActivity.EXTRA_DATA, url)
                 }
                 putExtra(MainActivity.EXTRA_PUSH_NOTIFICATION_CAMPAIGN_ID, campaignId)
-            }, PendingIntent.FLAG_UPDATE_CURRENT
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
     }
 
@@ -238,7 +240,8 @@ class BRDFirebaseMessagingService : FirebaseMessagingService() {
             applicationContext, 0,
             Intent(applicationContext, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }, 0
+            },
+            0
         )
 
     private fun getMixpanelDeepLink(messageData: Map<String, String>): String? =

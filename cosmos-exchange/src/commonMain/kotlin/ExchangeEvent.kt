@@ -9,10 +9,29 @@
 package com.brd.exchange
 
 import com.brd.api.BrdApiHost
-import com.brd.api.models.*
-
+import com.brd.api.models.ExchangeCountriesResult
+import com.brd.api.models.ExchangeCountry
+import com.brd.api.models.ExchangeCurrency
+import com.brd.api.models.ExchangeOffer
+import com.brd.api.models.ExchangeOfferBody
+import com.brd.api.models.ExchangeOfferRequest
+import com.brd.api.models.ExchangeOfferRequestResult
+import com.brd.api.models.ExchangeOrder
+import com.brd.api.models.ExchangeOrderResult
+import com.brd.api.models.ExchangePair
+import com.brd.api.models.ExchangePairsResult
+import com.brd.api.models.ExchangeRegion
 
 sealed class ExchangeEvent {
+
+    /**
+     *  Feedback effect for [ExchangeEffect.LoadFeaturePromotions]. Contains
+     *  info on weather to show promotion screens or not
+     */
+    data class OnFeaturePromotionsLoaded(
+        val showBuyPromotion: Boolean,
+        val showTradePromotion: Boolean
+    ): ExchangeEvent()
 
     /**
      * Feedback effect for [ExchangeEffect.LoadCountries] containing
@@ -26,11 +45,12 @@ sealed class ExchangeEvent {
     ) : ExchangeEvent() {
         override fun toString(): String {
             return "OnCountriesChanged(" +
-                    "countries=${countries.size}, " +
-                    "defaultCountryCode=$defaultCountryCode, " +
-                    "defaultRegionCode=$defaultRegionCode)"
+                "countries=${countries.size}, " +
+                "defaultCountryCode=$defaultCountryCode, " +
+                "defaultRegionCode=$defaultRegionCode)"
         }
     }
+
     /**
      * Error feedback effect for [ExchangeEffect.LoadCountries].
      */
@@ -46,6 +66,7 @@ sealed class ExchangeEvent {
         val selectedRegionCode: String?,
         val fiatCurrencyCode: String?,
         val lastPurchaseCurrencyCode: String?,
+        val lastSellCurrencyCode: String?,
         val lastTradeSourceCurrencyCode: String?,
         val lastTradeQuoteCurrencyCode: String?,
         val lastOrderAmount: String?,
@@ -62,9 +83,9 @@ sealed class ExchangeEvent {
     ) : ExchangeEvent() {
         override fun toString(): String {
             return "OnPairsLoaded(" +
-                    "pairs=${pairs.size}, " +
-                    "currencies=${currencies.size}, " +
-                    "formattedFiatRates=${formattedFiatRates.size})"
+                "pairs=${pairs.size}, " +
+                "currencies=${currencies.size}, " +
+                "formattedFiatRates=${formattedFiatRates.size})"
         }
     }
 
@@ -285,9 +306,32 @@ sealed class ExchangeEvent {
     object OnCryptoSendHashUpdateFailed : ExchangeEvent()
 
     sealed class SendFailedReason {
+        object FeeEstimateFailed : SendFailedReason()
+        object CreateTransferFailed : SendFailedReason()
+
         data class InsufficientNativeWalletBalance(
             val currencyCode: String,
             val requiredAmount: Double,
         ) : SendFailedReason()
     }
+
+    /**
+     * User event to switch [ExchangeModel.Mode] (Buy / Sell / Trade).
+     */
+    data class OnChangeModeClicked(val mode: ExchangeModel.Mode) : ExchangeEvent()
+
+    /**
+     * User event to select [ExchangeModel.inputPresets]
+     */
+    data class OnSelectInputPresets(val index: Int): ExchangeEvent()
+
+    /**
+     * Feedback event for [ExchangeModel.EstimateNetworkFee]
+     */
+    data class OnLoadedNativeNetworkInfo(
+        val currencyCode: String,
+        val currencyId: String,
+        val networkCurrencyCode: String,
+        val fee: Double,
+    ): ExchangeEvent()
 }

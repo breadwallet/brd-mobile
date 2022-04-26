@@ -10,7 +10,6 @@ package com.breadwallet.ui.exchange
 
 import android.animation.LayoutTransition
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -26,13 +25,15 @@ import com.brd.exchange.ExchangeEvent
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.ControllerExchangePickerBinding
+import com.breadwallet.tools.recyclerview.DividerItemDecorator
+import com.breadwallet.tools.recyclerview.MarginItemDecoration
 import com.breadwallet.tools.util.TokenUtil
 import com.breadwallet.tools.util.Utils
+import com.breadwallet.tools.util.getPixelsFromDps
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.mikepenz.fastadapter.select.getSelectExtension
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
@@ -53,7 +54,8 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
 
     private val regionAdapter = ModelAdapter(::RegionListItem)
     private val currencyAdapter = ModelAdapter(::CurrencyListItem)
-    private val assetAdapter = ModelAdapter<ExchangeCurrency, AssetListItem> { AssetListItem(it) { currentModel } }
+    private val assetAdapter =
+        ModelAdapter<ExchangeCurrency, AssetListItem> { AssetListItem(it) { currentModel } }
     private val countriesAdapter = ModelAdapter(::CountryListItem)
     private val offersAdapter = ModelAdapter(::OfferListItem)
     private val fastAdapter = FastAdapter.with(
@@ -63,23 +65,23 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
     init {
         countriesAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         assetAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         currencyAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
         regionAdapter.itemFilter.filterPredicate = { item, constraint ->
             constraint.isNullOrBlank() ||
-                    item.model.name.contains(constraint, true) ||
-                    item.model.code.contains(constraint, true)
+                item.model.name.contains(constraint, true) ||
+                item.model.code.contains(constraint, true)
         }
     }
 
@@ -95,10 +97,22 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
             toolbar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             layoutSearch.isVisible = selectionType != SelectionType.OFFER
             val displayAssetToggle =
-                selectionType == SelectionType.ASSET && currentModel.mode == ExchangeModel.Mode.TRADE
+                selectionType == SelectionType.ASSET && currentModel.mode.isTrade
             title.isVisible = !displayAssetToggle
             tradeToggleGroup.isVisible = displayAssetToggle
+            tradeToggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                eventConsumer.accept(
+                    ExchangeEvent.OnSelectPairClicked(checkedId == R.id.buttonFrom)
+                )
+            }
+
             recycler.itemAnimator = DefaultItemAnimator()
+
+            recycler.addItemDecoration(MarginItemDecoration(root.context.getPixelsFromDps(12)))
+            if (selectionType != SelectionType.OFFER) {
+                recycler.addItemDecoration(DividerItemDecorator(root.context.getPixelsFromDps(24)))
+            }
+
             recycler.layoutManager = LinearLayoutManager(view.context)
             recycler.adapter = fastAdapter.apply {
                 addEventHook(object : ClickEventHook<OfferListItem>() {
@@ -212,7 +226,7 @@ class PickerController(args: Bundle? = null) : ExchangeController.ChildControlle
                 }
 
                 val activeColor = getColor(R.color.white)
-                val inactiveColor = getColor(R.color.hydra_quaternary_background)
+                val inactiveColor = getColor(R.color.hydra_primary_background)
                 if (state.source) {
                     buttonFrom.backgroundTintList = ColorStateList.valueOf(activeColor)
                     buttonTo.backgroundTintList = ColorStateList.valueOf(inactiveColor)

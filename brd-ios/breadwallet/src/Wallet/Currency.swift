@@ -116,7 +116,6 @@ class Currency: CurrencyWithIcon {
         if isBitcoinCash {
             return E.isTestnet ? ["bchtest"] : ["bitcoincash"]
         }
-
         if isEthereumCompatible {
             return ["ethereum"]
         }
@@ -125,6 +124,12 @@ class Currency: CurrencyWithIcon {
         }
         if isHBAR {
             return ["hbar"]
+        }
+        if isDoge {
+            return ["dogecoin"]
+        }
+        if isLitecoin {
+            return ["litecoin"]
         }
         return nil
     }
@@ -168,6 +173,12 @@ class Currency: CurrencyWithIcon {
         }
         if isHBAR {
             return "0.0.39768"
+        }
+        if isDoge {
+            return "DUP4XYb33EGHezJs7RYsuEqcHNhMWum2Te"
+        }
+        if isLitecoin {
+            return "ltc1quku6k0dn4can94ysaas9grrpyah3eh4702q592"
         }
         return nil
     }
@@ -273,6 +284,8 @@ extension Currency {
     var isBitcoinCompatible: Bool { return isBitcoin || isBitcoinCash }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
     var isTezos: Bool { return uid == Currencies.xtz.uid }
+    var isDoge: Bool { return uid == Currencies.doge.uid }
+    var isLitecoin: Bool { return uid == Currencies.ltc.uid }
 }
 
 // MARK: - Confirmation times
@@ -344,13 +357,30 @@ extension CurrencyWithIcon {
         if let baseURL = AssetArchive(name: imageBundleName, apiClient: Backend.apiClient)?.extractedUrl {
             let path = baseURL.appendingPathComponent("white-no-bg").appendingPathComponent(code.lowercased()).appendingPathExtension("png")
             if let data = try? Data(contentsOf: path) {
-                return UIImage(data: data)?.withRenderingMode(.alwaysTemplate)
+                let image = UIImage(data: data) 
+                let isDoge = code.lowercased() == "doge"
+                return isDoge ? image : image?.withRenderingMode(.alwaysTemplate)
             }
         }
         
         return TokenImageNoBackground(code: code, color: colors.0).renderedImage
     }
-    
+
+    public var backgroundOverlayImage: UIImage? {
+        guard let baseURL = AssetArchive(
+            name: imageBundleName,
+            apiClient: Backend.apiClient
+        )?.extractedUrl else {
+            return nil
+        }
+
+        let path = baseURL.appendingPathComponent("bg-overlay-image")
+            .appendingPathComponent(code.lowercased())
+            .appendingPathExtension("png")
+
+        return UIImage(optionalData: try? Data(contentsOf: path))
+    }
+
     private var imageBundleName: String {
         return (E.isDebug || E.isTestFlight) ? "brd-tokens-staging" : "brd-tokens"
     }
@@ -489,6 +519,8 @@ enum Currencies: String, CaseIterable {
     case hbar
     case xtz
     case usdc
+    case doge
+    case ltc
     
     var code: String { return rawValue }
     var uid: CurrencyId {
@@ -512,6 +544,10 @@ enum Currencies: String, CaseIterable {
             uids = "tezos-mainnet:__native__"
         case .usdc:
             uids = "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        case .doge:
+            uids = "dogecoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
+        case .ltc:
+            uids = "litecoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         }
         return CurrencyId(rawValue: uids)
     }

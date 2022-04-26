@@ -8,9 +8,16 @@
  */
 package com.breadwallet.ui.exchange
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
@@ -24,18 +31,24 @@ import com.brd.exchange.ExchangeModel.Mode.*
 import com.brd.exchange.ExchangeModel.OfferDetails
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
+import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerExchangeBinding
 import com.breadwallet.ui.BaseController
 import com.breadwallet.ui.MobiusKtController
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import kt.mobius.Connectable
 import kt.mobius.Connection
 import kt.mobius.disposables.Disposable
 import kt.mobius.extras.CompositeEffectHandler
 import kt.mobius.functions.Consumer
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.*
 
 private const val KEY_MODE = "ExchangeController.KEY_MODE"
@@ -68,6 +81,7 @@ class ExchangeController(args: Bundle) :
                         direct.instance(),
                         AndroidWalletProvider(direct.instance(), direct.instance()),
                         direct.instance(),
+                        direct.instance(),
                         Dispatchers.Default
                     )
                 }
@@ -80,13 +94,18 @@ class ExchangeController(args: Bundle) :
             object : Connectable<ExchangeEffect, ExchangeEvent> {
                 override fun connect(output: Consumer<ExchangeEvent>): Connection<ExchangeEffect> {
                     return object : Connection<ExchangeEffect> {
+                        val scope = CoroutineScope(Main + SupervisorJob())
                         override fun accept(value: ExchangeEffect) {
-                            val childRouter = getChildRouter(binding.exchangeRoot)
-                            val topController = childRouter.backstack.lastOrNull()?.controller
-                            (topController as? ChildController)?.handleEffect(value)
+                            scope.launch(Main) {
+                                val childRouter = getChildRouter(binding.exchangeRoot)
+                                val topController = childRouter.backstack.lastOrNull()?.controller
+                                (topController as? ChildController)?.handleEffect(value)
+                            }
                         }
 
-                        override fun dispose() = Unit
+                        override fun dispose() {
+                            scope.cancel()
+                        }
                     }
                 }
             }
@@ -105,29 +124,48 @@ class ExchangeController(args: Bundle) :
     }
 
     override fun ExchangeModel.render(): Unit = with(binding) {
+        val res = requireResources()
         val childRouter = getChildRouter(exchangeRoot)
 
+        val rootController = childRouter.backstack.firstOrNull()?.controller
         val topController = childRouter.backstack.lastOrNull()?.controller
 
         ifChanged(ExchangeModel::state) {
             when (val state = state) {
-                ExchangeModel.State.EmptyWallets -> {
-                    if (topController !is EmptyWalletsController) {
+                is ExchangeModel.State.EmptyWallets -> {
+                    if (topController !is EmptyWalletsController && !mode.isSell) {
                         childRouter.setRoot(
                             RouterTransaction.with(EmptyWalletsController())
                                 .popChangeHandler(FadeChangeHandler())
                                 .pushChangeHandler(FadeChangeHandler())
                         )
                     }
+                    // TODO: handle exchangeDialog display
+                    // else if (mode.isSell) {
+                    //     layoutDialog.isVisible = true
+                    //     dialog.root.isVisible = false
+                    //     exchangeDialog.root.isVisible = true
+                    //     exchangeDialog.dialogTitle.text = "ETH Balance Low"
+                    //     exchangeDialog.dialogText.text =
+                    //         "BAT uses the Ethereum network which requires ETH to pay transaction fees."
+                    //     exchangeDialog.posButton.text = "Top up ETH balance"
+                    //     exchangeDialog.negButton.text = "Close"
+                    //     val bgDrawable: LayerDrawable? = requireContext().getLayerDrawable(
+                    //         colorRes = R.color.brdRed,
+                    //         drawableRes = R.drawable.ic_error,
+                    //         alpha = .2f
+                    //     )
+                    //     exchangeDialog.dialogIcon.setImageDrawable(bgDrawable)
+                    // }
                 }
                 is ExchangeModel.State.Initializing -> {
-                    val matchesMode = (mode == BUY && topController is BuyController) ||
+                    val matchesMode =
+                        ((mode == BUY || mode == SELL) && topController is BuyController) ||
                             (mode == TRADE && topController is TradeController)
                     if (topController == null || !matchesMode) {
                         val transaction = when (mode) {
-                            BUY -> RouterTransaction.with(BuyController())
+                            BUY, SELL -> RouterTransaction.with(BuyController())
                             TRADE -> RouterTransaction.with(TradeController())
-                            SELL -> error("SELL not implemented")
                         }.pushChangeHandler(VerticalChangeHandler())
                             .popChangeHandler(VerticalChangeHandler())
                         childRouter.setRoot(transaction)
@@ -136,8 +174,12 @@ class ExchangeController(args: Bundle) :
                     }
                 }
                 is ExchangeModel.State.OrderSetup -> {
+                    val shouldUpdateRoot =
+                        ((mode == BUY || mode == SELL) && rootController !is BuyController) ||
+                            (mode == TRADE && rootController !is TradeController)
                     if (state.selectingOffer) {
-                        val currentSelectionType = (topController as? PickerController)?.selectionType
+                        val currentSelectionType =
+                            (topController as? PickerController)?.selectionType
                         if (currentSelectionType != PickerController.SelectionType.OFFER) {
                             val (pushHandler, popHandler) = when (mode) {
                                 BUY,
@@ -150,6 +192,14 @@ class ExchangeController(args: Bundle) :
                                     .popChangeHandler(popHandler)
                             childRouter.pushController(transaction)
                         }
+                    } else if (shouldUpdateRoot) {
+                        val transaction = when (mode) {
+                            BUY, SELL -> RouterTransaction.with(BuyController())
+                            TRADE -> RouterTransaction.with(TradeController())
+                        }.pushChangeHandler(VerticalChangeHandler())
+                            .popChangeHandler(VerticalChangeHandler())
+                        childRouter.setRoot(transaction)
+                        childRouter.popToRoot()
                     } else if (childRouter.backstackSize > 1) {
                         childRouter.popToRoot()
                     }
@@ -166,9 +216,10 @@ class ExchangeController(args: Bundle) :
                                 if (hasSettingsController) {
                                     childRouter.popCurrentController()
                                 } else {
-                                    val transaction = RouterTransaction.with(ExchangeSettingsController())
-                                        .pushChangeHandler(VerticalChangeHandler())
-                                        .popChangeHandler(VerticalChangeHandler())
+                                    val transaction =
+                                        RouterTransaction.with(ExchangeSettingsController())
+                                            .pushChangeHandler(VerticalChangeHandler())
+                                            .popChangeHandler(VerticalChangeHandler())
                                     childRouter.pushController(transaction)
                                 }
                             }
@@ -217,9 +268,10 @@ class ExchangeController(args: Bundle) :
                 is ExchangeModel.State.SelectAsset -> {
                     val currentSelectionType = (topController as? PickerController)?.selectionType
                     if (currentSelectionType != PickerController.SelectionType.ASSET) {
-                        val transaction = RouterTransaction.with(PickerController(PickerController.SelectionType.ASSET))
-                            .pushChangeHandler(HorizontalChangeHandler())
-                            .popChangeHandler(HorizontalChangeHandler())
+                        val transaction =
+                            RouterTransaction.with(PickerController(PickerController.SelectionType.ASSET))
+                                .pushChangeHandler(HorizontalChangeHandler())
+                                .popChangeHandler(HorizontalChangeHandler())
                         if (currentSelectionType == null) {
                             childRouter.pushController(transaction)
                         } else {
@@ -240,24 +292,35 @@ class ExchangeController(args: Bundle) :
                     }
                 }
                 is ExchangeModel.State.ProcessingOrder -> {
-                    state.userAction?.run {
-                        when (action.type) {
-                            ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS,
-                            ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS -> error("Invalid user action type")
-                            ExchangeOrder.Action.Type.CRYPTO_SEND -> {
-                                if (topController !is TradeTransactionController) {
-                                    val transaction = RouterTransaction.with(TradeTransactionController())
-                                        .pushChangeHandler(FadeChangeHandler(false))
-                                        .popChangeHandler(FadeChangeHandler())
-                                    childRouter.pushController(transaction)
+                    if (state.userAction == null) {
+                        if (mode == TRADE && topController !is TradeTransactionController) {
+                            val transaction = RouterTransaction.with(TradeTransactionController())
+                                .pushChangeHandler(FadeChangeHandler(false))
+                                .popChangeHandler(FadeChangeHandler())
+                            childRouter.pushController(transaction)
+                        }
+                    } else {
+                        state.userAction?.run {
+                            when (action.type) {
+                                ExchangeOrder.Action.Type.CRYPTO_REFUND_ADDRESS,
+                                ExchangeOrder.Action.Type.CRYPTO_RECEIVE_ADDRESS -> error("Invalid user action type")
+                                ExchangeOrder.Action.Type.CRYPTO_SEND -> {
+                                    if (mode.isSell && topController !is TradeTransactionController) {
+                                        childRouter.popToRoot()
+                                        val transaction = RouterTransaction.with(TradeTransactionController())
+                                            .pushChangeHandler(FadeChangeHandler(false))
+                                            .popChangeHandler(FadeChangeHandler())
+                                        childRouter.pushController(transaction)
+                                    }
                                 }
-                            }
-                            ExchangeOrder.Action.Type.BROWSER -> {
-                                if (topController !is PartnerBrowserController) {
-                                    val transaction = RouterTransaction.with(PartnerBrowserController())
-                                        .pushChangeHandler(HorizontalChangeHandler())
-                                        .popChangeHandler(HorizontalChangeHandler())
-                                    childRouter.pushController(transaction)
+                                ExchangeOrder.Action.Type.BROWSER -> {
+                                    if (topController !is PartnerBrowserController) {
+                                        val transaction =
+                                            RouterTransaction.with(PartnerBrowserController())
+                                                .pushChangeHandler(HorizontalChangeHandler())
+                                                .popChangeHandler(HorizontalChangeHandler())
+                                        childRouter.pushController(transaction)
+                                    }
                                 }
                             }
                         }
@@ -271,15 +334,27 @@ class ExchangeController(args: Bundle) :
                         childRouter.pushController(transaction)
                     }
                 }
+                is ExchangeModel.State.FeaturePromotion -> {
+                    if (topController !is FeaturePromotionController) {
+                        val selection = if (mode == BUY) {
+                            FeaturePromotionController.SelectionType.BUY
+                        } else {
+                            FeaturePromotionController.SelectionType.TRADE
+                        }
+                        val transaction =
+                            RouterTransaction.with(FeaturePromotionController(selection))
+                                .pushChangeHandler(FadeChangeHandler())
+                                .popChangeHandler(HorizontalChangeHandler())
+                        childRouter.pushController(transaction)
+                    }
+                }
             }
         }
 
         ifChanged(ExchangeModel::confirmingClose, ExchangeModel::errorState) {
             if (confirmingClose) {
-                dialog.dialogTitle.text = "Exit Checkout?"
-                dialog.dialogText.text = "View order details in Menu → Order History"
-                dialog.posButton.isAllCaps = true
-                dialog.negButton.isAllCaps = true
+                dialog.dialogTitle.setText(R.string.Exchange_tradeCancelAlertTitle)
+                dialog.dialogText.setText(R.string.Exchange_tradeCancelAlertBody)
                 dialog.posButton.setText(R.string.Button_ok)
                 dialog.negButton.setText(R.string.Button_cancel)
                 dialog.helpIcon.isVisible = false
@@ -287,8 +362,6 @@ class ExchangeController(args: Bundle) :
 
             val errorState = errorState
             if (errorState != null) {
-                dialog.dialogTitle.text = errorState.title
-                dialog.dialogText.text = errorState.message
                 if (errorState.isRecoverable) {
                     dialog.posButton.setText(R.string.Exchange_CTA_retry)
                     dialog.negButton.setText(R.string.Button_cancel)
@@ -298,9 +371,48 @@ class ExchangeController(args: Bundle) :
                 }
 
                 dialog.helpIcon.isVisible = false
+                dialog.dialogTitle.isVisible = false
+                when (val type = errorState.type) {
+                    is ExchangeModel.ErrorState.Type.TransactionError -> {
+                        when (type.sendFailedReason) {
+                            ExchangeEvent.SendFailedReason.FeeEstimateFailed -> {
+                                dialog.dialogText.setText(R.string.Send_noFeesError)
+                            }
+                            else -> {
+                                dialog.dialogText.setText(R.string.Exchange_ErrorState_transaction)
+                            }
+                        }
+                    }
+                    is ExchangeModel.ErrorState.Type.OrderError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_order)
+                    }
+                    is ExchangeModel.ErrorState.Type.NetworkError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_network)
+                    }
+                    is ExchangeModel.ErrorState.Type.InitializationError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_initialization)
+                    }
+                    is ExchangeModel.ErrorState.Type.UnsupportedRegionError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_unsupportedRegionError)
+                    }
+                    is ExchangeModel.ErrorState.Type.InsufficientNativeBalanceError -> {
+                        dialog.posButton.setText(R.string.Exchange_ErrorState_insufficientNativeBalanceErrorConfirm)
+                        dialog.dialogTitle.isVisible = true
+                        dialog.dialogTitle.setText(R.string.Send_insufficientGasTitle)
+                        dialog.dialogText.text = res.getString(
+                            R.string.Send_insufficientGasMessage,
+                            type.amount.toBigDecimal().formatCryptoForUi(type.currencyCode)
+                        )
+                    }
+                    is ExchangeModel.ErrorState.Type.UnknownError -> {
+                        dialog.dialogText.setText(R.string.Exchange_ErrorState_unknown)
+                    }
+                }
             }
 
             layoutDialog.isVisible = confirmingClose || errorState != null
+            dialog.root.isVisible = confirmingClose || errorState != null
+            exchangeDialog.root.isVisible = false
         }
 
         (childRouter.backstack.lastOrNull()?.controller as? ChildController)?.dispatchRender()
@@ -323,7 +435,9 @@ class ExchangeController(args: Bundle) :
         }
 
         fun dispatchRender() {
-            currentModel.render()
+            if (isAttached) {
+                currentModel.render()
+            }
             previousModel = currentModel
         }
 
@@ -336,7 +450,8 @@ class ExchangeController(args: Bundle) :
             crossinline block: (@ParameterName("value") T) -> Unit
         ) {
             val currentValue = extract(this)
-            val previousValue: Any? = if (previousModel == null) Unit else previousModel?.run(extract)
+            val previousValue: Any? =
+                if (previousModel == null) Unit else previousModel?.run(extract)
             if (currentValue != previousValue) {
                 block(currentValue)
             }
@@ -385,8 +500,9 @@ fun ExchangeCurrency.selectedFiatCurrencyName(): String {
 fun OfferDetails.setProviderIcon(icon: ImageView) {
     when (offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> icon.setImageResource(R.drawable.ic_provider_moonpay)
+        "simplex" -> icon.setImageResource(R.drawable.ic_provider_simplex)
         "wyre" -> icon.setImageResource(R.drawable.ic_provider_wyre)
-        "changelly" -> icon.setImageResource(R.drawable.ic_proivider_changelly)
+        "changelly" -> icon.setImageResource(R.drawable.ic_provider_changelly)
         else -> {
             if (offer.provider.logoUrl.isNullOrBlank()) {
                 icon.setImageDrawable(null)
@@ -395,4 +511,22 @@ fun OfferDetails.setProviderIcon(icon: ImageView) {
             }
         }
     }
+}
+
+/** Handles Layered Drawable view for icon with circular background*/
+fun Context.getLayerDrawable(
+    @ColorRes colorRes: Int,
+    @DrawableRes drawableRes: Int,
+    alpha: Float = 1f,
+): LayerDrawable? {
+    val bgDrawable: LayerDrawable? =
+        ContextCompat.getDrawable(this, R.drawable.ic_circular_layer) as? LayerDrawable
+    val bgLayer = bgDrawable?.findDrawableByLayerId(R.id.bg_layer) as? GradientDrawable
+    bgLayer?.color = ColorStateList.valueOf(ContextCompat.getColor(this, colorRes))
+    bgLayer?.alpha = (alpha * 255).coerceAtMost(255f).toInt()
+    bgDrawable?.setDrawableByLayerId(
+        R.id.image_layer,
+        ContextCompat.getDrawable(this, drawableRes)
+    )
+    return bgDrawable
 }

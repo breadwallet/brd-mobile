@@ -41,7 +41,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transformLatest
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.concurrent.Executors
 
 private const val CAMERA_UI_UPDATE_MS = 100L
@@ -74,9 +74,9 @@ class ScannerController(
 
         val cameraPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
         if (cameraPermission == PackageManager.PERMISSION_GRANTED) {
-            try  {
+            try {
                 startScanner(breadBox, uriParser)
-            }  catch(e: NoCameraException) {
+            } catch (e: NoCameraException) {
                 logError("No camera found, exiting scanner.")
                 toastLong(R.string.Scanner_noCamera)
                 router.popController(this)
@@ -87,14 +87,16 @@ class ScannerController(
                 BRConstants.CAMERA_REQUEST_ID
             )
         }
-
     }
 
     override fun onDetach(view: View) {
         cameraProviderFuture?.apply {
-            addListener(Runnable {
-                get().unbindAll()
-            }, mainExecutor)
+            addListener(
+                {
+                    get().unbindAll()
+                },
+                mainExecutor
+            )
         }
         super.onDetach(view)
     }
@@ -118,45 +120,48 @@ class ScannerController(
         cameraProviderFuture = ProcessCameraProvider.getInstance(applicationContext!!).apply {
             if (!(get().hasCamera(cameraSelector))) throw NoCameraException()
 
-            addListener(Runnable {
-                val imageAnalysis = bindImageAnalyzer(get())
+            addListener(
+                {
+                    val imageAnalysis = bindImageAnalyzer(get())
 
-                imageAnalysis.decodedTextFlow()
-                    .mapLatest { text ->
-                        text to text.asLink(
-                            breadBox,
-                            uriParser,
-                            scanned = true
-                        )
-                    }
-                    .flowOn(Default)
-                    .transformLatest { (text, link) ->
-                        if (link == null) {
-                            logError("Found incompatible QR code")
-                            showGuideError()
-                        } else {
-                            logDebug("Found compatible QR code $text -> $link")
-                            binding.scanGuide.setImageResource(R.drawable.cameraguide)
-                            emit(text to link)
+                    imageAnalysis.decodedTextFlow()
+                        .mapLatest { text ->
+                            text to text.asLink(
+                                breadBox,
+                                uriParser,
+                                scanned = true
+                            )
                         }
-                    }
-                    .take(1)
-                    .onEach { (text, link) ->
-                        handleValidLink(text, link)
-                    }
-                    .flowOn(Main)
-                    .launchIn(viewAttachScope)
-            }, mainExecutor)
+                        .flowOn(Default)
+                        .transformLatest { (text, link) ->
+                            if (link == null) {
+                                logError("Found incompatible QR code")
+                                showGuideError()
+                            } else {
+                                logDebug("Found compatible QR code $text -> $link")
+                                binding.scanGuide.setImageResource(R.drawable.cameraguide)
+                                emit(text to link)
+                            }
+                        }
+                        .take(1)
+                        .onEach { (text, link) ->
+                            handleValidLink(text, link)
+                        }
+                        .flowOn(Main)
+                        .launchIn(viewAttachScope)
+                },
+                mainExecutor
+            )
         }
     }
 
     private fun bindImageAnalyzer(cameraProvider: ProcessCameraProvider): QRCodeImageAnalysis {
-        var preview = Preview.Builder().build().apply {
+        val preview = Preview.Builder().build().apply {
             setSurfaceProvider(binding.previewView.surfaceProvider)
         }
 
         val imageAnalysis = QRCodeImageAnalysis(backgroundExecutor)
-        
+
         cameraProvider.bindToLifecycle(
             activity as LifecycleOwner,
             cameraSelector,
@@ -190,5 +195,5 @@ class ScannerController(
         binding.scanGuide.setImageResource(R.drawable.cameraguide)
     }
 
-    class NoCameraException: Exception()
+    class NoCameraException : Exception()
 }

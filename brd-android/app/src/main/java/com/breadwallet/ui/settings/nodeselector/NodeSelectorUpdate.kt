@@ -8,7 +8,7 @@
  */
 package com.breadwallet.ui.settings.nodeselector
 
-import com.breadwallet.crypto.WalletManagerState
+import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.ui.settings.nodeselector.NodeSelector.E
 import com.breadwallet.ui.settings.nodeselector.NodeSelector.F
 import com.breadwallet.ui.settings.nodeselector.NodeSelector.M

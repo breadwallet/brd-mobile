@@ -14,13 +14,20 @@ import com.brd.addressresolver.AddressResolver
 import com.brd.addressresolver.AddressResult
 import com.brd.addressresolver.AddressType
 import com.breadwallet.R
-import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferState
-import com.breadwallet.crypto.errors.FeeEstimationError
-import com.breadwallet.crypto.errors.LimitEstimationError
+import com.breadwallet.breadbox.BreadBox
+import com.breadwallet.breadbox.addressFor
+import com.breadwallet.breadbox.defaultUnit
+import com.breadwallet.breadbox.estimateFee
+import com.breadwallet.breadbox.estimateMaximum
+import com.breadwallet.breadbox.feeForSpeed
+import com.breadwallet.breadbox.hashString
+import com.breadwallet.breadbox.toBigDecimal
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferState
+import com.blockset.walletkit.errors.FeeEstimationError
+import com.blockset.walletkit.errors.LimitEstimationError
 import com.breadwallet.effecthandler.metadata.MetaDataEffect
 import com.breadwallet.effecthandler.metadata.MetaDataEvent
 import com.breadwallet.ext.isZero
@@ -272,8 +279,10 @@ object SendSheetHandler {
             AddressResult.Invalid -> E.OnAddressValidated.InvalidAddress(effect.type)
             AddressResult.ExternalError -> E.OnAddressValidated.ResolveError(effect.type)
 
-            is AddressResult.Success -> when (val validateResult =
-                validateTargetString(breadBox, addressResolver, uriParser, effect.currencyCode, result.address)) {
+            is AddressResult.Success -> when (
+                val validateResult =
+                    validateTargetString(breadBox, addressResolver, uriParser, effect.currencyCode, result.address)
+            ) {
                 is E.OnAddressValidated.ValidAddress -> E.OnAddressValidated.ValidAddress(
                     effect.type,
                     validateResult.address,

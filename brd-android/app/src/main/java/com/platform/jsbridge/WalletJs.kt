@@ -32,18 +32,20 @@ import com.breadwallet.breadbox.isBitcoin
 import com.breadwallet.breadbox.isNative
 import com.breadwallet.breadbox.toBigDecimal
 import com.breadwallet.breadbox.toSanitizedString
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferAttribute
-import com.breadwallet.crypto.TransferFeeBasis
-import com.breadwallet.crypto.TransferState
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.errors.FeeEstimationError
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.AddressScheme
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferAttribute
+import com.blockset.walletkit.TransferFeeBasis
+import com.blockset.walletkit.TransferState
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.errors.FeeEstimationError
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.model.TokenItem
+import com.breadwallet.platform.entities.TxMetaDataValue
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
@@ -53,8 +55,6 @@ import com.breadwallet.ui.send.TransferField
 import com.platform.ConfirmTransactionMessage
 import com.platform.PlatformTransactionBus
 import com.platform.TransactionResultMessage
-import com.breadwallet.platform.entities.TxMetaDataValue
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.platform.util.getStringOrNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onStart
@@ -372,7 +372,7 @@ class WalletJs(
             put(KEY_CURRENCY, currencyCode)
             put(KEY_ADDRESS, getAddress(wallet, FORMAT_LEGACY))
             if (wallet.currency.isBitcoin()) {
-                put("${KEY_ADDRESS}_${FORMAT_SEGWIT}", getAddress(wallet, FORMAT_SEGWIT))
+                put("${KEY_ADDRESS}_$FORMAT_SEGWIT", getAddress(wallet, FORMAT_SEGWIT))
             }
         }
     }

@@ -20,9 +20,9 @@ import com.breadwallet.tools.animation.BRDialog
 import com.breadwallet.tools.manager.BRSharedPrefs.getScreenHeight
 import com.breadwallet.tools.manager.BRSharedPrefs.putScreenHeight
 import com.breadwallet.tools.manager.BRSharedPrefs.putScreenWidth
+import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.BrdUserState.Disabled
 import com.breadwallet.tools.security.BrdUserState.Locked
-import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.util.errorHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
@@ -35,7 +35,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val TAG = "BRActivity"
 

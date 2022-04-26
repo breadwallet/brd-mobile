@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.flowOn
 
 fun View.clicks(): Flow<Unit> =
     callbackFlow {
-        setOnClickListener { offer(Unit) }
+        setOnClickListener { trySend(Unit) }
         awaitClose { setOnClickListener(null) }
     }.flowOn(Dispatchers.Main)
 
@@ -36,4 +36,3 @@ fun View.touchEvents(consumed: Boolean = true): Flow<MotionEvent> =
         }
         awaitClose { setOnTouchListener(null) }
     }.flowOn(Dispatchers.Main)
-

@@ -8,12 +8,12 @@
  */
 package com.breadwallet.ui.exchange
 
+import com.blockset.walletkit.Address
+import com.blockset.walletkit.AddressScheme
+import com.blockset.walletkit.errors.LimitEstimationError
 import com.brd.exchange.WalletProvider
 import com.breadwallet.BuildConfig
 import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.Address
-import com.breadwallet.crypto.AddressScheme
-import com.breadwallet.crypto.errors.LimitEstimationError
 import com.breadwallet.logger.logError
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import kotlinx.coroutines.runBlocking
@@ -68,6 +68,30 @@ class AndroidWalletProvider(
                 wallet.estimateMaximum(target, fee).doubleAmount(wallet.unit).orNull()
             } catch (e: LimitEstimationError) {
                 logError("Failed to estimate max", e)
+                null
+            }
+        }
+    }
+
+    override fun currencyCode(currencyId: String): String? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId }
+        return wallet?.currency?.code
+    }
+
+    override fun networkCurrencyCode(currencyId: String): String? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId }
+        return wallet?.walletManager?.network?.currency?.code
+    }
+
+    override fun estimateFee(currencyId: String, targetAddress: String): Double? {
+        val wallet = breadBox.getSystemUnsafe()?.wallets?.find { it.currency.uids == currencyId } ?: return null
+        val target = Address.create(targetAddress, wallet.walletManager.network).get()
+        val fee = wallet.feeForSpeed(TransferSpeed.Priority(wallet.currency.code))
+        return runBlocking {
+            try {
+                wallet.estimateFee(target, wallet.balance).fee.doubleAmount(wallet.unit).orNull()
+            } catch (e: LimitEstimationError) {
+                logError("Failed to estimate fee", e)
                 null
             }
         }

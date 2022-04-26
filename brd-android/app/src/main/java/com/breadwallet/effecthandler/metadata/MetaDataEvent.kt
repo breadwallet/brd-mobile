@@ -8,7 +8,7 @@
  */
 package com.breadwallet.effecthandler.metadata
 
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.platform.entities.TxMetaData
 
 sealed class MetaDataEvent {

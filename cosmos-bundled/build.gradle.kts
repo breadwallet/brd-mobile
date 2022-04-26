@@ -11,10 +11,10 @@ plugins {
 hasAndroidSdK()
 
 android {
-    compileSdkVersion(brd.BrdRelease.ANDROID_COMPILE_SDK)
-    buildToolsVersion(brd.BrdRelease.ANDROID_BUILD_TOOLS)
+    compileSdk = brd.BrdRelease.ANDROID_COMPILE_SDK
+    buildToolsVersion = brd.BrdRelease.ANDROID_BUILD_TOOLS
     defaultConfig {
-        minSdkVersion(brd.BrdRelease.ANDROID_MINIMUM_SDK)
+        minSdk = brd.BrdRelease.ANDROID_MINIMUM_SDK
     }
 
     compileOptions {
@@ -42,6 +42,7 @@ kotlin {
                 export(project(":cosmos-core"))
                 export(project(":cosmos-exchange"))
                 export(project(":cosmos-support"))
+                export(project(":cosmos-feature-promotion"))
                 export(brd.Libs.Mobiuskt.Core)
                 export(brd.Libs.Mobiuskt.Extras)
                 export(brd.Libs.Blockset)
@@ -59,6 +60,7 @@ kotlin {
                 api(project(":cosmos-core"))
                 api(project(":cosmos-exchange"))
                 api(project(":cosmos-support"))
+                api(project(":cosmos-feature-promotion"))
                 api(brd.Libs.Blockset)
                 api(brd.Libs.Mobiuskt.Core)
                 api(brd.Libs.Mobiuskt.Extras)

@@ -10,7 +10,6 @@ package com.breadwallet.ui.settings.currency
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.breadwallet.R
 import com.breadwallet.databinding.ControllerDisplayCurrencyBinding
 import com.breadwallet.ui.BaseMobiusController
 import com.breadwallet.ui.flowbind.clicks
@@ -25,7 +24,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 class DisplayCurrencyController(
     args: Bundle? = null

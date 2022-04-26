@@ -111,7 +111,8 @@ val ImportUpdate = Update<M, E, F> { model, event ->
             next(
                 model.copy(
                     currencyCode = event.currencyCode
-                ), setOf(
+                ),
+                setOf(
                     F.ShowConfirmImport(
                         receiveAmount = (balance - fee).toPlainString(),
                         feeAmount = fee.toPlainString()

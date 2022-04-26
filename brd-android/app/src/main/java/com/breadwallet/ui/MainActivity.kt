@@ -67,12 +67,12 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.android.retainedSubKodein
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.singleton
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.android.retainedSubDI
+import org.kodein.di.bind
+import org.kodein.di.instance
+import org.kodein.di.singleton
 
 // String extra containing a recovery phrase to bootstrap the recovery process. (debug only)
 private const val EXTRA_RECOVER_PHRASE = "RECOVER_PHRASE"
@@ -84,7 +84,7 @@ private const val EXTRA_RECOVER_PHRASE = "RECOVER_PHRASE"
  * platform events into Mobius events.
  */
 @Suppress("TooManyFunctions")
-class MainActivity : AppCompatActivity(), KodeinAware {
+class MainActivity : AppCompatActivity(), DIAware {
 
     companion object {
         const val EXTRA_DATA = "com.breadwallet.ui.MainActivity.EXTRA_DATA"
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             "com.breadwallet.ui.MainActivity.EXTRA_PUSH_CAMPAIGN_ID"
     }
 
-    override val kodein by retainedSubKodein(closestKodein()) {
+    override val di by retainedSubDI(closestDI()) {
         val router = router
         bind<Navigator>() with singleton {
             RouterNavigator { router }
@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     private val userManager by instance<BrdUserManager>()
+    private val appScope by instance<CoroutineScope>()
 
     lateinit var router: Router
     private var trackingListener: ControllerTrackingListener? = null
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         trackingListener = ControllerTrackingListener(this).also(router::addChangeListener)
 
-        BreadApp.applicationScope.launch(Main) {
+        appScope.launch(Main) {
             try {
                 userManager.checkAccountInvalidated()
             } catch (e: UserNotAuthenticatedException) {
@@ -175,7 +176,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         }
 
         if (BuildConfig.DEBUG) {
-            Utils.printPhoneSpecs(this@MainActivity)
+            Utils.printPhoneSpecs()
         }
     }
 
@@ -225,7 +226,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         super.onNewIntent(intent)
         intent ?: return
 
-        val data = processIntentData(intent) ?: ""
+        val data = processIntentData(intent).orEmpty()
         if (data.isNotBlank() && userManager.isInitialized()) {
             val hasRoot = router.hasRootController()
             val isTopLogin = router.backstack.lastOrNull()?.controller is LoginController
@@ -254,25 +255,34 @@ class MainActivity : AppCompatActivity(), KodeinAware {
                     closeDrawer(drawerDirection)
                 }
             }
-            addView(root, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.MATCH_PARENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ))
-            addView(NavigationView(context).apply {
-                addView(ChangeHandlerFrameLayout(context).apply {
-                    id = R.id.drawer_layout_id
-                    Conductor.attachRouter(this@MainActivity, this, bundle)
-                        .setRoot(RouterTransaction.with(controller))
-                }, FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                ))
-            }, DrawerLayout.LayoutParams(
-                DrawerLayout.LayoutParams.WRAP_CONTENT,
-                DrawerLayout.LayoutParams.MATCH_PARENT
-            ).apply {
-                gravity = drawerDirection
-            })
+            addView(
+                root,
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.MATCH_PARENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            addView(
+                NavigationView(context).apply {
+                    addView(
+                        ChangeHandlerFrameLayout(context).apply {
+                            id = R.id.drawer_layout_id
+                            Conductor.attachRouter(this@MainActivity, this, bundle)
+                                .setRoot(RouterTransaction.with(controller))
+                        },
+                        FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.WRAP_CONTENT,
+                            FrameLayout.LayoutParams.MATCH_PARENT
+                        )
+                    )
+                },
+                DrawerLayout.LayoutParams(
+                    DrawerLayout.LayoutParams.WRAP_CONTENT,
+                    DrawerLayout.LayoutParams.MATCH_PARENT
+                ).apply {
+                    gravity = drawerDirection
+                }
+            )
         }
     }
 

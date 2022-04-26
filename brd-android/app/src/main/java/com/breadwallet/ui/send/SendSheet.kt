@@ -13,9 +13,9 @@ import com.brd.addressresolver.AddressType
 import com.breadwallet.R
 import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
-import com.breadwallet.crypto.PaymentProtocolRequest
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferFeeBasis
+import com.blockset.walletkit.PaymentProtocolRequest
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferFeeBasis
 import com.breadwallet.ext.isZero
 import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.tools.util.BRConstants
@@ -184,7 +184,7 @@ object SendSheet {
 
         /** True when the necessary inputs to estimate a fee are available. */
         val canEstimateFee: Boolean =
-                (balance >= amount || isSendingMax) &&
+            (balance >= amount || isSendingMax) &&
                 targetInputError == null &&
                 !amount.isZero()
 
@@ -615,5 +615,3 @@ fun List<TransferField>.copy(key: String, value: String): List<TransferField> = 
         transferField
     }
 }
-
-

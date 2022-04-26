@@ -10,15 +10,15 @@ package com.breadwallet.ui.wallet
 
 import com.breadwallet.R
 import com.breadwallet.breadbox.WalletState
-import com.breadwallet.crypto.Transfer
+import com.blockset.walletkit.Transfer
 import com.breadwallet.legacy.presenter.entities.CryptoRequest
 import com.breadwallet.model.PriceChange
 import com.breadwallet.model.PriceDataPoint
+import com.breadwallet.platform.entities.TxMetaData
 import com.breadwallet.tools.manager.MarketDataResult
 import com.breadwallet.tools.util.asCryptoRequestUrl
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget
-import com.breadwallet.platform.entities.TxMetaData
 import dev.zacsweers.redacted.annotations.Redacted
 import java.math.BigDecimal
 
@@ -141,7 +141,7 @@ object WalletScreen {
         ) : E()
 
         data class OnMarketDataUpdated(
-            val marketData : MarketDataResult
+            val marketData: MarketDataResult
         ) : E()
 
         data class OnChartDataPointSelected(val priceDataPoint: PriceDataPoint) : E()
@@ -191,13 +191,13 @@ object WalletScreen {
 
             data class GoToStaking(
                 val currencyId: String
-            ): Nav() {
+            ) : Nav() {
                 override val navigationTarget = NavigationTarget.Staking(currencyId)
             }
 
             data class GoToCreateGift(
                 val currencyId: String
-            ): Nav() {
+            ) : Nav() {
                 override val navigationTarget = NavigationTarget.CreateGift(currencyId)
             }
         }
@@ -223,7 +223,7 @@ object WalletScreen {
 
         data class ConvertCryptoTransactions(
             @Redacted val transactions: List<Transfer>,
-            val  currencyId: String
+            val currencyId: String
         ) : F()
 
         data class LoadChartInterval(

@@ -18,14 +18,13 @@ import com.brd.api.BrdApiHost
 import com.brd.prefs.BrdPreferences
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
-import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.*
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.TransferDirection
-import com.breadwallet.crypto.TransferState
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManagerMode
-import com.breadwallet.crypto.WalletManagerState
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.TransferDirection
+import com.blockset.walletkit.TransferState
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.WalletManagerMode
+import com.blockset.walletkit.WalletManagerState
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.logger.Logger
 import com.breadwallet.logger.logDebug
@@ -33,6 +32,7 @@ import com.breadwallet.model.Experiments
 import com.breadwallet.model.TokenItem
 import com.breadwallet.platform.entities.TxMetaDataEmpty
 import com.breadwallet.platform.entities.TxMetaDataValue
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.repository.ExperimentsRepository
 import com.breadwallet.repository.ExperimentsRepositoryImpl
 import com.breadwallet.tools.manager.BRClipboardManager
@@ -47,9 +47,8 @@ import com.breadwallet.tools.util.btc
 import com.breadwallet.ui.settings.SettingsScreen.E
 import com.breadwallet.ui.settings.SettingsScreen.F
 import com.breadwallet.util.errorHandler
-import com.platform.APIClient
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.util.isBitcoinLike
+import com.platform.APIClient
 import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 import kotlinx.coroutines.CoroutineScope
@@ -103,6 +102,7 @@ class SettingsScreenHandler(
     private val supportManager: SupportManager,
     private val brdPreferences: BrdPreferences,
     private val brdClient: BrdApiClient,
+    private val scope: CoroutineScope,
 ) : Connection<F>, CoroutineScope {
 
     override val coroutineContext = SupervisorJob() + Dispatchers.Default + errorHandler()
@@ -190,7 +190,7 @@ class SettingsScreenHandler(
                     !BRSharedPrefs.appRatePromptShouldPromptDebug
             }
             F.RefreshTokens -> {
-                BreadApp.applicationScope.launch {
+                scope.launch {
                     userManager.putBdbJwt("", 0)
                     userManager.removeToken()
                     bdbAuthInterceptor.refreshClientToken()
@@ -204,7 +204,7 @@ class SettingsScreenHandler(
                 }
             }
             F.CopyPaperKey -> {
-                BreadApp.applicationScope.launch {
+                scope.launch {
                     val phrase = userManager.getPhrase()?.toString(UTF_8)
                     Main {
                         BRClipboardManager.putClipboard(phrase)
@@ -294,11 +294,14 @@ class SettingsScreenHandler(
             )
         ).apply {
             if (brdPreferences.hydraActivated) {
-                add(3, SettingsItem(
-                    title = "Order History",
-                    option = SettingsOption.ORDER_HISTORY,
-                    iconResId = R.drawable.ic_order_history
-                ))
+                add(
+                    3,
+                    SettingsItem(
+                        title = context.getString(R.string.Settings_orderHistory),
+                        option = SettingsOption.ORDER_HISTORY,
+                        iconResId = R.drawable.ic_order_history
+                    )
+                )
             }
             if (experimentsRepository.isExperimentActive(Experiments.ATM_MAP)) {
                 add(
@@ -381,7 +384,8 @@ class SettingsScreenHandler(
         )
         if (isFingerPrintAvailableAndSetup(context)) {
             items.add(
-                0, SettingsItem(
+                0,
+                SettingsItem(
                     context.getString(R.string.TouchIdSettings_switchLabel_android),
                     SettingsOption.FINGERPRINT_AUTH
                 )
@@ -535,13 +539,12 @@ class SettingsScreenHandler(
                 val feeWallet = if (wallet.currency.isNative()) wallet else breadBox.wallet(wallet.unitForFee.currency.code).first()
                 wallet.transfers
                     .filter { it.state.type == TransferState.Type.INCLUDED }
-                    .sortedBy { it.confirmation.orNull()?.confirmationTime ?: Date()}
+                    .sortedBy { it.confirmation.orNull()?.confirmationTime ?: Date() }
                     .forEach { transfer ->
                         val memo = getMemo(transfer)
                         out.write("${transfer.export(memo, feeWallet, wallet.currencyId)}\n")
                     }
             }
-
         }
         val authority = buildString {
             append(AUTHORITY_BASE)
@@ -606,7 +609,8 @@ class SettingsScreenHandler(
         metaDataManager.enabledWallets().first()
             .map { currencyId ->
                 breadBox.wallet(currencyId).filter {
-                        wallet -> wallet.walletManager.state.type != WalletManagerState.Type.SYNCING
+                    wallet ->
+                    wallet.walletManager.state.type != WalletManagerState.Type.SYNCING
                 }.first()
             }.sortedBy { it.currency.code }
 }

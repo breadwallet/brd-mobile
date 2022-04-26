@@ -1,5 +1,7 @@
 package com.breadwallet.legacy.presenter.customviews;
 
+import static org.kodein.type.TypeTokensJVMKt.erased;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
@@ -22,8 +24,6 @@ import com.breadwallet.tools.util.EventUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.kodein.di.TypesKt.TT;
-
 /**
  * BreadWallet
  *
@@ -37,7 +37,6 @@ public class PinLayout extends LinearLayout implements BRKeyboard.OnInsertListen
     private static final int FIRST_INDEX = 0;
     private static final int SIXTH_INDEX = 5;
     private static final int PIN_INSERTED_DELAY_MILLISECONDS = 50;
-    private View mRootView;
     private List<View> mPinDigitViewsAll;
     private List<View> mPinDigitViews;
     private BRKeyboard mKeyboard;
@@ -47,7 +46,7 @@ public class PinLayout extends LinearLayout implements BRKeyboard.OnInsertListen
     private PinLayoutListener mOnPinInsertedListener;
     private boolean mIsPinUpdating;
     private int mPinDotBackground;
-    private BrdUserManager mUserManager = BreadApp.getKodeinInstance().Instance(TT(BrdUserManager.class), null);
+    private BrdUserManager mUserManager = BreadApp.getKodeinInstance().Instance(erased(BrdUserManager.class), null);
 
     public PinLayout(Context context) {
         super(context);
@@ -70,7 +69,7 @@ public class PinLayout extends LinearLayout implements BRKeyboard.OnInsertListen
     }
 
     private void init(Context context, AttributeSet attrs) {
-        mRootView = inflate(getContext(), R.layout.pin_digits, this);
+        View mRootView = inflate(getContext(), R.layout.pin_digits, this);
         mPinDigitViews = new ArrayList<>();
         mPinDigitViewsAll = new ArrayList<>();
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PinLayout);
@@ -130,25 +129,21 @@ public class PinLayout extends LinearLayout implements BRKeyboard.OnInsertListen
         updatePinUi(pinLength);
 
         if (mPinStringBuilder.length() == mPinLimit) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String pin = mPinStringBuilder.toString();
-                    if (mUserManager.hasPinCode() && mUserManager.verifyPinCode(pin)) {
-                        mOnPinInsertedListener.onPinInserted(pin, true);
-                        useNewDigitLimit(true);
-                    } else {
-                        mOnPinInsertedListener.onPinInserted(pin, false);
-                        if (!mIsPinUpdating) {
-                            authFailed();
-                        }
+            new Handler().postDelayed(() -> {
+                String pin = mPinStringBuilder.toString();
+                if (mUserManager.hasPinCode() && mUserManager.verifyPinCode(pin)) {
+                    mOnPinInsertedListener.onPinInserted(pin, true);
+                    useNewDigitLimit(true);
+                } else {
+                    mOnPinInsertedListener.onPinInserted(pin, false);
+                    if (!mIsPinUpdating) {
+                        authFailed();
                     }
-
-                    updatePinUi(0);
-                    mPinStringBuilder = new StringBuilder();
                 }
-            }, PIN_INSERTED_DELAY_MILLISECONDS);
 
+                updatePinUi(0);
+                mPinStringBuilder = new StringBuilder();
+            }, PIN_INSERTED_DELAY_MILLISECONDS);
         }
     }
 

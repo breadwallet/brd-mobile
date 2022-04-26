@@ -8,9 +8,9 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.errors.AccountInitializationError
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.System
+import com.blockset.walletkit.errors.AccountInitializationError
 
 interface NetworkInitializer {
     suspend fun initialize(system: System, network: Network, createIfNeeded: Boolean): NetworkState
@@ -27,4 +27,3 @@ sealed class NetworkState {
         val message: String? = null
     ) : NetworkState()
 }
-

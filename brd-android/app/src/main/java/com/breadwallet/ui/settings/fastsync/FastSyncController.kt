@@ -43,7 +43,7 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.util.Locale
 
 private const val CURRENCY_CODE = "currency_code"
@@ -84,9 +84,16 @@ class FastSyncController(
                                 MetaDataEffect.LoadWalletModes
                         }
                     }
-                    .transform(Connectable<MetaDataEffect, MetaDataEvent> { consumer ->
-                        MetaDataEffectHandler(consumer, direct.instance(), direct.instance())
-                    })
+                    .transform(
+                        Connectable<MetaDataEffect, MetaDataEvent> { consumer ->
+                            MetaDataEffectHandler(
+                                output = consumer,
+                                metaDataProvider = direct.instance(),
+                                breadBox = direct.instance(),
+                                scope = direct.instance()
+                            )
+                        }
+                    )
                     .mapNotNull { event ->
                         when (event) {
                             is MetaDataEvent.OnWalletModesUpdated ->
@@ -101,7 +108,6 @@ class FastSyncController(
                         }
                     }
             }
-
         }
 
     override fun bindView(modelFlow: Flow<M>): Flow<E> {

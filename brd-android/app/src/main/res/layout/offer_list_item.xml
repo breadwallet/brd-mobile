@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,9 +7,10 @@
     app:cardElevation="0dp"
     app:cardBackgroundColor="@color/hydra_quaternary_background"
     app:cardCornerRadius="10dp"
-    android:layout_margin="16dp"
+    android:layout_margin="12dp"
     android:foreground="?selectableItemBackground"
     android:filterTouchesWhenObscured="false">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,8 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintVertical_bias="0"
-            tools:src="@color/blue"/>
+            tools:src="@color/blue" />
+
         <TextView
             android:id="@+id/labelProviderName"
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
             app:layout_constraintEnd_toStartOf="@+id/iconEnabled"
             app:layout_constraintStart_toEndOf="@+id/imageProviderLogo"
             app:layout_constraintTop_toTopOf="@+id/imageProviderLogo"
-            app:layout_constraintBottom_toTopOf="@+id/labelSubtitle"/>
+            app:layout_constraintBottom_toTopOf="@+id/labelSubtitle" />
 
         <ImageView
             android:id="@+id/iconEnabled"
@@ -55,7 +56,7 @@
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintBottom_toBottomOf="@+id/imageProviderLogo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageProviderLogo"/>
+            app:layout_constraintTop_toTopOf="@+id/imageProviderLogo" />
 
         <TextView
             android:id="@+id/labelSubtitle"
@@ -70,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/labelProviderName"
             app:layout_constraintBottom_toBottomOf="@+id/imageProviderLogo"
             app:layout_constraintStart_toEndOf="@+id/imageProviderLogo"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/labelOutputAmount"
@@ -81,7 +82,7 @@
             app:layout_constraintStart_toEndOf="@+id/labelTotal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/labelTotal"
-            app:layout_constraintBottom_toTopOf="@+id/labelOutputAmountAlt"/>
+            app:layout_constraintBottom_toTopOf="@+id/labelOutputAmountAlt" />
 
         <TextView
             android:id="@+id/labelOutputAmountAlt"
@@ -93,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@+id/labelOutputAmount"
             app:layout_constraintBottom_toBottomOf="@+id/labelTotal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"/>
+            app:layout_constraintHorizontal_bias="1" />
 
 
         <TextView
@@ -107,7 +108,7 @@
             app:layout_constraintTop_toBottomOf="@id/imageProviderLogo"
             app:layout_constraintBottom_toTopOf="@+id/viewFeeDivider"
             app:layout_constraintEnd_toStartOf="@+id/labelRateValue"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+            app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
         <TextView
             android:id="@+id/labelRateValue"
@@ -120,7 +121,7 @@
             app:layout_constraintTop_toTopOf="@+id/labelRateText"
             app:layout_constraintBottom_toBottomOf="@+id/labelRateText"
             app:layout_constraintStart_toEndOf="@+id/labelRateText"
-            app:layout_constraintEnd_toEndOf="@+id/viewFeeDivider"/>
+            app:layout_constraintEnd_toEndOf="@+id/viewFeeDivider" />
 
 
         <View
@@ -133,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/labelRateText"
             app:layout_constraintBottom_toTopOf="@+id/labelFee"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/labelFee"
@@ -145,7 +146,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewFeeDivider"
             app:layout_constraintBottom_toTopOf="@+id/viewFooterDivider"
             app:layout_constraintEnd_toStartOf="@+id/labelFeeValue"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+            app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
         <TextView
             android:id="@+id/labelFeeValue"
@@ -158,7 +159,7 @@
             app:layout_constraintTop_toTopOf="@+id/labelFee"
             app:layout_constraintBottom_toBottomOf="@+id/labelFee"
             app:layout_constraintStart_toEndOf="@+id/labelFee"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <View
             android:id="@+id/viewFooterDivider"
@@ -170,7 +171,7 @@
             app:layout_constraintTop_toBottomOf="@+id/labelFee"
             app:layout_constraintBottom_toTopOf="@+id/labelTotal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/labelTotal"
@@ -183,14 +184,15 @@
             app:layout_constraintEnd_toStartOf="@+id/labelOutputAmount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewFooterDivider"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+            app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/groupValid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="viewFooterDivider,viewFeeDivider,labelTotal,labelOutputAmount,labelOutputAmountAlt,labelRateText,labelRateValue,labelFee,labelFeeValue"/>
+            tools:visibility="visible"
+            app:constraint_referenced_ids="viewFooterDivider,viewFeeDivider,labelTotal,labelOutputAmount,labelOutputAmountAlt,labelRateText,labelRateValue,labelFee,labelFeeValue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonContinue"
@@ -204,7 +206,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Next"
             android:layout_marginTop="8dp"
-            style="@style/PrimaryButton"/>
+            style="@style/PrimaryButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

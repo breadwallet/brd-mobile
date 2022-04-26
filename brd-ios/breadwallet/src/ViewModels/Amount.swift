@@ -227,18 +227,16 @@ public struct Amount {
             formatter = cosmosLocalFormat
         }
 
-
         nativeFormatter.locale = locale ?? self.locale
 
         var fiatString = formatter.format(double: fiatValue.doubleValue)
-        let fiatStringInitial = fiatString
 
         if let stringValue = nativeFormatter.number(from: fiatString),
            abs(fiatValue) > 0.0,
            stringValue == 0 {
             // if non-zero values show as 0, show minimum fractional value for fiat
             let minimumValue = pow(10.0, Double(-formatter.minimumFractionDigits)) * (negative ? -1.0 : 1.0)
-            fiatString = formatter.format(double: minimumValue) ?? fiatString
+            fiatString = formatter.format(double: minimumValue)
         }
 
         return fiatString

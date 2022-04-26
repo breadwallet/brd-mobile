@@ -11,23 +11,79 @@
 //
 
 import Foundation
+import CoinGecko
 import SwiftUI
 
 struct ChartViewModel {
-    let candles: [Candle]
+    let lineCandles: [Candle]
+    let barCandles: [Candle]
+    let lineChart: Bool
     let greenCandle: Color
     let redCandle: Color
     let colorOverride: Color?
-    
+
     var chartColor: Color {
         if let color = colorOverride {
             return color
         }
-        guard candles.count > 1 else {
+        guard barCandles.count > 1 else {
             return greenCandle
         }
-        let rising = candles[candles.count - 1].close >= candles[candles.count - 2].close
+        let rising = barCandles[barCandles.count - 1].close >= barCandles[barCandles.count - 2].close
         return rising ? greenCandle : redCandle
+    }
+
+    func lineCandleViewModels(in size: CGSize) -> [ChartViewModel.Candle] {
+        return ChartViewModel.normalized(lineCandles)
+    }
+
+    func barCandleViewModels(in size: CGSize) -> [ChartViewModel.BarCandle] {
+        var viewModels: [ChartViewModel.BarCandle] = []
+        guard size.width > 0, size.height > 0, !barCandles.isEmpty else {
+            return []
+        }
+
+        let candles = self.barCandles.last(n: 30)
+        let width = size.width / CGFloat(candles.count)
+        let high = candles.sorted { $0.high > $1.high }.first?.high ?? 1
+        let low = candles.sorted { $0.low < $1.low }.first?.low ?? 0
+        let yLength = CGFloat(high - low)
+        let yRatio = size.height / yLength
+
+        for i in 0..<candles.count {
+            let candle = candles[i]
+            let (close, open) = (candle.close, candle.open)
+            let isGreen = candle.close >= candle.open
+            let bodyHigh = isGreen ? close : open
+            let bodyLength = isGreen ? close - open : open - close
+
+            viewModels.append(
+                .init(
+                    wick: .init(
+                        origin: CGPoint(
+                            x: CGFloat(i) * width + (width / 2 - 0.5),
+                            y: (yLength - CGFloat(candle.high - low)) * yRatio
+                        ),
+                        size: CGSize(
+                            width: 1,
+                            height: CGFloat(candle.high - candle.low) * yRatio
+                        )
+                    ),
+                    body: .init(
+                        origin: CGPoint(
+                            x: CGFloat(i) * width,
+                            y: (yLength - CGFloat(bodyHigh - low)) * yRatio
+                        ),
+                        size: CGSize(
+                            width: width,
+                            height: CGFloat(bodyLength) * yRatio
+                        )
+                    ),
+                    color: isGreen ? greenCandle : redCandle
+                )
+            )
+        }
+        return viewModels
     }
 }
 
@@ -40,6 +96,24 @@ extension ChartViewModel {
         let close: Float
         let high: Float
         let low: Float
+        
+        init(open: Float, close: Float, high: Float, low: Float) {
+            self.open = open
+            self.close = close
+            self.high = high
+            self.low = low
+        }
+    }
+}
+
+// MARK: - BarCandle
+
+extension ChartViewModel {
+
+    struct BarCandle {
+        let wick: CGRect
+        let body: CGRect
+        let color: Color
     }
 }
 
@@ -47,7 +121,12 @@ extension ChartViewModel {
 
 extension ChartViewModel {
     
-    static func mock(_ count: Int = 30, greenCandle: Color = .green, redCandle: Color = .red) -> ChartViewModel {
+    static func mock(
+        _ count: Int = 30,
+        lineChart: Bool = true,
+        greenCandle: Color = .green,
+        redCandle: Color = .red
+    ) -> ChartViewModel {
         guard let url = Bundle.main.url(forResource: "mock-candles", withExtension: "json") else {
             fatalError("mock-candles.json not found")
         }
@@ -60,7 +139,9 @@ extension ChartViewModel {
             fatalError("could not decode data from mock-candles.json")
         }
         
-        return .init(candles: normalized(candles),
+        return .init(lineCandles: candles,
+                     barCandles: candles,
+                     lineChart: lineChart,
                      greenCandle: greenCandle,
                      redCandle: redCandle,
                      colorOverride: nil)
@@ -106,14 +187,14 @@ extension ChartViewModel.Candle: Decodable {
 
 extension ChartViewModel.Candle {
     
-    static func candles(_ candles: [MarketInfo.Candle]) -> [ChartViewModel.Candle] {
-        var bounded = candles
-        if candles.count > 90 {
-            bounded = Array(candles[candles.count-90..<candles.count])
+    static func candles(_ candles: [Candle]) -> [ChartViewModel.Candle] {
+        return candles.last(n: 90).map {
+            .init(
+                open: $0.open.float,
+                close: $0.close.float,
+                high: $0.high.float,
+                low: $0.low.float
+            )
         }
-        let chartCandles: [ChartViewModel.Candle] = bounded.map {
-            .init(open: $0.open, close: $0.close, high: $0.high, low: $0.low)
-        }
-        return ChartViewModel.normalized(chartCandles)
     }
 }

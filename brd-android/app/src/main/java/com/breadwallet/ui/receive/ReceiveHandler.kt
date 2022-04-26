@@ -12,7 +12,7 @@ import android.content.Context
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.isBitcoin
 import com.breadwallet.breadbox.toSanitizedString
-import com.breadwallet.crypto.AddressScheme
+import com.blockset.walletkit.AddressScheme
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.manager.BRClipboardManager
 import com.breadwallet.tools.manager.BRSharedPrefs

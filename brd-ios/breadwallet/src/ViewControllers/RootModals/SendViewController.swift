@@ -407,7 +407,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
                 case is AddressType.ResolvableUnstoppableDomain:
                     showErrorMessage(S.UDomains.invalid)
                 default:
-                    showErrorMessage(S.UDomains.invalid)
+                    break
                 }
             }
             addressCell.hideResolveableState()
@@ -642,6 +642,7 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
                     })
                 }
             })
+            amountView.disableEconomyFee()
         }
     }
     

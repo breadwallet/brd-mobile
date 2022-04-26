@@ -43,6 +43,7 @@ kotlin {
                 implementation(project(":cosmos-core"))
                 implementation(project(":cosmos-brd-api-client"))
                 implementation(project(":cosmos-preferences"))
+                implementation(project(":cosmos-feature-promotion"))
                 implementation(project(":cosmos-websocket"))
                 implementation(kotlin("stdlib-common"))
                 implementation(brd.Libs.Coroutines.Core) {

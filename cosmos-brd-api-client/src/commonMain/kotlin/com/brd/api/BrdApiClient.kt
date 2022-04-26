@@ -28,6 +28,7 @@ interface BrdApiClient {
     }
 
     var host: BrdApiHost
+    val brdAuthProvider: BrdAuthProvider
 
     /**
      * Fetch a list of supported mainnet [BrdCurrency]s or testnet
@@ -52,6 +53,7 @@ interface BrdApiClient {
         regionCode: String? = null,
         sourceCurrencyCode: String? = null,
         quoteCurrencyCode: String? = null,
+        test: Boolean = false,
     ): ExchangePairsResult
 
     suspend fun createOfferRequest(configuration: ExchangeOfferBody): ExchangeOfferRequestResult
@@ -71,6 +73,8 @@ interface BrdApiClient {
     suspend fun setMe(ethereumAddress: String): Boolean
 
     suspend fun deleteMe(): Boolean
+
+    suspend fun getToken(): String?
 
     suspend fun preflight(): Preflight?
 

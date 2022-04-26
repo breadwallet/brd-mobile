@@ -9,10 +9,10 @@
 package com.breadwallet.tools.crypto
 
 import android.text.format.DateUtils
-import com.breadwallet.crypto.Coder
-import com.breadwallet.crypto.Hasher
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Signer
+import com.blockset.walletkit.Coder
+import com.blockset.walletkit.Hasher
+import com.blockset.walletkit.Key
+import com.blockset.walletkit.Signer
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

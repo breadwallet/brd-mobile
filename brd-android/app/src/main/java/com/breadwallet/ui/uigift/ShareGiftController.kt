@@ -18,9 +18,9 @@ import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
 import com.breadwallet.BuildConfig
 import com.breadwallet.R
-import com.breadwallet.databinding.ControllerShareGiftBinding
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.formatCryptoForUi
+import com.breadwallet.databinding.ControllerShareGiftBinding
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.qrcode.QRUtils
 import com.breadwallet.tools.util.BRConstants.USD
@@ -47,7 +47,7 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.io.File
 import java.io.IOException
 import java.math.BigDecimal

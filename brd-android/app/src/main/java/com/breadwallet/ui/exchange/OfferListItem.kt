@@ -9,15 +9,14 @@
 package com.breadwallet.ui.exchange
 
 import android.view.View
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.brd.exchange.ExchangeModel
 import com.breadwallet.R
 import com.breadwallet.databinding.OfferListItemBinding
+import com.breadwallet.util.methodStringRes
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.ModelAbstractItem
 import com.squareup.picasso.Picasso
-
 
 class OfferListItem(
     offerDetails: ExchangeModel.OfferDetails
@@ -53,7 +52,6 @@ class OfferListItem(
     }
 }
 
-
 fun OfferListItemBinding.bindToModel(model: ExchangeModel.OfferDetails) {
     when (model) {
         is ExchangeModel.OfferDetails.ValidOffer -> {
@@ -87,10 +85,13 @@ fun OfferListItemBinding.bindToModel(model: ExchangeModel.OfferDetails) {
             }
         }
     }
-    labelProviderName.text = model.offer.provider.name
+    val methodStringRes = model.offer.sourceCurrencyMethod.methodStringRes
+    labelProviderName.text =
+        root.context.getString(methodStringRes, model.offer.provider.name)
 
     when (model.offer.provider.slug.removeSuffix("-test")) {
         "moonpay" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_moonpay)
+        "simplex" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_simplex)
         "wyre" -> imageProviderLogo.setImageResource(R.drawable.ic_provider_wyre)
         else -> {
             if (model.offer.provider.logoUrl.isNullOrBlank()) {

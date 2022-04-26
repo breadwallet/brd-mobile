@@ -117,6 +117,18 @@ class FormatterTests {
             fiat("pln").format(AMOUNT)
         )
     }
+
+    @Test
+    fun testFormatWithNumber() {
+        val subject = Formatters.crypto("123")
+        assertEquals("1 123", subject.format(1.0))
+    }
+
+    @Test
+    fun testFormatWithNumberWithEmptyCurrencyCode() {
+        val subject = Formatters.crypto("")
+        assertEquals("3.75148504", subject.format(3.751485037433532).trim())
+    }
 }
 
 expect fun hasLocale(id: String): Boolean

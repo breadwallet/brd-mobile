@@ -11,8 +11,8 @@ package com.breadwallet.ui.recovery
 import android.content.Context
 import android.security.keystore.UserNotAuthenticatedException
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logError
 import com.breadwallet.logger.logInfo
 import com.breadwallet.tools.manager.BRSharedPrefs
@@ -68,10 +68,12 @@ fun createRecoveryKeyHandler(
     }
 
     addFunction<F.ValidatePhrase> { effect ->
-        E.OnPhraseValidated(List(RECOVERY_KEY_WORDS_COUNT) { i ->
-            val word = effect.phrase[i]
-            !Bip39Reader.isWordValid(breadApp, word)
-        })
+        E.OnPhraseValidated(
+            List(RECOVERY_KEY_WORDS_COUNT) { i ->
+                val word = effect.phrase[i]
+                !Bip39Reader.isWordValid(breadApp, word)
+            }
+        )
     }
 
     addFunction<F.MonitorLoading> {

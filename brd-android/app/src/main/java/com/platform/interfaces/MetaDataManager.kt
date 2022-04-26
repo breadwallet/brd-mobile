@@ -12,8 +12,8 @@ import com.breadwallet.BuildConfig
 import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.isErc20
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.logger.logInfo
@@ -58,12 +58,23 @@ class MetaDataManager(
         private const val PAIRING_META_DATA_KEY_PREFIX = "pwd-"
         private val ORDERED_KEYS =
             listOf(KEY_WALLET_INFO, KEY_ASSET_INDEX, KEY_TOKEN_LIST_META_DATA)
+
+        fun getDefaultWalletModes() = when {
+            BuildConfig.BITCOIN_TESTNET -> mapOf(
+                "bitcoin-testnet:__native__" to WalletManagerMode.API_ONLY,
+                "bitcoincash-testnet:__native__" to WalletManagerMode.API_ONLY
+            )
+            else -> mapOf(
+                "bitcoin-mainnet:__native__" to WalletManagerMode.API_ONLY,
+                "bitcoincash-mainnet:__native__" to WalletManagerMode.API_ONLY,
+            )
+        }
     }
 
     override fun create(accountCreationDate: Date) {
         val walletInfoJson = WalletInfoData(
             creationDate = accountCreationDate.time,
-            connectionModes = BreadApp.getDefaultWalletModes()
+            connectionModes = getDefaultWalletModes()
         ).toJSON()
 
         storeProvider.put(KEY_WALLET_INFO, walletInfoJson)
@@ -99,8 +110,7 @@ class MetaDataManager(
                 emit(
                     getOrSync(
                         KEY_WALLET_INFO
-                    )
-                    { WalletInfoData().toJSON() }
+                    ) { WalletInfoData().toJSON() }
                     !!.run { WalletInfoData.fromJsonObject(this) }
                 )
             }
@@ -187,7 +197,8 @@ class MetaDataManager(
                 false
             }
             else -> {
-                val rawPubKey = CryptoHelper.hexDecode(pairingData.publicKeyHex) ?: pairingData.publicKeyHex.toByteArray(Charsets.UTF_8)
+                val rawPubKey = CryptoHelper.hexDecode(pairingData.publicKeyHex)
+                    ?: pairingData.publicKeyHex.toByteArray(Charsets.UTF_8)
                 storeProvider.put(pairingKey(rawPubKey), pairingData.toJSON())
             }
         }
@@ -251,7 +262,11 @@ class MetaDataManager(
         putTxMetaData(key, transaction.wallet.currency.isErc20(), newTxMetaData)
     }
 
-    override suspend fun putTxMetaData(key: String, isErc20: Boolean, newTxMetaData: TxMetaDataValue) {
+    override suspend fun putTxMetaData(
+        key: String,
+        isErc20: Boolean,
+        newTxMetaData: TxMetaDataValue
+    ) {
         var txMetaData = txMetaData(key, isErc20 = isErc20).first()
 
         var needsUpdate = false
@@ -259,8 +274,8 @@ class MetaDataManager(
             is TxMetaDataEmpty -> {
                 needsUpdate =
                     !newTxMetaData.comment.isNullOrBlank() ||
-                        newTxMetaData.exchangeRate != 0.0 ||
-                        !newTxMetaData.gift?.keyData.isNullOrBlank()
+                    newTxMetaData.exchangeRate != 0.0 ||
+                    !newTxMetaData.gift?.keyData.isNullOrBlank()
                 txMetaData = newTxMetaData
             }
             is TxMetaDataValue -> {
@@ -275,8 +290,10 @@ class MetaDataManager(
                         needsUpdate = true
                     } else if (
                         oldGift?.keyData != null &&
-                        (oldGift.claimed != newGift.claimed ||
-                            oldGift.reclaimed != newGift.reclaimed)
+                        (
+                            oldGift.claimed != newGift.claimed ||
+                                oldGift.reclaimed != newGift.reclaimed
+                            )
                     ) {
                         txMetaData = txMetaData.copy(
                             gift = oldGift.copy(
@@ -371,8 +388,7 @@ class MetaDataManager(
         key: String,
         defaultProducer: (() -> JSONObject)? = null
     ): JSONObject? {
-        val value = storeProvider.get(key) ?: storeProvider.sync(key)
-        return when (value) {
+        return when (val value = storeProvider.get(key) ?: storeProvider.sync(key)) {
             null -> {
                 defaultProducer
                     ?.invoke()

@@ -239,6 +239,10 @@ class AmountViewController: UIViewController, Trackable {
         selectedRate = selectedRate == nil ? currency.state?.currentRate : nil
         updateCurrencyToggleTitle()
     }
+    
+    func disableEconomyFee() {
+        feeSelector.disableEconomyFee()
+    }
 
     private func preventAmountOverflow() {
         amountLabel.constrain([

@@ -25,8 +25,6 @@ import android.view.animation.OvershootInterpolator;
 
 public class UiUtils {
     public static final int CLICK_PERIOD_ALLOWANCE = 300;
-    public static final String ARTICLE_QUERY_STRING = "/article?slug=";
-    public static final String CURRENCY_QUERY_STRING = "&currency=";
     private static final String TAG = UiUtils.class.getName();
     private static long mLastClickTime = 0;
 
@@ -57,14 +55,6 @@ public class UiUtils {
         }
         mLastClickTime = System.currentTimeMillis();
         return allow;
-    }
-
-    private static void setStatusBarColor(Activity app, int color) {
-        if (app == null) return;
-        Window window = app.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(app.getColor(color));
     }
 
     public static boolean isMainThread() {

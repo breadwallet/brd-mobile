@@ -27,7 +27,7 @@
             android:layout_marginEnd="8dp"
             android:text="TESTNET"
             android:textColor="#4DFFFFFF"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_marginTop="60dp"
                 android:background="@drawable/brd_logo_gradient" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/total_assets_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/mobile_font_medium" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/total_assets_usd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,10 +93,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            tools:listitem="@layout/wallet_list_item"
             app:layout_constraintBottom_toTopOf="@+id/menu_table"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prompt_container"/>
+            app:layout_constraintTop_toBottomOf="@+id/prompt_container" />
 
         <TableLayout
             android:id="@+id/menu_table"
@@ -131,7 +130,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_menu_buy_sell"
-                        android:tint="@color/white"
+                        app:tint="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/buy_text_view"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +147,19 @@
                         app:layout_constraintBottom_toTopOf="@+id/buy_text_view"
                         app:layout_constraintStart_toStartOf="@+id/imageView4" />
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <ImageView
+                        android:id="@+id/buy_promo_indicator"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:src="@drawable/page_indicator_active"
+                        app:layout_constraintTop_toTopOf="@+id/buy_text_view"
+                        app:layout_constraintBottom_toBottomOf="@+id/buy_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/buy_text_view" />
+
+                    <TextView
                         android:id="@+id/buy_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -158,14 +169,13 @@
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.buy"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/mobile_font_book"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/trade_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -180,17 +190,40 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_menu_trade"
-                        android:tint="@color/white" />
+                        app:tint="@color/white"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/trade_text_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <ImageView
+                        android:id="@+id/trade_promo_indicator"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:src="@drawable/page_indicator_active"
+                        app:layout_constraintTop_toTopOf="@+id/trade_text_view"
+                        app:layout_constraintBottom_toBottomOf="@+id/trade_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/trade_text_view" />
+
+                    <TextView
+                        android:id="@+id/trade_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="bottom"
                         android:text="@string/HomeScreen.trade"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/mobile_font_book" />
-                </LinearLayout>
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/menu_layout"
@@ -208,9 +241,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="4dp"
                         android:src="@drawable/ic_menu_more"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
 
-                    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

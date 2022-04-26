@@ -17,6 +17,13 @@
         android:background="@drawable/crypto_card_shape"
         android:foreground="?android:attr/selectableItemBackground">
 
+        <ImageView
+            android:id="@+id/wallet_item_image_overlay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/icon_container"
@@ -30,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/icon_letter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +48,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/currency_icon_white"
@@ -52,10 +59,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,9 +75,10 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintStart_toEndOf="@+id/icon_container" tools:text="CryptoCurrency"/>
+            app:layout_constraintStart_toEndOf="@+id/icon_container"
+            tools:text="CryptoCurrency" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_trade_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,10 +89,10 @@
             android:textColor="@color/balance_crypto_color"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/icon_container"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" tools:text="$534.29"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:text="$534.29" />
 
-
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/price_change"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -95,9 +103,10 @@
             android:textColor="@color/balance_crypto_color"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" tools:text="4.32%"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:text="4.32%" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_balance_fiat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,9 +117,9 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="$12.00"/>
+            tools:text="$12.00" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/wallet_balance_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,9 +129,9 @@
             android:textColor="@color/balance_crypto_color"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/wallet_balance_fiat"
-            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat" tools:text="0.07832 CC"
-            tools:visibility="invisible"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat"
+            tools:text="0.07832 CC"
+            tools:visibility="invisible" />
 
         <ProgressBar
             android:id="@+id/sync_progress"
@@ -137,9 +146,9 @@
             android:keepScreenOn="true"
             app:layout_constraintBottom_toBottomOf="@+id/syncing_label"
             app:layout_constraintEnd_toEndOf="@+id/wallet_balance_fiat"
-            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat"/>
+            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat" />
 
-        <com.breadwallet.legacy.presenter.customviews.BaseTextView
+        <TextView
             android:id="@+id/syncing_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,14 +162,14 @@
             app:layout_constraintEnd_toStartOf="@+id/sync_progress"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/price_change"
-            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat"/>
+            app:layout_constraintTop_toBottomOf="@+id/wallet_balance_fiat" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.50"/>
+            app:layout_constraintGuide_percent="0.50" />
 
         <View
             android:id="@+id/divider"
@@ -172,7 +181,7 @@
             android:background="@color/white_transparent_25"
             app:layout_constraintBottom_toBottomOf="@+id/wallet_trade_price"
             app:layout_constraintStart_toEndOf="@+id/wallet_trade_price"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

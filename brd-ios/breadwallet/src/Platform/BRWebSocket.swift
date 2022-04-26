@@ -16,7 +16,7 @@ public protocol BRWebSocket {
     func send(_ text: String)
 }
 
-public protocol BRWebSocketClient: class {
+public protocol BRWebSocketClient: AnyObject {
     func socketDidConnect(_ socket: BRWebSocket)
     func socket(_ socket: BRWebSocket, didReceiveData data: Data)
     func socket(_ socket: BRWebSocket, didReceiveText text: String)

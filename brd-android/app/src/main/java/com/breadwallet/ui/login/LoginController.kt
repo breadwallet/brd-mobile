@@ -10,6 +10,7 @@ package com.breadwallet.ui.login
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -41,7 +42,7 @@ import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val EXTRA_URL = "PENDING_URL"
 private const val EXTRA_SHOW_HOME = "SHOW_HOME"
@@ -135,7 +136,7 @@ class LoginController(args: Bundle? = null) :
         super.onCreateView(view)
         with(binding) {
             brkeyboard.setShowDecimal(false)
-            brkeyboard.setDeleteButtonBackgroundColor(resources!!.getColor(android.R.color.transparent))
+            brkeyboard.setDeleteButtonBackgroundColor(Color.TRANSPARENT)
             brkeyboard.setDeleteImage(R.drawable.ic_delete_dark)
 
             val pinDigitButtonColors = resources!!.getIntArray(R.array.pin_digit_button_colors)

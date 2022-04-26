@@ -16,13 +16,13 @@ project.tasks.register<brd.DownloadBundles>("downloadBundles")
 project.tasks.register<brd.DownloadSupportArticles>("downloadSupportArticles")
 
 android {
-    compileSdkVersion(BrdRelease.ANDROID_COMPILE_SDK)
-    buildToolsVersion(BrdRelease.ANDROID_BUILD_TOOLS)
+    compileSdk = BrdRelease.ANDROID_COMPILE_SDK
+    buildToolsVersion = (BrdRelease.ANDROID_BUILD_TOOLS)
     defaultConfig {
-        minSdkVersion(BrdRelease.ANDROID_MINIMUM_SDK)
+        minSdk = BrdRelease.ANDROID_MINIMUM_SDK
         buildConfigField("int", "VERSION_CODE", "${BrdRelease.versionCode}")
     }
-    lintOptions {
+    lint {
         isAbortOnError = false
     }
 
@@ -43,7 +43,12 @@ dependencies {
     implementation(Libs.Coroutines.Core) {
         version { strictly(brd.COROUTINES_VERSION) }
     }
-    api(Libs.WalletKit.CoreAndroid)
+    val overrideIdeCheck = gradle.startParameter.taskNames.any { it.contains("brd-android") }
+    if (System.getProperty("idea.active") == "true" && !overrideIdeCheck) {
+        implementation(Libs.WalletKit.CoreJRE)
+    } else {
+        implementation(Libs.WalletKit.CoreAndroid)
+    }
 
     implementation(Libs.Androidx.LifecycleExtensions)
     implementation(Libs.Androidx.AppCompat)
@@ -60,7 +65,7 @@ dependencies {
     implementation(Libs.Firebase.Crashlytics)
 
     // Kodein DI
-    implementation(Libs.Kodein.CoreErasedJvm)
+    implementation(Libs.Kodein.Core)
     implementation(Libs.Kodein.FrameworkAndroidX)
 
     implementation(Libs.Jbsdiff.Core)

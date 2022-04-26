@@ -25,7 +25,6 @@ import com.breadwallet.breadbox.TransferSpeed
 import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerSendSheetBinding
 import com.breadwallet.effecthandler.metadata.MetaDataEffectHandler
-import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.legacy.presenter.customviews.BRKeyboard
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.animation.SlideDetector
@@ -35,13 +34,14 @@ import com.breadwallet.tools.util.BRConstants
 import com.breadwallet.tools.util.Link
 import com.breadwallet.tools.util.Utils
 import com.breadwallet.ui.BaseMobiusController
-import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.auth.AuthMode
+import com.breadwallet.ui.auth.AuthenticationController
 import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.flowbind.clicks
 import com.breadwallet.ui.flowbind.focusChanges
 import com.breadwallet.ui.flowbind.textChanges
+import com.breadwallet.ui.formatFiatForUi
 import com.breadwallet.ui.scanner.ScannerController
 import com.breadwallet.ui.send.SendSheet.E
 import com.breadwallet.ui.send.SendSheet.E.OnAmountChange
@@ -55,7 +55,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -120,7 +120,12 @@ class SendSheetController(args: Bundle? = null) :
             apiClient = direct.instance(),
             ratesRepository = direct.instance(),
             metaDataEffectHandler = {
-                MetaDataEffectHandler(it, direct.instance(), direct.instance())
+                MetaDataEffectHandler(
+                    output = it,
+                    metaDataProvider = direct.instance(),
+                    breadBox = direct.instance(),
+                    scope = direct.instance()
+                )
             },
             addressResolver = direct.instance()
         )
@@ -204,9 +209,9 @@ class SendSheetController(args: Bundle? = null) :
     private fun EditText.bindActionComplete(output: E) =
         callbackFlow<E> {
             setOnEditorActionListener { _, actionId, event ->
-                if (event?.keyCode == KeyEvent.KEYCODE_ENTER
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || actionId == EditorInfo.IME_ACTION_NEXT
+                if (event?.keyCode == KeyEvent.KEYCODE_ENTER ||
+                    actionId == EditorInfo.IME_ACTION_DONE ||
+                    actionId == EditorInfo.IME_ACTION_NEXT
                 ) {
                     offer(output)
                     Utils.hideKeyboard(activity)
@@ -247,6 +252,14 @@ class SendSheetController(args: Bundle? = null) :
         val res = checkNotNull(resources)
 
         with(binding) {
+            ifChanged(M::paymentProtocolRequest) {
+                buttonEconomy.isEnabled = paymentProtocolRequest == null
+                if (paymentProtocolRequest != null) {
+                    buttonEconomy.setTextColor(res.getColor(R.color.separator_gray))
+                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_gray_fill)
+                }
+            }
+
             ifChanged(M::addressType, M::isResolvingAddress) {
                 addressProgressBar.isVisible = isResolvingAddress
                 if (addressType is AddressType.Resolvable) {
@@ -403,7 +416,7 @@ class SendSheetController(args: Bundle? = null) :
                 M::transferSpeed
             ) {
                 layoutFeeOption.isVisible = showFeeSelect
-                setFeeOption(transferSpeed)
+                setFeeOption(transferSpeed, paymentProtocolRequest != null)
             }
 
             ifChanged(M::showFeeSelect) {
@@ -477,8 +490,10 @@ class SendSheetController(args: Bundle? = null) :
 
                     if (destinationTag.value.isNullOrBlank() &&
                         !textInputDestinationTag.text.isNullOrBlank() ||
-                        (!destinationTag.value.isNullOrBlank() &&
-                            textInputDestinationTag.text.isNullOrBlank()) || isDestinationTagFromResolvedAddress
+                        (
+                            !destinationTag.value.isNullOrBlank() &&
+                                textInputDestinationTag.text.isNullOrBlank()
+                            ) || isDestinationTagFromResolvedAddress
                     ) {
                         textInputDestinationTag.setText(currentModel.destinationTag?.value)
                     }
@@ -543,7 +558,7 @@ class SendSheetController(args: Bundle? = null) :
             .accept(E.ConfirmTx.OnCancelClicked)
     }
 
-    private fun setFeeOption(feeOption: TransferSpeed) {
+    private fun setFeeOption(feeOption: TransferSpeed, economyFeeDisabled: Boolean) {
         val context = applicationContext!!
         // TODO: Redo using a toggle button and a selector
         with(binding) {
@@ -551,8 +566,10 @@ class SendSheetController(args: Bundle? = null) :
                 is TransferSpeed.Regular -> {
                     buttonRegular.setTextColor(context.getColor(R.color.white))
                     buttonRegular.setBackgroundResource(R.drawable.b_blue_square)
-                    buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
-                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    if (!economyFeeDisabled) {
+                        buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
+                        buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    }
                     buttonPriority.setTextColor(context.getColor(R.color.dark_blue))
                     buttonPriority.setBackgroundResource(R.drawable.b_half_right_blue_stroke)
                     labelFeeDescription.text = when {
@@ -583,8 +600,10 @@ class SendSheetController(args: Bundle? = null) :
                 is TransferSpeed.Priority -> {
                     buttonRegular.setTextColor(context.getColor(R.color.dark_blue))
                     buttonRegular.setBackgroundResource(R.drawable.b_blue_square_stroke)
-                    buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
-                    buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    if (!economyFeeDisabled) {
+                        buttonEconomy.setTextColor(context.getColor(R.color.dark_blue))
+                        buttonEconomy.setBackgroundResource(R.drawable.b_half_left_blue_stroke)
+                    }
                     buttonPriority.setTextColor(context.getColor(R.color.white))
                     buttonPriority.setBackgroundResource(R.drawable.b_half_right_blue)
                     labelFeeDescription.text = when {

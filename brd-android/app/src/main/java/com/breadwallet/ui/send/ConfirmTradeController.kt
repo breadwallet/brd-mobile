@@ -18,7 +18,6 @@ import com.breadwallet.breadbox.formatCryptoForUi
 import com.breadwallet.databinding.ControllerConfirmTradeDetailsBinding
 import com.breadwallet.tools.util.eth
 import com.breadwallet.ui.BaseController
-import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.util.isErc20
 import java.math.BigDecimal
 
@@ -68,13 +67,6 @@ class ConfirmTradeController(
         arg(KEY_TRANSFER_FIELDS)
     )
 
-    override val layoutId = R.layout.controller_confirm_tx_details
-
-    init {
-        overridePushHandler(DialogChangeHandler())
-        overridePopHandler(DialogChangeHandler())
-    }
-
     private val binding by viewBinding(ControllerConfirmTradeDetailsBinding::inflate)
 
     override fun onCreateView(view: View) {
@@ -104,13 +96,12 @@ class ConfirmTradeController(
 
     private fun ConfirmTradeModel.render() {
         val res = checkNotNull(resources)
-        with (binding) {
+        with(binding) {
             val feeCode = if (currencyCode.isErc20()) eth else currencyCode
 
             sendValue.text = amount.formatCryptoForUi(currencyCode)
             toAddress.text = targetAddress
             networkFeeValue.text = networkFee.formatCryptoForUi(feeCode)
-
 
             val processingTime = res.getString(
                 when {

@@ -21,8 +21,6 @@ import android.widget.FrameLayout.LayoutParams
 import android.widget.FrameLayout.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import android.widget.LinearLayout.LayoutParams.MATCH_PARENT as LL_MATCH_PARENT
-import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT as LL_WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.view.get
 import androidx.core.view.setMargins
@@ -42,8 +40,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.json.JSONObject
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 import android.widget.LinearLayout.LayoutParams as LinearLayoutParams
+import android.widget.LinearLayout.LayoutParams.MATCH_PARENT as LL_MATCH_PARENT
+import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT as LL_WRAP_CONTENT
 
 private const val LOG_LINE_MARGIN = 8
 
@@ -116,15 +116,17 @@ class MetadataViewer(args: Bundle? = null) : BaseController(args) {
         super.onAttach(view)
         kvStore.keysFlow()
             .combineTransform(filterFlow) { keys, filter ->
-                emit(when (filter) {
-                    Filter.ALL_TX -> keys.filter { it.startsWith("txn2") }
-                    Filter.NON_TX -> keys.filterNot { it.startsWith("txn2") }
-                    Filter.GIFT_TX -> keys.filter { it.startsWith("txn2") }
-                        .filter { key ->
-                            (kvStore.get(key) ?: JSONObject())
-                                .getJSONObjectOrNull("gift") != null
-                        }
-                })
+                emit(
+                    when (filter) {
+                        Filter.ALL_TX -> keys.filter { it.startsWith("txn2") }
+                        Filter.NON_TX -> keys.filterNot { it.startsWith("txn2") }
+                        Filter.GIFT_TX -> keys.filter { it.startsWith("txn2") }
+                            .filter { key ->
+                                (kvStore.get(key) ?: JSONObject())
+                                    .getJSONObjectOrNull("gift") != null
+                            }
+                    }
+                )
             }
             .flowOn(Default)
             .onEach { keys ->

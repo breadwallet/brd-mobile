@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,30 +8,44 @@
     <com.bluelinelabs.conductor.ChangeHandlerFrameLayout
         android:id="@+id/exchangeRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
     <FrameLayout
         android:id="@+id/layoutDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
+
         <View
             android:id="@+id/scrim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
-            android:alpha=".4"
+            android:alpha=".8"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true" />
+
         <include
             android:id="@+id/dialog"
+            android:visibility="gone"
+            tools:visibility="gone"
             layout="@layout/bread_alert_dialog"
-            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_gravity="center" />
+
+        <include
+            android:id="@+id/exchange_dialog"
+            android:visibility="gone"
+            tools:visibility="visible"
+            layout="@layout/controller_exchange_alert_dialog"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

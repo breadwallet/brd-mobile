@@ -61,9 +61,10 @@ class BRDButton: UIControl {
         set { container.layer.cornerRadius = newValue }
     }
 
+    private(set) var label = UILabel()
+
     private let type: ButtonType
     private let container = UIView()
-    private let label = UILabel()
     private var imageView: UIImageView?
     private var activityView = UIActivityIndicatorView(style: .white)
 

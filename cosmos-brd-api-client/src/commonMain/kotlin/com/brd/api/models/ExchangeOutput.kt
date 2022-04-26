@@ -8,7 +8,6 @@
  */
 package com.brd.api.models
 
-import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -30,7 +29,6 @@ sealed class ExchangeOutput {
         override val actions: List<ExchangeOrder.Action>,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant? = null,
         @SerialName("crypto_transfer_status")
         val status: CryptoStatus,
@@ -38,8 +36,7 @@ sealed class ExchangeOutput {
         val sendToAddress: String,
         @SerialName("transaction_id")
         val transactionId: String,
-    ) : ExchangeOutput() {
-    }
+    ) : ExchangeOutput()
 
     @SerialName("ach")
     @Serializable
@@ -49,12 +46,24 @@ sealed class ExchangeOutput {
         override val actions: List<ExchangeOrder.Action>,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant? = null,
-        @SerialName("ach_transfer_status")
+        @SerialName("payment_status")
         val status: FiatStatus,
     ) : ExchangeOutput()
 
+    @SerialName("sepa")
+    @Serializable
+    data class Sepa(
+        override val media: ExchangeInput.Media,
+        override val amount: String,
+        override val actions: List<ExchangeOrder.Action>,
+        override val currency: ExchangeCurrency,
+        @SerialName("expires_at")
+        override val expiresAt: Instant? = null,
+        @SerialName("payment_status")
+        val status: FiatStatus,
+    ) : ExchangeOutput()
+    
     @Serializable
     enum class CryptoStatus {
         @SerialName("waiting_for_address")
@@ -87,6 +96,9 @@ sealed class ExchangeOutput {
 
         @SerialName("processing")
         PROCESSING,
+
+        @SerialName("ordering")
+        ORDERING,
 
         @SerialName("complete")
         COMPLETE,

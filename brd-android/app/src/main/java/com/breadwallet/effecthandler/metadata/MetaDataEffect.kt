@@ -8,8 +8,8 @@
  */
 package com.breadwallet.effecthandler.metadata
 
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import java.math.BigDecimal
 
 sealed class MetaDataEffect {

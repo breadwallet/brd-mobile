@@ -66,4 +66,3 @@ enum class SettingsOption {
     REFRESH_TOKENS,
     DETAILED_LOGGING,
 }
-

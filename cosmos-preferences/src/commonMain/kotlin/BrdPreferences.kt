@@ -25,13 +25,18 @@ class BrdPreferences(
         private const val KEY_COUNTRY_CODE = "cosmos_country_code"
         private const val KEY_REGION_CODE = "cosmos_region_code"
         private const val KEY_LAST_PURCHASE_CURRENCY = "cosmos_last_purchase_currency"
+        private const val KEY_LAST_SELL_CURRENCY = "cosmos_last_sell_currency"
         private const val KEY_LAST_TRADE_SOURCE_CURRENCY = "cosmos_last_trade_source_currency"
         private const val KEY_LAST_TRADE_QUOTE_CURRENCY = "cosmos_last_trade_quote_currency"
         private const val KEY_LAST_ORDER_AMOUNT = "cosmos_last_order_amount"
 
         private const val KEY_DEBUG_API_HOST = "cosmos_debug_api_host"
         private const val KEY_HYDRA_ACTIVATED = "cosmos_hydra_activated"
+        private const val KEY_IS_REWARDS_SET = "cosmos_is_rewards_set"
         private const val KEY_NATIVE_EXCHANGE_UI = "cosmos_native_exchange_ui"
+
+        private const val KEY_PROMOTION_BUY_SHOWN = "cosmos_feature_promotion_buy_shown"
+        private const val KEY_PROMOTION_TRADE_SHOWN = "cosmos_feature_promotion_trade_shown"
     }
 
     init {
@@ -60,6 +65,12 @@ class BrdPreferences(
             preferences.putBoolean(KEY_HYDRA_ACTIVATED, value)
         }
 
+    var isRewardsAddressSet: Boolean
+        get() = preferences.getBoolean(KEY_IS_REWARDS_SET, false)
+        set(value) {
+            preferences.putBoolean(KEY_IS_REWARDS_SET, value)
+        }
+
     var fiatCurrencyCode: String
         get() = preferences.getString(
             platformKey(KEY_USER_FIAT),
@@ -69,9 +80,7 @@ class BrdPreferences(
             preferences.putString(platformKey(KEY_USER_FIAT), value.lowercase())
         }
 
-    /**
-     * The currency code of the user's latest crypto purchase or null.
-     */
+    /** The currency code of the user's latest crypto purchase or null. */
     var lastPurchaseCurrency: String?
         get() = preferences.getStringOrNull(KEY_LAST_PURCHASE_CURRENCY)
         set(value) {
@@ -79,6 +88,17 @@ class BrdPreferences(
                 preferences.remove(KEY_LAST_PURCHASE_CURRENCY)
             } else {
                 preferences.putString(KEY_LAST_PURCHASE_CURRENCY, value.lowercase())
+            }
+        }
+
+    /** The currency code of the user's latest crypto sell or null. */
+    var lastSellCurrency: String?
+        get() = preferences.getStringOrNull(KEY_LAST_SELL_CURRENCY)
+        set(value) {
+            if (value == null) {
+                preferences.remove(KEY_LAST_SELL_CURRENCY)
+            } else {
+                preferences.putString(KEY_LAST_SELL_CURRENCY, value.lowercase())
             }
         }
 
@@ -136,6 +156,18 @@ class BrdPreferences(
         get() = preferences.getBoolean(KEY_NATIVE_EXCHANGE_UI, false)
         set(value) {
             preferences.putBoolean(KEY_NATIVE_EXCHANGE_UI, value)
+        }
+
+    var featurePromotionBuyShown: Boolean
+        get() = preferences.getBoolean(KEY_PROMOTION_BUY_SHOWN, false)
+        set(value) {
+            preferences.putBoolean(KEY_PROMOTION_BUY_SHOWN, value)
+        }
+
+    var featurePromotionTradeShown: Boolean
+        get() = preferences.getBoolean(KEY_PROMOTION_TRADE_SHOWN, false)
+        set(value) {
+            preferences.putBoolean(KEY_PROMOTION_TRADE_SHOWN, value)
         }
 
     private fun platformKey(key: String): String = platformKeyMap[key] ?: key

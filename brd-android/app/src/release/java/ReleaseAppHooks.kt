@@ -8,8 +8,13 @@
  */
 package com.breadwallet
 
+import android.content.Context
 import com.breadwallet.app.BreadApp
+import okhttp3.Interceptor
 
 internal fun BreadApp.installHooks() {
-
 }
+
+fun initializeFlipper(context: Context) = Unit // No-Op for Release builds
+
+fun getFlipperOkhttpInterceptor(): Interceptor? = null

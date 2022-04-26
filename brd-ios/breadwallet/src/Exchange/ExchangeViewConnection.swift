@@ -28,7 +28,10 @@ class ExchangeConnectable: NSObject, Connectable {
             brdApi: Backend.brdApi,
             brdPrefs: UserDefaults.cosmos,
             walletProvider: IosWalletProvider(system: system),
-            exchangeDataLoader: Backend.exchangeDataLoader
+            exchangeDataLoader: Backend.exchangeDataLoader,
+            featurePromotionService: FeaturePromotionService(
+                    preferences: UserDefaults.cosmos
+            )
         )
     }
 }
@@ -98,13 +101,11 @@ class ExchangeViewConnection: NSObject, Connection {
             return
         }
 
-        print("=== STATE", model.state)
-        print("=== ERROR STATE", model.errorState?.type)
-
         switch model.state {
+        case is ExchangeModel.StateFeaturePromotion:
+            handleStateFeaturePromotion(model)
         case is ExchangeModel.StateInitializing:
-            // loading
-            break
+            handleStateInitializing(model)
         case is ExchangeModel.StateConfigureSettings:
             handleStateConfigureSettings(model)
         case is ExchangeModel.StateEmptyWallets:
@@ -133,12 +134,29 @@ class ExchangeViewConnection: NSObject, Connection {
 
 private extension ExchangeViewConnection {
 
-    func handleStateInitializing(model: ExchangeModel) {
-        guard let state = model.state as? ExchangeModel.StateInitializing else {
+    func handleStateFeaturePromotion(_ model: ExchangeModel) {
+        guard view.presentedViewController == nil else {
             return
         }
 
-        view.update(with: model, consumer: consumer)
+        let action = { self.consumer.accept(.OnContinueClicked()) }
+        let vc = FeaturePromotionViewController(
+            with: model.mode == .buy ? .hydraBuy(action) : .hydraTrade(action)
+        )
+
+        view.present(vc, animated: true)
+    }
+
+    func handleStateInitializing(_ model: ExchangeModel) {
+        if (view.presentedViewController as? FeaturePromotionViewController) != nil {
+            view.popToRoot()
+        }
+//
+//        if model.state as? ExchangeModel.StateInitializing == nil {
+//            return
+//        }
+//
+//        view.update(with: model, consumer: consumer)
     }
 
     func handleStateConfigureSettings(_ model: ExchangeModel) {
@@ -304,7 +322,7 @@ private extension ExchangeViewConnection {
                 rewardsDetailAction: { [weak self] in self?.presentRewards() }
             )
 
-            if let visibleVC = (view as? UIViewController)?
+            if let visibleVC = view
                 .navigationController?
                 .visibleViewController as? ExchangeTradePreviewViewController {
                     visibleVC.update(with: viewModel)
@@ -323,6 +341,16 @@ private extension ExchangeViewConnection {
     func handleStateProcessingOrder(_ model: ExchangeModel) {
         view.update(with: model, consumer: consumer)
         let topVc = view.navigationController?.topViewController
+        let webVc = (view.presentedViewController as? UINavigationController)?
+            .topViewController as? WebViewController
+        
+        if let _ = webVc, view.presentedViewController?.isBeingDismissed == false {
+            let state = model.state as? ExchangeModel.StateProcessingOrder
+            let action = state?.userAction as? ExchangeOrder.Action
+            if action?.type != .browser {
+                view.popToRoot()
+            }
+        }
 
         guard let previewVc = topVc as? ExchangeTradePreviewViewController else {
             return
@@ -397,6 +425,33 @@ private extension ExchangeViewConnection {
             return
         }
 
+        if let errorType = errorState.type as? ExchangeModel.ErrorStateTypeInsufficientNativeBalanceError {
+            let alert = BreadAlertViewController(
+                viewModel: .init(
+                    imageName: "alertErrorLarge",
+                    title: errorState.title ?? "",
+                    body: errorState.message ?? "",
+                    buttons: [
+                        BreadAlertViewController.ViewModel.Button(
+                            title: String(
+                                format: S.Exchange.ErrorState.insufficientNativeBalanceErrorConfirm,
+                                errorType.currencyCode
+                            ),
+                            style: .default,
+                            action: { [weak self] in self?.consumer.accept(.OnDialogConfirmClicked()) }
+                        ),
+                        BreadAlertViewController.ViewModel.Button(
+                            title: S.Button.cancel,
+                            style: .cancel,
+                            action: { [weak self] in self?.consumer.accept(.OnDialogCancelClicked()) }
+                        )
+                    ]
+                )
+            )
+            view.present(alert, animated: true)
+            return
+        }
+
         let alert = UIAlertController(
             title: errorTitle(for: errorState),
             message: errorMessage(for: errorState),
@@ -452,6 +507,19 @@ private extension ExchangeViewConnection {
         case is ExchangeModel.ErrorStateTypeUnknownError:
             return S.Exchange.ErrorState.unknown
         case is ExchangeModel.ErrorStateTypeTransactionError:
+            let error = errorState as? ExchangeModel.ErrorStateTypeTransactionError
+            let reason = error?.sendFailedReason
+            if let uwReason =  reason as? ExchangeEvent.SendFailedReasonInsufficientNativeWalletBalance {
+                return String(
+                    format: S.Exchange.ErrorState.insufficientNativeWalletBalance,
+                    uwReason.currencyCode,
+                    uwReason.requiredAmount
+                )
+            } else if reason as? ExchangeEvent.SendFailedReasonCreateTransferFailed != nil{
+                return S.Exchange.ErrorState.createTransferFailed
+            } else if reason as? ExchangeEvent.SendFailedReasonFeeEstimateFailed  != nil {
+                return S.Exchange.ErrorState.feeEstimateFailed
+            }
             return S.Exchange.ErrorState.transaction
         case is ExchangeModel.ErrorStateTypeUnsupportedRegionError:
             return S.Exchange.ErrorState.unsupportedRegionError
@@ -470,7 +538,6 @@ private extension ExchangeViewConnection {
             return S.Exchange.CTA.retry
         }
     }
-
 
     func errorTitle(for errorState: ExchangeModel.ErrorState) -> String {
         switch errorState.type {

@@ -9,16 +9,25 @@
 package com.brd.exchange
 
 import com.brd.api.brdJson
-import com.brd.api.models.*
+import com.brd.api.models.CurrencyMethod
+import com.brd.api.models.ExchangeCountry
+import com.brd.api.models.ExchangeCurrency
+import com.brd.api.models.ExchangeOffer
+import com.brd.api.models.ExchangeOfferRequest
 import com.brd.exchange.ExchangeModel.OfferState
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 
+@ExperimentalSerializationApi
 class ExchangeModelTests {
 
     private val usa = brdJson.decodeFromString<ExchangeCountry>(USA_JSON)
@@ -63,10 +72,10 @@ class ExchangeModelTests {
     @Test
     fun test_DefaultModel_AmountInputsAreEmpty() {
         assertOnModels {
-            assertEquals("0", sourceAmountInput)
+            assertEquals("", sourceAmountInput)
             assertEquals(0.0, sourceAmount)
             assertNull(formattedSourceAmount)
-            assertNull(quoteAmount)
+            assertEquals(0.0, quoteAmount)
             assertNull(formattedQuoteAmount)
         }
     }

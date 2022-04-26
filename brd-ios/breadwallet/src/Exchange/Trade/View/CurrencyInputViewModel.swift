@@ -19,6 +19,7 @@ struct CurrencyInputViewModel {
     let symbol: String?
     let bgColor: (UIColor?, UIColor?)
     let inputEnabled: Bool
+    let isLoading: Bool
 
     // Actions
     let didChangeAction: ((_ old: String, _ new: String) -> Void)?
@@ -31,7 +32,10 @@ struct CurrencyInputViewModel {
 
 extension CurrencyInputViewModel {
 
-    static func empty(_ action: (() -> Void)? = nil) -> CurrencyInputViewModel {
+    static func empty(
+        _ isLoading: Bool = true,
+        _ action: (() -> Void)? = nil
+    ) -> CurrencyInputViewModel {
         return .init(
             text: nil,
             detail: nil,
@@ -39,6 +43,7 @@ extension CurrencyInputViewModel {
             symbol: nil,
             bgColor: (nil, nil),
             inputEnabled: true,
+            isLoading: isLoading,
             didChangeAction: nil,
             didEndEditingAction: nil,
             clearAction: nil,

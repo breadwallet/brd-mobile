@@ -19,6 +19,8 @@ struct ExchangeBuySellViewModel {
     let title: String
     let quoteText: String?
     let quotePlaceholder: NSAttributedString?
+    let inputPresets: [String]
+    let selectedInputPreset: Int?
     let baseText: String?
     let baseColor: UIColor?
     let baseView: CellLayoutView.ViewModel
@@ -28,9 +30,11 @@ struct ExchangeBuySellViewModel {
     let ctaState: CTAState
     let limit: String?
     let isLoading: Bool
+    let fullScreenErrorStyle: ExchangeFullScreenErrorView.Style?
 
     // Actions
     let settingsAction: Action?
+    let inputPresetAction: (Int) -> Void
     let closeAction: Action?
     let baseAction: Action?
     let offerAction: Action?
@@ -47,21 +51,34 @@ extension ExchangeBuySellViewModel {
         assetCollection: AssetCollection?,
         consumer: TypedConsumer<ExchangeEvent>?
     ) {
+        let isSell = model.mode == .sell
         let quoteCode = model.quoteCurrencyCode
         let baseCode = model.sourceCurrencyCode ?? Store.state.defaultCurrencyCode
-        let baseSymbol = Locale.currencySymbolByCode(baseCode) ?? baseCode ?? ""
-        let baseString = model.formattedSourceAmount
+        let baseSymbol = Locale.currencySymbolByCode(baseCode) ?? baseCode
+
+        if isSell {
+            quoteText = model.sourceAmountInput
+        } else {
+            let sourceAmount = model.formattedSourceAmount
+            quoteText = model.sourceAmountInput == "" ? nil : sourceAmount
+        }
 
         title = ExchangeBuySellViewModel.title(model)
-        quoteText = model.sourceAmount == 0 ? nil : baseString
-        quotePlaceholder = ExchangeBuySellViewModel.placeholder(baseSymbol + "0")
+        quotePlaceholder = ExchangeBuySellViewModel.placeholder(
+            isSell ? "0" : baseSymbol + "0"
+        )
         (baseText, baseColor) = ExchangeBuySellViewModel.baseTextAndColor(model)
+        inputPresets = model.inputPresets.map { $0.formattedAmount }
+        selectedInputPreset = model.selectedInputPreset?.intValue
 
-        let currency = model.currencies[quoteCode ?? ""]
+        let currency = model.currencies[ isSell ? baseCode : quoteCode ?? ""]
         let currencyId = CurrencyId(rawValue: currency?.currencyId ?? "")
-        let isLoading = (model.state as? ExchangeModel.StateInitializing) != nil
+        let loading = (model.state as? ExchangeModel.StateInitializing) != nil
+        let sourceBalance = model.formattedCryptoBalances[baseCode] ?? ""
+        let formattedSourceBalance = String(format: S.Exchange.available, sourceBalance)
+        let lowBalance = model.inputError as? ExchangeModel.InputErrorBalanceLow != nil
 
-        if isLoading {
+        if loading {
             baseView = .init(
                 title: S.Exchange.loadingAssets,
                 iconImage: UIImage(named: "TransparentPixel")
@@ -69,24 +86,49 @@ extension ExchangeBuySellViewModel {
         } else {
             baseView = .init(
                 title: currency?.name ?? "",
+                subtitle: isSell ? formattedSourceBalance : nil,
+                subtitleColor: isSell && lowBalance ? Theme.error : nil,
                 iconImage: assetCollection?.allAssets[currencyId]?
                     .imageSquareBackground,
                 rightIconImage: UIImage(named: "RightArrow")
             )
         }
 
+        let fullScreenError: ExchangeFullScreenErrorView.Style?
+        if let emptyWalletsState = model.state as? ExchangeModel.StateEmptyWallets {
+            if emptyWalletsState.sellingUnavailable {
+                fullScreenError = .sellUnsupportedRegion
+            } else if emptyWalletsState.invalidSellPairs {
+                fullScreenError = .emptyWallets
+            } else {
+                fullScreenError = .emptyWallets
+            }
+        } else {
+            fullScreenError = nil
+        }
+
+        let ctaState = CTAState.from(model)
         offer = ExchangeBuySellViewModel.offer(model)
         offerEnabled = model.offerState != .idle && model.offerState != .noOffers
         offerIsLoading = model.offerState == .gathering
-        ctaState = CTAState.from(model)
+        self.ctaState = ctaState
         limit = nil
+        isLoading = loading
+        fullScreenErrorStyle = fullScreenError
         settingsAction = { consumer?.accept(.OnConfigureSettingsClicked()) }
+        inputPresetAction = { consumer?.accept(.OnSelectInputPresets(index: Int32($0))) }
         closeAction = { consumer?.accept(.OnCloseClicked(confirmed: true)) }
-        baseAction = { consumer?.accept(.OnSelectPairClicked(selectSource: false)) }
+        baseAction = { consumer?.accept(.OnSelectPairClicked(selectSource: model.mode == .sell)) }
         offerAction = { consumer?.accept(.OnSelectOfferClicked(cancel: false)) }
         keyAction = { consumer?.accept($0.exchangeEvent()) }
-        ctaAction = { consumer?.accept(.OnContinueClicked()) }
-        self.isLoading = isLoading
+        ctaAction = {
+            switch ctaState {
+            case .nextSetMax:
+                consumer?.accept(.OnMaxAmountClicked())
+            default:
+                consumer?.accept(.OnContinueClicked())
+            }
+        }
     }
 }
 
@@ -107,18 +149,17 @@ private extension ExchangeBuySellViewModel {
 
     static func placeholder(_ string: String) -> NSAttributedString {
         NSAttributedString(
-            string: string,
-            attributes: [
-                .font: UIFont.customBold(size: 60) ?? Theme.body1,
-                .foregroundColor: Theme.primaryText.withAlphaComponent(0.3)
-            ]
+                string: string,
+                attributes: [
+                    .font: UIFont.customBold(size: 60),
+                    .foregroundColor: Theme.primaryText.withAlphaComponent(0.3)
+                ]
         )
     }
 
     static func offer(_ model: ExchangeModel) -> CellLayoutView.ViewModel {
         let method = model.selectedOffer?.formattedViaMethod() ?? ""
         let name = String(format: method, model.selectedOffer?.offer.provider.name ?? "Unknown")
-        let valid = model.selectedOffer as? ExchangeModel.OfferDetailsValidOffer
 
         switch model.offerState {
         case .noOffers:
@@ -148,6 +189,14 @@ private extension ExchangeBuySellViewModel {
                         : nil
           )
         default:
+            if let error = model.inputError as? ExchangeModel.InputErrorInsufficientNativeCurrencyBalance {
+                // TODO: Localise
+                return .init(
+                    title: String(format: "%@ balance low", error.currencyCode),
+                    subtitle: String(format: "Network fee of %@ %@ required ", error.currencyCode),
+                    iconImage: UIImage(named: "alertErrorLarge")
+                )
+            }
             return .init(
                 title: S.Exchange.Offer.initTitle,
                 iconImage: UIImage(named: "OfferCart")
@@ -177,6 +226,11 @@ private extension ExchangeBuySellViewModel {
     static func baseTextAndColor(_ model: ExchangeModel) -> (String, UIColor) {
         let invalid = model.selectedOffer as? ExchangeModel.OfferDetailsInvalidOffer
 
+        if let inputError = model.inputError as? ExchangeModel.InputErrorBalanceLow,
+            model.mode == .sell {
+            return inputErrorFromInfo(for: model)
+        }
+
         if let minAmount = invalid?.minSourceAmount,
            minAmount.doubleValue > model.sourceAmount {
             let amount = invalid?.formattedMinSourceAmount ?? ""
@@ -196,6 +250,25 @@ private extension ExchangeBuySellViewModel {
         }
 
         return (model.formattedQuoteAmount ?? " ", Theme.secondaryText)
+    }
+
+    static func inputErrorFromInfo(for model: ExchangeModel) -> (String, UIColor) {
+        let formattedBalances = model.formattedCryptoBalances
+        let code = model.sourceCurrencyCode ?? ""
+
+        guard let balance =  model.cryptoBalances[code]?.doubleValue else {
+            return ("Input error", .failedRed)
+        }
+
+        let suffix = model.mode != .sell ? (formattedBalances[code] ?? "") : ""
+        if model.sourceAmount > balance {
+            return (
+                S.Exchange.Offer.insufficientBalance + suffix,
+                .failedRed
+            )
+        }
+
+        return ("Input error", .failedRed)
     }
 }
 
@@ -239,7 +312,13 @@ extension ExchangeBuySellViewModel {
 extension ExchangeBuySellViewModel.CTAState {
 
     static func from(_ model: ExchangeModel) -> ExchangeBuySellViewModel.CTAState {
-        guard let offer = model.selectedOffer else {
+        if let inputError = model.inputError as? ExchangeModel.InputErrorBalanceLow,
+           model.mode == .sell {
+            let balance = model.formattedCryptoBalances[model.sourceCurrencyCode ?? ""]
+            return .nextSetMax(max: balance ?? "")
+        }
+
+        if model.selectedOffer == nil {
             return .nextDisabled
         }
 

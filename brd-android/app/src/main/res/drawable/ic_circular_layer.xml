@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bg_layer"
+        android:gravity="center"
+        android:height="68dp"
+        android:width="68dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/hydra_secondary_background" />
+        </shape>
+    </item>
+    <item
+        android:id="@+id/image_layer"
+        android:gravity="center"
+        android:drawable="@drawable/ic_rain" />
+</layer-list>

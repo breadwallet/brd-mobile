@@ -8,18 +8,17 @@
                                                    android:clickable="true">
 
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:drawableLeft="@drawable/ic_qrcode"
         android:drawablePadding="5dp"
         android:text="@string/Send.scanLabel"
         android:textColor="@color/logo_gradient_start"
         android:textSize="18sp"
         android:visibility="gone"
-        android:fontFamily="@font/mobile_font_book"
+        app:drawableStartCompat="@drawable/ic_qrcode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

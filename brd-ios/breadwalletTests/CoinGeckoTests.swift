@@ -89,7 +89,7 @@ class CoinGeckoTests : XCTestCase {
                                                             change24Hrs: change*simplePrice.price/100,
                                                             price: simplePrice.price)
                     }
-                    missing = missing.filter { $0 != "polygon" }
+                    missing = missing.filter { $0 != "polygon" && $0 != "polymath-network" }
                     XCTAssert(missing.count == 0, "Missing exchange rate for: \(missing)")
                     group.leave()
                 }

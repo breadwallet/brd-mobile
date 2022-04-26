@@ -8,7 +8,6 @@
  */
 package com.brd.api.models
 
-import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -21,7 +20,6 @@ sealed class ExchangeInput {
     abstract val currency: ExchangeCurrency
     abstract val actions: List<ExchangeOrder.Action>
     @SerialName("expires_at")
-    @Serializable(with = InstantSerializer::class)
     abstract val expiresAt: Instant?
 
     @Serializable
@@ -31,7 +29,6 @@ sealed class ExchangeInput {
         override val amount: String,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant? = null,
         override val actions: List<ExchangeOrder.Action>,
         @SerialName("crypto_transfer_status")
@@ -43,12 +40,10 @@ sealed class ExchangeInput {
         @SerialName("refund_address")
         val refundAddress: String,
         @SerialName("payment_detected_time")
-        @Serializable(with = InstantSerializer::class)
         val paymentDetectedTime: Instant? = null,
         @SerialName("transaction_id")
         val transactionId: String,
         @SerialName("confirmation_detected_time")
-        @Serializable(with = InstantSerializer::class)
         val confirmationDetectedTime: Instant? = null,
         @SerialName("refunded_transaction_id")
         val refundedTransactionId: String,
@@ -61,7 +56,6 @@ sealed class ExchangeInput {
         override val amount: String,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant?,
         override val actions: List<ExchangeOrder.Action>,
     ) : ExchangeInput()
@@ -73,7 +67,6 @@ sealed class ExchangeInput {
         override val amount: String,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant?,
         @SerialName("ach_transfer_status")
         val status: FiatStatus,
@@ -87,7 +80,6 @@ sealed class ExchangeInput {
         override val amount: String,
         override val currency: ExchangeCurrency,
         @SerialName("expires_at")
-        @Serializable(with = InstantSerializer::class)
         override val expiresAt: Instant?,
         override val actions: List<ExchangeOrder.Action>,
     ) : ExchangeInput()
@@ -106,6 +98,9 @@ sealed class ExchangeInput {
 
     @Serializable
     enum class CryptoStatus {
+        @SerialName("ready")
+        READY,
+
         @SerialName("waiting_for_payment")
         WAITING_FOR_PAYMENT,
 

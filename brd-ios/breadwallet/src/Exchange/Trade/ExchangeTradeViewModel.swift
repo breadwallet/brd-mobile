@@ -24,7 +24,7 @@ struct ExchangeTradeViewModel {
     let fromInfoColor: UIColor
     let ctaState: CTAState
     let limit: String?
-    let emptyWallets: Bool
+    let fullScreenErrorStyle: ExchangeFullScreenErrorView.Style?
 
     // Actions
     let swapAction: Action?
@@ -67,9 +67,10 @@ extension ExchangeTradeViewModel {
             responder: responder
         )
 
+        let isEmptyWallets = model.state as? ExchangeModel.StateEmptyWallets != nil
         ctaState = CTAState.from(model)
         limit =  nil
-        emptyWallets = (model.state as? ExchangeModel.StateEmptyWallets) != nil
+        fullScreenErrorStyle = isEmptyWallets ? .emptyWallets : nil
         swapAction = { consumer?.accept(.OnSwapCurrenciesClicked()) }
         offerAction = { consumer?.accept(.OnSelectOfferClicked(cancel: false)) }
         closeAction = { consumer?.accept(.OnCloseClicked(confirmed: false))}
@@ -87,12 +88,21 @@ extension ExchangeTradeViewModel {
         assetCollection: AssetCollection?,
         consumer: TypedConsumer<ExchangeEvent>?
     ) -> CurrencyInputViewModel {
+
+        let isLoading = model.cryptoBalances.isEmpty
+
         guard let code = isQuote ? model.sourceCurrencyCode : model.quoteCurrencyCode else {
-            return .empty({ consumer?.accept(.OnSelectPairClicked(selectSource: isQuote)) })
+            return .empty(
+                isLoading,
+                { consumer?.accept(.OnSelectPairClicked(selectSource: isQuote)) }
+            )
         }
 
         guard let currency = model.currencies[code] else {
-            return .empty({ consumer?.accept(.OnSelectPairClicked(selectSource: isQuote)) })
+            return .empty(
+                isLoading,
+                { consumer?.accept(.OnSelectPairClicked(selectSource: isQuote)) }
+            )
         }
 
         let currencyId = CurrencyId(rawValue: currency.currencyId)
@@ -105,10 +115,10 @@ extension ExchangeTradeViewModel {
             .first
 
         if let fiatValue = model.formattedSourceAmountFiatValue, isQuote {
-            detail = "≈ \(fiatValue)"
+            detail = "\(fiatValue)"
         } else if let rate = dollarRate?.rate, isQuote {
             let fiatValue = rate * ((try? model.sourceAmountInput.double()) ?? 0.0)
-            detail = "≈ \(CommonFormatter.price.string(from: fiatValue) ?? "")"
+            detail = "\(CommonFormatter.price.string(from: fiatValue) ?? "")"
         }
 
         func wrap(_ event: ExchangeEvent.OnAmountChange, quote: Bool) -> ExchangeEvent {
@@ -125,6 +135,7 @@ extension ExchangeTradeViewModel {
             symbol: code.uppercased(),
             bgColor: (metadata?.colors.0, metadata?.colors.1),
             inputEnabled: isQuote,
+            isLoading: model.sourceCurrencyCode == nil && model.quoteCurrencyCode == nil,
             didChangeAction: { (old, new) in
                 let new = new.replacingOccurrences(of: decSeparator, with: ".")
                 var event: ExchangeEvent.OnAmountChange?
@@ -200,7 +211,7 @@ extension ExchangeTradeViewModel.CTAState {
             return .processing
         }
 
-        guard let offer = model.selectedOffer else {
+        if model.selectedOffer == nil {
             return .nextDisabled
         }
 
@@ -263,7 +274,7 @@ extension  ExchangeTradeViewModel {
             responder: Responder
     ) -> (String?, UIColor) {
 
-        if let inputError = model.inputError {
+        if model.inputError != nil {
             return inputErrorFromInfo(for: model, responder: responder)
         }
 
@@ -313,7 +324,7 @@ extension  ExchangeTradeViewModel {
         }
 
         if model.sourceAmount > balance && responder != .quote ||
-           model.quoteAmount?.doubleValue ?? 0 > balance && responder != .base {
+           model.quoteAmount > balance && responder != .base {
             return (
                 S.Exchange.Offer.insufficientBalance + (formattedBalances[code] ?? ""),
                 .failedRed

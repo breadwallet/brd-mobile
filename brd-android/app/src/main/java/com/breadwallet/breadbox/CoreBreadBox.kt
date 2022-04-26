@@ -8,32 +8,14 @@
  */
 package com.breadwallet.breadbox
 
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Key
+import com.blockset.walletkit.Network
+import com.blockset.walletkit.System
+import com.blockset.walletkit.SystemClient
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.Wallet
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
-import com.breadwallet.crypto.Network
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.WalletManager
-import com.breadwallet.crypto.WalletManagerState
-import com.breadwallet.crypto.blockchaindb.BlockchainDb
-import com.breadwallet.crypto.events.network.NetworkEvent
-import com.breadwallet.crypto.events.system.SystemDiscoveredNetworksEvent
-import com.breadwallet.crypto.events.system.SystemEvent
-import com.breadwallet.crypto.events.system.SystemListener
-import com.breadwallet.crypto.events.system.SystemNetworkAddedEvent
-import com.breadwallet.crypto.events.transfer.TranferEvent
-import com.breadwallet.crypto.events.wallet.WalletEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferAddedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferChangedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferDeletedEvent
-import com.breadwallet.crypto.events.wallet.WalletTransferSubmittedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerChangedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerCreatedEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerSyncProgressEvent
-import com.breadwallet.crypto.events.walletmanager.WalletManagerSyncRecommendedEvent
 import com.breadwallet.ext.throttleLatest
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logInfo
@@ -48,22 +30,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
-import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.dropWhile
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
@@ -81,16 +58,17 @@ internal class CoreBreadBox(
     private val storageFile: File,
     override val isMainnet: Boolean = false,
     private val walletProvider: WalletProvider,
-    private val blockchainDb: BlockchainDb,
+    private val blockchainDb: SystemClient,
     private val userManager: BrdUserManager
-) : BreadBox,
-    SystemListener {
+) : BreadBox {
 
-    init {
-        // Set default words list
-        val context = BreadApp.getBreadContext()
-        val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
-        Key.setDefaultWordList(words)
+    companion object {
+        fun setWords() {
+            // Set default words list
+            val context = BreadApp.getBreadContext()
+            val words = Bip39Reader.getBip39Words(context, BRSharedPrefs.recoveryKeyLanguage)
+            Key.setDefaultWordList(words)
+        }
     }
 
     @Volatile
@@ -101,15 +79,8 @@ internal class CoreBreadBox(
         SupervisorJob() + Dispatchers.Default + errorHandler("openScope")
     )
 
-    private val systemChannel = BroadcastChannel<Unit>(CONFLATED)
-    private val accountChannel = BroadcastChannel<Unit>(CONFLATED)
-    private val walletsChannel = BroadcastChannel<Unit>(CONFLATED)
-    private val walletTransfersChannelMap = BroadcastChannel<String>(BUFFERED)
-    private val transferUpdatedChannelMap = BroadcastChannel<Transfer>(BUFFERED)
-
     private var networkManager: NetworkManager? = null
-
-    private val isDiscoveryComplete = AtomicBoolean(false)
+    private val systemListener = SystemListenerImpl()
     private val _isOpen = AtomicBoolean(false)
     override var isOpen: Boolean
         get() = _isOpen.get()
@@ -133,7 +104,7 @@ internal class CoreBreadBox(
 
         fun newSystem() = System.create(
             systemExecutor,
-            this@CoreBreadBox,
+            systemListener,
             account,
             isMainnet,
             storageFile.absolutePath,
@@ -152,14 +123,8 @@ internal class CoreBreadBox(
                 system,
                 openScope + systemExecutor.asCoroutineDispatcher(),
                 listOf(DefaultNetworkInitializer(userManager))
-            )
-            systemChannel.offer(Unit)
-            accountChannel.offer(Unit)
-            system.wallets?.let { wallets ->
-                walletsChannel.offer(Unit)
-                wallets.forEach { wallet ->
-                    walletTransfersChannelMap.offer(wallet.eventKey())
-                }
+            ).also {
+                systemListener.init(it, system)
             }
         }
 
@@ -169,9 +134,7 @@ internal class CoreBreadBox(
             .enabledWallets()
             .onEach { enabledWallets ->
                 networkManager?.enabledWallets = enabledWallets
-                system?.wallets?.let {
-                    walletsChannel.offer(Unit)
-                }
+                systemListener.updateWallets(system?.wallets)
             }
             .launchIn(openScope)
 
@@ -179,9 +142,7 @@ internal class CoreBreadBox(
             .walletModes()
             .onEach { modes ->
                 networkManager?.managerModes = modes
-                system?.wallets?.let {
-                    walletsChannel.offer(Unit)
-                }
+                systemListener.updateWallets(system?.wallets)
             }
             .launchIn(openScope)
 
@@ -212,25 +173,25 @@ internal class CoreBreadBox(
     }
 
     override fun system(): Flow<System> =
-        systemChannel
-            .asFlow()
+        systemListener.systemEvents
             .dropWhile { !isOpen }
             .mapNotNull { system }
 
-    override fun account() =
-        accountChannel
-            .asFlow()
-            .mapNotNull { system?.account }
+    override fun account(): Flow<Account> =
+        systemListener.account.filterNotNull()
 
-    override fun wallets(filterByTracked: Boolean) =
-        walletsChannel
-            .asFlow()
+    override fun wallets(filterByTracked: Boolean): Flow<List<Wallet>> =
+        combine(
+            systemListener.walletEvents,
+            systemListener.walletManagerEvents,
+            systemListener.wallets
+        ) { _, _, wallets -> wallets }
             .throttleLatest(AGGRESSIVE_THROTTLE_MS)
-            .mapNotNull {
-                val wallets = system?.wallets
+            .filterNotNull()
+            .mapNotNull { wallets ->
                 when {
                     filterByTracked -> {
-                        wallets?.filterByCurrencyIds(
+                        wallets.filterByCurrencyIds(
                             walletProvider.enabledWallets().first()
                         )
                     }
@@ -238,20 +199,24 @@ internal class CoreBreadBox(
                 }
             }
 
-    override fun wallet(currencyCode: String) =
-        walletsChannel
-            .asFlow()
+    override fun wallet(currencyCode: String): Flow<Wallet> =
+        combine(
+            systemListener.walletEvents,
+            systemListener.walletManagerEvents,
+            systemListener.wallets
+        ) { _, _, wallets -> wallets }
             .throttleLatest(DEFAULT_THROTTLE_MS)
+            .filterNotNull()
             .run {
                 if (currencyCode.contains(":")) {
-                    mapNotNull {
-                        system?.wallets?.firstOrNull {
+                    mapNotNull { wallet ->
+                        wallet.firstOrNull {
                             it.currency.uids.equals(currencyCode, true)
                         }
                     }
                 } else {
-                    mapNotNull {
-                        system?.wallets?.firstOrNull {
+                    mapNotNull { wallet ->
+                        wallet.firstOrNull {
                             it.currency.code.equals(currencyCode, true)
                         }
                     }
@@ -274,56 +239,51 @@ internal class CoreBreadBox(
         }.throttleLatest(AGGRESSIVE_THROTTLE_MS)
             .distinctUntilChanged()
 
-    override fun walletTransfers(currencyCode: String) =
-        walletTransfersChannelMap
-            .asFlow()
-            .onStart { emit(currencyCode) }
-            .filter { currencyCode.equals(it, true) }
-            .throttleLatest(AGGRESSIVE_THROTTLE_MS)
-            .mapNotNull {
-                system?.wallets
-                    ?.find { it.currency.code.equals(currencyCode, true) }
-                    ?.transfers
+    override fun walletTransfers(currencyCode: String): Flow<List<Transfer>> =
+        combine(
+            systemListener.transferEvents,
+            systemListener.walletEvents,
+            systemListener.transfers.mapNotNull { walletMap ->
+                walletMap.keys
+                    .find { currencyCode.equals(it.currency.code, true) }
+                    ?.run(walletMap::get)
             }
+        ) { _, _, walletTransfers -> walletTransfers }
+            .throttleLatest(AGGRESSIVE_THROTTLE_MS)
 
     override fun walletTransfer(currencyCode: String, transferHash: String): Flow<Transfer> {
-        return transferUpdatedChannelMap
-            .asFlow()
-            .filter { transfer ->
-                transfer.wallet.currency.code.equals(currencyCode, true) &&
-                    transfer.hash.isPresent &&
-                    transfer.hashString().equals(transferHash, true)
+        return combine(
+            systemListener.transferEvents,
+            systemListener.walletEvents,
+            systemListener.transfers.mapNotNull { walletMap ->
+                walletMap.keys
+                    .find { currencyCode.equals(it.currency.code, true) }
+                    ?.run(walletMap::get)
             }
-            .onStart {
-                system?.wallets
-                    ?.find { it.currency.code.equals(currencyCode, true) }
-                    ?.transfers
-                    ?.firstOrNull {
-                        it.hash.isPresent && it.hashString() == transferHash
-                    }
-                    ?.also { emit(it) }
+        ) { _, _, transfers -> transfers }
+            .mapNotNull { transfers ->
+                transfers.find { transfer ->
+                    transfer.wallet.currency.code.equals(currencyCode, true) &&
+                        transfer.hash.isPresent &&
+                        transfer.hashString().equals(transferHash, true)
+                }
             }
     }
 
     override fun walletTransfer(currencyCode: String, transfer: Transfer): Flow<Transfer> {
-        val targetWallet = { wallet: Wallet -> wallet.currency.code.equals(currencyCode, true) }
-        val targetTransfer = { updatedTransfer: Transfer ->
-                (transfer == updatedTransfer || (transfer.hash.isPresent && transfer.hash == updatedTransfer.hash))
-        }
-        return transferUpdatedChannelMap
-            .asFlow()
-            .filter { updatedTransfer ->
-                updatedTransfer.wallet.currency.code.equals(currencyCode, true) &&
-                    targetTransfer(updatedTransfer)
+        return combine(
+            systemListener.transfer,
+            systemListener.walletEvents,
+            systemListener.transfers.mapNotNull { walletsMap ->
+                walletsMap.keys
+                    .find { it.currency.code.equals(currencyCode, true) }
+                    ?.run(walletsMap::get)
             }
-            .onStart {
-                emit(
-                    system?.wallets
-                        ?.firstOrNull(targetWallet)
-                        ?.transfers
-                        ?.firstOrNull(targetTransfer)
-                        ?: return@onStart
-                )
+        ) { _, _, transfers -> transfers }
+            .mapNotNull { transfers ->
+                transfers.find { updatedTransfer ->
+                    (transfer == updatedTransfer || (transfer.hash.isPresent && transfer.hash == updatedTransfer.hash))
+                }
             }
     }
 
@@ -361,7 +321,7 @@ internal class CoreBreadBox(
     override fun networks(whenDiscoveryComplete: Boolean): Flow<List<Network>> =
         system().transform {
             if (whenDiscoveryComplete) {
-                if (isDiscoveryComplete.get()) {
+                if (systemListener.discovery.value) {
                     emit(it.networks)
                 }
             } else {
@@ -370,88 +330,4 @@ internal class CoreBreadBox(
         }
 
     override fun getSystemUnsafe(): System? = system
-
-    override fun handleWalletEvent(
-        system: System,
-        manager: WalletManager,
-        wallet: Wallet,
-        event: WalletEvent
-    ) {
-        walletsChannel.offer(Unit)
-
-        fun updateTransfer(transfer: Transfer) {
-            transferUpdatedChannelMap.offer(transfer)
-            walletTransfersChannelMap.offer(wallet.eventKey())
-        }
-
-        when (event) {
-            is WalletTransferSubmittedEvent ->
-                updateTransfer(event.transfer)
-            is WalletTransferDeletedEvent ->
-                updateTransfer(event.transfer)
-            is WalletTransferAddedEvent ->
-                updateTransfer(event.transfer)
-            is WalletTransferChangedEvent ->
-                updateTransfer(event.transfer)
-        }
-    }
-
-    override fun handleManagerEvent(
-        system: System,
-        manager: WalletManager,
-        event: WalletManagerEvent
-    ) {
-        walletsChannel.offer(Unit)
-
-        when (event) {
-            is WalletManagerCreatedEvent -> {
-                logDebug("Wallet Manager Created: '${manager.name}' mode ${manager.mode}")
-                networkManager?.connectManager(manager)
-            }
-            is WalletManagerChangedEvent -> {
-                val fromStateType = event.oldState.type
-                val toStateType = event.newState.type
-                logDebug("(${manager.currency.code}) State Changed from='$fromStateType' to='$toStateType'")
-
-                if (fromStateType != WalletManagerState.Type.CONNECTED &&
-                    toStateType == WalletManagerState.Type.CONNECTED
-                ) {
-                    logDebug("Wallet Manager Connected: '${manager.name}'")
-                    networkManager?.registerCurrencies(manager)
-                }
-            }
-            is WalletManagerSyncRecommendedEvent -> {
-                logDebug("Syncing '${manager.currency.code}' to ${event.depth}")
-                manager.syncToDepth(event.depth)
-            }
-        }
-    }
-
-    override fun handleNetworkEvent(system: System, network: Network, event: NetworkEvent) = Unit
-
-    override fun handleSystemEvent(system: System, event: SystemEvent) {
-        when (event) {
-            is SystemNetworkAddedEvent -> {
-                logDebug("Network '${event.network.name}' added.")
-                networkManager?.initializeNetwork(event.network)
-            }
-            is SystemDiscoveredNetworksEvent -> {
-                isDiscoveryComplete.set(true)
-            }
-        }
-        systemChannel.offer(Unit)
-    }
-
-    override fun handleTransferEvent(
-        system: System,
-        manager: WalletManager,
-        wallet: Wallet,
-        transfer: Transfer,
-        event: TranferEvent
-    ) {
-        transferUpdatedChannelMap.offer(transfer)
-        walletTransfersChannelMap.offer(wallet.eventKey())
-    }
-
-    private fun Wallet.eventKey() = currency.code.toLowerCase(Locale.ROOT)
 }

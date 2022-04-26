@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_gravity="center"
+    android:background="@drawable/bread_dialog_rounded_exchange"
+    android:filterTouchesWhenObscured="true"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/exchange_dialog_icon"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circular_layer"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@null"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/exchange_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/mobile_font_bold"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:lineHeight="36sp"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/exchange_dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="16sp"
+        app:lineHeight="20dp"
+        android:alpha=".8"
+        android:layout_marginTop="24dp"
+        tools:text="Hello world." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exchange_positive_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        tools:text="Buy Some"
+        style="@style/PrimaryButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exchange_negative_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Close"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
+        style="@style/SecondaryButton" />
+
+</LinearLayout>

@@ -9,10 +9,10 @@
 package com.breadwallet.ui.writedownkey
 
 import com.breadwallet.tools.util.EventUtils
+import com.breadwallet.ui.writedownkey.WriteDownKey.F
+import com.breadwallet.ui.writedownkey.WriteDownKey.M
 import com.spotify.mobius.First
 import com.spotify.mobius.Init
-import com.breadwallet.ui.writedownkey.WriteDownKey.M
-import com.breadwallet.ui.writedownkey.WriteDownKey.F
 
 object WriteDownKeyInit : Init<M, F> {
     override fun init(model: M): First<M, F> =

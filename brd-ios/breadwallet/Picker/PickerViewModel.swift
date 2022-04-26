@@ -99,9 +99,14 @@ extension PickerViewModel {
         let allCurrencies = assetCollection?.allAssets ?? [:]
         let currencies = state.assets
         let pair = model.selectedPair
-        let selectedFromCode = state.source ? pair?.fromCode : pair?.toCode
+
+        let buyFromCode = state.source ? pair?.fromCode : pair?.toCode
+        let sellFromCode = state.source ? pair?.toCode : pair?.fromCode
+        let selectedFromCode = model.mode == .sell ? sellFromCode : buyFromCode
+
         self.init(
-            withTitle: state.source ? "Pay With" : "Assets",
+            // TODO: Localize titles
+            withTitle: model.mode == .sell ? "Sell" : state.source ? "Pay With" : "Assets",
             prefersLargerCells: true,
             selectedIndexes: [currencies
                 .firstIndex(where: { $0.code == selectedFromCode ?? "" })]
@@ -211,11 +216,7 @@ extension PickerViewModel {
         self.init(
             id: state?.target.name ?? "",
             withTitle: S.Exchange.Settings.currency,
-            selectedIndexes: [
-                currencies.firstIndex(where: {
-                    $0.code == model.selectedFiatCurrency?.code ?? ""
-                })
-            ].compactMap { $0 },
+            selectedIndexes: [selected].compactMap { $0 },
             items: currencies.map {
                 let symbol = Locale.currencySymbolByCode($0.code) ?? ""
                 let name = "\($0.code.uppercased()) (\(symbol)) - \($0.name)"

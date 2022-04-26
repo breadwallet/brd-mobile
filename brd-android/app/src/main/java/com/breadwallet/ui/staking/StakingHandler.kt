@@ -16,18 +16,18 @@ import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.addressFor
 import com.breadwallet.breadbox.estimateFee
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Amount
-import com.breadwallet.crypto.TransferFeeBasis
-import com.breadwallet.crypto.TransferState.Type.CREATED
-import com.breadwallet.crypto.TransferState.Type.DELETED
-import com.breadwallet.crypto.TransferState.Type.FAILED
-import com.breadwallet.crypto.TransferState.Type.INCLUDED
-import com.breadwallet.crypto.TransferState.Type.PENDING
-import com.breadwallet.crypto.TransferState.Type.SIGNED
-import com.breadwallet.crypto.TransferState.Type.SUBMITTED
-import com.breadwallet.crypto.WalletManagerState
-import com.breadwallet.crypto.errors.FeeEstimationError
-import com.breadwallet.crypto.errors.TransferSubmitError
+import com.blockset.walletkit.Amount
+import com.blockset.walletkit.TransferFeeBasis
+import com.blockset.walletkit.TransferState.Type.CREATED
+import com.blockset.walletkit.TransferState.Type.DELETED
+import com.blockset.walletkit.TransferState.Type.FAILED
+import com.blockset.walletkit.TransferState.Type.INCLUDED
+import com.blockset.walletkit.TransferState.Type.PENDING
+import com.blockset.walletkit.TransferState.Type.SIGNED
+import com.blockset.walletkit.TransferState.Type.SUBMITTED
+import com.blockset.walletkit.WalletManagerState
+import com.blockset.walletkit.errors.FeeEstimationError
+import com.blockset.walletkit.errors.TransferSubmitError
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.tools.security.BrdUserManager
@@ -145,9 +145,11 @@ private fun handleLoadAccount(
                 .firstOrNull { transfer ->
                     transfer.attributes.any {
                         it.key.equals(DELEGATION_OP, true) ||
-                                it.key.equals(DELEGATE, true) ||
-                                (it.key.equals(UNSTAKE_KEY, true) &&
-                                        it.value.or("").equals(UNSTAKE_VALUE, true))
+                            it.key.equals(DELEGATE, true) ||
+                            (
+                                it.key.equals(UNSTAKE_KEY, true) &&
+                                    it.value.or("").equals(UNSTAKE_VALUE, true)
+                                )
                     } && (transfer.confirmation.orNull()?.success ?: true)
                 }
             val balance = wallet.balance.toBigDecimal()

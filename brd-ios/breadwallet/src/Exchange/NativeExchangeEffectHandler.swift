@@ -12,7 +12,6 @@ import UIKit
 import Cosmos
 import WalletKit
 
-
 // MARK: - NativeExchangeConnectable
 
 class NativeExchangeConnectable: NSObject, Connectable {
@@ -71,7 +70,6 @@ class NativeExchangeEffectHandler: NSObject, Connection, Trackable {
     }
 
     func accept(value: Any?) {
-        print("=== Native event", value)
         switch value {
         case is ExchangeEffect.ExitFlow:
             exitFlow()
@@ -116,6 +114,7 @@ class NativeExchangeEffectHandler: NSObject, Connection, Trackable {
         let (navVC, browser) = WebViewController.embeddedInNavigationController(.brd)
         browser.title = effect.order.provider.name
         browser.flowEndUrlComponents = ["return", "return?"]
+        browser.flowEndOnDidFinishNavigation = isSellOrder(effect.order)
         browser.load(URLRequest(url: url))
         browser.closeAction = {
             self.output.accept(.OnCloseClicked(confirmed: false))
@@ -163,6 +162,17 @@ class NativeExchangeEffectHandler: NSObject, Connection, Trackable {
 
     private func trackEvent(effect: ExchangeEffect.TrackEvent) {
         saveEvent(effect.name, attributes: effect.props)
+    }
+
+    private func isSellOrder(_ order: ExchangeOrder?) -> Bool {
+        guard let order = order else {
+            return false
+        }
+
+        let fiatMedia: [ExchangeInput.Media] = [.card, .ach, .sepa]
+
+        return !order.inputs.filter { $0.media == .crypto }.isEmpty  &&
+            !order.outputs.filter { fiatMedia.contains($0.media) }.isEmpty
     }
 
     func dispose() { }
@@ -244,6 +254,7 @@ private extension NativeExchangeEffectHandler {
         }
     }
 
+    // swiftlint:disable:next function_parameter_count
     func verifyAndMakeTransfer(
         wallet: Wallet,
         toAddress: String,

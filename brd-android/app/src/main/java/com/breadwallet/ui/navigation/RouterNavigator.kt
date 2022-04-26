@@ -30,7 +30,6 @@ import com.breadwallet.tools.util.asLink
 import com.breadwallet.tools.util.btc
 import com.breadwallet.ui.addwallets.AddWalletsController
 import com.breadwallet.ui.auth.AuthenticationController
-import com.breadwallet.ui.changehandlers.BottomSheetChangeHandler
 import com.breadwallet.ui.changehandlers.DialogChangeHandler
 import com.breadwallet.ui.controllers.AlertDialogController
 import com.breadwallet.ui.controllers.SignalController
@@ -60,15 +59,17 @@ import com.breadwallet.ui.settings.segwit.LegacyAddressController
 import com.breadwallet.ui.settings.wipewallet.WipeWalletController
 import com.breadwallet.ui.showkey.ShowPaperKeyController
 import com.breadwallet.ui.staking.SelectBakersController
+import com.breadwallet.ui.support.*
 import com.breadwallet.ui.sync.SyncBlockchainController
 import com.breadwallet.ui.txdetails.TxDetailsController
-import com.breadwallet.ui.wallet.BrdWalletController
-import com.breadwallet.ui.wallet.WalletController
-import com.breadwallet.ui.web.WebController
-import com.breadwallet.ui.writedownkey.WriteDownKeyController
-import com.breadwallet.ui.uistaking.StakingController
 import com.breadwallet.ui.uigift.CreateGiftController
 import com.breadwallet.ui.uigift.ShareGiftController
+import com.breadwallet.ui.uistaking.StakingController
+import com.breadwallet.ui.wallet.BrdWalletController
+import com.breadwallet.ui.wallet.WalletController
+import com.breadwallet.ui.web.BrowserController
+import com.breadwallet.ui.web.WebController
+import com.breadwallet.ui.writedownkey.WriteDownKeyController
 import com.breadwallet.util.CryptoUriParser
 import com.breadwallet.util.isBrd
 import com.platform.HTTPServer
@@ -77,20 +78,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 import java.util.Locale
 
 @Suppress("TooManyFunctions")
 class RouterNavigator(
     private val routerProvider: () -> Router
-) : Navigator, NavigationTargetHandlerSpec, KodeinAware {
+) : Navigator, NavigationTargetHandlerSpec, DIAware {
 
     private val router get() = routerProvider()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-    override val kodein by closestKodein {
+    override val di by closestDI {
         checkNotNull(router.activity?.applicationContext)
     }
 
@@ -102,7 +103,7 @@ class RouterNavigator(
     override fun navigateTo(target: INavigationTarget) =
         patch(target as NavigationTarget)
 
-    fun Controller.asTransaction(
+    private fun Controller.asTransaction(
         popChangeHandler: ControllerChangeHandler? = FadeChangeHandler(),
         pushChangeHandler: ControllerChangeHandler? = FadeChangeHandler()
     ) = RouterTransaction.with(this)
@@ -130,7 +131,10 @@ class RouterNavigator(
     override fun orderHistory(effect: NavigationTarget.OrderHistory) {
         val orderHistory = brdApiClient.signUrl("/web/exchange/order/list")
         router.pushController(
-            WebController(orderHistory).asTransaction(
+            BrowserController(
+                orderHistory,
+                router.activity?.getString(R.string.Exchange_Browser_orderHistoryTitle),
+            ).asTransaction(
                 VerticalChangeHandler(),
                 VerticalChangeHandler()
             )
@@ -147,13 +151,16 @@ class RouterNavigator(
     }
 
     override fun brdRewards() {
-        val rewardsUrl = if (brdPreferences.hydraActivated) {
-            brdApiClient.signUrl("/web/rewards")
+        val controller = if (brdPreferences.hydraActivated) {
+            BrowserController(
+                brdApiClient.signUrl("/web/rewards"),
+                router.activity?.getString(R.string.Exchange_Browser_rewardsTitle)
+            )
         } else {
-            HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS)
+            WebController(HTTPServer.getPlatformUrl(HTTPServer.URL_REWARDS))
         }
         router.pushController(
-            WebController(rewardsUrl).asTransaction(
+            controller.asTransaction(
                 VerticalChangeHandler(),
                 VerticalChangeHandler()
             )
@@ -271,9 +278,12 @@ class RouterNavigator(
 
     override fun supportPage(effect: NavigationTarget.SupportPage) {
         router.pushController(
-            WebController(effect.asSupportUrl()).asTransaction(
-                BottomSheetChangeHandler(),
-                BottomSheetChangeHandler()
+            SupportController(
+                slug = effect.articleId,
+                currencyCode = effect.currencyCode
+            ).asTransaction(
+                VerticalChangeHandler(),
+                VerticalChangeHandler(),
             )
         )
     }
@@ -663,8 +673,8 @@ class RouterNavigator(
             pricePerUnit = effect.pricePerUnit
         )
         val transaction = RouterTransaction.with(controller)
-                .popChangeHandler(DialogChangeHandler())
-                .pushChangeHandler(DialogChangeHandler())
+            .popChangeHandler(DialogChangeHandler())
+            .pushChangeHandler(DialogChangeHandler())
         if (effect.replaceTop) {
             router.replaceTopController(transaction)
         } else {

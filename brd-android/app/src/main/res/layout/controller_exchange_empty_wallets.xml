@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hydra_quaternary_background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/hydra_quaternary_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layoutEmptyWallets"
+        android:theme="@style/ExchangeToolbar"
+        android:animateLayoutChanges="true"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/Exchange.trade"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+        <ImageButton
+            android:id="@+id/buttonClose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close_white_24dp"
+            android:padding="16dp"
+            android:stateListAnimator="@null"
+            android:layout_gravity="end"
+            android:contentDescription="@string/AccessibilityLabels.close" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/layoutEmptyWallets"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_assets"
+            android:contentDescription="@null"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your wallet is empty"
+            android:textSize="26sp"
+            android:layout_margin="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="It looks like you don't have any coins in your wallet to swap."
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:alpha=".8"
+            android:layout_margin="7dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoToBuy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Buy Some"
+            style="@style/PrimaryButton" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

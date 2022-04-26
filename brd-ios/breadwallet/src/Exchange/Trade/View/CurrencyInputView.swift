@@ -1,4 +1,4 @@
- //
+//
 //  ExchangeViewController.swift
 //  breadwallet
 //
@@ -24,6 +24,9 @@ class CurrencyInputView: UIView {
     private lazy var detailLabel =  UILabel(color: Theme.tertiaryBackground)
     private lazy var currencyButton = CurrencyInputButton()
     private lazy var previousText = ""
+    private lazy var textStack = VStackView([textField, detailLabel])
+    private lazy var stack = HStackView([textStack, currencyButton])
+    private lazy var blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
     init() {
         super.init(frame: .zero)
@@ -47,7 +50,7 @@ class CurrencyInputView: UIView {
         minAction = viewModel.minAction
         maxAction = viewModel.maxAction
         currencyAction = viewModel.currencyAction
-        detailLabel.isHidden = viewModel.detail == nil || viewModel.detail == ""
+        detailLabel.isHidden = viewModel.detail?.isEmpty ?? true
 
         if let symbol = viewModel.symbol {
             let icon = viewModel.icon
@@ -59,10 +62,33 @@ class CurrencyInputView: UIView {
         gradientLayer.colors = [viewModel.bgColor.0, viewModel.bgColor.1]
             .compactMap { $0 }
             .map { $0.cgColor }
+
+        animateStateTransitionIfNeeded(viewModel)
     }
 
     func shakeAnimate() {
         layer.add(ShakeNoAnimation.animation(), forKey: "position.x")
+    }
+
+    func animateStateTransitionIfNeeded(_ viewModel: CurrencyInputViewModel) {
+        UIView.animate(
+            withDuration: C.animationDuration / 4,
+            animations: {
+                self.stack.alpha = viewModel.isLoading ? 0 : 1
+            },
+            completion: { _ in
+                self.blurView.isHidden = !viewModel.isLoading
+                self.gradientLayer.isHidden = viewModel.isLoading
+                self.stack.isHidden = viewModel.isLoading
+            }
+        )
+
+        gradientLayer.opacity = viewModel.isLoading ? 0 : 1
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = viewModel.isLoading ? 1 : 0
+        animation.toValue = viewModel.isLoading ? 0 : 1
+        animation.duration = C.animationDuration / 4
+        gradientLayer.add(animation, forKey: "opacity")
     }
 
     func isEditing() -> Bool {
@@ -105,8 +131,7 @@ extension  CurrencyInputView: UITextFieldDelegate {
 private extension CurrencyInputView {
 
     func setupUI() {
-        let textStack = VStackView([textField, detailLabel])
-        let stack = HStackView([textStack, currencyButton])
+        addSubview(blurView)
         layer.addSublayer(gradientLayer)
         addSubview(stack)
 
@@ -118,6 +143,8 @@ private extension CurrencyInputView {
             bottom: -vInset,
             right: -C.padding[1]
         )
+
+        blurView.constrain(toSuperviewEdges: nil)
         stack.constrain(toSuperviewEdges: insets)
         stack.alignment = .center
         stack.distribution = .fill
@@ -137,7 +164,7 @@ private extension CurrencyInputView {
             string: "0",
             attributes: [
                 .foregroundColor: Theme.tertiaryText,
-                .font: textField.font
+                .font: textField.font ?? UIFont.header
             ]
         )
 
@@ -146,12 +173,17 @@ private extension CurrencyInputView {
         detailLabel.backgroundColor = .clear
         textField.keyboardType = .decimalPad
         textField.keyboardAppearance = .dark
-        
+
         layer.cornerRadius = Padding.half
+        clipsToBounds = true
         backgroundColor = UIColor.white.withAlphaComponent(0.1)
         gradientLayer.cornerRadius = layer.cornerRadius
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+
+        blurView.alpha = 0.5
+        gradientLayer.opacity = 0
+        stack.alpha = 0
     }
 
     func setupActions() {

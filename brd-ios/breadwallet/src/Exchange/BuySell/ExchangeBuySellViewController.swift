@@ -19,9 +19,14 @@ final class ExchangeBuySellViewController: CosmosViewController {
     private lazy var baseView = CellLayoutButton(accessoryStyle: .large)
     private lazy var offerView = CellLayoutButton(accessoryStyle: .large)
     private lazy var numberKeyboard = NumberKeyboardView()
+    private lazy var fullScreenErrorView = ExchangeFullScreenErrorView()
     private lazy var ctaButton = BRDButton(title: S.Exchange.CTA.next)
     private lazy var limitLabel = UILabel()
     private lazy var container = VStackView()
+    private lazy var modeSwitcher = SegmentedControl([
+        .init(title: S.Exchange.buy), .init(title: S.Exchange.sell)
+    ])
+    private lazy var inputPresetsPicker = SegmentPickerView()
     private lazy var consumer: TypedConsumer<ExchangeEvent>? = {
         TypedConsumer<ExchangeEvent>(optional: self.consumer())
     }()
@@ -103,6 +108,12 @@ extension ExchangeBuySellViewController: ExchangeView {
         viewModel.isLoading ? baseView.showIconSpinner() : baseView.hideIconSpinner()
         contentViews().forEach { $0.alpha = viewModel.isLoading ? 0.6 : 1 }
         baseView.alpha = 1.0
+        modeSwitcher.setSelected(model.mode == .sell ? 1 : 0)
+        inputPresetsPicker.update(with: viewModel)
+        fullScreenErrorView.update(with: viewModel)
+        setSellFullScreenErrorHidden(fullScreenErrorView.isHidden)
+        inputPresetsPicker.isHidden = !fullScreenErrorView.isHidden ||
+            viewModel.inputPresets.isEmpty
     }
 
     func errorSignalAction() {
@@ -114,7 +125,8 @@ extension ExchangeBuySellViewController: ExchangeView {
         navigationController?.popToRootViewController(animated: true)
         if let visible = navigationController?.visibleViewController,
            visible as? UIAlertController == nil,
-           visible != self {
+           visible != self,
+           visible.isBeingDismissed == false {
             dismiss(animated: true)
         }
     }
@@ -160,9 +172,12 @@ private extension ExchangeBuySellViewController {
         ])
 
         container.spacing = spacing()
-        container.setCustomSpacing(Padding.half, after: quoteTextField)
+        container.setCustomSpacing(0, after: quoteTextField)
+        container.setCustomSpacing(C.padding[3] + Padding.half, after: baseLabel)
+        container.setCustomSpacing(C.padding[1] + Padding.half, after: inputPresetsPicker)
         container.setCustomSpacing(C.padding[2], after: baseView)
         container.setCustomSpacing( C.padding[1] + Padding.half, after: ctaButton)
+        inputPresetsPicker.setContentCompressionResistancePriority(.required, for: .vertical)
         ctaButton.setContentHuggingPriority(.required, for: .vertical)
         limitLabel.setContentHuggingPriority(.required, for: .vertical)
         numberKeyboard.setContentHuggingPriority(.init(0), for: .vertical)
@@ -183,6 +198,15 @@ private extension ExchangeBuySellViewController {
         navigationController?.view.backgroundColor = view.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .automatic
+
+        modeSwitcher.delegate = self
+        modeSwitcher.preferredItemWidth = Constant.segmentWidth
+        modeSwitcher.preferredItemHeight = Constant.segmentHeight
+        modeSwitcher.textColor = Theme.tertiaryText
+        modeSwitcher.selectedTextColor = Theme.primaryText
+        modeSwitcher.highlightColor = Theme.accent
+        modeSwitcher.backgroundColor = Theme.primaryBackground
+        modeSwitcher.font = Theme.body1
 
         quoteTextField.font = UIFont.customBold(size: 60)
         quoteTextField.textColor = Theme.primaryText
@@ -206,11 +230,15 @@ private extension ExchangeBuySellViewController {
         }
 
         baseLabel.font = Theme.body2
+        fullScreenErrorView.isHidden = true
         update(with: loopController?.model as? ExchangeModel, consumer: nil)
     }
     
     func addNavigationBarButtons() {
         navigationItem.rightBarButtonItem = .close()
+
+        modeSwitcher.setSelected(0)
+        navigationItem.titleView = modeSwitcher
 
         guard E.isDebug else {
             return
@@ -225,8 +253,8 @@ private extension ExchangeBuySellViewController {
     }
 
     func contentViews() -> [UIView] {
-        [quoteTextField, baseLabel, baseView, offerView, numberKeyboard,
-         ctaButton, limitLabel]
+        [quoteTextField, baseLabel, inputPresetsPicker, baseView, offerView,
+         numberKeyboard, fullScreenErrorView, ctaButton, limitLabel]
     }
     
     func topPadding() -> CGFloat {
@@ -252,6 +280,24 @@ private extension ExchangeBuySellViewController {
 
         return C.padding[5] + Padding.half
     }
+
+    func setSellFullScreenErrorHidden(_ hidden: Bool) {
+        contentViews().forEach { $0.isHidden = !hidden }
+        fullScreenErrorView.isHidden = hidden
+    }
+}
+
+// MARK: - SegmentedControlDelegate
+
+extension ExchangeBuySellViewController: SegmentedControlDelegate {
+
+    func segmentedControl(_ segmentedControl: SegmentedControl, didSelect index: Int) {
+        if index == 0 {
+            consumer?.accept(.OnChangeModeClicked(mode: .buy))
+        } else {
+            consumer?.accept(.OnChangeModeClicked(mode: .sell))
+        }
+    }
 }
 
 // MARK: - Constant
@@ -262,5 +308,7 @@ private extension ExchangeBuySellViewController {
 
     enum Constant {
         static let iconSize: CGFloat = 33
+        static let segmentWidth: CGFloat = 83
+        static let segmentHeight: CGFloat = 31
     }
 }

@@ -12,7 +12,6 @@ import android.net.Uri
 import com.breadwallet.R
 import com.breadwallet.tools.util.Link
 import com.breadwallet.ui.ViewEffect
-import com.breadwallet.ui.navigation.INavigationTarget
 import com.breadwallet.ui.navigation.NavigationEffect
 import com.breadwallet.ui.navigation.NavigationTarget
 import com.breadwallet.util.CurrencyCode
@@ -216,15 +215,15 @@ object SettingsScreen {
 
         object ShowConfirmExportTransactions : F(), NavigationEffect {
             override val navigationTarget = NavigationTarget.AlertDialog(
-                    titleResId = R.string.ExportConfirmation_title,
-                    messageResId = R.string.ExportConfirmation_message,
-                    positiveButtonResId = R.string.ExportConfirmation_continue,
-                    negativeButtonResId = R.string.ExportConfirmation_cancel,
-                    dialogId = CONFIRM_EXPORT_TRANSACTIONS_DIALOG
-                )
+                titleResId = R.string.ExportConfirmation_title,
+                messageResId = R.string.ExportConfirmation_message,
+                positiveButtonResId = R.string.ExportConfirmation_continue,
+                negativeButtonResId = R.string.ExportConfirmation_cancel,
+                dialogId = CONFIRM_EXPORT_TRANSACTIONS_DIALOG
+            )
         }
 
-        object GenerateTransactionsExportFile: F()
+        object GenerateTransactionsExportFile : F()
 
         object EnableNativeExchangeUI : F()
 

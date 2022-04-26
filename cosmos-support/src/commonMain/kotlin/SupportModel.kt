@@ -8,10 +8,8 @@
  */
 package com.brd.support
 
-import com.brd.support.SupportModel.State
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
+import com.brd.support.SupportModel.*
+import kotlinx.serialization.*
 
 data class SupportModel(
     /** Current [State] */
@@ -32,6 +30,8 @@ data class SupportModel(
     val slug: String? = null,
     /** Currency code used for deep linking to article */
     val currencyCode: String? = null,
+    /** True if user is viewing a single article without the index. */
+    val deepLinked: Boolean = false,
 ) {
 
     companion object {
@@ -40,7 +40,11 @@ data class SupportModel(
          * `Destination` optionally deep link into article or section
          */
         fun create(slug: String? = null, currencyCode: String? = null): SupportModel {
-            return SupportModel(slug = slug, currencyCode = currencyCode)
+            return SupportModel(
+                slug = slug,
+                currencyCode = currencyCode,
+                deepLinked = !slug.isNullOrBlank() || !currencyCode.isNullOrBlank(),
+            )
         }
     }
 
@@ -52,13 +56,20 @@ data class SupportModel(
         object Index : State()
 
         /** Display selected section */
-        data class Section(val section: SupportModel.Section) : State()
+        data class Section(
+            val section: SupportModel.Section,
+            val articles: List<SupportModel.Article>,
+        ) : State()
 
         /** Display selected article */
         data class Article(val article: SupportModel.Article) : State()
 
         /** Display search results */
-        data class Search(val results: List<SupportModel.Article>) : State()
+        data class Search(val results: List<SupportModel.Article>) : State() {
+            override fun toString(): String {
+                return "Search(results=(size:${results.size}))"
+            }
+        }
     }
 
     /**
@@ -68,7 +79,15 @@ data class SupportModel(
         "Support.$action"
 
     override fun toString(): String {
-        return "SupportModel(sections=${sections.count()}, articles=${articles.count()})"
+        return "SupportModel(" +
+            "state=$state, " +
+            "slug=$slug, " +
+            "currencyCode=$currencyCode, " +
+            "selectedSession=$selectedSection, " +
+            "selectedArticle=$selectedArticle, " +
+            "sections=${sections.size}, " +
+            "articles=${articles.size}" +
+            ")"
     }
 
     @Serializable
@@ -90,5 +109,17 @@ data class SupportModel(
         @SerialName("label_names")
         val labelNames: List<String> = emptyList(),
         val body: String,
-    )
+    ) {
+        override fun toString(): String {
+            return "Article(" +
+                "id=$id, " +
+                "title=(size:${title.length}), " +
+                "sectionId=$sectionId, " +
+                "promoted=$promoted, " +
+                "position=$position, " +
+                "labelNames=$labelNames, " +
+                "body=(size:${body.length})" +
+                ")"
+        }
+    }
 }

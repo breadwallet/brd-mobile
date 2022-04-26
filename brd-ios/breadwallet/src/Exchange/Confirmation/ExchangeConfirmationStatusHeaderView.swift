@@ -12,6 +12,9 @@ import UIKit
 
 class ExchangeConfirmationStatusHeaderView: UIView {
 
+    var successfulColorOverride: UIColor?
+    var confettyStyle: ConfettyView.Style = .default
+
     private(set) var state: State = .processing
 
     private lazy var imageView = UIImageView()
@@ -33,6 +36,7 @@ class ExchangeConfirmationStatusHeaderView: UIView {
     }
 
     func animateConfetty() {
+        confettyView.style = confettyStyle
         confettyView.animateConfetty()
     }
 
@@ -114,7 +118,7 @@ private extension ExchangeConfirmationStatusHeaderView {
             imageView.image = UIImage(named: "deletecircle")
             label.text = S.Exchange.Order.Status.failed
         case .sent:
-            backgroundColor = .brdGreen
+            backgroundColor = successfulColorOverride ?? .brdGreen
             imageView.removeActivityIndicator()
             imageView.image = UIImage(named: "CircleCheckSolid")
             label.text = S.Exchange.Order.Status.sent

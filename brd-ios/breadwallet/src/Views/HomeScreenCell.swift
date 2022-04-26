@@ -51,7 +51,8 @@ class HomeScreenCell: UITableViewCell, Subscriber {
     private let tokenBalance = UILabel(font: Theme.body3, color: Theme.secondaryText)
     private let syncIndicator = SyncingIndicator(style: .home)
     private let priceChangeView = PriceChangeView(style: .percentOnly)
-    
+    private let backgroundOverlayImageView = UIImageView()
+
     let container = Background()    // not private for inheritance
         
     private var isSyncIndicatorVisible: Bool = false {
@@ -107,6 +108,8 @@ class HomeScreenCell: UITableViewCell, Subscriber {
                                 self.syncIndicator.progress = progress
                             }
         })
+
+        backgroundOverlayImageView.image = viewModel.backgroundOverlayImage
     }
     
     func setupViews() {
@@ -117,6 +120,7 @@ class HomeScreenCell: UITableViewCell, Subscriber {
 
     private func addSubviews() {
         contentView.addSubview(container)
+        container.addSubview(backgroundOverlayImageView)
         container.addSubview(iconContainer)
         iconContainer.addSubview(icon)
         container.addSubview(currencyName)
@@ -170,12 +174,24 @@ class HomeScreenCell: UITableViewCell, Subscriber {
         layoutIfNeeded()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let imageSize = backgroundOverlayImageView.image?.size ?? CGSize(width: 1, height: 1)
+        let size = CGSize(
+            width: bounds.height * imageSize.width / imageSize.height,
+            height: bounds.height
+        )
+        let origin = CGPoint(x: bounds.width - size.width, y: 0)
+        backgroundOverlayImageView.frame = CGRect(origin: origin, size: size)
+    }
+
     private func setupStyle() {
         selectionStyle = .none
         backgroundColor = .clear
         iconContainer.layer.cornerRadius = 6.0
         iconContainer.clipsToBounds = true
         icon.tintColor = .white
+        backgroundOverlayImageView.contentMode = .scaleAspectFit
     }
     
     override func prepareForReuse() {

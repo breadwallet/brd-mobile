@@ -10,7 +10,7 @@ package com.breadwallet.ui.settings.segwit
 
 import android.content.Context
 import com.breadwallet.breadbox.BreadBox
-import com.breadwallet.crypto.AddressScheme
+import com.blockset.walletkit.AddressScheme
 import com.breadwallet.tools.manager.BRSharedPrefs
 import com.breadwallet.ui.settings.segwit.EnableSegWit.E
 import com.breadwallet.ui.settings.segwit.EnableSegWit.F

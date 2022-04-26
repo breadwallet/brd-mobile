@@ -20,8 +20,8 @@ import android.util.Log;
 
 import com.breadwallet.app.ApplicationLifecycleObserver;
 import com.breadwallet.app.BreadApp;
-import com.breadwallet.crypto.Cipher;
-import com.breadwallet.crypto.Key;
+import com.blockset.walletkit.Cipher;
+import com.blockset.walletkit.Key;
 import com.breadwallet.logger.Logger;
 import com.breadwallet.tools.crypto.CryptoHelper;
 import com.breadwallet.tools.security.BrdUserManager;
@@ -42,7 +42,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.platform.sqlite.PlatformSqliteHelper.KV_STORE_TABLE_NAME;
-import static org.kodein.di.TypesKt.TT;
+import static org.kodein.type.TypeTokensJVMKt.erased;
 
 public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
     private static final String TAG = ReplicatedKVStore.class.getName();
@@ -94,7 +94,7 @@ public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
             Log.e(TAG, "encrypt: app is null");
             return null;
         }
-        if (mTempAuthKey == null) cacheKeyIfNeeded(app);
+        if (mTempAuthKey == null) cacheKeyIfNeeded();
         if (Utils.isNullOrEmpty(mTempAuthKey)) {
             Log.e(TAG, "encrypt: authKey is empty: " + (mTempAuthKey == null ? null : mTempAuthKey.length));
             return null;
@@ -137,7 +137,7 @@ public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
         if (app == null) app = BreadApp.getBreadContext();
         if (app == null) return null;
         if (mTempAuthKey == null)
-            cacheKeyIfNeeded(app);
+            cacheKeyIfNeeded();
 
         final Key key = Key.createFromPrivateKeyString(mTempAuthKey).orNull();
         if (key == null) {
@@ -150,7 +150,7 @@ public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
         final Cipher cipher = Cipher.createForChaCha20Poly1305(key, nonce, ad);
 
         // Fix for encryption issue in < 4.0 builds
-        byte[] migratedText = com.breadwallet.crypto.System.migrateBRCoreKeyCiphertext(
+        byte[] migratedText = com.blockset.walletkit.System.migrateBRCoreKeyCiphertext(
                 key,
                 nonce,
                 ad,
@@ -161,9 +161,9 @@ public class ReplicatedKVStore implements Function1<Lifecycle.Event, Unit> {
         return cipher.decrypt(cipherText).orNull();
     }
 
-    private static void cacheKeyIfNeeded(Context context) {
+    private static void cacheKeyIfNeeded() {
         if (Utils.isNullOrEmpty(mTempAuthKey)) {
-            BrdUserManager userManager = BreadApp.getKodeinInstance().Instance(TT(BrdUserManager.class), null);
+            BrdUserManager userManager = BreadApp.getKodeinInstance().Instance(erased(BrdUserManager.class), null);
             mTempAuthKey = userManager.getAuthKey();
             if (mTempAuthKey == null) Log.e(TAG, "cacheKeyIfNeeded: FAILED, still null!");
             ApplicationLifecycleObserver.Companion.addApplicationLifecycleListener(instance);

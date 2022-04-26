@@ -1,5 +1,7 @@
 package com.platform;
 
+import static org.kodein.type.TypeTokensJVMKt.erased;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +38,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.kodein.di.TypesKt.TT;
-
 
 /**
  * BreadWallet
@@ -52,7 +52,6 @@ public class HTTPServer extends AbstractLifeCycle {
     public static final String URL_BUY = "/buy";
     public static final String URL_TRADE = "/trade";
     public static final String URL_SELL = "/sell";
-    public static final String URL_SUPPORT = "/support";
     public static final String URL_REWARDS = "/rewards";
     public static final String URL_MAP = "/map";
     private static final String PLATFORM_BASE_URL = "http://127.0.0.1:";
@@ -67,7 +66,7 @@ public class HTTPServer extends AbstractLifeCycle {
     private Context mContext; // TODO Inject when implementing dependency injection.
 
     private HTTPServer() {
-        mContext = BreadApp.getKodeinInstance().Instance(TT(Application.class), null);
+        mContext = BreadApp.getKodeinInstance().Instance(erased(Application.class), null);
     }
 
     public static synchronized HTTPServer getInstance() {

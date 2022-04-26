@@ -10,8 +10,7 @@ package com.breadwallet.breadbox
 
 import android.util.Base64
 import com.breadwallet.BuildConfig
-import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Key
 import com.breadwallet.logger.logDebug
 import com.breadwallet.logger.logError
 import com.breadwallet.tools.crypto.CryptoHelper
@@ -24,6 +23,7 @@ import com.breadwallet.tools.security.BrdUserState
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
@@ -52,10 +52,12 @@ private const val BDB_TOKEN_KEY = "BDB_TOKEN"
 
 class BdbAuthInterceptor(
     private val httpClient: OkHttpClient,
-    private val userManager: BrdUserManager
+    private val userManager: BrdUserManager,
+    scope: CoroutineScope
 ) : Interceptor {
 
-    private val mutex = Mutex()
+    private val mutex =
+        Mutex()
 
     private val jwtHeader = JSONObject()
         .put("alg", "ES256")
@@ -68,7 +70,9 @@ class BdbAuthInterceptor(
     init {
         if (BuildConfig.USE_REMOTE_CONFIG) {
             clientToken = Firebase.remoteConfig.getString(BDB_TOKEN_KEY)
-            BreadApp.applicationScope.launch { fetchClientToken() }
+            scope.launch {
+                fetchClientToken()
+            }
         } else {
             clientToken = BuildConfig.BDB_CLIENT_TOKEN
         }

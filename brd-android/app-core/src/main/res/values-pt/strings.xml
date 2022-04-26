@@ -86,10 +86,10 @@
     <string name="Alerts.sendSuccessSubheader">Dinheiro Enviado!</string>
     <!-- Fingerprint was recognized by the scanner -->
     <string name="Alerts.touchIdSucceeded.android">Impressão digital reconhecida</string>
-    <!-- Tell the user where they can enable permissions to access device storage. -->
-    <string name="Android.allowFileSystemAccess">Agradecemos que ative as permissões de armazenamento nas definições do seu dispositivo: \"Definições\" &gt; \"Aplicações\" &gt; \"BRD\" &gt; \"Permissões\".</string>
     <!-- The "home" screen is the name of the top level menu for the app. -->
     <string name="Android.BCH.welcome.message">Qualquer BCH existente na sua carteira pode ser acedido através do ecrã principal.</string>
+    <!-- Tell the user where they can enable permissions to access device storage. -->
+    <string name="Android.allowFileSystemAccess">Agradecemos que ative as permissões de armazenamento nas definições do seu dispositivo: \"Definições\" &gt; \"Aplicações\" &gt; \"BRD\" &gt; \"Permissões\".</string>
     <!-- Warning about using apps that can alter the screen -->
     <string name="Android.screenAlteringMessage">O BRD não vai funcionar adequadamente se não forem desativadas as aplicações que alteram o ecrã (tais como a Twilight).</string>
     <!-- An app that alters the screen ("screen-altering app") has been detected. -->
@@ -134,6 +134,8 @@
     <string name="BitID.success">Autenticado com sucesso</string>
     <!-- BitID Authentication Request alert view title -->
     <string name="BitID.title">Pedido de autenticação BitID</string>
+    <!-- Button to return to the "home" screen (the home screen is the top menu). -->
+    <string name="Button.Home">Página inicial</string>
     <!-- As in "(tap here to) buy (bitcoin)" -->
     <string name="Button.buy">Comprar</string>
     <!-- Cancel button label -->
@@ -148,8 +150,6 @@
     <string name="Button.dismiss">Descartar</string>
     <!-- Done button title -->
     <string name="Button.done">Feito</string>
-    <!-- Button to return to the "home" screen (the home screen is the top menu). -->
-    <string name="Button.Home">Página inicial</string>
     <!-- Ignore button label -->
     <string name="Button.ignore">Ignorar</string>
     <!-- Maybe Later button label -->
@@ -213,6 +213,14 @@
     <string name="CloudBackup.step4">Verifique se o chaveiro do iCloud está ligado</string>
     <string name="CloudBackup.understandText">Entendo que este recurso não funcionará a menos que o iCloud Keychain esteja ativado.</string>
     <string name="CloudBackup.warningBody">Seu backup do iCloud será apagado após mais %1$@ tentativas incorretas de PIN.</string>
+    <string name="ConfirmGift.paperWalletAmount">Quantidade de carteira de papel</string>
+    <string name="ConfirmGift.processingTime">A validação desta carteira de papel na rede pode levar até 60 minutos</string>
+    <!-- Confirm paper phrase error message -->
+    <string name="ConfirmPaperPhrase.error">As palavras inseridas não correspondem à sua frase de recuperação. Por favor, tente novamente.</string>
+    <!-- Confirm paper phrase view label. -->
+    <string name="ConfirmPaperPhrase.label">Para se certificar de que tudo foi escrito corretamente, digite as seguintes palavras da sua frase de recuperação.</string>
+    <!-- Word label eg. Word #1, Word #2 -->
+    <string name="ConfirmPaperPhrase.word">Palavra #%1$s</string>
     <!-- Amount to Send: ($1.00) -->
     <string name="Confirmation.amountLabel">Montante a enviar:</string>
     <string name="Confirmation.destinationTag">Tag de Destino</string>
@@ -233,14 +241,6 @@
     <string name="Confirmation.to">Para</string>
     <!-- Total Cost: ($5.00) -->
     <string name="Confirmation.totalLabel">Custo total</string>
-    <string name="ConfirmGift.paperWalletAmount">Quantidade de carteira de papel</string>
-    <string name="ConfirmGift.processingTime">A validação desta carteira de papel na rede pode levar até 60 minutos</string>
-    <!-- Confirm paper phrase error message -->
-    <string name="ConfirmPaperPhrase.error">As palavras inseridas não correspondem à sua frase de recuperação. Por favor, tente novamente.</string>
-    <!-- Confirm paper phrase view label. -->
-    <string name="ConfirmPaperPhrase.label">Para se certificar de que tudo foi escrito corretamente, digite as seguintes palavras da sua frase de recuperação.</string>
-    <!-- Word label eg. Word #1, Word #2 -->
-    <string name="ConfirmPaperPhrase.word">Palavra #%1$s</string>
     <string name="CreateGift.amountLabel">Escolha o valor ($ USD)</string>
     <string name="CreateGift.create">Crio</string>
     <string name="CreateGift.customAmountHint">Montante personalizado (máximo de $ 500)</string>
@@ -270,14 +270,14 @@
     <string name="DefaultCurrency.rateLabel">Taxa de Câmbio</string>
     <!-- The wallet is disabled. -->
     <string name="Disabled.title">Carteira desativada</string>
-    <!-- Share address by e-mail subject -->
-    <string name="Email.address_subject">%1$s Endereço</string>
     <!-- Service capabilities description -->
     <string name="EME.permissions.accountRequest">Requisitar %1$s dados da conta</string>
     <!-- Service capabilities description -->
     <string name="EME.permissions.callRequest">Requisitar %1$s ligação de contrato inteligente</string>
     <!-- Service capabilities description -->
     <string name="EME.permissions.paymentRequest">Requisitar %1$s pagamento</string>
+    <!-- Share address by e-mail subject -->
+    <string name="Email.address_subject">%1$s Endereço</string>
     <!-- Email unavailable alert title -->
     <string name="ErrorMessages.emailUnavailableMessage">Este dispositivo não está configurado para enviar emails com a app Mail do iOS.</string>
     <!-- Email unavailable alert title -->
@@ -290,10 +290,8 @@
     <string name="ErrorMessages.messagingUnavailableTitle">Mensagens Indisponíveis</string>
     <!-- Fingerprint was not recognized by the scanner, please try scanning again -->
     <string name="ErrorMessages.touchIdFailed.android">Impressão digital não reconhecida. Por favor, tente novamente.</string>
-    <!-- Exchange available balance label -->
-    <string name="Exchange.available">Available: %s</string>
-    <!-- Exchange buy title -->
-    <string name="Exchange.buy">Buy</string>
+    <string name="Exchange.Browser.orderHistoryTitle">Order History</string>
+    <string name="Exchange.Browser.rewardsTitle">Rewards</string>
     <!-- CTA button title exchange screen -->
     <string name="Exchange.CTA.loading">Loading ...</string>
     <!-- CTA button title exchange screen -->
@@ -309,6 +307,137 @@
     <!-- CTA action exchange to set to min trade amount -->
     <!--CTA action exchange to set to min trade amount-->
     <string name="Exchange.CTA.setMin">Set amount to min %s</string>
+    <!-- Transaction error alert body -->
+    <string name="Exchange.ErrorState.CreateTransferFailed">Create transfer failed</string>
+    <!-- Transaction error alert body -->
+    <string name="Exchange.ErrorState.feeEstimateFailed">Fee Estimate Failed</string>
+    <!-- Initialization error alert body -->
+    <string name="Exchange.ErrorState.initialization">Initialization error</string>
+    <!-- Insufficient chain error alert body -->
+    <string name="Exchange.ErrorState.insufficientNativeBalanceError">%1$s uses the %2$s network which requires %3$s to pay transaction fees.</string>
+    <!-- Insufficient chain error alert ok action -->
+    <string name="Exchange.ErrorState.insufficientNativeBalanceErrorConfirm">Top up %1$s balance</string>
+    <string name="Exchange.ErrorState.insufficientNativeBalanceErrorSecondary">Network fee of %1$s %2$s required.</string>
+    <!-- Insufficient chain error alert title -->
+    <string name="Exchange.ErrorState.insufficientNativeBalanceErrorTitle">%1$s Balance Low</string>
+    <!-- Transaction error alert body -->
+    <string name="Exchange.ErrorState.insufficientNativeWalletBalance">Insufficient %1$s native wallet balance, you will need at least %1$s to proceed.</string>
+    <!-- Network error alert body -->
+    <string name="Exchange.ErrorState.network">Network error</string>
+    <!-- Order error alert body -->
+    <string name="Exchange.ErrorState.order">Order error</string>
+    <!-- Transaction error alert body -->
+    <string name="Exchange.ErrorState.transaction">Transaction error</string>
+    <!-- Unknown error alert body -->
+    <string name="Exchange.ErrorState.unknown">Unknown error</string>
+    <!-- Region error alert body -->
+    <string name="Exchange.ErrorState.unsupportedRegionError">Region you selected is not supported, please select different region</string>
+    <!-- Promotion CTA -->
+    <string name="Exchange.FeaturePromotion.CTA">Let\'s see it!</string>
+    <!-- Buy promotion body -->
+    <string name="Exchange.FeaturePromotion.buyBody">There\'s no better time to invest than today with our streamlined new interface.</string>
+    <!-- Buy promotion title -->
+    <string name="Exchange.FeaturePromotion.buyTitle">Buy &amp; sell is now easier than ever!</string>
+    <!-- Trade promotion body -->
+    <string name="Exchange.FeaturePromotion.tradeBody">Trade your assets into another with just a few taps. Walk and trade baby!</string>
+    <!-- Trade promotion title -->
+    <string name="Exchange.FeaturePromotion.tradeTitle">Trading assets is now even easier!</string>
+    <!-- Empty wallet message body -->
+    <string name="Exchange.FullScreenErrorState.emptyWalletBody">It looks like you don’t have any assets in your wallet to sell yet.</string>
+    <!-- CTA title for empty wallet trade screen -->
+    <string name="Exchange.FullScreenErrorState.emptyWalletCTA">Buy Now</string>
+    <!-- Empty wallet message title -->
+    <string name="Exchange.FullScreenErrorState.emptyWalletTitle">Your wallet is empty</string>
+    <!-- Selling unavailable message -->
+    <string name="Exchange.FullScreenErrorState.sellingNoAssetsBody">Looks like you’re not holding assets that can be sold yet.</string>
+    <!-- Selling unavailable CTA -->
+    <string name="Exchange.FullScreenErrorState.sellingNoAssetsCTA">Buy now</string>
+    <!-- Selling unavailable message title -->
+    <string name="Exchange.FullScreenErrorState.sellingNoAssetsTitle">No assets to sell</string>
+    <!-- Selling unavailable message -->
+    <string name="Exchange.FullScreenErrorState.sellingUnavailableBody">We don’t have a partner that supports selling to %1$s in %2$s yet.</string>
+    <!-- Selling unavailable CTA -->
+    <string name="Exchange.FullScreenErrorState.sellingUnavailableCTA">Change location / currency</string>
+    <!-- Selling unavailable message title -->
+    <string name="Exchange.FullScreenErrorState.sellingUnavailableTitle">Selling Unavailable</string>
+    <!-- InputError BalanceLow text -->
+    <string name="Exchange.InputError.BalanceLow">Insufficient balance</string>
+    <!-- "CTA button label -->
+    <string name="Exchange.Order.CTA.great">Great!</string>
+    <!-- "View receipt -->
+    <string name="Exchange.Order.CTA.receipt">View Receipt</string>
+    <!-- Receipt item label bought -->
+    <string name="Exchange.Order.bought">Bought</string>
+    <!-- Receipt item label delivery -->
+    <string name="Exchange.Order.delivery">Delivery</string>
+    <!-- Receipt item label fees -->
+    <string name="Exchange.Order.fees">Fees</string>
+    <!-- Order footer info explaining exchange rate estimate -->
+    <string name="Exchange.Order.footer">This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.</string>
+    <!-- Receipt item label for -->
+    <string name="Exchange.Order.for">For</string>
+    <!-- Receipt item label method -->
+    <string name="Exchange.Order.method">Method</string>
+    <!-- Status creating order -->
+    <string name="Exchange.Order.status.creating">Creating order</string>
+    <!-- Status failed order -->
+    <string name="Exchange.Order.status.failed">Order failed</string>
+    <!-- Status processing order -->
+    <string name="Exchange.Order.status.processing">Processing</string>
+    <!-- Status sent order -->
+    <string name="Exchange.Order.status.sent">Order sent!</string>
+    <!-- Status successful order -->
+    <string name="Exchange.Order.status.successful">Order Successful!</string>
+    <!-- Trade preview CTA -->
+    <string name="Exchange.Preview.CTA">Trade Now</string>
+    <!-- Rewards status active -->
+    <string name="Exchange.Preview.active">Active</string>
+    <!-- Trade preview footer -->
+    <string name="Exchange.Preview.footer">This is an estimate. The amount you will receive will depend on the market conditions.</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.fulfilledBy">Fulfilled by</string>
+    <!-- Rewards status inactive -->
+    <string name="Exchange.Preview.inactive">Inactive</string>
+    <!-- Rewards info -->
+    <string name="Exchange.Preview.info">Hold 1000 BRD and receive 25% off trading fees </string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.networkFee">Network Fee</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.partnerFee">Partner Fee</string>
+    <!-- Trade preview info item label -->
+    <string name="Exchange.Preview.rate">Rate</string>
+    <!-- Preview items rewards label -->
+    <string name="Exchange.Preview.rewards">BRD Rewards</string>
+    <!-- Trade preview navigation title -->
+    <string name="Exchange.Preview.title">Trade preview</string>
+    <!-- CTA button title for region settings -->
+    <string name="Exchange.Settings.applyRegion">Apply region</string>
+    <!-- County label -->
+    <string name="Exchange.Settings.country">Country</string>
+    <!-- Currency label -->
+    <string name="Exchange.Settings.currency">Display Currency</string>
+    <!-- Region label -->
+    <string name="Exchange.Settings.region">State</string>
+    <!-- Region settings screen title -->
+    <string name="Exchange.Settings.title">Set Region</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.confirmation">Failed to confirm transaction</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.loadInput">Failed to load input</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.noFeeBasis">Failed with no fee bases error</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.pinVerifier">Failed to verify pin</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.sendResult">Failed send transaction with error %s</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.transactionValidation">Failed transaction validation with %s</string>
+    <!-- Crypto transfer error description -->
+    <string name="Exchange.TransferError.validateCurrencyOrAddress">Failed to validate currency or address</string>
+    <!-- Exchange available balance label -->
+    <string name="Exchange.available">Available: %s</string>
+    <!-- Exchange buy title -->
+    <string name="Exchange.buy">Buy</string>
     <!-- Exchange label from -->
     <string name="Exchange.from">From</string>
     <!-- purchase limit -->
@@ -349,96 +478,24 @@
     <string name="Exchange.offer.sectionTitle">All values displayed are estimates and susceptible to market price fluctuations.</string>
     <!-- Offer total -->
     <string name="Exchange.offer.total">Total</string>
-    <!-- Receipt item label bought -->
-    <string name="Exchange.Order.bought">Bought</string>
-    <!-- "CTA button label -->
-    <string name="Exchange.Order.CTA.great">Great!</string>
-    <!-- "View receipt -->
-    <string name="Exchange.Order.CTA.receipt">View Receipt</string>
-    <!-- Receipt item label delivery -->
-    <string name="Exchange.Order.delivery">Delivery</string>
-    <!-- Receipt item label fees -->
-    <string name="Exchange.Order.fees">Fees</string>
-    <!-- Order footer info explaining exchange rate estimate -->
-    <string name="Exchange.Order.footer">This is an estimate. The amount you will receive will depend on the market conditions. These details can be found in your trade history screen.</string>
-    <!-- Receipt item label for -->
-    <string name="Exchange.Order.for">For</string>
-    <!-- Receipt item label method -->
-    <string name="Exchange.Order.method">Method</string>
-    <!-- Status creating order -->
-    <string name="Exchange.Order.status.creating">Creating order</string>
-    <!-- Status failed order -->
-    <string name="Exchange.Order.status.failed">Order failed</string>
-    <!-- Status processing order -->
-    <string name="Exchange.Order.status.processing">Processing</string>
-    <!-- Status sent order -->
-    <string name="Exchange.Order.status.sent">Order sent!</string>
-    <!-- Status successful order -->
-    <string name="Exchange.Order.status.successful">Order Successful!</string>
     <!-- Over the min limit -->
     <string name="Exchange.over">Over</string>
-    <!-- Rewards status active -->
-    <string name="Exchange.Preview.active">Active</string>
-    <!-- Trade preview CTA -->
-    <string name="Exchange.Preview.CTA">Trade Now</string>
-    <!-- Trade preview footer -->
-    <string name="Exchange.Preview.footer">This is an estimate. The amount you will receive will depend on the market conditions.</string>
-    <!-- Trade preview info item label -->
-    <string name="Exchange.Preview.fulfilledBy">Fulfilled by</string>
-    <!-- Rewards status inactive -->
-    <string name="Exchange.Preview.inactive">Inactive</string>
-    <!-- Rewards info -->
-    <string name="Exchange.Preview.info">Hold 1000 BRD and receive 25% off trading fees </string>
-    <!-- Trade preview info item label -->
-    <string name="Exchange.Preview.networkFee">Network Fee</string>
-    <!-- Trade preview info item label -->
-    <string name="Exchange.Preview.partnerFee">Partner Fee</string>
-    <!-- Trade preview info item label -->
-    <string name="Exchange.Preview.rate">Rate</string>
-    <!-- Preview items rewards label -->
-    <string name="Exchange.Preview.rewards">BRD Rewards</string>
-    <!-- Trade preview navigation title -->
-    <string name="Exchange.Preview.title">Trade preview</string>
     <!-- Exchange select asset button label -->
     <string name="Exchange.selectAsset">Select Asset</string>
     <!-- Exchange sell title -->
     <string name="Exchange.sell">Sell</string>
-    <!-- CTA button title for region settings -->
-    <string name="Exchange.Settings.applyRegion">Apply region</string>
-    <!-- County label -->
-    <string name="Exchange.Settings.country">Country</string>
-    <!-- Currency label -->
-    <string name="Exchange.Settings.currency">Currency</string>
-    <!-- Region label -->
-    <string name="Exchange.Settings.region">Region</string>
-    <!-- Region settings screen title -->
-    <string name="Exchange.Settings.title">My preferred region</string>
     <!-- Exchange label to -->
     <string name="Exchange.to">To</string>
     <!-- Exchange trade title -->
     <string name="Exchange.trade">Trade</string>
     <!-- Trade cancel alert body -->
-    <string name="Exchange.tradeCancelAlertBody">All your progress will be lost.</string>
+    <string name="Exchange.tradeCancelAlertBody">View order details in Menu -&gt; Order History</string>
     <!-- Trade cancel alert no button -->
     <string name="Exchange.tradeCancelAlertNo">No</string>
     <!-- Trade cancel alert title -->
-    <string name="Exchange.tradeCancelAlertTitle">Are you sure?</string>
+    <string name="Exchange.tradeCancelAlertTitle">Exit Checkout?</string>
     <!-- Trade cancel alert yes button -->
     <string name="Exchange.tradeCancelAlertYes">Yes</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.confirmation">Failed to confirm transaction</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.loadInput">Failed to load input</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.noFeeBasis">Failed with no fee bases error</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.pinVerifier">Failed to verify pin</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.sendResult">Failed send transaction with error %s</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.transactionValidation">Failed transaction validation with %s</string>
-    <!-- Crypto transfer error description -->
-    <string name="Exchange.TransferError.validateCurrencyOrAddress">Failed to validate currency or address</string>
     <!-- Under the min limit -->
     <string name="Exchange.under">Under</string>
     <!-- Offer purchase method ACH -->
@@ -532,10 +589,6 @@
     <string name="HomeScreen.totalAssets">ativos totais</string>
     <!-- "home screen toolbar button -->
     <string name="HomeScreen.trade">Comércio</string>
-    <!-- Checking private key balance progress view text -->
-    <string name="Import.checking">A verificar o saldo da chave privada...</string>
-    <!-- Sweep private key confirmation message -->
-    <string name="Import.confirm">Enviar %1$s desta chave privada para a sua carteira? A rede bitcoin receberá uma taxa de %2$s.</string>
     <!-- Duplicate key error message -->
     <string name="Import.Error.duplicate">Esta chave privada já está na sua carteira.</string>
     <!-- empty private key error message -->
@@ -546,6 +599,12 @@
     <string name="Import.Error.notValid">Não é uma chave privada válida</string>
     <!-- Import signing error message -->
     <string name="Import.Error.signing">Erro a assinar transação</string>
+    <!-- Successfully imported wallet message body -->
+    <string name="Import.SuccessBody">Chave privada resgatada com êxito.</string>
+    <!-- Checking private key balance progress view text -->
+    <string name="Import.checking">A verificar o saldo da chave privada...</string>
+    <!-- Sweep private key confirmation message -->
+    <string name="Import.confirm">Enviar %1$s desta chave privada para a sua carteira? A rede bitcoin receberá uma taxa de %2$s.</string>
     <!-- [Redeem] the funds stored on this private key. -->
     <string name="Import.importButton">Resgatar</string>
     <!-- Importing wallet progress view label -->
@@ -564,8 +623,6 @@
     <string name="Import.scan">Digitalizar Chave Privada</string>
     <!-- Import wallet success alert title -->
     <string name="Import.success">Sucesso</string>
-    <!-- Successfully imported wallet message body -->
-    <string name="Import.SuccessBody">Chave privada resgatada com êxito.</string>
     <!-- Import Wallet screen title -->
     <string name="Import.title">Resgatar Chave Privada</string>
     <!-- Unlocking Private key activity view message. -->
@@ -739,10 +796,10 @@
     <string name="Prompts.NoScreenLock.body.android">É necessário um bloqueio de ecrã no dispositivo para salvaguardar a sua carteira. Vá a \"Definições\" &gt; \"Segurança\" &gt; \"Bloqueio de ecrã\" e ative para continuar.</string>
     <!-- Device encryption prompt title -->
     <string name="Prompts.NoScreenLock.title.android">Bloqueio de ecrã desativado</string>
-    <!-- Warning about recovery phrase (formerly paper key). -->
-    <string name="Prompts.PaperKey.body">Sua frase de recuperação deve ser salva para o caso de você perder ou trocar de telefone.</string>
     <!-- Warning about paper key (Android-version) -->
     <string name="Prompts.PaperKey.Body.Android">Configure sua frase de recuperação para o caso de você perder ou substituir seu telefone. Sua chave também é necessária se você alterar as configurações de segurança do telefone.</string>
+    <!-- Warning about recovery phrase (formerly paper key). -->
+    <string name="Prompts.PaperKey.body">Sua frase de recuperação deve ser salva para o caso de você perder ou trocar de telefone.</string>
     <!-- An action is required (You must do this action). -->
     <string name="Prompts.PaperKey.title">Ação Necessária</string>
     <string name="Prompts.RateApp.dontShow">Não pergunte novamente</string>
@@ -778,10 +835,10 @@
     <string name="PushNotifications.disabled">Notificações Desativadas</string>
     <!-- Body text when push notifications are disabled. -->
     <string name="PushNotifications.disabledBody">Ative as notificações para receber ofertas especiais e atualizações do BRD.</string>
-    <!-- Body text when push notifications are enabled. -->
-    <string name="PushNotifications.enabledBody">Está a receber ofertas especiais e atualizações do BRD.</string>
     <!-- Instructions to enable push notifications for BRD in the phone's system settings. -->
     <string name="PushNotifications.enableInstructions">Parece que as notificações estão desativadas. Vá para Configurações para ativar as notificações do BRD.</string>
+    <!-- Body text when push notifications are enabled. -->
+    <string name="PushNotifications.enabledBody">Está a receber ofertas especiais e atualizações do BRD.</string>
     <!-- Push notifications toggle switch label -->
     <string name="PushNotifications.label">Receber Notificações Push</string>
     <!-- Push notifications are off label -->
@@ -800,6 +857,28 @@
     <string name="RateAppPrompt.Button.RateApp.Android">Avalia a BRD</string>
     <!-- Google play review prompt title -->
     <string name="RateAppPrompt.Title.Android">Avalia a BRD</string>
+    <!-- Alert action button label -->
+    <string name="ReScan.alertAction">Sincronizar</string>
+    <!-- Alert message body -->
+    <string name="ReScan.alertMessage">Não será capaz de enviar dinheiro enquanto estiver a sincronizar.</string>
+    <!-- Alert message title -->
+    <string name="ReScan.alertTitle">Sincronizar com a Blockchain?</string>
+    <!-- extimated time -->
+    <string name="ReScan.body1">20-45 minutos</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body2">Se uma transação aparece como concluída na sua rede bitcoin mas não na sua BRD.</string>
+    <!-- Syncing explanation -->
+    <string name="ReScan.body3">Recebe repetidamente uma mensagem de erro dizendo que a sua transação foi rejeitada.</string>
+    <!-- Start Sync button label -->
+    <string name="ReScan.buttonTitle">Começar Sincronização</string>
+    <!-- Sync blockchain view footer -->
+    <string name="ReScan.footer">Não será capaz de enviar dinheiro enquanto estiver a sincronizar com a blockchain.</string>
+    <!-- Sync Blockchain view header -->
+    <string name="ReScan.header">Sincronizar Blockchain</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader1">Tempo previsto</string>
+    <!-- Subheader label -->
+    <string name="ReScan.subheader2">Quando sincronizar?</string>
     <!-- Address copied message. -->
     <string name="Receive.copied">Copiado para a área de transferência.</string>
     <!-- Share via email button label -->
@@ -912,28 +991,6 @@
     <string name="RequestAnAmount.noAmount">Primeiro, por favor, introduza um montante.</string>
     <!-- Request a specific amount of bitcoin -->
     <string name="RequestAnAmount.title">Pedir uma Quantia</string>
-    <!-- Alert action button label -->
-    <string name="ReScan.alertAction">Sincronizar</string>
-    <!-- Alert message body -->
-    <string name="ReScan.alertMessage">Não será capaz de enviar dinheiro enquanto estiver a sincronizar.</string>
-    <!-- Alert message title -->
-    <string name="ReScan.alertTitle">Sincronizar com a Blockchain?</string>
-    <!-- extimated time -->
-    <string name="ReScan.body1">20-45 minutos</string>
-    <!-- Syncing explanation -->
-    <string name="ReScan.body2">Se uma transação aparece como concluída na sua rede bitcoin mas não na sua BRD.</string>
-    <!-- Syncing explanation -->
-    <string name="ReScan.body3">Recebe repetidamente uma mensagem de erro dizendo que a sua transação foi rejeitada.</string>
-    <!-- Start Sync button label -->
-    <string name="ReScan.buttonTitle">Começar Sincronização</string>
-    <!-- Sync blockchain view footer -->
-    <string name="ReScan.footer">Não será capaz de enviar dinheiro enquanto estiver a sincronizar com a blockchain.</string>
-    <!-- Sync Blockchain view header -->
-    <string name="ReScan.header">Sincronizar Blockchain</string>
-    <!-- Subheader label -->
-    <string name="ReScan.subheader1">Tempo previsto</string>
-    <!-- Subheader label -->
-    <string name="ReScan.subheader2">Quando sincronizar?</string>
     <!-- Rewards view expanded body. -->
     <string name="RewardsView.expandedBody">Saiba como pode poupar em comissões de negociação e desbloqueie recompensas futuras.</string>
     <!-- Rewards view expanded title. -->
@@ -977,19 +1034,24 @@
     <string name="SecurityCenter.touchIdTitle">Touch ID</string>
     <!-- Security center fingerprint authentication button -->
     <string name="SecurityCenter.touchIdTitle.android">Autenticação por Impressão Digital</string>
+    <!-- Segwit extra confirmation title. -->
+    <string name="Segwit.ConfirmChoiceLayout">A ativação do SegWit é uma opção irreversível. Tem a certeza de que pretende continuar?</string>
     <!-- Segwit enabled confirmation title -->
     <string name="Segwit.ConfirmationConfirmationTitle">Ativou o SegWit!</string>
     <!-- Segwit enabled confirmation description -->
     <string name="Segwit.ConfirmationInstructionsDescription">Obrigado por ajudar a fazer a bitcoin avançar.</string>
     <!-- Segwit instructions -->
     <string name="Segwit.ConfirmationInstructionsInstructions">O suporte do SegWit ainda é um recurso beta.\nQuando o SegWit estiver ativado, não será possível desativá-lo. Poderá encontrar o endereço legado nas Configurações.\nAlguns serviços de terceiros, incluindo a criptografia, podem estar indisponíveis para utilizadores que ativaram o SegWit. Em caso de emergência, poderá gerar um endereço legado em Preferências&gt; Configurações de Bitcoin.\nO SegWit será automaticamente ativado para todos os utilizadores numa futura atualização.</string>
-    <!-- Segwit extra confirmation title. -->
-    <string name="Segwit.ConfirmChoiceLayout">A ativação do SegWit é uma opção irreversível. Tem a certeza de que pretende continuar?</string>
     <!-- Segwit enableButton -->
     <string name="Segwit.Enable">Ativar</string>
     <!-- Segwit button label that takes the user back to the home screen once SegWit is enabled. -->
     <string name="Segwit.HomeButton">Até à Lua</string>
-    <string name="Send_fio_toLabel">FIO</string>
+    <!-- Adress already used alert message - first part -->
+    <string name="Send.UsedAddress.firstLine">Os endereços de bitcoin destinam-se apenas a uma única utilização.</string>
+    <!-- Adress already used alert message - second part -->
+    <string name="Send.UsedAddress.secondLIne">A reutilização reduz a sua privacidade e a do destinatário e pode resultar em perdas se o destinatário não controlar diretamente o endereço.</string>
+    <!-- Adress already used alert title -->
+    <string name="Send.UsedAddress.title">Endereço Já Utilizado</string>
     <!-- Send money amount label -->
     <string name="Send.amountLabel">Quantia</string>
     <!-- Balance: $4.00 -->
@@ -1000,10 +1062,10 @@
     <string name="Send.cameraUnavailabeMessage.android">Permita o acesso à câmara em \"Definições\" &gt; \"Aplicações\" &gt; \"BRD\" &gt; \"Permissões\"</string>
     <!-- Permission required to access camera -->
     <string name="Send.cameraUnavailabeTitle.android">O BRD não tem autorização para aceder à câmara</string>
-    <!-- Camera not allowed message -->
-    <string name="Send.cameraunavailableMessage">Vá às Definições para permitir acesso à câmara.</string>
     <!-- Camera not allowed alert title -->
     <string name="Send.cameraUnavailableTitle">A BRD não tem autorização para aceder à câmara</string>
+    <!-- Camera not allowed message -->
+    <string name="Send.cameraunavailableMessage">Vá às Definições para permitir acesso à câmara.</string>
     <!-- Warning when sending to self. -->
     <string name="Send.containsAddress">O destino é o seu próprio endereço. Não pode enviar a si mesmo.</string>
     <!-- Could not create transaction alert title -->
@@ -1070,12 +1132,12 @@
     <string name="Send.remoteRequestError">Não foi possível carregar a solicitação de pagamento</string>
     <!-- Scan button label -->
     <string name="Send.scanLabel">Digitalizar</string>
-    <!-- Sending Max: $4.00 for iOS, the balance can't have a parameter -->
-    <string name="Send.sendingMax">Enviando Max: </string>
     <!-- Send button label (the action, "press here to send") -->
     <string name="Send.sendLabel">Enviar</string>
     <!-- Send button label (for special case where the user specified send amount is too high and does not leave a balance to cover fees.) -->
     <string name="Send.sendMaximum">Enviar montante máximo?</string>
+    <!-- Sending Max: $4.00 for iOS, the balance can't have a parameter -->
+    <string name="Send.sendingMax">Enviando Max: </string>
     <!-- Send screen title (as in "this is the screen for sending money") -->
     <string name="Send.title">Enviar</string>
     <!-- Send money to label -->
@@ -1083,12 +1145,15 @@
     <string name="Send.udomains_invalid">Invalid address.</string>
     <string name="Send.udomains_noAddress">There is no %1$s address associated with this address.</string>
     <string name="Send.udomains_retrievalError">There was an error retrieving this address. Please try again later.</string>
-    <!-- Adress already used alert message - first part -->
-    <string name="Send.UsedAddress.firstLine">Os endereços de bitcoin destinam-se apenas a uma única utilização.</string>
-    <!-- Adress already used alert message - second part -->
-    <string name="Send.UsedAddress.secondLIne">A reutilização reduz a sua privacidade e a do destinatário e pode resultar em perdas se o destinatário não controlar diretamente o endereço.</string>
-    <!-- Adress already used alert title -->
-    <string name="Send.UsedAddress.title">Endereço Já Utilizado</string>
+    <string name="Send_fio_toLabel">FIO</string>
+    <!-- Enable segwit. -->
+    <string name="Settings.EnableSegwit">Ativar Segwit</string>
+    <!-- View legacy address (old format). -->
+    <string name="Settings.ViewLegacyAddress">Ver Endereço de Receção Legada</string>
+    <!-- Receive Bitcoin instructions -->
+    <string name="Settings.ViewLegacyAddressReceiveDescription">Apenas envie Bitcoin (BTC) para este endereço. Qualquer outro ativo enviado para este endereço será irreversivelmente perdido</string>
+    <!-- Receive Bitcoin -->
+    <string name="Settings.ViewLegacyAddressReceiveTitle">Receber Bitcoin</string>
     <!-- About label -->
     <string name="Settings.about">Sobre</string>
     <!-- Advanced settings header -->
@@ -1107,8 +1172,6 @@
     <string name="Settings.currencySettings">Definições da Moeda</string>
     <!-- Join Early access label -->
     <string name="Settings.earlyAccess">Registe-se no Acesso Antecipado</string>
-    <!-- Enable segwit. -->
-    <string name="Settings.EnableSegwit">Ativar Segwit</string>
     <!-- Are you enjoying bread alert message body -->
     <string name="Settings.enjoying">Está a gostar da BRD?</string>
     <!-- Export transaction history menu item -->
@@ -1121,6 +1184,7 @@
     <string name="Settings.manage">Gerir</string>
     <!-- Notifications label -->
     <string name="Settings.notifications">Notificações</string>
+    <string name="Settings.orderHistory">Order History</string>
     <!-- Section header for "other settings". -->
     <string name="Settings.other">Outro</string>
     <!-- Preferences settings section header -->
@@ -1145,12 +1209,6 @@
     <string name="Settings.touchIdLimit">Limite de Gastos Touch ID</string>
     <!-- The fingerprint spending limit -->
     <string name="Settings.touchIdLimit.android">Limite de Gastos da Autenticação por Impressão Digital</string>
-    <!-- View legacy address (old format). -->
-    <string name="Settings.ViewLegacyAddress">Ver Endereço de Receção Legada</string>
-    <!-- Receive Bitcoin instructions -->
-    <string name="Settings.ViewLegacyAddressReceiveDescription">Apenas envie Bitcoin (BTC) para este endereço. Qualquer outro ativo enviado para este endereço será irreversivelmente perdido</string>
-    <!-- Receive Bitcoin -->
-    <string name="Settings.ViewLegacyAddressReceiveTitle">Receber Bitcoin</string>
     <!-- Wallet Settings section header -->
     <string name="Settings.wallet">Carteira</string>
     <!-- Unlink/delete your wallet from the current device. -->
@@ -1212,12 +1270,12 @@
     <!-- Button label: Unstake the selected baker -->
     <string name="Staking.unstake">Desamarrar</string>
     <string name="Staking.validatorHint">Digite o endereço do validador</string>
+    <!-- Paper key explanation text (Android-version) -->
+    <string name="StartPaperPhrase.Body.Android">Sua frase de recuperação é a única maneira de restaurar seu BRD se seu telefone estiver perdido, roubado, quebrado ou atualizado.\n\nSua frase de recuperação também é necessária se você alterar as configurações de segurança do seu dispositivo.\n\nVamos mostrar-lhe uma lista de palavras para escrever num pedaço de papel e manter em segurança.</string>
     <!-- button label -->
     <string name="StartPaperPhrase.againButtonTitle">Escreva a frase de recuperação novamente</string>
     <!-- Paper key explanation text. -->
     <string name="StartPaperPhrase.body">Sua frase de recuperação é a única maneira de restaurar seu BRD se seu telefone for perdido, roubado, quebrado ou atualizado.\n\nVamos mostrar-lhe uma lista de palavras para anotar num pedaço de papel e manter em segurança.</string>
-    <!-- Paper key explanation text (Android-version) -->
-    <string name="StartPaperPhrase.Body.Android">Sua frase de recuperação é a única maneira de restaurar seu BRD se seu telefone estiver perdido, roubado, quebrado ou atualizado.\n\nSua frase de recuperação também é necessária se você alterar as configurações de segurança do seu dispositivo.\n\nVamos mostrar-lhe uma lista de palavras para escrever num pedaço de papel e manter em segurança.</string>
     <!-- button label -->
     <string name="StartPaperPhrase.buttonTitle">Escreva a frase de recuperação</string>
     <!-- Argument is date; date should be on a new line -->
@@ -1339,9 +1397,9 @@
     <string name="Transaction.stakingTo">apostando em %1$s</string>
     <!-- eg. Starting balance: $50.00 -->
     <string name="Transaction.starting">Saldo inicial: %1$s</string>
+    <string name="Transaction.toRecipient">para %1$s</string>
     <!-- e.g. "[The money you paid was a] Fee for token transfer: BRD" (BRD is the token that was transfered) -->
     <string name="Transaction.tokenTransfer">Taxa para transferência de token: %1$s</string>
-    <string name="Transaction.toRecipient">para %1$s</string>
     <!-- Waiting to be confirmed string -->
     <string name="Transaction.waiting">À espera de confirmação. Alguns comerciantes necessitam de confirmação para concluir uma transação. Tempo estimado: 1-2 horas.</string>
     <!-- e.g. I received money from an account. -->
@@ -1449,6 +1507,14 @@
     <string name="TransactionDirection.address">Recebida neste endereço</string>
     <!-- (this transaction was) Sent to this address: -->
     <string name="TransactionDirection.to">Enviada para este endereço</string>
+    <!-- Authorize to copy wallet address PIN view prompt. -->
+    <string name="URLHandling.addressList">Autorize para copiar o endereço da carteira para a área de transferência</string>
+    <!-- Authorize to copy wallet address alert title -->
+    <string name="URLHandling.addressListAlertTitle">Copiar Endereços da Carteira</string>
+    <!-- Authorize to copy wallet addresses alert message -->
+    <string name="URLHandling.addressaddressListAlertMessage">Copiar endereços da carteira para a área de transferência?</string>
+    <!-- Copy wallet addresses alert button label -->
+    <string name="URLHandling.copy">Copiar</string>
     <!-- Disabled until date -->
     <string name="UnlockScreen.disabled">Desativado até: %1$s</string>
     <!-- Unlock with FaceID accessibility label -->
@@ -1489,14 +1555,6 @@
     <string name="UpdatePin.setPinErrorTitle">Erro a Atualizar PIN</string>
     <!-- Update PIN title -->
     <string name="UpdatePin.updateTitle">Atualizar PIN</string>
-    <!-- Authorize to copy wallet addresses alert message -->
-    <string name="URLHandling.addressaddressListAlertMessage">Copiar endereços da carteira para a área de transferência?</string>
-    <!-- Authorize to copy wallet address PIN view prompt. -->
-    <string name="URLHandling.addressList">Autorize para copiar o endereço da carteira para a área de transferência</string>
-    <!-- Authorize to copy wallet address alert title -->
-    <string name="URLHandling.addressListAlertTitle">Copiar Endereços da Carteira</string>
-    <!-- Copy wallet addresses alert button label -->
-    <string name="URLHandling.copy">Copiar</string>
     <!-- Verify PIN for transaction view body -->
     <string name="VerifyPin.authorize">Por favor, introduza o seu PIN, a fim de autorizar esta transação.</string>
     <!-- Verify PIN view body -->
@@ -1541,14 +1599,6 @@
     <string name="Welcome.body">As Breadwallets mudaram de nome para BRD, com um visual completamente novo e algumas características novas. \n\nSe precisar de ajuda, procure o (?) no canto superior direito da maioria das telas.</string>
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Bem-vindo ao BRD!</string>
-    <!-- Single asset widget description -->
-    <string name="Widget.assetDescription">Mantenha-se atualizado com o seu ativo criptográfico favorito</string>
-    <!-- Asset list widget description -->
-    <string name="Widget.assetListDescription">Mantenha-se atualizado com seus recursos criptográficos favoritos</string>
-    <!-- Asset list widget title -->
-    <string name="Widget.assetListTitle">Lista de ativos</string>
-    <!-- Single asset widget title -->
-    <string name="Widget.assetTitle">Ativo</string>
     <!-- Name of color based on os theme light/dark -->
     <string name="Widget.Color.autoLightDark">Sistema Auto Light / Dark</string>
     <!-- Name of color - Black -->
@@ -1583,6 +1633,14 @@
     <string name="Widget.Color.white">Branco</string>
     <!-- Name of color - Yellow -->
     <string name="Widget.Color.yellow">Amarelo</string>
+    <!-- Single asset widget description -->
+    <string name="Widget.assetDescription">Mantenha-se atualizado com o seu ativo criptográfico favorito</string>
+    <!-- Asset list widget description -->
+    <string name="Widget.assetListDescription">Mantenha-se atualizado com seus recursos criptográficos favoritos</string>
+    <!-- Asset list widget title -->
+    <string name="Widget.assetListTitle">Lista de ativos</string>
+    <!-- Single asset widget title -->
+    <string name="Widget.assetTitle">Ativo</string>
     <!-- Title of color grouping in widget color picker -->
     <string name="Widget.colorSectionBackground">Cores de fundo do tema</string>
     <!-- Title of color grouping in widget color picker -->

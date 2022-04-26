@@ -9,18 +9,17 @@
 package com.breadwallet.effecthandler.metadata
 
 import android.text.format.DateUtils
-import com.breadwallet.app.BreadApp
 import com.breadwallet.breadbox.BreadBox
 import com.breadwallet.breadbox.getSize
 import com.breadwallet.breadbox.hashString
 import com.breadwallet.breadbox.toBigDecimal
-import com.breadwallet.crypto.Transfer
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.Transfer
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.mobius.bindConsumerIn
-import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.util.errorHandler
 import com.breadwallet.platform.entities.TxMetaDataValue
 import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import com.breadwallet.tools.manager.BRSharedPrefs
+import com.breadwallet.util.errorHandler
 import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 import kotlinx.coroutines.CoroutineScope
@@ -45,7 +44,8 @@ import java.math.BigDecimal
 class MetaDataEffectHandler(
     private val output: Consumer<MetaDataEvent>,
     private val metaDataProvider: AccountMetaDataProvider,
-    private val breadBox: BreadBox
+    private val breadBox: BreadBox,
+    private val scope: CoroutineScope,
 ) : Connection<MetaDataEffect>, CoroutineScope {
 
     companion object {
@@ -170,7 +170,7 @@ class MetaDataEffectHandler(
             creationTime
         )
 
-        BreadApp.applicationScope.launch {
+        scope.launch {
             metaDataProvider.putTxMetaData(transaction, metaData)
         }
     }

@@ -13,7 +13,7 @@ import Cosmos
 
 class CosmosViewController: UIViewController, EventSource, Disposable {
 
-    var loopController: MobiusLoopController? = nil
+    var loopController: MobiusLoopController?
     var eventConsumerDelegate: ConsumerDelegate? = ConsumerDelegate(QueuedConsumer())
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,4 +90,3 @@ class CosmosTableViewController: UITableViewController, EventSource, Disposable 
         eventConsumerDelegate?.consumer = nil
     }
 }
-

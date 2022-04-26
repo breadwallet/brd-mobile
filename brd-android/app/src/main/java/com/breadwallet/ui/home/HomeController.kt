@@ -8,12 +8,13 @@
  */
 package com.breadwallet.ui.home
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,7 +24,6 @@ import com.breadwallet.R
 import com.breadwallet.databinding.ControllerHomeBinding
 import com.breadwallet.legacy.presenter.customviews.BRButton
 import com.breadwallet.legacy.presenter.customviews.BREdit
-import com.breadwallet.legacy.presenter.customviews.BaseTextView
 import com.breadwallet.repository.RatesRepository
 import com.breadwallet.tools.animation.SpringAnimator
 import com.breadwallet.tools.manager.BRSharedPrefs
@@ -55,7 +55,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val EMAIL_SUCCESS_DELAY = 3_000L
 private const val NETWORK_TESTNET = "TESTNET"
@@ -70,23 +70,26 @@ class HomeController(
     override val init = HomeScreenInit
     override val flowEffectHandler
         get() = createHomeScreenHandler(
-            checkNotNull(applicationContext),
-            direct.instance(),
-            RatesRepository.getInstance(applicationContext!!),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance(),
-            direct.instance()
+            context = checkNotNull(applicationContext),
+            breadBox = direct.instance(),
+            ratesRepo = RatesRepository.getInstance(applicationContext!!),
+            brdUser = direct.instance(),
+            walletProvider = direct.instance(),
+            featurePromotionService = direct.instance(),
+            accountMetaDataProvider = direct.instance(),
+            connectivityStateProvider = direct.instance(),
+            supportManager = direct.instance()
         )
 
     private val binding by viewBinding(ControllerHomeBinding::inflate)
     private var fastAdapter: GenericFastAdapter? = null
     private var walletAdapter: ModelAdapter<Wallet, WalletListItem>? = null
     private var addWalletAdapter: ItemAdapter<AddWalletItem>? = null
+    private var buyDotAnimator: ObjectAnimator? = null
+    private var tradeDotAnimator: ObjectAnimator? = null
 
     override fun bindView(output: Consumer<E>): Disposable {
-        return with (binding) {
+        return with(binding) {
             buyLayout.setOnClickListener { output.accept(E.OnBuyClicked) }
             tradeLayout.setOnClickListener { output.accept(E.OnTradeClicked) }
             menuLayout.setOnClickListener { output.accept(E.OnMenuClicked) }
@@ -127,7 +130,7 @@ class HomeController(
             rvWalletList.layoutManager = LinearLayoutManager(view.context)
         }
 
-        addWalletAdapter!!.add(AddWalletItem())
+        addWalletAdapter?.add(AddWalletItem())
     }
 
     override fun onAttach(view: View) {
@@ -139,6 +142,8 @@ class HomeController(
         walletAdapter = null
         addWalletAdapter = null
         fastAdapter = null
+        binding.buyPromoIndicator.removePromoAnimator(buyDotAnimator)
+        binding.tradePromoIndicator.removePromoAnimator(tradeDotAnimator)
         super.onDestroyView(view)
     }
 
@@ -153,7 +158,8 @@ class HomeController(
     override fun M.render() {
         with(binding) {
             ifChanged(M::aggregatedFiatBalance) {
-                totalAssetsUsd.text = aggregatedFiatBalance.formatFiatForUi(BRSharedPrefs.getPreferredFiatIso())
+                totalAssetsUsd.text =
+                    aggregatedFiatBalance.formatFiatForUi(BRSharedPrefs.getPreferredFiatIso())
             }
 
             ifChanged(M::showPrompt) {
@@ -186,6 +192,14 @@ class HomeController(
             ifChanged(M::isBuyBellNeeded) {
                 buyBell.isVisible = isBuyBellNeeded
             }
+
+            ifChanged(M::isBuyPromoDotNeeded) {
+                if (isBuyPromoDotNeeded) buyPromoIndicator.animateIndicatorAnimation(true)
+            }
+
+            ifChanged(M::isTradePromoDotNeeded) {
+                if (isTradePromoDotNeeded) tradePromoIndicator.animateIndicatorAnimation(false)
+            }
         }
     }
 
@@ -200,8 +214,8 @@ class HomeController(
         val act = checkNotNull(activity)
 
         val baseLayout = act.layoutInflater.inflate(R.layout.base_prompt, null)
-        val title = baseLayout.findViewById<BaseTextView>(R.id.prompt_title)
-        val description = baseLayout.findViewById<BaseTextView>(R.id.prompt_description)
+        val title = baseLayout.findViewById<TextView>(R.id.prompt_title)
+        val description = baseLayout.findViewById<TextView>(R.id.prompt_description)
         val continueButton = baseLayout.findViewById<Button>(R.id.continue_button)
         val dismissButton = baseLayout.findViewById<ImageButton>(R.id.dismiss_button)
         dismissButton.setOnClickListener {
@@ -247,10 +261,10 @@ class HomeController(
     private fun getEmailPrompt(): View {
         val act = checkNotNull(activity)
         val customLayout = act.layoutInflater.inflate(R.layout.email_prompt, null)
-        val customTitle = customLayout.findViewById<BaseTextView>(R.id.prompt_title)
+        val customTitle = customLayout.findViewById<TextView>(R.id.prompt_title)
         val customDescription =
-            customLayout.findViewById<BaseTextView>(R.id.prompt_description)
-        val footNote = customLayout.findViewById<BaseTextView>(R.id.prompt_footnote)
+            customLayout.findViewById<TextView>(R.id.prompt_description)
+        val footNote = customLayout.findViewById<TextView>(R.id.prompt_footnote)
         val submitButton = customLayout.findViewById<BRButton>(R.id.submit_button)
         val closeButton = customLayout.findViewById<ImageView>(R.id.close_button)
         val emailEditText = customLayout.findViewById<BREdit>(R.id.email_edit)
@@ -276,7 +290,6 @@ class HomeController(
             } else {
                 SpringAnimator.failShakeAnimation(act, emailEditText)
             }
-
         }
         return customLayout
     }
@@ -338,4 +351,32 @@ class HomeController(
     ) {
         eventConsumer.accept(E.OnSupportFormSubmitted(result.inputText))
     }
+
+    private fun ImageView.animateIndicatorAnimation(isBuyTextField: Boolean) {
+        isVisible = true
+        if (isBuyTextField) {
+            buyDotAnimator = getDotAnimator(drawable)
+            buyDotAnimator?.start()
+        } else {
+            tradeDotAnimator = getDotAnimator(drawable)
+            tradeDotAnimator?.start()
+        }
+    }
+
+    private fun ImageView.removePromoAnimator(animator: ObjectAnimator?) {
+        isVisible = false
+        animator?.removeAllUpdateListeners()
+        animator?.cancel()
+    }
+
+    private fun getDotAnimator(drawable: Drawable?) =
+        ObjectAnimator.ofPropertyValuesHolder(
+            drawable,
+            PropertyValuesHolder.ofInt("alpha", 0, 255)
+        ).apply {
+            duration = 2000L
+            target = drawable
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+        }
 }

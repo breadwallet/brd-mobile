@@ -24,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:background="?attr/toolbar_back_arrow" />
 
-            <com.breadwallet.legacy.presenter.customviews.BaseTextView
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,14 +40,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:lineSpacingMultiplier="1.3"
         android:text="@string/ShareData.body"
         android:textSize="@dimen/sub_header"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,7 +69,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <com.breadwallet.legacy.presenter.customviews.BaseTextView
+    <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

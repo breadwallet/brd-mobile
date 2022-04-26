@@ -8,7 +8,6 @@
  */
 package com.brd.api.models
 
-import com.brd.api.InstantSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,7 +17,6 @@ import kotlinx.serialization.Transient
 data class ExchangeOfferRequest(
     val url: String,
     @SerialName("created_at")
-    @Serializable(with = InstantSerializer::class)
     val createdAt: Instant,
     val status: Status,
     @SerialName("country_code")

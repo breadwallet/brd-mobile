@@ -22,14 +22,16 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.Lifecycle
 import com.breadwallet.app.ApplicationLifecycleObserver
 import com.breadwallet.app.BreadApp
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Key
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Key
+import com.breadwallet.BuildConfig
 import com.breadwallet.logger.logInfo
+import com.breadwallet.platform.interfaces.AccountMetaDataProvider
 import com.breadwallet.tools.crypto.CryptoHelper.hexDecode
 import com.breadwallet.tools.crypto.CryptoHelper.hexEncode
 import com.breadwallet.tools.manager.BRReportsManager
 import com.breadwallet.tools.manager.BRSharedPrefs
-import com.breadwallet.platform.interfaces.AccountMetaDataProvider
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.Main
@@ -92,7 +94,8 @@ private const val MANUFACTURER_GOOGLE = "Google"
 class CryptoUserManager(
     context: Context,
     private val createStore: () -> SharedPreferences?,
-    private val metaDataProvider: AccountMetaDataProvider
+    private val metaDataProvider: AccountMetaDataProvider,
+    private val scope: CoroutineScope,
 ) : BrdUserManager {
 
     private var store: SharedPreferences? = null
@@ -154,7 +157,7 @@ class CryptoUserManager(
             .first()
             .creationDate
             .run(::Date)
-        BreadApp.applicationScope.launch {
+        scope.launch {
             metaDataProvider.recoverAll(true)
         }
         return initAccount(phrase, creationDate, apiKey)
@@ -166,7 +169,7 @@ class CryptoUserManager(
         try {
             val creationDate = Date(BRKeyStore.getWalletCreationTime())
             val account =
-                Account.createFromPhrase(phrase, creationDate, BRSharedPrefs.getDeviceId()).get()
+                Account.createFromPhrase(phrase, creationDate, BRSharedPrefs.getDeviceId(), !BuildConfig.BITCOIN_TESTNET).get()
             val apiKey = Key.createForBIP32ApiAuth(
                 phrase,
                 Key.getDefaultWordList()
@@ -187,7 +190,7 @@ class CryptoUserManager(
         putFailCount(BRKeyStore.getFailCount())
         putFailTimestamp(BRKeyStore.getFailTimeStamp())
 
-        BreadApp.applicationScope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.IO) {
             BRKeyStore.wipeAfterMigration()
         }
 
@@ -213,7 +216,8 @@ class CryptoUserManager(
         val account = Account.createFromPhrase(
             phrase,
             Date(getWalletCreationTime()),
-            deviceId
+            deviceId,
+            !BuildConfig.BITCOIN_TESTNET
         ).orNull()
 
         if (account == null) {
@@ -414,7 +418,8 @@ class CryptoUserManager(
                 val account = Account.createFromPhrase(
                     storedPhrase,
                     creationDate,
-                    BRSharedPrefs.getDeviceId()
+                    BRSharedPrefs.getDeviceId(),
+                    !BuildConfig.BITCOIN_TESTNET
                 ).get() ?: return@withLock SetupResult.FailedToCreateAccount
 
                 val apiAuthKey = apiKey ?: Key.createForBIP32ApiAuth(
@@ -494,7 +499,7 @@ class CryptoUserManager(
                     disabledSeconds.set(0)
                     stateChangeChannel.offer(Unit)
                 }
-                .launchIn(BreadApp.applicationScope)
+                .launchIn(scope)
         }
     }
 
@@ -507,7 +512,7 @@ class CryptoUserManager(
     private suspend fun <T> executeWithAuth(action: (context: Activity) -> T): T {
         val activity = getActivity()
         return try {
-            runOnMain{ action(activity) }
+            runOnMain { action(activity) }
         } catch (e: UserNotAuthenticatedException) {
             logInfo("Attempting authentication")
 
@@ -518,10 +523,10 @@ class CryptoUserManager(
         }
     }
 
-    private suspend fun <T> runOnMain(block : () -> T): T {
+    private suspend fun <T> runOnMain(block: () -> T): T {
         return Main {
             try {
-               block()
+                block()
             } catch (e: Throwable) {
                 e
             }
@@ -637,4 +642,3 @@ fun SharedPreferences.getBytes(key: String, defaultValue: ByteArray?): ByteArray
 fun SharedPreferences.Editor.putBytes(key: String, value: ByteArray) {
     putString(key, hexEncode(value))
 }
-

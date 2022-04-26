@@ -1,6 +1,6 @@
 package com.breadwallet.platform.entities
 
-import com.breadwallet.crypto.WalletManagerMode
+import com.blockset.walletkit.WalletManagerMode
 import com.breadwallet.logger.logError
 import com.platform.util.getIntOrDefault
 import com.platform.util.getLongOrDefault

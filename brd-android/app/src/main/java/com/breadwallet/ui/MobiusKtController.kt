@@ -18,16 +18,14 @@ import com.breadwallet.util.errorHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
 import kt.mobius.*
 import kt.mobius.android.AndroidLogger
 import kt.mobius.android.MobiusAndroid
 import kt.mobius.disposables.Disposable
 import kt.mobius.functions.Consumer
 import kt.mobius.runners.WorkRunners
-import org.kodein.di.Kodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DI
+import org.kodein.di.instance
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Suppress("TooManyFunctions")
@@ -36,8 +34,8 @@ abstract class MobiusKtController<M, E, F>(
 ) : BaseController(args),
     EventSource<E> {
 
-    override val kodein by Kodein.lazy {
-        extend(super.kodein)
+    override val di by DI.lazy {
+        extend(super.di)
     }
 
     protected val uiBindScope = CoroutineScope(
@@ -74,7 +72,6 @@ abstract class MobiusKtController<M, E, F>(
     }
 
     private val eventConsumerDelegate = ConsumerDelegateKt<E>(QueuedConsumerKt())
-    private val modelChannel = BroadcastChannel<M>(Channel.CONFLATED)
 
     /**
      * An entrypoint for adding platform events into a [MobiusLoop].

@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.kodein.di.direct
-import org.kodein.di.erased.instance
+import org.kodein.di.instance
 
 private const val EXTRA_PIN_MODE_UPDATE = "pin-update"
 private const val EXTRA_SKIP_WRITE_DOWN = "skip-write-down"
@@ -85,15 +85,18 @@ class InputPinController(args: Bundle) : BaseMobiusController<M, E, F>(args) {
 
     private fun PinLayout.bindInput() = callbackFlow<E> {
         val channel = channel
-        setup(binding.brkeyboard, object : PinLayoutListener {
-            override fun onPinInserted(pin: String, isPinCorrect: Boolean) {
-                channel.offer(E.OnPinEntered(pin, isPinCorrect))
-            }
+        setup(
+            binding.brkeyboard,
+            object : PinLayoutListener {
+                override fun onPinInserted(pin: String, isPinCorrect: Boolean) {
+                    channel.offer(E.OnPinEntered(pin, isPinCorrect))
+                }
 
-            override fun onPinLocked() {
-                channel.offer(E.OnPinLocked)
+                override fun onPinLocked() {
+                    channel.offer(E.OnPinLocked)
+                }
             }
-        })
+        )
         awaitClose { cleanUp() }
     }
 

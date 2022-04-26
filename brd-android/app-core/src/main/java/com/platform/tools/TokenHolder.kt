@@ -8,19 +8,22 @@
  */
 package com.platform.tools
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import android.util.Log
+import com.brd.api.BrdApiClient
 import com.breadwallet.logger.logError
 
 import com.breadwallet.tools.security.BrdUserManager
 import com.breadwallet.tools.security.BrdUserState
-import com.platform.APIClient
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.erased.instance
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 
-object TokenHolder : KodeinAware {
+@SuppressLint("StaticFieldLeak")
+object TokenHolder : DIAware {
     private val TAG = TokenHolder::class.java.simpleName
     private var mApiToken: String? = null
     private var mOldApiToken: String? = null
@@ -30,9 +33,9 @@ object TokenHolder : KodeinAware {
         this.context = context
     }
 
-    override val kodein by closestKodein { context }
+    override val di by closestDI { context }
     private val userManager by instance<BrdUserManager>()
-    private val apiClient: APIClient by instance()
+    private val brdApiClient: BrdApiClient by instance()
 
     @Synchronized
     fun retrieveToken(): String? {
@@ -66,7 +69,14 @@ object TokenHolder : KodeinAware {
 
     @Synchronized
     fun fetchNewToken() {
-        mApiToken = apiClient.token
+        mApiToken = runBlocking {
+            try {
+                brdApiClient.getToken()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                null
+            }
+        }
         logError("fetchNewToken: $mApiToken")
         if (!mApiToken.isNullOrEmpty()) {
             userManager.putToken(mApiToken!!)

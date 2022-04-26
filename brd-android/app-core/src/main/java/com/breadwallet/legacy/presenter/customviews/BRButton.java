@@ -307,12 +307,9 @@ public class BRButton extends Button {
 
         ValueAnimator shadowAnim = ValueAnimator.ofFloat(SHADOW_UNPRESSED, SHADOW_PRESSED);
         shadowAnim.setDuration(duration);
-        shadowAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                shadowOffSet = (float) animation.getAnimatedValue();
-                invalidate();
-            }
+        shadowAnim.addUpdateListener(animation -> {
+            shadowOffSet = (float) animation.getAnimatedValue();
+            invalidate();
         });
         shadowAnim.addListener(new ClearAnimationListener());
 
@@ -336,12 +333,9 @@ public class BRButton extends Button {
 
         ValueAnimator shadowAnim = ValueAnimator.ofFloat(SHADOW_PRESSED, SHADOW_UNPRESSED);
         shadowAnim.setDuration(duration);
-        shadowAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                shadowOffSet = (float) animation.getAnimatedValue();
-                invalidate();
-            }
+        shadowAnim.addUpdateListener(animation -> {
+            shadowOffSet = (float) animation.getAnimatedValue();
+            invalidate();
         });
         shadowAnim.addListener(new ClearAnimationListener());
 

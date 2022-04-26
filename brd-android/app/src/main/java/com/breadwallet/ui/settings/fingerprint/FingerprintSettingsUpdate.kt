@@ -22,14 +22,12 @@ object FingerprintSettingsUpdate : Update<M, E, F>, FingerprintSettingsUpdateSpe
         event: E
     ): Next<M, F> = patch(model, event)
 
-    override fun onBackClicked(model: M)
-        : Next<M, F> =
+    override fun onBackClicked(model: M): Next<M, F> =
         Next.dispatch(
             setOf(F.GoBack)
         )
 
-    override fun onFaqClicked(model: M)
-        : Next<M, F> =
+    override fun onFaqClicked(model: M): Next<M, F> =
         Next.dispatch(
             setOf(F.GoToFaq)
         )

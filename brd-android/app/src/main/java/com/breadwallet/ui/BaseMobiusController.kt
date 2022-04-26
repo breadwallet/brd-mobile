@@ -35,14 +35,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart.ATOMIC
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Unconfined
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filterIsInstance
@@ -52,8 +50,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
-import org.kodein.di.erased.instance
+import org.kodein.di.DI
+import org.kodein.di.instance
 import java.util.concurrent.atomic.AtomicBoolean
 
 private const val MAX_QUEUED_VIEW_EFFECTS = 100
@@ -64,8 +62,8 @@ abstract class BaseMobiusController<M, E, F>(
 ) : BaseController(args),
     EventSource<E> {
 
-    override val kodein by Kodein.lazy {
-        extend(super.kodein)
+    override val di by DI.lazy {
+        extend(super.di)
     }
 
     protected val uiBindScope = CoroutineScope(
@@ -104,7 +102,7 @@ abstract class BaseMobiusController<M, E, F>(
             object : Connection<F> {
                 override fun accept(value: F) {
                     if (value is ViewEffect) {
-                        check(viewEffectChannel.offer(value)) {
+                        check(viewEffectChannel.trySend(value).isSuccess) {
                             "ViewEffect queue capacity exceeded."
                         }
                     } else {
@@ -116,7 +114,7 @@ abstract class BaseMobiusController<M, E, F>(
                     connection.dispose()
                     // Dispose any queued effects
                     viewEffectChannel.receiveAsFlow()
-                        .launchIn(GlobalScope)
+                        .launchIn(controllerScope)
                 }
             }
         }
@@ -130,7 +128,7 @@ abstract class BaseMobiusController<M, E, F>(
     private var disposeConnection: (() -> Unit)? = null
 
     private val eventConsumerDelegate = ConsumerDelegate<E>(QueuedConsumer())
-    private val modelChannel = BroadcastChannel<M>(Channel.CONFLATED)
+    private val modelChannel = MutableSharedFlow<M>(replay = 1)
 
     /**
      * An entrypoint for adding platform events into a [MobiusLoop].
@@ -207,7 +205,7 @@ abstract class BaseMobiusController<M, E, F>(
         val workRunner = MainThreadWorkRunner.create()
         loop = loopFactory.startFrom(first.model(), first.effects()).apply {
             observe { model ->
-                modelChannel.offer(model)
+                modelChannel.tryEmit(model)
 
                 workRunner.post {
                     if (isAttached) model.render()
@@ -226,16 +224,16 @@ abstract class BaseMobiusController<M, E, F>(
     }
 
     private fun connectView(loop: MobiusLoop<M, E, F>) {
-        val legacyDispose = bindView(Consumer { event ->
+        val legacyDispose = bindView { event ->
             if (isLoopActive.get()) {
                 loop.dispatchEvent(event)
             }
-        })
+        }
 
         val job = SupervisorJob()
         val scope = CoroutineScope(job + Dispatchers.Main + errorHandler("modelConsumer"))
         scope.launch(Unconfined) {
-            bindView(modelChannel.asFlow()).collect { event ->
+            bindView(modelChannel).collect { event ->
                 ensureActive()
                 if (isLoopActive.get()) {
                     loop.dispatchEvent(event)

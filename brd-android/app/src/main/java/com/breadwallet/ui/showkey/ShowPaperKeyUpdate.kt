@@ -14,7 +14,8 @@ import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Update
 
-object ShowPaperKeyUpdate : Update<ShowPaperKey.M, ShowPaperKey.E, ShowPaperKey.F>,
+object ShowPaperKeyUpdate :
+    Update<ShowPaperKey.M, ShowPaperKey.E, ShowPaperKey.F>,
     ShowPaperKeyUpdateSpec {
 
     override fun update(

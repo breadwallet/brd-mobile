@@ -8,12 +8,12 @@
  */
 package com.breadwallet.breadbox
 
-import com.breadwallet.crypto.Account
-import com.breadwallet.crypto.Network
+import com.blockset.walletkit.Account
+import com.blockset.walletkit.Network
 
-import com.breadwallet.crypto.Wallet
-import com.breadwallet.crypto.System
-import com.breadwallet.crypto.Transfer
+import com.blockset.walletkit.Wallet
+import com.blockset.walletkit.System
+import com.blockset.walletkit.Transfer
 import kotlinx.coroutines.flow.Flow
 
 /** Provides access to data from a lazily created [System] using [Flow]s. */

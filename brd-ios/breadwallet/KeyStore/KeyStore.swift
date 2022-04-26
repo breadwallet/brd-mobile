@@ -606,7 +606,8 @@ extension KeyStore: WalletAuthenticator {
         guard let existingAccountData = serializedAccountData,
             let account = Account.createFrom(phrase: nfkdPhrase as String,
                                              timestamp: creationTime,
-                                             uids: UserDefaults.deviceID) else { return false }
+                                             uids: UserDefaults.deviceID,
+                                             isMainnet: !E.isTestnet) else { return false }
         
         // validates the account generated from the input phrase matches the stored account (public key)
         return account.validate(serialization: existingAccountData)
@@ -669,7 +670,8 @@ extension KeyStore: WalletAuthenticator {
         guard let seedPhrase: String = try? keychainItem(key: KeychainKey.mnemonic),
             let account = Account.createFrom(phrase: seedPhrase,
                                              timestamp: creationTime,
-                                             uids: UserDefaults.deviceID) else { assertionFailure(); return nil }
+                                             uids: UserDefaults.deviceID,
+                                             isMainnet: !E.isTestnet) else { assertionFailure(); return nil }
         do {
             try setKeychainItem(key: KeychainKey.systemAccount, item: account.serialize)
             clearDeprecatedKeys()
@@ -756,7 +758,8 @@ extension KeyStore: KeyMaster {
             CFStringNormalize(nfkdPhrase, .KD)
             guard let account = Account.createFrom(phrase: nfkdPhrase as String,
                                                    timestamp: creationTime,
-                                                   uids: UserDefaults.deviceID) else { return nil }
+                                                   uids: UserDefaults.deviceID,
+                                                   isMainnet: !E.isTestnet) else { return nil }
             try setKeychainItem(key: KeychainKey.mnemonic, item: nfkdPhrase as String?, authenticated: true)
             try setKeychainItem(key: KeychainKey.systemAccount, item: account.serialize)
             return account
@@ -805,7 +808,8 @@ extension KeyStore: KeyMaster {
                     guard let phrase: String = try keychainItem(key: KeychainKey.mnemonic),
                         let newAccount = Account.createFrom(phrase: phrase,
                                                             timestamp: walletInfo.creationDate,
-                                                            uids: UserDefaults.deviceID) else { return completion(recoveredAccount) }
+                                                            uids: UserDefaults.deviceID,
+                                                            isMainnet: !E.isTestnet) else { return completion(recoveredAccount) }
 
                     print("[KEY] restored account timestamp from KV-store: \(walletInfo.creationDate)")
                     try setKeychainItem(key: KeychainKey.systemAccount, item: newAccount.serialize)
@@ -954,7 +958,7 @@ extension KeyStore {
 
 struct NoAuthWalletAuthenticator: WalletAuthenticator {
     
-    var bdbAuthToken: JWT? = nil
+    var bdbAuthToken: JWT?
     var apiUserAccount: [AnyHashable: Any]?
     
     var noWallet: Bool { return true }

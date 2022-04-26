@@ -41,6 +41,7 @@ class AccountInitializationTests : XCTestCase {
     }
     
     func testInitializeHbar() {
+        sleep(5) // NOTE: Workaround to stop `tearDown` being called right after `setup`
 //        let exp = expectation(description: "Wallet initialization")
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 //            print("[SYS] createAccount")
